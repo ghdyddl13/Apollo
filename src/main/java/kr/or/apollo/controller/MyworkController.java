@@ -1,5 +1,9 @@
 package kr.or.apollo.controller;
 
-public class MyworkController {
+import org.springframework.ui.Model;
 
+public class MyworkController {
+	public String showMywork(String s1, Model model) {
+		return null;
+	}
 }
