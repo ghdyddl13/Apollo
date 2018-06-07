@@ -13,7 +13,7 @@ public class MemberController {
 	}
 	
 	public View apollokeyCheck(String s2) {
-		int a;
+		
 		return null;
 	}
 	
