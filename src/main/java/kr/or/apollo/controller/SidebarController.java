@@ -4,6 +4,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.View;
 
 import kr.or.apollo.vo.ProjectDTO;
+import kr.or.apollo.vo.StepDTO;
 
 public class SidebarController {
 
@@ -20,8 +21,17 @@ public class SidebarController {
 		return null;
 	}
 	
+	public String createStep(StepDTO stepdto, Model model) {
+		return null;
+	}
 	
+	public String changeStep(StepDTO stepdto, Model model) {
+		return null;
+	}
 	
+	public String deleteStep(String s1) {
+		return null;
+	}
 	
 	
 }
