@@ -1,6 +1,7 @@
 package kr.or.apollo.controller;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import kr.or.apollo.vo.MemberDTO;
@@ -21,6 +22,7 @@ public class MemberController {
 		
 		return null;
 	}
+	
 	
 	public String login(MemberDTO memberdto, Model model) {
 		
