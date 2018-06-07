@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+        
+         <!-- Dispatcher에 의해 던져지는 content 페이지를 찾아주는 mapping -->
+         <!-- definition의 name이 " *.* " 로 들어오면 {1}과 {2}가 활용되면서 
+              mapping이 조금 더 복잡해지지만 일단 기본 원리는 똑같다 -->
+         <definition name="emp.*" template="/WEB-INF/views/inc/layout.jsp"> 
+	         <put-attribute name="header"  value="/WEB-INF/views/inc/header.jsp" /> 
+	         <put-attribute name="footer" value="/WEB-INF/views/inc/footer.jsp" /> 
+	         <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" /> 
+         </definition>
+         
+</tiles-definitions>    

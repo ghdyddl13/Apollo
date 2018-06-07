@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+<!-- @Autowired, @Required, @Resource, @Configuration 과 같은 어노테이션을 인식하기 위한 코드 -->
+<!-- context:annotation-config 태그는 어노테이션과 관련해서 다음의 BeanPostProcessor를 함께 등록 한다.
+
+		@Required(RequiedAnnotationBeanPostProcessor)
+		@Autowired(AutowiredAnnotationBeanPostProcessor)
+		@Resource, @PostConstruct, @PreDestory(CommonAnnotationBeanPostProcessor)
+		@Configuration(ConfigurationClassPostProcessor)
+		그 외 Repository, Service, Controller 포함 -->
+<context:annotation-config />
+
+<!-- base-package 범위 내에서 어노테이션이 적용된 클래스를 bean으로 등록 -->
+<context:component-scan base-package="kr.or.bit.controller" />
+
+<!-- tile 기능 사용을 위한 코드 -->
+<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+	 <property name="definitions">
+		  
+		  <list>
+		  		<!-- Tiles.xml의 경로 설정 -->
+		    	<value>/WEB-INF/spring/appServlet/Tiles.xml</value>
+		  </list>
+	 </property>
+</bean>
+
+<!-- view가 결국 Tiles를 거쳐서 나갈 것이므로 urlBasedViewResolver가 필요하다 -->
+<bean id="urlBasedViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+ 	<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+</bean> 	
+	
+</beans>
