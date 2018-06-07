@@ -1,450 +1,442 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="kr.or.apollo.controller.MyworkController" project="Apollo" 
+  <class id="1" language="java" name="kr.or.apollo.vo.CommentDTO" project="Apollo" 
+    file="/Apollo/src/main/java/kr/or/apollo/vo/CommentDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="405" width="144" x="-21" y="-185"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="kr.or.apollo.vo.FileDTO" project="Apollo" 
+    file="/Apollo/src/main/java/kr/or/apollo/vo/FileDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="142" x="163" y="-185"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="kr.or.apollo.vo.ProjectDTO" project="Apollo" 
+    file="/Apollo/src/main/java/kr/or/apollo/vo/ProjectDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="89" x="345" y="-185"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="kr.or.apollo.vo.TaskDTO" project="Apollo" 
+    file="/Apollo/src/main/java/kr/or/apollo/vo/TaskDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="87" x="474" y="-185"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="kr.or.apollo.vo.MemberDTO" project="Apollo" 
+    file="/Apollo/src/main/java/kr/or/apollo/vo/MemberDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="95" x="601" y="-185"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="kr.or.apollo.vo.FolderDTO" project="Apollo" 
+    file="/Apollo/src/main/java/kr/or/apollo/vo/FolderDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="132" x="736" y="-185"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="kr.or.apollo.vo.StepDTO" project="Apollo" 
+    file="/Apollo/src/main/java/kr/or/apollo/vo/StepDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="87" x="908" y="-185"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="kr.or.apollo.vo.AuthkeyDTO" project="Apollo" 
+    file="/Apollo/src/main/java/kr/or/apollo/vo/AuthkeyDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="147" x="1035" y="-185"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="kr.or.apollo.vo.SubtaskDTO" project="Apollo" 
+    file="/Apollo/src/main/java/kr/or/apollo/vo/SubtaskDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="139" x="1222" y="-185"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="kr.or.apollo.controller.MyworkController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/MyworkController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="428" y="55"/>    
+    <position height="99" width="191" x="-33" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="kr.or.apollo.controller.StepListController" project="Apollo" 
+  <class id="11" language="java" name="kr.or.apollo.controller.StepListController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/StepListController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="662" y="92"/>    
+    <position height="153" width="256" x="198" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="kr.or.apollo.controller.StepTimelineController" project="Apollo" 
+  <class id="12" language="java" name="kr.or.apollo.controller.StepTimelineController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/StepTimelineController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="904" y="55"/>    
+    <position height="81" width="154" x="494" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="kr.or.apollo.controller.StepWorkloadController" project="Apollo" 
+  <class id="13" language="java" name="kr.or.apollo.controller.StepWorkloadController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/StepWorkloadController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1101" y="55"/>    
+    <position height="81" width="161" x="688" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="kr.or.apollo.controller.ReportController" project="Apollo" 
+  <class id="14" language="java" name="kr.or.apollo.controller.ReportController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/ReportController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1281" y="55"/>    
+    <position height="81" width="118" x="889" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="kr.or.apollo.controller.StreamController" project="Apollo" 
+  <class id="15" language="java" name="kr.or.apollo.controller.StreamController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/StreamController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1441" y="55"/>    
+    <position height="99" width="203" x="1047" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="kr.or.apollo.controller.StarredtaskController" project="Apollo" 
+  <class id="16" language="java" name="kr.or.apollo.controller.StarredtaskController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/StarredtaskController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1616" y="55"/>    
+    <position height="99" width="216" x="1290" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="kr.or.apollo.controller.ProjectInfoController" project="Apollo" 
+  <class id="17" language="java" name="kr.or.apollo.controller.ProjectInfoController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/ProjectInfoController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1826" y="80"/>    
+    <position height="135" width="197" x="1546" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="kr.or.apollo.controller.TaskController" project="Apollo" 
+  <class id="18" language="java" name="kr.or.apollo.controller.TaskController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/TaskController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2018" y="53"/>    
+    <position height="135" width="226" x="1783" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="kr.or.apollo.controller.ProjectTableController" project="Apollo" 
+  <class id="19" language="java" name="kr.or.apollo.controller.ProjectTableController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/ProjectTableController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2203" y="62"/>    
+    <position height="99" width="182" x="2049" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="kr.or.apollo.controller.StepBoardController" project="Apollo" 
+  <class id="20" language="java" name="kr.or.apollo.controller.StepBoardController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/StepBoardController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2074" y="215"/>    
+    <position height="135" width="224" x="2271" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="kr.or.apollo.controller.InboxController" project="Apollo" 
+  <class id="21" language="java" name="kr.or.apollo.controller.InboxController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/InboxController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2281" y="188"/>    
+    <position height="135" width="194" x="2535" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="kr.or.apollo.controller.MemberController" project="Apollo" 
+  <class id="22" language="java" name="kr.or.apollo.controller.MemberController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/MemberController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2484" y="93"/>    
+    <position height="207" width="233" x="2769" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="kr.or.apollo.controller.ProjectFilesController" project="Apollo" 
+  <class id="23" language="java" name="kr.or.apollo.controller.ProjectFilesController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/ProjectFilesController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2463" y="262"/>    
+    <position height="99" width="179" x="3042" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="kr.or.apollo.controller.SidebarController" project="Apollo" 
+  <class id="24" language="java" name="kr.or.apollo.controller.SidebarController" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/controller/SidebarController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2224" y="399"/>    
+    <position height="189" width="205" x="3261" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="16" language="java" name="kr.or.apollo.dao.StepDAO" project="Apollo" 
+  <interface id="25" language="java" name="kr.or.apollo.dao.StepDAO" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/dao/StepDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="382" y="753"/>    
+    <position height="63" width="103" x="21" y="475"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="17" language="java" name="kr.or.apollo.dao.ProjectDAO" project="Apollo" 
+  <interface id="26" language="java" name="kr.or.apollo.dao.ProjectDAO" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/dao/ProjectDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="525" y="753"/>    
+    <position height="63" width="103" x="164" y="475"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="18" language="java" name="kr.or.apollo.dao.CommentDAO" project="Apollo" 
+  <interface id="27" language="java" name="kr.or.apollo.dao.CommentDAO" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/dao/CommentDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="669" y="753"/>    
+    <position height="63" width="104" x="307" y="475"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="19" language="java" name="kr.or.apollo.dao.FolderDAO" project="Apollo" 
+  <interface id="28" language="java" name="kr.or.apollo.dao.FolderDAO" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/dao/FolderDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="812" y="753"/>    
+    <position height="63" width="103" x="451" y="475"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="20" language="java" name="kr.or.apollo.dao.TaskDAO" project="Apollo" 
+  <interface id="29" language="java" name="kr.or.apollo.dao.TaskDAO" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/dao/TaskDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="955" y="753"/>    
+    <position height="63" width="103" x="594" y="475"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="21" language="java" name="kr.or.apollo.dao.FileDAO" project="Apollo" 
+  <interface id="30" language="java" name="kr.or.apollo.dao.FileDAO" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/dao/FileDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1098" y="753"/>    
+    <position height="63" width="103" x="737" y="475"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="22" language="java" name="kr.or.apollo.dao.MemberDAO" project="Apollo" 
+  <interface id="31" language="java" name="kr.or.apollo.dao.MemberDAO" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/dao/MemberDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1241" y="753"/>    
+    <position height="63" width="103" x="880" y="475"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="23" language="java" name="kr.or.apollo.dao.AuthkeyDAO" project="Apollo" 
+  <interface id="32" language="java" name="kr.or.apollo.dao.AuthkeyDAO" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/dao/AuthkeyDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1384" y="753"/>    
+    <position height="63" width="103" x="1023" y="475"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="24" language="java" name="kr.or.apollo.dao.SubtaskDAO" project="Apollo" 
+  <interface id="33" language="java" name="kr.or.apollo.dao.SubtaskDAO" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/dao/SubtaskDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1521" y="753"/>    
+    <position height="63" width="103" x="1166" y="475"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="25" language="java" name="kr.or.apollo.service.MemberService" project="Apollo" 
+  <class id="34" language="java" name="kr.or.apollo.service.MemberService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/MemberService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="389" y="929"/>    
+    <position height="81" width="114" x="-29" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="26" language="java" name="kr.or.apollo.service.SidebarService" project="Apollo" 
+  <class id="35" language="java" name="kr.or.apollo.service.SidebarService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/SidebarService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="541" y="929"/>    
+    <position height="81" width="111" x="125" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="27" language="java" name="kr.or.apollo.service.MyworkService" project="Apollo" 
+  <class id="36" language="java" name="kr.or.apollo.service.MyworkService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/MyworkService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="693" y="929"/>    
+    <position height="81" width="112" x="276" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="28" language="java" name="kr.or.apollo.service.StreamService" project="Apollo" 
+  <class id="37" language="java" name="kr.or.apollo.service.StreamService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/StreamService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="843" y="929"/>    
+    <position height="81" width="109" x="428" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="29" language="java" name="kr.or.apollo.service.InboxService" project="Apollo" 
+  <class id="38" language="java" name="kr.or.apollo.service.InboxService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/InboxService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="987" y="929"/>    
+    <position height="81" width="98" x="577" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="30" language="java" name="kr.or.apollo.service.ProjectTableService" project="Apollo" 
+  <class id="39" language="java" name="kr.or.apollo.service.ProjectTableService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/ProjectTableService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1145" y="929"/>    
+    <position height="81" width="138" x="715" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="31" language="java" name="kr.or.apollo.service.StepWorkloadService" project="Apollo" 
+  <class id="40" language="java" name="kr.or.apollo.service.StepWorkloadService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/StepWorkloadService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1328" y="929"/>    
+    <position height="81" width="148" x="893" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="32" language="java" name="kr.or.apollo.service.ProjectFilesService" project="Apollo" 
+  <class id="41" language="java" name="kr.or.apollo.service.ProjectFilesService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/ProjectFilesService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1509" y="929"/>    
+    <position height="81" width="134" x="1081" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="33" language="java" name="kr.or.apollo.service.ProjectInfoService" project="Apollo" 
+  <class id="42" language="java" name="kr.or.apollo.service.ProjectInfoService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/ProjectInfoService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1680" y="929"/>    
+    <position height="81" width="129" x="1255" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="34" language="java" name="kr.or.apollo.service.ReportService" project="Apollo" 
+  <class id="43" language="java" name="kr.or.apollo.service.ReportService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/ReportService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1822" y="930"/>    
+    <position height="81" width="105" x="1424" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="35" language="java" name="kr.or.apollo.service.TaskService" project="Apollo" 
+  <class id="44" language="java" name="kr.or.apollo.service.TaskService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/TaskService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1962" y="930"/>    
+    <position height="81" width="94" x="1569" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="36" language="java" name="kr.or.apollo.service.StarredtaskService" project="Apollo" 
+  <class id="45" language="java" name="kr.or.apollo.service.StarredtaskService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/StarredtaskService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2116" y="930"/>    
+    <position height="81" width="135" x="1703" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="37" language="java" name="kr.or.apollo.service.StepListService" project="Apollo" 
+  <class id="46" language="java" name="kr.or.apollo.service.StepListService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/StepListService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2281" y="930"/>    
+    <position height="81" width="114" x="1878" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="38" language="java" name="kr.or.apollo.service.StepTimelineService" project="Apollo" 
+  <class id="47" language="java" name="kr.or.apollo.service.StepTimelineService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/StepTimelineService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2448" y="930"/>    
+    <position height="81" width="141" x="2032" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="39" language="java" name="kr.or.apollo.service.StepBoardService" project="Apollo" 
+  <class id="48" language="java" name="kr.or.apollo.service.StepBoardService" project="Apollo" 
     file="/Apollo/src/main/java/kr/or/apollo/service/StepBoardService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2622" y="930"/>    
+    <position height="81" width="127" x="2213" y="607"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="40" language="java" name="kr.or.apollo.vo.CommentDTO" project="Apollo" 
-    file="/Apollo/src/main/java/kr/or/apollo/vo/CommentDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="402" y="442"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="41" language="java" name="kr.or.apollo.vo.FileDTO" project="Apollo" 
-    file="/Apollo/src/main/java/kr/or/apollo/vo/FileDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="585" y="361"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="42" language="java" name="kr.or.apollo.vo.ProjectDTO" project="Apollo" 
-    file="/Apollo/src/main/java/kr/or/apollo/vo/ProjectDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="740" y="280"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="43" language="java" name="kr.or.apollo.vo.TaskDTO" project="Apollo" 
-    file="/Apollo/src/main/java/kr/or/apollo/vo/TaskDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="868" y="280"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="44" language="java" name="kr.or.apollo.vo.MemberDTO" project="Apollo" 
-    file="/Apollo/src/main/java/kr/or/apollo/vo/MemberDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="999" y="280"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="45" language="java" name="kr.or.apollo.vo.FolderDTO" project="Apollo" 
-    file="/Apollo/src/main/java/kr/or/apollo/vo/FolderDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1153" y="361"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="46" language="java" name="kr.or.apollo.vo.StepDTO" project="Apollo" 
-    file="/Apollo/src/main/java/kr/or/apollo/vo/StepDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1302" y="280"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="47" language="java" name="kr.or.apollo.vo.AuthkeyDTO" project="Apollo" 
-    file="/Apollo/src/main/java/kr/or/apollo/vo/AuthkeyDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1459" y="361"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="48" language="java" name="kr.or.apollo.vo.SubtaskDTO" project="Apollo" 
-    file="/Apollo/src/main/java/kr/or/apollo/vo/SubtaskDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1642" y="388"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <dependency id="49">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="43"/>  
-  </dependency>  
-  <dependency id="50">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="43"/>  
-  </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
