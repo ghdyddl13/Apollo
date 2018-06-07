@@ -30,6 +30,15 @@ public class MemberController {
 	public String createApollokey(String s1, String s2, Model model) {
 		
 		return null;
+		}
+	
+	public String changeProfile(MemberDTO memberdto, Model model) {
+		
+		return null;
 	}
 	
+	public String showMember(String s1, Model model) {
+		return null;
+	
+	}
 }
