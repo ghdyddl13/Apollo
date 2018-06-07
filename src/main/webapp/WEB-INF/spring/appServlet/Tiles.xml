@@ -4,7 +4,7 @@
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
 <tiles-definitions>
-        <
+        
          <!-- Dispatcher에 의해 던져지는 content 페이지를 찾아주는 mapping -->
          <!-- definition의 name이 " *.* " 로 들어오면 {1}과 {2}가 활용되면서 
               mapping이 조금 더 복잡해지지만 일단 기본 원리는 똑같다 -->
