@@ -1,6 +1,6 @@
 package kr.or.apollo.vo;
 
-public class AuthenkeyDTO {
+public class AuthkeyDTO {
 	private String apollokey;
 	private String cname;
 	private String email;
