@@ -18,7 +18,7 @@
 <context:annotation-config />
 
 <!-- base-package 범위 내에서 어노테이션이 적용된 클래스를 bean으로 등록 -->
-<context:component-scan base-package="kr.or.bit.controller" />
+<context:component-scan base-package="kr.or.apollo.controller" />
 
 <!-- tile 기능 사용을 위한 코드 -->
 <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
