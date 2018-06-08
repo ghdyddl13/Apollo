@@ -8,10 +8,15 @@ public class TestController {
 	
 	@RequestMapping("/index.htm")
 	public String main() {
-		System.out.println("test");
+
 		return "home.login";
 	}
 	
+	@RequestMapping("/join.htm")
+	public String join() {
+		return "home.join";
+	}
+
 	@RequestMapping("/login.htm")
 	public String login() {
 		System.out.println("dd");
