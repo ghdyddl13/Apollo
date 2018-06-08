@@ -25,13 +25,9 @@ public class MemberController {
 		return null;
 	}
 	
-	@RequestMapping("index.htm")
+
 	public String login(MemberDTO memberdto, Model model) {
-		System.out.println("asd");
-		
-		
-		
-		return "home.login";
+		return null;
 	}
 	
 	public String createApollokey(String s1, String s2, Model model) {

@@ -1,0 +1,337 @@
+@charset "UTF-8";
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+/* 폰트 */
+body {
+	font-family: 'Noto Sans KR';
+}
+
+/* /////////////////////////// 로그인 css /////////////////////////////////////////////////////  */
+/* 로그인 input 간격  */
+.input-group{
+margin-top:1em;
+margin-bottom:1em;
+}
+
+.login-box{
+	line-height:2.3em;
+	font-size:1em;
+	margin-top:1em;
+	margin-bottom:1em;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+}
+
+/* 모달 센터 맞추는 부분  */
+.modal {
+        text-align: center;
+}
+ 
+@media screen and (min-width: 768px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+}
+ 
+.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+}
+
+/* 버튼 맞추는 부분 */
+.btn{
+	margin-right: 40px; 
+	padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 30px;
+    padding-left: 30px;
+    background-color: ##B9062F;
+    color:white;
+    
+}
+
+/* 버튼 맞추는 부분 */
+.btn2{
+	margin-right: 180px;
+	padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 30px;
+    padding-left: 30px;
+    background-color: #000069;
+    color:white;
+}
+
+.btn3{
+	margin-right: 40px; 
+	padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 30px;
+    padding-left: 30px;
+    background-color: #B9062F;
+    color:white;
+    margin-left:160px;
+    
+}
+/* 모달 색깔 바꾸는 부분 */
+#modal,#modal2,#modal3{
+	background-color: white;
+}
+
+.footer{ /* 꼬리말 부분 */
+text-align: center;
+color: #999999;
+}
+
+.legend{
+text-align: center; 
+font-size: 40px;
+}
+
+.header{
+	margin-right: 0px;
+    margin-left: 500px;
+    margin-top: 250px;
+}
+.magin{
+margin-left: 150px;
+}
+
+.margin2{
+width: 350px;
+}
+
+.btn-block{
+	background-color: #000069; 
+	color: white;
+}
+.btn-color{
+background-color: #B9062F;
+color: white;
+}
+
+.p-color{
+font-size: 15px;
+text-align: center; 
+color: black;
+}
+.p-color2{
+font-size: 15px; 
+text-align: center; 
+color: black;
+}
+.i-width,.i-width2{
+width:40px;
+}
+.head{
+	 margin-left: 35px;
+	 margin-bottom: 25px;
+     margin-top: 0px;
+     font-size:40px;	
+}
+.div-font-size{
+	font-size: 21px; 
+	text-align: center;
+}
+
+.input-size{
+	width: 326px;
+}
+
+ .font-header6{
+ 	 margin-left: 35px;
+ }
+ 
+ /* /////////////////////////// 로그인 css끝 /////////////////////////////////////////////////////  */
+
+ 
+  /* ///////////////////////////헤더와 사이드바/////////////////////////////////////////////////////  */
+body {
+	font-family: 'Noto Sans KR';
+}
+
+#header {
+	background-color: rgb(0, 0, 50);
+	z-index: 2;
+	border-radius: 0px
+}
+
+#my-side-nav {
+	background-color: rgba(180, 197, 209, 0.15);
+	overflow: scroll;
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+#loginimg { /* 로그인 이미지 색상  */
+	color: white;
+}
+
+.navbar-header {
+	width: 250px;
+}
+
+.side-nav {
+	height: 100%;
+	width: 250px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+}
+
+.side-nav a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 15px;
+	/* 	color: #818181; */
+	display: block;
+	transition: 0.3s;
+}
+
+/*  .sidenav a:hover {
+	color: blue;
+} 
+ */
+.side-nav a:hover {
+	background-color: #cccccc;
+}
+
+.side-dir {
+	padding-left: 20px;
+}
+
+.side-dir a {
+	font-size: 12px
+}
+
+.add-project {
+	color: black
+}
+
+.apollo-logo {
+	color: white;
+	padding-left: 50px;
+	font-size: 30px;
+	margin: 0px
+}
+
+.header-menu {
+	font-size: 18px;
+}
+
+a {
+	cursor: pointer;
+}
+
+.side-nav span {
+	margin-right: 6px;
+	margin-left: 6px
+}
+
+.custom-menu {
+	z-index: 1000;
+	position: absolute;
+	overflow: visible;
+	border: 1px solid #CCC;
+	white-space: nowrap;
+	font-family: sans-serif;
+	background: #FFF;
+	color: #333;
+	border-radius: 5px;
+	padding: 0px;
+}
+
+/* Each of the items in the list */
+.custom-menu li {
+	padding: 8px 12px;
+	cursor: pointer;
+	list-style-type: none;
+	transition: all .3s ease;
+	user-select: none;
+}
+
+.custom-menu li:hover {
+	background-color: #DEF;
+}
+
+.dropdown-submenu {
+	position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-top: -1px;
+	min-width: 100px;
+}
+
+/* Modal */
+label {
+	display: block;
+}
+
+#project-name {
+	margin-bottom: 12px;
+	width: 100%;
+	padding: .4em;
+}
+
+.method {
+	font-weight: bold;
+}
+
+.add-project-modal-title {
+	font-weight: bold;
+	padding-top: 5px;
+}
+
+.project-setting-left { /* 프로젝트 생성 모달창 vertical line  */
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+.project-setting-right { /* 프로젝트 생성 모달창 vertical line  */
+	border-left: 1px solid rgb(230, 230, 230);
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+.date {
+	margin-right: 3px;
+	width: 80%;
+}
+
+#descri {
+	width: 100%;
+	height: 50%;
+}
+
+#add-project-btn {
+	background-color: rgb(178, 28, 74);
+	color: white;
+	width: 80px;
+}
+
+#cancel-project-btn {
+	background-color: rgb(0, 0, 50);
+	color: white;
+	width: 80px;
+}
+
+.modal-dialog {
+	width: 950px;
+	height: 75%;
+	overflow: hidden;
+}
+
+.header_logo{
+	margin-top: 5px;
+	width: 80px;
+	height: 35px
+}
