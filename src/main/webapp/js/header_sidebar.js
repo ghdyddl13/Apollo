@@ -65,8 +65,8 @@ $(function() {
 				$(".custom-menu").hide(100);
 			}
 		});
-
-		$(".date").datepicker({
+		
+	$(".date").datepicker({
 			showOn : "button",
 			buttonImage : "img/calendar.png",
 			buttonImageOnly : true,
