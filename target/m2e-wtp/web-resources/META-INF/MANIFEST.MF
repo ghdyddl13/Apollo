@@ -1,25 +1,5 @@
 Manifest-Version: 1.0
 Built-By: Bit
-<<<<<<< HEAD
 Build-Jdk: 1.8.0_171
-=======
-<<<<<<< HEAD
-Build-Jdk: 1.8.0_161
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-Build-Jdk: 1.8.0_171
-=======
-Build-Jdk: 1.8.0_161
->>>>>>> feature/jk
-=======
-Build-Jdk: 1.8.0_161
->>>>>>> feature/yy
-=======
-Build-Jdk: 1.8.0_161
->>>>>>> feature/jk
->>>>>>> 00b079e2a21691aa7844360539775874120e61ad
->>>>>>> 6104f954fb7ad4ed5f958b1f66556c1f6f119514
 Created-By: Maven Integration for Eclipse
 
