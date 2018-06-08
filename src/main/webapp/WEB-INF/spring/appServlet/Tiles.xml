@@ -26,7 +26,7 @@
 	         <put-attribute name="js" value="/js/header_sidebar.js" />
 		     <put-attribute name="header"  value="/WEB-INF/views/inc/header.jsp" /> 
 	         <put-attribute name="sidebar" value="/WEB-INF/views/inc/sidebar.jsp" /> 
-	         <!--   <put-attribute name="footer" value="/WEB-INF/views/inc/{1}/insideHeader.jsp" />  -->
+	         <put-attribute name="insideheader" value="/WEB-INF/views/{1}/inc/insideHeader.jsp" />
 	         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" /> 
          </definition>
          

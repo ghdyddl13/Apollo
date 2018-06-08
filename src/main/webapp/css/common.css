@@ -388,6 +388,14 @@ label {
 	height: 35px
 }
 
+
+.inside-header{
+	background-color: #f4faff;
+	color: black;
+	height: 30px;
+	
+}
+
 /* /////////////////////////////////회원가입 //////////////////////////////////////////// */
 .div-width{
    width:40%
