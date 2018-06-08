@@ -25,6 +25,7 @@
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="sidebar" />
 	<div class="content_box">
+	<tiles:insertAttribute name="insideheader" />
 	<tiles:insertAttribute name="content" />
 	</div>
 
