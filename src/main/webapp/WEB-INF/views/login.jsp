@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-<script>
-	$("#login_btn").click(function(){
-		location.href="login.htm"
-	})
-</script>	
 	
 <div class="container header">
 	<div class="row magin">
@@ -30,9 +25,10 @@
 				</div>
 
 				<!-- 구매 취소 부분  -->
-				<button id="login_btn" type="submit" class="btn btn-default btn-block">로그인</button>
-				<button type="button" class="btn btn-default btn-block btn-color"
-					data-toggle="modal" data-target="#myModal">구매하기</button>
+				<input id="login_btn" type="submit" class="btn btn-block login-btn" value="로그인">
+				<a href="login.htm">로그인</a><br>
+				<input type="button" class="btn buy-license-btn" value="구매하기"
+					data-toggle="modal" data-target="#myModal">
 				<br>
 				<!-- 비밀번호 ,회원가입 페이지 링크 -->
 				<p class="p-color">

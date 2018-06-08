@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>  
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html>
 <head>
 <link rel="stylesheet"
@@ -22,6 +22,11 @@
 </head>
 <body>
 
-		<tiles:insertAttribute name="content" />
+	<tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="sidebar" />
+	<div class="content_box">
+	<tiles:insertAttribute name="content" />
+	</div>
+
 </body>
 </html>

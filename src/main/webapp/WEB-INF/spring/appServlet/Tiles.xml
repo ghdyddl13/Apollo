@@ -13,18 +13,20 @@
 	         <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" /> 
          </definition>
          
-         <definition name="header.*" template="/WEB-INF/views/inc/{1}/layout.jsp"> 
+         <definition name="header.*" template="/WEB-INF/views/header/inc/layout.jsp"> 
        <!--   	<put-attribute name="css" value="/css/common.css"></put-attribute> -->
+       		<!--  <put-attribute name="js" value="/js/header_sidebar.js" /> -->
 	         <put-attribute name="header"  value="/WEB-INF/views/inc/header.jsp" /> 
-	         <put-attribute name="footer" value="/WEB-INF/views/inc/sidebar.jsp" /> 
-	         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" /> 
+	         <put-attribute name="sidebar" value="/WEB-INF/views/inc/sidebar.jsp" /> 
+	         <put-attribute name="content" value="/WEB-INF/views/header/{1}.jsp" /> 
          </definition>
          
-         <definition name="*.*" template="/WEB-INF/views/inc/{1}/layout.jsp"> 
+         <definition name="*.*" template="/WEB-INF/views/{1}/inc/layout.jsp"> 
          <!-- 	<put-attribute name="css" value="/css/common.css"></put-attribute> -->
-	         <put-attribute name="header"  value="/WEB-INF/views/inc/header.jsp" /> 
-	         <put-attribute name="footer" value="/WEB-INF/views/inc/sidebar.jsp" /> 
-	           <put-attribute name="footer" value="/WEB-INF/views/inc/{1}/insideHeader.jsp" /> 
+	         <put-attribute name="js" value="/js/header_sidebar.js" />
+		     <put-attribute name="header"  value="/WEB-INF/views/inc/header.jsp" /> 
+	         <put-attribute name="sidebar" value="/WEB-INF/views/inc/sidebar.jsp" /> 
+	         <put-attribute name="insideheader" value="/WEB-INF/views/{1}/inc/insideHeader.jsp" />
 	         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" /> 
          </definition>
          
