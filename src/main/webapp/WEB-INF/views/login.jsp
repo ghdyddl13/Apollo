@@ -2,9 +2,12 @@
 	pageEncoding="UTF-8"%>
 	
 <script>
+$(function() {
 	$("#login_btn").click(function(){
+		console.log("Test")
 		location.href="login.htm"
 	})
+})	
 </script>	
 	
 <div class="container header">
@@ -31,6 +34,7 @@
 
 				<!-- 구매 취소 부분  -->
 				<button id="login_btn" type="submit" class="btn btn-default btn-block">로그인</button>
+				<a href="login.htm">로그인</a>
 				<button type="button" class="btn btn-default btn-block btn-color"
 					data-toggle="modal" data-target="#myModal">구매하기</button>
 				<br>

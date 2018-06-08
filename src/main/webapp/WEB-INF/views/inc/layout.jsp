@@ -17,12 +17,11 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 <link href="css/common.css" type="text/css" rel="stylesheet"> 
+<link href="css/layout.css" type="text/css" rel="stylesheet"> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
 		<tiles:insertAttribute name="content" />
-		
 </body>
 </html>
