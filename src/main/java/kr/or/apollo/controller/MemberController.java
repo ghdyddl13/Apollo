@@ -1,10 +1,13 @@
 package kr.or.apollo.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import kr.or.apollo.vo.MemberDTO;
 
+@Controller
 public class MemberController {
 
 	public View midCheck(String s1) {
@@ -22,13 +25,13 @@ public class MemberController {
 		return null;
 	}
 	
-	
+	@RequestMapping("index.htm")
 	public String login(MemberDTO memberdto, Model model) {
+		System.out.println("asd");
 		
 		
 		
-		
-		return null;
+		return "home.login";
 	}
 	
 	public String createApollokey(String s1, String s2, Model model) {
