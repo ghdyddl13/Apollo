@@ -2,48 +2,44 @@
 	pageEncoding="UTF-8"%>
 	
 	
-<div class="container header">
-	<div class="row magin">
-		<div class="col-sm-5">
-			<form action="" class="margin2">
-				<!-- 제목 -->
-				<h1 class="head">
-					<b>Login to Apollo</b>
-				</h1>
-				<br>
+<div class="container-fluid" align="center">
+	<div class="login-container">
+		<form action="" >
+			<!-- 제목 -->
+			<h1 class="login-head">
+				<b>Login to Apollo</b>
+			</h1>
+			<br>
+			<!-- <i> 사람모양 열쇠모양 , input 부분 -->
+			<div class="input-group">
+				<span class="input-group-addon"> <i
+					class="fa fa-user fa i-width2"></i></span> <input type="text"
+					class="form-control" placeholder="Username">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon"><i
+					class="	fa fa-key i-width"></i></span> <input type="text"
+					class="form-control" placeholder="****">
+			</div>
 
-				<!-- <i> 사람모양 열쇠모양 , input 부분 -->
-				<div class="input-group">
-					<span class="input-group-addon"> <i
-						class="fa fa-user fa i-width2"></i></span> <input type="text"
-						class="form-control" placeholder="Username">
-				</div>
-				<div class="input-group">
-					<span class="input-group-addon"><i
-						class="	fa fa-key i-width"></i></span> <input type="text"
-						class="form-control" placeholder="****">
-				</div>
-
-				<!-- 구매 취소 부분  -->
-				<input id="login_btn" type="submit" class="btn btn-block login-btn" value="로그인">
-				<a href="login.htm">로그인</a><br>
-				<input type="button" class="btn buy-license-btn" value="구매하기"
-					data-toggle="modal" data-target="#myModal">
-				<br>
-				<!-- 비밀번호 ,회원가입 페이지 링크 -->
-				<p class="p-color">
-					<a href="#">회원가입이 필요하신가요?</a>
-				</p>
-				<p class="p-color2">
-					<a href="#" data-toggle="modal" data-target="#pwdModal">비밀번호를
-						잊어버리셨나요?</a>
-				</p>
-				<br> <br> <br>
-				<p class="footer">@ Copyright 2018.All right reserved</p>
-			</form>
-		</div>
+			<!-- 구매 취소 부분  -->
+			<input id="login_btn" type="submit" class="btn btn-block login-btn" value="로그인">
+			<a href="login.htm">로그인</a><br>
+			<input type="button" class="btn btn-block buy-license-btn" value="구매하기"
+				data-toggle="modal" data-target="#myModal">
+			<br>
+			<!-- 비밀번호 ,회원가입 페이지 링크 -->
+			<p class="p-color">
+				<a href="join.htm">회원가입이 필요하신가요?</a>
+			</p>
+			<p class="p-color2">
+				<a href="#" data-toggle="modal" data-target="#pwdModal">비밀번호를
+					잊어버리셨나요?</a>
+			</p>
+			<br> <br> <br>
+			<p class="footer">@ Copyright 2018.All right reserved</p>
+		</form>
 	</div>
-
 </div>
 
 

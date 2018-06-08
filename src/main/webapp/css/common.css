@@ -53,6 +53,7 @@ margin-bottom:1em;
     color:white;
     
 }
+
 .buy-license-btn{
 	margin-right: 40px; 
 	padding-top: 12px;
@@ -61,8 +62,11 @@ margin-bottom:1em;
     padding-left: 30px;
     background-color: #B9062F;
     color:white;
-    
 }
+
+
+
+
 /* 버튼 맞추는 부분 */
 .btn2{
 	margin-right: 180px;
@@ -85,6 +89,7 @@ margin-bottom:1em;
     margin-left:160px;
     
 }
+
 /* 모달 색깔 바꾸는 부분 */
 #modal,#modal2,#modal3{
 	background-color: white;
@@ -105,12 +110,11 @@ font-size: 40px;
     margin-left: 500px;
     margin-top: 250px;
 }
-.magin{
-margin-left: 150px;
-}
 
-.margin2{
+
+.login-container{
 width: 350px;
+margin-top: 10%
 }
 
 
@@ -127,11 +131,12 @@ color: black;
 .i-width,.i-width2{
 width:40px;
 }
-.head{
-	 margin-left: 35px;
+.login-head{
+
 	 margin-bottom: 25px;
-     margin-top: 0px;
-     font-size:40px;	
+ 
+     font-size:40px;
+     text-align:center; 	
 }
 .div-font-size{
 	font-size: 21px; 
@@ -382,3 +387,43 @@ label {
 	width: 80px;
 	height: 35px
 }
+
+/* /////////////////////////////////회원가입 //////////////////////////////////////////// */
+.div-width{
+   width:40%
+}
+
+.div-font{
+   text-align:left;
+}
+.div-btn-position{
+   text-align:right;
+}
+
+.btn-size{
+   width:125px;
+   height:50px;
+   margin-right: 15px;
+   background-color: B9062F;
+   color:white;
+}
+.container{
+   margin-top:60px;
+}
+.footer-color{
+   color:999999;
+}
+.btn-color{
+background-color: 999999;
+   color: white;
+}
+.header-fontsize{
+   font-size:45px;   
+}
+.sign-account{
+   text-align:left;
+}
+.hr-color{
+   border: Inset 1px #999999;   
+}
+
