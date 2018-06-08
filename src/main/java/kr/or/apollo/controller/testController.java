@@ -35,6 +35,7 @@ public class TestController {
 	
 	@RequestMapping("/inbox.htm")
 	public String inbox() {
+		System.out.println("inbox");
 		return "header.inbox";
 	}
 	

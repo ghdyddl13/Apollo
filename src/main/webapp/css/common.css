@@ -43,17 +43,26 @@ margin-bottom:1em;
 }
 
 /* 버튼 맞추는 부분 */
-.btn{
+.login-btn{
 	margin-right: 40px; 
 	padding-top: 12px;
     padding-bottom: 12px;
     padding-right: 30px;
     padding-left: 30px;
-    background-color: ##B9062F;
+    background-color: #000069;
     color:white;
     
 }
-
+.buy-license-btn{
+	margin-right: 40px; 
+	padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 30px;
+    padding-left: 30px;
+    background-color: #B9062F;
+    color:white;
+    
+}
 /* 버튼 맞추는 부분 */
 .btn2{
 	margin-right: 180px;
@@ -104,14 +113,6 @@ margin-left: 150px;
 width: 350px;
 }
 
-.btn-block{
-	background-color: #000069; 
-	color: white;
-}
-.btn-color{
-background-color: #B9062F;
-color: white;
-}
 
 .p-color{
 font-size: 15px;
@@ -149,9 +150,6 @@ width:40px;
 
  
   /* ///////////////////////////헤더와 사이드바/////////////////////////////////////////////////////  */
-body {
-	font-family: 'Noto Sans KR';
-}
 
 #header {
 	background-color: rgb(0, 0, 50);
@@ -276,17 +274,17 @@ label {
 	display: block;
 }
 
-#project-name {
+#add-project-name { /* 프로젝트 생성 모달창 프로젝트명 text */
 	margin-bottom: 12px;
 	width: 100%;
 	padding: .4em;
 }
 
-.method {
+.method { /* 프로젝트 생성 모달창 방법론 */
 	font-weight: bold;
 }
 
-.add-project-modal-title {
+.add-modal-title {
 	font-weight: bold;
 	padding-top: 5px;
 }
@@ -307,27 +305,76 @@ label {
 	width: 80%;
 }
 
-#descri {
+.add-project-description {
 	width: 100%;
 	height: 50%;
 }
 
-#add-project-btn {
+.add-project-btn {
 	background-color: rgb(178, 28, 74);
 	color: white;
 	width: 80px;
 }
 
-#cancel-project-btn {
+
+.cancel-project-btn {
 	background-color: rgb(0, 0, 50);
 	color: white;
 	width: 80px;
 }
 
-.modal-dialog {
+.modal-add-project-dialog {
+	position:absolute; 
+    top:50%; 
+    left:50%; 
 	width: 950px;
 	height: 75%;
 	overflow: hidden;
+	vertical-align: middle;
+	margin-top:-370px; 
+    margin-left:-25%;
+}
+
+.modal-add-folder-dialog {
+	position:absolute; 
+    top:50%; 
+    left:50%; 
+	width: 330px;
+	height: 460px;
+	vertical-align: middle;
+	margin-top:-115px; 
+    margin-left:-230px;
+}
+
+.add-folder-text {
+	width: 100%;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.modal-add-step-dialog {
+	position:absolute; 
+    top:50%; 
+    left:50%; 
+	width: 530px;
+	height: 550px;
+	vertical-align: middle;
+	margin-top:-350px; 
+    margin-left:-250px;
+}
+
+#add-step-description {
+	width: 100%;
+	height: 30%;
+}
+.add-step-text {
+	width: 100%;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+#add-step-modal-hr {
+	padding-top: 0.1px;
+	padding-bottom: 0.1px;
 }
 
 .header_logo{
