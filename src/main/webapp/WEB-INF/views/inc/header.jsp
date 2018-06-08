@@ -8,7 +8,7 @@
 				<a class="apollo-logo" href="#"><img class="header_logo" src="img/apollo_logo.png"/></a>
 			</div>
 			<ul class="nav navbar-nav ">
-				<li class="nav-item"><a class="nav-link header-menu" href="#"
+				<li class="nav-item"><a class="nav-link header-menu" href="inbox.htm"
 					style="color: white">Inbox</a></li>
 				<li class="nav-item"><a class="nav-link header-menu" href="#"
 					style="color: white">My work</a></li>
