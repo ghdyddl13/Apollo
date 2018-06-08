@@ -21,7 +21,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+		Layout
 		<tiles:insertAttribute name="content" />
 		
 </body>
