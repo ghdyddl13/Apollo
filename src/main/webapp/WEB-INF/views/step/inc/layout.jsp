@@ -19,10 +19,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="sidebar" />
 	<div class="content_box">
 	<tiles:insertAttribute name="content" />
 	</div>
+
 </body>
 </html>

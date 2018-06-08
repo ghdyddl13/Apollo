@@ -22,6 +22,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 		<tiles:insertAttribute name="content" />
 </body>
 </html>

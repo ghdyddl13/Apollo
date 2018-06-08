@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <div id="my-side-nav" class="side-nav">
 		<div class="text-center container-fluid">
 			<a class="add-project" id="add-project" data-toggle="modal"
