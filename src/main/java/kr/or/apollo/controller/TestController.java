@@ -57,5 +57,28 @@ public class TestController {
 	public String stream() {
 		return "header.stream";
 	}
+	@RequestMapping("/board.htm")
+    public String board() {
+        
+        return "step.board";
+    }
+    
+    @RequestMapping("/list.htm")
+    public String list() {
+        
+        return "step.list";
+    }
+    
+    @RequestMapping("/timeline.htm")
+    public String timeLine() {
+        
+        return "step.timeline";
+    }
+    
+    @RequestMapping("/workload.htm")
+    public String workLoad() {
+        
+        return "step.workload";
+    }
 	
 }

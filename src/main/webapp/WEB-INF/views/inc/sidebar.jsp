@@ -13,7 +13,7 @@
 				프로젝트</a>
 			<div class="side-dir collapse" id="working-project">
 
-				<a class="side-project" data-toggle="collapse" on
+				<a class="side-project" data-toggle="collapse"
 					data-target="#project1"><span
 					class="glyphicon glyphicon-duplicate"></span>Project1</a>
 				<div class="side-dir collapse" id="project1">
@@ -100,7 +100,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Create Project</h4>
+					<h4 class="modal-title">Project 생성</h4>
 				</div>
 				<div class="modal-body">
 					<form>
@@ -197,7 +197,7 @@
 		</div>
 	</div>
 
-<!-- 스텝 생성 모달 -->
+		<!-- 스텝 생성 모달 -->
 		<div class="modal fade" id="add-step" role="dialog">
 		<div class="modal-dialog modal-add-step-dialog">
 			<!-- Modal content-->
