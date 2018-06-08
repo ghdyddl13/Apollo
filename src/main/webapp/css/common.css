@@ -1,0 +1,147 @@
+@charset "UTF-8";
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+/* 폰트 */
+body {
+	font-family: 'Noto Sans KR';
+}
+
+/* /////////////////////////// 로그인 css /////////////////////////////////////////////////////  */
+/* 로그인 input 간격  */
+.input-group{
+margin-top:1em;
+margin-bottom:1em;
+}
+
+.login-box{
+	line-height:2.3em;
+	font-size:1em;
+	margin-top:1em;
+	margin-bottom:1em;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+}
+
+/* 모달 센터 맞추는 부분  */
+.modal {
+        text-align: center;
+}
+ 
+@media screen and (min-width: 768px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+}
+ 
+.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+}
+
+/* 버튼 맞추는 부분 */
+.btn{
+	margin-right: 40px; 
+	padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 30px;
+    padding-left: 30px;
+    background-color: B9062F;
+    color:white;
+    
+}
+
+/* 버튼 맞추는 부분 */
+.btn2{
+	margin-right: 180px;
+	padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 30px;
+    padding-left: 30px;
+    background-color: 000069;
+    color:white;
+}
+
+.btn3{
+	margin-right: 40px; 
+	padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 30px;
+    padding-left: 30px;
+    background-color: B9062F;
+    color:white;
+    margin-left:160px;
+    
+}
+/* 모달 색깔 바꾸는 부분 */
+#modal,#modal2,#modal3{
+	background-color: white;
+}
+
+.footer{ /* 꼬리말 부분 */
+text-align: center;
+color: 999999;
+}
+
+.legend{
+text-align: center; 
+font-size: 40px;
+}
+
+.header{
+	margin-right: 0px;
+    margin-left: 500px;
+    margin-top: 250px;
+}
+.magin{
+margin-left: 150px;
+}
+
+.margin2{
+width: 350px;
+}
+
+.btn-block{
+	background-color: 000069; 
+	color: white;
+}
+.btn-color{
+background-color: B9062F;
+color: white;
+}
+.p-color{
+font-size: 15px;
+text-align: center; 
+color: black;
+}
+.p-color2{
+font-size: 15px; 
+text-align: center; 
+color: black;
+}
+.i-width,.i-width2{
+width:40px;
+}
+.head{
+	 margin-left: 35px;
+	 margin-bottom: 25px;
+     margin-top: 0px;
+     font-size:40px;	
+}
+.div-font-size{
+	font-size: 21px; 
+	text-align: center;
+}
+
+.input-size{
+	width: 326px;
+}
+
+ .font-header6{
+ 	 margin-left: 35px;
+ }
+ 
+ /* /////////////////////////// 로그인 css끝 /////////////////////////////////////////////////////  */
