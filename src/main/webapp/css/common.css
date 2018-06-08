@@ -49,7 +49,7 @@ margin-bottom:1em;
     padding-bottom: 12px;
     padding-right: 30px;
     padding-left: 30px;
-    background-color: B9062F;
+    background-color: ##B9062F;
     color:white;
     
 }
@@ -61,7 +61,7 @@ margin-bottom:1em;
     padding-bottom: 12px;
     padding-right: 30px;
     padding-left: 30px;
-    background-color: 000069;
+    background-color: #000069;
     color:white;
 }
 
@@ -71,7 +71,7 @@ margin-bottom:1em;
     padding-bottom: 12px;
     padding-right: 30px;
     padding-left: 30px;
-    background-color: B9062F;
+    background-color: #B9062F;
     color:white;
     margin-left:160px;
     
@@ -83,7 +83,7 @@ margin-bottom:1em;
 
 .footer{ /* 꼬리말 부분 */
 text-align: center;
-color: 999999;
+color: #999999;
 }
 
 .legend{
@@ -105,13 +105,14 @@ width: 350px;
 }
 
 .btn-block{
-	background-color: 000069; 
+	background-color: #000069; 
 	color: white;
 }
 .btn-color{
-background-color: B9062F;
+background-color: #B9062F;
 color: white;
 }
+
 .p-color{
 font-size: 15px;
 text-align: center; 

@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<script>
+	$("#login_btn").click(function(){
+		location.href="login.htm"
+	})
+</script>	
+	
 <div class="container header">
 	<div class="row magin">
 		<div class="col-sm-5">
@@ -23,7 +30,7 @@
 				</div>
 
 				<!-- 구매 취소 부분  -->
-				<button type="submit" class="btn btn-default btn-block">로그인</button>
+				<button id="login_btn" type="submit" class="btn btn-default btn-block">로그인</button>
 				<button type="button" class="btn btn-default btn-block btn-color"
 					data-toggle="modal" data-target="#myModal">구매하기</button>
 				<br>
