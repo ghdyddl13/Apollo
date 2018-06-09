@@ -1,5 +1,7 @@
 package kr.or.apollo.service;
 
-public class b {
+public class MemberService {
 
+	
+	
 }
