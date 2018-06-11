@@ -6,9 +6,38 @@ body {
 	font-family: 'Noto Sans KR';
 }
 
-#content-box{
+#main-box{
 	margin-left: 250px;
+	padding:0px;
 	border: 1px soild red
+}
+
+.navbar.inside-header{
+	background-color: #f4faff;
+	color:black;
+	min-height:35px;
+	text-align: center
+}
+
+.inside-header ul li{
+	height:35px;
+	
+}
+
+.inside-header a{
+	height:35px;
+	font-size: 17px;	
+	color:black;
+	padding: 5px
+}
+
+
+.navbar.inside-header.inside-header-step{
+	background-color: transparent;
+}
+
+.navbar.inside-header.inside-header-step a:hover{
+	background-color: transparent;
 }
 
 /* /////////////////////////// 로그인 css /////////////////////////////////////////////////////  */

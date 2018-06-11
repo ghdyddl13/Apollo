@@ -66,11 +66,47 @@ $(function() {
 			}
 		});
 		
-	$(".date").datepicker({
+	/*$(".date").datepicker({
 			showOn : "button",
 			buttonImage : "img/calendar.png",
 			buttonImageOnly : true,
 			buttonText : "Select date"
 
-		});
-	});
+		});*/
+	
+	
+	/////////////////////////// 비동기 화면전환 - 프로젝트 /////////////////////////
+	
+
+		$(".side-project").click(function(evt){
+			console.log("test")
+			$.ajax({
+				url:"information.htm",
+				dataType:"html",
+				success:function(data){
+					console.log(data);
+					console.log("11");
+					 $("#main-box").empty();
+					 $("#main-box").append(data);	 		
+					 
+				}
+			})
+	    });
+	
+		$(".side-step").click(function(evt){
+			console.log("test")
+			$.ajax({
+				url:"list.htm",
+				dataType:"html",
+				success:function(data){
+					console.log(data);
+					console.log("11");
+					 $("#main-box").empty();
+					 $("#main-box").append(data);	 		
+					 
+				}
+			})
+	    });
+	
+	
+});
