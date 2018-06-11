@@ -20,6 +20,7 @@ public class MemberController {
 		return null;
 	}
 	
+	
 	public String memberInsert(MemberDTO memberdto, Model model) {
 		
 		return null;

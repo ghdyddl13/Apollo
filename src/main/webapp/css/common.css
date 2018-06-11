@@ -6,6 +6,11 @@ body {
 	font-family: 'Noto Sans KR';
 }
 
+#content-box{
+	margin-left: 250px;
+	border: 1px soild red
+}
+
 /* /////////////////////////// 로그인 css /////////////////////////////////////////////////////  */
 /* 로그인 input 간격  */
 .input-group{
@@ -389,10 +394,11 @@ label {
 }
 
 
-.inside-header{
+/* Project header부분  */
+.navbar.inside-header{
 	background-color: #f4faff;
 	color: black;
-	height: 30px;
+	height: 25px;
 	
 }
 
