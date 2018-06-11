@@ -22,63 +22,72 @@ public class TestController {
 		return "main";
 	}
 	
-	@RequestMapping("/file.htm")
+	@RequestMapping("/files.htm")
 	public String projectFilelist() {
-		return "project.files";
+		System.out.println("files");
+		return "project/files";
 	}
 	
 	@RequestMapping("/information.htm")
 	public String projectInformation() {
-		return "project.information";
+		System.out.println("info");
+		return "project/information";
 	}
 	
 	@RequestMapping("/table.htm")
 	public String projectTable() {
-		return "project.table";
+		System.out.println("table");
+		return "project/table";
 	}
 	
 	@RequestMapping("/inbox.htm")
 	public String inbox() {
-		return "header.inbox";
+		return "header/inbox";
 	}
 	
+<<<<<<< HEAD
+=======
+	@RequestMapping("/myWork.htm")
+	public String myWork() {
+		return "header/myWork";
+	}
+>>>>>>> 0c96bd09d1e0f874c8d12cff55f301a470d0e521
 	
 	@RequestMapping("/report.htm")
 	public String report() {
-		return "header.report";
+		return "header/report";
 	}
 	
 	@RequestMapping("/starredTask.htm")
 	public String starredTask() {
-		return "header.starredTask";
+		return "header/starredTask";
 	}
 	
 	@RequestMapping("/stream.htm")
 	public String stream() {
-		return "header.stream";
+		return "header/stream";
 	}
 	@RequestMapping("/board.htm")
     public String board() {
         
-        return "step.board";
+        return "step/board";
     }
     
     @RequestMapping("/list.htm")
     public String list() {
         
-        return "step.list";
+        return "step/list";
     }
     
     @RequestMapping("/timeline.htm")
     public String timeLine() {
         
-        return "step.timeline";
+        return "step/timeline";
     }
     
     @RequestMapping("/workload.htm")
     public String workLoad() {
         
-        return "step.workload";
+        return "step/workload";
     }
-	
 }
