@@ -66,7 +66,7 @@ $(function() {
 			}
 		});
 	
-	$(".step1").click(function(event) {
+/*	$(".step1").click(function(event) {
 		console.log(event.target.Id);
 		$.ajax(
 			{
@@ -80,7 +80,7 @@ $(function() {
 				}
 			}
 		)
-	});
+	});*/
 
 
 		
@@ -126,5 +126,12 @@ $(function() {
 			})
 	    });
 	
-	
+		$( ".date-img" ).datepicker({
+		    showOn: "button",
+		    buttonImage: "img/calendar.png",
+		    buttonImageOnly: true,
+		    dateFormat: 'yy년 mm월 dd일'
+
+
+		});
 });
