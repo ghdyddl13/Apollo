@@ -5,22 +5,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TestController {
-	
+	/*
 	@RequestMapping("/index.htm")
 	public String main() {
 		System.out.println("login");
 		return "login";
-	}
+	}*/
 	
-	@RequestMapping("/join.htm")
+/*	@RequestMapping("/join.htm")
 	public String join() {
 		return "join";
-	}
+	}*/
 
-	@RequestMapping("/login.htm")
+	/*@RequestMapping("/login.htm")
 	public String login() {
 		return "main";
-	}
+	}*/
 	
 	@RequestMapping("/file.htm")
 	public String projectFilelist() {

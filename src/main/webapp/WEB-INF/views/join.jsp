@@ -27,8 +27,18 @@
 			<a>or sign in to your account</a>
 		</h4>
 	</div>
-
+<!--private String mid;
+	private String mname;
+	private String pwd;
+	private Date rday;
+	private String pnum;
+	private String image;
+	private String deptname;
+	private String apollokey;
+	private String position; -->
+	
 	<!-- 바디 1 아이디 -->
+	<form action="join.htm" method="post">
 	<div class="input-group div-width">
 		<div class="col-sm-4 div-font">
 			<h5>*아이디</h5>
@@ -38,7 +48,7 @@
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control">
+		<input type="text" class="form-control" name="mid">
 	</div>
 
 	<!-- 바디 2 비밀번호 -->
@@ -51,7 +61,7 @@
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control">
+		<input type="password" class="form-control" name ="pwd">
 	</div>
 
 	<!-- 바디 3 비밀번호 재입력 -->
@@ -61,7 +71,7 @@
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control">
+		<input type="password" class="form-control">
 	</div>
 
 
@@ -73,7 +83,7 @@
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control"> <br> <br>
+		<input type="text" class="form-control" name="mname"> <br> <br>
 		<hr class="hr-color">
 	</div>
 
@@ -97,7 +107,7 @@
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control">
+		<input type="text" class="form-control" name ="apollokey">
 	</div>
 
 	<!-- 휴대폰 번호 -->
@@ -107,7 +117,7 @@
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control">
+		<input type="text" class="form-control" name="pnum">
 	</div>
 	<!-- 부서명 -->
 	<div class="input-group div-width">
@@ -116,7 +126,7 @@
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control">
+		<input type="text" class="form-control" name ="deptname">
 	</div>
 
 	<!-- 직위 -->
@@ -126,13 +136,15 @@
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control">
+		<input type="text" class="form-control" name="position">
 	</div>
 	<br> <br>
 	<!-- 가입완료 버튼 -->
 	<div class="input-group div-width" align="right">
-		<button class="btn ">가입완료</button>
+		<button type="submit" class="btn">가입완료</button>
 	</div>
+	</form>
+	
 	<br> <br>
 	<h5 class="footer-color">@Copyright 2018.All right reserved.</h5>
 	<br> <br> <br>

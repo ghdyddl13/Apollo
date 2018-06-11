@@ -1,6 +1,7 @@
 package kr.or.apollo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +14,10 @@ import kr.or.apollo.vo.MemberDTO;
 @Controller
 public class MemberController {
 	
-	/*@Autowired
+	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	*/
+	
+	
 	@Autowired
 	private MemberService service;
 	
@@ -29,14 +31,16 @@ public class MemberController {
 
 	@RequestMapping(value="join.htm",method=RequestMethod.GET)
 	public String memberInsert() {
-		return "home.join";
+		System.out.println("join(get)");
+		return "join";
 	}
 	
 	@RequestMapping(value="join.htm",method=RequestMethod.POST)
 	public String memberInsert(MemberDTO memberdto, Model model) {
 		int result = 0;
 		String viewpage="";
-	/*	memberdto.setPwd(this.bCryptPasswordEncoder.encode(memberdto.getPwd()));*/
+		System.out.println("join(post)");
+		memberdto.setPwd(this.bCryptPasswordEncoder.encode(memberdto.getPwd()));
 		result = service.insertMember(memberdto);
 		
 		if(result > 0) {

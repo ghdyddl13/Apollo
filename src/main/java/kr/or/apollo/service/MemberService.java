@@ -10,11 +10,13 @@ import kr.or.apollo.vo.MemberDTO;
 
 @Service
 public class MemberService {
-
+	
 	@Autowired
 	private SqlSession sqlsession;
 	
+	
 	public int insertMember(MemberDTO memberdto){
+		System.out.println("service insertmember");
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.insertMember(memberdto);

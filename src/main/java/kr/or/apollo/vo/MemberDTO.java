@@ -15,8 +15,6 @@ public class MemberDTO {
 	private String position;
 	
 	
-	
-	
 	public String getMid() {
 		return mid;
 	}

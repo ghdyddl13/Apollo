@@ -1,5 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<insert id="insertMember" parameterType="vo.Member">
-		insert into member(mid, mname, pwd, rday, pnum, image, deptname, apollokey, position)
-		values(seq_mid.nextval, #{mname}, #{pwd}, #{rday}, #{pnum}, #{image}, #{deptname}, #{apollokey}, #{position})
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.apollo.dao.MemberDAO">
+<insert id="insertMember" parameterType="kr.or.apollo.vo.MemberDTO">
+		insert into member(mid, mname, pwd, rday, pnum, deptname, apollokey, position)
+		values(seq_mid.nextval, #{mname}, #{pwd}, sysdate, #{pnum}, #{deptname}, #{apollokey}, #{position})
 </insert>
+</mapper>
