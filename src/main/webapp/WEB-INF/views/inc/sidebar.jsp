@@ -15,14 +15,14 @@
 
 
 				<a id="test1" href="#" class="side-project" data-toggle="collapse"
-					on data-target="#project1"><span
+					 data-target="#project1"><span
 					class="glyphicon glyphicon-duplicate"></span>Project1</a>
 				<div class="side-dir collapse" id="project1">
 					<a class="side-folder" data-toggle="collapse"
 						data-target="#folder1"><span
 						class="glyphicon glyphicon-folder-close"></span>Folder1</a>
 					<div class="side-dir collapse" id="folder1">
-						<a class="side-step"><span
+						<a class="side-step step1"><span
 							class="glyphicon glyphicon glyphicon-list-alt"></span>Step1</a>
 					</div>
 					<a class="side-step"><span

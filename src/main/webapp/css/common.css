@@ -6,7 +6,7 @@ body {
 	font-family: 'Noto Sans KR';
 }
 
-#content-box{
+#main-box{
 	margin-left: 250px;
 	border: 1px soild red
 }
@@ -440,4 +440,8 @@ background-color: 999999;
 .hr-color{
    border: Inset 1px #999999;   
 }
-
+.inside-header {
+	background-color: #f4faff;
+	height:30px;
+	color: black;
+}

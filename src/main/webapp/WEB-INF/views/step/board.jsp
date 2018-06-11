@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-Board
-</body>
-</html>
+<nav class="navbar inside-header">
+	<div class="container-fluid">
+		<ul class="nav navbar-nav">
+			<li class="nav-item"><a id="step1" class="nav-link header-menu step1">List</a></li>
+			<li class="nav-item"><a id="board" class="nav-link header-menu board">Board</a></li>
+			<li class="nav-item"><a id="timeline" class="nav-link header-menu timeline">Timeline</a></li>
+			<li class="nav-item"><a class="nav-link header-menu" href="workload.htm">Workload</a></li>
+		</ul>
+	</div>
+</nav>
+
+<h3>board</h3>
