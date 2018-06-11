@@ -28,12 +28,6 @@ public class TestController {
 		return "project/files";
 	}
 	
-	@RequestMapping("/information.htm")
-	public String projectInformation() {
-		System.out.println("info");
-		return "project/information";
-	}
-	
 	@RequestMapping("/table.htm")
 	public String projectTable() {
 		System.out.println("table");
