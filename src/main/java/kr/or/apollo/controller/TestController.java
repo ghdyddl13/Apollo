@@ -8,19 +8,18 @@ public class TestController {
 	
 	@RequestMapping("/index.htm")
 	public String main() {
-
-		return "home.login";
+		System.out.println("login");
+		return "login";
 	}
 	
 	@RequestMapping("/join.htm")
 	public String join() {
-		return "home.join";
+		return "join";
 	}
 
 	@RequestMapping("/login.htm")
 	public String login() {
-		System.out.println("dd");
-		return "project.information";
+		return "main";
 	}
 	
 	@RequestMapping("/file.htm")
@@ -40,7 +39,6 @@ public class TestController {
 	
 	@RequestMapping("/inbox.htm")
 	public String inbox() {
-		System.out.println("inbox");
 		return "header.inbox";
 	}
 	
