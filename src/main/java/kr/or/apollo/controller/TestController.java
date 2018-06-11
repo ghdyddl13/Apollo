@@ -42,10 +42,6 @@ public class TestController {
 		return "header.inbox";
 	}
 	
-	@RequestMapping("/myWork.htm")
-	public String myWork() {
-		return "header.myWork";
-	}
 	
 	@RequestMapping("/report.htm")
 	public String report() {
