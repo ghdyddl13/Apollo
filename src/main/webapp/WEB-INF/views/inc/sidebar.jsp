@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html >
+
+
 <div id="my-side-nav" class="side-nav">
 		<div class="text-center container-fluid">
 			<a class="add-project" id="add-project" data-toggle="modal"
@@ -12,9 +14,7 @@
 			<a data-toggle="collapse" data-target="#working-project">진행중인
 				프로젝트</a>
 			<div class="side-dir collapse" id="working-project">
-
-
-				<a id="test1" href="#" class="side-project" data-toggle="collapse"
+				<a  href="#" class="side-project" data-toggle="collapse"
 					 data-target="#project1"><span
 					class="glyphicon glyphicon-duplicate"></span>Project1</a>
 				<div class="side-dir collapse" id="project1">
