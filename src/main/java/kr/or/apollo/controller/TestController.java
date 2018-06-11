@@ -45,13 +45,6 @@ public class TestController {
 		return "header/inbox";
 	}
 	
-<<<<<<< HEAD
-=======
-	@RequestMapping("/myWork.htm")
-	public String myWork() {
-		return "header/myWork";
-	}
->>>>>>> 0c96bd09d1e0f874c8d12cff55f301a470d0e521
 	
 	@RequestMapping("/report.htm")
 	public String report() {

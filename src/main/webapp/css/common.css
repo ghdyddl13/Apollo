@@ -9,7 +9,9 @@ body {
 #main-box{
 	margin-left: 250px;
 	padding:0px;
-	border: 1px soild red
+	border: 1px soild red;
+	width: 100%;
+	height: 100%;
 }
 
 .navbar.inside-header{

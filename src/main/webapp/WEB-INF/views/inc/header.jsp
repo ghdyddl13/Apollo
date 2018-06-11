@@ -3,12 +3,6 @@
 <!DOCTYPE html >
 <script type="text/javascript" src="js/header.js"></script>
 <nav class="navbar navbar-default" id="header">
-<<<<<<< HEAD
-	<div class="container-fluid">
-		<div class="navbar-header container-fluid">
-			<a href="index.htm"><img id="gohome" class="header_logo"
-				src="img/apollo_logo.png" /></a>
-=======
 		<div class="container-fluid">
 			<div class="navbar-header container-fluid">
 				<a href="index.htm"><img id="gohome" class="header_logo"
@@ -31,36 +25,5 @@
 					style="color: white"><span class="glyphicon glyphicon-user"
 						id="loginimg"></span>김래영님</a></li>
 			</ul>
->>>>>>> 0c96bd09d1e0f874c8d12cff55f301a470d0e521
 		</div>
-		<ul class="nav navbar-nav ">
-			<li class="nav-item"><a class="nav-link header-menu"
-				href="inbox.htm" style="color: white">Inbox</a></li>
-			<li class="nav-item"><a class="nav-link header-menu"
-				id="myWork" style="color: white">My Work</a></li>
-			<li class="nav-item"><a class="nav-link header-menu"
-				 style="color: white">Starred Task</a></li>
-			<li class="nav-item"><a class="nav-link header-menu"
-				href="report.htm" style="color: white">Report</a></li>
-			<li class="nav-item"><a class="nav-link header-menu"
-				href="stream.htm" style="color: white">Stream</a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li class="nav-item"><a class="nav-link" href="#"
-				style="color: white"><span class="glyphicon glyphicon-user"
-					id="loginimg"></span>김래영님</a></li>
-		</ul>
-	</div>
 </nav>
-<script type="text/javascript">
-	$('#myWork').click(function() {
-		$.ajax({
-					type: "get",
-					url	: "myWork.htm",
-					success: function (data) {
-							console.log(data);
-						
-				}
-		})
-	});
-</script>
