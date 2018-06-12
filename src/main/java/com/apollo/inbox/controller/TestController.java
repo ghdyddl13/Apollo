@@ -27,11 +27,7 @@ public class TestController {
 		return "project/files";
 	}
 	
-	@RequestMapping("/information.htm")
-	public String projectInformation() {
-		return "project/information";
-	}
-	
+
 	@RequestMapping("/table.htm")
 	public String projectTable() {
 		return "project/table";

@@ -3,7 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.task.dao.TaskDAO">
-
+    <select id="getTasks" parameterType="String" resultType="com.apollo.vo.TaskDTO">
+    select * from task where pid = #{pid}
+    </select>
     
+    <select id="getTasksInSteps" parameterType="String" resultType="com.apollo.vo.TaskDTO">
+    select * from taskinstep where sid = #{sid}
+    </select>
 
 </mapper>
