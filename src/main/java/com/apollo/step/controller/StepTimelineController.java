@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
   날      짜 : 2018. 6. 12.
   작성자명 : 박 민 식
  */
-
 @Controller
 @RequestMapping("/step")
 public class StepTimelineController {
@@ -19,5 +18,11 @@ public class StepTimelineController {
 	public String getTimelineView(String pid) {
 		
 		return "step/timeline";
+	}
+	
+	@RequestMapping("/getTimelineTasks.htm")
+	public String getTimelineTasks(String sid) {
+		
+		return "jsonview";
 	}
 }

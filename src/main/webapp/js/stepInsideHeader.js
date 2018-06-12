@@ -40,7 +40,7 @@ $(function() {
 				
 				$("#main-box").empty();
 				$("#main-box").append(data);
-				
+				makeTimeline(tasks);
 			}
 		})
 	})
