@@ -1,0 +1,19 @@
+<p>안녕하세요, <strong>${cname} 담당자님</strong>!</p>
+
+<p> Apollo 관리자 입니다.</p>
+
+<p>저희 <strong>Apollo</strong>를 이용해주셔서 감사합니다.</p>
+
+<p>구매하신 인증키 보내드립니다. </p>
+
+<p>회원 가입 또는 회원 정보 수정에서 인증키를 입력해서 사용해주시면 감사하겠습니다.</p>
+
+<p> 인증키 : <strong>${apollokey}</strong></p>
+
+<p>앞으로도 많은 방문 부탁드립니다.</p>
+
+<img src="https://cafeptthumb-phinf.pstatic.net/MjAxODA2MTFfNTAg/MDAxNTI4Njg4MTM3OTQ4.TjtkuCBsb1G1X1oX-8lxZEZKdNb5caqzEuBMYR5a9F0g.9_PqglArXJQMiIUYjXGqhZnMEXReGAL1cdKre3DTfhwg.JPEG.pvkpkv0801/Apollo.jpg.jpg?type=w740" 
+	style="width: 300px; height:200px"></img>
+
+<p>&nbsp;</p>
+
