@@ -5,16 +5,32 @@
 	
 	<div class ="main-container container">
 		<div class ="main-section-left" id="left">
-
+			<div class ="main-section-header">
+				<div>TODAY</div>
+				<div>Jun 12</div>
+			</div>
+			<div class="main-section-task"> TASK1</div>
 		</div>
 		<div class ="main-section-center" id="center"></div>
 		<div class ="main-section-right" id="right">
-
+			<div class ="main-section-header">
+				<div>THIS WEEK</div>
+				<div>Jun 12</div>
+			</div>
+			<div class ="main-section-header">
+				<div>NEXT WEEK</div>
+				<div>Jun 12</div>
+			</div>
+			<div class ="main-section-header">
+				<div>LATER</div>
+				<div>Jun 12</div>
+			</div>
 		</div>
 	
 	</div>
 <script type="text/javascript">
 	$(function() {
+		/////////////////////////////DIV TAG 이동시키기 /////////////////////////////////////
 		var startpos, diffpos = 0, range = 400;
 		var isEnable = false;
 
@@ -43,5 +59,6 @@
 				}
 			}
 		}
+		/////////////////////////////////////////////////////////////////////////////////////
 	});
 </script>
