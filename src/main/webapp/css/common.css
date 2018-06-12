@@ -12,12 +12,9 @@ html, body{
 #main-box{
     padding-left: 250px;
     height: calc(100% - 50px);
+    margin-top: 50px
+}
 
-}
-.navbar{
-	border: 0px;
-	margin-bottom: 0px;
-}
 .navbar.inside-header{
    background-color: #f4faff;
    color:black;
@@ -346,13 +343,8 @@ label {
 }
 
 .date {
-<<<<<<< HEAD
-	margin-right: 3px;
-	width: 80%;
-=======
    margin-right: 3px;
    width: 80%;
->>>>>>> develop
 }
 
 .add-project-btn {
@@ -372,19 +364,11 @@ label {
    position:absolute; 
     top:50%; 
     left:50%; 
-<<<<<<< HEAD
-	width: 850px;
-	height: 515px;
-	overflow: hidden;
-	vertical-align: middle;
-	margin-top:-370px; 
-=======
    width: 850px;
    height: 515px;
    overflow: hidden;
    vertical-align: middle;
    margin-top:-370px; 
->>>>>>> develop
     margin-left:-25%;
 }
 .modal-add-project-content {
@@ -396,17 +380,10 @@ label {
    position:absolute; 
     top:50%; 
     left:50%; 
-<<<<<<< HEAD
-	width: 330px;
-	height: 70%;
-	vertical-align: middle;
-	margin-top:-115px; 
-=======
    width: 330px;
    height: 70%;
    vertical-align: middle;
    margin-top:-115px; 
->>>>>>> develop
     margin-left:-230px;
 }
 .add-folder-text {
@@ -494,13 +471,7 @@ background-color: 999999;
    border: Inset 1px #999999;   
 }
 .inside-header {
-<<<<<<< HEAD
-	background-color: #f4faff;
-	height:30px;
-	color: black;
-=======
    background-color: #f4faff;
    height:30px;
    color: black;
->>>>>>> develop
 }
