@@ -111,7 +111,7 @@ $(function() {
 		</div>
 	</div>
 
-	<!-- 스텝 생성 모달 -->
+	<!-- 스텝 생성 Modal 창 -->
 	<div class="modal fade" id="add-step" role="dialog">
 		<div class="modal-dialog modal-add-step-dialog">
 			<!-- Modal content-->
@@ -166,10 +166,10 @@ $(function() {
 	</div>
 	
 	
-<!-- 프로젝트 수정 Modal 창 -->
-	<div class="modal fade" id="modify-project" role="dialog">
-		<div class="modal-dialog modal-add-project-dialog">
-			<div class="modal-content modal-add-project-content">
+	<!-- 프로젝트 수정 Modal 창 -->
+	<div class="modal fade" id="update-project" role="dialog">
+		<div class="modal-dialog modal-update-project-dialog">
+			<div class="modal-content modal-update-project-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Project 수정</h4>
@@ -234,13 +234,36 @@ $(function() {
 							</div>
 							<br><br>
 						<div align="center">
-							<input type="button" class="btn add-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn add-project-btn" value="수정">&nbsp;&nbsp;&nbsp;
 							<input type="button" class="btn cancel-project-btn"
 								data-dismiss="modal" value="취소">
 						</div>
 						</fieldset>
 					</form>
 				</div>
+			</div>
+		</div>
+	</div>	
+	
+	<!-- Project 삭제 Modal 창 -->
+	<div class="modal fade" id="delete-project" role="dialog">
+		<div class="modal-dialog modal-delete-project-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Project 삭제</h4>
+				</div>
+				<div class="modal-body">
+					<p>해당 프로젝트를 삭제하시겠습니까?</p>
+					<p>프로젝트 삭제시 14일동안 휴지통에 보관됩니다.</p>
+				</div>
+				<div align="center">
+					<input type="button" class="btn delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn cancel-btn"
+						data-dismiss="modal" value="취소">
+				</div>
+				<br>
 			</div>
 		</div>
 	</div>	

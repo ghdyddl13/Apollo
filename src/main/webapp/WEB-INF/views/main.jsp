@@ -15,6 +15,8 @@
 <link href="css/common.css" type="text/css" rel="stylesheet">
 <!--MY WORK CSS  -->
 <link href="css/myWork.css" type="text/css" rel="stylesheet">
+<!-- PROJECT CSS -->
+<link href="css/project.css" type="text/css" rel="stylesheet">
 <!--MY WORK JAVASCRIPT  -->
 <script type="text/javascript" src="js/sidebar.js"></script>
 <title>Insert title here</title>
