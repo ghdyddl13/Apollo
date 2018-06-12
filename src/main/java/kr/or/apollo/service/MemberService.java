@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import kr.or.apollo.dao.MemberDAO;
 import kr.or.apollo.vo.MemberDTO;
 
+import kr.or.apollo.dao.AuthkeyDAO;
+
+import kr.or.apollo.vo.AuthkeyDTO;
+
 
 @Service
 public class MemberService {
@@ -15,6 +19,12 @@ public class MemberService {
 	private SqlSession sqlsession;
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 12.
+	 기      능 : 
+	 작성자명 : 신 호 용
+	 */
 	public int insertMember(MemberDTO memberdto){
 		System.out.println("service insertmember");
 		int result = 0;
@@ -22,15 +32,26 @@ public class MemberService {
 		result = dao.insertMember(memberdto);
 		return result;
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 12.
+	 기      능 : 
+	 작성자명 : 신 호 용
+	 */
 	public String getlogin(String mid){
 		System.out.println("service getlogin");
 		String result = "";
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.getlogin(mid);
 		
-		
 		return result;
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 12.
+	 기      능 : 
+	 작성자명 : 신 호 용
+	 */
 	public int midcheck(String mid){
 		System.out.println("service midcheck");
 		int result=0;
@@ -39,15 +60,66 @@ public class MemberService {
 		System.out.println(result);
 		return result;
 	}
-	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 12.
+	 기      능 : 
+	 작성자명 : 신 호 용
+	 */
 	public int keycheck(String apollokey){
 		System.out.println("service midcheck");
 		int result=0;
-		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		AuthkeyDAO dao = sqlsession.getMapper(AuthkeyDAO.class);
 		result = dao.keycheck(apollokey);
 		System.out.println(result);
 		return result;
+
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 12.
+	 기      능 : 인증키 생성하는 mapping method
+	 작성자명 : 이 창 훈
+	 */
+	public int createApollokey(AuthkeyDTO authkeydto) {
+		int result = 0;
+		AuthkeyDAO dao = sqlsession.getMapper(AuthkeyDAO.class);
+		result = dao.createApollokey(authkeydto);
+		return result;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 12.
+	 기      능 : Password 찾는 mapping method 
+	 작성자명 : 이 창 훈
+	 */
+	public int findpwd(MemberDTO memberdto) {
+		System.out.println("memberdto :" + memberdto.getPwd());
+		System.out.println("memberdto2 : " + memberdto.getMid());
+		System.out.println("memberdto3 : " + memberdto.getMname());
+		int result = 0;
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		result = dao.findpwd(memberdto);
+		System.out.println("result : " + result);
+		return result;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 12.
+	 기      능 : Password 찾는 모달에서 id 체크 mapping method 
+	 작성자명 : 이 창 훈
+	 */
+	public String findpwdidcheck(String mid) {
+		System.out.println("mid : " + mid);
+		String result = "";
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		result = dao.findpwdidcheck(mid);
+		//System.out.println("result2 : " + result);
+		return result;
+		
+	}
 	
 }

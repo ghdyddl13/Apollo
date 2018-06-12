@@ -7,8 +7,10 @@ public interface MemberDAO {
 	public int insertMember(MemberDTO memberdto);
 	
 	public String getlogin(String mid);
-	
+
 	public int midcheck(String mid);
+
+	public int findpwd(MemberDTO memberdto);
 	
-	public int keycheck(String apollokey);
+	public String findpwdidcheck(String mid);
 }

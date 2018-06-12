@@ -133,7 +133,7 @@ var RegexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i; //이메일
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control" id="mid" name="mid">
+		<input type="email" class="form-control" id="mid" name="mid">
 	</div>
 
 	<!-- 바디 2 비밀번호 -->
