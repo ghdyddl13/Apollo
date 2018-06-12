@@ -1,7 +1,15 @@
 package com.apollo.step.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.View;
+
+import com.apollo.step.service.StepTimelineService;
+import com.apollo.vo.TaskDTO;
 
 /**
  * 
@@ -12,7 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/step")
 public class StepTimelineController {
-
+	
+	@Autowired
+	private View jsonview;
+	
+	@Autowired
+	private StepTimelineService steptimelineservice; 
 	
 	@RequestMapping("/timeline.htm")
 	public String getTimelineView(String pid) {
@@ -21,8 +34,16 @@ public class StepTimelineController {
 	}
 	
 	@RequestMapping("/getTimelineTasks.htm")
-	public String getTimelineTasks(String sid) {
+	public View getTimelineTasks(String sid, Model model) {
+		ArrayList<TaskDTO> tasks = null;
 		
-		return "jsonview";
+		try {
+			tasks = steptimelineservice.getTasksByStepId(sid);
+			model.addAttribute("tasks", tasks);
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		
+		return jsonview;
 	}
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html >
+
 <script type="text/javascript" src="js/stepInsideHeader.js"></script>
 <nav class="navbar inside-header inside-header-step">
    <div class="container-fluid">

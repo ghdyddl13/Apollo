@@ -40,7 +40,10 @@ $(function() {
 				
 				$("#main-box").empty();
 				$("#main-box").append(data);
+				
+				var tasks = getGanttItems(3);
 				makeTimeline(tasks);
+				console.log(tasks);
 			}
 		})
 	})
