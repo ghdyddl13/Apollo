@@ -79,13 +79,10 @@ $(function() {
 	
 
 		$(".side-project").click(function(evt){
-			console.log("test")
 			$.ajax({
 				url:"information.htm",
 				dataType:"html",
 				success:function(data){
-					console.log(data);
-					console.log("11");
 					 $("#main-box").empty();
 					 $("#main-box").append(data);	 		
 					 

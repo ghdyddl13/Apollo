@@ -19,8 +19,10 @@
 
 <!-- base-package 범위 내에서 어노테이션이 적용된 클래스를 bean으로 등록 -->
 <context:component-scan base-package="kr.or.apollo.controller" />
+<context:component-scan base-package="kr.or.apollo.service" />
 
-
+<!-- 비동기 -->
+<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
 
 <!-- view가 결국 Tiles를 거쳐서 나갈 것이므로 urlBasedViewResolver가 필요하다 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

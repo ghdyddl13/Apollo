@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html >
 <script type="text/javascript" src="js/header.js"></script>
-<nav class="navbar navbar-default" id="header">
+<nav class="navbar navbar-default navbar-fixed-top" id="header">
 		<div class="container-fluid">
 			<div class="navbar-header container-fluid">
 				<a href="index.htm"><img id="gohome" class="header_logo"
 					src="img/apollo_logo.png" /></a>
 			</div>
-			<ul class="nav navbar-nav ">
+			<ul class="nav navbar-nav">
 				<li class="nav-item"><a class="nav-link header-menu"
 					id="inbox-page" style="color: white">Inbox</a></li>
 				<li class="nav-item"><a class="nav-link header-menu"
