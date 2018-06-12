@@ -29,7 +29,7 @@ $(function() {
 										class="text ui-widget-content ui-corner-all"><br>
 									<br> 
 									<div class="add-modal-title">
-										<h4>방법론</h4>
+										<p>방법론</p>
 									</div>
 										<input type="radio" name="method" value="customizing"
 										checked><span class="method"> Customizing</span> <br>
@@ -71,7 +71,7 @@ $(function() {
 										<br><br>
 									</div>
 									<div>
-										<h4>상세설명</h4>
+										<p>상세설명</p>
 									</div>
 									<textarea rows="7%" cols="49%" placeholder="내용을 입력하세요"></textarea>
 								</div>
