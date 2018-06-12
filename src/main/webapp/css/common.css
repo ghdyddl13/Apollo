@@ -12,10 +12,10 @@ html, body{
 #main-box{
     padding-left: 250px;
     height: calc(100% - 50px);
-    margin-top: 50px
 }
 .navbar{
 	border: 0px;
+	margin-bottom: 0px;
 }
 .navbar.inside-header{
    background-color: #f4faff;

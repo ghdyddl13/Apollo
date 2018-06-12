@@ -15,7 +15,7 @@
 	</div>
 <script type="text/javascript">
 	$(function() {
-		var startpos, diffpos = 0, range = 200;
+		var startpos, diffpos = 0, range = 400;
 		var isEnable = false;
 
 		document.getElementById("center").onmousedown = on_mouse_down;
@@ -38,8 +38,8 @@
 				diffpos = startpos - pos;
 				var width = (window.innerWidth-250) / 2;
 				if (diffpos > -(width - range) && diffpos < (width - range)) {
-					document.getElementById("left").style.width = width -25 - diffpos + "px";
-					document.getElementById("right").style.width = width - 25+ diffpos + "px";
+					document.getElementById("left").style.width = width -20 - diffpos + "px";
+					document.getElementById("right").style.width = width - 20+ diffpos + "px";
 				}
 			}
 		}
