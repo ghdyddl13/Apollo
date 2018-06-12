@@ -9,7 +9,7 @@ $(function() {
 							var dropdown = '<li class="dropdown-submenu" ><p data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></p>'
 							dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li data-toggle="modal" data-target="#add-step">Step추가</li></ul></li>'
 							dropdown += '<li data-action="second">완료</li>'
-							dropdown += '<li data-action="third">수정</li>'
+							dropdown += '<li data-action="third" data-toggle="modal" data-target="#modify-project">수정</li>'
 							dropdown += '<li data-action="fourth">삭제</li>'
 
 							$(dropdown_ul).attr("class", "custom-menu").append(
