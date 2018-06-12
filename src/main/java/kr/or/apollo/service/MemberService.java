@@ -22,5 +22,23 @@ public class MemberService {
 		result = dao.insertMember(memberdto);
 		return result;
 	}
+	public String getlogin(String mid){
+		System.out.println("service getlogin");
+		String result = "";
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		result = dao.getlogin(mid);
+		
+		
+		return result;
+	}
+	public int midcheck(String mid){
+		System.out.println("service midcheck");
+		int result=0;
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		result = dao.midcheck(mid);
+		System.out.println(result);
+		return result;
+	}
+	
 	
 }

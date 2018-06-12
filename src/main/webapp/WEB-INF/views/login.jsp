@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,16 +13,42 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script type="text/javascript" src="js/header_sidebar.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="css/common.css" type="text/css" rel="stylesheet">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+$(function() {
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
+	
+});
+	
+function login() {
+	if ($("#mid").val()== ""){
+        alert("아이디를 입력하지 않았습니다.");
+        $("#mid").focus();
+        return false;
+    }
+	
+	if ($("#pwd").val()== ""){
+        alert("비밀번호 입력하지 않았습니다.");
+        $("#pwd").focus();
+        return false;
+    }
+	$("#f").submit();
+}
+</script>
 </head>
 <body>
 	<div class="container-fluid" align="center">
 		<div class="login-container">
-			<form action="">
+		
+		<c:set var="msg" value="${msg}"></c:set>
+		<form id="f" action="login.htm" method="post">
 				<!-- 제목 -->
 				<h1 class="login-head">
 					<b>Login to Apollo</b>
@@ -29,21 +56,18 @@
 				<br>
 				<!-- <i> 사람모양 열쇠모양 , input 부분 -->
 				<div class="input-group">
-					<span class="input-group-addon"> <i
-						class="fa fa-user fa i-width2"></i></span> <input type="text"
-						class="form-control" placeholder="Username">
+					<span class="input-group-addon"> <i class="fa fa-user fa i-width2"></i></span> 
+						<input type="text" class="form-control" placeholder="Username" name="mid" id="mid">
 				</div>
 				<div class="input-group">
-					<span class="input-group-addon"><i
-						class="	fa fa-key i-width"></i></span> <input type="text"
-						class="form-control" placeholder="****">
+					<span class="input-group-addon"><i class="	fa fa-key i-width"></i></span> 
+						<input type="password" class="form-control" placeholder="****" name="pwd" id="pwd">
 				</div>
 
 				<!-- 구매 취소 부분  -->
-				<input id="login_btn" type="submit" class="btn btn-block login-btn"
-					value="로그인"> <a href="login.htm">로그인</a><br> <input
-					type="button" class="btn btn-block buy-license-btn" value="구매하기"
-					data-toggle="modal" data-target="#myModal"> <br>
+				<input id="login_btn" type="button" onclick="login()" class="btn btn-block login-btn" value="로그인"> 
+				<a href="login.htm">로그인</a><br> 
+				<input type="button" class="btn btn-block buy-license-btn" value="구매하기" data-toggle="modal" data-target="#myModal"><br>
 				<!-- 비밀번호 ,회원가입 페이지 링크 -->
 				<p class="p-color">
 					<a href="join.htm">회원가입이 필요하신가요?</a>
@@ -53,8 +77,10 @@
 						잊어버리셨나요?</a>
 				</p>
 				<br> <br> <br>
+				</form>
+				
 				<p class="footer">@ Copyright 2018.All right reserved</p>
-			</form>
+			
 		</div>
 	</div>
 

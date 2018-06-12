@@ -18,6 +18,76 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="css/common.css" type="text/css" rel="stylesheet">
 <title>Insert title here</title>
+
+<script type="text/javascript">
+
+$(function() {
+	$('#btnCheckUid').click(function(){
+		if ($("#mid").val()== "") {
+            alert("아이디를 입력하지 않았습니다.");
+            $("#mid").focus();
+            return false;
+        }
+		$.ajax(
+			{
+				type:"post",
+				url:"midcheck.htm",
+				data:{"mid" : $('#mid').val()},
+				success:function(data){
+					if(data.result=="fail"){
+						alert('중복된 아이디 입니다.');
+						$("#mid").focus();
+					}else{
+						alert('사용가능한 아이디 입니다.');
+					}
+				}
+			}	
+		);
+	});
+});
+
+var RegexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i; //이메일 유효성검사
+
+	function sendit() {
+		if ($("#mid").val()== "") {
+            alert("아이디를 입력하지 않았습니다.");
+            $("#mid").focus();
+            return false;
+        }
+		
+		if ($("#pwd").val()== "") {
+            alert("비밀번호 입력하지 않았습니다.");
+            $("#pwd").focus();
+            return false;
+        }
+
+		if ($("#pwd").val()!=$("#pwd2").val()) {
+            alert("비밀번호 확인이 일치하지 않습니다.");
+            $("#pwd").focus();
+            return false;
+        }
+		
+		if ($("#mname").val()== "") {
+            alert("이름을 입력하지 않았습니다.");
+            $("#mname").focus();
+            return false;
+        }
+		if ( !RegexEmail.test($.trim($("#mid").val())) ){
+			alert("이메일 형식이 아닙니다.");
+			$("#email").focus();
+			return false;
+
+		}
+		if ($("#pwd").val().length < 8) {
+            alert("비밀번호를 8자리 이상입력해주세요.");
+            $("#pwd").focus();
+            return false;
+        }
+
+		$("#f").submit();
+	}
+</script>
+
 </head>
 <body>	
 <div class="container" align="center">
@@ -27,28 +97,19 @@
 			<a>or sign in to your account</a>
 		</h4>
 	</div>
-<!--private String mid;
-	private String mname;
-	private String pwd;
-	private Date rday;
-	private String pnum;
-	private String image;
-	private String deptname;
-	private String apollokey;
-	private String position; -->
 	
 	<!-- 바디 1 아이디 -->
-	<form action="join.htm" method="post">
+	<form id = "f" action="join.htm" method="post">
 	<div class="input-group div-width">
 		<div class="col-sm-4 div-font">
 			<h5>*아이디</h5>
 		</div>
 		<div class="col-sm-8 div-btn-position">
-			<button class="btn ">중복확인</button>
+			<input type="button" id="btnCheckUid" class="btn" value="중복확인">
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control" name="mid">
+		<input type="text" class="form-control" id="mid" name="mid">
 	</div>
 
 	<!-- 바디 2 비밀번호 -->
@@ -61,7 +122,7 @@
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="password" class="form-control" name ="pwd">
+		<input type="password" class="form-control" id ="pwd" name ="pwd">
 	</div>
 
 	<!-- 바디 3 비밀번호 재입력 -->
@@ -71,7 +132,7 @@
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="password" class="form-control">
+		<input type="password" class="form-control" id ="pwd2" name ="pwd2">
 	</div>
 
 
@@ -83,7 +144,7 @@
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control" name="mname"> <br> <br>
+		<input type="text" class="form-control" id = "mname" name="mname"> <br> <br>
 		<hr class="hr-color">
 	</div>
 
@@ -141,7 +202,7 @@
 	<br> <br>
 	<!-- 가입완료 버튼 -->
 	<div class="input-group div-width" align="right">
-		<button type="submit" class="btn">가입완료</button>
+		<input type="button"  onclick="sendit()" class="btn" value="가입완료">
 	</div>
 	</form>
 	

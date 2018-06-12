@@ -2,6 +2,7 @@ package kr.or.apollo.vo;
 
 import java.sql.Date;
 
+
 public class CommentDTO {
 	private int cmtid;
 	private String comment;
@@ -10,8 +11,7 @@ public class CommentDTO {
 	private int cmtkind;
 	private Date cmtmtime;
 	
-	
-	
+
 	public int getCmtid() {
 		return cmtid;
 	}

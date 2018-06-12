@@ -1,7 +1,9 @@
 $(function() {
 	
+
 	/// step list 페이지
 	$("#list-page").click(function(evt){
+		var id = evt.target.Id
 		$.ajax({
 			url:"list.htm",
 			dataType:"html",

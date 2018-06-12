@@ -17,23 +17,8 @@
   					 http://www.springframework.org/schema/tx/spring-tx.xsd
   					 ">
 
+<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+</bean>
 
-<!--   /login  컨트롤로를 구현하지 않았어요  
-             사용자입력한 ID , PWD 가지고 처리하는 로직
-	  select userid, pwd as password, 1 enabled from member where userid='kglim'
-            결과를 가지고 ... 사용자가 있으면  입력한password 비교하는  DB password  작업 (x) .....Spring 처리 
 
-로그인 처리 : <security:password-encoder ref="bCryptPasswordEncoder"/> 
--->
-<security:authentication-manager>
-	<security:authentication-provider>
-		<security:jdbc-user-service data-source-ref="driverManagerDataSource"
-			users-by-username-query="select mid, pwd as password, 1 enabled from member where mid=?"
-			authorities-by-username-query="select m.mid, r.ROLE_NAME 
-											from member m join roll r
-											on m.mid = r.mid
-											where m.mid=?"/>
-		<security:password-encoder ref="bCryptPasswordEncoder"/>
-	</security:authentication-provider>
-</security:authentication-manager>
 </beans>
