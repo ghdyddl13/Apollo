@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import kr.or.apollo.service.ProjectInfoService;
+import kr.or.apollo.vo.MemberDTO;
 import kr.or.apollo.vo.StepDTO;
 import kr.or.apollo.vo.TaskDTO;
 
@@ -87,17 +88,47 @@ public class ProjectInfoController {
 		return jsonview;
 	}
 	
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 12.
+	 기      능 : Step id를 구분하여 원하는 step의 Task들 가져옴
+	 작성자명 : 김 정 권
+	 */
 	@RequestMapping("/getTasksInSteps.htm")
 	public View getTasksInSteps(String sid, ModelMap map) {
 
-		ArrayList<String> taskinsteplist = new ArrayList<String>();
-		/*
-		taskinsteplist = 
+		ArrayList<TaskDTO> taskinsteplist = new ArrayList<TaskDTO>();
+		taskinsteplist = projectinfoservice.getTasksInSteps(sid);
         map.addAttribute("taskinsteplist", taskinsteplist);
-		*/
 		
 		return jsonview;
 	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 12.
+	 기      능 : 같은 프로젝트 멤버들을 가져옴
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/getProjectMembers.htm")
+	public View getProjectMembers(String pid, ModelMap map) {
+
+		ArrayList<MemberDTO> getProjectMemberlist = new ArrayList<MemberDTO>();
+		getProjectMemberlist = projectinfoservice.getProjectMembers(pid);
+
+		for(MemberDTO dto : getProjectMemberlist) {
+			int mid = dto.getMid();
+			
+		}
+		
+        
+        
+        
+		return jsonview;
+	}
+	
+	
 	
 	
 	

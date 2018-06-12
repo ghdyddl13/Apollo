@@ -7,5 +7,7 @@ import kr.or.apollo.vo.TaskDTO;
 public interface TaskDAO {
 
 	public ArrayList<TaskDTO> getTasks(String pid);
+	public ArrayList<TaskDTO> getTasksInSteps(String sid);
+	
 
 }

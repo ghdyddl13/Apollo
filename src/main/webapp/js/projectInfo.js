@@ -80,7 +80,6 @@ $(function() {
 	
 	
 	$('#testbtn4').click(function(){
-		alert("d")
 		var pid = 1;
 		
 		$.ajax(
@@ -97,13 +96,44 @@ $(function() {
 	});
 	
 	$('#testbtn5').click(function(){
-		alert("d")
 		var pid = 1;
 		
 		$.ajax(
         {
            type : "post",
            url  : "getSteps.htm",
+           data : "pid="+pid,
+           success : function(data){
+               console.log(data);
+           } 
+        } 
+      ) // end-ajax
+        
+	});
+	
+	$('#testbtn6').click(function(){
+		var sid = 1;
+		
+		$.ajax(
+        {
+           type : "post",
+           url  : "getTasksInSteps.htm",
+           data : "sid="+sid,
+           success : function(data){
+               console.log(data);
+           } 
+        } 
+      ) // end-ajax
+        
+	});
+	
+	$('#testbtn7').click(function(){
+		var pid = 1;
+		
+		$.ajax(
+        {
+           type : "post",
+           url  : "getProjectMembers.htm",
            data : "pid="+pid,
            success : function(data){
                console.log(data);
