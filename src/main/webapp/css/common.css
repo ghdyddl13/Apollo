@@ -2,8 +2,47 @@
 
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 /* 폰트 */
-body {
-	font-family: 'Noto Sans KR';
+html, body{
+  font-family: 'Noto Sans KR';
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+#main-box{
+    padding-left: 250px;
+    height: calc(100% - 50px);
+}
+.navbar{
+	border: 0px;
+	margin-bottom: 0px;
+}
+.navbar.inside-header{
+   background-color: #f4faff;
+   color:black;
+   min-height:35px;
+   text-align: center
+}
+
+.inside-header ul li{
+   height:35px;
+   
+}
+
+.inside-header a{
+   height:35px;
+   font-size: 17px;   
+   color:black;
+   padding: 5px
+}
+
+
+.navbar.inside-header.inside-header-step{
+   background-color: transparent;
+}
+
+.navbar.inside-header.inside-header-step a:hover{
+   background-color: transparent;
 }
 
 /* /////////////////////////// 로그인 css /////////////////////////////////////////////////////  */
@@ -14,12 +53,12 @@ margin-bottom:1em;
 }
 
 .login-box{
-	line-height:2.3em;
-	font-size:1em;
-	margin-top:1em;
-	margin-bottom:1em;
-	padding-top:0.5em;
-	padding-bottom:0.5em;
+   line-height:2.3em;
+   font-size:1em;
+   margin-top:1em;
+   margin-bottom:1em;
+   padding-top:0.5em;
+   padding-bottom:0.5em;
 }
 
 /* 모달 센터 맞추는 부분  */
@@ -44,8 +83,8 @@ margin-bottom:1em;
 
 /* 버튼 맞추는 부분 */
 .login-btn{
-	margin-right: 40px; 
-	padding-top: 12px;
+   margin-right: 40px; 
+   padding-top: 12px;
     padding-bottom: 12px;
     padding-right: 30px;
     padding-left: 30px;
@@ -53,20 +92,24 @@ margin-bottom:1em;
     color:white;
     
 }
+
 .buy-license-btn{
-	margin-right: 40px; 
-	padding-top: 12px;
+   margin-right: 40px; 
+   padding-top: 12px;
     padding-bottom: 12px;
     padding-right: 30px;
-    padding-left: 30px;
+    padding-left:30px;
     background-color: #B9062F;
     color:white;
-    
 }
+
+
+
+
 /* 버튼 맞추는 부분 */
 .btn2{
-	margin-right: 180px;
-	padding-top: 12px;
+   margin-right: 180px;
+   padding-top: 12px;
     padding-bottom: 12px;
     padding-right: 30px;
     padding-left: 30px;
@@ -75,8 +118,8 @@ margin-bottom:1em;
 }
 
 .btn3{
-	margin-right: 40px; 
-	padding-top: 12px;
+   margin-right: 40px; 
+   padding-top: 12px;
     padding-bottom: 12px;
     padding-right: 30px;
     padding-left: 30px;
@@ -85,9 +128,10 @@ margin-bottom:1em;
     margin-left:160px;
     
 }
+
 /* 모달 색깔 바꾸는 부분 */
 #modal,#modal2,#modal3{
-	background-color: white;
+   background-color: white;
 }
 
 .footer{ /* 꼬리말 부분 */
@@ -101,16 +145,15 @@ font-size: 40px;
 }
 
 .header{
-	margin-right: 0px;
+   margin-right: 0px;
     margin-left: 500px;
     margin-top: 250px;
 }
-.magin{
-margin-left: 150px;
-}
 
-.margin2{
+
+.login-container{
 width: 350px;
+margin-top: 10%
 }
 
 
@@ -127,23 +170,24 @@ color: black;
 .i-width,.i-width2{
 width:40px;
 }
-.head{
-	 margin-left: 35px;
-	 margin-bottom: 25px;
-     margin-top: 0px;
-     font-size:40px;	
+.login-head{
+
+    margin-bottom: 25px;
+ 
+     font-size:40px;
+     text-align:center;    
 }
 .div-font-size{
-	font-size: 21px; 
-	text-align: center;
+   font-size: 21px; 
+   text-align: center;
 }
 
 .input-size{
-	width: 326px;
+   width: 326px;
 }
 
  .font-header6{
- 	 margin-left: 35px;
+     margin-left: 35px;
  }
  
  /* /////////////////////////// 로그인 css끝 /////////////////////////////////////////////////////  */
@@ -152,233 +196,284 @@ width:40px;
   /* ///////////////////////////헤더와 사이드바/////////////////////////////////////////////////////  */
 
 #header {
-	background-color: rgb(0, 0, 50);
-	z-index: 2;
-	border-radius: 0px
+   background-color: rgb(0, 0, 50);
+   z-index: 2;
+   border-radius: 0px
 }
 
 #my-side-nav {
-	background-color: rgba(180, 197, 209, 0.15);
-	overflow: scroll;
-	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
+   background-color: rgba(180, 197, 209, 0.15);
+   overflow: scroll;
+   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
 }
 
 #loginimg { /* 로그인 이미지 색상  */
-	color: white;
+   color: white;
 }
 
 .navbar-header {
-	width: 250px;
+   width: 250px;
 }
 
 .side-nav {
-	height: 100%;
-	width: 250px;
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	overflow-x: hidden;
-	transition: 0.5s;
-	padding-top: 60px;
+   height: 100%;
+   width: 250px;
+   position: fixed;
+   z-index: 1;
+   top: 0;
+   left: 0;
+   overflow-x: hidden;
+   transition: 0.5s;
+   padding-top: 60px;
 }
 
 .side-nav a {
-	padding: 8px 8px 8px 32px;
-	text-decoration: none;
-	font-size: 15px;
-	/* 	color: #818181; */
-	display: block;
-	transition: 0.3s;
+   padding: 8px 8px 8px 32px;
+   text-decoration: none;
+   font-size: 15px;
+   /*    color: #818181; */
+   display: block;
+   transition: 0.3s;
 }
 
 /*  .sidenav a:hover {
-	color: blue;
+   color: blue;
 } 
  */
 .side-nav a:hover {
-	background-color: #cccccc;
+   background-color: #cccccc;
 }
 
 .side-dir {
-	padding-left: 20px;
+   padding-left: 20px;
 }
 
 .side-dir a {
-	font-size: 12px
+   font-size: 12px
 }
 
 .add-project {
-	color: black
+   color: black
 }
 
 .apollo-logo {
-	color: white;
-	padding-left: 50px;
-	font-size: 30px;
-	margin: 0px
+   color: white;
+   padding-left: 50px;
+   font-size: 30px;
+   margin: 0px
 }
 
 .header-menu {
-	font-size: 18px;
+   font-size: 18px;
 }
 
 a {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .side-nav span {
-	margin-right: 6px;
-	margin-left: 6px
+   margin-right: 6px;
+   margin-left: 6px
 }
 
 .custom-menu {
-	z-index: 1000;
-	position: absolute;
-	overflow: visible;
-	border: 1px solid #CCC;
-	white-space: nowrap;
-	font-family: sans-serif;
-	background: #FFF;
-	color: #333;
-	border-radius: 5px;
-	padding: 0px;
+   z-index: 1000;
+   position: absolute;
+   overflow: visible;
+   border: 1px solid #CCC;
+   white-space: nowrap;
+   font-family: sans-serif;
+   background: #FFF;
+   color: #333;
+   border-radius: 5px;
+   padding: 0px;
 }
 
 /* Each of the items in the list */
 .custom-menu li {
-	padding: 8px 12px;
-	cursor: pointer;
-	list-style-type: none;
-	transition: all .3s ease;
-	user-select: none;
+   padding: 8px 12px;
+   cursor: pointer;
+   list-style-type: none;
+   transition: all .3s ease;
+   user-select: none;
 }
 
 .custom-menu li:hover {
-	background-color: #DEF;
+   background-color: #DEF;
 }
 
 .dropdown-submenu {
-	position: relative;
+   position: relative;
 }
 
 .dropdown-submenu .dropdown-menu {
-	top: 0;
-	left: 100%;
-	margin-top: -1px;
-	min-width: 100px;
+   top: 0;
+   left: 100%;
+   margin-top: -1px;
+   min-width: 100px;
 }
 
 /* Modal */
 label {
-	display: block;
+   display: block;
 }
 
 #add-project-name { /* 프로젝트 생성 모달창 프로젝트명 text */
-	margin-bottom: 12px;
-	width: 100%;
-	padding: .4em;
+   margin-bottom: 12px;
+   width: 100%;
+   padding: .4em;
 }
 
 .method { /* 프로젝트 생성 모달창 방법론 */
-	font-weight: bold;
+   font-weight: bold;
 }
 
 .add-modal-title {
-	font-weight: bold;
-	padding-top: 5px;
+   font-weight: bold;
+   padding-top: 5px;
 }
 
 .project-setting-left { /* 프로젝트 생성 모달창 vertical line  */
-	padding-left: 25px;
-	padding-right: 25px;
+   padding-left: 25px;
+   padding-right: 25px;
 }
 
 .project-setting-right { /* 프로젝트 생성 모달창 vertical line  */
-	border-left: 1px solid rgb(230, 230, 230);
-	padding-left: 25px;
-	padding-right: 25px;
+   border-left: 1px solid rgb(230, 230, 230);
+   padding-left: 25px;
+   padding-right: 25px;
 }
 
 .date {
-	margin-right: 3px;
-	width: 80%;
-}
-
-.add-project-description {
-	width: 100%;
-	height: 50%;
+   margin-right: 3px;
+   width: 80%;
 }
 
 .add-project-btn {
-	background-color: rgb(178, 28, 74);
-	color: white;
-	width: 80px;
+   background-color: rgb(178, 28, 74);
+   color: white;
+   width: 80px;
 }
 
 
 .cancel-project-btn {
-	background-color: rgb(0, 0, 50);
-	color: white;
-	width: 80px;
+   background-color: rgb(0, 0, 50);
+   color: white;
+   width: 80px;
 }
 
 .modal-add-project-dialog {
-	position:absolute; 
+   position:absolute; 
     top:50%; 
     left:50%; 
-	width: 950px;
-	height: 75%;
-	overflow: hidden;
-	vertical-align: middle;
-	margin-top:-370px; 
+   width: 850px;
+   height: 515px;
+   overflow: hidden;
+   vertical-align: middle;
+   margin-top:-370px; 
     margin-left:-25%;
 }
-
+.modal-add-project-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0; 
+}
 .modal-add-folder-dialog {
-	position:absolute; 
+   position:absolute; 
     top:50%; 
     left:50%; 
-	width: 330px;
-	height: 460px;
-	vertical-align: middle;
-	margin-top:-115px; 
+   width: 330px;
+   height: 70%;
+   vertical-align: middle;
+   margin-top:-115px; 
     margin-left:-230px;
 }
-
 .add-folder-text {
-	width: 100%;
-	padding-left: 15px;
-	padding-right: 15px;
+   width: 100%;
+   padding-left: 15px;
+   padding-right: 15px;
 }
 
 .modal-add-step-dialog {
-	position:absolute; 
+   position:absolute; 
     top:50%; 
     left:50%; 
-	width: 530px;
-	height: 550px;
-	vertical-align: middle;
-	margin-top:-350px; 
+   width: 530px;
+   height: 550px;
+   vertical-align: middle;
+   margin-top:-350px; 
     margin-left:-250px;
 }
 
 #add-step-description {
-	width: 100%;
-	height: 30%;
+   width: 100%;
+   height: 30%;
 }
 .add-step-text {
-	width: 100%;
-	padding-left: 15px;
-	padding-right: 15px;
+   width: 100%;
+   padding-left: 15px;
+   padding-right: 15px;
 }
 #add-step-modal-hr {
-	padding-top: 0.1px;
-	padding-bottom: 0.1px;
+   padding-top: 0.1px;
+   padding-bottom: 0.1px;
 }
 
 .header_logo{
-	margin-top: 5px;
-	width: 80px;
-	height: 35px
+   margin-top: 5px;
+   width: 80px;
+   height: 35px
+}
+
+
+/* Project header부분  */
+.navbar.inside-header{
+   background-color: #f4faff;
+   color: black;
+   height: 25px;
+   
+}
+
+/* /////////////////////////////////회원가입 //////////////////////////////////////////// */
+.div-width{
+   width:40%
+}
+
+.div-font{
+   text-align:left;
+}
+.div-btn-position{
+   text-align:right;
+}
+
+.btn-size{
+   width:125px;
+   height:50px;
+   margin-right: 15px;
+   background-color: B9062F;
+   color:white;
+}
+.container{
+   margin-top:60px;
+}
+.footer-color{
+   color:999999;
+}
+.btn-color{
+background-color: 999999;
+   color: white;
+}
+.header-fontsize{
+   font-size:45px;   
+}
+.sign-account{
+   text-align:left;
+}
+.hr-color{
+   border: Inset 1px #999999;   
+}
+.inside-header {
+   background-color: #f4faff;
+   height:30px;
+   color: black;
 }

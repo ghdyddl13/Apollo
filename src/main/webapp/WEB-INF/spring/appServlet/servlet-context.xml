@@ -18,22 +18,34 @@
 <context:annotation-config />
 
 <!-- base-package 범위 내에서 어노테이션이 적용된 클래스를 bean으로 등록 -->
-<context:component-scan base-package="kr.or.apollo.controller" />
+<context:component-scan base-package="com.apollo.inbox.controller" />
+<context:component-scan base-package="com.apollo.member.controller" />
+<context:component-scan base-package="com.apollo.mywork.controller" />
+<context:component-scan base-package="com.apollo.project.controller" />
+<context:component-scan base-package="com.apollo.report.controller" />
+<context:component-scan base-package="com.apollo.sidebar.controller" />
+<context:component-scan base-package="com.apollo.starredtask.controller" />
+<context:component-scan base-package="com.apollo.step.controller" />
+<context:component-scan base-package="com.apollo.stream.controller" />
+<context:component-scan base-package="com.apollo.task.controller" />
 
-<!-- tile 기능 사용을 위한 코드 -->
-<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-	 <property name="definitions">
-		  
-		  <list>
-		  		<!-- Tiles.xml의 경로 설정 -->
-		    	<value>/WEB-INF/spring/appServlet/Tiles.xml</value>
-		  </list>
-	 </property>
-</bean>
+<context:component-scan base-package="com.apollo.inbox.service" />
+<context:component-scan base-package="com.apollo.member.service" />
+<context:component-scan base-package="com.apollo.mywork.service" />
+<context:component-scan base-package="com.apollo.project.service" />
+<context:component-scan base-package="com.apollo.report.service" />
+<context:component-scan base-package="com.apollo.sidebar.service" />
+<context:component-scan base-package="com.apollo.starredtask.service" />
+<context:component-scan base-package="com.apollo.step.service" />
+<context:component-scan base-package="com.apollo.stream.service" />
+<context:component-scan base-package="com.apollo.task.service" />
+
+<!-- 비동기 -->
+<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
 
 <!-- view가 결국 Tiles를 거쳐서 나갈 것이므로 urlBasedViewResolver가 필요하다 -->
-<bean id="urlBasedViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
- 	<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
-</bean> 	
-	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 </beans>
