@@ -26,4 +26,6 @@
 						id="loginimg"></span>김래영님</a></li>
 			</ul>
 		</div>
+
 </nav>
+

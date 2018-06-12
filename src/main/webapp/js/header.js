@@ -17,10 +17,10 @@ $(function() {
 	//// 헤더 mywork 페이지
 	$("#myWork-page").click(function(evt){
 		$.ajax({
+			type:"GET",
 			url:"myWork.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				
