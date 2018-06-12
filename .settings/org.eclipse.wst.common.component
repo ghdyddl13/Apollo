@@ -4,7 +4,11 @@
 		<wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< HEAD
         <property name="java-output-path" value="/Apollo_Project/target/classes"/>
+=======
+        <property name="java-output-path" value="/Apollo/target/classes"/>
+>>>>>>> develop_raeyoung
         <property name="context-root" value="bit"/>
 	</wb-module>
 </project-modules>

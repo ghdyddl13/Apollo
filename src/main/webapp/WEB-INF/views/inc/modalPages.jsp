@@ -1,13 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$(function() {
+	
+});
+</script>
+
 <!-- 프로젝트 생성 Modal 창 -->
 	<div class="modal fade" id="dialog-form" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
+		<div class="modal-dialog modal-add-project-dialog">
+			<div class="modal-content modal-add-project-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Create Project</h4>
+					<h4 class="modal-title">Project 생성</h4>
 				</div>
 				<div class="modal-body">
 					<form>
@@ -15,13 +24,14 @@
 							<div class="row">
 								<br>
 								<div class="col-sm-6 project-setting-left">
-									<div class="add-project-modal-title">
-										<p>프로젝트명</p>
-									</div>
-									<input type="text" name="name" id="project-name"
+									<input type="text" name="name" id="add-project-name"
 										placeholder="프로젝트명을 입력하세요"
 										class="text ui-widget-content ui-corner-all"><br>
-									<br> <input type="radio" name="method" value="customizing"
+									<br> 
+									<div class="add-modal-title">
+										<p>방법론</p>
+									</div>
+										<input type="radio" name="method" value="customizing"
 										checked><span class="method"> Customizing</span> <br>
 									<div>
 										<!-- Customizing 설명 작성  -->
@@ -43,39 +53,37 @@
 								</div>
 								<!-- Allow form submission with keyboard without duplicating the dialog button -->
 								<div class="col-sm-6 project-setting-right">
-									<div class="add-project-modal-title">
+									<div class="add-modal-title">
 										<p>기간 설정</p>
 									</div>
 									<br>
 									<div class="col-sm-6">
-										<div class="add-project-modal-title">
+										<div class="add-modal-title">
 											<p>시작일</p>
 										</div>
-										<input type="text" placeholder="Start Date" class="date"><br>
+										<input type="text" placeholder="Start Date" class="date date-img">
 									</div>
 									<div class="col-sm-6">
-										<div class="add-project-modal-title">
+										<div class="add-modal-title">
 											<p>종료일</p>
 										</div>
-										<input type="text" placeholder="End Date" class="date"><br>
-										<br> <br>
+										<input type="text" placeholder="End Date" class="date date-img">
+										<br><br>
 									</div>
-									<div class="add-project-modal-title">
+									<div>
 										<p>상세설명</p>
 									</div>
-									<input type="text" class="text ui-widget-content ui-corner-all"
-										id="descri" placeholder="상세설명을 입력하세요">
+									<textarea rows="7%" cols="49%" placeholder="내용을 입력하세요"></textarea>
 								</div>
 							</div>
+							<br><br>
+						<div align="center">
+							<input type="button" class="btn add-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn cancel-project-btn"
+								data-dismiss="modal" value="취소">
+						</div>
 						</fieldset>
 					</form>
-				</div>
-				<div class="modal-footer">
-					<div align="center">
-						<input type="button" class="btn" id="add-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
-						<input type="button" class="btn" id="cancel-project-btn"
-							data-dismiss="modal" value="취소">
-					</div>
 				</div>
 			</div>
 		</div>
@@ -156,3 +164,83 @@
 			</div>
 		</div>
 	</div>
+	
+	
+<!-- 프로젝트 수정 Modal 창 -->
+	<div class="modal fade" id="modify-project" role="dialog">
+		<div class="modal-dialog modal-add-project-dialog">
+			<div class="modal-content modal-add-project-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Project 수정</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<fieldset>
+							<div class="row">
+								<br>
+								<div class="col-sm-6 project-setting-left">
+									<input type="text" name="name" id="add-project-name"
+										placeholder="프로젝트명을 입력하세요"
+										class="text ui-widget-content ui-corner-all"><br>
+									<br> 
+									<div class="add-modal-title">
+										<p>방법론</p>
+									</div>
+										<input type="radio" name="method" value="customizing"
+										checked><span class="method"> Customizing</span> <br>
+									<div>
+										<!-- Customizing 설명 작성  -->
+										가나다라마바사아자차카타파하 커스텀마이징 설명작성 필요
+									</div>
+									<br> <input type="radio" name="method" value="agile"><span
+										class="method"> Agile</span><br>
+									<div>
+										<!-- Agile 설명 작성  -->
+										가나다라마바사아자차카타파하 애자일 설명작성 필요
+									</div>
+									<br> <input type="radio" name="method" value="waterfall"><span
+										class="method"> Waterfall</span><br>
+									<div>
+										<!-- Waterfall 설명 작성  -->
+										가나다라마바사아자차카타파하 폭포수 설명작성 필요
+									</div>
+									<br> <br>
+								</div>
+								<!-- Allow form submission with keyboard without duplicating the dialog button -->
+								<div class="col-sm-6 project-setting-right">
+									<div class="add-modal-title">
+										<p>기간 설정</p>
+									</div>
+									<br>
+									<div class="col-sm-6">
+										<div class="add-modal-title">
+											<p>시작일</p>
+										</div>
+										<input type="text" placeholder="Start Date" class="date date-img">
+									</div>
+									<div class="col-sm-6">
+										<div class="add-modal-title">
+											<p>종료일</p>
+										</div>
+										<input type="text" placeholder="End Date" class="date date-img">
+										<br><br>
+									</div>
+									<div class="add-modal-title">
+										<p>상세설명</p>
+									</div>
+									<textarea rows="7%" cols="49%" placeholder="내용을 입력하세요"></textarea>
+								</div>
+							</div>
+							<br><br>
+						<div align="center">
+							<input type="button" class="btn add-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn cancel-project-btn"
+								data-dismiss="modal" value="취소">
+						</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>	
