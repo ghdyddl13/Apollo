@@ -1,4 +1,4 @@
-package kr.or.apollo.dao;
+package com.apollo.task.dao;
 public interface TaskDAO {
 
 }

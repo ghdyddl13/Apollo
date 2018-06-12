@@ -1,4 +1,4 @@
-package kr.or.apollo.dao;
+package com.apollo.member.dao;
 
 public interface AuthkeyDAO {
 	

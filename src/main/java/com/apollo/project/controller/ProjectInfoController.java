@@ -1,4 +1,4 @@
-package kr.or.apollo.controller;
+package com.apollo.project.controller;
 
 import org.springframework.web.servlet.View;
 

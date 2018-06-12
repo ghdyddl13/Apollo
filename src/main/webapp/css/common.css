@@ -8,10 +8,7 @@ html, body{
 	padding:0;
 	height:100%;
 }
-.navbar{
-	margin-bottom: 0px;
-	border: 0px; 
-}
+
 #main-box{
 	padding-left: 250px;
 	height:calc(100% - 50px);

@@ -1,4 +1,4 @@
-package kr.or.apollo.vo;
+package com.apollo.vo;
 
 public class AuthkeyDTO {
 	private String apollokey;

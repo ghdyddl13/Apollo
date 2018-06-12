@@ -1,4 +1,4 @@
-package kr.or.apollo.service;
+package com.apollo.mywork.service;
 
 public class MyworkService {
 

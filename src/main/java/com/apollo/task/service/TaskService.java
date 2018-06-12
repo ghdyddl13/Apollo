@@ -1,4 +1,4 @@
-package kr.or.apollo.service;
+package com.apollo.task.service;
 
 public class TaskService {
 

@@ -1,10 +1,10 @@
-package kr.or.apollo.controller;
+package com.apollo.sidebar.controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.View;
 
-import kr.or.apollo.vo.ProjectDTO;
-import kr.or.apollo.vo.StepDTO;
+import com.apollo.vo.ProjectDTO;
+import com.apollo.vo.StepDTO;
 
 public class SidebarController {
 

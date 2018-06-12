@@ -13,15 +13,16 @@
 }
 .main-section-left{
 	margin-left: 0.66%;
-	margin-right:0.66%;
+
+}
+.main-section-center{
+	width:0.66%;
+	background: rgb(0, 0, 50);
 }
 .main-section-right{
 	margin-right:0.66%;
 }
-.main-section-margin{
-	width: 0.66%;
-	height:100%;
-}
+
 .container{
    margin-top:0px;
    padding-left: 0px;

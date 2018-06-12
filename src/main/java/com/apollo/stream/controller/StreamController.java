@@ -1,4 +1,4 @@
-package kr.or.apollo.controller;
+package com.apollo.stream.controller;
 
 import org.springframework.ui.Model;
 

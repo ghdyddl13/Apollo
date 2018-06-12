@@ -1,9 +1,9 @@
-package kr.or.apollo.controller;
+package com.apollo.task.controller;
 
 import org.springframework.web.servlet.View;
 
-import kr.or.apollo.vo.CommentDTO;
-import kr.or.apollo.vo.TaskDTO;
+import com.apollo.vo.CommentDTO;
+import com.apollo.vo.TaskDTO;
 
 public class TaskController {
 	

@@ -18,7 +18,16 @@
 <context:annotation-config />
 
 <!-- base-package 범위 내에서 어노테이션이 적용된 클래스를 bean으로 등록 -->
-<context:component-scan base-package="kr.or.apollo.controller" />
+<context:component-scan base-package="com.apollo.inbox.controller" />
+<context:component-scan base-package="com.apollo.member.controller" />
+<context:component-scan base-package="com.apollo.mywork.controller" />
+<context:component-scan base-package="com.apollo.project.controller" />
+<context:component-scan base-package="com.apollo.report.controller" />
+<context:component-scan base-package="com.apollo.sidebar.controller" />
+<context:component-scan base-package="com.apollo.starredtask.controller" />
+<context:component-scan base-package="com.apollo.step.controller" />
+<context:component-scan base-package="com.apollo.stream.controller" />
+<context:component-scan base-package="com.apollo.task.controller" />
 
 
 

@@ -1,11 +1,11 @@
-package kr.or.apollo.controller;
+package com.apollo.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
-import kr.or.apollo.vo.MemberDTO;
+import com.apollo.vo.MemberDTO;
 
 @Controller
 public class MemberController {

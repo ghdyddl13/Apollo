@@ -7,8 +7,20 @@
 		<div class ="main-section-left">
 
 		</div>
+		<div class ="main-section-center"></div>
 		<div class ="main-section-right">
 
 		</div>
 	
 	</div>
+<script type="text/javascript">
+	$(function () {
+		
+		
+		
+		
+		
+	});
+
+
+</script>

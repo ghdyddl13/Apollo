@@ -1,4 +1,4 @@
-package kr.or.apollo.controller;
+package com.apollo.mywork.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

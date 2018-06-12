@@ -1,4 +1,4 @@
-package kr.or.apollo.controller;
+package com.apollo.report.controller;
 
 public class ReportController {
 

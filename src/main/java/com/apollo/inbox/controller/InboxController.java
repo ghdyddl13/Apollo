@@ -1,4 +1,4 @@
-package kr.or.apollo.controller;
+package com.apollo.inbox.controller;
 
 import org.springframework.ui.Model;
 

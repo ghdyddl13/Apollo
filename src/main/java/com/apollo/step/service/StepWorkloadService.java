@@ -1,4 +1,4 @@
-package kr.or.apollo.service;
+package com.apollo.step.service;
 
 public class StepWorkloadService {
 

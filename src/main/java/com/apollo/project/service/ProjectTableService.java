@@ -1,4 +1,4 @@
-package kr.or.apollo.service;
+package com.apollo.project.service;
 
 public class ProjectTableService {
 

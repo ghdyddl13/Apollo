@@ -1,4 +1,4 @@
-package kr.or.apollo.vo;
+package com.apollo.vo;
 
 public class SubtaskDTO {
 	private int subtaskid;

@@ -1,4 +1,4 @@
-package kr.or.apollo.service;
+package com.apollo.stream.service;
 
 public class StreamService {
 

@@ -1,4 +1,4 @@
-package kr.or.apollo.service;
+package com.apollo.report.service;
 
 public class ReportService {
 

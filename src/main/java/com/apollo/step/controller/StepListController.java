@@ -1,9 +1,9 @@
-package kr.or.apollo.controller;
+package com.apollo.step.controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.View;
 
-import kr.or.apollo.vo.TaskDTO;
+import com.apollo.vo.TaskDTO;
 
 public class StepListController {
 
