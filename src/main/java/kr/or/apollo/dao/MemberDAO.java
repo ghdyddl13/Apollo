@@ -9,4 +9,6 @@ public interface MemberDAO {
 	public String getlogin(String mid);
 	
 	public int midcheck(String mid);
+	
+	public int keycheck(String apollokey);
 }

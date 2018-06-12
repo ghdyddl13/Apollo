@@ -45,6 +45,20 @@ public class MemberController {
 		return jsonview;
 	}
 	
+	@RequestMapping(value = "keycheck.htm", method = RequestMethod.POST)
+	public View keyCheck(String apollokey, Model model) {
+		System.out.println("키 체크");
+		int result = service.keycheck(apollokey);
+		if (result > 0) {
+			System.out.println("키 인증 성공");
+			model.addAttribute("result", "success");
+		} else {
+			System.out.println("키 인증 실패");
+			model.addAttribute("result", "fail");
+		}
+		return jsonview;
+	}
+	
 	
 	public View apollokeyCheck(String s2) {
 		return null;

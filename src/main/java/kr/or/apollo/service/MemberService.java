@@ -40,5 +40,14 @@ public class MemberService {
 		return result;
 	}
 	
+	public int keycheck(String apollokey){
+		System.out.println("service midcheck");
+		int result=0;
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		result = dao.keycheck(apollokey);
+		System.out.println(result);
+		return result;
+	}
+	
 	
 }

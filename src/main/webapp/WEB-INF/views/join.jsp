@@ -44,6 +44,30 @@ $(function() {
 			}	
 		);
 	});
+	
+	$('#btnCheckkey').click(function(){
+		if ($("#apollokey").val()== "") {
+            alert("인증키를 입력하지 않았습니다.");
+            $("#apollokey").focus();
+            return false;
+        }
+		$.ajax(
+			{
+				type:"post",
+				url:"keycheck.htm",
+				data:{"apollokey" : $('#apollokey').val()},
+				success:function(data){
+					if(data.result=="fail"){
+						alert('존재하지 않는 인증키 입니다.');
+						$("#mid").focus();
+					}else{
+						alert('인증 되었습니다.');
+					}
+				}
+			}	
+		);
+	});
+	
 });
 
 var RegexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i; //이메일 유효성검사
@@ -164,11 +188,11 @@ var RegexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i; //이메일
 			<h5>인증키</h5>
 		</div>
 		<div class="col-sm-8 div-btn-position">
-			<button class="btn">인증확인</button>
+			<input type="button" id="btnCheckkey" class="btn" value="인증확인">
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="text" class="form-control" name ="apollokey">
+		<input type="text" class="form-control" id="apollokey"  name ="apollokey">
 	</div>
 
 	<!-- 휴대폰 번호 -->
