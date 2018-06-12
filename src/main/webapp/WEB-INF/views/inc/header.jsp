@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html >
 <script type="text/javascript" src="js/header.js"></script>
-<nav class="navbar navbar-top-fixed navbar-default" id="header">
+<nav class="navbar navbar-fixed-top navbar-default" id="header">
 		<div class="container-fluid">
 			<div class="navbar-header container-fluid">
 				<a href="index.htm"><img id="gohome" class="header_logo"

@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.main-container div{
+.main-container .main-section-left,.main-section-right{
 	float: left;
 	background: #ffffff;
 	border-radius:3px;
@@ -16,7 +16,9 @@
 
 }
 .main-section-center{
+	float: left;
 	width:0.66%;
+	height: 100%;
 	background: rgb(0, 0, 50);
 }
 .main-section-right{
@@ -27,4 +29,7 @@
    margin-top:0px;
    padding-left: 0px;
    padding-right: 0px;
+}
+#center {
+	cursor:e-resize;
 }

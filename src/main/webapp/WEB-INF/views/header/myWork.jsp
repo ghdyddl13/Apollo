@@ -4,23 +4,44 @@
 
 	
 	<div class ="main-container container">
-		<div class ="main-section-left">
+		<div class ="main-section-left" id="left">
 
 		</div>
-		<div class ="main-section-center"></div>
-		<div class ="main-section-right">
+		<div class ="main-section-center" id="center"></div>
+		<div class ="main-section-right" id="right">
 
 		</div>
 	
 	</div>
 <script type="text/javascript">
-	$(function () {
-		
-		
-		
-		
-		
+	$(function() {
+		var startpos, diffpos = 0, range = 200;
+		var isEnable = false;
+
+		document.getElementById("center").onmousedown = on_mouse_down;
+		document.onmouseup = on_mouse_up;
+		document.onmousemove = on_mouse_move;
+		function on_mouse_down(e) {
+			startpos = event.clientX + diffpos;
+			isEnable = true;
+			return false;
+		}
+
+		function on_mouse_up(e) {
+			isEnable = false;
+			return false;
+		}
+
+		function on_mouse_move(e) {
+			if (isEnable) {
+				pos = event.clientX;
+				diffpos = startpos - pos;
+				var width = (window.innerWidth-250) / 2;
+				if (diffpos > -(width - range) && diffpos < (width - range)) {
+					document.getElementById("left").style.width = width -25 - diffpos + "px";
+					document.getElementById("right").style.width = width - 25+ diffpos + "px";
+				}
+			}
+		}
 	});
-
-
 </script>
