@@ -101,6 +101,7 @@ $(function() {
 			})
 	    });
 	
+		
 		$(".side-step").click(function(evt){
 			console.log("test")
 			$.ajax({

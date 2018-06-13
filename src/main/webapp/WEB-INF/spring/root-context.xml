@@ -26,6 +26,6 @@
     <!-- Mybatis 사용을 위한 Bean 설정으로 pom.xml에서 dependency 설정을 이미 했기에 가능 -->
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
     <constructor-arg index="0" ref="sqlSessionFactoryBean"/>
-    </bean>
+	</bean>
 
 </beans>

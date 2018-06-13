@@ -1,0 +1,41 @@
+#projectinfo_outerbox{
+  margin-left: 200px
+}
+
+#projectinfo_first_row{
+  padding: 20px
+}
+
+#projectinfo_Task_Status_Donut{
+  height:400px;
+  margin: 2px;
+  padding:10px;
+  background-color:#f0f0f0
+}
+
+#projectinfo_DonutChart{
+ height: 350px
+}
+
+#projectinfo_Task_Situation_Table{
+   overflow:auto;
+   height:400px;
+   margin: 2px;
+   padding:10px;
+   background-color:#f0f0f0
+}
+
+#projectinfo_Step_Progress_Graph{
+   height:400px;
+   margin: 1px;
+   padding:10px;
+   background-color:#f0f0f0
+}
+
+#projectinfo_Project_Member_Table{
+  overflow:auto;
+  height:400px;
+  margin: 1px;
+  padding:10px;
+  background-color:#f0f0f0
+}
