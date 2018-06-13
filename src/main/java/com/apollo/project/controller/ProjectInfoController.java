@@ -1,16 +1,17 @@
 package com.apollo.project.controller;
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
+
 import com.apollo.project.service.ProjectInfoService;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
-import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.View;
 
 @Controller
 public class ProjectInfoController {
@@ -28,7 +29,12 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
-	public String projectInfoShow(String s1) {
+	public String projectInfoShow(String pid, Model map) {
+		
+		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
+		steplist = projectinfoservice.getSteps(pid);
+		map.addAttribute("steplist", steplist);
+		
 		return "project/information";
 	}
 	
@@ -43,7 +49,7 @@ public class ProjectInfoController {
 		
 		ArrayList<TaskDTO> tasklist = new ArrayList<TaskDTO>();
 		tasklist = projectinfoservice.getTasks(pid);
-        map.addAttribute("tastlist", tasklist);
+        map.addAttribute("tasklist", tasklist);
 		
 		return jsonview;
 	}

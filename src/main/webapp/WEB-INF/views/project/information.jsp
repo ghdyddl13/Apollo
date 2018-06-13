@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <script type="text/javascript" src="js/projectInfo.js"></script>
 <link href="css/projectinfo.css" type="text/css" rel="stylesheet">
 
@@ -17,8 +19,6 @@
 <div id=projectinfo_outerbox>
   <div class="row" id="projectinfo_first_row"> <!-- row_1 -->
 
-
-
 	<div id="projectinfo_Task_Status_Donut" class="col-lg-5">
 		마감기한 기준 Task 현황
 		<canvas id="projectinfo_DonutChart"></canvas>
@@ -26,15 +26,16 @@
 
     <div id="projectinfo_Task_Situation_Table" class="col-lg-5">
 
-			<span align='left'>Step별 Task 완료/미완료 현황</span>
-			<span align='right'>
+			<div align='left'>Step별 Task 완료/미완료 현황</div>
+			<br />
+			<div align='right'>
 					<select id="projectinfo_Task_Situation_Table_selectbar">
-						<option value="volvo">Volvo</option>
-						<option value="saab">Saab</option>
-						<option value="mercedes">Mercedes</option>
-						<option value="audi">Audi</option>
+						 <c:forEach var="step" items="${steplist}">
+	                        <option value="${step.sid}">${step.sname}</option>
+	                     </c:forEach>
 					</select>
-				</span>
+			</div>
+				
 	 </div>
 
   </div> <!-- end_row_1 -->

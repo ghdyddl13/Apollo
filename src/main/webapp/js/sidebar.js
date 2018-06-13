@@ -97,13 +97,15 @@ $(function() {
 	
 
 		$(".side-project").click(function(evt){
-			console.log("test")
+			
+			// 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
+			// 지금은 pid가 1이라고 가정하고 실시
+			var pid = 1;
+			
 			$.ajax({
-				url:"information.htm",
+				url:"information.htm?pid=" + pid,
 				dataType:"html",
 				success:function(data){
-					console.log(data);
-					console.log("11");
 					 $("#main-box").empty();
 					 $("#main-box").append(data);	 		
 					 
