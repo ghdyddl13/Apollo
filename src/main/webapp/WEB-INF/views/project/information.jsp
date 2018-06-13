@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript" src="js/projectInfo.js"></script>
 
+
 <h3>인포메이션</h3>
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 
@@ -36,3 +37,4 @@
   </div> <!-- end_row_3 -->
 
 </div> <!-- end_outerbox -->
+

@@ -22,16 +22,14 @@ public class TestController {
 		return "main";
 	}
 	
-	@RequestMapping("/files.htm")
+	@RequestMapping("/file.htm")
 	public String projectFilelist() {
-		System.out.println("files");
 		return "project/files";
 	}
 	
-	
+
 	@RequestMapping("/table.htm")
 	public String projectTable() {
-		System.out.println("table");
 		return "project/table";
 	}
 	
@@ -63,19 +61,16 @@ public class TestController {
     
     @RequestMapping("/list.htm")
     public String list() {
+        System.out.println("list"); 
         
         return "step/list";
     }
     
-    @RequestMapping("/timeline.htm")
-    public String timeLine() {
-        
-        return "step/timeline";
-    }
     
     @RequestMapping("/workload.htm")
     public String workLoad() {
         
         return "step/workload";
     }
+	
 }
