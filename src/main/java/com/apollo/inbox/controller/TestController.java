@@ -8,7 +8,6 @@ public class TestController {
 	
 	@RequestMapping("/index.htm")
 	public String main() {
-		System.out.println("login");
 		return "login";
 	}
 	
