@@ -5,12 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.apollo.member.dao.MemberDAO">
 
     <select id="getProjectMemberlist" parameterType="String" resultType="com.apollo.vo.MemberDTO">
-    select * from pmember where pid = #{pid}
-    </select>
-
-    <select id="getMemberlist" parameterType="String" resultType="com.apollo.vo.MemberDTO">
-    select * from pmember where pid = #{pid}
+    select * from member where mid in (select mid from pmember where pid = #{pid})
     </select>
     
-
 </mapper>

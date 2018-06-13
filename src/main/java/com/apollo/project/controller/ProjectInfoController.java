@@ -91,11 +91,7 @@ public class ProjectInfoController {
 
 		ArrayList<MemberDTO> getProjectMemberlist = new ArrayList<MemberDTO>();
 		getProjectMemberlist = projectinfoservice.getProjectMembers(pid);
-
-		for(MemberDTO dto : getProjectMemberlist) {
-			//int mid = dto.getMid();
-			
-		}
+        map.addAttribute("getProjectMemberlist", getProjectMemberlist);
 		return jsonview;
 	}
 	
