@@ -23,7 +23,7 @@ public class SidebarController {
 		return "login";
 		
 	}
-	@RequestMapping(value="/insertprojecttest.htm", method=RequestMethod.POST)
+	@RequestMapping(value="/insertproject.htm", method=RequestMethod.POST)
 	public String insertProject(ProjectDTO projectdto) {
 		System.out.println("aaaaaaaaaaaaaaaaaaaa");
 		
@@ -33,7 +33,7 @@ public class SidebarController {
 	} catch (Exception e) {
 			e.printStackTrace();
 	} 		
-		return "redirect:/login.htm";
+		return "redirect:/information.htm";
 	}
 	
 	public View changeProjectStatus(int i1, Model model) {

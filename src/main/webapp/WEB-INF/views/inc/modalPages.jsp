@@ -21,7 +21,7 @@ $(function() {
 				<div class="modal-body">
 				
 				
-					<form action="insertprojecttest.htm" method="post">
+					<form action="information.htm" method="post">
 						<fieldset>
 							<div class="row">
 								<br>
@@ -108,7 +108,7 @@ $(function() {
 						placeholder="folder명을 입력하세요">
 				</div>
 				<div align="center">
-					<input type="button" class="btn" id="add-btn" value="생성">&nbsp;&nbsp;&nbsp;
+					<input type="submit" class="btn" id="add-btn" value="생성">&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn" id="cancel-btn"
 						data-dismiss="modal" value="취소">
 				</div>
@@ -162,7 +162,7 @@ $(function() {
 						id="add-step-description" placeholder="상세설명을 입력하세요">
 				</div>
 				<div align="center">
-					<input type="button" class="btn" id="add-btn" value="생성">&nbsp;&nbsp;&nbsp;
+					<input type="submit" class="btn" id="add-btn" value="생성">&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn" id="cancel-btn"
 						data-dismiss="modal" value="취소">
 				</div>
@@ -240,7 +240,7 @@ $(function() {
 							</div>
 							<br><br>
 						<div align="center">
-							<input type="button" class="btn add-project-btn" value="수정">&nbsp;&nbsp;&nbsp;
+							<input type="submit" class="btn add-project-btn" value="수정">&nbsp;&nbsp;&nbsp;
 							<input type="button" class="btn cancel-project-btn"
 								data-dismiss="modal" value="취소">
 						</div>
@@ -265,7 +265,7 @@ $(function() {
 					<p>프로젝트 삭제시 14일동안 휴지통에 보관됩니다.</p>
 				</div>
 				<div align="center">
-					<input type="button" class="btn delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
+					<input type="submit" class="btn delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn cancel-btn"
 						data-dismiss="modal" value="취소">
 				</div>
