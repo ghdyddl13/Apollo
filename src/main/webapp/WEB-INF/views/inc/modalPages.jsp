@@ -19,31 +19,33 @@ $(function() {
 					<h4 class="modal-title">Project 생성</h4>
 				</div>
 				<div class="modal-body">
-					<form method="post">
+				
+				
+					<form action="insertprojecttest.htm" method="post">
 						<fieldset>
 							<div class="row">
 								<br>
 								<div class="col-sm-6 project-setting-left">
-									<input type="text" name="name" id="add-project-name"
+									<input type="text" name="pname" id="add-project-name"
 										placeholder="프로젝트명을 입력하세요"
 										class="text ui-widget-content ui-corner-all"><br>
 									<br> 
 									<div class="add-modal-title">
 										<p>방법론</p>
 									</div>
-										<input type="radio" name="method" value="customizing"
+										<input type="radio" name="methodologyid" value="customizing"
 										checked><span class="method"> Customizing</span> <br>
 									<div>
 										<!-- Customizing 설명 작성  -->
 										가나다라마바사아자차카타파하 커스텀마이징 설명작성 필요
 									</div>
-									<br> <input type="radio" name="method" value="agile"><span
+									<br> <input type="radio" name="methodologyid" value="agile"><span
 										class="method"> Agile</span><br>
 									<div>
 										<!-- Agile 설명 작성  -->
 										가나다라마바사아자차카타파하 애자일 설명작성 필요
 									</div>
-									<br> <input type="radio" name="method" value="waterfall"><span
+									<br> <input type="radio" name="methodologyid" value="waterfall"><span
 										class="method"> Waterfall</span><br>
 									<div>
 										<!-- Waterfall 설명 작성  -->
@@ -61,19 +63,19 @@ $(function() {
 										<div class="add-modal-title">
 											<p>시작일</p>
 										</div>
-										<input type="text" placeholder="Start Date" class="date date-img">
+										<input type="text" name="sday" placeholder="Start Date" class="date date-img">
 									</div>
 									<div class="col-sm-6">
 										<div class="add-modal-title">
 											<p>종료일</p>
 										</div>
-										<input type="text" placeholder="End Date" class="date date-img">
+										<input type="text" name="eday" placeholder="End Date" class="date date-img">
 										<br><br>
 									</div>
 									<div>
 										<p>상세설명</p>
 									</div>
-									<textarea rows="7%" cols="49%" placeholder="내용을 입력하세요"></textarea>
+									<textarea rows="7%" cols="49%" name="detail" placeholder="내용을 입력하세요"></textarea>
 								</div>
 							</div>
 							<br><br>
@@ -84,6 +86,10 @@ $(function() {
 						</div>
 						</fieldset>
 					</form>
+					
+					
+					
+					
 				</div>
 			</div>
 		</div>

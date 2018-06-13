@@ -2,6 +2,7 @@ package com.apollo.sidebar.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.apollo.sidebar.dao.FolderDAO;
 import com.apollo.vo.ProjectDTO;
@@ -10,6 +11,7 @@ import com.apollo.vo.ProjectDTO;
   날      짜 : 2018. 6. 13.
   작성자명 : 김 래 영
  */
+@Service
 public class SidebarService {
 
 	@Autowired
@@ -21,9 +23,16 @@ public class SidebarService {
 	 */
 	public int insertProject(ProjectDTO projectdto) {
 		int result = 0;
-		FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
-		result = dao.insertProject(projectdto);
-		
+		try {
+			FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
+			result = dao.insertProject(projectdto);
+			
+			System.out.println(projectdto);
+			System.out.println(result);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 		
 	}

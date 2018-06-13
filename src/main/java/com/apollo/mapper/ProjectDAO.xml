@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.project.dao.ProjectDAO">
-	<insert id="insertProject" parameterType="com.apollo.vo.ProjectDTO">
+	<insert id="insertProject" statementType="CALLABLE">
 		<!-- insert into project values(SEQ_PID.nextval, 'test_project1', TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS'), 
 		TO_DATE('2018-07-11 11:59:59', 'YYYY-MM-DD HH24:MI:SS'), 1, 'testid1', 1, TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS'), 
 		'테스트 프로젝트_1 상세정보'); 

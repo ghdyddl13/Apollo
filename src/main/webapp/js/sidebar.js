@@ -81,16 +81,6 @@ $(function() {
 			}
 		)
 	});*/
-
-
-		
-	/*$(".date").datepicker({
-			showOn : "button",
-			buttonImage : "img/calendar.png",
-			buttonImageOnly : true,
-			buttonText : "Select date"
-
-		});*/
 	
 	
 	/////////////////////////// 비동기 화면전환 - 프로젝트 /////////////////////////
@@ -134,4 +124,18 @@ $(function() {
 
 
 		});
+		/*
+		$(".add-project-btn").click(function(){
+			console.log("project 생성버튼 클릭!!")
+			$.ajax({
+				url:"insertporject.htm",
+				dataType:"html",
+				type: "POST",
+				success:function(data){
+					console.log("data: " + data);
+				}
+			})
+		});
+		*/
+		
 });
