@@ -22,13 +22,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (SEQ_PID.nextval, #{PNAME}, #{SDAY}, #{EDAY}, #{METHODOLOGYID}, #{MID}, 1, TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS'), #{DETAIL});
 		
 	</insert>
-	<update id="updateProject">
+	<update id="updateProject" parameterType="com.apollo.vo.ProjectDTO">
 		update project
 		set PNAME=#{PNAME}, SDAY=#{SDAY}, EDAY=#{EDAY}, STMTIME=sysdate, DETAIL=#{DETAIL}
 		where PID=#{PID}
 	</update>
 	<delete id="deleteProject">
-	
+		delete project where PID=#{PID}
 	</delete>
 	
 </mapper>

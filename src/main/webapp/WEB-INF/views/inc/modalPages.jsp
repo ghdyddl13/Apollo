@@ -19,7 +19,7 @@ $(function() {
 					<h4 class="modal-title">Project 생성</h4>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form method="post">
 						<fieldset>
 							<div class="row">
 								<br>
@@ -78,7 +78,7 @@ $(function() {
 							</div>
 							<br><br>
 						<div align="center">
-							<input type="button" class="btn add-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
+							<input type="submit" class="btn add-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
 							<input type="button" class="btn cancel-project-btn"
 								data-dismiss="modal" value="취소">
 						</div>
