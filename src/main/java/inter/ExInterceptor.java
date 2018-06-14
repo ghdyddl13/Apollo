@@ -10,16 +10,7 @@ public class ExInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		System.out.println("afterCompletion");
-		try {
-			System.out.println("Exception : " + ex.getMessage());
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		long start = System.currentTimeMillis();
-		request.getSession().setAttribute("start", start);
-		System.out.println("start : " + start);
+		System.out.println("afterHandle");
 	}
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv)
@@ -34,7 +25,9 @@ public class ExInterceptor implements HandlerInterceptor {
 		boolean result = false;
 		
 		if (request.getSession().getAttribute("mid") == null) {
+			System.out.println("야호");
 			response.sendRedirect(request.getContextPath() + "/index.htm");
+			result = true;
 		}
 
 		return result;
