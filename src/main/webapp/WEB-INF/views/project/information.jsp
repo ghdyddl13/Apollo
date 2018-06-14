@@ -19,7 +19,9 @@
 
 	<div id="projectinfo_Task_Status_Donut" class="col-lg-5">
 		마감기한 기준 Task 현황
+		<div id="prison_Donut">
 		<canvas id="projectinfo_DonutChart"></canvas>
+		</div>
 	</div>
 
     <div id="projectinfo_Task_Situation_Table" class="col-lg-5">
