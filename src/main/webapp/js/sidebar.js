@@ -19,7 +19,6 @@ $(function() {
 								top : event.pageY + "px",
 								left : event.pageX + "px"
 							}).appendTo("body");
-
 						});
 
 		// 사이드바 폴더 우클릭  >> 추후 폴더 id(DB상 기본키)를 받아와 li 태그에 넣어주는 작업 필요

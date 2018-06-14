@@ -9,7 +9,7 @@ const MINUTE = 'minute';
 const SECOND = 'second';
 const MILLISECOND = 'millisecond';
 
-const month_names = [ //상단 값 
+const month_names = [
     'January',
     'February',
     'March',
@@ -198,7 +198,7 @@ var date_utils = {
         ];
     },
 
-    get_days_in_month(date) { //월별 마지막일 설정 
+    get_days_in_month(date) {
         const no_of_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
         const month = date.getMonth();
@@ -217,7 +217,7 @@ var date_utils = {
 };
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
-function padStart(str, targetLength, padString) { //padStart : 값에 padding 을 넣어주는 것 예를 들어.. 'abc'.padStart(8, "0");     // "00000abc"
+function padStart(str, targetLength, padString) {
     str = str + '';
     targetLength = targetLength >> 0;
     padString = String(typeof padString !== 'undefined' ? padString : ' ');
@@ -234,7 +234,8 @@ function padStart(str, targetLength, padString) { //padStart : 값에 padding �
 
 function $(expr, con) {
     return typeof expr === 'string'
-        ? (con || document).querySelector(expr) : expr || null;
+        ? (con || document).querySelector(expr)
+        : expr || null;
 }
 
 function createSVG(tag, attrs) {
@@ -397,10 +398,10 @@ class Bar {
         this.progress_width =
             this.gantt.options.column_width *
                 this.duration *
-                (this.task.progress / 100) || 0;        
+                (this.task.progress / 100) || 0;
         this.group = createSVG('g', {
             class: 'bar-wrapper ' + (this.task.custom_class || ''),
-            'data-id': this.task.id
+            'data-id': this.task.tid
         });
         this.bar_group = createSVG('g', {
             class: 'bar-group',
@@ -428,10 +429,6 @@ class Bar {
         SVGElement.prototype.getEndX = function() {
             return this.getX() + this.getWidth();
         };
-        SVGElement.prototype.getEndY = function() {
-            return this.getY() + this.getHeight();
-        };
-        
     }
 
     draw() {
@@ -466,8 +463,7 @@ class Bar {
             x: this.x,
             y: this.y,
             width: this.progress_width,
-            height: this.progress_height,
-            //height: this.height,
+            height: this.height,
             rx: this.corner_radius,
             ry: this.corner_radius,
             class: 'bar-progress',
@@ -481,7 +477,7 @@ class Bar {
         createSVG('text', {
             x: this.x + this.width / 2,
             y: this.y + this.height / 2,
-            innerHTML: this.task.name,
+            innerHTML: this.task.tname,
             class: 'bar-label',
             append_to: this.bar_group
         });
@@ -497,7 +493,6 @@ class Bar {
 
         createSVG('rect', {
             x: bar.getX() + bar.getWidth() - 9,
-            //y: bar.getX() + bar.getWidth() - 9,
             y: bar.getY() + 1,
             width: handle_width,
             height: this.height - 2,
@@ -574,7 +569,7 @@ class Bar {
 
         this.gantt.show_popup({
             target_element: this.$bar,
-            title: this.task.name,
+            title: this.task.tname,
             subtitle: subtitle
         });
     }
@@ -853,8 +848,8 @@ class Arrow {
     draw() {
         this.element = createSVG('path', {
             d: this.path,
-            'data-from': this.from_task.task.id,
-            'data-to': this.to_task.task.id
+            'data-from': this.from_task.task.tid,
+            'data-to': this.to_task.task.tid
         });
     }
 
@@ -991,29 +986,29 @@ class Gantt {
         // prepare tasks
         this.tasks = tasks.map((task, i) => {
             // convert to Date objects
-            task._start = date_utils.parse(task.start);
-            task._end = date_utils.parse(task.end);
+            task._start = date_utils.parse(task.sday);
+            task._end = date_utils.parse(task.eday);
 
             // make task invalid if duration too large
             if (date_utils.diff(task._end, task._start, 'year') > 10) {
-                task.end = null;
+                task.eday = null;
             }
 
             // cache index
             task._index = i;
 
             // invalid dates
-            if (!task.start && !task.end) {
+            if (!task.sday && !task.eday) {
                 const today = date_utils.today();
                 task._start = today;
                 task._end = date_utils.add(today, 2, 'day');
             }
 
-            if (!task.start && task.end) {
+            if (!task.sday && task.eday) {
                 task._start = date_utils.add(task._end, -2, 'day');
             }
 
-            if (task.start && !task.end) {
+            if (task.sday && !task.eday) {
                 task._end = date_utils.add(task._start, 2, 'day');
             }
 
@@ -1025,7 +1020,7 @@ class Gantt {
             }
 
             // invalid flag
-            if (!task.start || !task.end) {
+            if (!task.sday || !task.eday) {
                 task.invalid = true;
             }
 
@@ -1042,8 +1037,8 @@ class Gantt {
             }
 
             // uids
-            if (!task.id) {
-                task.id = generate_id(task);
+            if (!task.tid) {
+                task.tid = generate_id(task);
             }
 
             return task;
@@ -1462,8 +1457,8 @@ class Gantt {
         for (let bar of this.bars) {
             bar.arrows = this.arrows.filter(arrow => {
                 return (
-                    arrow.from_task.task.id === bar.task.id ||
-                    arrow.to_task.task.id === bar.task.id
+                    arrow.from_task.task.tid === bar.task.tid ||
+                    arrow.to_task.task.tid === bar.task.tid
                 );
             });
         }
@@ -1504,24 +1499,19 @@ class Gantt {
             this.hide_popup();
         });
     }
-    //////////////////////////////////////////////////////////////////////////
-    //이부분이 drag 해서 움직이는 부분 같다 
+
     bind_bar_events() {
         let is_dragging = false;
         let x_on_start = 0;
         let y_on_start = 0;
         let is_resizing_left = false;
         let is_resizing_right = false;
-        //추가
-        let is_resizing_top = false;
-        let is_resizing_down = false;
-        
         let parent_bar_id = null;
         let bars = []; // instanceof Bar
         this.bar_being_dragged = null;
 
         function action_in_progress() {
-            return is_dragging || is_resizing_left || is_resizing_right || is_resizing_top || is_resizing_down;
+            return is_dragging || is_resizing_left || is_resizing_right;
         }
 
         $.on(this.$svg, 'mousedown', '.bar-wrapper, .handle', (e, element) => {
@@ -1531,13 +1521,7 @@ class Gantt {
                 is_resizing_left = true;
             } else if (element.classList.contains('right')) {
                 is_resizing_right = true;
-            } else if(element.classList.contains('top')) {
-            	is_resizing_top = true;
-            } else if(element.classList.contains('down')) {
-            	is_resizing_down = true;
-            }
-            
-            else if (element.classList.contains('bar-wrapper')) {
+            } else if (element.classList.contains('bar-wrapper')) {
                 is_dragging = true;
             }
 
@@ -1561,8 +1545,6 @@ class Gantt {
                 $bar.oy = $bar.getY();
                 $bar.owidth = $bar.getWidth();
                 $bar.finaldx = 0;
-                //추가 
-                $bar.finaldy = 0;
             });
         });
 
@@ -1574,62 +1556,38 @@ class Gantt {
             bars.forEach(bar => {
                 const $bar = bar.$bar;
                 $bar.finaldx = this.get_snap_position(dx);
-                //추가
-                $bar.finaldy = this.get_snap_position(dy);
 
                 if (is_resizing_left) {
-                    if (parent_bar_id === bar.task.id) {
+                    if (parent_bar_id === bar.task.tid) {
                         bar.update_bar_position({
                             x: $bar.ox + $bar.finaldx,
-                            //추가
-                            y: $bar.oy + $bar.finaldy,
                             width: $bar.owidth - $bar.finaldx
                         });
                     } else {
                         bar.update_bar_position({
-                            x: $bar.ox + $bar.finaldx,
-                            //추가
-                            y: $bar.ox + $bar.finaldy
+                            x: $bar.ox + $bar.finaldx
                         });
                     }
                 } else if (is_resizing_right) {
-                    if (parent_bar_id === bar.task.id) {
+                    if (parent_bar_id === bar.task.tid) {
                         bar.update_bar_position({
                             width: $bar.owidth + $bar.finaldx
                         });
                     }
-                } else if (is_resizing_top) {
-                    if (parent_bar_id === bar.task.id) {
-                        bar.update_bar_position({
-                            width: $bar.owidth + $bar.finaldx
-                        });
-                    }
-                } else if (is_resizing_down) {
-                    if (parent_bar_id === bar.task.id) {
-                        bar.update_bar_position({
-                            width: $bar.owidth + $bar.finaldx
-                        });
-                    }
-                }
-                
-                
-                	else if (is_dragging) {
+                } else if (is_dragging) {
                     bar.update_bar_position({ x: $bar.ox + $bar.finaldx });
-                    bar.update_bar_position({ y: $bar.oy + $bar.finaldy });
                 }
             });
         });
 
         document.addEventListener('mouseup', e => {
-            if (is_dragging || is_resizing_left || is_resizing_right || is_resizing_top || is_resizing_down) {
+            if (is_dragging || is_resizing_left || is_resizing_right) {
                 bars.forEach(bar => bar.group.classList.remove('active'));
             }
 
             is_dragging = false;
             is_resizing_left = false;
             is_resizing_right = false;
-            is_resizing_top = false;
-            is_resizing_down = false;
         });
 
         $.on(this.$svg, 'mouseup', e => {
@@ -1666,13 +1624,9 @@ class Gantt {
             $bar = bar.$bar;
 
             $bar_progress.finaldx = 0;
-            $bar_progress.finaldy = 0;
             $bar_progress.owidth = $bar_progress.getWidth();
             $bar_progress.min_dx = -$bar_progress.getWidth();
             $bar_progress.max_dx = $bar.getWidth() - $bar_progress.getWidth();
-            //추가
-            $bar_progress.min_dy = -$bar_progress.getWidth();
-            $bar_progress.max_dy = $bar.getWidth() - $bar_progress.getWidth();
         });
 
         $.on(this.$svg, 'mousemove', e => {
@@ -1686,29 +1640,20 @@ class Gantt {
             if (dx < $bar_progress.min_dx) {
                 dx = $bar_progress.min_dx;
             }
-            
-            //추가
-            if (dy > $bar_progress.max_dy) {
-                dy = $bar_progress.max_dy;
-            }
-            if (dy < $bar_progress.min_dy) {
-                dy = $bar_progress.min_dy;
-            }
 
             const $handle = bar.$handle_progress;
             $.attr($bar_progress, 'width', $bar_progress.owidth + dx);
             $.attr($handle, 'points', bar.get_progress_polygon_points());
             $bar_progress.finaldx = dx;
-            $bar_progress.finaldy = dy;
         });
 
         $.on(this.$svg, 'mouseup', () => {
             is_resizing = false;
-            if (!($bar_progress && $bar_progress.finaldx && $bar_progress.finaldy)) return;
+            if (!($bar_progress && $bar_progress.finaldx)) return;
             bar.progress_changed();
             bar.set_action_completed();
         });
-    }// drag 여기까지//////////////////////////////////////////////////
+    }
 
     get_all_dependent_tasks(task_id) {
         let out = [];
@@ -1758,40 +1703,6 @@ class Gantt {
         }
         return position;
     }
-    
-    ////////////////////
-    get_snap_position(dy) {
-        let ody = dy,
-            rem,
-            position;
-
-        if (this.view_is('Week')) {
-            rem = dy % (this.options.column_width / 7);
-            position =
-                ody -
-                rem +
-                (rem < this.options.column_width / 14
-                    ? 0
-                    : this.options.column_width / 7);
-        } else if (this.view_is('Month')) {
-            rem = dy % (this.options.column_width / 30);
-            position =
-                ody -
-                rem +
-                (rem < this.options.column_width / 60
-                    ? 0
-                    : this.options.column_width / 30);
-        } else {
-            rem = dy % this.options.column_width;
-            position =
-                ody -
-                rem +
-                (rem < this.options.column_width / 2
-                    ? 0
-                    : this.options.column_width);
-        }
-        return position;
-    }
 
     unselect_all() {
         [...this.$svg.querySelectorAll('.bar-wrapper')].forEach(el => {
@@ -1813,17 +1724,17 @@ class Gantt {
 
     get_task(id) {
         return this.tasks.find(task => {
-            return task.id === id;
+            return task.tid === id;
         });
     }
 
     get_bar(id) {
         return this.bars.find(bar => {
-            return bar.task.id === id;
+            return bar.task.tid === id;
         });
     }
 
-    show_popup(options) { //팝업 보여주기
+    show_popup(options) {
         if (!this.popup) {
             this.popup = new Popup(this.popup_wrapper);
         }
@@ -1840,7 +1751,7 @@ class Gantt {
         }
     }
 
-    /*
+    /**
      * Gets the oldest starting date from the list of tasks
      *
      * @returns Date
@@ -1855,7 +1766,7 @@ class Gantt {
             );
     }
 
-    /*
+    /**
      * Clear all elements from the parent svg element
      *
      * @memberof Gantt
@@ -1867,7 +1778,7 @@ class Gantt {
 
 function generate_id(task) {
     return (
-        task.name +
+        task.tname +
         '_' +
         Math.random()
             .toString(36)
@@ -1877,4 +1788,4 @@ function generate_id(task) {
 
 return Gantt;
 
-}()); //Gantt End
+}());
