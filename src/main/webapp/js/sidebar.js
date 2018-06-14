@@ -123,22 +123,9 @@ $(function() {
 		    showOn: "button",
 		    buttonImage: "img/calendar.png",
 		    buttonImageOnly: true,
-		    dateFormat: 'yy년 mm월 dd일'
+		    dateFormat: 'yy/mm/dd'
 
 
 		});
-		/*
-		$(".add-project-btn").click(function(){
-			console.log("project 생성버튼 클릭!!")
-			$.ajax({
-				url:"insertporject.htm",
-				dataType:"html",
-				type: "POST",
-				success:function(data){
-					console.log("data: " + data);
-				}
-			})
-		});
-		*/
 		
 });

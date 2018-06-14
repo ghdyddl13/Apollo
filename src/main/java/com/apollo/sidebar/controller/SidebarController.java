@@ -15,27 +15,20 @@ import com.apollo.vo.StepDTO;
 public class SidebarController {
 	
 	@Autowired 
-	private SidebarService service;
+	private SidebarService sidebarservice;
 	
-	@RequestMapping(value="/insertproject.htm", method=RequestMethod.GET)
-	public String insertProject() {
-		
-		return "login";
-		
-	}
-	@RequestMapping(value="/insertproject.htm", method=RequestMethod.POST)
+	@RequestMapping(value="/raeyoung.htm", method=RequestMethod.POST)
 	public String insertProject(ProjectDTO projectdto) {
-		System.out.println("aaaaaaaaaaaaaaaaaaaa");
-		
 		try {
-			System.out.println("bbbbbbbbbbb");
-			service.insertProject(projectdto);
-	} catch (Exception e) {
+			sidebarservice.insertProject(projectdto);
+			System.out.println(projectdto.toString());
+		} catch (Exception e) {
 			e.printStackTrace();
-	} 		
-		return "redirect:/information.htm";
+		}
+		
+		return "redirect:/login.htm";
 	}
-	
+
 	public View changeProjectStatus(int i1, Model model) {
 		return null;
 	}

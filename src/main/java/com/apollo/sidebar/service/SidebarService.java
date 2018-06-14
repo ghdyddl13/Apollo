@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apollo.project.dao.ProjectDAO;
 import com.apollo.sidebar.dao.FolderDAO;
 import com.apollo.vo.ProjectDTO;
 /* 
@@ -24,14 +25,16 @@ public class SidebarService {
 	public int insertProject(ProjectDTO projectdto) {
 		int result = 0;
 		try {
-			FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
+			ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
 			result = dao.insertProject(projectdto);
-			
-			System.out.println(projectdto);
-			System.out.println(result);
-			
 		}catch(Exception e) {
 			e.printStackTrace();
+		}
+		
+		if(result > 0) {
+			System.out.println("insert success");
+		}else {
+			System.out.println("insert fail");
 		}
 		return result;
 		
@@ -43,7 +46,7 @@ public class SidebarService {
 	 */
 	public int updateProejct(ProjectDTO projectdto) {
 		int result = 0;
-		FolderDAO dao = sqlsession.getMapper(FolderDAO.class);		
+		ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
 		result = dao.updateProject(projectdto);
 		
 		return result;
@@ -56,7 +59,7 @@ public class SidebarService {
 	 */
 	public int deleteProject(ProjectDTO projectdto) {
 		int result = 0;
-		FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
+		ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
 		result = dao.deleteProject(projectdto);
 		
 		return result;
