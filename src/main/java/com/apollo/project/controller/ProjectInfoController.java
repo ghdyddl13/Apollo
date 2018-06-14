@@ -105,6 +105,26 @@ public class ProjectInfoController {
 		return jsonview;
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 14.
+	 기      능 : Step별 Task 완료/ 미완료에서 Step 셀렉트바에 따른 Task 가져오기
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/getTasksByStepForSituation.htm")
+	public View getTasksByStep(String sid, ModelMap map) {
+
+		ArrayList<TaskDTO> tasklist = null;
+		
+		try {
+			tasklist = projectinfoservice.getTasksByStepId(sid);
+			map.addAttribute("tasklist", tasklist);
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		return jsonview;
+	}
+	
 	public View projectMemberSearch(String s1) {
 		return null;
 	}

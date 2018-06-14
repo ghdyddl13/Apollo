@@ -47,7 +47,6 @@ $(function() {
 	 기      능 : donut Chart의 데이터를 불러오고 이에 맞게 분류하고 donut Chart 형성
 	 작성자명 : 김 정 권
 	 */
-	
 	// 마감기한별로 구분된 라벨을 배열로 선언
 	// 후에 반복을 돌면서 맞는 배열에 데이터를 넣는다
 	var unassigned = [];
@@ -295,9 +294,41 @@ $(function() {
 			} // end-success
 		});// end-ajax
 	
+	
+	/*
+	 날      짜 : 2018. 6. 14.
+	 기      능 : Step별 Task 완료/미완료 현황에서 셀렉트바 온체인지 함수
+	 작성자명 : 김 정 권
+	 */
+	$('#projectinfo_Task_Situation_Table_selectbar').on('change', function() {
+		alert(this.value);
+		$.ajax(
+		        {
+		           type : "post",
+		           url  : "getTasksByStepForSituation.htm",
+		           data : "sid="+this.value,
+		           success : function(rdata){
+		               console.log(rdata);
+		               
+		               
+		               
+		               
+		               
+		               
+		               
+		               
+		               
+		               
+		           } 
+		        }); // end-ajax
+		
+		
+		});
+	
+	
 ////////////////////////////////////////////////////////////////////////////////////////////////	
-	$('#testbtn1').click(function(){
-
+	$('#testjk').click(function(){
+		alert('dd');
 	});
 	
 	$('#testbtn3').click(function(){

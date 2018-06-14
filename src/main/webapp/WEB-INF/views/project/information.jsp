@@ -29,6 +29,7 @@
 			<div align='left'>Step별 Task 완료/미완료 현황</div>
 			<br />
 			<div align='right'>
+			<input type=button value="테스트버튼" id="testjk">
 					<select id="projectinfo_Task_Situation_Table_selectbar">
 						 <c:forEach var="step" items="${steplist}">
 	                        <option value="${step.sid}">${step.sname}</option>

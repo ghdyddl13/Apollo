@@ -102,4 +102,25 @@ public class ProjectInfoService {
 		return getProjectMemberlist;
 	}
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 14.
+	 기      능 : Step별 Task 완료/ 미완료에서 Step 셀렉트바에 따른 Task 가져오기
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<TaskDTO> getTasksByStepId(String sid){
+		
+		ArrayList<TaskDTO> tasklist= new ArrayList<TaskDTO>();
+		
+		try {
+			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
+			tasklist = dao.getTasksByStepId(sid);
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		
+		return tasklist;
+	}
+	
 }
