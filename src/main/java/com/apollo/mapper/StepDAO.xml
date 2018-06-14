@@ -7,5 +7,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getSteps" parameterType="String" resultType="com.apollo.vo.StepDTO">
     select * from step where pid = #{pid}
     </select>
-
+<!-- 	CREATE TABLE STEP (
+	SID NUMBER NOT NULL, /* 스텝아이디 */
+	SNAME VARCHAR2(300) NOT NULL, /* 스텝이름 */
+	SDAY DATE, /* 시작일  */
+	EDAY DATE, /* 종료일 */
+	PID NUMBER NOT NULL, /* 프로젝트 아이디 */
+	FID NUMBER, /* 폴더아이디 */
+	MGR VARCHAR2(50), /* 책임자 */
+	METHODOLOGYID NUMBER, /* 방법론아이디 */
+	MID VARCHAR2(50) /* 유저아이디 */ -->
+	<insert id="insertStep" parameterType="com.apollo.vo.StepDTO">
+		insert into step(sid, sname, sday, eday, pid, fid, mgr, methodologyid, mid) 
+		values (seq_sid.nextval, '${sname}', '${sday}', '${eday}', '${pid}', '${fid}', '${mgr}', '${methodologyid}', '${mid}')
+	</insert>
 </mapper>

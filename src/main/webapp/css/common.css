@@ -328,7 +328,7 @@ label {
    font-weight: bold;
 }
 
-.add-modal-title {
+.modal-title {
    font-weight: bold;
    padding-top: 5px;
 }
@@ -349,14 +349,14 @@ label {
    width: 80%;
 }
 
-.add-project-btn {
+.add-btn {
    background-color: rgb(178, 28, 74);
    color: white;
    width: 80px;
 }
 
 
-.cancel-project-btn {
+.cancel-btn {
    background-color: rgb(0, 0, 50);
    color: white;
    width: 80px;
@@ -380,13 +380,13 @@ label {
 }
 .modal-add-folder-dialog {
    position:absolute; 
-    top:50%; 
-    left:50%; 
+   top:50%; 
+   left:50%; 
    width: 330px;
    height: 70%;
    vertical-align: middle;
    margin-top:-115px; 
-    margin-left:-230px;
+   margin-left:-230px;
 }
 .add-folder-text {
    width: 100%;
@@ -396,13 +396,19 @@ label {
 
 .modal-add-step-dialog {
    position:absolute; 
-    top:50%; 
-    left:50%; 
+   top:50%; 
+   left:50%; 
    width: 530px;
-   height: 550px;
+   height: 640px;
    vertical-align: middle;
    margin-top:-350px; 
-    margin-left:-250px;
+   margin-left:-250px;
+}
+
+.modal-add-step-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0; 
 }
 
 #add-step-description {

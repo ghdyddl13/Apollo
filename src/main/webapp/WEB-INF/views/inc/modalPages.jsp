@@ -20,7 +20,8 @@ $(function() {
 				</div>
 
 				<div class="modal-body">
-					<form action="raeyoung.htm" method="post">
+				<!-- 추후 actuon="infromation.htm" 으로 변경 예정 -->
+					<form action="insertproject.htm" method="post">
 						<fieldset>
 							<div class="row">
 								<br>
@@ -29,7 +30,7 @@ $(function() {
 										placeholder="프로젝트명을 입력하세요"
 										class="text ui-widget-content ui-corner-all"><br>
 									<br> 
-									<div class="add-modal-title">
+									<div class="modal-title">
 										<p>방법론</p>
 									</div>
 										<input type="radio" name="methodologyid" value="3"
@@ -54,24 +55,24 @@ $(function() {
 								</div>
 								<!-- Allow form submission with keyboard without duplicating the dialog button -->
 								<div class="col-sm-6 project-setting-right">
-									<div class="add-modal-title">
+									<div class="modal-title">
 										<p>기간 설정</p>
 									</div>
 									<br>
 									<div class="col-sm-6">
-										<div class="add-modal-title">
+										<div class="modal-title">
 											<p>시작일</p>
 										</div>
 										<input type="text" name="sday" placeholder="Start Date" class="date date-img">
 									</div>
 									<div class="col-sm-6">
-										<div class="add-modal-title">
+										<div class="modal-title">
 											<p>종료일</p>
 										</div>
 										<input type="text" name="eday" placeholder="End Date" class="date date-img">
 										<br><br>
 									</div>
-									<div class="add-modal-title">
+									<div class="modal-title">
 										<p>상세설명</p>
 									</div>
 									<textarea rows="7%" cols="49%" name="detail" placeholder="내용을 입력하세요"></textarea>
@@ -83,8 +84,8 @@ $(function() {
 							<br><br>
 							
 						<div align="center">
-							<input type="submit" class="btn add-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
-							<input type="button" class="btn cancel-project-btn"
+							<input type="submit" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn cancel-btn"
 								data-dismiss="modal" value="취소">
 						</div>
 						</fieldset>
@@ -94,7 +95,7 @@ $(function() {
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Folder 생성 Modal 창 -->
 	<div class="modal fade" id="add-folder" role="dialog">
 		<div class="modal-dialog modal-add-folder-dialog">
@@ -104,14 +105,14 @@ $(function() {
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Folder 생성</h4>
 				</div>
-				<div class="modal-body ">
+				<div class="modal-body">
 					<input type="text" class="add-folder-text"
 						placeholder="folder명을 입력하세요">
-				</div>
-				<div align="center">
-					<input type="submit" class="btn" id="add-btn" value="생성">&nbsp;&nbsp;&nbsp;
-					<input type="button" class="btn" id="cancel-btn"
-						data-dismiss="modal" value="취소">
+					<div align="center">
+						<input type="submit" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
 				</div>
 				<br>
 			</div>
@@ -119,61 +120,69 @@ $(function() {
 	</div>
 
 	<!-- 스텝 생성 Modal 창 -->
-	<div class="modal fade" id="add-step" role="dialog">
+	<div class="modal fade" id="step-add-modal" role="dialog">
 		<div class="modal-dialog modal-add-step-dialog">
 			<!-- Modal content-->
-			<div class="modal-content">
+			<div class="modal-content modal-add-step-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Step 생성</h4>
 				</div>
 				<div class="modal-body">
-					<div class="add-modal-title">
-						<h4>Step명</h4>
-					</div>
-					<input type="text" name="sname" class="add-step-text" placeholder="step명을 입력하세요">
-					<hr id="add-step-modal-hr">
-					<div class="add-modal-title">
-						<h4>설정</h4>
-						<br>
-						<p>책임자</p>
-					</div>
-					<div>책임자명</div>
-					<br>
-					<div class="add-modal-title">
-						<p>기간 설정</p>
-					</div>
-					<div class="col-sm-6">
-						<div class="add-modal-title">
-							<p>시작일</p>
-						</div>
-						<input type="text" name="sday" placeholder="Start Date" class="date"><br>
-					</div>
-					<div class="col-sm-6">
-						<div class="add-modal-title">
-							<p>종료일</p>
-						</div>
-						<input type="text" name="eday" placeholder="End Date" class="date"><br>
-						<br> <br>
-					</div>
-					<div class="add-modal-title">
-						<p>상세설명</p>
-					</div>
-					<input type="text" class="text ui-widget-content ui-corner-all"
-						id="add-step-description" placeholder="상세설명을 입력하세요">
-				</div>
-				<div align="center">
-					<input type="submit" class="btn" id="add-btn" value="생성">&nbsp;&nbsp;&nbsp;
-					<input type="button" class="btn" id="cancel-btn"
-						data-dismiss="modal" value="취소">
+					<form method="post">
+						<fieldset>
+							<div class="modal-title">
+								<p>Step명</p>
+							</div>
+							<input type="text" name="sname" class="add-step-text"
+								placeholder="step명을 입력하세요">
+							<br><br>
+							<div class="modal-title">
+								<p>책임자</p>
+							</div>
+							<div>
+								<select>
+									<option value=""></option>
+								</select>
+							</div>
+							<br>
+							<div class="modal-title">
+								<p>기간 설정</p>
+							</div>
+							<div class="col-sm-6">
+								<div class="modal-title">
+									<p>시작일</p>
+								</div>
+								<input type="text" name="sday" placeholder="Start Date"
+									class="date date-img"><br>
+							</div>
+							<div class="col-sm-6">
+								<div class="modal-title">
+									<p>종료일</p>
+								</div>
+								<input type="text" name="eday" placeholder="End Date"
+									class="date date-img"><br><br><br>
+							</div>
+							<div class="modal-title">
+								<p>상세설명</p>
+							</div>
+							<textarea rows="7%" cols="68%" name="detail" placeholder="내용을 입력하세요"></textarea>
+								<br><br>
+							<div align="center">
+								<input type="submit" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
+								<input type="button" class="btn cancel-btn"
+									data-dismiss="modal" value="취소">
+							</div>
+						</fieldset>
+					</form>
 				</div>
 				<br>
 			</div>
 		</div>
 	</div>
-	
-	
-	<!-- 프로젝트 수정 Modal 창 -->
+
+
+<!-- 프로젝트 수정 Modal 창 -->
 	<div class="modal fade" id="update-project" role="dialog">
 		<div class="modal-dialog modal-update-project-dialog">
 			<div class="modal-content modal-update-project-content">
@@ -191,7 +200,7 @@ $(function() {
 										placeholder="프로젝트명을 입력하세요"
 										class="text ui-widget-content ui-corner-all"><br>
 									<br> 
-									<div class="add-modal-title">
+									<div class="modal-title">
 										<p>방법론</p>
 									</div>
 										<input type="radio" name="methodologyid" value="customizing"
@@ -216,24 +225,24 @@ $(function() {
 								</div>
 								<!-- Allow form submission with keyboard without duplicating the dialog button -->
 								<div class="col-sm-6 project-setting-right">
-									<div class="add-modal-title">
+									<div class="modal-title">
 										<p>기간 설정</p>
 									</div>
 									<br>
 									<div class="col-sm-6">
-										<div class="add-modal-title">
+										<div class="modal-title">
 											<p>시작일</p>
 										</div>
 										<input type="text" name="sday" placeholder="Start Date" class="date date-img">
 									</div>
 									<div class="col-sm-6">
-										<div class="add-modal-title">
+										<div class="modal-title">
 											<p>종료일</p>
 										</div>
 										<input type="text" name="eday" placeholder="End Date" class="date date-img">
 										<br><br>
 									</div>
-									<div class="add-modal-title">
+									<div class="modal-title">
 										<p>상세설명</p>
 									</div>
 									<textarea rows="7%" cols="49%" name="detail" placeholder="내용을 입력하세요"></textarea>
@@ -241,8 +250,8 @@ $(function() {
 							</div>
 							<br><br>
 						<div align="center">
-							<input type="submit" class="btn add-project-btn" value="수정">&nbsp;&nbsp;&nbsp;
-							<input type="button" class="btn cancel-project-btn"
+							<input type="submit" class="btn add-btn" value="수정">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn cancel-btn"
 								data-dismiss="modal" value="취소">
 						</div>
 						</fieldset>

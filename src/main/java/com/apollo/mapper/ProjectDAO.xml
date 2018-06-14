@@ -8,13 +8,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(seq_pid.nextval, '${pname}', '${sday}', '${eday}', '${methodologyid}', '${mid}', 1, sysdate, '${detail}')
 		
 	</insert>
-<!-- 	<update id="updateProject" parameterType="com.apollo.vo.ProjectDTO">
+	<update id="updateProject" parameterType="com.apollo.vo.ProjectDTO">
 		update project
-		set PNAME=#{PNAME}, SDAY=TO_DATE(SDAY, 'YYYY-MM-DD HH24:MI:SS'), EDAY=TO_DATE(EDAY, 'YYYY-MM-DD HH24:MI:SS'), STMTIME=TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS'), DETAIL=#{DETAIL}
-		where PID=#{PID}
+		set pname='${pname}', sday='${sday}'), EDAY='${eday}', stmtime=sysdate, detail='${detail}'
+		where pid='${pid}'
 	</update>
 	<delete id="deleteProject">
 		delete project where PID=#{PID}
-	</delete> -->
+	</delete>
 	
 </mapper>

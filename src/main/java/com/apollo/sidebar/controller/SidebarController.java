@@ -17,7 +17,7 @@ public class SidebarController {
 	@Autowired 
 	private SidebarService sidebarservice;
 	
-	@RequestMapping(value="/raeyoung.htm", method=RequestMethod.POST)
+	@RequestMapping(value="/insertproject.htm", method=RequestMethod.POST)
 	public String insertProject(ProjectDTO projectdto) {
 		try {
 			sidebarservice.insertProject(projectdto);
