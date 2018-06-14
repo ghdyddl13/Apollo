@@ -12,16 +12,13 @@ public interface StepDAO {
 	 ì‘ì„±ìëª… : 
 	 */
 	public ArrayList<StepDTO> getSteps(String pid);
-<<<<<<< HEAD
 	
 	/**
 	 * 
-	 ³¯      Â¥ : 2018. 6. 14.
-	 ±â      ´É : StepÅ¬¸¯½Ã SessionÀ¸·Î °ü¸®ÇÏ´Â ProjectÀÇ Id¸¦ °»½ÅÇØÁÖ±â À§ÇÔ.
-	 ÀÛ¼ºÀÚ¸í : ¹Ú ¹Î ½Ä
+	 ë‚       ì§œ : 2018. 6. 14.
+	 ê¸°      ëŠ¥ :ìŠ¤í…ì•„ì´ë””ë¡œ í”„ë¡œì íŠ¸ ì•„ì´ë”” ê°€ì ¸ì˜¤ê¸° >> sessionê´€ë¦¬ë¥¼ ìœ„í•´ 
+	 ì‘ì„±ìëª… : ë°• ë¯¼ ì‹
 	 */
 	public int getProjectIdByStepId(int sid);
-=======
 
->>>>>>> develop
 }

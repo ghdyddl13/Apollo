@@ -13,10 +13,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<<<<<<< HEAD
-=======
 
->>>>>>> 06ffad74364a14508020d3850774fb6d9ca45b03
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="css/common.css" type="text/css" rel="stylesheet">
@@ -76,7 +73,7 @@ $(function() {
 });
 	var Regexemail = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
 
-	var Regexpwd = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
+	var Regexpwd = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~,.])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
 	function sendit() {
 		if ($("#mid").val()== "") {
             alert("아이디를 입력하지 않았습니다.");
@@ -91,6 +88,8 @@ $(function() {
         }
 
 		if ($("#pwd").val()!=$("#pwd2").val()) {
+			console.log($("#pwd").val())
+			console.log($("#pwd2").val())
             alert("비밀번호 확인이 일치하지 않습니다.");
             $("#pwd").focus();
             return false;
