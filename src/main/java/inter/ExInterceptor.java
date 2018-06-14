@@ -34,7 +34,6 @@ public class ExInterceptor implements HandlerInterceptor {
 		boolean result = false;
 		
 		if (request.getSession().getAttribute("mid") == null) {
-			System.out.println("여기");
 			response.sendRedirect(request.getContextPath() + "/index.htm");
 		}
 

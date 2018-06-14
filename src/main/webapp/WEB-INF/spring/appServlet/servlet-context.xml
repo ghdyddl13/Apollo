@@ -33,7 +33,7 @@
 	
 	<!-- Velocity 설정 -->
 	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-		<property name="resourceLoaderPath" value="WEB-INF/views/vm/" />
+		<property name="resourceLoaderPath" value="WEB-INF/views/vm/"/>
 		<property name="velocityProperties">
 			<value>
 				input.encoding=UTF-8
