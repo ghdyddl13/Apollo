@@ -51,6 +51,7 @@
 			<mvc:mapping path="/**" /> <!-- 매핑경로 지정 -->
 		 	<mvc:exclude-mapping path="/index.htm"/><!-- interceptor적용을 제외시킬 URL -->
 		 	<mvc:exclude-mapping path="/keycheck.htm"/>
+		 	<mvc:exclude-mapping path="/login.htm"/>
 		 	<mvc:exclude-mapping path="/join.htm"/>
 		 	<mvc:exclude-mapping path="/apollokey.htm"/>
 		 	<mvc:exclude-mapping path="/findpwd.htm"/>

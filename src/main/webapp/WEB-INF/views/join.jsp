@@ -21,6 +21,8 @@
 <script type="text/javascript">
 
 $(function() {
+	
+	
 	$('#btnCheckUid').click(function(){
 		if ($("#mid").val()== "") {
             alert("아이디를 입력하지 않았습니다.");
@@ -68,7 +70,9 @@ $(function() {
 	});
 	
 });
-var Regexpwd = "^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$";
+	var Regexemail = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+
+	var Regexpwd = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
 	function sendit() {
 		if ($("#mid").val()== "") {
             alert("아이디를 입력하지 않았습니다.");
@@ -93,7 +97,13 @@ var Regexpwd = "^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$
             $("#mname").focus();
             return false;
         }
-		if ( !Regexpwd.test($.trim($("#pwd").val())) ){
+		if (!Regexemail.test($.trim($("#mid").val())) ){
+			alert("이메일 형식이 아닙니다.");
+			$("#mid").focus();
+			return false;
+
+		}
+		if (!Regexpwd.test($.trim($("#pwd").val())) ){
 			alert("비밀번호 형식이 잘못되었습니다.");
 			$("#pwd").focus();
 			return false;
@@ -125,7 +135,7 @@ var Regexpwd = "^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$
 		</div>
 	</div>
 	<div class="input-group div-width">
-		<input type="email" class="form-control" id="mid" name="mid">
+		<input type="text" class="form-control" id="mid" name="mid">
 	</div>
 
 	<!-- 바디 2 비밀번호 -->
@@ -134,7 +144,7 @@ var Regexpwd = "^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$
 			<h5>*비밀번호</h5>
 		</div>
 		<div class="col-sm-8 div-btn-position">
-			<h6>(특수문자 포함해서 8자 이상 입력하세요)</h6>
+			<h6>(영문,숫자,특수문자 포함해서 8자 이상 입력하세요)</h6>
 		</div>
 	</div>
 	<div class="input-group div-width">
