@@ -5,8 +5,8 @@ import java.sql.Date;
 public class TaskDTO {
 	private int tid;
 	private String tname;
-	private Date sday;
-	private Date eday;
+	private String sday;
+	private String eday;
 	private String detail;
 	private int pid;
 	private int importance;
@@ -24,16 +24,16 @@ public class TaskDTO {
 	public void setTname(String tname) {
 		this.tname = tname;
 	}
-	public Date getSday() {
+	public String getSday() {
 		return sday;
 	}
-	public void setSday(Date sday) {
+	public void setSday(String sday) {
 		this.sday = sday;
 	}
-	public Date getEday() {
+	public String getEday() {
 		return eday;
 	}
-	public void setEday(Date eday) {
+	public void setEday(String eday) {
 		this.eday = eday;
 	}
 	public String getDetail() {
@@ -66,6 +66,7 @@ public class TaskDTO {
 	public void setStatusid(int statusid) {
 		this.statusid = statusid;
 	}
+	
 	
 	
 	
