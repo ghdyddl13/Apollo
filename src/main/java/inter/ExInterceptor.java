@@ -11,15 +11,7 @@ public class ExInterceptor implements HandlerInterceptor {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		System.out.println("afterCompletion");
-		try {
-			System.out.println("Exception : " + ex.getMessage());
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		long start = System.currentTimeMillis();
-		request.getSession().setAttribute("start", start);
-		System.out.println("start : " + start);
+
 	}
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv)
@@ -31,10 +23,11 @@ public class ExInterceptor implements HandlerInterceptor {
 			throws Exception {
 		System.out.println("preHandle");
 		System.out.println(">" + request.getSession().getAttribute("mid") + "<");
-		boolean result = false;
+		boolean result = true;
 		
 		if (request.getSession().getAttribute("mid") == null) {
 			response.sendRedirect(request.getContextPath() + "/index.htm");
+			result = false;
 		}
 
 		return result;

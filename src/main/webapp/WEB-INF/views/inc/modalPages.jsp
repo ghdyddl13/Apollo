@@ -18,9 +18,8 @@ $(function() {
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Project 생성</h4>
 				</div>
-
 				<div class="modal-body">
-				<!-- 추후 actuon="infromation.htm" 으로 변경 예정 -->
+				<!-- 추후 actuon=""information.htm" 으로 변경 예정 -->
 					<form action="insertproject.htm" method="post">
 						<fieldset>
 							<div class="row">
@@ -79,15 +78,14 @@ $(function() {
 								</div>
 							</div>
 							<!-- 아래는 임시로 작성해둔 것임 -->
-							<p>책임자</p>
-							<input type="text" name="mid" placeholder="책임자는 default">
-							<br><br>
-							
+							<input type="hidden" name="mid" value="${mid}">
+		
 						<div align="center">
 							<input type="submit" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
 							<input type="button" class="btn cancel-btn"
 								data-dismiss="modal" value="취소">
 						</div>
+						<br>
 						</fieldset>
 					</form>
 

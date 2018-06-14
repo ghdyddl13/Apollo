@@ -1,5 +1,7 @@
 package com.apollo.sidebar.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +19,20 @@ public class SidebarController {
 	@Autowired 
 	private SidebarService sidebarservice;
 	
+	HttpSession session;
+	
 	@RequestMapping(value="/insertproject.htm", method=RequestMethod.POST)
-	public String insertProject(ProjectDTO projectdto) {
+	public String insertProject(ProjectDTO projectdto, Model model) {
+		System.out.println("여기 들어오니 aaaaaaaaaaaaaaaaaaaaaaaa");
+		/*String mid = (String)session.getAttribute("mid");*/
+		/*model.addAttribute("mid", mid);*/
 		try {
 			sidebarservice.insertProject(projectdto);
 			System.out.println(projectdto.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		/*System.out.println("mid : " + mid);*/
 		
 		return "redirect:/login.htm";
 	}
