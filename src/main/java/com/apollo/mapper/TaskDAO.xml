@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -11,12 +10,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getTasksInSteps" parameterType="String" resultType="com.apollo.vo.TaskDTO">
     select * from taskinstep where sid = #{sid}
     </select>
-
-=======
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.apollo.dao.dao.TaskDAO">
->>>>>>> feature/yy2
 </mapper>

@@ -22,6 +22,7 @@
 
 <title>Insert title here</title>
 <script type="text/javascript">
+
 	$(function() {
 		var msg = "${msg}";
 		if (msg != "") {
