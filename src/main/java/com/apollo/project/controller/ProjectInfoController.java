@@ -1,9 +1,5 @@
 package com.apollo.project.controller;
-<<<<<<< HEAD
-
 import org.springframework.web.servlet.View;
-
-=======
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +15,14 @@ import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 
 @Controller
->>>>>>> 06ffad74364a14508020d3850774fb6d9ca45b03
 public class ProjectInfoController {
 	
+	@Autowired
+	private View jsonview;
 	
-<<<<<<< HEAD
 	public String projectInfoShow(String s1) {
 		return null;
-=======
+	}
 	/**
 	 * 
 	 날      짜 : 2018. 6. 13.
@@ -104,7 +100,6 @@ public class ProjectInfoController {
 		getProjectMemberlist = projectinfoservice.getProjectMembers(pid);
         map.addAttribute("getProjectMemberlist", getProjectMemberlist);
 		return jsonview;
->>>>>>> 06ffad74364a14508020d3850774fb6d9ca45b03
 	}
 	
 	public View projectMemberSearch(String s1) {

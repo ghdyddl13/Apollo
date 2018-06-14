@@ -1,9 +1,11 @@
 package com.apollo.project.service;
 
-public class ProjectInfoService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-=======
+@Service
+public class ProjectInfoService {
+	
 	@Autowired
 	private SqlSession sqlsession;
 	
@@ -60,6 +62,5 @@ public class ProjectInfoService {
 		
 		return getProjectMemberlist;
 	}
-	
->>>>>>> 06ffad74364a14508020d3850774fb6d9ca45b03
+
 }
