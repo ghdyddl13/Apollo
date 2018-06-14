@@ -1,5 +1,6 @@
 package com.apollo.project.controller;
 import org.springframework.web.servlet.View;
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,6 @@ public class ProjectInfoController {
 	@Autowired
 	private View jsonview;
 	
-	public String projectInfoShow(String s1) {
-		return null;
-	}
 	/**
 	 * 
 	 날      짜 : 2018. 6. 13.
@@ -47,10 +45,14 @@ public class ProjectInfoController {
 	 */
 	@RequestMapping("/donutChart.htm")
 	public View donutChart(String pid, ModelMap map) {
+		ArrayList<TaskDTO> assignedtasklist = new ArrayList<TaskDTO>();
+		ArrayList<TaskDTO> notassignedtasklist = new ArrayList<TaskDTO>();
 		
-		ArrayList<TaskDTO> tasklist = new ArrayList<TaskDTO>();
-		tasklist = projectinfoservice.getTasks(pid);
-        map.addAttribute("tasklist", tasklist);
+		assignedtasklist = projectinfoservice.getAssignedTasks(pid);
+		notassignedtasklist = projectinfoservice.getNotAssignedTasks(pid);
+		
+        map.addAttribute("assignedtasklist", assignedtasklist);
+        map.addAttribute("notassignedtasklist", notassignedtasklist);
 		
 		return jsonview;
 	}

@@ -8,10 +8,8 @@
 <h3>인포메이션</h3>
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 
-<input type=button value="test" id="testbtn1">
-<input type=button value="test" id="testbtn2">
-<input type=button value="test" id="testbtn3">
-<input type=button value="도넛데이터 get" id="testbtn4">
+<input type=button value="테스트버튼" id="testbtn1">
+<input type=button value="기능작성중" id="testbtn3">
 <input type=button value="완/미완 스텝명들 get" id="testbtn5">
 <input type=button value="sid별 task들" id="testbtn6">
 <input type=button value="같은 프로젝트 멤버들 mid get" id="testbtn7">
