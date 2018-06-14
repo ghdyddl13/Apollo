@@ -68,9 +68,7 @@ $(function() {
 	});
 	
 });
-
-var RegexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i; //이메일 유효성검사
-
+var Regexpwd = ^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$;
 	function sendit() {
 		if ($("#mid").val()== "") {
             alert("아이디를 입력하지 않았습니다.");
@@ -95,17 +93,12 @@ var RegexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i; //이메일
             $("#mname").focus();
             return false;
         }
-		if ( !RegexEmail.test($.trim($("#mid").val())) ){
-			alert("이메일 형식이 아닙니다.");
-			$("#email").focus();
+		if ( !Regexpwd.test($.trim($("#pwd").val())) ){
+			alert("비밀번호 형식이 잘못되었습니다.");
+			$("#pwd").focus();
 			return false;
 
 		}
-		if ($("#pwd").val().length < 8) {
-            alert("비밀번호를 8자리 이상입력해주세요.");
-            $("#pwd").focus();
-            return false;
-        }
 
 		$("#f").submit();
 	}

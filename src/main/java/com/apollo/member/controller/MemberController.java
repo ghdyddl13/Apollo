@@ -17,7 +17,8 @@ import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -45,13 +46,15 @@ public class MemberController {
 	@Autowired
 	private VelocityEngine velocityEngine;
 	
+	HttpSession session;
+	
 	@RequestMapping("/index.htm")
 	public String index() {
 		System.out.println("login");
 		return "login";
 	}
 	
-	@RequestMapping(value = "midcheck.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/midcheck.htm", method = RequestMethod.POST)
 	public View midCheck(String mid, Model model) {
 		System.out.println("아이디 체크");
 		int result = service.midcheck(mid);
@@ -67,7 +70,7 @@ public class MemberController {
 
 	}
 	
-	@RequestMapping(value = "keycheck.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/keycheck.htm", method = RequestMethod.POST)
 	public View keyCheck(String apollokey, Model model) {
 		System.out.println("키 체크");
 		int result = service.keycheck(apollokey);
@@ -81,13 +84,13 @@ public class MemberController {
 		return jsonview;
 	}
 
-	@RequestMapping(value="join.htm",method=RequestMethod.GET)
+	@RequestMapping(value="/join.htm",method=RequestMethod.GET)
 	public String memberInsert() {
 		System.out.println("join(get)");
 		return "join";
 	}
 	
-	@RequestMapping(value="join.htm",method=RequestMethod.POST)
+	@RequestMapping(value="/join.htm",method=RequestMethod.POST)
 	public String memberInsert(MemberDTO memberdto, Model model) {
 		int result = 0;
 		String viewpage="";
@@ -104,11 +107,17 @@ public class MemberController {
 		}
 		
 		return viewpage; //주의 (website/index.htm
-	}
-
+	}	
 	
-	@RequestMapping(value="login.htm",method=RequestMethod.POST)
-	public String login(String mid, String pwd, Model model) {
+	@RequestMapping(value="/login.htm",method=RequestMethod.GET)
+	public String login() {
+		System.out.println("login");
+		return "login";
+	}
+	
+	
+	@RequestMapping(value="/login.htm",method=RequestMethod.POST)
+	public String login(String mid, String pwd, Model model,HttpSession session) {
 		System.out.println("로그인처리");
 		String result="";
 		String msg = "";
@@ -120,7 +129,9 @@ public class MemberController {
 		}else {
 			if(bCryptPasswordEncoder.matches(pwd, securitypwd)) {
 			    System.out.println("비밀번호 일치");
-			    result = "redirect:/information.htm";
+			    
+			    session.setAttribute("mid", mid);
+			    result = "main";
 			}else { 
 			    System.out.println("비밀번호 불일치");
 			    msg="비밀번호가 일치하지 않습니다.";
@@ -132,11 +143,17 @@ public class MemberController {
 		return result;
 	}
 	
+	@RequestMapping("/logout.htm")
+	public String logout(HttpSession session) {
+		 session.invalidate();
+	     return "login";
+	
+	}
+	
 
-	@RequestMapping(value = "apollokey.htm", method = RequestMethod.POST)
-	public String createApollokey(AuthkeyDTO authkeydto, HttpServletRequest request) {
+	@RequestMapping(value = "/apollokey.htm", method = RequestMethod.POST)
+	public String createApollokey(AuthkeyDTO authkeydto) {
 		MimeMessage message = javaMailSender.createMimeMessage();
-		// String baseUrl = request.getServletContext().getRealPath("/");
 
 		try {
 			MimeMessageHelper messageHelper1 = new MimeMessageHelper(message, true, "utf-8"); // true로 해야 첨부파일 추가 가능
@@ -202,7 +219,7 @@ public class MemberController {
 	 작성자명 : 이 창 훈
 	 * 
 	 */
-	@RequestMapping(value = "findpwd.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/findpwd.htm", method = RequestMethod.POST)
 	public View findpwd(MemberDTO memberdto, Model model){
 		System.out.println(memberdto.getMid()+"-----------");
 		String result = service.findpwdidcheck(memberdto.getMid());

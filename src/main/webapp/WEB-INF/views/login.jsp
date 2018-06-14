@@ -99,7 +99,6 @@
 
 				<!-- 구매 취소 부분  -->
 				<input id="login_btn" type="button" onclick="login()" class="btn btn-block login-btn" value="로그인"> 
-				<a href="login.htm">로그인</a><br> 
 				<input type="button" class="btn btn-block buy-license-btn" value="구매하기" data-toggle="modal" data-target="#myModal"><br>
 				<!-- 비밀번호 ,회원가입 페이지 링크 -->
 				<p class="p-color">
