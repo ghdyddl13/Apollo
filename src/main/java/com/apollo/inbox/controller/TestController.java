@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TestController {
 	
-	@RequestMapping("/index.htm")
+	/*@RequestMapping("/index.htm")
 	public String main() {
 		return "login";
 	}
@@ -19,7 +19,7 @@ public class TestController {
 	@RequestMapping("/login.htm")
 	public String login() {
 		return "main";
-	}
+	}*/
 	
 	@RequestMapping("/file.htm")
 	public String projectFilelist() {

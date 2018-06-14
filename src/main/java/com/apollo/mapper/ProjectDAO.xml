@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.project.dao.ProjectDAO">
+
 	<insert id="insertProject" parameterType="com.apollo.vo.ProjectDTO">
 		insert into project(pid, pname, sday, eday, methodologyid, mid, pstatuscode, stmtime, detail)
 		values(seq_pid.nextval, '${pname}', '${sday}', '${eday}', '${methodologyid}', '${mid}', 1, sysdate, '${detail}')
@@ -16,5 +17,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteProject">
 		delete project where PID=#{PID}
 	</delete>
-	
+
 </mapper>
