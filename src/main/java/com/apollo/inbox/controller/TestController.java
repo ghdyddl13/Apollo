@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TestController {
 	
-	@RequestMapping("/index.htm")
+	/*@RequestMapping("/index.htm")
 	public String main() {
 		System.out.println("login");
 		return "login";
@@ -20,7 +20,7 @@ public class TestController {
 	@RequestMapping("/login.htm")
 	public String login() {
 		return "main";
-	}
+	}*/
 	
 	@RequestMapping("/files.htm")
 	public String projectFilelist() {

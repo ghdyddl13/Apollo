@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
+=======
+<?xml version="1.0" encoding="UTF-8" ?>
+>>>>>>> feature/yy2
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.member.dao.MemberDAO">
 
+<<<<<<< HEAD
     <select id="getProjectMemberlist" parameterType="String" resultType="com.apollo.vo.MemberDTO">
     select * from pmember where pid = #{pid}
     </select>
@@ -13,4 +18,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
 
+=======
+<insert id="insertMember" parameterType="com.apollo.vo.MemberDTO">
+		insert into member(mid, mname, pwd, rday, pnum, deptname, apollokey, position)
+		values(#{mid}, #{mname}, #{pwd}, sysdate, #{pnum}, #{deptname}, #{apollokey}, #{position})
+</insert>
+<select id="getlogin" resultType="String">
+		select pwd from member where mid=#{mid}
+</select>
+
+<select id="midcheck" resultType="int">
+		select count(*) from member where mid = #{mid}
+</select>
+ <update id="findpwd" parameterType="com.apollo.vo.MemberDTO">
+  		update member set pwd=#{pwd} where mid=#{mid}
+ </update> 
+ <select id="findpwdidcheck" resultType="String">
+		select mname from member where mid=#{mid}
+</select>
+>>>>>>> feature/yy2
 </mapper>

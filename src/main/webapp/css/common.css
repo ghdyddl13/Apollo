@@ -12,10 +12,14 @@ html, body{
 #main-box{
     padding-left: 250px;
     height: calc(100% - 50px);
+<<<<<<< HEAD
 }
 .navbar{
 	border: 0px;
 	margin-bottom: 0px;
+=======
+    margin-top: 50px
+>>>>>>> feature/yy2
 }
 .navbar.inside-header{
    background-color: #f4faff;
