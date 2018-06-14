@@ -13,22 +13,8 @@ html, body{
 #main-box{
     padding-left: 250px;
     height: calc(100% - 50px);
-<<<<<<< HEAD
-<<<<<<< HEAD
+	margin-top: 50px
 }
-.navbar{
-	border: 0px;
-	margin-bottom: 0px;
-=======
-    margin-top: 50px
->>>>>>> feature/yy2
-}
-=======
-    margin-top: 50px
-
-}
-
->>>>>>> 06ffad74364a14508020d3850774fb6d9ca45b03
 .navbar.inside-header{
    background-color: #f4faff;
    color:black;
