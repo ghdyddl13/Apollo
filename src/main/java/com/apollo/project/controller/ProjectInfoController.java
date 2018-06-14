@@ -29,11 +29,13 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
+
 	public String projectInfoShow(String pid, Model map) {
 		
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
 		map.addAttribute("steplist", steplist);
+
 		
 		return "project/information";
 	}

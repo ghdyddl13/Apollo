@@ -10,7 +10,10 @@ public class ExInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		System.out.println("afterHandle");
+
+		System.out.println("afterCompletion");
+
+
 	}
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv)
@@ -22,12 +25,14 @@ public class ExInterceptor implements HandlerInterceptor {
 			throws Exception {
 		System.out.println("preHandle");
 		System.out.println(">" + request.getSession().getAttribute("mid") + "<");
-		boolean result = false;
+		boolean result = true;
 		
 		if (request.getSession().getAttribute("mid") == null) {
 			System.out.println("야호");
 			response.sendRedirect(request.getContextPath() + "/index.htm");
-			result = true;
+
+			result = false;
+
 		}
 
 		return result;

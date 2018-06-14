@@ -15,18 +15,18 @@ function getGanttItems(sid) {
 		async:false,
 		dataType : "json",
 		success : function(data) {
-			console.log(data);
 			tasks = data;
-			console.log(tasks);
 		},
 		
-	})
+	});
 	return tasks;
 };
 
 /**
  * 
- * 날 짜 : 2018. 6. 12. 기 능 : 타임라인 간트차트 생성 작성자명 : 박 민 식
+ * 날 짜 : 2018. 6. 12.
+ * 기 능 : 타임라인 간트차트 생성 
+ * 작성자명 : 박 민 식
  */
 function makeTimeline(tasks) {
 	console.log(tasks)

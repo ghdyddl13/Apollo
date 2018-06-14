@@ -1,7 +1,12 @@
 package com.apollo.inbox.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.apollo.step.service.StepListService;
 
 @Controller
 public class TestController {
@@ -60,8 +65,14 @@ public class TestController {
     }
     
     @RequestMapping("/list.htm")
-    public String list() {
-        System.out.println("list"); 
+    public String list(int sid, HttpServletRequest request) {
+       
+    	System.out.println(sid);
+    	
+        StepListService service = new StepListService();
+        int pid = service.getProjectIdByStepId(sid);
+        request.getSession().setAttribute("sid", sid);
+        request.getSession().setAttribute("pid", pid);
         
         return "step/list";
     }
