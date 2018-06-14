@@ -118,10 +118,8 @@ $(function() {
 
 		        	   
 		           }
-		        }
-		     );// end-ajax
-	});
-	
+		        });// end-ajax
+		  });
 	
 	// 해당 프로젝트의 task들 불러와서 마감일 기준으로 donutChart 형성
 	$('#testbtn3').click(function(){
@@ -210,9 +208,8 @@ $(function() {
 		            		   	*/ 
 		            		   		
 		            		   } // assignedtasklist .each 반복종료
-		            		   
-		            	   });
-								
+		            	 
+		            	   });		
 		           }
 		        }
 		     );// end-ajax
@@ -259,8 +256,7 @@ $(function() {
 	                  }
 	            }
 	      }
-	    });
-	    
+	    });    
 	});
 	
 	/*

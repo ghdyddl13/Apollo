@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.View;
 
 import com.apollo.project.service.ProjectInfoService;
 import com.apollo.vo.MemberDTO;
@@ -21,6 +20,8 @@ public class ProjectInfoController {
 	@Autowired
 	private View jsonview;
 	
+	@Autowired
+	private ProjectInfoService projectinfoservice;
 	/**
 	 * 
 	 날      짜 : 2018. 6. 13.
