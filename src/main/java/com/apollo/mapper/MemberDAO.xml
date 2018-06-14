@@ -4,12 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.member.dao.MemberDAO">
     <select id="getProjectMemberlist" parameterType="String" resultType="com.apollo.vo.MemberDTO">
-    select * from pmember where pid = #{pid}
+    select * from member where mid in (select mid from pmember where pid = #{pid})
     </select>
-
-    <select id="getMemberlist" parameterType="String" resultType="com.apollo.vo.MemberDTO">
-    select * from pmember where pid = #{pid}
-    </select>
+<<<<<<< HEAD
 
 <insert id="insertMember" parameterType="com.apollo.vo.MemberDTO">
 		insert into member(mid, mname, pwd, rday, pnum, deptname, apollokey, position)
@@ -28,4 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <select id="findpwdidcheck" resultType="String">
 		select mname from member where mid=#{mid}
 </select>
+=======
+    
+>>>>>>> 06ffad74364a14508020d3850774fb6d9ca45b03
 </mapper>

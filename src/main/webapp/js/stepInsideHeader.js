@@ -8,7 +8,7 @@ $(function() {
 			url:"list.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
+			
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				
@@ -24,7 +24,7 @@ $(function() {
 			url:"board.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
+		
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				
@@ -36,13 +36,16 @@ $(function() {
 	// 스텝 timeline 페이지
 	$("#timeline-page").click(function(evt){
 		$.ajax({
-			url:"timeline.htm",
+			url:"step/timeline.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
+				
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				
+				var tasks = getGanttItems(3);
+				makeTimeline(tasks);
+				console.log(tasks);
 			}
 		})
 	})
@@ -53,7 +56,7 @@ $(function() {
 			url:"workload.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
+			
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				

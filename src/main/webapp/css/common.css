@@ -3,6 +3,7 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 /* 폰트 */
 html, body{
+
   font-family: 'Noto Sans KR';
   margin:0;
   padding:0;
@@ -13,6 +14,7 @@ html, body{
     padding-left: 250px;
     height: calc(100% - 50px);
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 .navbar{
 	border: 0px;
@@ -21,6 +23,12 @@ html, body{
     margin-top: 50px
 >>>>>>> feature/yy2
 }
+=======
+    margin-top: 50px
+
+}
+
+>>>>>>> 06ffad74364a14508020d3850774fb6d9ca45b03
 .navbar.inside-header{
    background-color: #f4faff;
    color:black;
