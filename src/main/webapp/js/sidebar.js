@@ -112,9 +112,12 @@ $(function() {
 	
 		
 		$(".side-step").click(function(evt){
-			console.log("test")
+			
+			console.log(evt.target.id);
+			console.log("여기")
 			$.ajax({
 				url:"list.htm",
+				data:{sid:evt.target.id},
 				dataType:"html",
 				success:function(data){
 					console.log(data);

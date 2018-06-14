@@ -23,6 +23,9 @@ public class ProjectInfoController {
 	
 	@RequestMapping("/information.htm")
 	public String projectInfoShow(String s1) {
+		
+		
+		
 		return "project/information";
 	}
 	

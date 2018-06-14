@@ -21,7 +21,7 @@
 					<a class="side-folder" ><span data-toggle="collapse" data-target="#folder1"
 						class="glyphicon glyphicon-folder-close"></span>Folder1</a>
 					<div class="side-dir collapse" id="folder1">
-						<a class="side-step step1"><span
+						<a id="3" class="side-step step1"><span
 							class="glyphicon glyphicon glyphicon-list-alt"></span>Step1</a>
 					</div>
 					<a class="side-step"><span

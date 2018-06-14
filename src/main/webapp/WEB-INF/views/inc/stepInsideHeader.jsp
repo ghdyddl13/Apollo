@@ -5,6 +5,7 @@
 <script type="text/javascript" src="js/stepInsideHeader.js"></script>
 <nav class="navbar inside-header inside-header-step">
    <div class="container-fluid">
+   	  <input id ="current-sid" type ="hidden" value=<%=session.getAttribute("sid")%> >
       <ul class="nav navbar-nav">
          <li class="nav-item"><a id ="list-page" class="nav-link header-menu">List</a></li>
          <li class="nav-item"><a id ="board-page" class="nav-link header-menu">Board</a></li>

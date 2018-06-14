@@ -8,4 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     select * from step where pid = #{pid}
     </select>
 
+	<select id ="getProjectIdByStepId" parameterType="Integer"> 
+	  select pid from step where sid=#{sid}
+	</select>
 </mapper>

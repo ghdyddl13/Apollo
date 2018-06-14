@@ -2,8 +2,11 @@ $(function() {
 	
 	/// step list 페이지
 	$("#list-page").click(function(evt){
+		var sid = $("#current-sid").val();
+		
 		$.ajax({
 			url:"list.htm",
+			data:{sid:sid},
 			dataType:"html",
 			success:function(data){
 			
