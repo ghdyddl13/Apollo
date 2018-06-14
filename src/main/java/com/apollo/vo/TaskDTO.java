@@ -11,7 +11,7 @@ public class TaskDTO {
 	private int pid;
 	private int importance;
 	private Date ctime;
-	private int statusid;
+	private int tstatusid;
 	public int getTid() {
 		return tid;
 	}
@@ -60,11 +60,11 @@ public class TaskDTO {
 	public void setCtime(Date ctime) {
 		this.ctime = ctime;
 	}
-	public int getStatusid() {
-		return statusid;
+	public int getTstatusid() {
+		return tstatusid;
 	}
-	public void setStatusid(int statusid) {
-		this.statusid = statusid;
+	public void setTstatusid(int tstatusid) {
+		this.tstatusid = tstatusid;
 	}
 	
 	

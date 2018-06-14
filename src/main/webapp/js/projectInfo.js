@@ -1,13 +1,5 @@
 $(function() {
 	
-	/* 나중에 지울 것
-	 * 지금 버튼식으로 되어 있는데 다 빼서
-	 * 로드되자마자 뿌릴 수 있도록 한다
-	 * 잊지 않기 위해서 alert 작성
-	 */
-	alert('로드되자마자 데이터 뿌리기');
-
-	
 	/*
 	 날      짜 : 2018. 6. 13.
 	 기      능 : 서버시각 추출을 위한 함수 / 호출 형식은 YYYYMMDDHHMMSS / 활용 예시 : var nowdate = serverToday();
@@ -47,222 +39,275 @@ $(function() {
 		  } 
 		  curDateFmt = parseInt(year + "" + month + "" + day + "" + hours + "" + minutes); 
 		  return curDateFmt; 
-		}
+		} // end - serverToday()
 	
 	
 	/*
-	 날      짜 : 2018. 6. 13.
-	 기      능 : donut Chart의 데이터를 불러오고 이에 맞게 분류하기 위한 함수
+	 날      짜 : 2018. 6. 14.
+	 기      능 : donut Chart의 데이터를 불러오고 이에 맞게 분류하고 donut Chart 형성
 	 작성자명 : 김 정 권
 	 */
-	function donutChartSetting(){
-		
-		// 마감기한별로 구분된 라벨을 배열로 선언
-		// 후에 반복을 돌면서 맞는 배열에 데이터를 넣는다
-		var unassigned = [];
-		var nextweek = [];
-		var thisweek = [];
-		var completed = [];
-		var expired = [];
-		
-		// 서버시각 추출
-		var nowtime = serverToday();
-		nowtime = nowtime.toString();
-		var year = nowtime.substring(0,4);
-		var month = nowtime.substring(4,6); 
-		var day = nowtime.substring(6,8);
-		
-	    // 오늘에 해당하는 요일의 숫자값을 반환
-		// 일, 월, 화 ... ,토 = 0, 1, 2 ... ,6
-	    var today = new Date(year+'-'+month+'-'+day).getDay();
-		
-		// pid를 1로 가정하고 시행
-		// 이 부분은 나중에 사이드바에서 가져온 pid로 변경한다
-		var pid = 1;
-		
-		// DB로 Task들을 호출
-		// 위에서 선언한 배열에 데이터들을 넣기 위함
-		$.ajax(
-		        {
-		           type : "post",
-		           url  : "donutChart.htm",
-		           data : "pid="+pid,
-		           success : function(rdata){
-		               
-		            	   $(rdata.tasklist).each(function(index, el) {
-		            			
-		            		    nowtime = nowtime.toString();
-		            			var year = nowtime.substring(0,4);
-		            			var month = nowtime.substring(4,6); 
-		            			var day = nowtime.substring(6,8);
-		            		   
-		            		   
-		            	   });
-		           }
-		        }
-		     );// end-ajax
-		
-	} // end - donutChartSetting
 	
+	// 마감기한별로 구분된 라벨을 배열로 선언
+	// 후에 반복을 돌면서 맞는 배열에 데이터를 넣는다
+	var unassigned = [];
+	var nextweek = [];
+	var thisweek = [];
+	var completed = [];
+	var expired = [];
 	
-	$('#testbtn1').click(function(){ 
-		var pid = 1;
-		$.ajax(
-		        {
-		           type : "post",
-		           url  : "donutChart.htm",
-		           data : "pid="+pid,
-		           success : function(rdata){
-		        	   console.log(rdata);
-		        	   $(rdata.assignedtasklist).each(function(index, el) {
-
+	// 서버시각 추출
+	var nowtime = serverToday();
+	nowtime = nowtime.toString();
+	var now_year = parseInt(nowtime.substring(0,4));
+	var now_month = parseInt(nowtime.substring(4,6)); 
+	var now_day = parseInt(nowtime.substring(6,8));
+	
+    // 오늘에 해당하는 요일의 숫자값을 반환
+	// 일, 월, 화 ... ,토 = 0, 1, 2 ... ,6
+    var today = new Date(now_year+'-'+now_month+'-'+now_day).getDay();
+	
+	// pid를 1로 가정하고 시행
+	// 이 부분은 나중에 사이드바에서 가져온 pid로 변경한다
+	var pid = 1;
+	
+	// DB로 Task들을 호출
+	// 위에서 선언한 배열에 데이터들을 넣기 위함
+	$.ajax(
+	        {
+	           type : "post",
+	           url  : "donutChart.htm",
+	           data : "pid="+pid,
+	           success : function(rdata){
+	        	   	   
+	        	   	   // 할당되지 않은 테스크의 tid를 배열에 넣기
+		        	   $(rdata.unassignedtasklist).each(function(index, el) {
+		        		   		unassigned.push(el.tid);
+	            		});
+	      
 		        	   
-		           }
-		        }
-		     );// end-ajax
+		        	   // 할당된 테스크 반복돌며 기한 지난 테스크의 tid를 배열에 넣기
+	            	   $(rdata.assignedtasklist).each(function(index, el) {
+	            		   
+	            		    // 종료일을 year, month, day 기준으로 분할
+	            		    eday = el.eday.toString();
+	            			var eday_year = parseInt(eday.substring(0,4));
+	            			var eday_month = parseInt(eday.substring(5,7)); 
+	            			var eday_day = parseInt(eday.substring(8,10));
+	            			
+	            			console.log('--------------------')
+	            			console.log('eday : ' + eday)
+	            			console.log('eday_year : ' + eday_year)
+	            			console.log('eday_month : ' + eday_month)
+	            			console.log('eday_day : ' + eday_day)
+	            			console.log('tid : ' + el.tid)
+	            			console.log('tstatusid : ' + el.tstatusid)
+	            			
+	            		    // 완료 상태인 경우
+	            		    if((el.tstatusid == 3)||(el.tstatusid == 11)||(el.tstatusid == 15)){
+	            		    	completed.push(el.tid);
+
+	            		    	// 완료가 되었을 경우에는 마감 기한에 따라 배열에 넣지 않고
+	            		    	// continue 기능을 하는 return true
+	            		    	return true;
+	            		    }
+	            		    
+	            		    // 작업 기한이 만료된 경우 
+	            			// 년도상 과거가 만료일
+	            		    else if(eday_year < now_year){
+	            		    	expired.push(el.tid);
+        		    			return true;
+	            		    }
+	            			
+	            			// 년도상 미래가 만료일
+	            		    else if(eday_year > now_year){
+	            		    	nextweek.push(el.tid);
+        		    			return true;
+	            		    }
+	            			
+	            			// else1
+	            			// 년도상 같은 년도
+	            		    else {
+	            		    	
+	            		    	// 같은 년도, 과거 달
+	            		    	if(eday_month < now_month){
+	            		    		expired.push(el.tid);
+            		    			return true;
+	            		    	}
+	            		    	// 같은 년도, 미래 달
+	            		    	else if(eday_month > now_month){
+	            		    		nextweek.push(el.tid);
+            		    			return true;
+	            		    	}
+	            		    	
+	            		    	// else2
+	            		    	// 같은 년도, 같은 달
+	            		    	else {
+
+	            		    		var daygap = eday_day - now_day;
+	            		    		
+            		    			console.log('today :' + today)
+            		    			console.log('daygap :' + daygap)
+	            		    		
+	            		    		// 같은 년도, 같은 달, 과거 일
+	            		    		if(daygap < 0) {
+	            		    			expired.push(el.tid);
+            		    				////////////////////////////////////////////////////
+            		    				console.log('nextweek.length : ' + nextweek.length)
+            		    				console.log('thisweek.length : ' + thisweek.length)
+            		    				console.log('expired.length : ' + expired.length)
+           		       				 	////////////////////////////////////////////////////
+	            		    			return true;
+	            		    		}
+	            		    		
+	            		    		// else3
+	            		    		// 같은 년도, 같은 달, 같은 일 혹은 미래 일
+	            		    		else {
+	            		    			
+	            		    			if((today == 0) && (daygap <= 6)){
+	            		    				thisweek.push(el.tid);
+	            		    				////////////////////////////////////////////////////
+	            		    				console.log('nextweek.length : ' + nextweek.length)
+	            		    				console.log('thisweek.length : ' + thisweek.length)
+	            		    				console.log('expired.length : ' + expired.length)
+	           		       				 	////////////////////////////////////////////////////
+		            		    			return true;
+	            		    			} else if((today == 1) && (daygap <= 5)){
+	            		    				thisweek.push(el.tid);
+	            		    				////////////////////////////////////////////////////
+	            		    				console.log('nextweek.length : ' + nextweek.length)
+	            		    				console.log('thisweek.length : ' + thisweek.length)
+	            		    				console.log('expired.length : ' + expired.length)
+	           		       				 	////////////////////////////////////////////////////
+		            		    			return true;
+	            		    			} else if((today == 2) && (daygap <= 4)){
+	            		    				thisweek.push(el.tid);
+	            		    				////////////////////////////////////////////////////
+	            		    				console.log('nextweek.length : ' + nextweek.length)
+	            		    				console.log('thisweek.length : ' + thisweek.length)
+	            		    				console.log('expired.length : ' + expired.length)
+	           		       				 	////////////////////////////////////////////////////
+		            		    			return true;
+	            		    			} else if((today == 3) && (daygap <= 3)){
+	            		    				thisweek.push(el.tid);
+	            		    				////////////////////////////////////////////////////
+	            		    				console.log('nextweek.length : ' + nextweek.length)
+	            		    				console.log('thisweek.length : ' + thisweek.length)
+	            		    				console.log('expired.length : ' + expired.length)
+	           		       				 	////////////////////////////////////////////////////
+		            		    			return true;
+	            		    			} else if((today == 4) && (daygap <= 2)){
+	            		    				thisweek.push(el.tid);
+	            		    				////////////////////////////////////////////////////
+	            		    				console.log('nextweek.length : ' + nextweek.length)
+	            		    				console.log('thisweek.length : ' + thisweek.length)
+	            		    				console.log('expired.length : ' + expired.length)
+	           		       				 	////////////////////////////////////////////////////
+		            		    			return true;
+	            		    			} else if((today == 5) && (daygap <= 1)){
+	            		    				thisweek.push(el.tid);
+	            		    				////////////////////////////////////////////////////
+	            		    				console.log('nextweek.length : ' + nextweek.length)
+	            		    				console.log('thisweek.length : ' + thisweek.length)
+	            		    				console.log('expired.length : ' + expired.length)
+	           		       				 	////////////////////////////////////////////////////
+		            		    			return true;
+	            		    			} else if((today == 6) && (daygap == 0)){
+	            		    				thisweek.push(el.tid);
+	            		    				////////////////////////////////////////////////////
+	            		    				console.log('nextweek.length : ' + nextweek.length)
+	            		    				console.log('thisweek.length : ' + thisweek.length)
+	            		    				console.log('expired.length : ' + expired.length)
+	           		       				 	////////////////////////////////////////////////////
+		            		    			return true;
+	            		    			} else {
+	            		    				nextweek.push(el.tid);
+	            		    				////////////////////////////////////////////////////
+	            		    				console.log('nextweek.length : ' + nextweek.length)
+	            		    				console.log('thisweek.length : ' + thisweek.length)
+	            		    				console.log('expired.length : ' + expired.length)
+	           		       				 	////////////////////////////////////////////////////
+		            		    			return true;
+	            		    			} 
+	            		    		
+	            		    		} // end - else3
+	            		    		
+	            		    	} // end - else2
+	            		    	
+	            		    } // end - else1
+	            	   }); // assignedtasklist .each 반복종료
+	            	   
+	            	     ////////////////////////////////////////////////////////////////////
+	            	     console.log('---------------최종개수---------------')
+	                   	 console.log('unassigned.length : ' + unassigned.length)
+	       				 console.log('nextweek.length : ' + nextweek.length)
+	       				 console.log('thisweek.length : ' + thisweek.length)
+	       				 console.log('completed.length : ' + completed.length)
+	       				 console.log('expired.length : ' + expired.length)
+	       				 ////////////////////////////////////////////////////////////////////
+	       				 
+	       				 
+	       				var ctx = document.getElementById('projectinfo_DonutChart').getContext('2d');
+	            	    var myDoughnutChart = new Chart(ctx, {
+	            	     	
+	            	         type: 'doughnut',
+	            	         data: {
+	            	                 datasets: [{
+	            	                     data: [unassigned.length, nextweek.length, thisweek.length, completed.length, expired.length],
+	            	                     backgroundColor: [
+
+	            	                                     'rgba(190, 190, 190, 1)',
+
+	            	                                     'rgba(241, 196, 15, 1)',
+
+	            	                                     'rgba(244, 7, 7, 1)',
+
+	            	                                     'rgba(52, 152, 219, 1)',
+
+	            	                                     'rgba(46, 204, 113, 1)'
+
+	            	                                 ],
+
+	            	                 }],
+
+	            	                 labels:
+	            	            [
+	            	              '미지정','다음주 이후','이번주 까지','완료','기한 만료'
+	            	            ]
+	            	             },
+
+	            	         options: {
+	            	          maintainAspectRatio: false,
+	            	          cutoutPercentage: 50,
+	            	          legend: {
+	            	             display: true,
+	            	             position: 'left',
+	            	             labels: {
+	            	                 fontSize: 12,
+	            	                 fontFamily: 'sans-serif',
+	            	                 fontColor: '#000000',
+	            	                 fontStyle: 'bold'
+	            	                   }
+	            	             }
+	            	       }
+	            	     });
+	       				 
+			} // end-success
+		});// end-ajax
+	
+////////////////////////////////////////////////////////////////////////////////////////////////	
+	$('#testbtn1').click(function(){
+
 	});
 	
-	
-	// 해당 프로젝트의 task들 불러와서 마감일 기준으로 donutChart 형성
 	$('#testbtn3').click(function(){
-   
-		// 마감기한별로 구분된 라벨을 배열로 선언
-		// 후에 반복을 돌면서 맞는 배열에 데이터를 넣는다
-		var unassigned = [];
-		var nextweek = [];
-		var thisweek = [];
-		var completed = [];
-		var expired = [];
-		
-		// 서버시각 추출
-		var nowtime = serverToday();
-		nowtime = nowtime.toString();
-		var now_year = parseInt(nowtime.substring(0,4));
-		var now_month = parseInt(nowtime.substring(4,6)); 
-		var now_day = parseInt(nowtime.substring(6,8));
-		
-	    // 오늘에 해당하는 요일의 숫자값을 반환
-		// 일, 월, 화 ... ,토 = 0, 1, 2 ... ,6
-	    var today = new Date(year+'-'+month+'-'+day).getDay();
-		
-		// pid를 1로 가정하고 시행
-		// 이 부분은 나중에 사이드바에서 가져온 pid로 변경한다
-		var pid = 1;
-		
-		// DB로 Task들을 호출
-		// 위에서 선언한 배열에 데이터들을 넣기 위함
-		$.ajax(
-		        {
-		           type : "post",
-		           url  : "donutChart.htm",
-		           data : "pid="+pid,
-		           success : function(rdata){
-		        	   	   
-		        	   	   console.log(rdata);
-		        	   
-			        	   $(rdata.notassignedtasklist).each(function(index, el) {
-			        		   		unassigned.push(el.tid);
-		            		   });
-		        	   
-		            	   $(rdata.assignedtasklist).each(function(index, el) {
 
-		            		    // 종료일을 year, month, day 기준으로 분할
-		            		    eday = el.eday.toString();
-		            			var eday_year = parseInt(eday.substring(0,4));
-		            			var eday_month = parseInt(eday.substring(5,7)); 
-		            			var eday_day = parseInt(eday.substring(8,10));
-		            		   
-		            		    // 완료 상태인 경우
-		            		    if((el.tstatusid == 3)||(el.tstatusid == 11)||(el.tstatusid == 15)){
-		            		    	completed.push(el.tid);
-
-		            		    	// 완료가 되었을 경우에는 마감 기한에 따라 배열에 넣지 않고
-		            		    	// 끝내기 위해서 continue를 사용
-		            		    	continue;
-		            		    }
-		            		    
-		            		    // 작업 기한이 만료된 경우 
-		            		    else if(eday_year <= now_year){
-
-		            		    	if(eday_month <= now_year){
-		            		    		// 이미 만료일이 지난 경우
-		            		    		if(eday_day < now_day ){
-		            		    			expired.push(el.tid);
-		            		    			continue;
-			            		    		} 
-			            		    	}
-			            		    }
-		            		   		
-		            		    // 누군가에게 할당이 된 테스크 중
-		            		    // 1. 완료 상태가 아니며
-		            		    // 2. 만료 상태가 아닌 모든 테스크
-		            		    else{
-		            		    	
-		            		    }	
-
-		            		    /*
-		            		    	var unassigned = []; // 해결
-									var completed = []; // 해결
-									var expired = []; // 해결
-									
-									var nextweek = [];
-									var thisweek = [];
-		            		   	*/ 
-		            		   		
-		            		   } // assignedtasklist .each 반복종료
-		            		   
-		            	   });
-								
-		           }
-		        }
-		     );// end-ajax
-		
-	    var ctx = document.getElementById('DonutChart').getContext('2d');
-	    var myDoughnutChart = new Chart(ctx, {
-
-	        type: 'doughnut',
-	        data: {
-	                datasets: [{
-	                    data: [10, 20, 30, 20, 50],
-	                    backgroundColor: [
-
-	                                    'rgba(190, 190, 190, 1)',
-
-	                                    'rgba(241, 196, 15, 1)',
-
-	                                    'rgba(244, 7, 7, 1)',
-
-	                                    'rgba(52, 152, 219, 1)',
-
-	                                    'rgba(46, 204, 113, 1)'
-
-	                                ],
-
-	                }],
-
-	                labels:
-	           [
-	             '미지정','다음주 이후','이번주 까지','완료','기한 만료'
-	           ]
-	            },
-
-	        options: {
-	         cutoutPercentage: 50,
-	         legend: {
-	            display: true,
-	            position: 'left',
-	            labels: {
-	                fontSize: 12,
-	                fontFamily: 'sans-serif',
-	                fontColor: '#000000',
-	                fontStyle: 'bold'
-	                  }
-	            }
-	      }
-	    });
-	    
 	});
 	
+	
+}); // end-document.onready
+
+
 	/*
 	$('#testbtn5').click(function(){
 		var pid = 1;
@@ -311,5 +356,4 @@ $(function() {
       ) // end-ajax
         
 	});
-	*/
-});
+	 */

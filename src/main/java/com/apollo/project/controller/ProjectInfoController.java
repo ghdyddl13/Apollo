@@ -47,13 +47,13 @@ public class ProjectInfoController {
 	@RequestMapping("/donutChart.htm")
 	public View donutChart(String pid, ModelMap map) {
 		ArrayList<TaskDTO> assignedtasklist = new ArrayList<TaskDTO>();
-		ArrayList<TaskDTO> notassignedtasklist = new ArrayList<TaskDTO>();
+		ArrayList<TaskDTO> unassignedtasklist = new ArrayList<TaskDTO>();
 		
 		assignedtasklist = projectinfoservice.getAssignedTasks(pid);
-		notassignedtasklist = projectinfoservice.getNotAssignedTasks(pid);
+		unassignedtasklist = projectinfoservice.getNotAssignedTasks(pid);
 		
         map.addAttribute("assignedtasklist", assignedtasklist);
-        map.addAttribute("notassignedtasklist", notassignedtasklist);
+        map.addAttribute("unassignedtasklist", unassignedtasklist);
 		
 		return jsonview;
 	}
