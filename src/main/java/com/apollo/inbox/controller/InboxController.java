@@ -4,7 +4,9 @@ import org.springframework.ui.Model;
 
 public class InboxController {
 
-	public String showIncoming(String s1, Model model) {
+	
+	public String showIncoming(String s1, Model model) 	{
+		
 		return null;
 	}
 	

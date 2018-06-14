@@ -11,9 +11,8 @@ import com.apollo.step.service.StepListService;
 @Controller
 public class TestController {
 	
-	@RequestMapping("/index.htm")
+	/*@RequestMapping("/index.htm")
 	public String main() {
-		System.out.println("login");
 		return "login";
 	}
 	
@@ -25,7 +24,7 @@ public class TestController {
 	@RequestMapping("/login.htm")
 	public String login() {
 		return "main";
-	}
+	}*/
 	
 	@RequestMapping("/file.htm")
 	public String projectFilelist() {

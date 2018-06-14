@@ -1,9 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.project.dao.ProjectDAO">
-
-    
-
+	<insert id="insertProject" parameterType="com.apollo.vo.ProjectDTO">
+		insert into project(pid, pname, sday, eday, methodologyid, mid, pstatuscode, stmtime, detail)
+		values(seq_pid.nextval, '${pname}', '${sday}', '${eday}', '${methodologyid}', '${mid}', 1, sysdate, '${detail}')
+		
+	</insert>
+<!-- 	<update id="updateProject" parameterType="com.apollo.vo.ProjectDTO">
+		update project
+		set PNAME=#{PNAME}, SDAY=TO_DATE(SDAY, 'YYYY-MM-DD HH24:MI:SS'), EDAY=TO_DATE(EDAY, 'YYYY-MM-DD HH24:MI:SS'), STMTIME=TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS'), DETAIL=#{DETAIL}
+		where PID=#{PID}
+	</update>
+	<delete id="deleteProject">
+		delete project where PID=#{PID}
+	</delete> -->
 </mapper>
