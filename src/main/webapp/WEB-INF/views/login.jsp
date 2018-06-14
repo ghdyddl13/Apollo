@@ -18,6 +18,7 @@
 <link href="css/common.css" type="text/css" rel="stylesheet">
 <title>Insert title here</title>
 <script type="text/javascript">
+
 	$(function() {
 		var msg = "${msg}";
 		if (msg != "") {
