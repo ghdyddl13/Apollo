@@ -1,5 +1,4 @@
 $(function() {
-<<<<<<< HEAD
    /* 나중에 지울 것
     * 지금 버튼식으로 되어 있는데 다 빼서
     * 로드되자마자 뿌릴 수 있도록 한다
@@ -581,7 +580,6 @@ $(function() {
 		var pid = 1;
 		
 		$.ajax(
->>>>>>> feature/projectinfo_jk
         {
            type : "post",
            url  : "getSteps.htm",
@@ -624,10 +622,5 @@ $(function() {
         } 
       ) // end-ajax
         
-<<<<<<< HEAD
    });
     */
-=======
-	});
-	 */
->>>>>>> feature/projectinfo_jk
