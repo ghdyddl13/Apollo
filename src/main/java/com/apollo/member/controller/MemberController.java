@@ -48,12 +48,24 @@ public class MemberController {
 	
 	HttpSession session;
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 14.
+	 기      능 : 로그인 페이지로가는 index컨트롤러 
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping("/index.htm")
 	public String index() {
 		System.out.println("login");
 		return "login";
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 14.
+	 기      능 : 회원가입에서 아이디 중복체크 확인 
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping(value = "/midcheck.htm", method = RequestMethod.POST)
 	public View midCheck(String mid, Model model) {
 		System.out.println("아이디 체크");
@@ -69,7 +81,12 @@ public class MemberController {
 		return jsonview;
 
 	}
-	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 14.
+	 기      능 : 회원가입에서 인증키 확인 
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping(value = "/keycheck.htm", method = RequestMethod.POST)
 	public View keyCheck(String apollokey, Model model) {
 		System.out.println("키 체크");
@@ -83,13 +100,24 @@ public class MemberController {
 		}
 		return jsonview;
 	}
-
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 14.
+	 기      능 : 회원가입 페이지로 이동
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping(value="/join.htm",method=RequestMethod.GET)
 	public String memberInsert() {
 		System.out.println("join(get)");
 		return "join";
 	}
 	
+	/**
+	 날      짜 : 2018. 6. 14.
+	 기      능 : 회원가입 
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping(value="/join.htm",method=RequestMethod.POST)
 	public String memberInsert(MemberDTO memberdto, Model model) {
 		int result = 0;
@@ -109,13 +137,22 @@ public class MemberController {
 		return viewpage; //주의 (website/index.htm
 	}	
 	
+	/**
+	 날      짜 : 2018. 6. 14.
+	 기      능 : 로그인 페이지로 이동 (현재는 index.htm와 같다.. main페이지 생기면  index.htm수정)
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping(value="/login.htm",method=RequestMethod.GET)
 	public String login() {
 		System.out.println("login");
 		return "login";
 	}
 	
-	
+	/**
+	 날      짜 : 2018. 6. 14.
+	 기      능 : 로그인  
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping(value="/login.htm",method=RequestMethod.POST)
 	public String login(String mid, String pwd, Model model,HttpSession session) {
 		System.out.println("로그인처리");
@@ -143,6 +180,11 @@ public class MemberController {
 		return result;
 	}
 	
+	/**
+	 날      짜 : 2018. 6. 14.
+	 기      능 : 로그아웃
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping("/logout.htm")
 	public String logout(HttpSession session) {
 		 session.invalidate();
@@ -150,7 +192,11 @@ public class MemberController {
 	
 	}
 	
-
+	/**
+	 날      짜 : 2018. 6. 14.
+	 기      능 : 구매하기
+	 작성자명 : 이 창 훈
+	 */
 	@RequestMapping(value = "/apollokey.htm", method = RequestMethod.POST)
 	public String createApollokey(AuthkeyDTO authkeydto) {
 		MimeMessage message = javaMailSender.createMimeMessage();
