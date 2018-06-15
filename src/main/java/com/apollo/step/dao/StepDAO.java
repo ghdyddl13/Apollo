@@ -2,6 +2,7 @@ package com.apollo.step.dao;
 
 import java.util.ArrayList;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.TstatusDTO;
 
 
 public interface StepDAO {
@@ -27,4 +28,14 @@ public interface StepDAO {
 	 작성자명 : 김 래 영
 	 */
 	public int insertStep(StepDTO stepdto);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 15.
+	 기      능 : sid 받아서 해당 step에 들어있는 task 목록을 board에 가져옴
+	 작성자명 : 이 창 훈
+	 */
+	public ArrayList<TstatusDTO> selectBoardTstatus(int sid);
+
+
 }
