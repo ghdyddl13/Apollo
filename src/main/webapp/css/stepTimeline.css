@@ -16,8 +16,9 @@
 
 .table-responsive.step-timeline-table tbody>tr {
 	height: 38px;
-	cursor: pointer;
 }
+
+
 
 .gantt-target {
 	height: 100%

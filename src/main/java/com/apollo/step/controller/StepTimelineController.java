@@ -13,9 +13,9 @@ import com.apollo.vo.TaskDTO;
 
 /**
  * 
-  Ε¬·΅½ΊΈν : StepTimelineController
-  ³―      Β¥ : 2018. 6. 12.
-  ΐΫΌΊΐΪΈν : ΉΪ ΉΞ ½Δ
+  ν΄λμ¤λª… : StepTimelineController
+  λ‚       μ§ : 2018. 6. 15.
+  μ‘μ„±μλª… : λ°• λ―Ό μ‹
  */
 @Controller
 @RequestMapping("/step")
@@ -41,8 +41,11 @@ public class StepTimelineController {
 			tasks = steptimelineservice.getTasksByStepId(sid);
 			model.addAttribute("tasks", tasks);
 		} catch (Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}
+		
+		
+		
 		
 		return jsonview;
 	}

@@ -11,23 +11,18 @@ public class ExInterceptor implements HandlerInterceptor {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 
-		System.out.println("afterCompletion");
 
 	}
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv)
 			throws Exception {
-		System.out.println("postHandle");
 	}
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("preHandle");
-		System.out.println(">" + request.getSession().getAttribute("mid") + "<");
 		boolean result = true;
 		
 		if (request.getSession().getAttribute("mid") == null) {
-			System.out.println("야호");
 			response.sendRedirect(request.getContextPath() + "/index.htm");
 			result = false;
 
