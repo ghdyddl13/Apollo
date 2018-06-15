@@ -12,7 +12,8 @@ html, body{
 #main-box{
     padding-left: 250px;
     height: calc(100% - 50px);
-    margin-top: 50px
+    margin-top: 50px;
+    overflow: hidden;
 }
 
 .navbar.inside-header{

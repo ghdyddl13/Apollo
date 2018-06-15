@@ -120,7 +120,7 @@ public class MemberController {
 		}else {
 			if(bCryptPasswordEncoder.matches(pwd, securitypwd)) {
 			    System.out.println("비밀번호 일치");
-			    result = "redirect:/information.htm";
+			    result = "main";
 			}else { 
 			    System.out.println("비밀번호 불일치");
 			    msg="비밀번호가 일치하지 않습니다.";
