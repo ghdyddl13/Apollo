@@ -6,11 +6,11 @@ $(function() {
 						function(event) {
 							event.preventDefault();
 							var dropdown_ul = document.createElement("ul");
-							var dropdown = '<li class="dropdown-submenu" ><p data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></p>'
+							var dropdown = '<li class="dropdown-submenu"><p data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></p>'
 							dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li data-toggle="modal" data-target="#add-step">Step추가</li></ul></li>'
 							dropdown += '<li data-action="second">완료</li>'
-							dropdown += '<li data-action="third">수정</li>'
-							dropdown += '<li data-action="fourth">삭제</li>'
+							dropdown += '<li data-action="third" data-toggle="modal" data-target="#update-project">수정</li>'
+							dropdown += '<li data-action="fourth" data-toggle="modal" data-target="#delete-project">삭제</li>'
 
 							$(dropdown_ul).attr("class", "custom-menu").append(
 									dropdown);
@@ -19,7 +19,6 @@ $(function() {
 								top : event.pageY + "px",
 								left : event.pageX + "px"
 							}).appendTo("body");
-
 						});
 
 		// 사이드바 폴더 우클릭  >> 추후 폴더 id(DB상 기본키)를 받아와 li 태그에 넣어주는 작업 필요
@@ -65,27 +64,37 @@ $(function() {
 				$(".custom-menu").hide(100);
 			}
 		});
-		
-	/*$(".date").datepicker({
-			showOn : "button",
-			buttonImage : "img/calendar.png",
-			buttonImageOnly : true,
-			buttonText : "Select date"
-
-		});*/
+	
+/*	$(".step1").click(function(event) {
+		console.log(event.target.Id);
+		$.ajax(
+			{
+				url:"list.htm",
+				dataType:"html",
+				success:function(data){
+					console.log(data);
+					$("#main-box").empty();
+					$("#main-box").append(data);
+					
+				}
+			}
+		)
+	});*/
 	
 	
 	/////////////////////////// 비동기 화면전환 - 프로젝트 /////////////////////////
 	
 
 		$(".side-project").click(function(evt){
-			console.log("test")
+			
+			// 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
+			// 지금은 pid가 1이라고 가정하고 실시
+			var pid = 1;
+			
 			$.ajax({
-				url:"information.htm",
+				url:"information.htm?pid=" + pid,
 				dataType:"html",
 				success:function(data){
-					console.log(data);
-					console.log("11");
 					 $("#main-box").empty();
 					 $("#main-box").append(data);	 		
 					 
@@ -93,10 +102,14 @@ $(function() {
 			})
 	    });
 	
+		
 		$(".side-step").click(function(evt){
-			console.log("test")
+			
+			console.log(evt.target.id);
+			console.log("여기")
 			$.ajax({
 				url:"list.htm",
+				data:{sid:evt.target.id},
 				dataType:"html",
 				success:function(data){
 					console.log(data);
@@ -108,5 +121,13 @@ $(function() {
 			})
 	    });
 	
-	
+		$( ".date-img" ).datepicker({
+		    showOn: "button",
+		    buttonImage: "img/calendar.png",
+		    buttonImageOnly: true,
+		    dateFormat: 'yy/mm/dd'
+
+
+		});
+		
 });

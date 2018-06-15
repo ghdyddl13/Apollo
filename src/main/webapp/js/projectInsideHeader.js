@@ -1,4 +1,6 @@
 $(function() {
+
+	
 	
 	/// 프로젝트 information 페이지
 	$("#information-page").click(function(evt){
