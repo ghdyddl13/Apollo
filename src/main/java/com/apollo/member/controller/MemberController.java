@@ -342,7 +342,7 @@ public class MemberController {
 			taskassignees= service.getTaskAssignees(tid);
 			model.addAttribute("taskassignees", taskassignees);
 		} catch (Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}
 		return jsonview;
 	}

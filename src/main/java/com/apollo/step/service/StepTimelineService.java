@@ -8,7 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.vo.TaskDTO;
-
+/**
+ * 
+  클래스명 : StepTimelineService
+  날      짜 : 2018. 6. 15.
+  작성자명 : 박 민 식
+ */
 @Service
 public class StepTimelineService {
 	
@@ -24,7 +29,7 @@ public class StepTimelineService {
 			tasklist = dao.getTasksByStepId(sid);
 			
 		} catch (Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}
 		
 		return tasklist;

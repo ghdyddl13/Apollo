@@ -13,9 +13,9 @@ import com.apollo.vo.TaskDTO;
 
 /**
  * 
-  Ŭ������ : StepTimelineController
-  ��      ¥ : 2018. 6. 12.
-  �ۼ��ڸ� : �� �� ��
+  클래스명 : StepTimelineController
+  날      짜 : 2018. 6. 15.
+  작성자명 : 박 민 식
  */
 @Controller
 @RequestMapping("/step")
@@ -41,7 +41,7 @@ public class StepTimelineController {
 			tasks = steptimelineservice.getTasksByStepId(sid);
 			model.addAttribute("tasks", tasks);
 		} catch (Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}
 		
 		

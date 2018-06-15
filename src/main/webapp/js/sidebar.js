@@ -112,8 +112,6 @@ $(function() {
 				data:{sid:evt.target.id},
 				dataType:"html",
 				success:function(data){
-					console.log(data);
-					console.log("11");
 					 $("#main-box").empty();
 					 $("#main-box").append(data);	 		
 					 

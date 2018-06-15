@@ -62,15 +62,7 @@ $(function() {
 					tasks.push(ganttdata);
 					
 					//좌측 테이블에 들어갈 데이터 작업
-					/*
-					 <tr>
-						<td>No</td>
-						<td>Task이름</td>
-						<td>상태</td>
-						<td>담당자</td>
-					</tr>
-					 
-					 */
+				
 					var row = jQuery("<tr>");
 					var td_no = jQuery("<td>",{"text": no++}) 
 					var td_tname = jQuery("<td>",{"text": item.tname,"class":"timeline-task-edit","id":item.tid})
@@ -81,7 +73,7 @@ $(function() {
 														   "padding-left":"0px",
 														   "padding-right":"0px",
 														   "text-align":"center"}});
-					var td_assingee= jQuery("<td>",{"css":{"padding":"1px"}}).append(getTaskAssignees(item.tid,"25px"));
+					var td_assingee= jQuery("<td>",{"css":{"padding":"1px"}}).append(getTaskAssignees(item.tid,"27px"));
 					$(row).append(td_no);
 					$(row).append(td_tstatus);
 					$(row).append(td_tname);

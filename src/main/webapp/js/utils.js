@@ -10,15 +10,13 @@
 function getTaskAssignees(tid, imgsize){
 	console.log("getTaskAssignees실행")
 	console.log("img size :" + imgsize);
-	var div = jQuery("<div>");
+	var div = jQuery("<div>",{"class":"container-fluid"});
 	$.ajax({
 		url:"getTaskAssignees.htm",
 		data:{tid:tid},
 		dataType:"json",
 		async:false,
 		success:function(data){
-			console.log("tid : " + tid);
-			console.log(data);
 			if(data!=null){
 				$(data.taskassignees).each(function(index,el){
 					var profile_container = jQuery("<div>",{"class":"profile-img-container"});

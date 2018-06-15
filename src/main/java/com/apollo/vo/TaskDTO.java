@@ -82,6 +82,13 @@ public class TaskDTO {
 		this.color = color;
 	}
 	
+	@Override
+	public String toString() {
+		return "TaskDTO [tid=" + tid + ", tname=" + tname + ", sday=" + sday + ", eday=" + eday + ", detail=" + detail
+				+ ", pid=" + pid + ", importance=" + importance + ", ctime=" + ctime + ", statusid=" + statusid
+				+ ", tstatus=" + tstatus + ", color=" + color + "]";
+	}
+	
 	
 	
 	
