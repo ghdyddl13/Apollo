@@ -2,17 +2,22 @@
 
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 /* 폰트 */
-html, body{
+html,body{
 
-  font-family: 'Noto Sans KR';
-  margin:0;
-  padding:0;
-  height:100%;
+	font-family: 'Noto Sans KR';
+ 	margin:0;
+  	padding:0;
+}
+html{	
+  	height: 100%
+}
+body{
+  	height: calc(100% - 50px);
 }
 
 #main-box{
     padding-left: 250px;
-    height: calc(100% - 50px);
+    height: 100%;
     margin-top: 50px;
 
 }
@@ -35,7 +40,9 @@ html, body{
    color:black;
    padding: 5px
 }
-
+.navbar{
+	border:0px;
+}
 
 .navbar.inside-header.inside-header-step{
    background-color: transparent;

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apollo.mywork.dao.MyWorkDAO">
+
+	<!--MyWork 첫 페이지에 데이터를 가지고옴  -->
+	<select id="getMyWorkList" parameterType="String" resultType="com.apollo.vo.TaskDTO">
+		select TID, TNAME, SDAY, EDAY, DETAIL, PID, IMPORTANCE, CTIME, TSTATUSID 
+		from task where tid in (select tid from ASSIGNEE where mid= #{mid} )
+	</select>
+	
+</mapper>

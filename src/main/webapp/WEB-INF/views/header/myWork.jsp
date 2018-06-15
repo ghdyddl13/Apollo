@@ -54,11 +54,23 @@
 				diffpos = startpos - pos;
 				var width = (window.innerWidth-250) / 2;
 				if (diffpos > -(width - range) && diffpos < (width - range)) {
-					document.getElementById("left").style.width = width -20 - diffpos + "px";
-					document.getElementById("right").style.width = width - 20+ diffpos + "px";
+					document.getElementById("left").style.width = width -25 - diffpos + "px";
+					document.getElementById("right").style.width = width - 25+ diffpos + "px";
 				}
 			}
 		}
+		
 		/////////////////////////////////////////////////////////////////////////////////////
+		////////////////////ajax를 이용해 처음 데이터를 뿌려주는 함수////////////////////////
+		$.ajax({
+			type:"POST",
+			url:"myWork.htm",
+			dataType:"JSON",
+			success:function(data){
+				console.log(data);				
+			}
+		})
+	
+		
 	});
 </script>

@@ -7,6 +7,17 @@
 
 package com.apollo.mywork.dao;
 
-public interface MyWorkDAO {
+import java.util.ArrayList;
 
+import com.apollo.vo.TaskDTO;
+
+public interface MyWorkDAO {
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 15.
+	 기      능 : Mywork 첫 페이지에 데이터를 가지고옴
+	 작성자명 : 이 진 우
+	 */
+	public ArrayList<TaskDTO> getMyWorkList(String mid);
 }
