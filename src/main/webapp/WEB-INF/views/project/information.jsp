@@ -8,7 +8,7 @@
 <h3>인포메이션</h3>
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 
-<input type=button value="테스트버튼" id="testbtn1">
+<input type=button value="테스트버튼" id="testjk">
 <input type=button value="기능작성중" id="testbtn3">
 <input type=button value="완/미완 스텝명들 get" id="testbtn5">
 <input type=button value="sid별 task들" id="testbtn6">
@@ -29,12 +29,17 @@
 			<div align='left'>Step별 Task 완료/미완료 현황</div>
 			<br />
 			<div align='right'>
-			<input type=button value="테스트버튼" id="testjk">
-					<select id="projectinfo_Task_Situation_Table_selectbar">
+					<select id="projectinfo_task_situation_table_selectbar">
 						 <c:forEach var="step" items="${steplist}">
 	                        <option value="${step.sid}">${step.sname}</option>
 	                     </c:forEach>
 					</select>
+					<br>
+					<br>
+					<table id="task_progress_table" class="table">
+						<tr><th>완료 task</th><th>미완료 task</th></tr>
+					</table>
+					
 			</div>
 				
 	 </div>
@@ -42,8 +47,13 @@
   </div> <!-- end_row_1 -->
 
   <div class="row" style="padding:20px"> <!-- row_2 -->
-    <div id="projectinfo_Step_Progress_Graph" class="col-lg-10">col lg 6</div>
+    <div id="projectinfo_Step_Progress_Graph" class="col-lg-10">Step 진행률
   	<br>
+  	<br>
+    	<div id="prison_progressbar">
+			<canvas id="projectinfo_progressbar"></canvas>
+  		</div>
+    </div>
   </div> <!-- end_row_2 -->
 
   <div class="row" style="padding:20px"> <!-- row_3 -->

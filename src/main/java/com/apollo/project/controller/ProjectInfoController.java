@@ -125,6 +125,40 @@ public class ProjectInfoController {
 		return jsonview;
 	}
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 15.
+	 기      능 : Step 진행률 bar 데이터 가져오기
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/getProgressData.htm")
+	public View getProgressData(String pid, ModelMap map) {
+
+		ArrayList<ArrayList<TaskDTO>> tasklistbysteps = new ArrayList<ArrayList<TaskDTO>>();
+		
+		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
+		steplist = projectinfoservice.getSteps(pid);
+		
+		for(StepDTO stepdto : steplist) {
+			
+			ArrayList<TaskDTO> taskinsteplist = new ArrayList<TaskDTO>();
+			taskinsteplist = projectinfoservice.getTasksInSteps(Integer.toString(stepdto.getSid()));
+			tasklistbysteps.add(taskinsteplist);
+			
+		}
+		
+		map.addAttribute("steplist", steplist);
+        map.addAttribute("tasklistbysteps", tasklistbysteps);
+		
+		return jsonview;
+	}
+	
+	
+	
+	
+	
+	
 	public View projectMemberSearch(String s1) {
 		return null;
 	}

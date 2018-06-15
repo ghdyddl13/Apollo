@@ -94,14 +94,6 @@ $(function() {
 	            			var eday_month = parseInt(eday.substring(5,7)); 
 	            			var eday_day = parseInt(eday.substring(8,10));
 	            			
-	            			console.log('--------------------')
-	            			console.log('eday : ' + eday)
-	            			console.log('eday_year : ' + eday_year)
-	            			console.log('eday_month : ' + eday_month)
-	            			console.log('eday_day : ' + eday_day)
-	            			console.log('tid : ' + el.tid)
-	            			console.log('tstatusid : ' + el.tstatusid)
-	            			
 	            		    // 완료 상태인 경우
 	            		    if((el.tstatusid == 3)||(el.tstatusid == 11)||(el.tstatusid == 15)){
 	            		    	completed.push(el.tid);
@@ -151,11 +143,6 @@ $(function() {
 	            		    		// 같은 년도, 같은 달, 과거 일
 	            		    		if(daygap < 0) {
 	            		    			expired.push(el.tid);
-            		    				////////////////////////////////////////////////////
-            		    				console.log('nextweek.length : ' + nextweek.length)
-            		    				console.log('thisweek.length : ' + thisweek.length)
-            		    				console.log('expired.length : ' + expired.length)
-           		       				 	////////////////////////////////////////////////////
 	            		    			return true;
 	            		    		}
 	            		    		
@@ -165,67 +152,27 @@ $(function() {
 	            		    			
 	            		    			if((today == 0) && (daygap <= 6)){
 	            		    				thisweek.push(el.tid);
-	            		    				////////////////////////////////////////////////////
-	            		    				console.log('nextweek.length : ' + nextweek.length)
-	            		    				console.log('thisweek.length : ' + thisweek.length)
-	            		    				console.log('expired.length : ' + expired.length)
-	           		       				 	////////////////////////////////////////////////////
 		            		    			return true;
 	            		    			} else if((today == 1) && (daygap <= 5)){
 	            		    				thisweek.push(el.tid);
-	            		    				////////////////////////////////////////////////////
-	            		    				console.log('nextweek.length : ' + nextweek.length)
-	            		    				console.log('thisweek.length : ' + thisweek.length)
-	            		    				console.log('expired.length : ' + expired.length)
-	           		       				 	////////////////////////////////////////////////////
 		            		    			return true;
 	            		    			} else if((today == 2) && (daygap <= 4)){
 	            		    				thisweek.push(el.tid);
-	            		    				////////////////////////////////////////////////////
-	            		    				console.log('nextweek.length : ' + nextweek.length)
-	            		    				console.log('thisweek.length : ' + thisweek.length)
-	            		    				console.log('expired.length : ' + expired.length)
-	           		       				 	////////////////////////////////////////////////////
 		            		    			return true;
 	            		    			} else if((today == 3) && (daygap <= 3)){
 	            		    				thisweek.push(el.tid);
-	            		    				////////////////////////////////////////////////////
-	            		    				console.log('nextweek.length : ' + nextweek.length)
-	            		    				console.log('thisweek.length : ' + thisweek.length)
-	            		    				console.log('expired.length : ' + expired.length)
-	           		       				 	////////////////////////////////////////////////////
 		            		    			return true;
 	            		    			} else if((today == 4) && (daygap <= 2)){
 	            		    				thisweek.push(el.tid);
-	            		    				////////////////////////////////////////////////////
-	            		    				console.log('nextweek.length : ' + nextweek.length)
-	            		    				console.log('thisweek.length : ' + thisweek.length)
-	            		    				console.log('expired.length : ' + expired.length)
-	           		       				 	////////////////////////////////////////////////////
 		            		    			return true;
 	            		    			} else if((today == 5) && (daygap <= 1)){
 	            		    				thisweek.push(el.tid);
-	            		    				////////////////////////////////////////////////////
-	            		    				console.log('nextweek.length : ' + nextweek.length)
-	            		    				console.log('thisweek.length : ' + thisweek.length)
-	            		    				console.log('expired.length : ' + expired.length)
-	           		       				 	////////////////////////////////////////////////////
 		            		    			return true;
 	            		    			} else if((today == 6) && (daygap == 0)){
 	            		    				thisweek.push(el.tid);
-	            		    				////////////////////////////////////////////////////
-	            		    				console.log('nextweek.length : ' + nextweek.length)
-	            		    				console.log('thisweek.length : ' + thisweek.length)
-	            		    				console.log('expired.length : ' + expired.length)
-	           		       				 	////////////////////////////////////////////////////
 		            		    			return true;
 	            		    			} else {
 	            		    				nextweek.push(el.tid);
-	            		    				////////////////////////////////////////////////////
-	            		    				console.log('nextweek.length : ' + nextweek.length)
-	            		    				console.log('thisweek.length : ' + thisweek.length)
-	            		    				console.log('expired.length : ' + expired.length)
-	           		       				 	////////////////////////////////////////////////////
 		            		    			return true;
 	            		    			} 
 	            		    		
@@ -300,35 +247,181 @@ $(function() {
 	 기      능 : Step별 Task 완료/미완료 현황에서 셀렉트바 온체인지 함수
 	 작성자명 : 김 정 권
 	 */
-	$('#projectinfo_Task_Situation_Table_selectbar').on('change', function() {
-		alert(this.value);
+	$('#projectinfo_task_situation_table_selectbar').on('change', function() {
 		$.ajax(
 		        {
 		           type : "post",
 		           url  : "getTasksByStepForSituation.htm",
 		           data : "sid="+this.value,
 		           success : function(rdata){
-		               console.log(rdata);
+		               
+		        	   var completedtasks = [];
+		        	   var uncompletedtasks = [];
+		        	   
+		               $(rdata.tasklist).each(function(index, el){
+		            	  
+		            	   if((el.tstatusid == 3)||(el.tstatusid == 11)||(el.tstatusid == 15)){
+		            		   completedtasks.push(el.tname);
+
+	            		    }else{
+	            		    	uncompletedtasks.push(el.tname);
+	            		    }
+		               });
 		               
 		               
+		               if(completedtasks.length > uncompletedtasks.length){
+		            	   
+		            	   for(var i = 0; i < completedtasks.length - uncompletedtasks.length; i++){
+		            		   uncompletedtasks.push(' ');
+		            	   }
 		               
+		               } else if (completedtasks.length < uncompletedtasks.length){
+		            	   for(var i = 0; i < uncompletedtasks.length - completedtasks.length; i++){
+		            		   completedtasks.push(' ');
+		            	   }
+		               }
 		               
+		               // 위 로직에 의해 두 배열의 길이가 같아졌으므로
+		               // 아무 배열이나 잡아서 length 만큼 돌려도 상관없음
+		               var tablestr = '<tr><th>완료 task</th><th>미완료 task</th></tr>';
+		               for(var i = 0; i < completedtasks.length; i++){
+		            	   tablestr += '<tr><td>' + completedtasks[i] + '</td><td>' + uncompletedtasks[i] + '</td></tr>'
+		               }
 		               
-		               
-		               
-		               
-		               
-		               
-		           } 
-		        }); // end-ajax
+		               $('#task_progress_table').empty();
+		               $('#task_progress_table').append(tablestr);
+		            	  
+		               }
+			        }
+			       );
+				});
+
+	/*
+	 날      짜 : 2018. 6. 15.
+	 기      능 : Step진행률 막대그래프
+	 작성자명 : 김 정 권
+	 */
+	function progressBarSetting(){
+	
+	// 일단 pid를 1로 가정
+	var pid = 1;
 		
-		
-		});
+	$.ajax(
+	        {
+	           type : "post",
+	           url  : "getProgressData.htm",
+	           data : "pid="+pid,
+	           success : function(data){
+	               console.log(data);
+	               
+	               var ctx = document.getElementById('projectinfo_progressbar').getContext('2d');
+	               var stackedBar = new Chart(ctx, {
+	            	    type: 'bar',
+	            	    data: [10,20,30,40,20,30],
+	            	    options: {
+	            	    	maintainAspectRatio: false,
+	            	        scales: {
+	            	            xAxes: [{
+	            	                stacked: true
+	            	            }],
+	            	            yAxes: [{
+	            	                stacked: true
+	            	            }]
+	            	        }
+	            	    }
+	            	});
+	               
+	               
+	           } // end-success
+	        } 
+	      ); // end-ajax
+	} // end - progressBarSetting()
+	
+	
+	
+	
 	
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////	
 	$('#testjk').click(function(){
-		alert('dd');
+
+		// 일단 pid를 1로 가정
+		var pid = 1;
+			
+		$.ajax(
+		        {
+		           type : "post",
+		           url  : "getProgressData.htm",
+		           data : "pid="+pid,
+		           success : function(rdata){
+		               console.log(rdata);
+		               
+		               var labelnames = [];
+		               $(rdata.steplist).each(function (index, el){
+		            	   labelnames.push(el.sname);
+		               });
+		               
+		               var completedtasks= [];
+		               var uncompletedtasks= [];
+		               $(rdata.tasklistbysteps).each(function (index, element){
+		            	  
+		            	   var completedcount = 0;
+		            	   var uncompletedcount = 0;
+		            	   
+		            	   console.log('********************')
+		            	   console.log(element.length)
+		            	   console.log('********************')
+		            	   
+		            		   $(element).each(function (index,el) {
+		            			   if((el.tstatusid == 3)||(el.tstatusid == 11)||(el.tstatusid == 15)){
+				            	    	completedcount++;
+				            	    }else {
+				            	    	uncompletedcount++;
+			            		    }
+		            		   });
+
+		            	   completedtasks.push(completedcount);
+		            	   uncompletedtasks.push(uncompletedcount);
+		            	   
+		               });		               
+		               
+		               console.log('------------------')
+		               console.log('완료 : ' + completedtasks)
+		               console.log('미완료 : ' + uncompletedtasks)
+		               console.log('------------------')
+		               
+		               
+		               var ctx = document.getElementById('projectinfo_progressbar').getContext('2d');
+		               var stackedBar = new Chart(ctx, {
+		            	   type: 'bar',
+		            	    data: {
+		            	    	
+		            	    	labels: labelnames,
+		            			datasets: [{
+		            				label: '완료',
+		            				backgroundColor: '#3498db',
+		            				data: completedtasks
+		            			}, {
+		            				label: '미완료',
+		            				backgroundColor: '#2ecc71',
+		            				data: uncompletedtasks
+		            			}]
+		            	    },       	    
+		            	    options: {
+		            	    	maintainAspectRatio: false,
+		            	        scales: {
+		            	            xAxes: [{
+		            	                stacked: true
+		            	            }],
+		            	            yAxes: [{
+		            	                stacked: true
+		            	            }]
+		            	        }
+		            	    }
+		            	});
+		           } // end-success
+		        } 
+		      ); // end-ajax
 	});
 	
 	$('#testbtn3').click(function(){
