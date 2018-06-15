@@ -58,11 +58,6 @@ public class TestController {
 	public String stream() {
 		return "header/stream";
 	}
-	@RequestMapping("/board.htm")
-    public String board() {
-        
-        return "step/board";
-    }
     
     @RequestMapping("/list.htm")
     public String list(int sid, HttpServletRequest request) {

@@ -7,7 +7,7 @@ $(function() {
 							event.preventDefault();
 							var dropdown_ul = document.createElement("ul");
 							var dropdown = '<li class="dropdown-submenu"><p data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></p>'
-							dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li data-toggle="modal" data-target="#add-step">Step추가</li></ul></li>'
+							dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li data-toggle="modal" data-target="#step-add-modal">Step추가</li></ul></li>'
 							dropdown += '<li data-action="second">완료</li>'
 							dropdown += '<li data-action="third" data-toggle="modal" data-target="#update-project">수정</li>'
 							dropdown += '<li data-action="fourth" data-toggle="modal" data-target="#delete-project">삭제</li>'
@@ -25,7 +25,7 @@ $(function() {
 		$(".side-folder").contextmenu(function(event) {
 			event.preventDefault();
 			var dropdown_ul = document.createElement("ul");
-			var dropdown = '<li data-action="first" data-toggle="modal" data-target="#add-step">Step 추가</li>'
+			var dropdown = '<li data-action="first" data-toggle="modal" data-target="#step-add-modal">Step 추가</li>'
 			dropdown += '<li data-action="second">수정</li>'
 			dropdown += '<li data-action="third">삭제</li>'
 			$(dropdown_ul).attr("class", "custom-menu").append(dropdown);
@@ -118,7 +118,7 @@ $(function() {
 				}
 			})
 	    });
-	
+	/* modal 창(project, step) dateficker */
 		$( ".date-img" ).datepicker({
 		    showOn: "button",
 		    buttonImage: "img/calendar.png",

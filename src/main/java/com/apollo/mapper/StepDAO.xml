@@ -7,8 +7,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     select * from step where pid = #{pid}
     </select>
 
+	<insert id="insertStep" parameterType="com.apollo.vo.StepDTO">
+		insert into step(sid, sname, sday, eday, pid, fid, mgr, methodologyid, mid) 
+		values (seq_sid.nextval, '${sname}', '${sday}', '${eday}', '${pid}', '${fid}', '${mgr}', '${methodologyid}', '${mid}')
+	</insert>
+
 	<select id ="getProjectIdByStepId" parameterType="Integer"> 
 	  select pid from step where sid=#{sid}
+	</select>
+	
+    <select id ="selectBoardTstatus" resultType="com.apollo.vo.TstatusDTO" parameterType="Integer"> 
+	  select ts.TSTATUS, ts.TSTATUSID, ts.COLOR from step s join TSTATUS ts on s.METHODOLOGYID = ts.METHODOLOGYID where sid=#{sid}
 	</select>
 
 </mapper>

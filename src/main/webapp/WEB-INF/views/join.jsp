@@ -24,7 +24,7 @@
 $(function() {
 	
 	
-	$('#btnCheckUid').click(function(){
+	$('#btnCheckUid').click(function()
 		if ($("#mid").val()== "") {
             alert("아이디를 입력하지 않았습니다.");
             $("#mid").focus();
