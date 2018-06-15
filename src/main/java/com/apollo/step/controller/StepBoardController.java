@@ -40,7 +40,7 @@ public class StepBoardController {
     public String selectBoard(Model model) {
 		System.out.println("board 컨트롤러 들어왔따");
         int sid = 3;
-        ArrayList<TstatusDTO> tstatusdto = boardservice.selectBoardTstatus(sid);
+        ArrayList<TstatusDTO> tstatusdto = boardservice.selectTstatusBySid(sid);
         System.out.println("tstatusdto : " + tstatusdto);
         model.addAttribute("b", tstatusdto);
         

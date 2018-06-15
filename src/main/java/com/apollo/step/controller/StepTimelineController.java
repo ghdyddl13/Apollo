@@ -2,6 +2,8 @@ package com.apollo.step.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.View;
 
 import com.apollo.step.service.StepTimelineService;
 import com.apollo.vo.TaskDTO;
+import com.apollo.vo.TstatusDTO;
 
 /**
  * 
@@ -28,8 +31,15 @@ public class StepTimelineController {
 	private StepTimelineService steptimelineservice; 
 	
 	@RequestMapping("/timeline.htm")
-	public String getTimelineView(String pid) {
-		
+	public String getTimelineView(Model model,HttpServletRequest request) {
+		ArrayList<TstatusDTO> tstatuses = null;
+		int sid = (Integer) request.getSession().getAttribute("sid");
+		try {
+			tstatuses = steptimelineservice.selectTstatusBySid(sid);
+			model.addAttribute("tstatuses", tstatuses);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return "step/timeline";
 	}
 	

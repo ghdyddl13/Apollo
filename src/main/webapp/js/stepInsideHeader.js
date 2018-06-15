@@ -49,39 +49,11 @@ $(function() {
 				/*var tasks = getGanttItems(3);*/
 				
 				var data = getGanttItems(3);
-				var tasks= [];
-				var no = 1;
-				$(data.tasks).each(function(index,item){
-					// 간트차트에 들어 갈 데이터 가공 작업
-					var ganttdata={
-							start:item.sday,	
-							end:item.eday,
-							name:item.tname,
-							id: 'Task '+item.tid,
-					 };
-					tasks.push(ganttdata);
-					
-					//좌측 테이블에 들어갈 데이터 작업
 				
-					var row = jQuery("<tr>");
-					var td_no = jQuery("<td>",{"text": no++}) 
-					var td_tname = jQuery("<td>",{"text": item.tname,"class":"timeline-task-edit","id":item.tid})
-					var td_tstatus = jQuery("<td>",{"text": item.tstatus,
-													"css":{"background-color":item.color,
-														   "color":"white",
-														   "font-size":"10px",
-														   "padding-left":"0px",
-														   "padding-right":"0px",
-														   "text-align":"center"}});
-					var td_assingee= jQuery("<td>",{"css":{"padding":"1px"}}).append(getTaskAssignees(item.tid,"27px"));
-					$(row).append(td_no);
-					$(row).append(td_tstatus);
-					$(row).append(td_tname);
-					$(row).append(td_assingee);
-					$(row).appendTo("#timeline-table > tbody");
-				})
-
-				makeTimeline(tasks);
+				console.log(data.tasks);
+				makeTimelineTable(data.tasks);
+					
+				makeTimelineGantt(data.tasks);
 			}
 		})
 	})

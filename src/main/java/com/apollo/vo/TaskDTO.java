@@ -11,7 +11,7 @@ public class TaskDTO {
 	private int pid;
 	private int importance;
 	private Date ctime;
-	private int statusid;
+	private int tstatusid;
 	private String tstatus;
 	private String color;
 	
@@ -64,10 +64,10 @@ public class TaskDTO {
 		this.ctime = ctime;
 	}
 	public int getStatusid() {
-		return statusid;
+		return tstatusid;
 	}
 	public void setStatusid(int statusid) {
-		this.statusid = statusid;
+		this.tstatusid = statusid;
 	}
 	public String getTstatus() {
 		return tstatus;
@@ -85,7 +85,7 @@ public class TaskDTO {
 	@Override
 	public String toString() {
 		return "TaskDTO [tid=" + tid + ", tname=" + tname + ", sday=" + sday + ", eday=" + eday + ", detail=" + detail
-				+ ", pid=" + pid + ", importance=" + importance + ", ctime=" + ctime + ", statusid=" + statusid
+				+ ", pid=" + pid + ", importance=" + importance + ", ctime=" + ctime + ", statusid=" + tstatusid
 				+ ", tstatus=" + tstatus + ", color=" + color + "]";
 	}
 	

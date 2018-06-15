@@ -18,15 +18,15 @@ public class StepBoardService {
 	/**
 	 * 
 	 날      짜 : 2018. 6. 15.
-	 기      능 : step-board에서 각 task 불러오는 함수 
+	 기      능 : step-board에서 각 task상태 불러오는 함수 
 	 작성자명 : 이 창 훈
 	 */
-	public ArrayList<TstatusDTO> selectBoardTstatus(int sid) {
+	public ArrayList<TstatusDTO> selectTstatusBySid(int sid) {
 		System.out.println("보드 서비스 들어왔다");
 		ArrayList<TstatusDTO> result = null;
 		try {
 			StepDAO dao = sqlsession.getMapper(StepDAO.class);
-			result = dao.selectBoardTstatus(sid);
+			result = dao.selectTstatusBySid(sid);
 		}catch (Exception e) {
 		   System.out.println(e.getMessage());
 		}

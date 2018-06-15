@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  select pid from step where sid=#{sid}
 	</select>
 	
-    <select id ="selectBoardTstatus" resultType="com.apollo.vo.TstatusDTO" parameterType="Integer"> 
+    <select id ="selectTstatusBySid" resultType="com.apollo.vo.TstatusDTO" parameterType="Integer"> 
 	  select ts.TSTATUS, ts.TSTATUSID, ts.COLOR from step s join TSTATUS ts on s.METHODOLOGYID = ts.METHODOLOGYID where sid=#{sid}
 	</select>
 

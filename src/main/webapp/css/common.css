@@ -38,6 +38,7 @@ html, body{
 
 .navbar.inside-header.inside-header-step{
    background-color: transparent;
+   margin-bottom: 5px !important;
 }
 
 .navbar.inside-header.inside-header-step a:hover{

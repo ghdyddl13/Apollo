@@ -35,7 +35,7 @@ public interface StepDAO {
 	 기      능 : sid 받아서 해당 step에 들어있는 task 목록을 board에 가져옴
 	 작성자명 : 이 창 훈
 	 */
-	public ArrayList<TstatusDTO> selectBoardTstatus(int sid);
+	public ArrayList<TstatusDTO> selectTstatusBySid(int sid);
 
 
 }
