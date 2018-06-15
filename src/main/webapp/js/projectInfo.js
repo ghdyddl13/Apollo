@@ -1,5 +1,5 @@
 $(function() {
-	
+
 	/*
 	 날      짜 : 2018. 6. 13.
 	 기      능 : 서버시각 추출을 위한 함수 / 호출 형식은 YYYYMMDDHHMMSS / 활용 예시 : var nowdate = serverToday();
@@ -268,18 +268,23 @@ $(function() {
 	            		    }
 		               });
 		               
-		               
+		               console.log('11111111111111111111111');
+		               console.log(completedtasks.length);
+		               console.log(uncompletedtasks.length);
+		               		               		               
 		               if(completedtasks.length > uncompletedtasks.length){
-		            	   
-		            	   for(var i = 0; i < completedtasks.length - uncompletedtasks.length; i++){
-		            		   uncompletedtasks.push(' ');
+		            	   var c1 = completedtasks.length - uncompletedtasks.length
+		            	   for(var i = 0; i < c1; i++){
+			            	   uncompletedtasks.push(' ');
 		            	   }
 		               
 		               } else if (completedtasks.length < uncompletedtasks.length){
-		            	   for(var i = 0; i < uncompletedtasks.length - completedtasks.length; i++){
+		            	   var c2 = uncompletedtasks.length - completedtasks.length
+		            	   for(var i = 0; i < c2; i++){
 		            		   completedtasks.push(' ');
 		            	   }
 		               }
+
 		               
 		               // 위 로직에 의해 두 배열의 길이가 같아졌으므로
 		               // 아무 배열이나 잡아서 length 만큼 돌려도 상관없음
@@ -288,71 +293,32 @@ $(function() {
 		            	   tablestr += '<tr><td>' + completedtasks[i] + '</td><td>' + uncompletedtasks[i] + '</td></tr>'
 		               }
 		               
+		               
 		               $('#task_progress_table').empty();
 		               $('#task_progress_table').append(tablestr);
 		            	  
-		               }
+		               
+		               console.log('22222222222222222222');
+		               console.log(completedtasks.length);
+		               console.log(uncompletedtasks.length);
+		               
+		               } // end - success
 			        }
 			       );
-				});
+				}).trigger("change");
 
+	
 	/*
 	 날      짜 : 2018. 6. 15.
-	 기      능 : Step진행률 막대그래프
+	 기      능 : Step별 진행률 그래프 데이터 가져와서 세팅
 	 작성자명 : 김 정 권
 	 */
-	function progressBarSetting(){
-	
 	// 일단 pid를 1로 가정
-	var pid = 1;
-		
 	$.ajax(
-	        {
-	           type : "post",
-	           url  : "getProgressData.htm",
-	           data : "pid="+pid,
-	           success : function(data){
-	               console.log(data);
-	               
-	               var ctx = document.getElementById('projectinfo_progressbar').getContext('2d');
-	               var stackedBar = new Chart(ctx, {
-	            	    type: 'bar',
-	            	    data: [10,20,30,40,20,30],
-	            	    options: {
-	            	    	maintainAspectRatio: false,
-	            	        scales: {
-	            	            xAxes: [{
-	            	                stacked: true
-	            	            }],
-	            	            yAxes: [{
-	            	                stacked: true
-	            	            }]
-	            	        }
-	            	    }
-	            	});
-	               
-	               
-	           } // end-success
-	        } 
-	      ); // end-ajax
-	} // end - progressBarSetting()
-	
-	
-	
-	
-	
-	
-////////////////////////////////////////////////////////////////////////////////////////////////	
-	$('#testjk').click(function(){
-
-		// 일단 pid를 1로 가정
-		var pid = 1;
-			
-		$.ajax(
-		        {
+		       {
 		           type : "post",
 		           url  : "getProgressData.htm",
-		           data : "pid="+pid,
+		           data : "pid="+ 1,
 		           success : function(rdata){
 		               console.log(rdata);
 		               
@@ -422,62 +388,19 @@ $(function() {
 		           } // end-success
 		        } 
 		      ); // end-ajax
-	});
 	
-	$('#testbtn3').click(function(){
+	
+	/*
+	 날      짜 : 2018. 6. 15.
+	 기      능 : Modal Page에 데이터 던져주면서 띄우기
+	 작성자명 : 김 정 권
+	 */
+	$(document).on("click", "#testbtnjkjk", function() {
+		 alert('testbtnjkjk 클릭되었다');
+		 $("#myModal").modal('show');
+	 });
 
-	});
+////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	
 }); // end-document.onready
-
-
-	/*
-	$('#testbtn5').click(function(){
-		var pid = 1;
-		
-		$.ajax(
-        {
-           type : "post",
-           url  : "getSteps.htm",
-           data : "pid="+pid,
-           success : function(data){
-               console.log(data);
-           } 
-        } 
-      ) // end-ajax
-        
-	});
-	
-	$('#testbtn6').click(function(){
-		var sid = 1;
-		
-		$.ajax(
-        {
-           type : "post",
-           url  : "getTasksInSteps.htm",
-           data : "sid="+sid,
-           success : function(data){
-               console.log(data);
-           } 
-        } 
-      ) // end-ajax
-        
-	});
-	
-	$('#testbtn7').click(function(){
-		var pid = 1;
-		
-		$.ajax(
-        {
-           type : "post",
-           url  : "getProjectMembers.htm",
-           data : "pid="+pid,
-           success : function(data){
-               console.log(data);
-           } 
-        } 
-      ) // end-ajax
-        
-	});
-	 */

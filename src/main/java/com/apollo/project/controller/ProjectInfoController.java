@@ -24,8 +24,8 @@ public class ProjectInfoController {
 	
 	/**
 	 * 
-	 날      짜 : 2018. 6. 13.
-	 기      능 : 프로젝트 인포메이션 페이지 로드 
+	 날      짜 : 2018. 6. 15.
+	 기      능 : 프로젝트 인포메이션 페이지 로드
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
@@ -35,7 +35,11 @@ public class ProjectInfoController {
 		steplist = projectinfoservice.getSteps(pid);
 		map.addAttribute("steplist", steplist);
 		
-		return "project/information";
+		ArrayList<MemberDTO> getProjectMemberlist = new ArrayList<MemberDTO>();
+		getProjectMemberlist = projectinfoservice.getProjectMembers(pid);
+        map.addAttribute("memberlist", getProjectMemberlist);
+
+        return "project/information";
 	}
 	
 	/**
@@ -90,20 +94,6 @@ public class ProjectInfoController {
 		return jsonview;
 	}
 	
-	/**
-	 * 
-	 날      짜 : 2018. 6. 13.
-	 기      능 : 같은 프로젝트에 속한 멤버들을 가져옴
-	 작성자명 : 김 정 권
-	 */
-	@RequestMapping("/getProjectMembers.htm")
-	public View getProjectMembers(String pid, ModelMap map) {
-
-		ArrayList<MemberDTO> getProjectMemberlist = new ArrayList<MemberDTO>();
-		getProjectMemberlist = projectinfoservice.getProjectMembers(pid);
-        map.addAttribute("getProjectMemberlist", getProjectMemberlist);
-		return jsonview;
-	}
 	
 	/**
 	 * 
@@ -153,8 +143,6 @@ public class ProjectInfoController {
 		
 		return jsonview;
 	}
-	
-	
 	
 	
 	

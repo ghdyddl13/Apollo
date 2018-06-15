@@ -44,7 +44,7 @@
 	text-align: center
 }
 
-th {
+#task_progress_table th {
 	text-align: center;
 	width : 50%
 	}
@@ -53,3 +53,13 @@ th {
 	width: 100%;
 	height: 400px
 }
+
+#project_member_table{
+	text-align: center
+}
+
+#project_member_table th{
+	text-align: center;
+	width : 20%
+}
+
