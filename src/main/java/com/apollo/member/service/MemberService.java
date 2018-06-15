@@ -21,7 +21,7 @@ public class MemberService {
 	/**
 	 * 
 	 날      짜 : 2018. 6. 12.
-	 기      능 : 
+	 기      능 : 회원가입
 	 작성자명 : 신 호 용
 	 */
 	public int insertMember(MemberDTO memberdto){
@@ -34,7 +34,7 @@ public class MemberService {
 	/**
 	 * 
 	 날      짜 : 2018. 6. 12.
-	 기      능 : 
+	 기      능 : 로그인
 	 작성자명 : 신 호 용
 	 */
 	public String getlogin(String mid){
@@ -48,7 +48,7 @@ public class MemberService {
 	/**
 	 * 
 	 날      짜 : 2018. 6. 12.
-	 기      능 : 
+	 기      능 : 아이디 중복체크
 	 작성자명 : 신 호 용
 	 */
 	public int midcheck(String mid){
@@ -63,7 +63,7 @@ public class MemberService {
 	/**
 	 * 
 	 날      짜 : 2018. 6. 12.
-	 기      능 : 
+	 기      능 : 키 인증 
 	 작성자명 : 신 호 용
 	 */
 	public int keycheck(String apollokey){

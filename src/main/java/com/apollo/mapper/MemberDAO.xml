@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <update id="findpwd" parameterType="com.apollo.vo.MemberDTO">
   		update member set pwd=#{pwd} where mid=#{mid}
  </update> 
+ 
  <select id="findpwdidcheck" resultType="String">
 		select mname from member where mid=#{mid}
 </select>

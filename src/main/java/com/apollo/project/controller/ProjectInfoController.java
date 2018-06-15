@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.View;
 
 import com.apollo.project.service.ProjectInfoService;
 import com.apollo.vo.MemberDTO;
@@ -23,19 +22,20 @@ public class ProjectInfoController {
 	
 	@Autowired 
 	private ProjectInfoService projectinfoservice;
-	
-	/**
-	 * 
+
+	 /* 
 	 날      짜 : 2018. 6. 13.
 	 기      능 : 프로젝트 인포메이션 페이지 로드 
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
+
 	public String projectInfoShow(String pid, Model map) {
 		
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
 		map.addAttribute("steplist", steplist);
+
 		
 		return "project/information";
 	}

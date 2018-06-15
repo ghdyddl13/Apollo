@@ -401,7 +401,7 @@ class Bar {
                 (this.task.progress / 100) || 0;
         this.group = createSVG('g', {
             class: 'bar-wrapper ' + (this.task.custom_class || ''),
-            'data-id': this.task.id
+            'data-id': this.task.tid
         });
         this.bar_group = createSVG('g', {
             class: 'bar-group',
@@ -477,7 +477,7 @@ class Bar {
         createSVG('text', {
             x: this.x + this.width / 2,
             y: this.y + this.height / 2,
-            innerHTML: this.task.name,
+            innerHTML: this.task.tname,
             class: 'bar-label',
             append_to: this.bar_group
         });
@@ -569,7 +569,7 @@ class Bar {
 
         this.gantt.show_popup({
             target_element: this.$bar,
-            title: this.task.name,
+            title: this.task.tname,
             subtitle: subtitle
         });
     }
@@ -848,8 +848,8 @@ class Arrow {
     draw() {
         this.element = createSVG('path', {
             d: this.path,
-            'data-from': this.from_task.task.id,
-            'data-to': this.to_task.task.id
+            'data-from': this.from_task.task.tid,
+            'data-to': this.to_task.task.tid
         });
     }
 
@@ -986,29 +986,29 @@ class Gantt {
         // prepare tasks
         this.tasks = tasks.map((task, i) => {
             // convert to Date objects
-            task._start = date_utils.parse(task.start);
-            task._end = date_utils.parse(task.end);
+            task._start = date_utils.parse(task.sday);
+            task._end = date_utils.parse(task.eday);
 
             // make task invalid if duration too large
             if (date_utils.diff(task._end, task._start, 'year') > 10) {
-                task.end = null;
+                task.eday = null;
             }
 
             // cache index
             task._index = i;
 
             // invalid dates
-            if (!task.start && !task.end) {
+            if (!task.sday && !task.eday) {
                 const today = date_utils.today();
                 task._start = today;
                 task._end = date_utils.add(today, 2, 'day');
             }
 
-            if (!task.start && task.end) {
+            if (!task.sday && task.eday) {
                 task._start = date_utils.add(task._end, -2, 'day');
             }
 
-            if (task.start && !task.end) {
+            if (task.sday && !task.eday) {
                 task._end = date_utils.add(task._start, 2, 'day');
             }
 
@@ -1020,7 +1020,7 @@ class Gantt {
             }
 
             // invalid flag
-            if (!task.start || !task.end) {
+            if (!task.sday || !task.eday) {
                 task.invalid = true;
             }
 
@@ -1037,8 +1037,8 @@ class Gantt {
             }
 
             // uids
-            if (!task.id) {
-                task.id = generate_id(task);
+            if (!task.tid) {
+                task.tid = generate_id(task);
             }
 
             return task;
@@ -1457,8 +1457,8 @@ class Gantt {
         for (let bar of this.bars) {
             bar.arrows = this.arrows.filter(arrow => {
                 return (
-                    arrow.from_task.task.id === bar.task.id ||
-                    arrow.to_task.task.id === bar.task.id
+                    arrow.from_task.task.tid === bar.task.tid ||
+                    arrow.to_task.task.tid === bar.task.tid
                 );
             });
         }
@@ -1558,7 +1558,7 @@ class Gantt {
                 $bar.finaldx = this.get_snap_position(dx);
 
                 if (is_resizing_left) {
-                    if (parent_bar_id === bar.task.id) {
+                    if (parent_bar_id === bar.task.tid) {
                         bar.update_bar_position({
                             x: $bar.ox + $bar.finaldx,
                             width: $bar.owidth - $bar.finaldx
@@ -1569,7 +1569,7 @@ class Gantt {
                         });
                     }
                 } else if (is_resizing_right) {
-                    if (parent_bar_id === bar.task.id) {
+                    if (parent_bar_id === bar.task.tid) {
                         bar.update_bar_position({
                             width: $bar.owidth + $bar.finaldx
                         });
@@ -1724,13 +1724,13 @@ class Gantt {
 
     get_task(id) {
         return this.tasks.find(task => {
-            return task.id === id;
+            return task.tid === id;
         });
     }
 
     get_bar(id) {
         return this.bars.find(bar => {
-            return bar.task.id === id;
+            return bar.task.tid === id;
         });
     }
 
@@ -1778,7 +1778,7 @@ class Gantt {
 
 function generate_id(task) {
     return (
-        task.name +
+        task.tname +
         '_' +
         Math.random()
             .toString(36)
