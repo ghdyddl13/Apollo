@@ -98,9 +98,6 @@ public class MemberService {
 	 작성자명 : 이 창 훈
 	 */
 	public int findpwd(MemberDTO memberdto) {
-		System.out.println("memberdto :" + memberdto.getPwd());
-		System.out.println("memberdto2 : " + memberdto.getMid());
-		System.out.println("memberdto3 : " + memberdto.getMname());
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.findpwd(memberdto);
@@ -115,11 +112,9 @@ public class MemberService {
 	 작성자명 : 이 창 훈
 	 */
 	public String findpwdidcheck(String mid) {
-		System.out.println("mid : " + mid);
 		String result = "";
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.findpwdidcheck(mid);
-		//System.out.println("result2 : " + result);
 		return result;
 		
 	}
