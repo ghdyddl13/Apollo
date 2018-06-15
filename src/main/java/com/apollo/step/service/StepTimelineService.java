@@ -22,6 +22,7 @@ public class StepTimelineService {
 		try {
 			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
 			tasklist = dao.getTasksByStepId(sid);
+			
 		} catch (Exception e) {
 			e.getStackTrace();
 		}

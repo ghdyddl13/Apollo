@@ -12,6 +12,9 @@ public class TaskDTO {
 	private int importance;
 	private Date ctime;
 	private int statusid;
+	private String tstatus;
+	private String color;
+	
 	public int getTid() {
 		return tid;
 	}
@@ -65,6 +68,18 @@ public class TaskDTO {
 	}
 	public void setStatusid(int statusid) {
 		this.statusid = statusid;
+	}
+	public String getTstatus() {
+		return tstatus;
+	}
+	public void setTstatus(String tstatus) {
+		this.tstatus = tstatus;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
 	}
 	
 	

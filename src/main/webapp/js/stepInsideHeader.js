@@ -12,7 +12,7 @@ $(function() {
 			data:{sid:sid},
 			dataType:"html",
 			success:function(data){
-			
+
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				
@@ -52,7 +52,6 @@ $(function() {
 				var tasks= [];
 				var no = 1;
 				$(data.tasks).each(function(index,item){
-					
 					// 간트차트에 들어 갈 데이터 가공 작업
 					var ganttdata={
 							start:item.sday,	
@@ -74,10 +73,19 @@ $(function() {
 					 */
 					var row = jQuery("<tr>");
 					var td_no = jQuery("<td>",{"text": no++}) 
-					var td_tname = jQuery("<td>",{"text": item.tname})
-					var td_tstatus = jQuery("<td>",{"text": item.tname})
+					var td_tname = jQuery("<td>",{"text": item.tname,"class":"timeline-task-edit","id":item.tid})
+					var td_tstatus = jQuery("<td>",{"text": item.tstatus,
+													"css":{"background-color":item.color,
+														   "color":"white",
+														   "font-size":"10px",
+														   "padding-left":"0px",
+														   "padding-right":"0px",
+														   "text-align":"center"}});
+					var td_assingee= jQuery("<td>",{"css":{"padding":"1px"}}).append(getTaskAssignees(item.tid,"25px"));
 					$(row).append(td_no);
+					$(row).append(td_tstatus);
 					$(row).append(td_tname);
+					$(row).append(td_assingee);
 					$(row).appendTo("#timeline-table > tbody");
 				})
 

@@ -20,6 +20,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="getTasksByStepId" parameterType="String" resultType="com.apollo.vo.TaskDTO">
-    select * from task where tid in (select tid from taskinstep where sid= #{sid})
+    select t.*, s.tstatus, s.color from task t join tstatus s on t.tstatusid = s.tstatusid where tid in (select tid from taskinstep where sid= #{sid})
     </select>
 </mapper>

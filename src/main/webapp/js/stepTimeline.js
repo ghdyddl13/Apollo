@@ -32,10 +32,12 @@ function makeTimeline(tasks) {
 	console.log(tasks)
 	var gantt_chart = new Gantt(".gantt-target", tasks, {
 		on_click : function(task) {
-			console.log(task);
+			var array =task.id.split(" ");
+			console.log("test")
+			console.log(array[1]);
 		},
 		on_date_change : function(task, sday, eday) {
-			console.log(task, sday, eday);
+			console.log(task, sday, eday)
 		},
 		on_progress_change : function(task, progress) {
 			console.log(task, progress);

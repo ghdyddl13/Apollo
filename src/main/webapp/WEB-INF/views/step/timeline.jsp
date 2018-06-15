@@ -17,8 +17,8 @@
 				<thead>
 					<tr>
 						<th>No</th>
-						<th>Task이름</th>
 						<th>상태</th>
+						<th>Task이름</th>
 						<th>담당자</th>
 					</tr>
 				</thead>
