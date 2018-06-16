@@ -141,6 +141,22 @@ public class ProjectInfoService {
 	}
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 16.
+	 기      능 : 선택한 회원을 프로젝트 멤버에 추가
+	 작성자명 : 김 정 권
+	 */
+	public int insertPmember(MidpidDTO midpiddto){
+		
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		int result = dao.insertPmember(midpiddto);
+		
+		System.out.println("테스트 출력");
+		System.out.println("result : " + result);
+		
+		return result;
+	}
 	
 	
 }

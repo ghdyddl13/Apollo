@@ -9,5 +9,6 @@ public interface MemberDAO {
 	
 	public ArrayList<MemberDTO> getProjectMemberlist(String pid);
 	public ArrayList<MemberDTO> getInviteMemberList(MidpidDTO midpiddto);
+	public int insertPmember(MidpidDTO midpiddto);
 
 }

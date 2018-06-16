@@ -8,8 +8,6 @@
 <h3>인포메이션</h3>
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 
-<input type=button value="테스트버튼" id="test1">
-
 <div id=projectinfo_outerbox>
   <div class="row" id="projectinfo_first_row"> <!-- row_1 -->
 
@@ -78,18 +76,20 @@
 				</div>
 				<div class="modal-body ">
 				
-		<table id="project_member_table" class="table">
-			<tr><th>이름</th><th>직위</th><th>부서명</th><th>이메일</th><th>핸드폰 번호</th></tr>
-				 <c:forEach var="member" items="${invitememberlist}">
-				 <tr><td>${member.mname}</td><td>${member.position}</td><td>${member.deptname}</td><td>${member.mid}</td><td>${member.pnum}</td></tr>
+		<table id="project_pmember_table" class="table">
+			<tr><th>이름</th><th>직위</th><th>부서명</th><th>이메일</th><th>핸드폰 번호</th><th>초대</th></tr>
+				 <c:forEach var="pmember" items="${invitememberlist}">
+				 <tr><td>${pmember.mname}</td><td>${pmember.position}</td><td>${pmember.deptname}</td><td>${pmember.mid}</td><td>${pmember.pnum}</td><td><a id ='pmember_add_btn'><i id ="${pmember.mid}" class="fas fa-user-plus"></i></a></td></tr>
 		         </c:forEach>
 		</table>
-			
+		
+		<!-- 
+		<a id ='pmember_add_btn'><i id ="${member.mid}" class="fas fa-user-plus"></i></a>
+		 -->
 				</div>
 				<div align="center">
-					<input type="button" class="btn" id="add-btn" value="생성">&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn" id="cancel-btn"
-						data-dismiss="modal" value="취소">
+						data-dismiss="modal" value="돌아가기">
 				</div>
 				<br>
 			</div>

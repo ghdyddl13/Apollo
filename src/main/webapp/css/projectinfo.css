@@ -63,3 +63,16 @@
 	width : 20%
 }
 
+#project_member_add_modal{
+	width : 100%
+}
+
+#project_pmember_table{
+	text-align: center;
+}
+
+#project_pmember_table th{
+	text-align: center;
+}
+
+

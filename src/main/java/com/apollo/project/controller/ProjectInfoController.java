@@ -43,9 +43,6 @@ public class ProjectInfoController {
 		
 		String pid = data_arr[0];
 		String mid = data_arr[1];
-		
-		System.out.println("pid : " + pid);
-		System.out.println("mid : " + mid);
 	
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
@@ -54,7 +51,7 @@ public class ProjectInfoController {
 		ArrayList<MemberDTO> getProjectMemberlist = new ArrayList<MemberDTO>();
 		getProjectMemberlist = projectinfoservice.getProjectMembers(pid);
         map.addAttribute("memberlist", getProjectMemberlist);
-        
+
         MidpidDTO midpiddto = new MidpidDTO();
         midpiddto.setMid(mid);
         midpiddto.setPid(pid);
@@ -170,14 +167,34 @@ public class ProjectInfoController {
 		return jsonview;
 	}
 	
-	
-	public View projectMemberSearch(String s1) {
-		return null;
-	}
-	
-	public View projectMemberAdd(String s1) {
+	/**
+	 * 
+	 날      짜 : 2018. 6. 16.
+	 기      능 : 프로젝트 맴버 초대 모달에서 초대 아이콘을 누르면 프로젝트에 맴버가 추가됨
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/insertMidToPmember.htm")
+	public View projectMemberAdd(String[] data, Model map) {
 		
-		return null;
+		String tempstr = data[0];
+		String[] data_arr = tempstr.split(",");
+		
+		String pid = data_arr[0];
+		String mid = data_arr[1];
+
+		System.out.println("테스트출력");
+		System.out.println("mid : " + mid);
+		System.out.println("pid : " + pid);
+		
+        MidpidDTO midpiddto = new MidpidDTO();
+        midpiddto.setMid(mid);
+        midpiddto.setPid(pid);
+		
+		int result = 0;
+		result = projectinfoservice.insertPmember(midpiddto);
+        map.addAttribute("result", result);
+		return jsonview;
+		
 	}
 	
 }

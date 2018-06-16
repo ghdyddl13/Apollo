@@ -392,14 +392,48 @@ $(function() {
 	
 	/*
 	 날      짜 : 2018. 6. 15.
-	 기      능 : Modal Page에 데이터 던져주면서 띄우기
+	 기      능 : 프로젝트 멤버 초대 모달에서 초대하기 누르면 멤버가 초대되고 redirect
 	 작성자명 : 김 정 권
 	 */
+	// 동적 생성 태그에 대한 이벤트이므로
+	// 일반적으로 위에서 써오던 함수와 형태가 다르다
+	$(document).on("click","#pmember_add_btn",function(){
+		
+		var mid = $(this).children().attr("id");
+		
+		// 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
+		// 지금은 pid가 1이라고 가정하고 실시
+		var pid = '1';
+		
+		var send_data = new Array();
+		send_data[0] = pid;
+		send_data[1] = mid;
+		
+		$.ajax(
+		        {
+		           type : "post",
+				   url:"insertMidToPmember.htm",
+				   data: "data=" + send_data,
+		           success : function(rdata){
+
+		        	   if(rdata.result == 1){
+		        		   alert('프로젝트 멤버로 추가되었습니다')
+		        		   location.href = "login.htm";
+		        	   } else{
+		        		   alert('프로젝트 멤버 추가 실패')
+		        		   location.href = "login.htm";
+		        	   }
+		        	   
+		               } // end - success
+			        }
+			       );
+		
+	});
+	
+////////////////////////////////////////////////////////////////////////////////////////////////	
+	
 	$('#test1').click(function (){
 		
 	});
-
-////////////////////////////////////////////////////////////////////////////////////////////////	
-	
 	
 }); // end-document.onready
