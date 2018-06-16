@@ -10,6 +10,7 @@ import com.apollo.member.dao.MemberDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.MidpidDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 
@@ -122,5 +123,24 @@ public class ProjectInfoService {
 		
 		return tasklist;
 	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 16.
+	 기      능 : 프로젝트에 초대할 회원의 명단을 불러옴
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<MemberDTO> getInviteMemberList(MidpidDTO midpiddto){
+		
+		ArrayList<MemberDTO> invitememberlist = new ArrayList<MemberDTO>();
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		invitememberlist = dao.getInviteMemberList(midpiddto);
+
+		return invitememberlist;
+	}
+	
+	
+	
 	
 }

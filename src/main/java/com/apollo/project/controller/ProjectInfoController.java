@@ -10,6 +10,7 @@ import org.springframework.web.servlet.View;
 
 import com.apollo.project.service.ProjectInfoService;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.MidpidDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 
@@ -26,11 +27,26 @@ public class ProjectInfoController {
 	 * 
 	 날      짜 : 2018. 6. 15.
 	 기      능 : 프로젝트 인포메이션 페이지 로드
+	 			  로드되자마자 뿌려주는 정보는 다음과 같다
+	 			  1. 해당 프로젝트에 속한 스텝명(셀렉트 박스)
+	 			  	 (테이블은 비동기로 onload되자마자 trigger change)
+	 			  2. 프로젝트에 참여한 멤버 명단
+	 			  3. 모달 페이지에 띄워 줄 회원 명단
+	 			  	 (같은 회사키를 공유하는 회원들을 찾아서 뿌려준다)
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
-	public String projectInfoShow(String pid, Model map) {
+	public String projectInfoShow(String[] data, Model map) {
 		
+		String tempstr = data[0];
+		String[] data_arr = tempstr.split(",");
+		
+		String pid = data_arr[0];
+		String mid = data_arr[1];
+		
+		System.out.println("pid : " + pid);
+		System.out.println("mid : " + mid);
+	
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
 		map.addAttribute("steplist", steplist);
@@ -38,6 +54,16 @@ public class ProjectInfoController {
 		ArrayList<MemberDTO> getProjectMemberlist = new ArrayList<MemberDTO>();
 		getProjectMemberlist = projectinfoservice.getProjectMembers(pid);
         map.addAttribute("memberlist", getProjectMemberlist);
+        
+        MidpidDTO midpiddto = new MidpidDTO();
+        midpiddto.setMid(mid);
+        midpiddto.setPid(pid);
+        
+        // 같은 회사키를 사용하면서도 아직 해당 프로젝트에 참여중이지 않은 멤버들만 가져온다
+        // 가져와서 모달에 넣어준다
+        ArrayList<MemberDTO> invitememberlist = new ArrayList<MemberDTO>();
+        invitememberlist = projectinfoservice.getInviteMemberList(midpiddto);
+        map.addAttribute("invitememberlist", invitememberlist);
 
         return "project/information";
 	}
@@ -143,8 +169,6 @@ public class ProjectInfoController {
 		
 		return jsonview;
 	}
-	
-	
 	
 	
 	public View projectMemberSearch(String s1) {

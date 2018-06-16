@@ -100,10 +100,18 @@ $(function() {
 			
 			// 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
 			// 지금은 pid가 1이라고 가정하고 실시
-			var pid = 1;
+			var pid = '1';
+			
+			// mid도 필요하므로 일단 가정
+			var mid = 'testid1';
+			
+			 var send_data = new Array();
+			 send_data[0] = pid;
+			 send_data[1] = mid;
 			
 			$.ajax({
-				url:"information.htm?pid=" + pid,
+				url:"information.htm",
+				data: "data=" + send_data,
 				dataType:"html",
 				success:function(data){
 					 $("#main-box").empty();

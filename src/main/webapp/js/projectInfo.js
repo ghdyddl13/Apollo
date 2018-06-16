@@ -395,10 +395,9 @@ $(function() {
 	 기      능 : Modal Page에 데이터 던져주면서 띄우기
 	 작성자명 : 김 정 권
 	 */
-	$(document).on("click", "#testbtnjkjk", function() {
-		 alert('testbtnjkjk 클릭되었다');
-		 $("#myModal").modal('show');
-	 });
+	$('#test1').click(function (){
+		
+	});
 
 ////////////////////////////////////////////////////////////////////////////////////////////////	
 	
