@@ -20,10 +20,10 @@ public class ProjectInfoController {
 	@Autowired
 	private View jsonview;
 	
-	@Autowired
+	@Autowired 
 	private ProjectInfoService projectinfoservice;
-	/**
-	 * 
+
+	 /* 
 	 날      짜 : 2018. 6. 13.
 	 기      능 : 프로젝트 인포메이션 페이지 로드 
 	 작성자명 : 김 정 권

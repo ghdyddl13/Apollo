@@ -2,6 +2,8 @@ package com.apollo.step.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +12,13 @@ import org.springframework.web.servlet.View;
 
 import com.apollo.step.service.StepTimelineService;
 import com.apollo.vo.TaskDTO;
+import com.apollo.vo.TstatusDTO;
 
 /**
  * 
-  Ε¬·΅½ΊΈν : StepTimelineController
-  ³―      Β¥ : 2018. 6. 12.
-  ΐΫΌΊΐΪΈν : ΉΪ ΉΞ ½Δ
+  ν΄λμ¤λª… : StepTimelineController
+  λ‚       μ§ : 2018. 6. 15.
+  μ‘μ„±μλª… : λ°• λ―Ό μ‹
  */
 @Controller
 @RequestMapping("/step")
@@ -28,8 +31,15 @@ public class StepTimelineController {
 	private StepTimelineService steptimelineservice; 
 	
 	@RequestMapping("/timeline.htm")
-	public String getTimelineView(String pid) {
-		
+	public String getTimelineView(Model model,HttpServletRequest request) {
+		ArrayList<TstatusDTO> tstatuses = null;
+		int sid = (Integer) request.getSession().getAttribute("sid");
+		try {
+			tstatuses = steptimelineservice.selectTstatusBySid(sid);
+			model.addAttribute("tstatuses", tstatuses);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return "step/timeline";
 	}
 	
@@ -41,8 +51,11 @@ public class StepTimelineController {
 			tasks = steptimelineservice.getTasksByStepId(sid);
 			model.addAttribute("tasks", tasks);
 		} catch (Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}
+		
+		
+		
 		
 		return jsonview;
 	}

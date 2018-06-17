@@ -4,11 +4,19 @@
 <!DOCTYPE html >
  <h3>타임라인</h3>
 <jsp:include page="/WEB-INF/views/inc/stepInsideHeader.jsp"></jsp:include>
-<nav class="navbar inside-header ">
-   <div class="container-fluid ">
 
-   </div>
-</nav>
+
+
+<div class="step-subheader container">
+
+	  <select  id="timeline-tstatus-filter">
+	  	<option value="all">All Tasks</option>
+		<c:forEach var="tstatus" items="${tstatuses}">
+	       	<option class="timeline-tstatus-filter" value="${tstatus.tstatusid}">${tstatus.tstatus}</option>		
+		</c:forEach>
+      </select>
+
+</div>
 
 <div class="container-fluid row" id="timeline">
 <div class="col-lg-3 step-timeline-div" >	
@@ -17,8 +25,8 @@
 				<thead>
 					<tr>
 						<th>No</th>
-						<th>Task이름</th>
 						<th>상태</th>
+						<th>Task이름</th>
 						<th>담당자</th>
 					</tr>
 				</thead>
