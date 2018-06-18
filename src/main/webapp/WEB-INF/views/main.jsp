@@ -18,6 +18,9 @@
 <!-- SIDEBAR JAVASCRIPT -->
 <script type="text/javascript" src="js/sidebar.js"></script>
 
+<!-- 공통 JavaScript 함수 모음(Utils) -->
+<script type="text/javascript" src="js/utils.js"></script>
+
 <!-- Timeline관련  -->
 <script type="text/javascript" src="js/stepTimeline.js"></script>
 <link rel="stylesheet" href="css/stepTimeline.css" />

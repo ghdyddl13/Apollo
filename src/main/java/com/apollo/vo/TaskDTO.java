@@ -12,6 +12,12 @@ public class TaskDTO {
 	private int importance;
 	private Date ctime;
 	private int tstatusid;
+<<<<<<< HEAD
+=======
+	private String tstatus;
+	private String color;
+	
+>>>>>>> 21f92f6ce13f5df803421979adff77597710d097
 	public int getTid() {
 		return tid;
 	}
@@ -60,11 +66,38 @@ public class TaskDTO {
 	public void setCtime(Date ctime) {
 		this.ctime = ctime;
 	}
+<<<<<<< HEAD
 	public int getTstatusid() {
 		return tstatusid;
 	}
 	public void setTstatusid(int tstatusid) {
 		this.tstatusid = tstatusid;
+=======
+	public int getStatusid() {
+		return tstatusid;
+	}
+	public void setStatusid(int statusid) {
+		this.tstatusid = statusid;
+	}
+	public String getTstatus() {
+		return tstatus;
+	}
+	public void setTstatus(String tstatus) {
+		this.tstatus = tstatus;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	
+	@Override
+	public String toString() {
+		return "TaskDTO [tid=" + tid + ", tname=" + tname + ", sday=" + sday + ", eday=" + eday + ", detail=" + detail
+				+ ", pid=" + pid + ", importance=" + importance + ", ctime=" + ctime + ", statusid=" + tstatusid
+				+ ", tstatus=" + tstatus + ", color=" + color + "]";
+>>>>>>> 21f92f6ce13f5df803421979adff77597710d097
 	}
 	
 	

@@ -16,4 +16,6 @@ public interface MemberDAO {
 	public int findpwd(MemberDTO memberdto);
 	
 	public String findpwdidcheck(String mid);
+	
+	public ArrayList<MemberDTO> getTaskAssignees(String tid);
 }

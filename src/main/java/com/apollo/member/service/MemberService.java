@@ -1,6 +1,8 @@
 package com.apollo.member.service;
 
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,9 +98,6 @@ public class MemberService {
 	 작성자명 : 이 창 훈
 	 */
 	public int findpwd(MemberDTO memberdto) {
-		System.out.println("memberdto :" + memberdto.getPwd());
-		System.out.println("memberdto2 : " + memberdto.getMid());
-		System.out.println("memberdto3 : " + memberdto.getMname());
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.findpwd(memberdto);
@@ -113,13 +112,29 @@ public class MemberService {
 	 작성자명 : 이 창 훈
 	 */
 	public String findpwdidcheck(String mid) {
-		System.out.println("mid : " + mid);
 		String result = "";
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.findpwdidcheck(mid);
-		//System.out.println("result2 : " + result);
 		return result;
 		
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 14.
+	 기      능 : 태스크 담당자 구하기
+	 작성자명 : 박 민 식
+	 */
+	public ArrayList<MemberDTO> getTaskAssignees(String tid){
+		
+		ArrayList<MemberDTO> result = null;
+		try {
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			result = dao.getTaskAssignees(tid);
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		return result;
 	}
 	
 }
