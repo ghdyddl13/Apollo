@@ -2,7 +2,9 @@ package com.apollo.project.dao;
 
 import java.util.ArrayList;
 
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
+import com.apollo.vo.StepDTO;
 /**
  * 
   클래스명 : ProjectDAO
@@ -36,5 +38,7 @@ public interface ProjectDAO {
 	 작성자명 : 김 래 영
 	 */
 	public int deleteProject(ProjectDTO projectdto);
+	
+	
 	
 }

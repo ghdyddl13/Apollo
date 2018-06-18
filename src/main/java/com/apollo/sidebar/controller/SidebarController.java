@@ -1,15 +1,17 @@
 package com.apollo.sidebar.controller;
 
+import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import com.apollo.sidebar.service.SidebarService;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 
@@ -47,17 +49,25 @@ public class SidebarController {
 	}
 	
 	@RequestMapping(value="/insertstep.htm", method=RequestMethod.POST)
-	public View insertStep(StepDTO stepdto, int pid, int fid, Model model) {
-		System.out.println("스텝 생성");
+	public View insertStep(StepDTO stepdto, Model model) {
+		System.out.println("isnert step");
 		try {
-			int result = sidebarservice.insertStep(stepdto, pid, fid);
+			int stepresult = sidebarservice.insertStep(stepdto);
 			System.out.println(stepdto.toString());
+			model.addAttribute("stepresult", stepresult);
+			System.out.println("stepresult : " + stepresult);
 			
-			model.addAttribute("result", result); // service에 return 타입인 result 를 result 에 저장 
+			//해당 프로젝트 참여자 명단 가져오기
+			int pid = stepdto.getPid();
+			ArrayList<MemberDTO> memberlist = new ArrayList<MemberDTO>();
+			memberlist = sidebarservice.getMemberList(pid);
+			model.addAttribute("memberlist" + memberlist);
+			System.out.println("memberlist : " + memberlist);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return jsonview; //result 가 json 형태로 변환되어 저장
+		return jsonview; 
 	}
 	
 	public String changeStep(StepDTO stepdto, Model model) {

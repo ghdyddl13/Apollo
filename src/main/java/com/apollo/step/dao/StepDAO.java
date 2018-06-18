@@ -1,6 +1,8 @@
 package com.apollo.step.dao;
 
 import java.util.ArrayList;
+
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TstatusDTO;
 
@@ -27,7 +29,7 @@ public interface StepDAO {
 	 기      능 : pid, fid 받아와서 Step 생성
 	 작성자명 : 김 래 영
 	 */
-	public int insertStep(StepDTO stepdto, int pid, int fid);
+	public int insertStep(StepDTO stepdto);
 	
 	/**
 	 * 
@@ -36,6 +38,11 @@ public interface StepDAO {
 	 작성자명 : 이 창 훈
 	 */
 	public ArrayList<TstatusDTO> selectTstatusBySid(int sid);
-
-
+	
+	/*
+	 날      짜 : 2018. 6. 18.
+	 기      능 : Step 생성시 프로젝트 참여자 명단 불러오기 
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<MemberDTO> getMemberList(int pid);
 }

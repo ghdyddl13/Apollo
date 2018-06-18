@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+  
 	<!-- 프로젝트 생성 Modal 창 -->
 	<div class="modal fade" id="project-insert" role="dialog">
 		<div class="modal-dialog modal-add-project-dialog">
@@ -16,7 +16,7 @@
 					<h4 class="modal-title">Project 생성</h4>
 				</div>
 				<div class="modal-body">
-				<!-- 추후 action=""information.htm" 으로 변경 예정 -->
+				
 					 <form id="project-add-form" method="post" onsubmit="return false;">
 						<fieldset>
 							<div class="row">
@@ -59,13 +59,13 @@
 										<div class="modal-title">
 											<p>시작일</p>
 										</div>
-										<input type="text" id="sday-id" name="sday" placeholder="Start Date" class="date date-img">
+										<input type="text" id="insert-project-sday-id" name="sday" placeholder="Start Date" class="date sdate-img">
 									</div>
 									<div class="col-sm-6">
 										<div class="modal-title">
 											<p>종료일</p>
 										</div>
-										<input type="text" id="eday-id" name="eday" placeholder="End Date" class="date date-img">
+										<input type="text" id="insert-proejct-eday-id" name="eday" placeholder="End Date" class="date edate-img">
 										<br><br>
 									</div>
 									<div class="modal-title">
@@ -79,9 +79,9 @@
 		
 						<br>
 						<div align="center">	
-								<input type="button" class="btn add-btn" id="insert-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
-								<input type="button" class="btn cancel-btn"
-									data-dismiss="modal" value="취소">
+							<input type="button" class="btn add-btn" id="insert-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn cancel-btn"
+								data-dismiss="modal" value="취소">
 						</div>
 						</fieldset>
 					</form>
@@ -116,7 +116,7 @@
 	</div>
 
 	<!-- 스텝 생성 Modal 창 -->
-	<div class="modal fade" id="step-add-modal" role="dialog">
+	<div class="modal fade" id="insert-step" role="dialog">
 		<div class="modal-dialog modal-add-step-dialog">
 			<!-- Modal content-->
 			<div class="modal-content modal-add-step-content">
@@ -125,20 +125,25 @@
 					<h4 class="modal-title">Step 생성</h4>
 				</div>
 				<div class="modal-body">
-					<form method="post">
+					<form id="step-add-form" method="post" onsubmit="return false;">
 						<fieldset>
 							<div class="modal-title">
 								<p>Step명</p>
 							</div>
-							<input type="text" name="sname" class="add-step-text"
+							<input type="text" name="sname" class="add-step-name"
 								placeholder="step명을 입력하세요">
 							<br><br>
 							<div class="modal-title">
 								<p>책임자</p>
 							</div>
 							<div>
-								<select>
-									<option value=""></option>
+								<!-- 추후 project 참여자 불러오기로 변경 예정 -->
+								<select name="mname">
+									<option value="all">책임자를 선택하세요</option>
+									<option></option>
+									 <c:forEach var="member" items="${memberlist}">
+										<option value="${member.mname}"></option>
+									</c:forEach>
 								</select>
 							</div>
 							<br>
@@ -149,23 +154,25 @@
 								<div class="modal-title">
 									<p>시작일</p>
 								</div>
-								<input type="text" name="sday" placeholder="Start Date"
-									class="date date-img"><br>
+								<input type="text" id="insert-step-sday-id" name="sday" placeholder="Start Date"
+									class="date sdate-img"><br>
 							</div>
 							<div class="col-sm-6">
 								<div class="modal-title">
 									<p>종료일</p>
 								</div>
-								<input type="text" name="eday" placeholder="End Date"
-									class="date date-img"><br><br><br>
+								<input type="text" id="insert-step-eday-id" name="eday" placeholder="End Date"
+									class="date edate-img"><br><br><br>
 							</div>
 							<div class="modal-title">
 								<p>상세설명</p>
 							</div>
-							<textarea rows="7%" cols="68%" name="detail" placeholder="내용을 입력하세요"></textarea>
+							<textarea rows="7%" cols="68%" id="step-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
 								<br><br>
+							<input type="hidden" name="pid" value="1">
+							<input type="hidden" name="fid" value="1">
 							<div align="center">
-								<input type="button" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
+								<input type="submit" class="btn add-btn" id="insert-step-btn" value="생성">&nbsp;&nbsp;&nbsp;
 								<input type="button" class="btn cancel-btn"
 									data-dismiss="modal" value="취소">
 							</div>
@@ -178,7 +185,7 @@
 	</div>
 
 
-<!-- 프로젝트 수정 Modal 창 -->
+	<!-- 프로젝트 수정 Modal 창 -->
 	<div class="modal fade" id="update-project" role="dialog">
 		<div class="modal-dialog modal-update-project-dialog">
 			<div class="modal-content modal-update-project-content">
@@ -229,13 +236,13 @@
 										<div class="modal-title">
 											<p>시작일</p>
 										</div>
-										<input type="text" name="sday" placeholder="Start Date" class="date date-img">
+										<input type="text" name="sday" placeholder="Start Date" class="date sdate-img">
 									</div>
 									<div class="col-sm-6">
 										<div class="modal-title">
 											<p>종료일</p>
 										</div>
-										<input type="text" name="eday" placeholder="End Date" class="date date-img">
+										<input type="text" name="eday" placeholder="End Date" class="date edate-img">
 										<br><br>
 									</div>
 									<div class="modal-title">

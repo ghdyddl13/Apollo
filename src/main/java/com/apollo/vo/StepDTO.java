@@ -10,7 +10,6 @@ public class StepDTO {
 	private Date eday;
 	private int pid;
 	private int fid;
-	private String mgr;
 	private int methodologyid;
 	private String mid;
 	public int getSid() {
@@ -49,12 +48,6 @@ public class StepDTO {
 	public void setFid(int fid) {
 		this.fid = fid;
 	}
-	public String getMgr() {
-		return mgr;
-	}
-	public void setMgr(String mgr) {
-		this.mgr = mgr;
-	}
 	public int getMethodologyid() {
 		return methodologyid;
 	}
@@ -66,6 +59,11 @@ public class StepDTO {
 	}
 	public void setMid(String mid) {
 		this.mid = mid;
+	}
+	@Override
+	public String toString() {
+		return "StepDTO [sid=" + sid + ", sname=" + sname + ", sday=" + sday + ", eday=" + eday + ", pid=" + pid
+				+ ", fid=" + fid + ", methodologyid=" + methodologyid + ", mid=" + mid + "]";
 	}
 	
 	

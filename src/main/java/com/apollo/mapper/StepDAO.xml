@@ -8,16 +8,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
 	<insert id="insertStep" parameterType="com.apollo.vo.StepDTO">
-		insert into step(sid, sname, sday, eday, pid, fid, mgr, methodologyid, mid) 
-		values (seq_sid.nextval, #{sname}, #{sday}, #{eday}, #{pid}, #{fid}, #{mgr}, #{methodologyid}', '${mid}')
+		insert into step(sid, sname, sday, eday, pid, fid, methodologyid, mid) 
+		values (seq_sid.nextval, #{sname}, #{sday}, #{eday}, #{pid}, #{fid}, #{methodologyid}, #{mid})
 	</insert>
 
 	<select id ="getProjectIdByStepId" parameterType="Integer"> 
-	  select pid from step where sid=#{sid}
+	 	select pid from step where sid=#{sid}
 	</select>
 	
     <select id ="selectTstatusBySid" resultType="com.apollo.vo.TstatusDTO" parameterType="Integer"> 
-	  select ts.TSTATUS, ts.TSTATUSID, ts.COLOR from step s join TSTATUS ts on s.METHODOLOGYID = ts.METHODOLOGYID where sid=#{sid}
+    	select ts.TSTATUS, ts.TSTATUSID, ts.COLOR from step s join TSTATUS ts on s.METHODOLOGYID = ts.METHODOLOGYID where sid=#{sid}
 	</select>
-
+	
+	<select id="getMemberList" parameterType="Integer" resultType="com.apollo.vo.MemberDTO">
+		select mid, mname, pwd, rday, pnum, image, deptname, apollokey, position from member where mid in (select mid from pmember where pid=#{pid})
+    </select>
 </mapper>
