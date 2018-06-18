@@ -7,17 +7,25 @@
 
 package com.apollo.mywork.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import com.apollo.vo.TaskDTO;
+import com.apollo.vo.MyWorkStepDTO;
+import com.apollo.vo.MyWorkTaskDTO;
 
 public interface MyWorkDAO {
 	
 	/**
 	 * 
 	 날      짜 : 2018. 6. 15.
-	 기      능 : Mywork 첫 페이지에 데이터를 가지고옴
+	 기      능 : MyWork에서 mid를 이용해 Task 가지고오는 함수
 	 작성자명 : 이 진 우
 	 */
-	public ArrayList<TaskDTO> getMyWorkList(String mid);
+	public List<MyWorkTaskDTO> getMyWorkList(String mid);
+	/**
+	 * 
+	 날      짜 : 2018. 6. 18.
+	 기      능 : Mywork에서 mid를 이용해 특정 사용자가 가지고이 있는 Task가 속한 Step 목록을 가지고온다 
+	 작성자명 : 이 진 우
+	 */
+	public List<MyWorkStepDTO> getMyWorkStep(String mid);
 }

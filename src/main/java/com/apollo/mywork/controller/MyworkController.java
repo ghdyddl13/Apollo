@@ -41,7 +41,13 @@ public class MyworkController {
 	 작성자명 : 이 진 우
 	 */
 	@RequestMapping(value="/myWork.htm",method=RequestMethod.GET)
-	public String showMyworkPage(Model map) {
+	public String showMyworkPage(HttpServletRequest request,ModelMap map) {
+		String mid = (String)request.getSession().getAttribute("mid");
+		System.out.println("아이디 : " +mid);
+		String id = "testid4";
+		ArrayList<TaskDTO> myworklist = service.getMyWork(id);
+
+		
 		return "header/myWork";
 	}
 	/**
@@ -52,10 +58,7 @@ public class MyworkController {
 	 */
 	@RequestMapping(value="/myWork.htm",method=RequestMethod.POST)
 	public View myWorkList(HttpServletRequest request, ModelMap map) {
-		String mid = (String)request.getSession().getAttribute("mid");
-		System.out.println("아이디 : " +mid);
-		ArrayList<TaskDTO> myworklist = service.getMyWork(mid);
-		map.addAttribute("myworklist", myworklist);
+
 		
 		return jsonview;
 	}

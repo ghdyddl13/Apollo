@@ -5,9 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.apollo.mywork.dao.MyWorkDAO">
 
 	<!--MyWork 첫 페이지에 데이터를 가지고옴  -->
-	<select id="getMyWorkList" parameterType="String" resultType="com.apollo.vo.TaskDTO">
-		select TID, TNAME, SDAY, EDAY, DETAIL, PID, IMPORTANCE, CTIME, TSTATUSID 
-		from task where tid in (select tid from ASSIGNEE where mid= #{mid} )
+	<select id="getMyWorkList" parameterType="String" resultType="com.apollo.vo.MyWorkTaskDTO">
+		select t.TID, t.TNAME, t.SDAY, t.EDAY,t.DETAIL, t.PID, t.IMPORTANCE, t.CTIME, t.TSTATUSID, s.TSTATUS,s.COLOR  
+		from task t join TSTATUS s on t.TSTATUSID = s.TSTATUSID 
+		where t.TID in (select TID from ASSIGNEE where MID = #{mid}) and s.TSTATUS !='Completed'
 	</select>
-	
+	<!--  -->
+	<select id="getMyWorkStep" parameterType="String" resultType="com.apollo.vo.MyWorkStepDTO">
+		select t.tid, s.SID, s.SNAME
+		from step s join TASKINSTEP t on s.SID= t.SID
+		where t.TID in (select t.TID
+		from task t join TSTATUS s on t.TSTATUSID = s.TSTATUSID 
+		where t.TID in (select TID from ASSIGNEE where MID = #{mid}) and s.TSTATUS !='Completed')
+	</select>
 </mapper>

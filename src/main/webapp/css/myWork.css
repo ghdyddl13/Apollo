@@ -95,16 +95,17 @@
     }
     .task-date-section{
     	text-align:right;
-    	width:100px;
+    	width: 70px;
     	padding: 6px 18px 0 0;
+    	height: 100%;
     }
     .task-date-overdue{
       color:red;
     }
     .task-description-section{
-      margin-top: 6px;
-      width: calc(100%-140px);
-		min-width: 400px;
+    	margin-top: 6px;
+    	min-width:400px;
+      	width: calc(100%-120px);
     }
     .task-name-section{
       font-size: 16px;
@@ -118,9 +119,9 @@
       color:#504f4f;
     }
     .task-step-section{
-      min-width: 300px;
-      width: calc(100%-140px);
+      width: calc(100%-120px);
       height: 19px;
+      min-width:400px;
     }
     .div-step-section{
       margin:4px 0 0 4px;
