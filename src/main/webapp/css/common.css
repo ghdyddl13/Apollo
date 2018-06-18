@@ -3,17 +3,16 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 /* 폰트 */
 html, body{
-
   font-family: 'Noto Sans KR';
   margin:0;
   padding:0;
-  height:calc(100%-50px);
+  height:100%;
 }
 
 #main-box{
     padding-left: 250px;
     height:100%;
-    margin-top: 50px;
+    padding-top: 50px;
 }
 
 .navbar.inside-header{

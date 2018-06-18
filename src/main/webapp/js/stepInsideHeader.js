@@ -52,7 +52,6 @@ $(function() {
 				
 				console.log(data.tasks);
 				makeTimelineTable(data.tasks);
-					
 				makeTimelineGantt(data.tasks);
 			}
 		})

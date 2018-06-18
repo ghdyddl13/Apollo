@@ -1,6 +1,10 @@
 .step-timeline-div {
 	padding: 0px;
-	height: 100%
+	height: 100%;
+}
+
+.step-timeline-div-table{
+	padding:0px
 }
 
 .step-timeline-div thead, thead>tr {
@@ -16,13 +20,17 @@
 
 .table-responsive.step-timeline-table tbody>tr {
 	height: 38px;
+	max-height: 38px;
+}
+
+.table-responsive.step-timeline-table tbody>tr,td {
+	vertical-align: middle !important;
 }
 
 
 
-
 .gantt-target {
-	height: 100%
+	overflow-x:auto; 
 }
 
 
@@ -45,7 +53,8 @@
 #timeline {
 	padding-left: 20px;
 	padding-right: 20px;
-	height: calc(100% - 170px)
+	height: calc(100% - 170px);
+	overflow: auto 
 }
 
 #timeline-tstatus-filter{
@@ -54,4 +63,13 @@
 	background-color: transparent;
 	border: none;
 	text-align: center
+}
+
+.gantt .day-task .bar{
+	fill: #b8c2cc !important ;
+	
+}
+
+.gantt .no-day-task .bar{
+	fill: #b8c2cc;
 }

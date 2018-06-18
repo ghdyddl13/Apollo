@@ -31,7 +31,7 @@ public class ProjectInfoController {
 	@RequestMapping("/information.htm")
 
 	public String projectInfoShow(String pid, Model map) {
-		
+		System.out.println("test");
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
 		map.addAttribute("steplist", steplist);
