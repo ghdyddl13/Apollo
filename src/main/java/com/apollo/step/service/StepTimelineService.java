@@ -22,7 +22,9 @@ public class StepTimelineService {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	public ArrayList<TaskDTO> getTasksByStepId(String sid){
+
+	public ArrayList<TaskDTO> getTasksByStepId(int sid){
+
 		ArrayList<TaskDTO> tasklist= new ArrayList<TaskDTO>();
 		try {
 			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);

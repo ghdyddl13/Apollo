@@ -44,7 +44,7 @@ public class StepTimelineController {
 	}
 	
 	@RequestMapping("/getTimelineTasks.htm")
-	public View getTimelineTasks(String sid, Model model) {
+	public View getTimelineTasks(int sid, Model model) {
 		ArrayList<TaskDTO> tasks = null;
 		
 		try {

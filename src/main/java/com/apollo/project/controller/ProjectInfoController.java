@@ -109,7 +109,7 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/getTasksInSteps.htm")
-	public View getTasksInSteps(String sid, ModelMap map) {
+	public View getTasksInSteps(int sid, ModelMap map) {
 
 		ArrayList<TaskDTO> taskinsteplist = new ArrayList<TaskDTO>();
 		taskinsteplist = projectinfoservice.getTasksInSteps(sid);
@@ -126,7 +126,7 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/getTasksByStepForSituation.htm")
-	public View getTasksByStep(String sid, ModelMap map) {
+	public View getTasksByStep(int sid, ModelMap map) {
 
 		ArrayList<TaskDTO> tasklist = null;
 		
@@ -157,7 +157,7 @@ public class ProjectInfoController {
 		for(StepDTO stepdto : steplist) {
 			
 			ArrayList<TaskDTO> taskinsteplist = new ArrayList<TaskDTO>();
-			taskinsteplist = projectinfoservice.getTasksInSteps(Integer.toString(stepdto.getSid()));
+			taskinsteplist = projectinfoservice.getTasksInSteps(stepdto.getSid());
 			tasklistbysteps.add(taskinsteplist);
 			
 		}
