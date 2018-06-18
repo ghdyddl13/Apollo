@@ -10,21 +10,6 @@ import com.apollo.step.service.StepListService;
 @Controller
 public class TestController {
 	
-	/*@RequestMapping("/index.htm")
-	public String main() {
-		return "login";
-	}
-	
-	@RequestMapping("/join.htm")
-	public String join() {
-		return "join";
-	}
-
-	@RequestMapping("/login.htm")
-	public String login() {
-		return "main";
-	}*/
-	
 	@RequestMapping("/file.htm")
 	public String projectFilelist() {
 		return "project/files";
