@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <if test="eday != null">eday=TO_DATE(#{eday},'YYYY-MM-DD HH24:MI:SS'),</if>
       <if test="detail != null">detail=#{detail},</if>
       <if test="importance != 0">importance=#{importance},</if>
-      <if test="statusid != 0">statusid=#{statusid},</if>
+      <if test="tstatusid != 0">tstatusid=#{tstatusid},</if>
      	ctime=sysdate
     	where tid= #{tid}
     </update>

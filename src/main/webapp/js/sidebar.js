@@ -1,5 +1,7 @@
 $(function() {
 
+	console.log(selectProjectList());
+	
 		// 사이드바 프로젝트 우클릭 >> 추후 Project id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
 		$(".side-project")
 				.contextmenu(
@@ -65,21 +67,7 @@ $(function() {
 			}
 		});
 	
-/*	$(".step1").click(function(event) {
-		console.log(event.target.Id);
-		$.ajax(
-			{
-				url:"list.htm",
-				dataType:"html",
-				success:function(data){
-					console.log(data);
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					
-				}
-			}
-		)
-	});*/
+
 	
 	
 	/////////////////////////// 비동기 화면전환 - 프로젝트 /////////////////////////
@@ -170,4 +158,45 @@ $(function() {
 	
 });
 
+function selectProjectList(){
+	$.ajax({
+		url:"selectProjectList.htm",
+		dataType:"json",
+		success:function(data){
+			console.log(data);
+			$(data.projectlist).each(function(index,el){
+				console.log(el.pname)
+				var a = jQuery("<a>",{"class":"side-project","text":el.pname})
+				var span = jQuery("<span>",{"class":"glyphicon glyphicon-duplicate", 
+											"data-toggle":"collapse",
+											"data-target":"#p"+el.pid})
+				var div = jQuery("<div>",{"class":"side-dir collapse",
+										  "id": "p"+el.pid})
+											
+				console.log(el.pstatuscode);
+				
+				if(el.pstatuscode ==1){
+					$(a).prepend(span).appendTo("#working-project");
+					$(div).appendTo("#working-project");
 
+				}else if(el.pstatuscode ==2){
+					$(a).prepend(span).appendTo("#finished-project");
+					$(div).appendTo("#finished-project");
+				}else if(el.pstatuscode==3){
+					$(a).prepend(span).appendTo("#trash-bean");
+					$(div).appendTo("#trash-bean");
+				}
+			})
+		}
+	});
+	
+}
+
+
+function getSideFolders(pid){
+	
+}
+
+function getSideSteps(pid){
+	
+}
