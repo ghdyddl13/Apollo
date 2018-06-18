@@ -37,13 +37,16 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
+
+
 	public String projectInfoShow(String[] data, Model map) {
 		String tempstr = data[0];
 		String[] data_arr = tempstr.split(",");
 		
 		String pid = data_arr[0];
 		String mid = data_arr[1];
-	
+
+
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
 		map.addAttribute("steplist", steplist);

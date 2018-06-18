@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="dist/frappe-gantt.css" />
 <script src="dist/frappe-gantt.js"></script>
 
+
 <!-- 공통 CSS -->
 <link href="css/common.css" type="text/css" rel="stylesheet">
 <!--MY WORK CSS  -->
@@ -39,6 +40,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/inc/sidebar.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
