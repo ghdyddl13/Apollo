@@ -3,7 +3,7 @@ $(function() {
 
 	/// step list 페이지
 	$("#list-page").click(function(evt){
-
+		
 		var sid = $("#current-sid").val();
 		
 

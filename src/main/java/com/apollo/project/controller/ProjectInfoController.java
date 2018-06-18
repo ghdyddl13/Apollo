@@ -38,7 +38,7 @@ public class ProjectInfoController {
 	 */
 	@RequestMapping("/information.htm")
 	public String projectInfoShow(String[] data, Model map) {
-		
+		System.out.println("야호 두번");
 		String tempstr = data[0];
 		String[] data_arr = tempstr.split(",");
 		

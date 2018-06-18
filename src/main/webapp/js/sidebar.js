@@ -40,6 +40,7 @@ $(function() {
 		// 사이드바 스텝 우클릭  >> 추후 스텝 id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
 
 		$(".side-step").contextmenu(function(event) {
+			console.log("1111111111111234234324345435")
 			event.preventDefault();
 			var dropdown_ul = document.createElement("ul");
 			var dropdown = '<li data-action="second">수정</li>'
@@ -86,7 +87,6 @@ $(function() {
 	
 
 		$(".side-project").click(function(evt){
-			
 			// 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
 			// 지금은 pid가 1이라고 가정하고 실시
 			var pid = '1';
@@ -136,4 +136,33 @@ $(function() {
 
 		});
 		
+	//프로젝트 생성 버튼 클릭시 alert 창 화면 		
+	$("#insert-project-btn").click(function(evt){
+		 if($("#add-project-name").val().trim() == ""){
+			alert("프로젝트명을 입력해주세요.");
+			$("#add-project-name").focus();	
+			return false;
+		 }
+		 var newproject = $("#project-add-form").serialize(); //serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
+		 console.log(newproject);
+		 $.ajax({
+			 url:"insertproject.htm",
+			 data:newproject,
+			 type:"POST",
+			 dataType:"json",
+			 success: function(data){
+				 console.log(data); //data+"data" 로 하면 Object 타입으로 변환되므로 json 형태로 받아볼 경우 data만 찍어보면 된다.
+				 if(data.result > 0){
+					 alert("프로젝트 생성이 완료되었습니다!");
+				 }else {
+					 alert("프로젝트 생성에 실패했습니다");
+				 }
+			 }
+
+		 });	
+	});
+	
+	
 });
+
+

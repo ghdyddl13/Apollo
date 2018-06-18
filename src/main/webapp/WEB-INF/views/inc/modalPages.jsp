@@ -6,14 +6,9 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-$(function() {
-	
-});
-</script>
 
 <!-- 프로젝트 생성 Modal 창 -->
-	<div class="modal fade" id="dialog-form123" role="dialog">
+	<div class="modal fade" id="project-insert-form" role="dialog">
 		<div class="modal-dialog modal-add-project-dialog">
 			<div class="modal-content modal-add-project-content">
 				<div class="modal-header">
@@ -22,7 +17,7 @@ $(function() {
 				</div>
 				<div class="modal-body">
 				<!-- 추후 actuon=""information.htm" 으로 변경 예정 -->
-					<form action="insertproject.htm" method="post">
+					 <form id="project-add-form" method="post" onsubmit="return false;">
 						<fieldset>
 							<div class="row">
 								<br>
@@ -82,15 +77,16 @@ $(function() {
 							<!-- 아래는 임시로 작성해둔 것임 -->
 							<input type="hidden" name="mid" value="${mid}">
 		
-						<div align="center">
-							<input type="submit" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
-							<input type="button" class="btn cancel-btn"
-								data-dismiss="modal" value="취소">
-						</div>
 						<br>
+						<div align="center">	
+								<input type="button" class="btn add-btn" id="insert-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
+								<input type="button" class="btn cancel-btn"
+									data-dismiss="modal" value="취소">
+						</div>
 						</fieldset>
 					</form>
 
+				
 				</div>
 			</div>
 		</div>

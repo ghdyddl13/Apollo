@@ -31,7 +31,13 @@
          <id>oracle</id> 
          <name>ORACLE JDBC Repository</name> 
          <url>http://maven.jahia.org/maven2</url> 
-      </repository> 
+      </repository>
+      
+     <repository>
+		<id>mesir-repo</id>
+		<url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
+	</repository>
+       
 	</repositories> 
 
 
@@ -204,15 +210,12 @@
 			<version>4.0.1.RELEASE</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 			
-	
-		
 		<!-- Test -->
       <dependency>
          <groupId>junit</groupId>
