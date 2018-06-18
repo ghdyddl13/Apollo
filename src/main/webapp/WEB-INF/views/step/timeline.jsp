@@ -19,7 +19,7 @@
 </div>
 
 <div class="container-fluid row" id="timeline">
-<div class="col-lg-3 step-timeline-div" >	
+<div class="col-lg-3 step-timeline-div-table" >	
 		<div class="table-responsive step-timeline-table">
 			<table style="border-right:none" class="table step-timeline-table table-hover" id="timeline-table" width="100%" cellspacing="0">
 				<thead>
@@ -35,7 +35,13 @@
 			</table>
 		</div>
 	</div>
-<div class="col-lg-9 step-timeline-div">
-<div class="gantt-target"></div>
+
+
+
+	
+<div id="gantt-border" class="col-lg-9 step-timeline-div">
+	
+		<div class="gantt-target"></div>
+
 </div>
 </div>	
