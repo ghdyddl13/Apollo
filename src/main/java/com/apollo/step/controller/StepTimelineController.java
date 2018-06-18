@@ -13,9 +13,9 @@ import com.apollo.vo.TaskDTO;
 
 /**
  * 
-  Å¬·¡½º¸í : StepTimelineController
-  ³¯      Â¥ : 2018. 6. 12.
-  ÀÛ¼ºÀÚ¸í : ¹Ú ¹Î ½Ä
+  Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : StepTimelineController
+  ï¿½ï¿½      Â¥ : 2018. 6. 12.
+  ï¿½Û¼ï¿½ï¿½Ú¸ï¿½ : ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
  */
 @Controller
 @RequestMapping("/step")
@@ -34,7 +34,7 @@ public class StepTimelineController {
 	}
 	
 	@RequestMapping("/getTimelineTasks.htm")
-	public View getTimelineTasks(String sid, Model model) {
+	public View getTimelineTasks(int sid, Model model) {
 		ArrayList<TaskDTO> tasks = null;
 		
 		try {

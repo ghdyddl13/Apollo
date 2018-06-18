@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     select * from taskinstep where sid = #{sid}
     </select>
 
-    <select id="getTasksByStepId" parameterType="String" resultType="com.apollo.vo.TaskDTO">
+    <select id="getTasksByStepId" parameterType="Integer" resultType="com.apollo.vo.TaskDTO">
     select * from task where tid in (select tid from taskinstep where sid= #{sid})
     </select>
 </mapper>

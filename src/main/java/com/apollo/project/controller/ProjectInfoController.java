@@ -83,7 +83,7 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/getTasksInSteps.htm")
-	public View getTasksInSteps(String sid, ModelMap map) {
+	public View getTasksInSteps(int sid, ModelMap map) {
 
 		ArrayList<TaskDTO> taskinsteplist = new ArrayList<TaskDTO>();
 		taskinsteplist = projectinfoservice.getTasksInSteps(sid);

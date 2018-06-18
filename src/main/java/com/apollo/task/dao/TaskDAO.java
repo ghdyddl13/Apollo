@@ -10,6 +10,6 @@ public interface TaskDAO {
 	public ArrayList<TaskDTO> getAssignedTasks(String pid);
 	public ArrayList<TaskDTO> getNotAssignedTasks(String pid);
 	public ArrayList<TaskDTO> getTasksInSteps(String sid);
-	public ArrayList<TaskDTO> getTasksByStepId(String sid);	
+	public ArrayList<TaskDTO> getTasksByStepId(int sid);	
 	
 }
