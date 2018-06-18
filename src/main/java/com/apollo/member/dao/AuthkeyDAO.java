@@ -6,6 +6,6 @@ public interface AuthkeyDAO {
 
 	public int createApollokey(AuthkeyDTO authkeydto);
 	
-	public int keycheck(String apollokey);
+	public int keyCheck(String apollokey);
 
 }

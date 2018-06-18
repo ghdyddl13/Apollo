@@ -41,7 +41,7 @@ public class MemberService {
 		System.out.println("service getlogin");
 		String result = "";
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
-		result = dao.getlogin(mid);
+		result = dao.getLogin(mid);
 		
 		return result;
 	}
@@ -56,7 +56,7 @@ public class MemberService {
 		System.out.println(mid);
 		int result=0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
-		result = dao.midcheck(mid);
+		result = dao.midCheck(mid);
 		System.out.println(result);
 		return result;
 	}
@@ -70,7 +70,7 @@ public class MemberService {
 		System.out.println("service midcheck");
 		int result=0;
 		AuthkeyDAO dao = sqlsession.getMapper(AuthkeyDAO.class);
-		result = dao.keycheck(apollokey);
+		result = dao.keyCheck(apollokey);
 		System.out.println(result);
 		return result;
 
@@ -101,7 +101,7 @@ public class MemberService {
 		System.out.println("memberdto3 : " + memberdto.getMname());
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
-		result = dao.findpwd(memberdto);
+		result = dao.findPwd(memberdto);
 		System.out.println("result : " + result);
 		return result;
 	}
@@ -116,7 +116,7 @@ public class MemberService {
 		System.out.println("mid : " + mid);
 		String result = "";
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
-		result = dao.findpwdidcheck(mid);
+		result = dao.findPwdIdCheck(mid);
 		//System.out.println("result2 : " + result);
 		return result;
 		

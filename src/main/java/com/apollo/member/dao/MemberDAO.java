@@ -9,11 +9,11 @@ public interface MemberDAO {
 	
 	public int insertMember(MemberDTO memberdto);
 	
-	public String getlogin(String mid);
+	public String getLogin(String mid);
 
-	public int midcheck(String mid);
+	public int midCheck(String mid);
 
-	public int findpwd(MemberDTO memberdto);
+	public int findPwd(MemberDTO memberdto);
 	
-	public String findpwdidcheck(String mid);
+	public String findPwdIdCheck(String mid);
 }
