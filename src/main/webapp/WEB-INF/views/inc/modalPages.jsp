@@ -7,7 +7,7 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<!-- 프로젝트 생성 Modal 창 -->
+	<!-- 프로젝트 생성 Modal 창 -->
 	<div class="modal fade" id="project-insert" role="dialog">
 		<div class="modal-dialog modal-add-project-dialog">
 			<div class="modal-content modal-add-project-content">

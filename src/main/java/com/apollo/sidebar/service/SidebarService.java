@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.apollo.project.dao.ProjectDAO;
 import com.apollo.sidebar.dao.FolderDAO;
+import com.apollo.step.dao.StepDAO;
 import com.apollo.vo.ProjectDTO;
+import com.apollo.vo.StepDTO;
 /* 
   클래스명 : SidebarService
   날      짜 : 2018. 6. 13.
@@ -65,4 +67,21 @@ public class SidebarService {
 		return result;
 	}
 	
+	public int insertStep(StepDTO stepdto, int pid, int fid) {
+		int result = 0;
+		
+		try {
+			StepDAO stepdao = sqlsession.getMapper(StepDAO.class);
+			result = stepdao.insertStep(stepdto, pid, fid);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		if(result > 0) {
+			System.out.println("step insert success");
+		}else {
+			System.out.println("step insert fail");
+		}
+		return result;
+		
+	}
 }

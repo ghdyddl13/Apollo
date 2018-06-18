@@ -161,7 +161,7 @@ $(function() {
 				 $('#sday-id').val("");
 				 $('#eday-id').val("");
 				 $('#project-detail').val("");
-				 $('.close');
+				 $('#project-insert').close();
 			 }
 
 		 });	
