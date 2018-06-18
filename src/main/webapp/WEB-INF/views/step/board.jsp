@@ -18,7 +18,7 @@
 		var width = (($('.droptrue').length + $('.dropfalse').length) * 160)
 				+ "px";
 		console.log(width)
-		$('#content-md').css("width", width)
+		$('#board-content-md').css("width", width)
 	}
 
 	$(function() {
@@ -32,28 +32,28 @@
 		$("#sortable1").disableSelection();
 		
 		
-		 $('#content-md').draggable(
+		 $('#board-content-md').draggable(
           {
              axis: "x"
         },{
             stop: function() {
                 
-                var left = $('#content-md')[0].offsetLeft
+                var left = $('#board-content-md')[0].offsetLeft
                 console.log(left);
-                var maxwidth = $(window).width() - $('#content-md').width()
+                var maxwidth = $(window).width() - $('#board-content-md').width()
                 
                 if(left > 0){
-                    $('#content-md').css('left','0px')
-                }else if($(window).width() > $('#content-md').width()){
+                    $('#board-content-md').css('left','0px')
+                }else if($(window).width() > $('#board-content-md').width()){
                     if(left < 0){ //화면크기가 div길이보다 크고 left가 0보다 작으면!!
-                        $('#content-md').css('left','0px')
+                        $('#board-content-md').css('left','0px')
                     }
-                }else if($(window).width() < $('#content-md').width()){
+                }else if($(window).width() < $('#board-content-md').width()){
                     if(left < maxwidth){ //화면크기가 div길이보다 작고 left가 maxwidth보다 작으면!!
-                        $('#content-md').css('left',maxwidth-80)
+                        $('#board-content-md').css('left',maxwidth-80)
                     }
                 }
-                $('#content-md').off('mousemove')
+                $('#board-content-md').off('mousemove')
             }
         }
     ) 
@@ -80,180 +80,54 @@
 	width: 120px;
 }
 
-#content-md {
+#board-content-md {
 	height: 100%;
+	
 }
 
-#testdiv {
+#board-main-div {
 	overflow-x: scroll;
 	max-width: calc(100% -250px);
 	height: 100%;
+	
+
+}
+
+#board-status-div{
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+#board-hr{
+	border: 0; 
+	height: 10px; 
+	width: 300px;
+}
+
+#board-status-name{
+	font-size: 20px;
+	color: black;
+	
+	
 }
 </style>
-	<c:forEach var="b" items="${b}"> 
-  		<div style="width: 50px; height: 100%">
-  			${b.tstatus}
-  			<hr style="border: 0; height: 30px;  background-color:${b.color}">
-  		</div>
-	</c:forEach>
-	<div class="container-fluid" id="testdiv">
-	<div id="content-md" class="container-fluid" >
-		<div >
-			<!-- <ul id="sortable1" class="droptrue">
 
-				<li class="ui-state-default">4</li>
-				<li class="ui-state-default">6</li>
-				<li class="ui-state-default">1</li>
-				<li class="ui-state-default">2</li>
-				<li class="ui-state-default">3</li>
-			</ul>
-
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			
-			
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-				<li class="ui-state-default">Item 5</li>
-			</ul>
-			<ul id="sortable1" class="droptrue">
-
-				<li class="ui-state-default">Can be dropped..</li>
-				<li class="ui-state-default">..on an empty list</li>
-				<li class="ui-state-default">Item 3</li>
-				<li class="ui-state-default">Item 4</li>
-
-				<li class="ui-state-default">끝</li>
-			</ul>
- -->
+<div class="container-fluid" id="board-main-div">
+	<div class="container-fluid" id="board-content-md">
+		<div class="container-fluid" id="board-status-div">
+			<c:forEach var="b" items="${b}">
+				<div class="container-fluid">
+					<p align="center" id="board-status-name">${b.tstatus}</p>
+					<hr id="board-hr" style="background-color:${b.color};">
+					<c:forEach var="t" items="${t}">
+					<ul id="sortable1" class="droptrue">
+						<li class="ui-state-default">${t.tname}</li>
+					</ul>
+					</c:forEach>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
 </div>
-
-
-
-
-
-
-	</div>
-	</div>

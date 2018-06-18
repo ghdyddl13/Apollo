@@ -40,7 +40,6 @@ $(function() {
 		// 사이드바 스텝 우클릭  >> 추후 스텝 id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
 
 		$(".side-step").contextmenu(function(event) {
-			console.log("1111111111111234234324345435")
 			event.preventDefault();
 			var dropdown_ul = document.createElement("ul");
 			var dropdown = '<li data-action="second">수정</li>'
@@ -127,7 +126,7 @@ $(function() {
 			})
 	    });
 	/* modal 창(project, step) dateficker */
-		$( ".date-img" ).datepicker({
+		$(".date-img").datepicker({
 		    showOn: "button",
 		    buttonImage: "img/calendar.png",
 		    buttonImageOnly: true,
@@ -156,7 +155,13 @@ $(function() {
 					 alert("프로젝트 생성이 완료되었습니다!");
 				 }else {
 					 alert("프로젝트 생성에 실패했습니다");
-				 }
+				 }	
+				 $('#add-project-name').val("");
+				 $('#method').val("");
+				 $('#sday-id').val("");
+				 $('#eday-id').val("");
+				 $('#project-detail').val("");
+				 $('.close');
 			 }
 
 		 });	

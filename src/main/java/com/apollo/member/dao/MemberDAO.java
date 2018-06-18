@@ -18,9 +18,10 @@ public interface MemberDAO {
 	
 	public int insertPmember(MidpidDTO midpiddto);
 
-	public int findpwd(MemberDTO memberdto);
+	public int findPwd(MemberDTO memberdto);
 	
-	public String findpwdidcheck(String mid);
+	public String findPwdIdCheck(String mid);
 	
 	public ArrayList<MemberDTO> getTaskAssignees(String tid);
+
 }

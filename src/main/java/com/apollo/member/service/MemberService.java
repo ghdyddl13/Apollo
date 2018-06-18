@@ -87,7 +87,7 @@ public class MemberService {
 	public int createApollokey(AuthkeyDTO authkeydto) {
 		int result = 0;
 		AuthkeyDAO dao = sqlsession.getMapper(AuthkeyDAO.class);
-		result = dao.createApollokey(authkeydto);
+		result = dao.createApolloKey(authkeydto);
 		return result;
 	}
 	
@@ -100,7 +100,7 @@ public class MemberService {
 	public int findpwd(MemberDTO memberdto) {
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
-		result = dao.findpwd(memberdto);
+		result = dao.findPwd(memberdto);
 		System.out.println("result : " + result);
 		return result;
 	}
@@ -114,7 +114,7 @@ public class MemberService {
 	public String findpwdidcheck(String mid) {
 		String result = "";
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
-		result = dao.findpwdidcheck(mid);
+		result = dao.findPwdIdCheck(mid);
 		return result;
 		
 	}

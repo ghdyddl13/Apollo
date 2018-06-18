@@ -4,39 +4,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.member.dao.MemberDAO">
 
-    <select id="getProjectMemberlist" parameterType="String" resultType="com.apollo.vo.MemberDTO">
-    select * from member where mid in (select mid from pmember where pid = #{pid})
-    </select>
+	<select id="getProjectMemberlist" parameterType="String"
+		resultType="com.apollo.vo.MemberDTO">
+		select * from member where mid in (select mid from pmember where pid =
+		#{pid})
+	</select>
 
-	<insert id="insertMember" parameterType="com.apollo.vo.MemberDTO">
-			insert into member(mid, mname, pwd, rday, pnum, deptname, apollokey, position)
-			values(#{mid}, #{mname}, #{pwd}, sysdate, #{pnum}, #{deptname}, #{apollokey}, #{position})
+
+	<insert id="insertMember"
+		parameterType="com.apollo.vo.MemberDTO">
+		insert into member(mid, mname, pwd, rday, pnum, deptname, apollokey,
+		position)
+		values(#{mid}, #{mname}, #{pwd}, sysdate, #{pnum}, #{deptname}, #{apollokey},
+		#{position})
 	</insert>
 	<select id="getlogin" resultType="String">
-			select pwd from member where mid=#{mid}
+		select pwd from member where mid=#{mid}
 	</select>
-	
+
 	<select id="midcheck" resultType="int">
-			select count(*) from member where mid = #{mid}
+		select count(*) from member where mid = #{mid}
 	</select>
-	<update id="findpwd" parameterType="com.apollo.vo.MemberDTO">
-	  		update member set pwd=#{pwd} where mid=#{mid}
-	</update> 
-	 
-	<select id="findpwdidcheck" resultType="String">
-			select mname from member where mid=#{mid}
+	<update id="findPwd" parameterType="com.apollo.vo.MemberDTO">
+		update member set pwd=#{pwd} where mid=#{mid}
+	</update>
+
+	<select id="findPwdIdCheck" resultType="String">
+		select mname from member
+		where mid=#{mid}
 	</select>
-	
-	<select id="getTaskAssignees" resultType="com.apollo.vo.MemberDTO">
-		select * from member where mid in (select mid from assignee where tid= #{tid})
+
+	<select id="getTaskAssignees"
+		resultType="com.apollo.vo.MemberDTO">
+		select * from member where mid in (select mid from assignee
+		where tid= #{tid})
 	</select>
-	
-    <select id="getInviteMemberList" parameterType="com.apollo.vo.MidpidDTO" resultType="com.apollo.vo.MemberDTO">
-    select * from member where apollokey = (select apollokey from member where mid = #{mid}) and mid not in (select mid from pmember where pid = #{pid})
-    </select>
-    
-    <insert id="insertPmember" parameterType="com.apollo.vo.MidpidDTO">
-    	insert into pmember values(#{mid}, #{pid})
-    </insert>
-    
+
+	<select id="getInviteMemberList"
+		parameterType="com.apollo.vo.MidpidDTO"
+		resultType="com.apollo.vo.MemberDTO">
+		select * from member where apollokey = (select apollokey from member where
+		mid = #{mid}) and mid not in (select mid from pmember where pid =
+		#{pid})
+	</select>
+
+	<insert id="insertPmember"
+		parameterType="com.apollo.vo.MidpidDTO">
+		insert into pmember values(#{mid}, #{pid})
+	</insert>
+
 </mapper>

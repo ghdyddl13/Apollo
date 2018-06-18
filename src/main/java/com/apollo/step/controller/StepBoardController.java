@@ -21,6 +21,8 @@ public class StepBoardController {
 	@Autowired
 	private StepBoardService boardservice;
 	
+	
+	
 	@Autowired
 	private View jsonview;
 	
@@ -43,6 +45,10 @@ public class StepBoardController {
         ArrayList<TstatusDTO> tstatusdto = boardservice.selectTstatusBySid(sid);
         System.out.println("tstatusdto : " + tstatusdto);
         model.addAttribute("b", tstatusdto);
+        
+        ArrayList<TaskDTO> taskdto = boardservice.getTasksByStepId(sid);
+        model.addAttribute("t", taskdto);
+        
         
         return "step/board";
     }
