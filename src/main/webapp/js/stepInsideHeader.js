@@ -16,8 +16,6 @@ $(function() {
 		})
 		
 	})
-	
-	
 	// 스텝 board 페이지
 	$("#board-page").click(function(evt){
 		$.ajax({
@@ -27,7 +25,6 @@ $(function() {
 		
 				$("#main-box").empty();
 				$("#main-box").append(data);
-				
 			}
 		})
 	})

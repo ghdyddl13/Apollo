@@ -32,11 +32,6 @@ public class TestController {
 		return "project/table";
 	}
 	
-	@RequestMapping("/inbox.htm")
-	public String inbox() {
-		return "header/inbox";
-	}
-	
 	
 	@RequestMapping("/report.htm")
 	public String report() {

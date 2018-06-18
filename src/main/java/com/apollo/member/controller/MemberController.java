@@ -129,7 +129,6 @@ public class MemberController {
 		}else {
 			if(bCryptPasswordEncoder.matches(pwd, securitypwd)) {
 			    System.out.println("비밀번호 일치");
-			    
 			    session.setAttribute("mid", mid);
 			    result = "main";
 			}else { 

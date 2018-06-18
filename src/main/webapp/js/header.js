@@ -1,6 +1,5 @@
 $(function() {
-	
-	//// 헤더 inbox 페이지
+	// 헤더 inbox 페이지
 	$("#inbox-page").click(function(evt){
 		$.ajax({
 			url:"inbox.htm",
