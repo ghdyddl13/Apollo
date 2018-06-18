@@ -10,9 +10,9 @@ public interface MemberDAO {
 	
 	public int insertMember(MemberDTO memberdto);
 	
-	public String getlogin(String mid);
+	public String getLogin(String mid);
 
-	public int midcheck(String mid);
+	public int midCheck(String mid);
 
 	public ArrayList<MemberDTO> getInviteMemberList(MidpidDTO midpiddto);
 	

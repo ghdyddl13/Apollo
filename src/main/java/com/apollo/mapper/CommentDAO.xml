@@ -2,6 +2,30 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.apollo.task.dao.CommentDAO">
+<mapper namespace="com.apollo.inbox.dao.InboxDAO">
+<select id="getCommentlist" parameterType="String" resultType="com.apollo.vo.CommentDTO">
+ SELECT r.cmtid, c.comments, c.tid, c.mid ,m.mname, c.cmtkind, c.cmtmtime, r.isarchive, t.tname, p.pname,m.image
+ FROM RECEIVER r JOIN COMMENTS c ON r.CMTID = c.CMTID join task t on t.tid=c.tid join project p on p.pid =t.pid 
+ join member m on c.mid = m.mid where r.mid=#{mid} and r.ISARCHIVE = 0 and r.mid != c.mid ORDER BY c.cmtmtime DESC
+</select>
 
+<select id="getSentlist" parameterType="String" resultType="com.apollo.vo.CommentDTO">
+ select DISTINCT r.cmtid, c.comments, c.tid, c.mid ,m.mname, c.cmtkind, c.cmtmtime, r.isarchive, t.tname, p.pname, m.image 
+ from RECEIVER r join COMMENTS c on r.CMTID = c.CMTID join task t on t.tid = c.tid join PROJECT p on p.pid = t.pid
+ join member m on c.MID = m.MID where c.mid = #{mid} and r.ISARCHIVE = 0 and r.mid = c.mid ORDER BY c.cmtmtime DESC
+</select>
+
+<select id="getArchivelist" parameterType="String" resultType="com.apollo.vo.CommentDTO">
+SELECT r.cmtid, c.comments, c.tid, r.mid ,m.mname, c.cmtkind, c.cmtmtime, r.isarchive, t.tname, p.pname, m.image
+ FROM RECEIVER r JOIN COMMENTS c ON r.CMTID = c.CMTID join task t on t.tid=c.tid join project p on p.pid =t.pid 
+ join member m on r.mid = m.mid where r.mid=#{mid} and r.ISARCHIVE = 1 ORDER BY c.cmtmtime DESC
+</select>
+
+<update id="updateArchive" parameterType="com.apollo.vo.CommentDTO">
+UPDATE RECEIVER SET ISARCHIVE = 1 where mid=#{mid} and cmtid=#{cmtid}
+</update>
+
+<update id="updateArchive2" parameterType="com.apollo.vo.CommentDTO">
+UPDATE RECEIVER SET ISARCHIVE = 0 where mid=#{mid} and cmtid=#{cmtid}
+</update>
 </mapper>

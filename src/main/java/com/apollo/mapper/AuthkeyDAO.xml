@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    insert into AUTHKEY(apollokey, cname, email) values(#{apollokey}, #{cname}, #{email}) 
 	</insert>
 	
-	<select id="keycheck" resultType="int">
+	<select id="keyCheck" resultType="int">
 		select count(*) from authkey where apollokey = #{apollokey}
 	</select>
 </mapper>

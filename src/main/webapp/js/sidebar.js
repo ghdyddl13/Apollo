@@ -86,6 +86,8 @@ $(function() {
 	
 
 		$(".side-project").click(function(evt){
+
+			console.log("사이드바~~!~!~!~!~!~!~!~!~!");
 			// 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
 			// 지금은 pid가 1이라고 가정하고 실시
 			var pid = '1';
