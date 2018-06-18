@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class MyWorkTaskDTO {
 	private int tid;
 	private String tname;
-	private Date sday;
-	private Date eday;
+	private String sday;
+	private String eday;
 	private String detail;
 	private int pid;
 	private int importance;
@@ -15,7 +15,16 @@ public class MyWorkTaskDTO {
 	private int tstatusid;
 	private String tstatus;
 	private String color;
+	private String date;
 	private ArrayList<MyWorkStepDTO> steps;
+
+	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	public int getTid() {
 		return tid;
 	}
@@ -28,16 +37,16 @@ public class MyWorkTaskDTO {
 	public void setTname(String tname) {
 		this.tname = tname;
 	}
-	public Date getSday() {
+	public String getSday() {
 		return sday;
 	}
-	public void setSday(Date sday) {
+	public void setSday(String sday) {
 		this.sday = sday;
 	}
-	public Date getEday() {
+	public String getEday() {
 		return eday;
 	}
-	public void setEday(Date eday) {
+	public void setEday(String eday) {
 		this.eday = eday;
 	}
 	public String getDetail() {
@@ -92,9 +101,9 @@ public class MyWorkTaskDTO {
 	public String toString() {
 		return "MyWorkTaskDTO [tid=" + tid + ", tname=" + tname + ", sday=" + sday + ", eday=" + eday + ", detail="
 				+ detail + ", pid=" + pid + ", importance=" + importance + ", ctime=" + ctime + ", tstatusid="
-				+ tstatusid + ", tstatus=" + tstatus + ", color=" + color + ", steps=" + steps + "]";
+				+ tstatusid + ", tstatus=" + tstatus + ", color=" + color + ", date=" + date + ", steps=" + steps + "]";
 	}
-	
+
 	
 	
 }

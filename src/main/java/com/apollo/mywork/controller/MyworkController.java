@@ -1,13 +1,12 @@
 package com.apollo.mywork.controller;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +19,7 @@ import org.springframework.web.servlet.View;
  */
 
 import com.apollo.mywork.service.MyworkService;
-import com.apollo.vo.TaskDTO;
+import com.apollo.vo.MyWorkTaskDTO;
 @Controller
 public class MyworkController {
 	/**
@@ -45,7 +44,18 @@ public class MyworkController {
 		String mid = (String)request.getSession().getAttribute("mid");
 		System.out.println("아이디 : " +mid);
 		String id = "testid4";
-		ArrayList<TaskDTO> myworklist = service.getMyWork(id);
+		
+		Map<String, List<MyWorkTaskDTO>> taskmap=null;
+		try {
+			taskmap = service.getMyWork(id);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		map.addAttribute("todaylist", taskmap.get("todaylist"));
+		map.addAttribute("thisweeklist", taskmap.get("thisweeklist"));
+		map.addAttribute("nextweeklist", taskmap.get("nextweeklist"));
+		map.addAttribute("laterlist", taskmap.get("laterlist"));
 
 		
 		return "header/myWork";
