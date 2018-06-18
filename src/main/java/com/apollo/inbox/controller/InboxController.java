@@ -21,6 +21,12 @@ public class InboxController {
 	@Autowired
 	private InboxService service;
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 18.
+	 기      능 : 인박스 페이지 (디폴트 incomming페이지) 컨트롤러
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping("/inbox.htm")
 	public String inbox(HttpSession session,Model model) {
 		System.out.println("inbox controller");
@@ -41,14 +47,13 @@ public class InboxController {
 		model.addAttribute("inbox", "incomming");
 		return "header/inbox";
 	}
-	
-/*	@RequestMapping("/incoming.htm")
-	public String showIncoming(HttpSession session, Model model) 	{
-		
-		String mid = (String)session.getAttribute("mid");
-		System.out.println(mid);
-		return null;
-	}*/
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 18.
+	 기      능 : set 페이지 컨트롤러
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping("/sent.htm")
 	public String showSent(HttpSession session, Model model) {
 		System.out.println("sent controller");
@@ -69,6 +74,12 @@ public class InboxController {
 		model.addAttribute("inbox", "sent");
 		return "header/inbox";
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 18.
+	 기      능 : 아카이브 페이지 컨트롤러
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping("/archive.htm")
 	public String showArchive(HttpSession session, Model model){
 		System.out.println("archive controller");
@@ -89,7 +100,12 @@ public class InboxController {
 		model.addAttribute("inbox", "archive");
 		return "header/inbox";
 	}
-	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 18.
+	 기      능 : 아카이브 업데이트(아카이브 저장) 컨트롤러
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping("/archiveupdate.htm")
 	public String updateArchive(int cmtid,String inboxkind,HttpSession session) {
 		String result ="";
@@ -117,7 +133,12 @@ public class InboxController {
 		
 		return result;
 	}
-	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 18.
+	 기      능 : 아카이브 업데이트(아카이브 해제) 컨트롤러
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping("/archiveupdate2.htm")
 	public String updateArchive2(int cmtid,HttpSession session) {
 		System.out.println("updatearchive controller");
