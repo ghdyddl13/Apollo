@@ -1,5 +1,10 @@
 package com.apollo.vo;
-
+/**
+ * 
+  클래스명 : MyWorkStepDTO
+  날      짜 : 2018. 6. 19.
+  작성자명 : 이 진 우
+ */
 public class MyWorkStepDTO {
 
 	private int sid;

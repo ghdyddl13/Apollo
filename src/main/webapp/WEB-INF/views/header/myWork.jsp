@@ -14,10 +14,10 @@
 			<c:forEach var="todaytask" items="${todaylist}">
 				<div class="main-section-task" id="t+${todaytask.tid}">
 					<div class="task-image-section"></div>
-					<div class="task-date-section task-date-overdue"
+					<div class="task-date-section"
 						style="float: right">${todaytask.date}</div>
 					<div class="task-description-section">
-						<div class="task-status" style="color:${todaytask.color}">${todaytask.tstatus}</div>
+						<div class="task-status" style="background-color:${todaytask.color}">${todaytask.tstatus}</div>
 						<div class="task-name-section">${todaytask.tname}</div>
 						<div class="task-detail-section">${todaytask.detail}</div>
 					</div>
@@ -40,6 +40,25 @@
 				<div class="date-section">Jun 10 - Jun 16</div>
 				<div class="week-count-section" id="todaycount" style="float: right">2</div>
 			</div>
+			<c:forEach var="thisweektask" items="${thisweeklist}">
+				<div class="main-section-task" id="t+${thisweektask.tid}">
+					<div class="task-image-section"></div>
+					<div class="task-date-section"
+						style="float: right">${thisweektask.date}</div>
+					<div class="task-description-section">
+						<div class="task-status" style="background-color:${thisweektask.color}">${thisweektask.tstatus}</div>
+						<div class="task-name-section">${thisweektask.tname}</div>
+						<div class="task-detail-section">${thisweektask.detail}</div>
+					</div>
+					<div class="task-step-section">
+						<div class="div-step-section">
+							<c:forEach var="step" items="${thisweektask.steps}">
+								<span class="span-step-section" id="s+${step.sid}">${step.sname}</span>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
 		<div class="week-wrapper" id="nextweek">
 			<div class="main-section-header">
@@ -47,7 +66,25 @@
 				<div class="date-section">Jun 17 - Jun 23</div>
 				<div class="week-count-section" id="todaycount" style="float: right">1</div>
 			</div>
-
+			<c:forEach var="nextweektask" items="${nextweeklist}">
+				<div class="main-section-task" id="t+${nextweektask.tid}">
+					<div class="task-image-section"></div>
+					<div class="task-date-section"
+						style="float: right">${nextweektask.date}</div>
+					<div class="task-description-section">
+						<div class="task-status" style="background-color:${nextweektask.color}">${nextweektask.tstatus}</div>
+						<div class="task-name-section">${nextweektask.tname}</div>
+						<div class="task-detail-section">${nextweektask.detail}</div>
+					</div>
+					<div class="task-step-section">
+						<div class="div-step-section">
+							<c:forEach var="step" items="${nextweektask.steps}">
+								<span class="span-step-section" id="s+${step.sid}">${step.sname}</span>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
 		<div class="week-wrapper" id="later">
 			<div class="main-section-header">
@@ -55,105 +92,28 @@
 				<div class="date-section">After Jun 23</div>
 				<div class="week-count-section" id="todaycount" style="float: right">0</div>
 			</div>
+			<c:forEach var="latertask" items="${laterlist}">
+				<div class="main-section-task" id="t+${latertask.tid}">
+					<div class="task-image-section"></div>
+					<div class="task-date-section"
+						style="float: right">${latertask.date}</div>
+					<div class="task-description-section">
+						<div class="task-status" style="background-color:${latertask.color}">${latertask.tstatus}</div>
+						<div class="task-name-section">${latertask.tname}</div>
+						<div class="task-detail-section">${latertask.detail}</div>
+					</div>
+					<div class="task-step-section">
+						<div class="div-step-section">
+							<c:forEach var="step" items="${latertask.steps}">
+								<span class="span-step-section" id="s+${step.sid}">${step.sname}</span>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </div>
-  <script type="text/javascript">
-			$(function() {
-				$(".main-section-task").click(function() {
-					$(".main-section-task").css("background-color", '#a8c6ed');
-				});
-				///////////////////////////서버시간 추출해오는 함수////////////////////////////
-				/*
-				 날      짜 : 2018. 6. 13.
-				 기      능 : 서버시각 추출을 위한 함수 / 호출 형식은 YYYYMMDDHHMMSS / 활용 예시 : var nowdate = serverToday();
-				 작성자명 : 김 정 권
-				 */
-				function serverToday() {
-					var xmlHttp;
-					//분기하지 않으면 IE에서만 작동된다. 
-					if (window.XMLHttpRequest) { // IE 7.0 이상, 크롬, 파이어폭스일 경우 분기 
-						xmlHttp = new XMLHttpRequest();
-						xmlHttp.open('HEAD', window.location.href.toString(),
-								false);
-						xmlHttp.setRequestHeader("Content-Type", "text/html");
-						xmlHttp.send('');
-					} else if (window.ActiveXObject) {
-						xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
-						xmlHttp.open('HEAD', window.location.href.toString(),
-								false);
-						xmlHttp.setRequestHeader("Content-Type", "text/html");
-						xmlHttp.send('');
-					}
-					var st = xmlHttp.getResponseHeader("Date");
-					var curDate = new Date(st);
-					var curDateFmt;
-					var year = curDate.getFullYear();
-					var month = curDate.getMonth() + 1;
-					var day = curDate.getDate();
-					var hours = curDate.getHours();
-					var minutes = curDate.getMinutes();
-					if (parseInt(month) < 10) {
-						month = 0 + "" + month;
-					}
-					if (parseInt(day) < 10) {
-						day = 0 + "" + day;
-					}
-					if (parseInt(hours) < 10) {
-						hours = 0 + "" + hours;
-					}
-					if (parseInt(minutes) < 10) {
-						minutes = 0 + "" + minutes;
-					}
-					curDateFmt = parseInt(year + "" + month + "" + day + ""
-							+ hours + "" + minutes);
-					return curDateFmt;
-				} // end - serverToday()
-
-				/////////////////////////////DIV TAG 이동시키기 /////////////////////////////////////
-				var startpos, diffpos = 0, range = 540;
-				var isEnable = false;
-
-				document.getElementById("center").onmousedown = on_mouse_down;
-				document.onmouseup = on_mouse_up;
-				document.onmousemove = on_mouse_move;
-				function on_mouse_down(e) {
-					startpos = event.clientX + diffpos;
-					isEnable = true;
-					return false;
-				}
-
-				function on_mouse_up(e) {
-					isEnable = false;
-					return false;
-				}
-
-				function on_mouse_move(e) {
-					if (isEnable) {
-						pos = event.clientX;
-						diffpos = startpos - pos;
-						var width = (window.innerWidth - 250) / 2;
-						if (diffpos > -(width - range)
-								&& diffpos < (width - range)) {
-							document.getElementById("left").style.width = width
-									- 25 - diffpos + "px";
-							document.getElementById("right").style.width = width
-									- 25 + diffpos + "px";
-						}
-					}
-				}
-
-				/////////////////////////////////////////////////////////////////////////////////////
-				////////////////////ajax를 이용해 처음 데이터를 뿌려주는 함수////////////////////////
-				/*        $.ajax({
-				 type:"POST",
-				 url:"myWork.htm",
-				 dataType:"JSON",
-				 success:function(data){
-				 console.log(data);
-				 }
-				 }) */
-				///////////////////////////////////////////////////////////////////////////////////
-
-			});
-		</script>
+<script type="text/javascript">
+			
+</script>

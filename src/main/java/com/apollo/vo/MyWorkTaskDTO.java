@@ -2,7 +2,12 @@ package com.apollo.vo;
 
 import java.sql.Date;
 import java.util.ArrayList;
-
+/**
+ * 
+  클래스명 : MyWorkTaskDTO
+  날      짜 : 2018. 6. 19.
+  작성자명 : 이 진 우
+ */
 public class MyWorkTaskDTO {
 	private int tid;
 	private String tname;
@@ -17,8 +22,10 @@ public class MyWorkTaskDTO {
 	private String color;
 	private String date;
 	private ArrayList<MyWorkStepDTO> steps;
-
+	private ArrayList<MyWorkMemberDTO> members;
 	
+	
+
 	public String getDate() {
 		return date;
 	}
@@ -97,11 +104,18 @@ public class MyWorkTaskDTO {
 	public void setSteps(ArrayList<MyWorkStepDTO> steps) {
 		this.steps = steps;
 	}
+	public ArrayList<MyWorkMemberDTO> getMembers() {
+		return members;
+	}
+	public void setMembers(ArrayList<MyWorkMemberDTO> members) {
+		this.members = members;
+	}
 	@Override
 	public String toString() {
 		return "MyWorkTaskDTO [tid=" + tid + ", tname=" + tname + ", sday=" + sday + ", eday=" + eday + ", detail="
 				+ detail + ", pid=" + pid + ", importance=" + importance + ", ctime=" + ctime + ", tstatusid="
-				+ tstatusid + ", tstatus=" + tstatus + ", color=" + color + ", date=" + date + ", steps=" + steps + "]";
+				+ tstatusid + ", tstatus=" + tstatus + ", color=" + color + ", date=" + date + ", steps=" + steps
+				+ ", members=" + members + "]";
 	}
 
 	

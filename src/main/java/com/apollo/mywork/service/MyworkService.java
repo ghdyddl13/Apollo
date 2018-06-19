@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apollo.mywork.dao.MyWorkDAO;
+import com.apollo.vo.MyWorkMemberDTO;
 import com.apollo.vo.MyWorkStepDTO;
 import com.apollo.vo.MyWorkTaskDTO;
 
@@ -29,19 +30,23 @@ public class MyworkService {
 	@Autowired
 	private SqlSession sqlsession;
 	
+
+	
 	public Map<String, List<MyWorkTaskDTO>> getMyWork(String mid) throws Exception{
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd") ;
 		MyWorkDAO dao = sqlsession.getMapper(MyWorkDAO.class);
+		
 		List<MyWorkTaskDTO> tasklist = dao.getMyWorkList(mid);
 		List<MyWorkStepDTO> steplist = dao.getMyWorkStep(mid);
+		List<MyWorkMemberDTO> memberlist = dao.getMyWorkMember(mid);
 		List<MyWorkTaskDTO> todaylist = new ArrayList<MyWorkTaskDTO>();
 		List<MyWorkTaskDTO> thisweeklist = new ArrayList<MyWorkTaskDTO>();
 		List<MyWorkTaskDTO> nextweeklist = new ArrayList<MyWorkTaskDTO>();	
 		List<MyWorkTaskDTO> laterlist = new ArrayList<MyWorkTaskDTO>();
 		Map<String, List<MyWorkTaskDTO>> taskmap = new HashMap<String, List<MyWorkTaskDTO>>();
 		
-		Calendar calender = Calendar.getInstance();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd") ;
-		String today = calender.get(Calendar.YEAR)+"-" + (calender.get(Calendar.MONTH)+1) +"-"+ calender.get(Calendar.DATE); // 오늘 날짜
+		String today = calendar.get(Calendar.YEAR)+"-" + (calendar.get(Calendar.MONTH)+1) +"-"+ calendar.get(Calendar.DATE); // 오늘 날짜
 		Date todaydate =dateFormat.parse(today);
 	
 		for(MyWorkTaskDTO task:tasklist) {// Task를 하나하나 비교하기 시작한다
@@ -53,6 +58,15 @@ public class MyworkService {
 					task.getSteps().add(step);
 				}	
 			}//안쪽for문 end
+			for(MyWorkMemberDTO member: memberlist) {//Task에 할당된 Memb
+				if(task.getTid() ==member.getTid()) {
+					if(task.getMembers()==null) {
+						task.setMembers(new ArrayList<MyWorkMemberDTO>());
+					}
+					task.getMembers().add(member);
+				}
+			}
+			
 			
 			if(task.getEday()==null) {//시작날이 지정이 안되어 있으면
 				todaylist.add(task);
@@ -66,13 +80,26 @@ public class MyworkService {
 				
 				int tscompare = todaydate.compareTo(startday);
 				// 오늘 날짜와 task 시작 날짜를 비교 => 0보다 크면 일이 시작되었다! 0보다 작으면 아직 일이 시작 안했다
+				int twscompare = thisweeklast().compareTo(startday);
+				// 이번주 마지막 날짜와 시작일을 비교 => 0보다 크면 시작일이 이번주내에 있다, 0보다 작으면 이번주는 아니다!
+				int lscompare = laterfirst().compareTo(startday);
+				// 다다음주 첫째날과 시작일을 비교 => 0보다 크면 시작일이 다다음주 보다 전이다 0보다 작으면 시작일이 다다음주이다!
+				
 				
 				if(tecompare>0) {// 오늘 기준 마지막 날이 지났다
 					todaylist.add(task);
-				}else if(tecompare<0 && tscompare>0){// 오늘 기준 시작날은 지났고 마지막 날이 지나지 않았다
+				}else if(tecompare<=0 && tscompare>=0){// 오늘 기준 시작날은 지났고 마지막 날이 지나지 않았다
 					todaylist.add(task);
 				}else if(tscompare<0) {// 오늘 기준으로 일이 아직 시작 안했다
-					
+					if(twscompare>=0) {// 이번주 마지막날 기준으로 시작일이 이번주 내에 있다
+						thisweeklist.add(task);
+					}else {//이번주 이후의 시작일
+						if(lscompare>0) {//시작일이 다다음주에 비해 작
+							nextweeklist.add(task);
+						}else {
+							laterlist.add(task);
+						}
+					}
 				}
 			}
 		}//바깥for문 end	
@@ -91,7 +118,18 @@ public class MyworkService {
 	 작성자명 : 이 진 우
 	 */
 	public Date thisweeklast() {
-		
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd") ;
+		int restday = 7 - calendar.get(Calendar.DAY_OF_WEEK);
+		String lastday = calendar.get(Calendar.YEAR)+"-" + (calendar.get(Calendar.MONTH)+1) +"-"+ (calendar.get(Calendar.DATE));
+		Date thisweeklast = null;
+		try {
+			thisweeklast = dateFormat.parse(lastday);
+		} catch (ParseException e) {
+			System.out.println(e.getMessage());
+		}
+		calendar.setTime(thisweeklast);
+		calendar.add(Calendar.DATE, restday);
 		return thisweeklast;
 	}
 	/**
@@ -101,7 +139,10 @@ public class MyworkService {
 	 작성자명 : 이 진 우
 	 */
 	public Date nextweekfirst() {
-		
+		Calendar calendar = Calendar.getInstance();
+		Date nextweekfirst = thisweeklast();
+		calendar.setTime(nextweekfirst);
+		calendar.add(Calendar.DATE,1);
 		return nextweekfirst;
 	}
 	/**
@@ -111,7 +152,10 @@ public class MyworkService {
 	 작성자명 : 이 진 우
 	 */
 	public Date laterfirst() {
-		
+		Calendar calendar = Calendar.getInstance();
+		Date laterfirst = thisweeklast();
+		calendar.setTime(laterfirst);
+		calendar.add(Calendar.DATE, 8);
 		return laterfirst;
 	}
 	

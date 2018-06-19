@@ -9,6 +9,7 @@ package com.apollo.mywork.dao;
 
 import java.util.List;
 
+import com.apollo.vo.MyWorkMemberDTO;
 import com.apollo.vo.MyWorkStepDTO;
 import com.apollo.vo.MyWorkTaskDTO;
 
@@ -28,4 +29,6 @@ public interface MyWorkDAO {
 	 작성자명 : 이 진 우
 	 */
 	public List<MyWorkStepDTO> getMyWorkStep(String mid);
+	
+	public List<MyWorkMemberDTO> getMyWorkMember(String mid);
 }
