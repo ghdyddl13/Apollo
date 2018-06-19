@@ -15,4 +15,6 @@ public interface InboxDAO {
 	public int updateArchive(CommentDTO comment);
 	
 	public int updateArchive2(CommentDTO comment);
+	
+	public ArrayList<CommentDTO> getStreamlist(String mid);
 }

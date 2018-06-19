@@ -10,7 +10,6 @@
 				url:"inbox.htm",
 				dataType:"html",
 				success:function(data){
-					console.log(data);
 					$("#main-box").empty();
 					$("#main-box").append(data);
 				}
@@ -21,7 +20,6 @@
 				url:"sent.htm",
 				dataType:"html",
 				success:function(data){
-					console.log(data)
 					$("#main-box").empty();
 					$("#main-box").append(data);
 					
@@ -33,7 +31,6 @@
 				url:"archive.htm",
 				dataType:"html",
 				success:function(data){
-					console.log(data)
 					$("#main-box").empty();
 					$("#main-box").append(data);
 					
@@ -49,7 +46,6 @@
 				data:{cmtid:$(this).children(".cmtid").val(),
 					  inboxkind:$("#inboxkind").val()},
 				success:function(data){
-					console.log(data)
 					$("#main-box").empty();
 					$("#main-box").append(data);
 				}
@@ -64,7 +60,6 @@
 				data:{cmtid:$(this).children(".cmtid").val(),
 					  inboxkind:$("#inboxkind").val()},
 				success:function(data){
-					console.log(data)
 					$("#main-box").empty();
 					$("#main-box").append(data);
 					
