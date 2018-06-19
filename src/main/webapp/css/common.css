@@ -514,3 +514,23 @@ background-color: 999999;
 }
 
 /* task 수정,삭제 모달_정권 ---------------------- 종료 */
+
+.main-noproject-content {
+	position: absolute;
+	top:50%;
+	left:55%;
+	transform:translate(-50%, -50%);
+	font-weight: bold;
+	
+}
+#main-project-add-btn {
+	background-color:#ffc30d;
+	color:white;
+	width:250px;
+	height:50px;
+	font-size:20px;
+}
+#main-add-project-img {
+	width:20px;
+	hegith:10px;
+}

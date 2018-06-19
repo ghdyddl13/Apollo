@@ -166,6 +166,11 @@ public class SidebarController {
 		return jsonview; 
 		
 	}
+	@RequestMapping("/noproject.htm")
+	public String noproject() {
+		return "project/noproject";
+		
+	}
 
 }
 
