@@ -47,4 +47,14 @@ public interface StepDAO {
 	 작성자명 : 박 민 식
 	 */
 	public ArrayList<StepDTO> selectStepList(List<Integer> pids);
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 19.
+	 기      능 : tid 이용해서 sid 목록 가져오기
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepsid(String tid);
+
 }
