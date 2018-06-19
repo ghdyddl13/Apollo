@@ -20,7 +20,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select ts.TSTATUS, ts.TSTATUSID, ts.COLOR from step s join TSTATUS ts on s.METHODOLOGYID = ts.METHODOLOGYID where sid=#{sid}
 	</select>
 	
-	<select id="getMemberList" parameterType="Integer" resultType="com.apollo.vo.MemberDTO">
-		select mid, mname, pwd, rday, pnum, image, deptname, apollokey, position from member where mid in (select mid from pmember where pid=#{pid})
-    </select>
 </mapper>

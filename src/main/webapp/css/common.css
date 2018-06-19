@@ -12,12 +12,9 @@ html, body{
 #main-box{
     padding-left: 250px;
     height:100%;
-<<<<<<< HEAD
-    margin-top: 50px;
-=======
     padding-top: 50px;
 }
->>>>>>> b21cf1225d4896ec930a6cbf7dee09b6df41c81b
+
 
 }
 .navbar.inside-header{
@@ -387,7 +384,6 @@ label {
    top:50%; 
    left:50%; 
    width: 330px;
-   height: 70%;
    vertical-align: middle;
    margin-top:-115px; 
    margin-left:-230px;
@@ -396,6 +392,12 @@ label {
    width: 100%;
    padding-left: 15px;
    padding-right: 15px;
+}
+
+.modal-add-folder-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0; 
 }
 
 .modal-add-step-dialog {

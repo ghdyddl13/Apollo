@@ -94,26 +94,30 @@
 	<div class="modal fade" id="add-folder" role="dialog">
 		<div class="modal-dialog modal-add-folder-dialog">
 			<!-- Modal content-->
-			<div class="modal-content">
+			<div class="modal-content modal-add-folder-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Folder 생성</h4>
 				</div>
 				<div class="modal-body">
-					<input type="text" class="add-folder-text"
-						placeholder="folder명을 입력하세요">
-					<div align="center">
-						<input type="button" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
-						<input type="button" class="btn cancel-btn"
-							data-dismiss="modal" value="취소">
-					</div>
+					<form id="insert-folder-form" method="post" onsubmit="return false;">
+						<fieldset>
+							<input type="text" id="add-folder-name" name="fname" class="add-folder-text" placeholder="folder명을 입력하세요">
+							<input type="hidden" name="pid" value="1">
+							<br><br>
+							<div align="center">
+								<input type="button" class="btn add-btn" id="insert-folder-btn" value="생성">&nbsp;&nbsp;&nbsp;
+								<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
+							</div>
+						</fieldset>
+					</form>
 				</div>
 				<br>
 			</div>
 		</div>
 	</div>
 
-	<!-- 스텝 생성 Modal 창 -->
+<!-- 스텝 생성 Modal 창 -->
 	<div class="modal fade" id="insert-step" role="dialog">
 		<div class="modal-dialog modal-add-step-dialog">
 			<!-- Modal content-->
@@ -124,7 +128,7 @@
 				</div>
 				<div class="modal-body">
 				
-					<form id="step-add-form" method="post">
+					<form id="step-add-form" method="post" onsubmit="return false;">
 						<fieldset>
 							<div class="modal-title">
 								<p>Step명</p>

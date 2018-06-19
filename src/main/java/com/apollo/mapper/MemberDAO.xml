@@ -56,8 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getProjectMemberlist2" parameterType="Integer"
 		resultType="com.apollo.vo.MemberDTO">
-		select * from member where mid in (select mid from pmember where pid =
-		#{pid})
+		select * from member where mid in (select mid from pmember where pid = #{pid})
 	</select>
 	
 </mapper>

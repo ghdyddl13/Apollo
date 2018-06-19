@@ -1,15 +1,14 @@
 package com.apollo.sidebar.service;
 
 import java.util.ArrayList;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.apollo.member.dao.MemberDAO;
 import com.apollo.project.dao.ProjectDAO;
 import com.apollo.sidebar.dao.FolderDAO;
 import com.apollo.step.dao.StepDAO;
+import com.apollo.vo.FolderDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
@@ -38,9 +37,9 @@ public class SidebarService {
 		}
 		
 		if(result > 0) {
-			System.out.println("insert success");
+			System.out.println("project insert success");
 		}else {
-			System.out.println("insert fail");
+			System.out.println("project insert fail");
 		}
 		return result;
 		
@@ -132,6 +131,28 @@ public class SidebarService {
 			System.out.println("project list service 에러");
 		}
 		return result;
+	}
+	/*
+	 날      짜 : 2018. 6. 19.
+	 기      능 : 폴더 생성
+	 작성자명 : 김 래 영
+	 */
+	public int insertfolder(FolderDTO folderdto) {
+		int result = 0;
+		try {
+			FolderDAO folderdao = sqlsession.getMapper(FolderDAO.class);
+			result = folderdao.insertfolder(folderdto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(result > 0) {
+			System.out.println("folder insert success");
+		}else {
+			System.out.println("folder insert fail");
+		}
+		
+		return result;
+		
 	}
 	
 }
