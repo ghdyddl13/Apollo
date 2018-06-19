@@ -29,4 +29,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
 	</select>
 
+	<select id="getStepsid" parameterType="String" resultType="com.apollo.vo.StepDTO">
+   	 select * from step where sid in (select sid from taskinstep where tid = #{tid})
+    </select>
+
 </mapper>
