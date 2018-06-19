@@ -1,16 +1,14 @@
 package com.apollo.vo;
 
-import java.sql.Date;
 
 public class StepDTO {
 
 	private int sid;
 	private String sname;
-	private Date sday;
-	private Date eday;
+	private String sday;
+	private String eday;
 	private int pid;
 	private int fid;
-	private String mgr;
 	private int methodologyid;
 	private String mid;
 	public int getSid() {
@@ -25,16 +23,16 @@ public class StepDTO {
 	public void setSname(String sname) {
 		this.sname = sname;
 	}
-	public Date getSday() {
+	public String getSday() {
 		return sday;
 	}
-	public void setSday(Date sday) {
+	public void setSday(String sday) {
 		this.sday = sday;
 	}
-	public Date getEday() {
+	public String getEday() {
 		return eday;
 	}
-	public void setEday(Date eday) {
+	public void setEday(String eday) {
 		this.eday = eday;
 	}
 	public int getPid() {
@@ -49,12 +47,7 @@ public class StepDTO {
 	public void setFid(int fid) {
 		this.fid = fid;
 	}
-	public String getMgr() {
-		return mgr;
-	}
-	public void setMgr(String mgr) {
-		this.mgr = mgr;
-	}
+
 	public int getMethodologyid() {
 		return methodologyid;
 	}

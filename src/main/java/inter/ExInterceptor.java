@@ -23,7 +23,6 @@ public class ExInterceptor implements HandlerInterceptor {
 		boolean result = true;
 		
 		if (request.getSession().getAttribute("mid") == null) {
-			System.out.println("ddddd");
 			response.sendRedirect(request.getContextPath() + "/index.htm");
 			result = false;
 
