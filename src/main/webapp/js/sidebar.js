@@ -1,6 +1,6 @@
 $(function() {
 	
-	MakeSideProjectDir();
+	makeSideProjectDir();
 	
 	//스텝 추가 클릭시 이벤트	
 	$(document).on("click",".side-bar-step",function(){ 
@@ -34,18 +34,19 @@ $(function() {
 		        }); // end-ajax
 	});
 		// 사이드바 프로젝트 우클릭 >> 추후 Project id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
-		$(".side-project")
-				.contextmenu(
-						function() {
-							var pid = this.id;
+		$(document).on("contextmenu",".side-project",function() {
+							var pid = this.id.substr(1);
+							var methodologyid = $(this).find("input").val();
 							event.preventDefault();
 							var dropdown_ul = document.createElement("ul");
-							var dropdown = '<li class="dropdown-submenu"><p data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></p>'
+							var dropdown = '<input type="hidden" name="pid" value='+pid+'>';
+							dropdown += '<input type="hidden" name="methodologyid" value='+methodologyid+'>'
+							dropdown +=	'<li class="dropdown-submenu"><a data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></a>'
 							dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li class="side-bar-step" data-toggle="modal" data-target="#insert-step">Step추가</li></ul></li>'
 							dropdown += '<li data-action="second">완료</li>'
 							dropdown += '<li data-action="third" data-toggle="modal" data-target="#update-project">수정</li>'
 							dropdown += '<li data-action="fourth" data-toggle="modal" data-target="#delete-project">삭제</li>'
-
+							
 							$(dropdown_ul).attr("class", "custom-menu").append(
 									dropdown);
 							console.log(dropdown_ul)
@@ -56,7 +57,8 @@ $(function() {
 						});
 
 		// 사이드바 폴더 우클릭  >> 추후 폴더 id(DB상 기본키)를 받아와 li 태그에 넣어주는 작업 필요
-		$(".side-folder").contextmenu(function(event) {
+		$(document).on("contextmenu",".side-folder",function() {
+			console.log($($(this).parents()[0]));
 			event.preventDefault();
 			var dropdown_ul = document.createElement("ul");
 			var dropdown = '<li data-action="first" data-toggle="modal" data-target="#insert-step">Step 추가</li>'
@@ -73,12 +75,11 @@ $(function() {
 
 		// 사이드바 스텝 우클릭  >> 추후 스텝 id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
 
-		$(".side-step").contextmenu(function(event) {
+		$(document).on("contextmenu",".side-step",function(event) {
 			event.preventDefault();
 			var dropdown_ul = document.createElement("ul");
 			var dropdown = '<li data-action="second">수정</li>'
 			dropdown += '<li data-action="third">이동</li>'
-
 			dropdown += '<li data-action="third">삭제</li>'
 			$(dropdown_ul).attr("class", "custom-menu").append(dropdown);
 			console.log(dropdown_ul)
@@ -103,15 +104,13 @@ $(function() {
 	
 	
 	/////////////////////////// 비동기 화면전환 - 프로젝트 /////////////////////////
-	
-
-		$(".side-project").click(function(){
-
+		
+		$(document).on("click",".side-project",function(){
 			console.log("사이드바~~!~!~!~!~!~!~!~!~!");
 			// 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
 			// 지금은 pid가 1이라고 가정하고 실시
-			var pid = this.id;
-			
+			var pid = this.id.substr(1);
+			console.log(pid);
 			// mid도 필요하므로 일단 가정
 			var mid = 'testid1';
 			
@@ -130,13 +129,15 @@ $(function() {
 				}
 			})
 	    });
+
 	
-		
-		$(".side-step").click(function(){
+		////// 사이드바 스텝 클릭 시 
+		$(document).on("click",".side-step",function(){
 			console.log(this.id);
+			var sid= this.id.substr(1);
 			$.ajax({
 				url:"list.htm",
-				data:{sid:this.id},
+				data:{sid:sid},
 				dataType:"html",
 				success:function(data){
 					 $("#main-box").empty();
@@ -145,6 +146,8 @@ $(function() {
 				}
 			})
 	    });
+		
+		
 	/* modal 창(project, step) dateficker */
 		$(".sdate-img").datepicker({
 		    showOn: "button",
@@ -287,26 +290,29 @@ function selectProjectList(){
 			if(data!=null){ /// 참여중인 프로젝트가 있을 경우 
 				$(data.projectlist).each(function(index,el){
 					pids.push(el.pid);
-					var a = jQuery("<a>",{"class":"side-project","text":el.pname})
+					var a = jQuery("<a>",{"class":"side-project","text":el.pname,"id":"p"+el.pid})
+					var hidden = jQuery("<input>",{"type":"hidden",
+												   "name":"methodologyid",
+												   "value":el.methodologyid});
 					var span = jQuery("<span>",{"class":"glyphicon glyphicon-duplicate", 
 						"data-toggle":"collapse",
-						"data-target":"#p"+el.pid})
-						var div = jQuery("<div>",{"class":"side-dir collapse",
-							"id": "p"+el.pid});
-							
-							console.log(el.pstatuscode);
-					
+						"data-target":"#p-dir"+el.pid})
+					var div = jQuery("<div>",{"class":"side-dir collapse",
+						"id": "p-dir"+el.pid});
+						
+					console.log(el.pstatuscode);
+					$(a).prepend(span);
 					//////프로젝트의 상태에 따라 진행, 완료, 휴지통에 구분하여 append
 					if(el.pstatuscode ==1){
-						$(a).prepend(span).appendTo("#working-project");
-						$(div).appendTo("#working-project");
+						$(a).appendTo("#working-project");
+						$(div).append(hidden).appendTo("#working-project");
 						
 					}else if(el.pstatuscode ==2){
-						$(a).prepend(span).appendTo("#finished-project");
-						$(div).appendTo("#finished-project");
+						$(a).appendTo("#finished-project");
+						$(div).append(hidden).appendTo("#finished-project");
 					}else if(el.pstatuscode==3){
-						$(a).prepend(span).appendTo("#trash-bean");
-						$(div).appendTo("#trash-bean");
+						$(a).appendTo("#trash-bean");
+						$(div).append(hidden).appendTo("#trash-bean");
 					}
 				})
 			}else{ // 참여중인 프로젝트가 없을 경우 
@@ -325,7 +331,7 @@ function selectProjectList(){
  작성자명 : 박 민 식
  */
 function selectFolderList(pids){
-	if(pids==null) return;
+	if(pids==null) return false;
 	jQuery.ajaxSettings.traditional = true;
 	
 	var ajax =$.ajax({ // ajax는 내부적으로 Deffered와 호환이 되어 있는 함수이기 때문에 따로 선언을 해주지 않아도 된다. 
@@ -351,7 +357,7 @@ function selectFolderList(pids){
  작성자명 : 박 민 식
  */
 function selectStepList(pids){
-	if(pids==null) return;
+	if(pids==null) return false;
 	jQuery.ajaxSettings.traditional = true;
 	var data;
 	var ajax = $.ajax({
@@ -375,25 +381,27 @@ function selectStepList(pids){
  기   능 : 사이드바의 구조를 만들어주는 함수 
  작성자명 : 박 민 식
  */
-function MakeSideProjectDir(){
+function makeSideProjectDir(){
 	
 	 $.when(selectProjectList()).done(function(data){ //먼저 프로젝트의 리스트를 가져와 뿌려준 후, 
 		if(data==null) {
 			
 		} else{			
 			var pids = data;
-			MakeSideSubDir(pids); // 각 프로젝트의 내부 구조를 채워줄 요소들을 가져오는 함수를 실행한다. 
+			makeSideSubDir(pids); // 각 프로젝트의 내부 구조를 채워줄 요소들을 가져오는 함수를 실행한다. 
 		}
 	})
-
 }
+
+
+
 /**
  * 
  날   짜 : 2018. 6. 19.
  기   능 : 프로젝트 내부의 디렉토리구조를 만들어주는 함수  
  작성자명 : 박 민 식
  */	
-function MakeSideSubDir(pids){
+function makeSideSubDir(pids){
 	
 	$.when(selectFolderList(pids), selectStepList(pids)).done(function(folders,steps){ //먼저, 프로젝트들에 속한 폴더와 스텝들의 정보를 가져온 후 디렉토리 구조를 구성
 
@@ -405,15 +413,15 @@ function MakeSideSubDir(pids){
 		if(folders!=null){ //폴더가 하나라도 있다면 만들어 붙혀주세요
 			
 			$(folders).each(function(index,folder){
-				var a =jQuery("<a>",{"class":"side-folder","text":folder.fname});
+				var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
 				var span = jQuery("<span>",{"class":"glyphicon glyphicon-folder-close", 
 											"data-toggle":"collapse",
-											"data-target":"#f"+folder.fid});
+											"data-target":"#f-dir"+folder.fid});
 				var div = jQuery("<div>",{"class":"side-dir collapse",
-										  "id": "f"+folder.fid});
+										  "id": "f-dir"+folder.fid});
 				console.log(folder.pid);
-				$(a).prepend(span).appendTo($('#p'+folder.pid));
-				$(div).appendTo($('#p'+folder.pid));		
+				$(a).prepend(span).appendTo($('#p-dir'+folder.pid));
+				$(div).appendTo($('#p-dir'+folder.pid));		
 			})
 			
 		}
@@ -424,15 +432,17 @@ function MakeSideSubDir(pids){
 			$(steps).each(function(index,step){ // Step관련 태그 생성
 				var a =jQuery("<a>",{
 									"class":"side-step",
-									"id":"s"+step.id,
+									"id":"s"+step.sid,
 									"text":step.sname
 									});
 				var span = jQuery("<span>",{"class":"glyphicon glyphicon glyphicon-list-alt"})
-				$(a).prepend(span);
+				var hidden = jQuery("<input>",{"type":"hidden",
+												   "value":step.methodologyid});
+				$(a).prepend(span).append(hidden);
 				if(step.fid ==null){ // 스텝이 속해있는 폴더가 있다면 폴더 밑에 넣어주고 
-					$(a).appendTo("#f"+step.fid);
+					$(a).appendTo("#f-dir"+step.fid);
 				}else{ //속해있는 폴더가 없다면, Default경로, 즉 프로젝트 밑으로 넣어준다.
-					(step.sname=="백로그")?$(a).prependTo("#p"+step.pid):$(a).appendTo("#p"+step.pid);
+					(step.sname=="백로그")?$(a).prependTo("#p-dir"+step.pid):$(a).appendTo("#p-dir"+step.pid);
 				}
 			})
 		}
