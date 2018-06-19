@@ -294,8 +294,8 @@
 					</div>
 
 					<div class="col-sm-6" id="star_trash">
-						<i class="fas fa-star"></i>&nbsp&nbsp
-						<i class="fas fa-trash"></i>&nbsp&nbsp&nbsp
+						<i class="fas fa-star" id=""></i>&nbsp&nbsp
+						<i class="fas fa-trash" id="task_trash"></i>&nbsp&nbsp&nbsp
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 					
