@@ -36,8 +36,8 @@ $(function() {
 		// 사이드바 프로젝트 우클릭 >> 추후 Project id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
 		$(".side-project")
 				.contextmenu(
-						function(event) {
-							var pid = event.target.id;
+						function() {
+							var pid = this.id;
 							event.preventDefault();
 							var dropdown_ul = document.createElement("ul");
 							var dropdown = '<li class="dropdown-submenu"><p data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></p>'
@@ -105,12 +105,12 @@ $(function() {
 	/////////////////////////// 비동기 화면전환 - 프로젝트 /////////////////////////
 	
 
-		$(".side-project").click(function(evt){
+		$(".side-project").click(function(){
 
 			console.log("사이드바~~!~!~!~!~!~!~!~!~!");
 			// 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
 			// 지금은 pid가 1이라고 가정하고 실시
-			var pid = '1';
+			var pid = this.id;
 			
 			// mid도 필요하므로 일단 가정
 			var mid = 'testid1';
@@ -132,13 +132,11 @@ $(function() {
 	    });
 	
 		
-		$(".side-step").click(function(evt){
-			
-			console.log(evt.target.id);
-			console.log("여기");
+		$(".side-step").click(function(){
+			console.log(this.id);
 			$.ajax({
 				url:"list.htm",
-				data:{sid:evt.target.id},
+				data:{sid:this.id},
 				dataType:"html",
 				success:function(data){
 					 $("#main-box").empty();
@@ -380,9 +378,12 @@ function selectStepList(pids){
 function MakeSideProjectDir(){
 	
 	 $.when(selectProjectList()).done(function(data){ //먼저 프로젝트의 리스트를 가져와 뿌려준 후, 
-		if(data==null) return;
-		var pids = data;
-		MakeSideSubDir(pids); // 각 프로젝트의 내부 구조를 채워줄 요소들을 가져오는 함수를 실행한다. 
+		if(data==null) {
+			
+		} else{			
+			var pids = data;
+			MakeSideSubDir(pids); // 각 프로젝트의 내부 구조를 채워줄 요소들을 가져오는 함수를 실행한다. 
+		}
 	})
 
 }
@@ -420,8 +421,19 @@ function MakeSideSubDir(pids){
 		//// 폴더를 뿌려준 후, Step을 뿌려준다.
 		if(steps!=null){
 			
-			$(steps).each(function(){
-				
+			$(steps).each(function(index,step){ // Step관련 태그 생성
+				var a =jQuery("<a>",{
+									"class":"side-step",
+									"id":"s"+step.id,
+									"text":step.sname
+									});
+				var span = jQuery("<span>",{"class":"glyphicon glyphicon glyphicon-list-alt"})
+				$(a).prepend(span);
+				if(step.fid ==null){ // 스텝이 속해있는 폴더가 있다면 폴더 밑에 넣어주고 
+					$(a).appendTo("#f"+step.fid);
+				}else{ //속해있는 폴더가 없다면, Default경로, 즉 프로젝트 밑으로 넣어준다.
+					(step.sname=="백로그")?$(a).prependTo("#p"+step.pid):$(a).appendTo("#p"+step.pid);
+				}
 			})
 		}
 		
