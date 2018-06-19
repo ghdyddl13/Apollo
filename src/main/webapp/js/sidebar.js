@@ -1,15 +1,35 @@
 $(function() {
-
-		$(document).on("click",".side-bar-step",function(event){
-			
-			var mname = $('#insert-step').children().attr("name", "mname");
-			
-			var pid = 1;
-		});
-	/*	$(".side-bar-step").on("click",function(event){
-			console.log(event.target.id);
-		})*/
 		
+	$(document).on("click",".side-bar-step",function(){ 
+		// 가지고 있다고 가정
+		var pid = 1;
+		
+		$.ajax(
+		       {
+		           type : "post",
+		           url  : "getprojectmembers.htm",
+		           data : "pid="+ pid,
+		           success : function(data){
+		               console.log(data.memberlist);
+		               
+	            	   var optiondefault = jQuery("<option>",{
+	            		   "text":"책임자를 선택하세요", //default 값 
+	            		   "value":""
+	            	   })
+	            	   //해당 pid 에 참여한 멤버 불러오기
+		               $('#add-step-mgr-assignee').empty().append(optiondefault);
+		               $(data.memberlist).each(function (){
+		            	   var option = jQuery("<option>",{
+		            		   "value":this.mid,
+		            		   "text":this.mname
+		            	   })
+		            	   	console.log(option);
+		            	   $('#add-step-mgr-assignee').append(option);
+		               });
+		              
+		           } // end-success
+		        }); // end-ajax
+	});
 	console.log(selectProjectList());
 
 		// 사이드바 프로젝트 우클릭 >> 추후 Project id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
@@ -20,7 +40,7 @@ $(function() {
 							event.preventDefault();
 							var dropdown_ul = document.createElement("ul");
 							var dropdown = '<li class="dropdown-submenu"><p data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></p>'
-							dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li class="side-bar-step" id="test" data-toggle="modal" data-target="#insert-step">Step추가</li></ul></li>'
+							dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li class="side-bar-step" data-toggle="modal" data-target="#insert-step">Step추가</li></ul></li>'
 							dropdown += '<li data-action="second">완료</li>'
 							dropdown += '<li data-action="third" data-toggle="modal" data-target="#update-project">수정</li>'
 							dropdown += '<li data-action="fourth" data-toggle="modal" data-target="#delete-project">삭제</li>'
@@ -152,6 +172,7 @@ $(function() {
 		 }
 		 var newproject = $("#project-add-form").serialize(); //serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
 		 console.log(newproject);
+
 		 $.ajax({
 			 url:"insertproject.htm",
 			 data:newproject,
@@ -168,64 +189,50 @@ $(function() {
 				 $('#insert-project-sday-id').val("");
 				 $('#insert-proejct-eday-id').val("");
 				 $('#proejct-detail').val("");
-				 $('#project-insert').close();
+				 //$('#project-insert').close();
 			 }
 
 		 });	
 	});
 	
 	// 스텝 생성 버튼 클릭시  alert 창 화면
-	$("#insert-step-btn").click(function(){	 
+	$("#insert-step-btn").click(function(evt){	 
 		 if($(".add-step-name").val().trim() == ""){
 			alert("스텝명을 입력해주세요.");
 			$(".add-step-name").focus();	
 			return false;
 		 }
-		 var newstep = $("#step-add-form").serialize(); // serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
-		 console.log('newstep: ' + newstep);
-	 
+		 var newstep = $('#step-add-form').serialize();
+		 console.log(newstep);
 		 
-      $.ajax(
-              {
-                 type : "post",
-                 url  : "insertstep.htm",
-                 data : newstep,
+		 $.ajax({
+                 type:"POST",
+                 url:"insertstep.htm",
+                 data:newstep,
                  dataType:"json",
-                 success : function(data){
+                 success:function(data){
                 	 console.log(data);
-                	 if(data.result > 0){
+                	 if(data.stepresult > 0){
     					 alert("스텝 생성이 완료되었습니다!");
     				 }else {
     					 alert("스텝 생성에 실패했습니다");
     				 }	
+    				 $('.add-step-name').val("");
+    				 $('#insert-step-sday-id').val("");
+    				 $('#insert-step-eday-id').val("");
+    				 $('#step-detail').val("");
+    				 //$('#project-insert').close();
                  } // end - success
-              });// end-ajax
-		 
-		 
-//		 $.ajax({
-//			 url:"insertstep.htm",
-//			 data:newstep,
-//			 type:"POST",
-//			 dataType:"json",
-//			 success: function(data){
-//				 console.log(data); // data+"data" 로 하면 Object 타입으로 변환되므로 json 형태로 받아볼 경우 data만 찍어보면 된다.
-//				 if(data.result > 0){
-//					 alert("스텝 생성이 완료되었습니다!");
-//				 }else {
-//					 alert("스텝 생성에 실패했습니다");
-//				 }	
-//				 $('.add-step-name').val("");
-//				 $('#insert-step-sday-id').val("");
-//				 $('#insert-step-eday-id').val("");
-//				 $('#step-detail').val("");
-//				 $('#insert-step').close();
-//				 // 에러메시지 보기 
-//			 },error:function(request,status,error){
-//				   	console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-//			   }
-//		 });	
+              	,error:function(error){
+              		console.log(error);
+              	
+              	} // end - error
+              });// end-ajax	
 	});
+
 }); // end - doc.on.ready
+
+
 
 function selectProjectList(){
 	$.ajax({

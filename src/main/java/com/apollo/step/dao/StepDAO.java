@@ -44,5 +44,5 @@ public interface StepDAO {
 	 기      능 : Step 생성시 프로젝트 참여자 명단 불러오기 
 	 작성자명 : 김 래 영
 	 */
-	public ArrayList<MemberDTO> getMemberList(int pid);
+	
 }

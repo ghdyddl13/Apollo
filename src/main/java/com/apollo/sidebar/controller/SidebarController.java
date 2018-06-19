@@ -55,22 +55,13 @@ public class SidebarController {
 		try {
 			int stepresult = sidebarservice.insertStep(stepdto);
 			System.out.println(stepdto.toString());
+			
 			model.addAttribute("stepresult", stepresult);
-			System.out.println("stepresult : " + stepresult);
-			
-			//해당 프로젝트 참여자 명단 가져오기
-			int pid = stepdto.getPid();
-			ArrayList<MemberDTO> memberlist = new ArrayList<MemberDTO>();
-			memberlist = sidebarservice.getMemberList(pid);
-			model.addAttribute("memberlist" + memberlist);
-			System.out.println("memberlist : " + memberlist);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return jsonview; 
 	}
-	
 	public String changeStep(StepDTO stepdto, Model model) {
 		return null;
 	}
@@ -100,6 +91,27 @@ public class SidebarController {
 		return jsonview;
 	}
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 19.
+	 기      능 : 프로젝트 리스트 가져오기 
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping("/getprojectmembers.htm")
+	public View getProjectMembers(int pid, Model model) {
+		
+		System.out.println("pid : " + pid);
+		
+		ArrayList<MemberDTO> memberlist = new ArrayList();
+		memberlist = sidebarservice.getMemberList(pid);
+		model.addAttribute("memberlist", memberlist);
+		
+		System.out.println("잘 가져왔음");
+		System.out.println("memberlist size : " + memberlist.size());
+		
+		return jsonview;
+	}
 	
 	
 }

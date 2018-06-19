@@ -23,5 +23,7 @@ public interface MemberDAO {
 	public String findPwdIdCheck(String mid);
 	
 	public ArrayList<MemberDTO> getTaskAssignees(String tid);
-
+	
+	public ArrayList<MemberDTO> getProjectMemberlist2(int pid);
+	
 }
