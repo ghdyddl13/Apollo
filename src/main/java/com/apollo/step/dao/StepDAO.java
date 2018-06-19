@@ -37,5 +37,14 @@ public interface StepDAO {
 	 */
 	public ArrayList<TstatusDTO> selectTstatusBySid(int sid);
 
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 19.
+	 기      능 : tid 이용해서 sid 목록 가져오기
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepsid(String tid);
 
 }
