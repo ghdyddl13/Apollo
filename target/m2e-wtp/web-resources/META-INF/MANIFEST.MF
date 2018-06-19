@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: JK
 Build-Jdk: 1.8.0_162
+=======
+Built-By: Bit
+Build-Jdk: 1.8.0_161
+>>>>>>> feature/new_stream
 Created-By: Maven Integration for Eclipse
 
