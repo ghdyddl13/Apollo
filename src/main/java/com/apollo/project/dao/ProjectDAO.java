@@ -37,4 +37,12 @@ public interface ProjectDAO {
 	 */
 	public int deleteProject(ProjectDTO projectdto);
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 18.
+	 기      능 : 프로젝트 목록 select
+	 작성자명 : 박 민 식
+	 */
+	public ArrayList<ProjectDTO> selectProjectList(String mid);
+	
 }
