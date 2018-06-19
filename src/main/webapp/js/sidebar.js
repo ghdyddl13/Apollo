@@ -2,14 +2,46 @@ $(function() {
 	
 	MakeSideProjectDir();
 	
+	//스텝 추가 클릭시 이벤트	
+	$(document).on("click",".side-bar-step",function(){ 
+		// 가지고 있다고 가정
+		var pid = 1;
+		
+		$.ajax(
+		       {
+		           type : "post",
+		           url  : "getprojectmembers.htm",
+		           data : "pid="+ pid, 
+		           success : function(data){
+		               console.log(data.memberlist);
+		               
+	            	   var optiondefault = jQuery("<option>",{
+	            		   "text":"책임자를 선택하세요", //default 값 
+	            		   "value":""
+	            	   })
+	            	   //해당 pid 에 참여한 멤버 불러오기
+		               $('#add-step-mgr-assignee').empty().append(optiondefault);
+		               $(data.memberlist).each(function (){
+		            	   var option = jQuery("<option>",{
+		            		   "value":this.mid,
+		            		   "text":this.mname
+		            	   })
+		            	   	console.log(option);
+		            	   $('#add-step-mgr-assignee').append(option);
+		               });
+		              
+		           } // end-success
+		        }); // end-ajax
+	});
 		// 사이드바 프로젝트 우클릭 >> 추후 Project id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
 		$(".side-project")
 				.contextmenu(
 						function(event) {
+							var pid = event.target.id;
 							event.preventDefault();
 							var dropdown_ul = document.createElement("ul");
 							var dropdown = '<li class="dropdown-submenu"><p data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></p>'
-							dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li data-toggle="modal" data-target="#step-add-modal">Step추가</li></ul></li>'
+							dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li class="side-bar-step" data-toggle="modal" data-target="#insert-step">Step추가</li></ul></li>'
 							dropdown += '<li data-action="second">완료</li>'
 							dropdown += '<li data-action="third" data-toggle="modal" data-target="#update-project">수정</li>'
 							dropdown += '<li data-action="fourth" data-toggle="modal" data-target="#delete-project">삭제</li>'
@@ -27,7 +59,7 @@ $(function() {
 		$(".side-folder").contextmenu(function(event) {
 			event.preventDefault();
 			var dropdown_ul = document.createElement("ul");
-			var dropdown = '<li data-action="first" data-toggle="modal" data-target="#step-add-modal">Step 추가</li>'
+			var dropdown = '<li data-action="first" data-toggle="modal" data-target="#insert-step">Step 추가</li>'
 			dropdown += '<li data-action="second">수정</li>'
 			dropdown += '<li data-action="third">삭제</li>'
 			$(dropdown_ul).attr("class", "custom-menu").append(dropdown);
@@ -74,6 +106,8 @@ $(function() {
 	
 
 		$(".side-project").click(function(evt){
+
+			console.log("사이드바~~!~!~!~!~!~!~!~!~!");
 			// 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
 			// 지금은 pid가 1이라고 가정하고 실시
 			var pid = '1';
@@ -114,7 +148,7 @@ $(function() {
 			})
 	    });
 	/* modal 창(project, step) dateficker */
-		$(".date-img").datepicker({
+		$(".sdate-img").datepicker({
 		    showOn: "button",
 		    buttonImage: "img/calendar.png",
 		    buttonImageOnly: true,
@@ -122,8 +156,16 @@ $(function() {
 
 
 		});
+		$(".edate-img").datepicker({
+		    showOn: "button",
+		    buttonImage: "img/calendar.png",
+		    buttonImageOnly: true,
+		    dateFormat: 'yy/mm/dd',
+		    minDate: 0
+
+		});	
 		
-	//프로젝트 생성 버튼 클릭시 alert 창 화면 		
+	// 프로젝트 생성 버튼 클릭시 alert 창 화면 		
 	$("#insert-project-btn").click(function(evt){
 		 if($("#add-project-name").val().trim() == ""){
 			alert("프로젝트명을 입력해주세요.");
@@ -132,6 +174,7 @@ $(function() {
 		 }
 		 var newproject = $("#project-add-form").serialize(); //serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
 		 console.log(newproject);
+
 		 $.ajax({
 			 url:"insertproject.htm",
 			 data:newproject,
@@ -145,24 +188,96 @@ $(function() {
 					 alert("프로젝트 생성에 실패했습니다");
 				 }	
 				 $('#add-project-name').val("");
-				 $('#method').val("");
-				 $('#sday-id').val("");
-				 $('#eday-id').val("");
-				 $('#project-detail').val("");
-				 $('.close');
+				 $('#insert-project-sday-id').val("");
+				 $('#insert-proejct-eday-id').val("");
+				 $('#proejct-detail').val("");
+				 //$('#project-insert').close();
 			 }
 
 		 });	
 	});
+
+	// 스텝 생성 버튼 클릭시  alert 창 화면
+	$("#insert-step-btn").click(function(evt){	 
+		 if($(".add-step-name").val().trim() == ""){
+			alert("스텝명을 입력하세요.");
+			$(".add-step-name").focus();	
+			
+		 } else if($('#add-folder-name').val().trim() == ""){
+			 alert("책입자를 선택하세요.");
+		 }
+		 var newstep = $('#step-add-form').serialize();
+		 console.log(newstep);
+		 
+		 $.ajax({
+	             type:"POST",
+	             url:"insertstep.htm",
+	             data:newstep,
+	             dataType:"json",
+	             success:function(data){
+	            	 console.log(data);
+	            	 if(data.stepresult > 0){
+						 alert("스텝 생성이 완료되었습니다!");
+					 }else {
+						 alert("스텝 생성에 실패했습니다");
+					 }	
+					 $('.add-step-name').val("");
+					 $('#insert-step-sday-id').val("");
+					 $('#insert-step-eday-id').val("");
+					 $('#step-detail').val("");
+					 //$('#project-insert').close();
+	             } // end - success
+	          	,error:function(error){
+	          		console.log(error);
+	          	
+	          	} // end - error
+	          });// end-ajax	
+
 	
+	});
+
+	//폴더 생성 클릭 버튼시 alert 창 화면
+	$('#insert-folder-btn').click(function() {
+		if($('#add-folder-name').val().trim() == ""){
+			alert('폴더명을 입력해주세요');
+			$("#add-folder-name").focus();	
+			return false;
+		}
+		var newfolder = $('#insert-folder-form').serialize();
+		 console.log(newfolder);
+		 
+		 $.ajax({
+                type:"POST",
+                url:"insertfolder.htm",
+                data:newfolder,
+                dataType:"json",
+                success:function(data){
+               	 console.log(data);
+               	 if(data.folderresult > 0){
+   					 alert("폴더 생성이 완료되었습니다!");
+   				 }else {
+   					 alert("폴더 생성에 실패했습니다");
+   				 }	
+   				 $('.add-step-name').val("");
+   				 //$('#add-folder').close();
+                } // end - success
+             	,error:function(error){
+             		console.log(error);
+             	
+             	} // end - error
+             });// end-ajax	
+	});
 	
-});
+}); // end - doc.on.ready
+
+
 /**
  * 
  날   짜 : 2018. 6. 19.
  기   능 : 사이드바에 프로젝트 리스트디렉토리 구조 생성함수
  작성자명 : 박 민 식
  */
+
 function selectProjectList(){
 	var dfd = $.Deferred(); // 비동기 함수의 순서를 정해주기 위해(동기화) Defferred의 객체의 Promise를 활용한다.
 	var pids=[];

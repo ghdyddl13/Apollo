@@ -23,6 +23,8 @@ public class FolderDTO {
 		this.pid = pid;
 	}
 	
-	
-	
+	@Override
+	public String toString() {
+		return "FolderDTO [fid=" + fid + ", fname=" + fname + ", pid=" + pid + "]";
+	}
 }

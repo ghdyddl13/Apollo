@@ -1,13 +1,11 @@
 $(function() {
-	
-	//// 헤더 inbox 페이지
+	// 헤더 inbox 페이지
 	$("#inbox-page").click(function(evt){
 		$.ajax({
 			type:"GET",
 			url:"inbox.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
 			}
@@ -50,7 +48,6 @@ $(function() {
 			url:"report.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				
@@ -65,7 +62,6 @@ $(function() {
 			url:"stream.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				

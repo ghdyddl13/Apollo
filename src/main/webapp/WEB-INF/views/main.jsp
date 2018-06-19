@@ -26,6 +26,7 @@
 <!-- Timeline관련  -->
 <script type="text/javascript" src="js/stepTimeline.js"></script>
 <link rel="stylesheet" href="css/stepTimeline.css" />
+<link rel="stylesheet" href="css/inbox.css" />
 <link rel="stylesheet" href="dist/frappe-gantt.css" />
 <script src="dist/frappe-gantt.js"></script>
 
@@ -36,7 +37,6 @@
 <link href="css/myWork.css" type="text/css" rel="stylesheet">
 <!-- PROJECT CSS -->
 <link href="css/project.css" type="text/css" rel="stylesheet">
-
 <title>Insert title here</title>
 </head>
 <body>
