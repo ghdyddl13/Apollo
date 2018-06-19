@@ -2,7 +2,7 @@ package com.apollo.step.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TstatusDTO;
 

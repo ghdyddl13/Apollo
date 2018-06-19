@@ -6,7 +6,6 @@ $(function() {
 			url:"inbox.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
 			}

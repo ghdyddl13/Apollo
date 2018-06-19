@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.View;
 
 import com.apollo.sidebar.service.SidebarService;
 import com.apollo.vo.FolderDTO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 
@@ -53,10 +53,19 @@ public class SidebarController {
 		return null;
 	}
 	
-	public String createStep(StepDTO stepdto, Model model) {
-		return null;
+	@RequestMapping(value="/insertstep.htm", method=RequestMethod.POST)
+	public View insertStep(StepDTO stepdto, Model model) {
+		System.out.println("isnert step");
+		try {
+			int stepresult = sidebarservice.insertStep(stepdto);
+			System.out.println(stepdto.toString());
+			
+			model.addAttribute("stepresult", stepresult);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview; 
 	}
-	
 	public String changeStep(StepDTO stepdto, Model model) {
 		return null;
 	}
@@ -101,6 +110,12 @@ public class SidebarController {
 		return jsonview;
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 19.
+	 기      능 : 참여중인 모든 프로젝트의 스텝리스트를 가져오는 함수
+	 작성자명 : 박 민 식
+	 */
 	@RequestMapping(value="/selectStepList.htm", method=RequestMethod.POST)
 	public View selectStepList(@RequestParam(value="pids") List<Integer> pids, Model model) {
 		/*ArrayList<String> arraypids=  (ArrayList<String>) pids;*/
@@ -115,6 +130,29 @@ public class SidebarController {
 		}
 		return jsonview;
 	}
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 19.
+	 기      능 : 프로젝트 리스트 가져오기 
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping("/getprojectmembers.htm")
+	public View getProjectMembers(int pid, Model model) {
+		
+		System.out.println("pid : " + pid);
+		
+		ArrayList<MemberDTO> memberlist = new ArrayList();
+		memberlist = sidebarservice.getMemberList(pid);
+		model.addAttribute("memberlist", memberlist);
+		
+		System.out.println("잘 가져왔음");
+		System.out.println("memberlist size : " + memberlist.size());
+		
+		return jsonview;
+	}
+	
+
 }
 
 
