@@ -2,7 +2,6 @@ package com.apollo.inbox.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,21 +9,6 @@ import com.apollo.step.service.StepListService;
 
 @Controller
 public class TestController {
-	
-	/*@RequestMapping("/index.htm")
-	public String main() {
-		return "login";
-	}
-	
-	@RequestMapping("/join.htm")
-	public String join() {
-		return "join";
-	}
-
-	@RequestMapping("/login.htm")
-	public String login() {
-		return "main";
-	}*/
 	
 	@RequestMapping("/file.htm")
 	public String projectFilelist() {
@@ -37,13 +21,7 @@ public class TestController {
 		return "project/table";
 	}
 	
-	@RequestMapping("/inbox.htm")
-	public String inbox() {
-		System.out.println("inbox 컨트롤러 탓다");
-		return "header/inbox";
-	}
-	
-	
+
 	@RequestMapping("/report.htm")
 	public String report() {
 		return "header/report";

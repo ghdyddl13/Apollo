@@ -10,8 +10,6 @@ public class ExInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-
-
 	}
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv)
@@ -25,7 +23,6 @@ public class ExInterceptor implements HandlerInterceptor {
 		if (request.getSession().getAttribute("mid") == null) {
 			response.sendRedirect(request.getContextPath() + "/index.htm");
 			result = false;
-
 		}
 
 		return result;

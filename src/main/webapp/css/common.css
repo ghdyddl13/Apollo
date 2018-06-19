@@ -3,19 +3,23 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 /* 폰트 */
 html, body{
-
   font-family: 'Noto Sans KR';
   margin:0;
   padding:0;
-  height:calc(100%-50px);
+  height:100%;
 }
 
 #main-box{
     padding-left: 250px;
     height:100%;
+<<<<<<< HEAD
     margin-top: 50px;
+=======
+    padding-top: 50px;
 }
+>>>>>>> b21cf1225d4896ec930a6cbf7dee09b6df41c81b
 
+}
 .navbar.inside-header{
    background-color: #f4faff;
    color:black;
@@ -501,3 +505,9 @@ background-color: 999999;
     width: 100%;
     height: 100%;
 }
+/* task 수정,삭제 모달_정권 ---------------------- 시작 */
+#star_trash{
+  text-align: right;
+}
+
+/* task 수정,삭제 모달_정권 ---------------------- 종료 */

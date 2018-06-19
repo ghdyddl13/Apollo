@@ -107,5 +107,24 @@ public class SidebarService {
 		
 		return memberlist;
 		
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 18.
+	 기      능 : 프로젝트 리스트 가져오기
+	 작성자명 : 박 민 식
+	 */
+	public ArrayList<ProjectDTO> selectProjectList(String mid){
+		
+		ArrayList<ProjectDTO> result = null;
+		try {
+			ProjectDAO dao= sqlsession.getMapper(ProjectDAO.class);
+			result = dao.selectProjectList(mid);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("project list service 에러");
+		}
+		return result;
 	}
+	
 }

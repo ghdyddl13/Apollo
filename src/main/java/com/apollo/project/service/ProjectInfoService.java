@@ -81,7 +81,7 @@ public class ProjectInfoService {
 	 기      능 : sid를 이용해서 해당 스텝 소속 테스크들을 가져옴
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<TaskDTO> getTasksInSteps(String sid){
+	public ArrayList<TaskDTO> getTasksInSteps(int sid){
 		ArrayList<TaskDTO> taskinsteplist = new ArrayList<TaskDTO>();
 		TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
 		taskinsteplist = dao.getTasksByStepId(sid);
@@ -109,7 +109,7 @@ public class ProjectInfoService {
 	 기      능 : Step별 Task 완료/ 미완료에서 Step 셀렉트바에 따른 Task 가져오기
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<TaskDTO> getTasksByStepId(String sid){
+	public ArrayList<TaskDTO> getTasksByStepId(int sid){
 		
 		ArrayList<TaskDTO> tasklist= new ArrayList<TaskDTO>();
 		

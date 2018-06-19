@@ -26,8 +26,10 @@
 <!-- Timeline관련  -->
 <script type="text/javascript" src="js/stepTimeline.js"></script>
 <link rel="stylesheet" href="css/stepTimeline.css" />
+<link rel="stylesheet" href="css/inbox.css" />
 <link rel="stylesheet" href="dist/frappe-gantt.css" />
 <script src="dist/frappe-gantt.js"></script>
+
 
 <!-- 공통 CSS -->
 <link href="css/common.css" type="text/css" rel="stylesheet">
@@ -38,6 +40,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/inc/sidebar.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
