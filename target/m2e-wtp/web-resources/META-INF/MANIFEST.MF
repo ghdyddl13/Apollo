@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: JK
-Build-Jdk: 1.8.0_162
-=======
-Built-By: Minsik Park
+Built-By: pvkpk
 Build-Jdk: 1.8.0_171
->>>>>>> 0a1506f562206ac18bb3ba69f770d4dfdd6a71f3
 Created-By: Maven Integration for Eclipse
 
