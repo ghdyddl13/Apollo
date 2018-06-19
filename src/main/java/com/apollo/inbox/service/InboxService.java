@@ -80,4 +80,17 @@ public class InboxService {
 		
 		return result; 
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 19.
+	 기      능 : stream 데이터 가져오는 서비스
+	 작성자명 : 신 호 용
+	 */
+	public ArrayList<CommentDTO> getStreamlist(String mid){
+		System.out.println("service stream");
+		InboxDAO dao = sqlsession.getMapper(InboxDAO.class);
+		ArrayList<CommentDTO> streamlist = dao.getStreamlist(mid);
+		return streamlist;
+	}
+	
 }
