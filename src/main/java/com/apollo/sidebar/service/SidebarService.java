@@ -7,10 +7,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apollo.member.dao.MemberDAO;
 import com.apollo.project.dao.ProjectDAO;
 import com.apollo.sidebar.dao.FolderDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.vo.FolderDTO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 /* 
@@ -69,6 +71,49 @@ public class SidebarService {
 		result = dao.deleteProject(projectdto);
 		
 		return result;
+	}
+	/*
+	 날      짜 : 2018. 6. 18.
+	 기      능 : 스텝 생성
+	 작성자명 : 김 래 영
+	 */
+	public int insertStep(StepDTO stepdto) {
+		System.out.println("service step");
+		int result = 0;
+		
+		try {
+			StepDAO stepdao = sqlsession.getMapper(StepDAO.class);
+			result = stepdao.insertStep(stepdto);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		if(result > 0) {
+			System.out.println("step insert success");
+		}else {
+			System.out.println("step insert fail");
+		}
+		return result;
+		
+	}
+	/*
+	 날      짜 : 2018. 6. 18.
+	 기      능 : 스텝 생성시 pid를 이용하여 프로젝트 참여자 명단 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<MemberDTO> getMemberList(int pid) {
+		
+		//System.out.println("pid : " + pid);
+		
+		ArrayList<MemberDTO> memberlist = new ArrayList<MemberDTO>();
+		
+		try {
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			memberlist = dao.getProjectMemberlist2(pid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memberlist;
+		
 	}
 	
 	
