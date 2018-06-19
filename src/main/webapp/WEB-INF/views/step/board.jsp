@@ -15,15 +15,16 @@
 
 <script>
 	function autoWidth() {
-		var width = (($('.droptrue').length + $('.dropfalse').length) * 160)
-				+ "px";
+		var width = (($('.droptrue').length * 350)
+				+ "px");
 		console.log(width)
 		$('#board-content-md').css("width", width)
 	}
 
 	$(function() {
 
-		autoWidth()
+		autoWidth();
+		
 		$("ul.droptrue").sortable({
 			connectWith : "ul"
 		});
@@ -39,16 +40,16 @@
             stop: function() {
                 
                 var left = $('#board-content-md')[0].offsetLeft
-                console.log(left);
+                console.log("left : " + left);
                 var maxwidth = $(window).width() - $('#board-content-md').width()
-                
                 if(left > 0){
                     $('#board-content-md').css('left','0px')
+                   
                 }else if($(window).width() > $('#board-content-md').width()){
                     if(left < 0){ //화면크기가 div길이보다 크고 left가 0보다 작으면!!
                         $('#board-content-md').css('left','0px')
                     }
-                }else if($(window).width() < $('#board-content-md').width()){
+              	  }else if($(window).width() < $('#board-content-md').width()){
                     if(left < maxwidth){ //화면크기가 div길이보다 작고 left가 maxwidth보다 작으면!!
                         $('#board-content-md').css('left',maxwidth-80)
                     }
@@ -63,21 +64,21 @@
 
 
 <style>
-#sortable1, #sortable2, #sortable3 {
+#sortable1{
 	list-style-type: none;
 	margin: 0;
-	float: left;
+	 float: left; 
 	margin-right: 10px;
-	background: #eee;
+	 background: #eee; 
 	padding: 5px;
-	width: 143px;
+	width: 300px;
 }
 
-#sortable1 li, #sortable2 li, #sortable3 li {
+#sortable1 li{
 	margin: 5px;
 	padding: 5px;
 	font-size: 1.2em;
-	width: 120px;
+	width: 280px;
 }
 
 #board-content-md {
@@ -86,7 +87,7 @@
 }
 
 #board-main-div {
-	overflow-x: scroll;
+	overflow-x: auto;
 	max-width: calc(100% -250px);
 	height: 100%;
 	
@@ -97,7 +98,7 @@
 	display: flex;
 	flex-wrap: nowrap;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: flex-start;
 }
 
 #board-hr{
@@ -109,23 +110,26 @@
 #board-status-name{
 	font-size: 20px;
 	color: black;
-	
-	
 }
 </style>
 
 <div class="container-fluid" id="board-main-div">
-	<div class="container-fluid" id="board-content-md">
-		<div class="container-fluid" id="board-status-div">
+	<div class="container-fluid"  id="board-content-md">
+		<div  class="container-fluid" id="board-status-div">
 			<c:forEach var="b" items="${b}">
-				<div class="container-fluid">
+				<div >
 					<p align="center" id="board-status-name">${b.tstatus}</p>
 					<hr id="board-hr" style="background-color:${b.color};">
-					<c:forEach var="t" items="${t}">
 					<ul id="sortable1" class="droptrue">
+						<c:forEach var="t" items="${t}">
+							<c:choose>
+								<c:when test="${b.tstatus eq t.tstatus}">
 						<li class="ui-state-default">${t.tname}</li>
+								</c:when>
+							</c:choose>
+						</c:forEach>
 					</ul>
-					</c:forEach>
+				
 				</div>
 			</c:forEach>
 		</div>
