@@ -18,7 +18,7 @@ SELECT r.cmtid, c.comments, c.tid, c.mid ,m.mname, c.cmtkind, c.cmtmtime, r.isar
 <select id="getArchivelist" parameterType="String" resultType="com.apollo.vo.CommentDTO">
   SELECT r.cmtid, c.comments, c.tid, c.mid ,m.mname, c.cmtkind, c.cmtmtime, r.isarchive, t.tname, p.pname,m.image
  FROM RECEIVER r JOIN COMMENTS c ON r.CMTID = c.CMTID join task t on t.tid=c.tid join project p on p.pid =t.pid 
- join member m on c.mid = m.mid where r.mid=#{mid} and r.ISARCHIVE = 1 ORDER BY c.cmtmtime DESC
+ join member m on c.mid = m.mid where r.mid=#{mid} and r.ISARCHIVE = 1 (cmtkind = 0 or cmtkind = 2) ORDER BY c.cmtmtime DESC
 </select>
 
 <update id="updateArchive" parameterType="com.apollo.vo.CommentDTO">

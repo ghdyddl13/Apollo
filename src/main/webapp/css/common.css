@@ -12,14 +12,8 @@ html, body{
 #main-box{
     padding-left: 250px;
     height:100%;
-<<<<<<< HEAD
-    margin-top: 50px;
-=======
     padding-top: 50px;
     margin-left: 0;
-}
->>>>>>> b21cf1225d4896ec930a6cbf7dee09b6df41c81b
-
 }
 .navbar.inside-header{
    background-color: #f4faff;
@@ -39,7 +33,9 @@ html, body{
    color:black;
    padding: 5px
 }
-
+.navbar{
+	border:0px;
+}
 
 .navbar.inside-header.inside-header-step{
    background-color: transparent;
