@@ -16,6 +16,7 @@ html, body{
     margin-top: 50px;
 =======
     padding-top: 50px;
+    margin-left: 0;
 }
 >>>>>>> b21cf1225d4896ec930a6cbf7dee09b6df41c81b
 
@@ -24,7 +25,7 @@ html, body{
    background-color: #f4faff;
    color:black;
    min-height:35px;
-   text-align: center
+   text-align: center;
 }
 
 .inside-header ul li{
