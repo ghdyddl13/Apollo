@@ -10,7 +10,6 @@
 
 <a class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal"><div id="t10">테스트 tid 10</div></a>
 
-
 <!-- Task 수정/삭제 Modal 창 -->
 	<div class="modal fade modal-task-dialog" id="Task_RUD_Modal" role="dialog">
 		<div class="modal-dialog">
