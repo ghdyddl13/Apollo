@@ -19,5 +19,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id ="selectTstatusBySid" resultType="com.apollo.vo.TstatusDTO" parameterType="Integer"> 
 	  select ts.TSTATUS, ts.TSTATUSID, ts.COLOR from step s join TSTATUS ts on s.METHODOLOGYID = ts.METHODOLOGYID where sid=#{sid}
 	</select>
+	
+	
+	<select id="selectStepList" parameterType="java.util.List" resultType="com.apollo.vo.StepDTO">
+		select sid, sname, sday, eday, pid, fid, methodologyid, mid, detail from step
+		where pid in 
+		<foreach collection="list" item="pid"  open="(" close=")" separator=",">
+            #{pid}
+        </foreach>
+	</select>
 
 </mapper>

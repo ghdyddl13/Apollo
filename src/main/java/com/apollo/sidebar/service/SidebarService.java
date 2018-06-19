@@ -1,6 +1,7 @@
 package com.apollo.sidebar.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.apollo.project.dao.ProjectDAO;
 import com.apollo.sidebar.dao.FolderDAO;
+import com.apollo.step.dao.StepDAO;
+import com.apollo.vo.FolderDTO;
 import com.apollo.vo.ProjectDTO;
+import com.apollo.vo.StepDTO;
 /* 
   클래스명 : SidebarService
   날      짜 : 2018. 6. 13.
@@ -86,5 +90,38 @@ public class SidebarService {
 		}
 		return result;
 	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 19.
+	 기      능 : 참여중인 프로젝트들에 포함되어 있는 폴더의 정보를 모두 가져오는 함수
+	 작성자명 : 박 민 식
+	 */
+	public ArrayList<FolderDTO> selectFolderList(List<Integer> pids){
+		ArrayList<FolderDTO> folderlist = null;
+		try {
+			FolderDAO dao= sqlsession.getMapper(FolderDAO.class);
+			folderlist= dao.selectFolderList(pids);
+		} catch (Exception e) {
+			System.out.println("selectFolderList service");
+			e.printStackTrace();
+		}
+		
+		return folderlist;
+	};
+	
+	public ArrayList<StepDTO>  selectStepList(List<Integer> pids){
+		ArrayList<StepDTO> steplist = null;
+		try {
+			StepDAO dao= sqlsession.getMapper(StepDAO.class);
+			steplist= dao.selectStepList(pids);
+		} catch (Exception e) {
+			System.out.println("selectFolderList service");
+			e.printStackTrace();
+		}
+		
+		return steplist;
+	};
 	
 }
