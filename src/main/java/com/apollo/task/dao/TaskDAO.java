@@ -11,5 +11,6 @@ public interface TaskDAO {
 	public ArrayList<TaskDTO> getNotAssignedTasks(String pid);
 	public ArrayList<TaskDTO> getTasksInSteps(String sid);
 	public ArrayList<TaskDTO> getTasksByStepId(int sid);	
-	
+	public int updateTask(TaskDTO taskdto);
+
 }

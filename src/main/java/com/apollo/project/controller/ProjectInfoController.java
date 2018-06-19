@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.apollo.project.service.ProjectInfoService;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.MidpidDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 
@@ -23,21 +24,49 @@ public class ProjectInfoController {
 	@Autowired 
 	private ProjectInfoService projectinfoservice;
 
-	 /* 
-	 날      짜 : 2018. 6. 13.
-	 기      능 : 프로젝트 인포메이션 페이지 로드 
+	/**
+	 * 
+	 날      짜 : 2018. 6. 15.
+	 기      능 : 프로젝트 인포메이션 페이지 로드
+	 			  로드되자마자 뿌려주는 정보는 다음과 같다
+	 			  1. 해당 프로젝트에 속한 스텝명(셀렉트 박스)
+	 			  	 (테이블은 비동기로 onload되자마자 trigger change)
+	 			  2. 프로젝트에 참여한 멤버 명단
+	 			  3. 모달 페이지에 띄워 줄 회원 명단
+	 			  	 (같은 회사키를 공유하는 회원들을 찾아서 뿌려준다)
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
 
-	public String projectInfoShow(String pid, Model map) {
+
+	public String projectInfoShow(String[] data, Model map) {
+		String tempstr = data[0];
+		String[] data_arr = tempstr.split(",");
 		
+		String pid = data_arr[0];
+		String mid = data_arr[1];
+
+
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
 		map.addAttribute("steplist", steplist);
 
 		
-		return "project/information";
+		ArrayList<MemberDTO> getProjectMemberlist = new ArrayList<MemberDTO>();
+		getProjectMemberlist = projectinfoservice.getProjectMembers(pid);
+        map.addAttribute("memberlist", getProjectMemberlist);
+
+        MidpidDTO midpiddto = new MidpidDTO();
+        midpiddto.setMid(mid);
+        midpiddto.setPid(pid);
+        
+        // 같은 회사키를 사용하면서도 아직 해당 프로젝트에 참여중이지 않은 멤버들만 가져온다
+        // 가져와서 모달에 넣어준다
+        ArrayList<MemberDTO> invitememberlist = new ArrayList<MemberDTO>();
+        invitememberlist = projectinfoservice.getInviteMemberList(midpiddto);
+        map.addAttribute("invitememberlist", invitememberlist);
+
+        return "project/information";
 	}
 	
 	/**
@@ -49,13 +78,13 @@ public class ProjectInfoController {
 	@RequestMapping("/donutChart.htm")
 	public View donutChart(String pid, ModelMap map) {
 		ArrayList<TaskDTO> assignedtasklist = new ArrayList<TaskDTO>();
-		ArrayList<TaskDTO> notassignedtasklist = new ArrayList<TaskDTO>();
+		ArrayList<TaskDTO> unassignedtasklist = new ArrayList<TaskDTO>();
 		
 		assignedtasklist = projectinfoservice.getAssignedTasks(pid);
-		notassignedtasklist = projectinfoservice.getNotAssignedTasks(pid);
+		unassignedtasklist = projectinfoservice.getNotAssignedTasks(pid);
 		
         map.addAttribute("assignedtasklist", assignedtasklist);
-        map.addAttribute("notassignedtasklist", notassignedtasklist);
+        map.addAttribute("unassignedtasklist", unassignedtasklist);
 		
 		return jsonview;
 	}
@@ -92,28 +121,84 @@ public class ProjectInfoController {
 		return jsonview;
 	}
 	
+	
 	/**
 	 * 
-	 날      짜 : 2018. 6. 13.
-	 기      능 : 같은 프로젝트에 속한 멤버들을 가져옴
+	 날      짜 : 2018. 6. 14.
+	 기      능 : Step별 Task 완료/ 미완료에서 Step 셀렉트바에 따른 Task 가져오기
 	 작성자명 : 김 정 권
 	 */
-	@RequestMapping("/getProjectMembers.htm")
-	public View getProjectMembers(String pid, ModelMap map) {
+	@RequestMapping("/getTasksByStepForSituation.htm")
+	public View getTasksByStep(int sid, ModelMap map) {
 
-		ArrayList<MemberDTO> getProjectMemberlist = new ArrayList<MemberDTO>();
-		getProjectMemberlist = projectinfoservice.getProjectMembers(pid);
-        map.addAttribute("getProjectMemberlist", getProjectMemberlist);
+		ArrayList<TaskDTO> tasklist = null;
+		
+		try {
+			tasklist = projectinfoservice.getTasksByStepId(sid);
+			map.addAttribute("tasklist", tasklist);
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
 		return jsonview;
 	}
 	
-	public View projectMemberSearch(String s1) {
-		return null;
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 15.
+	 기      능 : Step 진행률 bar 데이터 가져오기
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/getProgressData.htm")
+	public View getProgressData(String pid, ModelMap map) {
+
+		ArrayList<ArrayList<TaskDTO>> tasklistbysteps = new ArrayList<ArrayList<TaskDTO>>();
+		
+		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
+		steplist = projectinfoservice.getSteps(pid);
+		
+		for(StepDTO stepdto : steplist) {
+			
+			ArrayList<TaskDTO> taskinsteplist = new ArrayList<TaskDTO>();
+			taskinsteplist = projectinfoservice.getTasksInSteps(stepdto.getSid());
+			tasklistbysteps.add(taskinsteplist);
+			
+		}
+		
+		map.addAttribute("steplist", steplist);
+        map.addAttribute("tasklistbysteps", tasklistbysteps);
+		
+		return jsonview;
 	}
 	
-	public View projectMemberAdd(String s1) {
+	/**
+	 * 
+	 날      짜 : 2018. 6. 16.
+	 기      능 : 프로젝트 맴버 초대 모달에서 초대 아이콘을 누르면 프로젝트에 맴버가 추가됨
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/insertMidToPmember.htm")
+	public View projectMemberAdd(String[] data, Model map) {
 		
-		return null;
+		String tempstr = data[0];
+		String[] data_arr = tempstr.split(",");
+		
+		String pid = data_arr[0];
+		String mid = data_arr[1];
+
+		System.out.println("테스트출력");
+		System.out.println("mid : " + mid);
+		System.out.println("pid : " + pid);
+		
+        MidpidDTO midpiddto = new MidpidDTO();
+        midpiddto.setMid(mid);
+        midpiddto.setPid(pid);
+		
+		int result = 0;
+		result = projectinfoservice.insertPmember(midpiddto);
+        map.addAttribute("result", result);
+		return jsonview;
+		
 	}
 	
 }

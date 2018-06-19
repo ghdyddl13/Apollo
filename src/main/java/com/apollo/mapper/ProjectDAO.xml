@@ -5,17 +5,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.apollo.project.dao.ProjectDAO">
 	<insert id="insertProject" parameterType="com.apollo.vo.ProjectDTO">
 		insert into project(pid, pname, sday, eday, methodologyid, mid, pstatuscode, stmtime, detail)
-		values(seq_pid.nextval, '${pname}', '${sday}', '${eday}', '${methodologyid}', '${mid}', 1, sysdate, '${detail}')
-		
+		values(seq_pid.nextval, #{pname}, #{sday}, #{eday}, #{methodologyid}, #{mid}, 1, sysdate, #{detail})
 	</insert>
+	<select id="getProject" parameterType="String" resultType="com.apollo.vo.ProjectDTO">
+		select pname, sday, eday, detail
+		from project
+		where pid=#{pid}
+	</select>
 	<update id="updateProject" parameterType="com.apollo.vo.ProjectDTO">
-		update project
-		set pname='${pname}', sday='${sday}'), EDAY='${eday}', stmtime=sysdate, detail='${detail}'
-		where pid='${pid}'
+		update project set
+		<if test="pname != null">pname=#{pname}</if>
+		<if test="sday != null">sday=#{sday}</if>
+		<if test="eday != null">eday=#{eday}</if>
+		<if test="detail != null">detail=#{detail}</if>
+		stmtime=sysdate
+		where pid=#{pid}
 	</update>
+	<!--  프로젝트 삭제시 14일동안 DB 에 데이터가 저장되고 그후 자동삭제된다 -->
 	<delete id="deleteProject">
 		delete project where PID=#{PID}
 	</delete>
-
-
 </mapper>

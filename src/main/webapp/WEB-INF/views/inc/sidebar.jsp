@@ -5,8 +5,8 @@
 
 <div id="my-side-nav" class="side-nav">
 		<div class="text-center container-fluid">
-			<a class="add-project" id="add-project" data-toggle="modal"
-				data-target="#dialog-form123">프로젝트 생성 <img class="add-project-img"
+			<a class="side-bar-add-project" id="side-bar-add-project" data-toggle="modal"
+				data-target="#project-insert">프로젝트 생성 <img class="add-project-img"
 				src="img/if_001_01_9588.gif"></a>
 		</div>
 

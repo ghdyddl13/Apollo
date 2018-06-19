@@ -3,7 +3,6 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 /* 폰트 */
 html, body{
-
   font-family: 'Noto Sans KR';
   margin:0;
   padding:0;
@@ -12,15 +11,16 @@ html, body{
 
 #main-box{
     padding-left: 250px;
-    height: calc(100% - 50px);
-    margin-top: 50px;
+    height:100%;
+    padding-top: 50px;
+    margin-left: 0;
 }
 
 .navbar.inside-header{
    background-color: #f4faff;
    color:black;
    min-height:35px;
-   text-align: center
+   text-align: center;
 }
 
 .inside-header ul li{
@@ -38,6 +38,7 @@ html, body{
 
 .navbar.inside-header.inside-header-step{
    background-color: transparent;
+   margin-bottom: 5px !important;
 }
 
 .navbar.inside-header.inside-header-step a:hover{
@@ -481,4 +482,22 @@ background-color: 999999;
    background-color: #f4faff;
    height:30px;
    color: black;
+}
+
+.profile-img-container{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color:white;
+  overflow: hidden;
+  cursor: pointer;
+  float:left;
+  box-shadow: 1 1px 1px 1 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgb(230, 230, 230);
+  margin-right: 3px
+}
+
+.profile-img{
+    width: 100%;
+    height: 100%;
 }

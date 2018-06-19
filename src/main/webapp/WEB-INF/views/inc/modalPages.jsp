@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-$(function() {
-	
-});
-</script>
 
 <!-- 프로젝트 생성 Modal 창 -->
-	<div class="modal fade" id="dialog-form123" role="dialog">
+	<div class="modal fade" id="project-insert" role="dialog">
 		<div class="modal-dialog modal-add-project-dialog">
 			<div class="modal-content modal-add-project-content">
 				<div class="modal-header">
@@ -19,8 +16,8 @@ $(function() {
 					<h4 class="modal-title">Project 생성</h4>
 				</div>
 				<div class="modal-body">
-				<!-- 추후 actuon=""information.htm" 으로 변경 예정 -->
-					<form action="insertproject.htm" method="post">
+				<!-- 추후 action=""information.htm" 으로 변경 예정 -->
+					 <form id="project-add-form" method="post" onsubmit="return false;">
 						<fieldset>
 							<div class="row">
 								<br>
@@ -32,19 +29,19 @@ $(function() {
 									<div class="modal-title">
 										<p>방법론</p>
 									</div>
-										<input type="radio" name="methodologyid" value="3"
+										<input type="radio" id="method" name="methodologyid" value="3"
 										checked><span class="method"> Customizing</span> <br>
 									<div>
 										<!-- Customizing 설명 작성  -->
 										가나다라마바사아자차카타파하 커스텀마이징 설명작성 필요
 									</div>
-									<br> <input type="radio" name="methodologyid" value="2"><span
+									<br> <input type="radio" id="method" name="methodologyid" value="2"><span
 										class="method"> Agile</span><br>
 									<div>
 										<!-- Agile 설명 작성  -->
 										가나다라마바사아자차카타파하 애자일 설명작성 필요
 									</div>
-									<br> <input type="radio" name="methodologyid" value="1"><span
+									<br> <input type="radio" id="method" name="methodologyid" value="1"><span
 										class="method"> Waterfall</span><br>
 									<div>
 										<!-- Waterfall 설명 작성  -->
@@ -62,33 +59,34 @@ $(function() {
 										<div class="modal-title">
 											<p>시작일</p>
 										</div>
-										<input type="text" name="sday" placeholder="Start Date" class="date date-img">
+										<input type="text" id="sday-id" name="sday" placeholder="Start Date" class="date date-img">
 									</div>
 									<div class="col-sm-6">
 										<div class="modal-title">
 											<p>종료일</p>
 										</div>
-										<input type="text" name="eday" placeholder="End Date" class="date date-img">
+										<input type="text" id="eday-id" name="eday" placeholder="End Date" class="date date-img">
 										<br><br>
 									</div>
 									<div class="modal-title">
 										<p>상세설명</p>
 									</div>
-									<textarea rows="7%" cols="49%" name="detail" placeholder="내용을 입력하세요"></textarea>
+									<textarea rows="7%" cols="49%" id="project-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
 								</div>
 							</div>
 							<!-- 아래는 임시로 작성해둔 것임 -->
 							<input type="hidden" name="mid" value="${mid}">
 		
-						<div align="center">
-							<input type="submit" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
-							<input type="button" class="btn cancel-btn"
-								data-dismiss="modal" value="취소">
-						</div>
 						<br>
+						<div align="center">	
+								<input type="button" class="btn add-btn" id="insert-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
+								<input type="button" class="btn cancel-btn"
+									data-dismiss="modal" value="취소">
+						</div>
 						</fieldset>
 					</form>
 
+				
 				</div>
 			</div>
 		</div>
@@ -107,7 +105,7 @@ $(function() {
 					<input type="text" class="add-folder-text"
 						placeholder="folder명을 입력하세요">
 					<div align="center">
-						<input type="submit" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"
 							data-dismiss="modal" value="취소">
 					</div>
@@ -167,7 +165,7 @@ $(function() {
 							<textarea rows="7%" cols="68%" name="detail" placeholder="내용을 입력하세요"></textarea>
 								<br><br>
 							<div align="center">
-								<input type="submit" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
+								<input type="button" class="btn add-btn" value="생성">&nbsp;&nbsp;&nbsp;
 								<input type="button" class="btn cancel-btn"
 									data-dismiss="modal" value="취소">
 							</div>

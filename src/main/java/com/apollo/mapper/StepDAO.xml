@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insertStep" parameterType="com.apollo.vo.StepDTO">
 		insert into step(sid, sname, sday, eday, pid, fid, mgr, methodologyid, mid) 
-		values (seq_sid.nextval, '${sname}', '${sday}', '${eday}', '${pid}', '${fid}', '${mgr}', '${methodologyid}', '${mid}')
+		values (seq_sid.nextval, #{sname}, #{sday}, #{eday}, #{pid}, #{fid}, #{mgr}, #{methodologyid}', '${mid}')
 	</insert>
 
 	<select id ="getProjectIdByStepId" parameterType="Integer"> 

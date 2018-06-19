@@ -933,7 +933,10 @@ class Gantt {
     constructor(wrapper, tasks, options) {
         this.setup_wrapper(wrapper);
         this.setup_options(options);
-        this.setup_tasks(tasks);
+        
+        if(tasks!=null || tasks.length !=0){
+        	this.setup_tasks(tasks);        	
+        }
         // initialize with default view mode
         this.change_view_mode();
         this.bind_events();

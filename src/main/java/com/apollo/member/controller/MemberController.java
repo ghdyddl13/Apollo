@@ -12,6 +12,8 @@ import org.springframework.web.servlet.View;
 import com.apollo.member.service.MemberService;
 import com.apollo.vo.AuthkeyDTO;
 import com.apollo.vo.MemberDTO;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -159,6 +161,7 @@ public class MemberController {
 		String result="";
 		String msg = "";
 		String securitypwd = service.getlogin(mid);
+		System.out.println(mid);
 		if(securitypwd == null) {
 			System.out.println("아이디 존재 안함");
 			msg = "아이디가 존재하지 않습니다.";
@@ -325,5 +328,23 @@ public class MemberController {
 				return jsonview;
 			}
 		}
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 14.
+	 기      능 : 태스크  담당자 명단 구하기 
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping("/getTaskAssignees.htm")
+	public View getTaskAssignees(String tid, Model model){
+		ArrayList<MemberDTO> taskassignees = null;;
+		try {
+			taskassignees= service.getTaskAssignees(tid);
+			model.addAttribute("taskassignees", taskassignees);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
 	}
 }

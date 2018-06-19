@@ -21,20 +21,21 @@ public class SidebarController {
 	
 	HttpSession session;
 	
+	@Autowired 
+	private View jsonview;
+	
 	@RequestMapping(value="/insertproject.htm", method=RequestMethod.POST)
-	public String insertProject(ProjectDTO projectdto, Model model) {
-		System.out.println("여기 들어오니 aaaaaaaaaaaaaaaaaaaaaaaa");
-		/*String mid = (String)session.getAttribute("mid");*/
-		/*model.addAttribute("mid", mid);*/
+	public View insertProject(ProjectDTO projectdto, Model model) {
+		System.out.println("프로젝트 생성");
 		try {
-			sidebarservice.insertProject(projectdto);
+			int result = sidebarservice.insertProject(projectdto);
 			System.out.println(projectdto.toString());
+			
+			model.addAttribute("result", result); // service에 return 타입인 result 를 result 에 저장 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		/*System.out.println("mid : " + mid);*/
-		
-		return "redirect:/login.htm";
+		return jsonview; //result 가 json 형태로 변환되어 저장
 	}
 
 	public View changeProjectStatus(int i1, Model model) {
