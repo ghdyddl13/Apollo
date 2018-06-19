@@ -286,7 +286,7 @@ function MakeSideSubDir(pids){
 		console.log(folders);
 		console.log(steps);
 		///// 먼저 폴더를 화면에 뿌려준다. 
-		if(folders!=null){ //폴더가 하나라도 있다면
+		if(folders!=null){ //폴더가 하나라도 있다면 만들어 붙혀주세요
 			
 			$(folders).each(function(index,folder){
 				var a =jQuery("<a>",{"class":"side-folder","text":folder.fname});
@@ -302,6 +302,13 @@ function MakeSideSubDir(pids){
 			
 		}
 		
+		//// 폴더를 뿌려준 후, Step을 뿌려준다.
+		if(steps!=null){
+			
+			$(steps).each(function(){
+				
+			})
+		}
 		
 	})
 }	
