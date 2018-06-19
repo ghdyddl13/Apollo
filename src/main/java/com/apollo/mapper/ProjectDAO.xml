@@ -25,4 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteProject">
 		delete project where PID=#{PID}
 	</delete>
+	
+	<select id="selectProjectList" parameterType="String" resultType="com.apollo.vo.ProjectDTO">
+		select * from project where pid in (select pid from pmember where mid=#{mid})
+	</select>
+	
 </mapper>
