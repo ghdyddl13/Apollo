@@ -170,6 +170,7 @@ $(function() {
 		 if($("#add-project-name").val().trim() == ""){
 			alert("프로젝트명을 입력해주세요.");
 			$("#add-project-name").focus();	
+			return false;
 		 }
 		 var newproject = $("#project-add-form").serialize(); //serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
 		 console.log(newproject);
@@ -195,14 +196,15 @@ $(function() {
 
 		 });	
 	});
-	
 
-	//스텝 생성 버튼 클릭시  alert 창 화면
+	// 스텝 생성 버튼 클릭시  alert 창 화면
 	$("#insert-step-btn").click(function(evt){	 
 		 if($(".add-step-name").val().trim() == ""){
-			alert("스텝명을 입력해주세요.");
+			alert("스텝명을 입력하세요.");
 			$(".add-step-name").focus();	
-			return false;
+			
+		 } else if($('#add-folder-name').val().trim() == ""){
+			 alert("책입자를 선택하세요.");
 		 }
 		 var newstep = $('#step-add-form').serialize();
 		 console.log(newstep);
@@ -234,7 +236,38 @@ $(function() {
 	
 	});
 
-
+	//폴더 생성 클릭 버튼시 alert 창 화면
+	$('#insert-folder-btn').click(function() {
+		if($('#add-folder-name').val().trim() == ""){
+			alert('폴더명을 입력해주세요');
+			$("#add-folder-name").focus();	
+			return false;
+		}
+		var newfolder = $('#insert-folder-form').serialize();
+		 console.log(newfolder);
+		 
+		 $.ajax({
+                type:"POST",
+                url:"insertfolder.htm",
+                data:newfolder,
+                dataType:"json",
+                success:function(data){
+               	 console.log(data);
+               	 if(data.folderresult > 0){
+   					 alert("폴더 생성이 완료되었습니다!");
+   				 }else {
+   					 alert("폴더 생성에 실패했습니다");
+   				 }	
+   				 $('.add-step-name').val("");
+   				 //$('#add-folder').close();
+                } // end - success
+             	,error:function(error){
+             		console.log(error);
+             	
+             	} // end - error
+             });// end-ajax	
+	});
+	
 }); // end - doc.on.ready
 
 

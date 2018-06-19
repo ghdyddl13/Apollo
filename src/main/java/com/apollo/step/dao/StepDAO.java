@@ -1,8 +1,10 @@
 package com.apollo.step.dao;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import com.apollo.vo.MemberDTO;
+
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TstatusDTO;
 
@@ -40,6 +42,7 @@ public interface StepDAO {
 	 */
 	public ArrayList<TstatusDTO> selectTstatusBySid(int sid);
 
+
 	/**
 	 * 
 	 날      짜 : 2018. 6. 19.
@@ -47,8 +50,7 @@ public interface StepDAO {
 	 작성자명 : 박 민 식
 	 */
 	public ArrayList<StepDTO> selectStepList(List<Integer> pids);
-	
-	
+
 	/**
 	 * 
 	 날      짜 : 2018. 6. 19.

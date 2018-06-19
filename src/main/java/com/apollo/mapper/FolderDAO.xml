@@ -10,4 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{pid}
         </foreach>
 	</select>
+	<insert id="insertfolder" parameterType="com.apollo.vo.FolderDTO">
+		insert into folder (fid, fname, pid) 
+		values (seq_fid.nextval, #{fname}, #{pid})
+	</insert>
 </mapper>

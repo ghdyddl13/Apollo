@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
 
+import com.apollo.sidebar.dao.FolderDAO;
 import com.apollo.sidebar.service.SidebarService;
 import com.apollo.vo.FolderDTO;
 import com.apollo.vo.MemberDTO;
@@ -55,7 +56,7 @@ public class SidebarController {
 	
 	@RequestMapping(value="/insertstep.htm", method=RequestMethod.POST)
 	public View insertStep(StepDTO stepdto, Model model) {
-		System.out.println("isnert step");
+		System.out.println("insert step");
 		try {
 			int stepresult = sidebarservice.insertStep(stepdto);
 			System.out.println(stepdto.toString());
@@ -146,12 +147,25 @@ public class SidebarController {
 		memberlist = sidebarservice.getMemberList(pid);
 		model.addAttribute("memberlist", memberlist);
 		
-		System.out.println("잘 가져왔음");
 		System.out.println("memberlist size : " + memberlist.size());
 		
 		return jsonview;
 	}
 	
+	@RequestMapping(value="/insertfolder.htm", method=RequestMethod.POST)
+	public View insertFolder(FolderDTO folderdto, Model model) {
+		System.out.println("isnert folder");
+		try {
+			int folderresult = sidebarservice.insertfolder(folderdto);
+			System.out.println(folderdto.toString());
+			
+			model.addAttribute("folderresult", folderresult);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview; 
+		
+	}
 
 }
 
