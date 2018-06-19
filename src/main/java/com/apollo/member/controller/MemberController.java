@@ -161,6 +161,7 @@ public class MemberController {
 		String result="";
 		String msg = "";
 		String securitypwd = service.getlogin(mid);
+		System.out.println(mid);
 		if(securitypwd == null) {
 			System.out.println("아이디 존재 안함");
 			msg = "아이디가 존재하지 않습니다.";
@@ -168,7 +169,6 @@ public class MemberController {
 		}else {
 			if(bCryptPasswordEncoder.matches(pwd, securitypwd)) {
 			    System.out.println("비밀번호 일치");
-			    
 			    session.setAttribute("mid", mid);
 			    result = "main";
 			}else { 

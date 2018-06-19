@@ -3,6 +3,7 @@
 <!DOCTYPE html >
 <script type="text/javascript" src="js/header.js"></script>
 <nav class="navbar navbar-default navbar-fixed-top" id="header">
+
 	<div class="container-fluid">
 		<div class="navbar-header container-fluid">
 			<a href="index.htm"><img id="gohome" class="header_logo"

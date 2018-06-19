@@ -13,8 +13,8 @@
   background-color:#f0f0f0
 }
 
-#projectinfo_DonutChart{
- height: 350px
+#prison_Donut{
+  height:350px;
 }
 
 #projectinfo_Task_Situation_Table{
@@ -26,7 +26,7 @@
 }
 
 #projectinfo_Step_Progress_Graph{
-   height:400px;
+   height:500px;
    margin: 1px;
    padding:10px;
    background-color:#f0f0f0
@@ -39,3 +39,40 @@
   padding:10px;
   background-color:#f0f0f0
 }
+
+#task_progress_table{
+	text-align: center
+}
+
+#task_progress_table th {
+	text-align: center;
+	width : 50%
+	}
+
+#prison_progressbar{
+	width: 100%;
+	height: 400px
+}
+
+#project_member_table{
+	text-align: center
+}
+
+#project_member_table th{
+	text-align: center;
+	width : 20%
+}
+
+#project_member_add_modal{
+	width : 100%
+}
+
+#project_pmember_table{
+	text-align: center;
+}
+
+#project_pmember_table th{
+	text-align: center;
+}
+
+

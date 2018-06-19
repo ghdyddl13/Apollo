@@ -1,6 +1,7 @@
 package com.apollo.member.dao;
 import java.util.ArrayList;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.MidpidDTO;
 
 public interface MemberDAO {
 	public ArrayList<MemberDTO> getProjectMemberlist(String pid);
@@ -9,13 +10,18 @@ public interface MemberDAO {
 	
 	public int insertMember(MemberDTO memberdto);
 	
-	public String getlogin(String mid);
+	public String getLogin(String mid);
 
-	public int midcheck(String mid);
+	public int midCheck(String mid);
 
-	public int findpwd(MemberDTO memberdto);
+	public ArrayList<MemberDTO> getInviteMemberList(MidpidDTO midpiddto);
 	
-	public String findpwdidcheck(String mid);
+	public int insertPmember(MidpidDTO midpiddto);
+
+	public int findPwd(MemberDTO memberdto);
+	
+	public String findPwdIdCheck(String mid);
 	
 	public ArrayList<MemberDTO> getTaskAssignees(String tid);
+
 }

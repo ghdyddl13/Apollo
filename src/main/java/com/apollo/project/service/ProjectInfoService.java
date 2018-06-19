@@ -10,6 +10,7 @@ import com.apollo.member.dao.MemberDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.MidpidDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 
@@ -80,7 +81,7 @@ public class ProjectInfoService {
 	 기      능 : sid를 이용해서 해당 스텝 소속 테스크들을 가져옴
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<TaskDTO> getTasksInSteps(String sid){
+	public ArrayList<TaskDTO> getTasksInSteps(int sid){
 		ArrayList<TaskDTO> taskinsteplist = new ArrayList<TaskDTO>();
 		TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
 		taskinsteplist = dao.getTasksByStepId(sid);
@@ -101,5 +102,60 @@ public class ProjectInfoService {
 		
 		return getProjectMemberlist;
 	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 14.
+	 기      능 : Step별 Task 완료/ 미완료에서 Step 셀렉트바에 따른 Task 가져오기
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<TaskDTO> getTasksByStepId(int sid){
+		
+		ArrayList<TaskDTO> tasklist= new ArrayList<TaskDTO>();
+		
+		try {
+			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
+			tasklist = dao.getTasksByStepId(sid);
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		
+		return tasklist;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 16.
+	 기      능 : 프로젝트에 초대할 회원의 명단을 불러옴
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<MemberDTO> getInviteMemberList(MidpidDTO midpiddto){
+		
+		ArrayList<MemberDTO> invitememberlist = new ArrayList<MemberDTO>();
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		invitememberlist = dao.getInviteMemberList(midpiddto);
 
+		return invitememberlist;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 16.
+	 기      능 : 선택한 회원을 프로젝트 멤버에 추가
+	 작성자명 : 김 정 권
+	 */
+	public int insertPmember(MidpidDTO midpiddto){
+		
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		int result = dao.insertPmember(midpiddto);
+		
+		System.out.println("테스트 출력");
+		System.out.println("result : " + result);
+		
+		return result;
+	}
+	
+	
 }

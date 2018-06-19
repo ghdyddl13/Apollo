@@ -1,5 +1,7 @@
 $(function() {
 
+	console.log(selectProjectList());
+	
 		// 사이드바 프로젝트 우클릭 >> 추후 Project id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
 		$(".side-project")
 				.contextmenu(
@@ -65,34 +67,29 @@ $(function() {
 			}
 		});
 	
-/*	$(".step1").click(function(event) {
-		console.log(event.target.Id);
-		$.ajax(
-			{
-				url:"list.htm",
-				dataType:"html",
-				success:function(data){
-					console.log(data);
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					
-				}
-			}
-		)
-	});*/
+
 	
 	
 	/////////////////////////// 비동기 화면전환 - 프로젝트 /////////////////////////
 	
 
 		$(".side-project").click(function(evt){
-			
+
+			console.log("사이드바~~!~!~!~!~!~!~!~!~!");
 			// 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
 			// 지금은 pid가 1이라고 가정하고 실시
-			var pid = 1;
+			var pid = '1';
+			
+			// mid도 필요하므로 일단 가정
+			var mid = 'testid1';
+			
+			 var send_data = new Array();
+			 send_data[0] = pid;
+			 send_data[1] = mid;
 			
 			$.ajax({
-				url:"information.htm?pid=" + pid,
+				url:"information.htm",
+				data: "data=" + send_data,
 				dataType:"html",
 				success:function(data){
 					 $("#main-box").empty();
@@ -106,7 +103,7 @@ $(function() {
 		$(".side-step").click(function(evt){
 			
 			console.log(evt.target.id);
-			console.log("여기")
+			console.log("여기");
 			$.ajax({
 				url:"list.htm",
 				data:{sid:evt.target.id},
@@ -119,7 +116,7 @@ $(function() {
 			})
 	    });
 	/* modal 창(project, step) dateficker */
-		$( ".date-img" ).datepicker({
+		$(".date-img").datepicker({
 		    showOn: "button",
 		    buttonImage: "img/calendar.png",
 		    buttonImageOnly: true,
@@ -128,4 +125,80 @@ $(function() {
 
 		});
 		
+	//프로젝트 생성 버튼 클릭시 alert 창 화면 		
+	$("#insert-project-btn").click(function(evt){
+		 if($("#add-project-name").val().trim() == ""){
+			alert("프로젝트명을 입력해주세요.");
+			$("#add-project-name").focus();	
+			return false;
+		 }
+		 var newproject = $("#project-add-form").serialize(); //serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
+		 console.log(newproject);
+		 $.ajax({
+			 url:"insertproject.htm",
+			 data:newproject,
+			 type:"POST",
+			 dataType:"json",
+			 success: function(data){
+				 console.log(data); //data+"data" 로 하면 Object 타입으로 변환되므로 json 형태로 받아볼 경우 data만 찍어보면 된다.
+				 if(data.result > 0){
+					 alert("프로젝트 생성이 완료되었습니다!");
+				 }else {
+					 alert("프로젝트 생성에 실패했습니다");
+				 }	
+				 $('#add-project-name').val("");
+				 $('#method').val("");
+				 $('#sday-id').val("");
+				 $('#eday-id').val("");
+				 $('#project-detail').val("");
+				 $('.close');
+			 }
+
+		 });	
+	});
+	
+	
 });
+
+function selectProjectList(){
+	$.ajax({
+		url:"selectProjectList.htm",
+		dataType:"json",
+		success:function(data){
+			console.log(data);
+			$(data.projectlist).each(function(index,el){
+				console.log(el.pname)
+				var a = jQuery("<a>",{"class":"side-project","text":el.pname})
+				var span = jQuery("<span>",{"class":"glyphicon glyphicon-duplicate", 
+											"data-toggle":"collapse",
+											"data-target":"#p"+el.pid})
+				var div = jQuery("<div>",{"class":"side-dir collapse",
+										  "id": "p"+el.pid})
+											
+				console.log(el.pstatuscode);
+				
+				if(el.pstatuscode ==1){
+					$(a).prepend(span).appendTo("#working-project");
+					$(div).appendTo("#working-project");
+
+				}else if(el.pstatuscode ==2){
+					$(a).prepend(span).appendTo("#finished-project");
+					$(div).appendTo("#finished-project");
+				}else if(el.pstatuscode==3){
+					$(a).prepend(span).appendTo("#trash-bean");
+					$(div).appendTo("#trash-bean");
+				}
+			})
+		}
+	});
+	
+}
+
+
+function getSideFolders(pid){
+	
+}
+
+function getSideSteps(pid){
+	
+}

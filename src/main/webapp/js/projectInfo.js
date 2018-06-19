@@ -39,9 +39,9 @@ $(function() {
         } 
         curDateFmt = parseInt(year + "" + month + "" + day + "" + hours + "" + minutes); 
         return curDateFmt; 
-      } // end - serverToday()
-   
-   
+      }
+  
+        
    /*
     날      짜 : 2018. 6. 14.
     기      능 : donut Chart의 데이터를 불러오고 이에 맞게 분류하고 donut Chart 형성
@@ -268,18 +268,23 @@ $(function() {
                          }
                      });
                      
-                     
+                     console.log('11111111111111111111111');
+                     console.log(completedtasks.length);
+                     console.log(uncompletedtasks.length);
+                                                               
                      if(completedtasks.length > uncompletedtasks.length){
-                        
-                        for(var i = 0; i < completedtasks.length - uncompletedtasks.length; i++){
+                        var c1 = completedtasks.length - uncompletedtasks.length
+                        for(var i = 0; i < c1; i++){
                            uncompletedtasks.push(' ');
                         }
                      
                      } else if (completedtasks.length < uncompletedtasks.length){
-                        for(var i = 0; i < uncompletedtasks.length - completedtasks.length; i++){
+                        var c2 = uncompletedtasks.length - completedtasks.length
+                        for(var i = 0; i < c2; i++){
                            completedtasks.push(' ');
                         }
                      }
+
                      
                      // 위 로직에 의해 두 배열의 길이가 같아졌으므로
                      // 아무 배열이나 잡아서 length 만큼 돌려도 상관없음
@@ -288,79 +293,140 @@ $(function() {
                         tablestr += '<tr><td>' + completedtasks[i] + '</td><td>' + uncompletedtasks[i] + '</td></tr>'
                      }
                      
+                     
                      $('#task_progress_table').empty();
                      $('#task_progress_table').append(tablestr);
                        
-                     }
+                     
+                     console.log('22222222222222222222');
+                     console.log(completedtasks.length);
+                     console.log(uncompletedtasks.length);
+                     
+                     } // end - success
                  }
                 );
-            });
+            }).trigger("change");
 
+   
+   /*
+    날      짜 : 2018. 6. 15.
+    기      능 : Step별 진행률 그래프 데이터 가져와서 세팅
+    작성자명 : 김 정 권
+    */
+   // 일단 pid를 1로 가정
+   $.ajax(
+             {
+                 type : "post",
+                 url  : "getProgressData.htm",
+                 data : "pid="+ 1,
+                 success : function(rdata){
+                     console.log(rdata);
+                     
+                     var labelnames = [];
+                     $(rdata.steplist).each(function (index, el){
+                        labelnames.push(el.sname);
+                     });
+                     
+                     var completedtasks= [];
+                     var uncompletedtasks= [];
+                     $(rdata.tasklistbysteps).each(function (index, element){
+                       
+                        var completedcount = 0;
+                        var uncompletedcount = 0;
+                        
+                        console.log('********************')
+                        console.log(element.length)
+                        console.log('********************')
+                        
+                           $(element).each(function (index,el) {
+                              if((el.tstatusid == 3)||(el.tstatusid == 11)||(el.tstatusid == 15)){
+                                  completedcount++;
+                               }else {
+                                  uncompletedcount++;
+                               }
+                           });
 
+                        completedtasks.push(completedcount);
+                        uncompletedtasks.push(uncompletedcount);
+                        
+                     });                     
+                     
+                     console.log('------------------')
+                     console.log('완료 : ' + completedtasks)
+                     console.log('미완료 : ' + uncompletedtasks)
+                     console.log('------------------')
+                     
+                     
+                     var ctx = document.getElementById('projectinfo_progressbar').getContext('2d');
+                     var stackedBar = new Chart(ctx, {
+                        type: 'bar',
+                         data: {
+                            
+                            labels: labelnames,
+                           datasets: [{
+                              label: '완료',
+                              backgroundColor: '#3498db',
+                              data: completedtasks
+                           }, {
+                              label: '미완료',
+                              backgroundColor: '#2ecc71',
+                              data: uncompletedtasks
+                           }]
+                         },              
+                         options: {
+                            maintainAspectRatio: false,
+                             scales: {
+                                 xAxes: [{
+                                     stacked: true
+                                 }],
+                                 yAxes: [{
+                                     stacked: true
+                                 }]
+                             }
+                         }
+                     });
+                 } // end-success
+              } 
+            ); // end-ajax
    
    
-   
-   
-   
-////////////////////////////////////////////////////////////////////////////////////////////////   
-   $('#testjk').click(function(){
-      alert('dd');
+   /*
+    날      짜 : 2018. 6. 15.
+    기      능 : 프로젝트 멤버 초대 모달에서 초대하기 누르면 멤버가 초대되고 redirect
+    작성자명 : 김 정 권
+    */
+   // 동적 생성 태그에 대한 이벤트이므로
+   // 일반적으로 위에서 써오던 함수와 형태가 다르다
+   $(document).on("click","#pmember_add_btn",function(){
+
+      var mid = $(this).children().attr("id");
+      
+      // 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
+      // 지금은 pid가 1이라고 가정하고 실시
+      var pid = '1';
+      
+      var send_data = new Array();
+      send_data[0] = pid;
+      send_data[1] = mid;
+      
+      $.ajax(
+              {
+                 type : "post",
+               url:"insertMidToPmember.htm",
+               data: "data=" + send_data,
+                 success : function(rdata){
+
+                    if(rdata.result == 1){
+                       alert('프로젝트 멤버로 추가되었습니다')
+                       location.href = "login.htm";
+                    } else{
+                       alert('프로젝트 멤버 추가 실패')
+                       location.href = "login.htm";
+                    }
+                    
+                     } // end - success
+                 }
+                );
    });
-   
-   $('#testbtn3').click(function(){
-
-   });
-   
    
 }); // end-document.onready
-
-
-   /*
-   $('#testbtn5').click(function(){
-      var pid = 1;
-      
-      $.ajax(
-        {
-           type : "post",
-           url  : "getSteps.htm",
-           data : "pid="+pid,
-           success : function(data){
-               console.log(data);
-           } 
-        } 
-      ) // end-ajax
-        
-   });
-   
-   $('#testbtn6').click(function(){
-      var sid = 1;
-      
-      $.ajax(
-        {
-           type : "post",
-           url  : "getTasksInSteps.htm",
-           data : "sid="+sid,
-           success : function(data){
-               console.log(data);
-           } 
-        } 
-      ) // end-ajax
-        
-   });
-   
-   $('#testbtn7').click(function(){
-      var pid = 1;
-      
-      $.ajax(
-        {
-           type : "post",
-           url  : "getProjectMembers.htm",
-           data : "pid="+pid,
-           success : function(data){
-               console.log(data);
-           } 
-        } 
-      ) // end-ajax
-        
-   });
-    */

@@ -4,6 +4,7 @@ public class AuthkeyDTO {
 	private String apollokey;
 	private String cname;
 	private String email;
+	
 	public String getApollokey() {
 		return apollokey;
 	}
@@ -22,6 +23,4 @@ public class AuthkeyDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
 }

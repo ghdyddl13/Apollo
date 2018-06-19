@@ -1,5 +1,8 @@
 package com.apollo.sidebar.controller;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +24,21 @@ public class SidebarController {
 	
 	HttpSession session;
 	
+	@Autowired 
+	private View jsonview;
+	
 	@RequestMapping(value="/insertproject.htm", method=RequestMethod.POST)
-	public String insertProject(ProjectDTO projectdto, Model model) {
-		System.out.println("여기 들어오니 aaaaaaaaaaaaaaaaaaaaaaaa");
-		/*String mid = (String)session.getAttribute("mid");*/
-		/*model.addAttribute("mid", mid);*/
+	public View insertProject(ProjectDTO projectdto, Model model) {
+		System.out.println("프로젝트 생성");
 		try {
-			sidebarservice.insertProject(projectdto);
+			int result = sidebarservice.insertProject(projectdto);
 			System.out.println(projectdto.toString());
+			
+			model.addAttribute("result", result); // service에 return 타입인 result 를 result 에 저장 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		/*System.out.println("mid : " + mid);*/
-		
-		return "redirect:/login.htm";
+		return jsonview; //result 가 json 형태로 변환되어 저장
 	}
 
 	public View changeProjectStatus(int i1, Model model) {
@@ -56,6 +60,28 @@ public class SidebarController {
 	public String deleteStep(String s1) {
 		return null;
 	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 18.
+	 기      능 : 프로젝트 리스트 가져오기 
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping("/selectProjectList.htm")
+	public View selectProjectList(Model model,HttpServletRequest request) {
+		String mid =  (String) request.getSession().getAttribute("mid");
+		ArrayList<ProjectDTO> projectlist = null;
+		try {
+			projectlist = sidebarservice.selectProjectList(mid);
+			model.addAttribute("projectlist",projectlist);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("selectProjectList Controller 에러");
+		}
+		
+		return jsonview;
+	}
+	
 	
 	
 }
