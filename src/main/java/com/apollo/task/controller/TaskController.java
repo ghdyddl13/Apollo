@@ -2,6 +2,8 @@ package com.apollo.task.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.View;
 
 import com.apollo.task.service.TaskService;
 import com.apollo.vo.CommentDTO;
+import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TstatusDTO;
@@ -59,28 +62,29 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/getTask.htm")
-	public View getTask(String pid, String tid, Model model) {
+	public View getTask(String pid, String tid, HttpSession session, Model model) {
 
+    String mid = (String) session.getAttribute("mid");
+    ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
+    starredtasklist = service.getStarredTaskList(mid);
+
+    System.out.println("task list 나왔니 : " + starredtasklist.size());
+    
+    model.addAttribute("starredtasklist", starredtasklist);
+   
+    
 	TaskDTO taskdto = new TaskDTO();
 	taskdto = service.getTask(tid);
 	model.addAttribute("task", taskdto);
 	
-	System.out.println("task : " + taskdto.getTname());
-	
 	ArrayList<StepDTO> steplist = new ArrayList();
 	steplist = service.getStepid(tid);
 	model.addAttribute("steps", steplist);
-
-	System.out.println("steplist size : " + steplist.size());
 	
 	ArrayList<TstatusDTO> tstatuslist = new ArrayList();
 	tstatuslist = service.gettstatuslist(pid);
 	model.addAttribute("tstatuslist", tstatuslist);
-	
-	for(TstatusDTO dto : tstatuslist) {
-		System.out.println(dto.getTstatus());
-	}
-	
+
 	return jsonview;
 	}
 	

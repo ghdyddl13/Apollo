@@ -97,15 +97,25 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			           success : function(rdata){
 
 			        	   console.log(rdata);
-			        	   
+
 			        	   // tname
 			        	   $('#Task_Modal_tname').empty();
 			        	   $('#Task_Modal_tname').append(rdata.task.tname);
 
 			        	   
 			        	   // star, trash
-			        	   $('#star_trash').empty();
-			        	   $('#star_trash').append(rdata.task.tname);
+			        	   $('#span_task_star').empty();
+
+			        	   var star_tag_class = 'far fa-star';
+			        	   $(rdata.starredtasklist).each(function (){
+			        		   
+			        		   if(this.tid == tid){
+			        			   star_tag_class = 'fas fa-star';
+			        			   return false;
+			        		   }
+			        	   });
+			        	   			        	   
+			        	   $('#span_task_star').append('<i class="' + star_tag_class + '" id="task_star"></i>');
 			        	   
 			        	   
 			        	   // step name
