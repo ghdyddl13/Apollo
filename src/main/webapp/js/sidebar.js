@@ -1,5 +1,5 @@
 $(function() {
-
+    
 	console.log(selectProjectList());
 	
 		// 사이드바 프로젝트 우클릭 >> 추후 Project id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요

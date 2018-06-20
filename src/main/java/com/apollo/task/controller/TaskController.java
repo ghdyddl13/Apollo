@@ -2,6 +2,7 @@ package com.apollo.task.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,16 +126,19 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/deletetask.htm")
-	public View deleteTask(int tid, Model model) {
-
+	public String deleteTask(int tid, Model model, HttpServletRequest request) {
+		
+		String location = (String) request.getSession().getAttribute("location");
+		
 		System.out.println("tid : " + tid);
 		int result;
 		result = service.deleteTask(tid);
+		
 		model.addAttribute("result", result);
 
 		System.out.println("결과는? : " + result);
 		
-		return jsonview;
+		return null;
 	
 	}
 	
