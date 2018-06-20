@@ -32,18 +32,20 @@ public class TestController {
 		return "header/starredTask";
 	}
     
-    @RequestMapping("/list.htm")
-    public String list(int sid, HttpServletRequest request) {
-       
-    	System.out.println(sid);
-    	
-        StepListService service = new StepListService();
-        int pid = service.getProjectIdByStepId(sid);
-        request.getSession().setAttribute("sid", sid);
-        request.getSession().setAttribute("pid", pid);
-        
-        return "step/list";
-    }
+	   @RequestMapping("/list.htm")
+	    public String list(int sid, HttpServletRequest request) {
+	       
+	    	System.out.println("list sid : " + sid);
+	    	
+	        StepListService service = new StepListService();
+	        int pid = service.getProjectIdByStepId(sid);
+	        System.out.println(pid);
+	        request.getSession().setAttribute("sid", sid);
+	        request.getSession().setAttribute("pid", pid);
+	        
+	        return "step/list";
+	    }
+
     
     
     @RequestMapping("/workload.htm")

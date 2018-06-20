@@ -33,7 +33,9 @@ public class StepBoardController {
 	 작성자명 : 이 창 훈
 	 */
 	@RequestMapping("/boardInsertTask.htm")
-	public View createTask(TaskDTO taskdto) {
+	public View createTask(TaskDTO taskdto, HttpServletRequest request) {
+		System.out.println("boardInsertTask : " + taskdto.getTname() + "/" + request.getSession().getAttribute("pid") + "/" + taskdto.getTstatusid());
+		
 		try {
 			boardservice.insertBoardTask(taskdto);
 		} catch (Exception e) {
@@ -71,8 +73,9 @@ public class StepBoardController {
 	 작성자명 : 이 창 훈
 	 */
 	@RequestMapping("/board.htm")
-    public String selectBoard(Model model) {
-        int sid = 3;
+    public String selectBoard(Model model,HttpServletRequest request) {
+        int sid = (Integer) request.getSession().getAttribute("sid");
+        System.out.println("sid : " + sid);
         try {
         	  ArrayList<TstatusDTO> tstatusdto = boardservice.selectTstatusBySid(sid);
               model.addAttribute("b", tstatusdto);

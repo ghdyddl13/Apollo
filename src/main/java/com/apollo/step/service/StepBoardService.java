@@ -63,6 +63,7 @@ public class StepBoardService {
 		ArrayList<TstatusDTO> result = null;
 		try {
 			StepDAO dao = sqlsession.getMapper(StepDAO.class);
+			System.out.println(" sess-board " + sqlsession);
 			result = dao.selectTstatusBySid(sid);
 		}catch (Exception e) {
 		   System.out.println(e.getMessage());

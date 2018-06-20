@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<h3>보드페이지-여기다가 해당 step명 입력하깅</h3>
+<h3></h3>
 <jsp:include page="/WEB-INF/views/inc/stepInsideHeader.jsp"></jsp:include>
 <nav class="navbar inside-header ">
    <div class="container-fluid ">
@@ -40,8 +40,7 @@ function addCard(obj, tstatusid){
 			url : "boardInsertTask.htm",
 			data : {
 					tstatusid : tstatusid, 
-					tname : value,
-					pid : pid
+					tname : value
 					}
 		
 		/* ,
@@ -201,7 +200,7 @@ function addCard(obj, tstatusid){
 					
 					<ul id="board-sortable" class="tstatuslist">
 						<c:forEach var="t" items="${t}">
-							<input type="hidden" id="board-pid" value="${t.pid}">
+							<%-- <input type="hidden" id="board-pid" value="${t.pid}"> --%>
 							<c:choose>
 							
 								<c:when test="${b.tstatus eq t.tstatus}">
