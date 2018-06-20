@@ -13,5 +13,6 @@ public interface TaskDAO {
 	public ArrayList<TaskDTO> getTasksByStepId(int sid);	
 	public int updateTask(TaskDTO taskdto);
 	public int insertBoardTask(TaskDTO taskdto);
+	public TaskDTO getTask(String tid);
 
 }

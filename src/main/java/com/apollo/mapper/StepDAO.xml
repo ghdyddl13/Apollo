@@ -8,16 +8,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
 	<insert id="insertStep" parameterType="com.apollo.vo.StepDTO">
-		insert into step(sid, sname, sday, eday, pid, fid, mgr, methodologyid, mid) 
-		values (seq_sid.nextval, #{sname}, #{sday}, #{eday}, #{pid}, #{fid}, #{mgr}, #{methodologyid}', '${mid}')
+		insert into step(sid, sname, sday, eday, pid, fid, methodologyid, mid, detail) 
+		values (seq_sid.nextval, #{sname}, #{sday}, #{eday}, #{pid}, #{fid}, #{methodologyid}, #{mid}, #{detail})
 	</insert>
 
 	<select id ="getProjectIdByStepId" parameterType="Integer"> 
-	  select pid from step where sid=#{sid}
+	 	select pid from step where sid=#{sid}
 	</select>
 	
     <select id ="selectTstatusBySid" resultType="com.apollo.vo.TstatusDTO" parameterType="Integer"> 
-	  select ts.TSTATUS, ts.TSTATUSID, ts.COLOR from step s join TSTATUS ts on s.METHODOLOGYID = ts.METHODOLOGYID where sid=#{sid}
+    	select ts.TSTATUS, ts.TSTATUSID, ts.COLOR from step s join TSTATUS ts on s.METHODOLOGYID = ts.METHODOLOGYID where sid=#{sid}
 	</select>
+
+	<select id="selectStepList" parameterType="java.util.List" resultType="com.apollo.vo.StepDTO">
+		select sid, sname, sday, eday, pid, fid, methodologyid, mid, detail from step
+		where pid in 
+		<foreach collection="list" item="pid"  open="(" close=")" separator=",">
+            #{pid}
+        </foreach>
+	</select>
+
+	<select id="getStepsid" parameterType="String" resultType="com.apollo.vo.StepDTO">
+   	 select * from step where sid in (select sid from taskinstep where tid = #{tid})
+    </select>
 
 </mapper>

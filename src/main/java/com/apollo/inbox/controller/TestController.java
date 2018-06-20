@@ -31,11 +31,6 @@ public class TestController {
 	public String starredTask() {
 		return "header/starredTask";
 	}
-	
-	@RequestMapping("/stream.htm")
-	public String stream() {
-		return "header/stream";
-	}
     
     @RequestMapping("/list.htm")
     public String list(int sid, HttpServletRequest request) {

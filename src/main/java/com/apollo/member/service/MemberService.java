@@ -137,4 +137,23 @@ public class MemberService {
 		return result;
 	}
 	
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 프로필 사진 클릭시 프로필모달에 들어갈 멤버정보 불러오기
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<MemberDTO> getProfileInfoMemberList(String mid) {
+		System.out.println("프로필 모달 서비스단");
+		ArrayList<MemberDTO> profileinforesult = null;
+		try {
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			profileinforesult = dao.getProfileInfoMemberList(mid);
+			System.out.println("result : " + profileinforesult);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return profileinforesult;
+		
+	}
+	
 }

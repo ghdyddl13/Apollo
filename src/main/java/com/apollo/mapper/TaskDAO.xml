@@ -37,8 +37,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      	ctime=sysdate
     	where tid= #{tid}
     </update>
-    
+
     <insert id="insertBoardTask" parameterType="com.apollo.vo.TaskDTO">
     	insert INTO task(tid, tname, tstatusid, pid, ctime) values(seq_tid.nextval, tname=#{tname}, tstatusid=#{tstatusid}, pid=#{pid}, sysdate)
     </insert>
+
+    <select id="getTask" parameterType="String" resultType="com.apollo.vo.TaskDTO">
+    select * from task where tid = #{tid}
+    </select>
+
 </mapper>
