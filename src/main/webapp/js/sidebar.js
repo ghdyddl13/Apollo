@@ -150,7 +150,7 @@ $(function() {
 		    showOn: "button",
 		    buttonImage: "img/calendar.png",
 		    buttonImageOnly: true,
-		    dateFormat: 'yy/mm/dd'
+		    dateFormat: 'yy-mm-dd'
 
 
 		});
@@ -158,7 +158,7 @@ $(function() {
 		    showOn: "button",
 		    buttonImage: "img/calendar.png",
 		    buttonImageOnly: true,
-		    dateFormat: 'yy/mm/dd',
+		    dateFormat: 'yy-mm-dd',
 		    minDate: 0
 
 		});	

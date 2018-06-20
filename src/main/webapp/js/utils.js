@@ -52,25 +52,33 @@ function makeProfileIcon(memberdata, imgsize){
  기   능 : 프로필사진 클릭시, 프로필창 띄워주기
  작성자명 : 박 민 식
  */
-$(document).on("click",".profile-img-container",function(){
+$(document).on("click",".profile-img-container",function(evt){
 	console.log("프로필 띄워주기 - targetId : " + this.id);
 	var mid = this.id.substr(7); // mid 만 가져오기
 	console.log(mid);
 	
 	
 	$.ajax({
-		url:"profilememberlist.htm",
-		data:mid,
-		dataType:"html",
+		url:"profilemember.htm",
+		data:{mid:mid},
+		dataType:"json",
 		success:function(data) {
-			console.log(data);
+			$('#profile-modal-img').text(data.profileinfo.image);
+			$('#profile-modal-mname').text(data.profileinfo.mname)
+			$('#profile-modal-mid').text(data.profileinfo.mid);
+			$('#profile-modal-pnum').text(data.profileinfo.pnum);
+			$('#profile-modal-deptname').text(data.profileinfo.deptname);
+			$('#profile-modal-position').text(data.profileinfo.position);
+			
+			if($('#profile-modal-img').text() == null) {
+				$('#profile-modal-img').text("");
+			}
+			
+			
 		}
 	});
 
 });
-
-
-
 
 /**
  * 

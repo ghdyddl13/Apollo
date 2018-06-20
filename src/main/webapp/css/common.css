@@ -532,5 +532,10 @@ background-color: 999999;
 }
 #main-add-project-img {
 	width:20px;
-	hegith:10px;
+	height:10px;
+}
+
+#profile-modal-content{
+	height:220px;
+	width:500px;
 }

@@ -400,48 +400,42 @@
 </div>	
 
 	<!-- 프로필 모달 -->
-	<c:set var="member" value="${profileinfolist}"></c:set>
 	<div class="modal fade" id="profile-modal-dialog" role="dialog">
 		<div class="modal-dialog profile-modal-dialog">
 			<!-- Modal content-->
-			<div class="modal-content">
+			<div class="modal-content" id="profile-modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Profile</h4>
 				</div>
 				<div class="modal-body">
 					<div class="col-sm-3">
-						
+						<div id="profile-modal-img"></div>
 					</div>
-					<div class="col-sm-9">
-						<table>
+					<div class="col-sm-9" id="profile-modal-info">
+						<table class="profile-modal-info-table">
 							<tr>
 								<td>이름</td>
 								<th id="profile-modal-mname"></th>
 							</tr>
 							<tr>
 								<td>이메일</td>
-								<th></th>
+								<th id="profile-modal-mid"></th>
 							</tr>
 							<tr>
 								<td>휴대폰번호</td>
-								<th></th>
+								<th id="profile-modal-pnum"></th>
 							</tr>
 							<tr>
 								<td>부서명</td>
-								<th></th>
+								<th id="profile-modal-deptname"></th>
 							</tr>
 							<tr>
 								<td>직위</td>
-								<th></th>
+								<th id="profile-modal-position"></th>
 							</tr>
 						</table>
 					</div>
-				</div>
-				<div align="center">
-					<input type="submit" class="btn delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
-					<input type="button" class="btn cancel-btn"
-						data-dismiss="modal" value="취소">
 				</div>
 				<br>
 			</div>
