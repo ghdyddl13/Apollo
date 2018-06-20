@@ -95,9 +95,9 @@
 
 	<!-- Folder 생성 Modal 창 -->
 	<div class="modal fade" id="add-folder" role="dialog">
-		<div class="modal-dialog modal-add-folder-dialog">
+		<div class="modal-dialog modal-folder-dialog">
 			<!-- Modal content-->
-			<div class="modal-content modal-add-folder-content">
+			<div class="modal-content modal-folder-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Folder 생성</h4>
@@ -265,6 +265,31 @@
 		</div>
 	</div>	
 	
+<<<<<<< HEAD
+	<!-- Project 삭제 Modal 창 -->
+	<div class="modal fade" id="delete-project" role="dialog">
+		<div class="modal-dialog modal-delete-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Project 삭제</h4>
+				</div>
+				<div class="modal-body">
+					<p>해당 프로젝트를 삭제하시겠습니까?</p>
+					<p>프로젝트 삭제시 14일동안 휴지통에 보관됩니다.</p>
+				</div>
+				<div align="center">
+					<input type="submit" class="btn delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn cancel-btn"
+						data-dismiss="modal" value="취소">
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>	
+=======
+>>>>>>> f23e2f52ccde02973650b6792af323ee5a9a9191
 
 <!-- Project 완료 Modal 창 -->
 	<div class="modal fade" id="move-project" role="dialog">
@@ -405,46 +430,98 @@
 </div>	
 
 	<!-- 프로필 모달 -->
-	<c:set var="member" value="${profileinfolist}"></c:set>
 	<div class="modal fade" id="profile-modal-dialog" role="dialog">
 		<div class="modal-dialog profile-modal-dialog">
 			<!-- Modal content-->
-			<div class="modal-content">
+			<div class="modal-content" id="profile-modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Profile</h4>
 				</div>
 				<div class="modal-body">
-					<div class="col-sm-3">
-						
+					<div class="col-sm-5">
+						<div id="profile-modal-img-content">
+							<img id="profile-modal-img" src="">
+						</div>
 					</div>
-					<div class="col-sm-9">
-						<table>
+					<div class="col-sm-7" id="profile-modal-info">
+						<table class="profile-modal-info-table">
 							<tr>
 								<td>이름</td>
 								<th id="profile-modal-mname"></th>
 							</tr>
 							<tr>
 								<td>이메일</td>
-								<th></th>
+								<th id="profile-modal-mid"></th>
 							</tr>
 							<tr>
 								<td>휴대폰번호</td>
-								<th></th>
+								<th id="profile-modal-pnum"></th>
 							</tr>
 							<tr>
 								<td>부서명</td>
-								<th></th>
+								<th id="profile-modal-deptname"></th>
 							</tr>
 							<tr>
 								<td>직위</td>
-								<th></th>
+								<th id="profile-modal-position"></th>
 							</tr>
 						</table>
 					</div>
 				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Folder 수정 Modal 창 -->
+	<div class="modal fade" id="update-folder" role="dialog">
+		<div class="modal-dialog modal-folder-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-folder-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Folder 수정</h4>
+				</div>
+				<div class="modal-body">
+					<form id="update-folder-form" method="post">
+						<fieldset>
+							<input type="text" id="update-folder-name" name="fname" class="modal-folder-text">
+							<input type="hidden" name="fid" id="update-folder-fid">
+							<input type="hidden" name="pid" id="update-folder-pid">
+							<br><br>
+							<div align="center">
+								<input type="button" class="btn add-btn" id="update-folder-btn" value="수정">&nbsp;&nbsp;&nbsp;
+								<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>	
+
+	<!-- Folder 삭제 Modal 창 -->
+	<div class="modal fade" id="delete-folder" role="dialog">
+		<div class="modal-dialog modal-delete-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Folder 삭제</h4>
+				</div>
+				<div class="modal-body">
+				<form id="delete-folder-form" method="post">
+					<p>해당  폴더를 삭제하시겠습니까?</p>
+					<p>폴더 삭제시 영구삭제됩니다.</p>
+					<input type="hidden" name="fid" id="delete-folder-fid">
+				</form>
+				</div>
+				
 				<div align="center">
-					<input type="submit" class="btn delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn delete-btn" id="delete-folder-btn" value="삭제">&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn cancel-btn"
 						data-dismiss="modal" value="취소">
 				</div>

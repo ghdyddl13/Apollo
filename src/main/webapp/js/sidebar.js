@@ -1,5 +1,5 @@
 $(function() {
-	
+
 	makeSideProjectDir();
 	
 	//스텝 추가 클릭시 이벤트	
@@ -378,14 +378,14 @@ $(function() {
                 data:newfolder,
                 dataType:"json",
                 success:function(data){
-               	 console.log(data);
-               	 if(data.folderresult > 0){
-   					 alert("폴더 생성이 완료되었습니다!");
-   				 }else {
-   					 alert("폴더 생성에 실패했습니다");
-   				 }	
-   				 $('.add-step-name').val("");
-   				 //$('#add-folder').close();
+                   console.log(data);
+                   if(data.folderresult > 0){
+                   alert("폴더 생성이 완료되었습니다!");
+                }else {
+                   alert("폴더 생성에 실패했습니다");
+                }   
+                $('.add-step-name').val("");
+                //$('#add-folder').close();
                 } // end - success
              	,error:function(error){
              		console.log(error);
@@ -478,6 +478,7 @@ $(function() {
 	           }
 	       }); // end - ajax       
 	   })
+
 }); // end - doc.on.ready
 
 
@@ -488,23 +489,23 @@ $(function() {
  작성자명 : 박 민 식
  */
 function selectFolderList(pids){
-	if(pids==null) return false;
-	jQuery.ajaxSettings.traditional = true;
-	
-	var ajax =$.ajax({ // ajax는 내부적으로 Deffered와 호환이 되어 있는 함수이기 때문에 따로 선언을 해주지 않아도 된다. 
-		               // 그저, ajax의 결과값을 저장한 변수를 return해주면 끝
-		url:"selectFolderList.htm",
-		method:"post",
-		dataType:"json",
-		data: {'pids':pids},
-		success:function(data){
-			console.log(data);
-		},
-		error:function(error){
-			console.log(error);
-		}
-	})
-	return ajax;
+   if(pids==null) return false;
+   jQuery.ajaxSettings.traditional = true;
+   
+   var ajax =$.ajax({ // ajax는 내부적으로 Deffered와 호환이 되어 있는 함수이기 때문에 따로 선언을 해주지 않아도 된다. 
+                     // 그저, ajax의 결과값을 저장한 변수를 return해주면 끝
+      url:"selectFolderList.htm",
+      method:"post",
+      dataType:"json",
+      data: {'pids':pids},
+      success:function(data){
+         console.log(data);
+      },
+      error:function(error){
+         console.log(error);
+      }
+   })
+   return ajax;
 }
 
 /**
@@ -514,23 +515,23 @@ function selectFolderList(pids){
  작성자명 : 박 민 식
  */
 function selectStepList(pids){
-	if(pids==null) return false;
-	jQuery.ajaxSettings.traditional = true;
-	var data;
-	var ajax = $.ajax({
-		url:"selectStepList.htm",
-		method:"post",
-		dataType:"json",
-		data: {'pids':pids},
-		success:function(data){
-			console.log(data);
-		},
-		error:function(error){
-			console.log(error);
-		}
-	})
-	
-	return ajax;
+   if(pids==null) return false;
+   jQuery.ajaxSettings.traditional = true;
+   var data;
+   var ajax = $.ajax({
+      url:"selectStepList.htm",
+      method:"post",
+      dataType:"json",
+      data: {'pids':pids},
+      success:function(data){
+         console.log(data);
+      },
+      error:function(error){
+         console.log(error);
+      }
+   })
+   
+   return ajax;
 }
 
 
@@ -543,15 +544,15 @@ function selectStepList(pids){
  작성자명 : 김 래 영
  */
 function noProjectPage() {
-	$.ajax({
-		url:"noproject.htm",
-		dataType:"html",
-		success:function(data){
-			 $("#main-box").empty();
-			 $("#main-box").append(data);	 		
-			 
-		}
-	})
+   $.ajax({
+      url:"noproject.htm",
+      dataType:"html",
+      success:function(data){
+          $("#main-box").empty();
+          $("#main-box").append(data);          
+          
+      }
+   })
 }
 
 
@@ -564,50 +565,50 @@ function noProjectPage() {
  */
 
 function selectProjectList(){
-	$("#working-project").empty();
-	$("#finished-project").empty();
-	$("#trash-bean").empty();
-	var dfd = $.Deferred(); // 비동기 함수의 순서를 정해주기 위해(동기화) Defferred의 객체의 Promise를 활용한다.
-	var pids=[];
-	$.ajax({
-		url:"selectProjectList.htm",
-		dataType:"json",
-		type:"post",
-		success:function(data){
-			if(data!=null){ /// 참여중인 프로젝트가 있을 경우 
-				$(data.projectlist).each(function(index,el){
-					pids.push(el.pid);
-					var wrapper = jQuery("<div>",{"class":"side-project-wrapper","id":"p"+el.pid});
-					var a = jQuery("<a>",{"class":"side-project","text":el.pname})
-					var hidden = jQuery("<input>",{"type":"hidden",
-												   "name":"methodologyid",
-												   "value":el.methodologyid});
-					var span = jQuery("<span>",{"class":"glyphicon glyphicon-duplicate", 
-						"data-toggle":"collapse",
-						"data-target":"#p-dir"+el.pid})
-					var div = jQuery("<div>",{"class":"side-dir  collapse",
-						"id": "p-dir"+el.pid});
-						
-					console.log(el.pstatuscode);
-					$(a).prepend(span);
-					$(wrapper).append(a).append(div).append(hidden);
-					//////프로젝트의 상태에 따라 진행, 완료, 휴지통에 구분하여 append
-					if(el.pstatuscode ==1){
-						$(wrapper).appendTo("#working-project");
-						
-					}else if(el.pstatuscode ==2){
-						$(wrapper).appendTo("#finished-project");
-					}else if(el.pstatuscode==3){
-						$(wrapper).appendTo("#trash-bean");
-					}
-				})
-			}else{ // 참여중인 프로젝트가 없을 경우 
-			
-			}
-			dfd.resolve(pids); // 요청을 통해 받은 결과를 resolve에 담아 리턴할 수 있다. 
-		}
-	});
-	return dfd.promise(); // 함수가 종료될 때, Promise로 리턴해주면 
+   $("#working-project").empty();
+   $("#finished-project").empty();
+   $("#trash-bean").empty();
+   var dfd = $.Deferred(); // 비동기 함수의 순서를 정해주기 위해(동기화) Defferred의 객체의 Promise를 활용한다.
+   var pids=[];
+   $.ajax({
+      url:"selectProjectList.htm",
+      dataType:"json",
+      type:"post",
+      success:function(data){
+         if(data!=null){ /// 참여중인 프로젝트가 있을 경우 
+            $(data.projectlist).each(function(index,el){
+               pids.push(el.pid);
+               var wrapper = jQuery("<div>",{"class":"side-project-wrapper","id":"p"+el.pid});
+               var a = jQuery("<a>",{"class":"side-project","text":el.pname})
+               var hidden = jQuery("<input>",{"type":"hidden",
+                                       "name":"methodologyid",
+                                       "value":el.methodologyid});
+               var span = jQuery("<span>",{"class":"glyphicon glyphicon-duplicate", 
+                  "data-toggle":"collapse",
+                  "data-target":"#p-dir"+el.pid})
+               var div = jQuery("<div>",{"class":"side-dir  collapse",
+                  "id": "p-dir"+el.pid});
+                  
+               console.log(el.pstatuscode);
+               $(a).prepend(span);
+               $(wrapper).append(a).append(div).append(hidden);
+               //////프로젝트의 상태에 따라 진행, 완료, 휴지통에 구분하여 append
+               if(el.pstatuscode ==1){
+                  $(wrapper).appendTo("#working-project");
+                  
+               }else if(el.pstatuscode ==2){
+                  $(wrapper).appendTo("#finished-project");
+               }else if(el.pstatuscode==3){
+                  $(wrapper).appendTo("#trash-bean");
+               }
+            })
+         }else{ // 참여중인 프로젝트가 없을 경우 
+         
+         }
+         dfd.resolve(pids); // 요청을 통해 받은 결과를 resolve에 담아 리턴할 수 있다. 
+      }
+   });
+   return dfd.promise(); // 함수가 종료될 때, Promise로 리턴해주면 
 }
 
 
@@ -618,16 +619,16 @@ function selectProjectList(){
  작성자명 : 박 민 식
  */
 function makeSideProjectDir(){
-	
-	 $.when(selectProjectList()).done(function(data){ //먼저 프로젝트의 리스트를 가져와 뿌려준 후, 
-		if(data.length==0) {
-			//프로젝트가 전혀 없는 경우 실행될 함수 
-			noProjectPage();
-		} else{			
-			var pids = data;
-			makeSideSubDir(pids); // 각 프로젝트의 내부 구조를 채워줄 요소들을 가져오는 함수를 실행한다. 
-		}
-	})
+   
+    $.when(selectProjectList()).done(function(data){ //먼저 프로젝트의 리스트를 가져와 뿌려준 후, 
+      if(data.length==0) {
+         //프로젝트가 전혀 없는 경우 실행될 함수 
+         noProjectPage();
+      } else{         
+         var pids = data;
+         makeSideSubDir(pids); // 각 프로젝트의 내부 구조를 채워줄 요소들을 가져오는 함수를 실행한다. 
+      }
+   })
 }
 
 
@@ -636,69 +637,69 @@ function makeSideProjectDir(){
  날   짜 : 2018. 6. 19.
  기   능 : 프로젝트 내부의 디렉토리구조를 만들어주는 함수  
  작성자명 : 박 민 식
- */	
+ */   
 function makeSideSubDir(pids){
-	
-	$.when(selectFolderList(pids), selectStepList(pids)).done(function(folders,steps){ //먼저, 프로젝트들에 속한 폴더와 스텝들의 정보를 가져온 후 디렉토리 구조를 구성
+   
+   $.when(selectFolderList(pids), selectStepList(pids)).done(function(folders,steps){ //먼저, 프로젝트들에 속한 폴더와 스텝들의 정보를 가져온 후 디렉토리 구조를 구성
 
-		var folders = folders[0].folderlist; //폴더 list
-		var steps= steps[0].steplist; // 스텝 list
-		console.log(folders);
-		console.log(steps);
-		///// 먼저 폴더를 화면에 뿌려준다. 
-		if(folders!=null){ //폴더가 하나라도 있다면 만들어 붙혀주세요
-			
-			$(folders).each(function(index,folder){
-				var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
-				var span = jQuery("<span>",{"class":"glyphicon glyphicon-folder-close", 
-											"data-toggle":"collapse",
-											"data-target":"#f-dir"+folder.fid});
-				var div = jQuery("<div>",{"class":"side-dir collapse",
-										  "id": "f-dir"+folder.fid});
-				console.log(folder.pid);
-				$(a).prepend(span).appendTo($('#p-dir'+folder.pid));
-				$(div).appendTo($('#p-dir'+folder.pid));		
-			})
-			
-		}
-		
-		//// 폴더를 뿌려준 후, Step을 뿌려준다.
-		if(steps!=null){
-			
-			$(steps).each(function(index,step){ // Step관련 태그 생성
-				var a =jQuery("<a>",{
-									"class":"side-step",
-									"id":"s"+step.sid,
-									"text":step.sname
-									});
-				var span = jQuery("<span>",{"class":"glyphicon glyphicon glyphicon-list-alt"})
+      var folders = folders[0].folderlist; //폴더 list
+      var steps= steps[0].steplist; // 스텝 list
+      console.log(folders);
+      console.log(steps);
+      ///// 먼저 폴더를 화면에 뿌려준다. 
+      if(folders!=null){ //폴더가 하나라도 있다면 만들어 붙혀주세요
+         
+         $(folders).each(function(index,folder){
+            var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
+            var span = jQuery("<span>",{"class":"glyphicon glyphicon-folder-close", 
+                                 "data-toggle":"collapse",
+                                 "data-target":"#f-dir"+folder.fid});
+            var div = jQuery("<div>",{"class":"side-dir collapse",
+                                "id": "f-dir"+folder.fid});
+            console.log(folder.pid);
+            $(a).prepend(span).appendTo($('#p-dir'+folder.pid));
+            $(div).appendTo($('#p-dir'+folder.pid));      
+         })
+         
+      }
+      
+      //// 폴더를 뿌려준 후, Step을 뿌려준다.
+      if(steps!=null){
+         
+         $(steps).each(function(index,step){ // Step관련 태그 생성
+            var a =jQuery("<a>",{
+                           "class":"side-step",
+                           "id":"s"+step.sid,
+                           "text":step.sname
+                           });
+            var span = jQuery("<span>",{"class":"glyphicon glyphicon glyphicon-list-alt"})
 
-				$(a).prepend(span);
-		
-				if(step.fid !=null){ // 스텝이 속해있는 폴더가 있다면 폴더 밑에 넣어주고 
-					$(a).appendTo("#f-dir"+step.fid);
-				}else{ //속해있는 폴더가 없다면, Default경로, 즉 프로젝트 밑으로 넣어준다.
-					(step.sname=="백로그")?$(a).prependTo("#p-dir"+step.pid):$(a).appendTo("#p-dir"+step.pid);
-				}
-			})
-		}
-		
-	})
-}	
+            $(a).prepend(span);
+      
+            if(step.fid !=null){ // 스텝이 속해있는 폴더가 있다면 폴더 밑에 넣어주고 
+               $(a).appendTo("#f-dir"+step.fid);
+            }else{ //속해있는 폴더가 없다면, Default경로, 즉 프로젝트 밑으로 넣어준다.
+               (step.sname=="백로그")?$(a).prependTo("#p-dir"+step.pid):$(a).appendTo("#p-dir"+step.pid);
+            }
+         })
+      }
+      
+   })
+}   
 
 
 ///// 프로젝트 업데이트시 사용하는 함수
 function updateProject(data){
-	var ajax = $.ajax({
-		url:"updateProject.htm",
-		type:"POST",
-		data:data,
-		dataType:"json",
-		success:function(data){
-			console.log(data);
-		}
-	})
-	return ajax;
+   var ajax = $.ajax({
+      url:"updateProject.htm",
+      type:"POST",
+      data:data,
+      dataType:"json",
+      success:function(data){
+         console.log(data);
+      }
+   })
+   return ajax;
 }
-	
-	
+   
+   
