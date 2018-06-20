@@ -10,23 +10,24 @@ import com.apollo.step.dao.StepDAO;
 public class StepListService {
 	
 	@Autowired
-	SqlSession session;
-	
+	private SqlSession sqlsession;
 	
 	/**
 	 * 
-	 ³¯      Â¥ : 2018. 6. 14.
-	 ±â      ´É : Step id·Î Çö ½ºÅÜÀÌ ¼ÓÇÑ ÇÁ·ÎÁ§Æ®ÀÇ id¸¦ °¡Á®¿Â´Ù.
-	 ÀÛ¼ºÀÚ¸í : ¹Ú ¹Î ½Ä
+	 ë‚       ì§œ : 2018. 6. 20.
+	 ê¸°      ëŠ¥ : Stepí´ë¦­ ì‹œ ì†Œì† í”„ë¡œì íŠ¸ì˜ ì•„ì´ë””ë¥¼ ê°€ì ¸ì˜¤ê¸° 
+	 ì‘ì„±ìëª… : ë°• ë¯¼ ì‹
 	 */
 	public int getProjectIdByStepId(int sid) {
 		
 		int pid = 0;
 		try {
-			StepDAO dao= session.getMapper(StepDAO.class);
+			System.out.println("sess "+sqlsession); 
+			
+			StepDAO dao= sqlsession.getMapper(StepDAO.class);
 			pid =dao.getProjectIdByStepId(sid);
 		} catch (Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}
 		
 		return pid;
