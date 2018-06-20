@@ -118,12 +118,16 @@ $(document).on("click",".Task_RUD_Modal",function(){
 
 			        	   console.log(rdata);
 
+			        	   //tid
+			        	   var tid = rdata.task.tid;
+			        	   $('#tidhidden').attr('value', tid);
+			        	   
 			        	   // tname
 			        	   $('#Task_Modal_tname').empty();
 			        	   $('#Task_Modal_tname').append(rdata.task.tname);
 
 			        	   
-			        	   // star, trash
+			        	   // star
 			        	   $('#span_task_star').empty();
 
 			        	   var star_tag_class = 'far fa-star';
@@ -183,3 +187,52 @@ $(document).on("click",".Task_RUD_Modal",function(){
 		
 });
 
+/**
+ * 
+ 날   짜 : 2018. 6. 20.
+ 기   능 : task 즐겨찾기
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#task_star",function(){
+	
+	var tid = $('#tidhidden').attr('value');
+	var starAddOrDel = 0;
+	var star_class = $('#task_star').attr('class');
+	
+	// if 빈 별(현재는 즐겨찾기가 되어있지 않음)
+	if(star_class == 'far fa-star'){
+		starAddOrDel = 1;
+	}
+	
+	// if 차있는 별(이미 즐겨찾기 한 일)
+	else {
+		starAddOrDel = 0;
+	}
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "addordeletestar.htm",
+		           data : {
+		        	   'tid': tid,
+		        	   'starAddOrDel': starAddOrDel
+		           },
+		           success : function(rdata){
+
+		        	   console.log(rdata);
+		        	   
+		        	   if(rdata.result == 'added'){
+		        		  
+		        		   // 클릭시 별을 채워준다
+		        		   $('#task_star').attr('class','fas fa-star');
+		        		   
+		        	   }else {
+		        		 
+		        			// 클릭시 별을 비워준다
+		        			$('#task_star').attr('class','far fa-star');
+		        	   }
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+});
