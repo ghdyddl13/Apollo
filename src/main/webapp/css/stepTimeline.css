@@ -1,0 +1,75 @@
+.step-timeline-div {
+	padding: 0px;
+	height: 100%;
+}
+
+.step-timeline-div-table{
+	padding:0px
+}
+
+.step-timeline-div thead, thead>tr {
+	height: 60px;
+	padding: 5px;
+}
+
+.table-responsive.step-timeline-table thead>tr>th {
+	text-align: center;
+	font-size: 15px;
+	padding-bottom: 14px
+}
+
+.table-responsive.step-timeline-table tbody>tr {
+	height: 38px;
+	max-height: 38px;
+}
+
+.table-responsive.step-timeline-table tbody>tr,td {
+	vertical-align: middle !important;
+}
+
+
+
+.gantt-target {
+	overflow-x:auto; 
+}
+
+
+.step-subheader{
+	background-color: #f4faff;
+	max-height: 40px;
+	margin-bottom: 15px;
+	margin-top:10px;
+	
+	width:100%;
+	
+}
+
+
+#timeline-table, #timeline-table>tr, td, th, thead, tbody {
+	border: 0.5px solid rgba(0, 0, 0, 0.08);
+	border-collapse: collapse;
+}
+
+#timeline {
+	padding-left: 20px;
+	padding-right: 20px;
+	height: calc(100% - 170px);
+	overflow: auto 
+}
+
+#timeline-tstatus-filter{
+	float:left;
+	margin: 10px;
+	background-color: transparent;
+	border: none;
+	text-align: center
+}
+
+.gantt .day-task .bar{
+	fill: #b8c2cc !important ;
+	
+}
+
+.gantt .no-day-task .bar{
+	fill: #b8c2cc;
+}

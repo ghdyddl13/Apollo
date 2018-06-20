@@ -1,18 +1,16 @@
 $(function() {
-	
-	//// 헤더 inbox 페이지
+	// 헤더 inbox 페이지
 	$("#inbox-page").click(function(evt){
 		$.ajax({
+			type:"GET",
 			url:"inbox.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
-				
 			}
 		})
-	})
+	});
 	
 	//// 헤더 mywork 페이지
 	$("#myWork-page").click(function(evt){
@@ -26,7 +24,7 @@ $(function() {
 				
 			}
 		})
-	})
+	});
 	
 	
 	//// 헤더 starred task 페이지
@@ -41,7 +39,7 @@ $(function() {
 				
 			}
 		})
-	})
+	});
 	
 	
 	//// 헤더 report 페이지
@@ -50,13 +48,12 @@ $(function() {
 			url:"report.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				
 			}
 		})
-	})
+	});
 	
 	
 	//// 헤더 stream 페이지
@@ -65,7 +62,6 @@ $(function() {
 			url:"stream.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				

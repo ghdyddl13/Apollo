@@ -1,14 +1,15 @@
 package com.apollo.vo;
 
 public class FileDTO {
-	private int field;
+	private int fileid;
 	private int tid;
 	private String filename;
-	public int getField() {
-		return field;
+	
+	public int getFileid() {
+		return fileid;
 	}
-	public void setField(int field) {
-		this.field = field;
+	public void setFileid(int fileid) {
+		this.fileid = fileid;
 	}
 	public int getTid() {
 		return tid;
@@ -22,6 +23,6 @@ public class FileDTO {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-	
+
 	
 }

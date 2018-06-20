@@ -1,18 +1,17 @@
 package com.apollo.vo;
 
-import java.sql.Date;
 
 public class StepDTO {
 
 	private int sid;
 	private String sname;
-	private Date sday;
-	private Date eday;
+	private String sday;
+	private String eday;
 	private int pid;
-	private int fid;
-	private String mgr;
+	private String fid;
 	private int methodologyid;
 	private String mid;
+	private String detail;
 	public int getSid() {
 		return sid;
 	}
@@ -25,16 +24,16 @@ public class StepDTO {
 	public void setSname(String sname) {
 		this.sname = sname;
 	}
-	public Date getSday() {
+	public String getSday() {
 		return sday;
 	}
-	public void setSday(Date sday) {
+	public void setSday(String sday) {
 		this.sday = sday;
 	}
-	public Date getEday() {
+	public String getEday() {
 		return eday;
 	}
-	public void setEday(Date eday) {
+	public void setEday(String eday) {
 		this.eday = eday;
 	}
 	public int getPid() {
@@ -43,17 +42,11 @@ public class StepDTO {
 	public void setPid(int pid) {
 		this.pid = pid;
 	}
-	public int getFid() {
+	public String getFid() {
 		return fid;
 	}
-	public void setFid(int fid) {
+	public void setFid(String fid) {
 		this.fid = fid;
-	}
-	public String getMgr() {
-		return mgr;
-	}
-	public void setMgr(String mgr) {
-		this.mgr = mgr;
 	}
 	public int getMethodologyid() {
 		return methodologyid;
@@ -67,7 +60,16 @@ public class StepDTO {
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+	@Override
 	
-	
-	
+	public String toString() {
+		return "StepDTO [sid=" + sid + ", sname=" + sname + ", sday=" + sday + ", eday=" + eday + ", pid=" + pid
+				+ ", fid=" + fid + ", methodologyid=" + methodologyid + ", mid=" + mid + ", detail=" + detail + "]";
+	}
 }

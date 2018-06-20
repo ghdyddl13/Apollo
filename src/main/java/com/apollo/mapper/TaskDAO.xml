@@ -3,12 +3,51 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.task.dao.TaskDAO">
+
     <select id="getTasks" parameterType="String" resultType="com.apollo.vo.TaskDTO">
     select * from task where pid = #{pid}
+    </select>
+    
+    <select id="getAssignedTasks" parameterType="String" resultType="com.apollo.vo.TaskDTO">
+    select * from task where pid=#{pid} and tid in (select tid from assignee)
+    </select>
+	    
+    <select id="getNotAssignedTasks" parameterType="String" resultType="com.apollo.vo.TaskDTO">
+    select * from task where pid=#{pid} and tid not in (select tid from assignee)
     </select>
     
     <select id="getTasksInSteps" parameterType="String" resultType="com.apollo.vo.TaskDTO">
     select * from taskinstep where sid = #{sid}
     </select>
 
+    <select id="getTasksByStepId"  resultType="com.apollo.vo.TaskDTO">
+    select t.*, s.tstatus, s.color 
+    from task t join tstatus s on t.tstatusid = s.tstatusid 
+    where tid in (select tid from taskinstep where sid= #{sid})
+    </select>
+    
+    <update id="updateTask" parameterType="com.apollo.vo.TaskDTO">
+    	update task set
+      <if test="tname != null">tname=#{tname},</if>
+      <if test="sday != null">sday=TO_DATE(#{sday},'YYYY-MM-DD HH24:MI:SS'),</if>
+      <if test="eday != null">eday=TO_DATE(#{eday},'YYYY-MM-DD HH24:MI:SS'),</if>
+      <if test="detail != null">detail=#{detail},</if>
+      <if test="importance != 0">importance=#{importance},</if>
+      <if test="tstatusid != 0">tstatusid=#{tstatusid},</if>
+     	ctime=sysdate
+    	where tid= #{tid}
+    </update>
+    
+    <select id="getTask" parameterType="String" resultType="com.apollo.vo.TaskDTO">
+    	select * from task where tid = #{tid}
+    </select>
+    
+    <insert id="addStar" parameterType="com.apollo.vo.StarredTaskDTO">
+    	insert into starredtask values(#{mid}, #{tid})
+    </insert>
+    
+    <delete id="deleteStar" parameterType="com.apollo.vo.StarredTaskDTO">
+    	delete from starredtask where mid = #{mid} and tid = #{tid}
+    </delete>
+    
 </mapper>

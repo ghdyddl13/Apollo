@@ -1,16 +1,17 @@
 package com.apollo.vo;
 
-import java.sql.Date;
-
 public class CommentDTO {
 	private int cmtid;
-	private String comment;
+	private String comments;
 	private int tid;
 	private String mid;
+	private String mname;
 	private int cmtkind;
-	private Date cmtmtime;
-	
-	
+	private String cmtmtime;
+	private int isarchive;
+	private String tname;
+	private String pname;
+	private String image;
 	
 	public int getCmtid() {
 		return cmtid;
@@ -18,11 +19,11 @@ public class CommentDTO {
 	public void setCmtid(int cmtid) {
 		this.cmtid = cmtid;
 	}
-	public String getComment() {
-		return comment;
+	public String getComments() {
+		return comments;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 	public int getTid() {
 		return tid;
@@ -36,17 +37,47 @@ public class CommentDTO {
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
+	public String getMname() {
+		return mname;
+	}
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
 	public int getCmtkind() {
 		return cmtkind;
 	}
 	public void setCmtkind(int cmtkind) {
 		this.cmtkind = cmtkind;
 	}
-	public Date getCmtmtime() {
+	public String getCmtmtime() {
 		return cmtmtime;
 	}
-	public void setCmtmtime(Date cmtmtime) {
+	public void setCmtmtime(String cmtmtime) {
 		this.cmtmtime = cmtmtime;
+	}
+	public int getIsarchive() {
+		return isarchive;
+	}
+	public void setIsarchive(int isarchive) {
+		this.isarchive = isarchive;
+	}
+	public String getTname() {
+		return tname;
+	}
+	public void setTname(String tname) {
+		this.tname = tname;
+	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	
