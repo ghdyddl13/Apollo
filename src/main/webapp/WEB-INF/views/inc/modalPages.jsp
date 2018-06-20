@@ -167,10 +167,9 @@
 							<textarea rows="7%" cols="68%" id="step-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
 								<br><br>
 							<!-- 아래는 임시로 작성해둔 것임 -->
-							<input type="hidden" name="methodologyid" value="3">
-							
-							<input type="hidden" name="pid" value="1">
-							<input type="hidden" name="fid" value="1">
+							<input type="hidden" id="insert-step-methodologyid" name="methodologyid" >
+							<input type="hidden" id="insert-step-pid" name="pid" >
+							<input type="hidden" id= "insert-step-fid" name="fid" >
 							<div align="center">
 								<input type="button" class="btn add-btn" id="insert-step-btn" value="생성">&nbsp;&nbsp;&nbsp;
 								<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
