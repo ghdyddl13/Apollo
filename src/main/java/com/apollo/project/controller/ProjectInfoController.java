@@ -37,9 +37,8 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
-
-
 	public String projectInfoShow(String[] data, Model map) {
+		
 		String tempstr = data[0];
 		String[] data_arr = tempstr.split(",");
 		

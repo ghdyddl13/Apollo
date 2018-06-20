@@ -1,7 +1,5 @@
 $(function() {
 	
-	makeSideProjectDir();
-	
 	//스텝 추가 클릭시 이벤트	
 	$(document).on("click","#side-insert-step",function(){ 
 		var custom_menu =  $(this).parents("ul.custom-menu")[0];
@@ -132,6 +130,28 @@ $(function() {
 		
 		
 		
+	console.log(selectProjectList());
+	
+		// 사이드바 프로젝트 우클릭 >> 추후 Project id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
+		$(".side-project")
+				.contextmenu(
+						function(event) {
+							event.preventDefault();
+							var dropdown_ul = document.createElement("ul");
+							var dropdown = '<li class="dropdown-submenu"><p data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></p>'
+							dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li data-toggle="modal" data-target="#step-add-modal">Step추가</li></ul></li>'
+							dropdown += '<li data-action="second">완료</li>'
+							dropdown += '<li data-action="third" data-toggle="modal" data-target="#update-project">수정</li>'
+							dropdown += '<li data-action="fourth" data-toggle="modal" data-target="#delete-project">삭제</li>'
+
+							$(dropdown_ul).attr("class", "custom-menu").append(
+									dropdown);
+							console.log(dropdown_ul)
+							$(dropdown_ul).css({
+								top : event.pageY + "px",
+								left : event.pageX + "px"
+							}).appendTo("body");
+						});
 
 		// 사이드바 폴더 우클릭  >> 추후 폴더 id(DB상 기본키)를 받아와 li 태그에 넣어주는 작업 필요
 		$(document).on("contextmenu",".side-folder",function() {
