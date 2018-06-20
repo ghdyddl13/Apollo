@@ -143,7 +143,6 @@ public class MemberService {
 	 작성자명 : 김 래 영
 	 */
 	public MemberDTO getProfileInfoMember(String mid) {
-		System.out.println("프로필 모달 서비스단");
 		MemberDTO profileinfo = null;
 		try {
 			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);

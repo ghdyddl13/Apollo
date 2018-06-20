@@ -47,6 +47,13 @@ html, body{
    background-color: transparent;
 }
 
+.dropdown-submenu > a:hover{
+	text-decoration: none
+}
+.dropdown-submenu > a{
+	color: black
+}
+
 /* /////////////////////////// 로그인 css /////////////////////////////////////////////////////  */
 /* 로그인 input 간격  */
 .input-group{

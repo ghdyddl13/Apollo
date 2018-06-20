@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apollo.step.dao.StepDAO;
+import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
+import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TstatusDTO;
@@ -89,7 +91,19 @@ public class TaskService {
 		return tstatuslist;
 	}
 	
-	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : mid를 이용해서 즐겨찾기 한 tid들을 가져온다
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StarredTaskDTO> getStarredTaskList(String mid){
+
+		ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
+		StarredTaskDAO dao = session.getMapper(StarredTaskDAO.class);
+		starredtasklist = dao.getStarredTaskList(mid);
+		return starredtasklist;
+	}
 	
 	
 }

@@ -45,7 +45,7 @@
 	<jsp:include page="/WEB-INF/views/inc/sidebar.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
 	
-	<div id="main-box"></div>
+	<div  id="main-box"></div>
 	
 </body>
 </html>

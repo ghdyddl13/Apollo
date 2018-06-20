@@ -8,7 +8,7 @@ public class StepDTO {
 	private String sday;
 	private String eday;
 	private int pid;
-	private int fid;
+	private String fid;
 	private int methodologyid;
 	private String mid;
 	private String detail;
@@ -42,10 +42,10 @@ public class StepDTO {
 	public void setPid(int pid) {
 		this.pid = pid;
 	}
-	public int getFid() {
+	public String getFid() {
 		return fid;
 	}
-	public void setFid(int fid) {
+	public void setFid(String fid) {
 		this.fid = fid;
 	}
 	public int getMethodologyid() {

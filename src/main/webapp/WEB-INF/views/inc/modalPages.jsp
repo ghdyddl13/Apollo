@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+
+
 <!DOCTYPE html>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -169,10 +170,9 @@
 							<textarea rows="7%" cols="68%" id="step-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
 								<br><br>
 							<!-- 아래는 임시로 작성해둔 것임 -->
-							<input type="hidden" name="methodologyid" value="3">
-							
-							<input type="hidden" name="pid" value="1">
-							<input type="hidden" name="fid" value="1">
+							<input type="hidden" id="insert-step-methodologyid" name="methodologyid" >
+							<input type="hidden" id="insert-step-pid" name="pid" >
+							<input type="hidden" id= "insert-step-fid" name="fid">
 							<div align="center">
 								<input type="button" class="btn add-btn" id="insert-step-btn" value="생성">&nbsp;&nbsp;&nbsp;
 								<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
@@ -302,8 +302,8 @@
 					</div>
 
 					<div class="col-sm-6" id="star_trash">
-						<i class="fas fa-star"></i>&nbsp&nbsp
-						<i class="fas fa-trash"></i>&nbsp&nbsp&nbsp
+						<span id="span_task_star"></span>&nbsp&nbsp
+						<i class="fas fa-trash" id="task_trash"></i>&nbsp&nbsp&nbsp
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 					

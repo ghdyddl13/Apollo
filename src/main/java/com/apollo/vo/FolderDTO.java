@@ -1,13 +1,13 @@
 package com.apollo.vo;
 
 public class FolderDTO {
-	private int fid;
+	private String fid;
 	private String fname;
 	private int pid;
-	public int getFid() {
+	public String getFid() {
 		return fid;
 	}
-	public void setFid(int fid) {
+	public void setFid(String fid) {
 		this.fid = fid;
 	}
 	public String getFname() {

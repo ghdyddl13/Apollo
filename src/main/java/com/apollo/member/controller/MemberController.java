@@ -354,7 +354,6 @@ public class MemberController {
 	 */
 	@RequestMapping("/profilemember.htm")
 	public View getProfileInfoMember(String mid, Model model) {
-		System.out.println("프로필에 들어갈 멤버 정보 컨트롤러 들어옴");
 		System.out.println("mid : " + mid);
 		MemberDTO profileinfo = null;
 		try {
