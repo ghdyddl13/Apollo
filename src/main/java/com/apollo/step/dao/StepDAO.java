@@ -2,6 +2,7 @@ package com.apollo.step.dao;
 
 import java.util.ArrayList;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TstatusDTO;
 
 
@@ -32,10 +33,12 @@ public interface StepDAO {
 	/**
 	 * 
 	 날      짜 : 2018. 6. 15.
-	 기      능 : sid 받아서 해당 step에 들어있는 task 목록을 board에 가져옴
+	 기      능 : sid 받아서 해당 step에 들어있는 task 상태 목록을 board에 가져옴
 	 작성자명 : 이 창 훈
 	 */
 	public ArrayList<TstatusDTO> selectTstatusBySid(int sid);
 
+	
+	
 
 }

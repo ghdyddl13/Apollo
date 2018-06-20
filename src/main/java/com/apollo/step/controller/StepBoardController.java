@@ -26,29 +26,63 @@ public class StepBoardController {
 	@Autowired
 	private View jsonview;
 	
-	public View createTask(TaskDTO tastdto) {
-		return null;
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : board에서 task 생성 
+	 작성자명 : 이 창 훈
+	 */
+	@RequestMapping("/boardInsertTask.htm")
+	public View createTask(TaskDTO taskdto) {
+		try {
+			boardservice.insertBoardTask(taskdto);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return jsonview;
 	}
 	
 	public String showBoardStepList(String s1, Model model) {
 		return null;
 	}
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 18.
+	 기      능 : board에서 task를 드래그를 통해 이동하여 update함. 
+	 작성자명 : 이 창 훈
+	 */
+	@RequestMapping("/boardTaskStatusUpdate.htm")
 	public View changeBoardStepStatus(TaskDTO taskdto) {
-		return null;
+		try {
+			boardservice.updateBoardTaskByTid(taskdto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 15.
+	 기      능 : 해당 step의 task들을 board page에 각각의 상태와 task를 가져온다. 
+	 작성자명 : 이 창 훈
+	 */
 	@RequestMapping("/board.htm")
     public String selectBoard(Model model) {
-		System.out.println("board 컨트롤러 들어왔따");
         int sid = 3;
-        ArrayList<TstatusDTO> tstatusdto = boardservice.selectTstatusBySid(sid);
-        System.out.println("tstatusdto : " + tstatusdto);
-        model.addAttribute("b", tstatusdto);
-        
-        ArrayList<TaskDTO> taskdto = boardservice.getTasksByStepId(sid);
-        model.addAttribute("t", taskdto);
-        
+        try {
+        	  ArrayList<TstatusDTO> tstatusdto = boardservice.selectTstatusBySid(sid);
+              model.addAttribute("b", tstatusdto);
+              
+              ArrayList<TaskDTO> taskdto = boardservice.getTasksByStepId(sid);
+              model.addAttribute("t", taskdto);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+               
         
         return "step/board";
     }

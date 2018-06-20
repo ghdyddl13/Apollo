@@ -19,6 +19,40 @@ public class StepBoardService {
 	
 	/**
 	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : board에서 task 생성 
+	 작성자명 : 이 창 훈
+	 */
+	public int insertBoardTask(TaskDTO taskdto) {
+		int result = 0;
+		try {
+			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
+			result = dao.insertBoardTask(taskdto);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : board에서 task를 드래그를 통해 이동하여 update함. 
+	 작성자명 : 이 창 훈
+	 */
+	public int updateBoardTaskByTid(TaskDTO taskdto) {
+		int result = 0;
+		try {
+			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
+			result = dao.updateTask(taskdto);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	
+	/**
+	 * 
 	 날      짜 : 2018. 6. 15.
 	 기      능 : step-board에서 각 task상태 불러오는 함수 
 	 작성자명 : 이 창 훈

@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getTasksByStepId"  resultType="com.apollo.vo.TaskDTO">
     select t.*, s.tstatus, s.color 
     from task t join tstatus s on t.tstatusid = s.tstatusid 
-    where tid in (select tid from taskinstep where sid= #{sid})
+    where tid in (select tid from taskinstep where sid= #{sid}) order by t.ctime
     </select>
     
     <update id="updateTask" parameterType="com.apollo.vo.TaskDTO">
@@ -37,4 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      	ctime=sysdate
     	where tid= #{tid}
     </update>
+    
+    <insert id="insertBoardTask" parameterType="com.apollo.vo.TaskDTO">
+    	insert INTO task(tid, tname, tstatusid, pid, ctime) values(seq_tid.nextval, tname=#{tname}, tstatusid=#{tstatusid}, pid=#{pid}, sysdate)
+    </insert>
 </mapper>
