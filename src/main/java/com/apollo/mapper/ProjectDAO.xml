@@ -14,11 +14,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<update id="updateProject" parameterType="com.apollo.vo.ProjectDTO">
 		update project set
-		<if test="pname != null">pname=#{pname}</if>
-		<if test="sday != null">sday=#{sday}</if>
-		<if test="eday != null">eday=#{eday}</if>
-		<if test="detail != null">detail=#{detail}</if>
-		stmtime=sysdate
+		<if test="pname != null">pname=#{pname},</if>
+		<if test="sday != null">sday=#{sday},</if>
+		<if test="eday != null">eday=#{eday},</if>
+		<if test="detail != null">detail=#{detail},</if>
+		<if test="pstatuscode != 0">pstatuscode=#{pstatuscode},</if>
+		stmtime=TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS')
 		where pid=#{pid}
 	</update>
 	<!--  프로젝트 삭제시 14일동안 DB 에 데이터가 저장되고 그후 자동삭제된다 -->

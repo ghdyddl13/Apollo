@@ -52,7 +52,7 @@ public class SidebarService {
 	 기      능 : 프로젝트 수정
 	 작성자명 : 김 래 영
 	 */
-	public int updateProejct(ProjectDTO projectdto) {
+	public int updateProject(ProjectDTO projectdto) {
 		int result = 0;
 		ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
 		result = dao.updateProject(projectdto);

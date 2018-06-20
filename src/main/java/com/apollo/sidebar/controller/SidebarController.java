@@ -45,13 +45,26 @@ public class SidebarController {
 		return jsonview; //result 가 json 형태로 변환되어 저장
 	}
 
-	public View changeProjectStatus(int i1, Model model) {
-		return null;
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 프로젝트 변경
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping(value="updateProject.htm", method=RequestMethod.POST)
+	public View updateProject(ProjectDTO projectdto, Model model) {
+		System.out.println(projectdto.toString());
+		int result = 0;
+		try {
+			result=sidebarservice.updateProject(projectdto);
+			model.addAttribute("result",result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return jsonview;
 	}
 	
-	public View changeProject(ProjectDTO projectdto) {
-		return null;
-	}
 	
 	@RequestMapping(value="/insertstep.htm", method=RequestMethod.POST)
 	public View insertStep(StepDTO stepdto, Model model) {

@@ -265,6 +265,7 @@
 		</div>
 	</div>	
 	
+<<<<<<< HEAD
 	<!-- Project 삭제 Modal 창 -->
 	<div class="modal fade" id="delete-project" role="dialog">
 		<div class="modal-dialog modal-delete-dialog">
@@ -287,22 +288,25 @@
 			</div>
 		</div>
 	</div>	
+=======
+>>>>>>> f23e2f52ccde02973650b6792af323ee5a9a9191
 
 <!-- Project 완료 Modal 창 -->
-	<div class="modal fade" id="complete-project" role="dialog">
+	<div class="modal fade" id="move-project" role="dialog">
 		<div class="modal-dialog modal-delete-project-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Project 완료</h4>
+					<h4 id="move-project-header" class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
-					<input type="hidden" id="complete-project-pname">
-					<p>해당 프로젝트를 완료하시겠습니까?</p>
+					<input type="hidden" id="move-project-pid">
+					<input type="hidden" id="move-project-pstatuscode">
+					<p id="move-project-message"></p>
 				</div>
 				<div align="center">
-					<input id="complete-project-btn" type="button" class="btn delete-btn" value="완료">&nbsp;&nbsp;&nbsp;
+					<input id="move-project-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn cancel-btn"
 						data-dismiss="modal" value="취소">
 				</div>
