@@ -66,16 +66,15 @@ $(document).on("click",".profile-img-container",function(evt){
 		data:{mid:mid},
 		dataType:"json",
 		success:function(data) {
-			$('#profile-modal-img').text(data.profileinfo.image);
+			var image = (data.profileinfo.image)?data.profileinfo.image :"img/user_image.png"
+			$('#profile-modal-img').attr("src",image);
 			$('#profile-modal-mname').text(data.profileinfo.mname)
 			$('#profile-modal-mid').text(data.profileinfo.mid);
 			$('#profile-modal-pnum').text(data.profileinfo.pnum);
 			$('#profile-modal-deptname').text(data.profileinfo.deptname);
 			$('#profile-modal-position').text(data.profileinfo.position);
 			
-			if($('#profile-modal-img').text() == null) {
-				$('#profile-modal-img').text("");
-			}
+			
 			
 			
 		}

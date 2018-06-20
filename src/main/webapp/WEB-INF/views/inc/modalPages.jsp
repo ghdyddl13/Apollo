@@ -95,9 +95,9 @@
 
 	<!-- Folder 생성 Modal 창 -->
 	<div class="modal fade" id="add-folder" role="dialog">
-		<div class="modal-dialog modal-add-folder-dialog">
+		<div class="modal-dialog modal-folder-dialog">
 			<!-- Modal content-->
-			<div class="modal-content modal-add-folder-content">
+			<div class="modal-content modal-folder-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Folder 생성</h4>
@@ -105,7 +105,7 @@
 				<div class="modal-body">
 					<form id="insert-folder-form" method="post" onsubmit="return false;">
 						<fieldset>
-							<input type="text" id="add-folder-name" name="fname" class="add-folder-text" placeholder="folder명을 입력하세요">
+							<input type="text" id="add-folder-name" name="fname" class="modal-folder-text" placeholder="folder명을 입력하세요">
 							<input type="hidden" name="pid" value="1">
 							<br><br>
 							<div align="center">
@@ -409,10 +409,12 @@
 					<h4 class="modal-title">Profile</h4>
 				</div>
 				<div class="modal-body">
-					<div class="col-sm-3">
-						<div id="profile-modal-img"></div>
+					<div class="col-sm-5">
+						<div id="profile-modal-img-content">
+							<img id="profile-modal-img" src="">
+						</div>
 					</div>
-					<div class="col-sm-9" id="profile-modal-info">
+					<div class="col-sm-7" id="profile-modal-info">
 						<table class="profile-modal-info-table">
 							<tr>
 								<td>이름</td>
@@ -441,3 +443,31 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- Folder 수정 Modal 창 -->
+	<div class="modal fade" id="update-folder" role="dialog">
+		<div class="modal-dialog modal-folder-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-folder-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Folder 수정</h4>
+				</div>
+				<div class="modal-body">
+					<form id="insert-folder-form" method="post" onsubmit="return false;">
+						<fieldset>
+							<input type="text" id="update-folder-name" name="fname" class="modal-folder-text">
+							<input type="hidden" name="pid" value="1">
+							<br><br>
+							<div align="center">
+								<input type="button" class="btn add-btn" id="insert-folder-btn" value="수정">&nbsp;&nbsp;&nbsp;
+								<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>	

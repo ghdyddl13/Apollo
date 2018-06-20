@@ -21,5 +21,12 @@ public interface FolderDAO {
 	 작성자명 : 김 래 영
 	 */
 	public int insertfolder(FolderDTO folderdto);	
+	
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 폴더명 수정 
+	 작성자명 : 김 래 영
+	 */
+	public int updateFolder(FolderDTO folderdto);
 
 }

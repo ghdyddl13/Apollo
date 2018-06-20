@@ -171,6 +171,19 @@ public class SidebarController {
 		return "project/noproject";
 		
 	}
+	
+	@RequestMapping("/updatefolder.htm")
+	public View updateFolder(FolderDTO folderdto, Model model) {
+		System.out.println("update folder");
+		try {
+			int updatefolder = sidebarservice.updateFolder(folderdto);
+			model.addAttribute("updatefolder", updatefolder);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+		
+	}
 
 }
 

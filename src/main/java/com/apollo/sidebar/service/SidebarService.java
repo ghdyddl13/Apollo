@@ -189,5 +189,27 @@ public class SidebarService {
 		
 		return steplist;
 	};
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 푤더 수정
+	 작성자명 : 김 래 영
+	 */
+	public int updateFolder(FolderDTO folderdto) {
+		int result = 0;
+		try {
+			FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
+			result = dao.updateFolder(folderdto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(result > 0) {
+			System.out.println("Folder update success");
+		}else {
+			System.out.println("Folder update fail");
+		}
+		
+		return result;
+		
+	};
 	
 }
