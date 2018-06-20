@@ -507,4 +507,9 @@ background-color: 999999;
   text-align: right;
 }
 
+#task_star{
+ color : #ffc30d
+}
+
+
 /* task 수정,삭제 모달_정권 ---------------------- 종료 */

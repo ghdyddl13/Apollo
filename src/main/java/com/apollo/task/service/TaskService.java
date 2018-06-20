@@ -105,6 +105,35 @@ public class TaskService {
 		return starredtasklist;
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 즐겨찾기 추가
+	 작성자명 : 김 정 권
+	 */
+	public int addstar(StarredTaskDTO dto) {
+		
+		System.out.println("addstar 탔음");
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.addStar(dto);
+		return result;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 즐겨찾기 삭제
+	 작성자명 : 김 정 권
+	 */
+	public int deletestar(StarredTaskDTO dto) {
+		
+		System.out.println("deletestar 탔음");
+
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.deleteStar(dto);
+		return result;
+	}
 	
 }
 

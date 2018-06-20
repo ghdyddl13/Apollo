@@ -65,13 +65,11 @@ public class TaskController {
 	public View getTask(String pid, String tid, HttpSession session, Model model) {
 
     String mid = (String) session.getAttribute("mid");
+    System.out.println("겟타스크 mid : " + mid);
+    
     ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
     starredtasklist = service.getStarredTaskList(mid);
-
-    System.out.println("task list 나왔니 : " + starredtasklist.size());
-    
     model.addAttribute("starredtasklist", starredtasklist);
-   
     
 	TaskDTO taskdto = new TaskDTO();
 	taskdto = service.getTask(tid);
@@ -87,5 +85,40 @@ public class TaskController {
 
 	return jsonview;
 	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 즐겨찾기 추가 혹은 삭제
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/addordeletestar.htm")
+	public View addordeletestar(int tid, int starAddOrDel, HttpSession session, Model model) {
+
+		String mid = (String) session.getAttribute("mid");
+		StarredTaskDTO dto = new StarredTaskDTO();
+		dto.setMid(mid);
+		dto.setTid(tid);
+		
+		int result;
+		// 현재 즐겨찾기에 되어있지 않다 -> 따라서 즐겨찾기에 추가
+		if(starAddOrDel == 1) {
+			result = service.addstar(dto);
+			model.addAttribute("result", "added");
+		}
+		
+		// 현재 즐겨찾기에 되어있다 -> 따라서 즐겨찾기에서 삭제
+		else {
+			result = service.deletestar(dto);
+			model.addAttribute("result", "deleted");
+		}
+		
+	return jsonview;
+	
+	}
+	
+	
+	
+	
 	
 }
