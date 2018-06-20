@@ -82,7 +82,6 @@ $(document).on("click",".profile-img-container",function(){
  기      능 : Task 수정/ 삭제 페이지에 날짜 클릭으로 넣는 datepicker 넣는 코드
  작성자명 : 김 정 권
  */
-
 $( ".date-img" ).datepicker({
     showOn: "button",
     buttonImage: "img/calendar.png",
@@ -99,11 +98,8 @@ $( ".date-img" ).datepicker({
  기   능 : task 수정/삭제 모달에 데이터 띄우기
  작성자명 : 김 정 권
  */
- 
 $(document).on("click",".Task_RUD_Modal",function(){
 
-		alert('탔습니다');
-		
 		// tid를 클릭한 태그의 id에서 가져올 것
 		// var tid = $(this).attr("id"); 
 		
@@ -121,15 +117,25 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			           success : function(rdata){
 
 			        	   console.log(rdata);
-			        	   
+
 			        	   // tname
 			        	   $('#Task_Modal_tname').empty();
 			        	   $('#Task_Modal_tname').append(rdata.task.tname);
 
 			        	   
 			        	   // star, trash
-			        	   // $('#').empty();
-			        	   // $('#').append(rdata.task.tname);
+			        	   $('#span_task_star').empty();
+
+			        	   var star_tag_class = 'far fa-star';
+			        	   $(rdata.starredtasklist).each(function (){
+			        		   
+			        		   if(this.tid == tid){
+			        			   star_tag_class = 'fas fa-star';
+			        			   return false;
+			        		   }
+			        	   });
+			        	   			        	   
+			        	   $('#span_task_star').append('<i class="' + star_tag_class + '" id="task_star"></i>');
 			        	   
 			        	   
 			        	   // step name
