@@ -1,5 +1,7 @@
 $(function() {
 	
+	makeSideProjectDir();
+	
 	//스텝 추가 클릭시 이벤트	
 	$(document).on("click","#side-insert-step",function(){ 
 		var custom_menu =  $(this).parents("ul.custom-menu")[0];
@@ -186,28 +188,8 @@ $(function() {
 		
 		
 		
-	console.log(selectProjectList());
-	
-		// 사이드바 프로젝트 우클릭 >> 추후 Project id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
-		$(".side-project")
-				.contextmenu(
-						function(event) {
-							event.preventDefault();
-							var dropdown_ul = document.createElement("ul");
-							var dropdown = '<li class="dropdown-submenu"><p data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></p>'
-							dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li data-toggle="modal" data-target="#step-add-modal">Step추가</li></ul></li>'
-							dropdown += '<li data-action="second">완료</li>'
-							dropdown += '<li data-action="third" data-toggle="modal" data-target="#update-project">수정</li>'
-							dropdown += '<li data-action="fourth" data-toggle="modal" data-target="#delete-project">삭제</li>'
 
-							$(dropdown_ul).attr("class", "custom-menu").append(
-									dropdown);
-							console.log(dropdown_ul)
-							$(dropdown_ul).css({
-								top : event.pageY + "px",
-								left : event.pageX + "px"
-							}).appendTo("body");
-						});
+	
 
 		// 사이드바 폴더 우클릭  >> 추후 폴더 id(DB상 기본키)를 받아와 li 태그에 넣어주는 작업 필요
 		$(document).on("contextmenu",".side-folder",function() {
@@ -225,8 +207,8 @@ $(function() {
 			dropdown +=	'<input type="hidden" name="methodologyid" value='+methodologyid+'>';
 			dropdown +=	'<input type="hidden" name="fid" value='+fid+'>';
 			dropdown +=	'<li data-toggle="modal" id="side-insert-step" data-target="#insert-step">Step 추가</li>';
-			dropdown += '<li >수정</li>';
-			dropdown += '<li >삭제</li>';
+	        dropdown += '<li id="side-update-folder" data-toggle="modal" data-target="#update-folder">수정</li>';
+	        dropdown += '<li id="side-delete-folder" data-toggle="modal" data-target="#delete-folder">삭제</li>';
 			$(dropdown_ul).attr("class", "custom-menu").append(dropdown);
 			console.log(dropdown_ul)
 			$(dropdown_ul).css({
@@ -275,7 +257,7 @@ $(function() {
 	/////////////////////////// 비동기 화면전환 - 프로젝트 /////////////////////////
 		
 		$(document).on("click",".side-project",function(){
-			console.log("사이드바~~!~!~!~!~!~!~!~!~!");
+	
 			
 			var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
 			
@@ -412,6 +394,90 @@ $(function() {
              });// end-ajax	
 	});
 	
+	
+	
+	   //폴더 우클릭하여 수정 버튼 클릭시 이벤트
+	   $(document).on("click","#side-update-folder",function(){
+	       var custom_menu =  $(this).parents("ul.custom-menu")[0];
+	       var fid = $(custom_menu).find("input[name=fid]").val();
+	       var pid = $(custom_menu).find("input[name=pid]").val();
+	       $.ajax({
+	           type:"post",
+	           url:"selectfolder.htm",
+	            data:{fid:fid},
+	            dataType:"json",
+	            success:function(data){
+	                console.log(data);
+	                console.log(data.selectfolder);
+	                $('#update-folder-fid').val(fid);
+	                $('#update-folder-pid').val(pid);
+	                $('#update-folder-name').val(data.selectfolder.fname);
+	                
+	            }
+	       });
+	   });
+	   
+	   //폴더 modal 에서 수정 버튼 클릭시
+	   $('#update-folder-btn').click(function() {
+	       var updatefolder = $('#update-folder-form').serialize();       
+	       
+	       $.ajax({
+	           type:"post",
+	           url:"updatefolder.htm",
+	           data:updatefolder,
+	           dataType:"json",
+	           success:function(data){
+	               console.log(data);
+	               console.log(data.updatefolder);
+	               
+	               if(data.updatefolder > 0){
+	                   alert('폴더 수정이 완료되었습니다!');
+	               }else {
+	                   alert('폴더 수정이 실패되었습니다');
+	               }
+	           }
+	       }); // end - ajax
+	   }); //end - event
+	   
+	   //폴더 우클릭하여 삭제 버튼 클릭시 실행되는 이벤트
+	   $(document).on("click","#side-delete-folder",function(){
+	       var custom_menu =  $(this).parents("ul.custom-menu")[0];
+	       var fid = $(custom_menu).find("input[name=fid]").val();
+	       $.ajax({
+	           type:"post",
+	           url:"selectfolder.htm",
+	            data:{fid:fid},
+	            dataType:"json",
+	            success:function(data){
+	                console.log(data);
+	                console.log(data.selectfolder);
+	                $('#delete-folder-fid').val(fid);
+	                
+	            }
+	       }); // end-ajax
+	   });
+	   
+	   //폴더 modal 에서 삭제 버튼 클릭시 이벤트
+	   $('#delete-folder-btn').click(function() {
+	       var deletefolder = $('#delete-folder-form').serialize();
+	       
+	       $.ajax({
+	           type:"post",
+	           url:"deletefolder.htm",
+	           data:deletefolder,
+	           dataType:"json",
+	           success:function(data){
+	               console.log(data);
+	               console.log(data.deletefolder);
+	               
+	               if(data.updatefolder > 0){
+	                   alert('폴더 삭제가 실패되었습니다');
+	               }else {
+	                   alert('폴더 삭제이 완료되었습니다!');
+	               }
+	           }
+	       }); // end - ajax       
+	   })
 }); // end - doc.on.ready
 
 
