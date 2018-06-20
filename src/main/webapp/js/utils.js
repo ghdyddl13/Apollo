@@ -33,10 +33,12 @@ function getTaskAssignees(tid){
  작성자명 : 박 민 식
  */
 function makeProfileIcon(memberdata, imgsize){
+
 	var profile_container = jQuery("<div>",{"class":"profile-img-container",
 											"id":"profile"+memberdata.mid,
 											"data-toggle":"modal",
 											"data-target":"#profile-modal-dialog"});
+
 	profile_container.css({"width":imgsize,"height":imgsize});
 	var img = jQuery("<img>",{"class":"profile-img"});
 	var src = (memberdata.image ==null)?"img/user_image.png" :"profileImg/"+memberdata.image;
@@ -54,6 +56,7 @@ function makeProfileIcon(memberdata, imgsize){
  */
 $(document).on("click",".profile-img-container",function(){
 	console.log("프로필 띄워주기 - targetId : " + this.id);
+
 	var mid = this.id.substr(7); // mid 만 가져오기
 	console.log(mid);
 	
@@ -68,6 +71,7 @@ $(document).on("click",".profile-img-container",function(){
 	});
 
 });
+
 
 
 

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
 
-import com.apollo.sidebar.dao.FolderDAO;
 import com.apollo.sidebar.service.SidebarService;
 import com.apollo.vo.FolderDTO;
 import com.apollo.vo.MemberDTO;
@@ -67,6 +66,7 @@ public class SidebarController {
 		}
 		return jsonview; 
 	}
+	
 	public String changeStep(StepDTO stepdto, Model model) {
 		return null;
 	}
