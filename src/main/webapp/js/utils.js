@@ -104,7 +104,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 		// var tid = $(this).attr("id"); 
 		
 		var pid = '1';
-		var tid = '12';
+		var tid = '14';
 		
 		$.ajax(
 			       {
@@ -236,3 +236,36 @@ $(document).on("click","#task_star",function(){
 		        }); // end-ajax
 	
 });
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 20.
+ 기      능 : Task 삭제 버튼
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#task_trash_btn",function(){
+	var tid = $('#tidhidden').attr('value');
+
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "deletetask.htm",
+		           data : {
+		        	   'tid': tid,
+		           },
+		           success : function(rdata){
+
+		        	   console.log(rdata);
+		        	   $('#task_delete_dismiss_btn').click();
+		        	   $('#task_dismiss_btn').click();
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+	
+});
+
+
+
+

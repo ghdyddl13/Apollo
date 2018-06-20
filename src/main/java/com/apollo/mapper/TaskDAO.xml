@@ -50,4 +50,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	delete from starredtask where mid = #{mid} and tid = #{tid}
     </delete>
     
+    <delete id="deleteTask">
+    	delete from task where tid = #{tid}
+    </delete>
+    
 </mapper>
