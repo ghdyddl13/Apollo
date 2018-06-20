@@ -511,5 +511,10 @@ background-color: 999999;
  color : #ffc30d
 }
 
+.modal-task-delete{
+	 display: inline-block;
+     text-align: left;
+     vertical-align: right;
+}
 
 /* task 수정,삭제 모달_정권 ---------------------- 종료 */

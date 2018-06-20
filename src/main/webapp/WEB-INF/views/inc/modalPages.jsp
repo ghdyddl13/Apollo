@@ -296,7 +296,7 @@
 
 					<div class="col-sm-6" id="star_trash">
 						<span id="span_task_star"></span>&nbsp&nbsp
-						<i class="fas fa-trash" id="task_trash"></i>&nbsp&nbsp&nbsp
+						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 					
@@ -393,3 +393,28 @@
 		</div>
 	</div>
 </div>	
+
+
+<!-- Task 삭제 창 -->
+	<div class="modal fade" id="Trash_Modal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Task 삭제</h4>
+				</div>
+				
+				<div class="modal-body" style="text-align:center">
+				<h4>해당 Task를 삭제하시겠습니까?<br><h5 style="color:red">(삭제 후 복구 불가능합니다)</h5></h4>					
+
+					<div align="center">
+						<input type="button" class="btn add-btn" id="task_trash_btn" value="삭제">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>

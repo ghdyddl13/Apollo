@@ -216,3 +216,18 @@ $(document).on("click","#task_star",function(){
 		        }); // end-ajax
 	
 });
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 20.
+ 기      능 : Task 삭제 버튼
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#task_trash_btn",function(){
+	
+});
+
+
+
+
