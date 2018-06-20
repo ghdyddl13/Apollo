@@ -106,7 +106,7 @@
 					<form id="insert-folder-form" method="post" onsubmit="return false;">
 						<fieldset>
 							<input type="text" id="add-folder-name" name="fname" class="add-folder-text" placeholder="folder명을 입력하세요">
-							<input type="hidden" name="pid" value="1">
+							<input type="hidden" id="add-folder-pid" name="pid">
 							<br><br>
 							<div align="center">
 								<input type="button" class="btn add-btn" id="insert-folder-btn" value="생성">&nbsp;&nbsp;&nbsp;
@@ -288,6 +288,30 @@
 		</div>
 	</div>	
 
+<!-- Project 완료 Modal 창 -->
+	<div class="modal fade" id="complete-project" role="dialog">
+		<div class="modal-dialog modal-delete-project-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Project 완료</h4>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="complete-project-pname">
+					<p>해당 프로젝트를 완료하시겠습니까?</p>
+				</div>
+				<div align="center">
+					<input id="complete-project-btn" type="button" class="btn delete-btn" value="완료">&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn cancel-btn"
+						data-dismiss="modal" value="취소">
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>	
+
+
 
 <!-- Task 수정/삭제 Modal 창 -->
 	<div class="modal fade modal-task-dialog" id="Task_RUD_Modal" role="dialog">
@@ -449,3 +473,7 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	

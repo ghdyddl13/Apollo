@@ -93,10 +93,10 @@ $(function() {
 			var dropdown = '<input type="hidden" name="pid" value='+pid+'>';
 			dropdown += '<input type="hidden" name="methodologyid" value='+methodologyid+'>'
 			dropdown +=	'<li class="dropdown-submenu"><a data-toggle="dropdown" class="dropdown-toggle">추가 <span class="glyphicon glyphicon-menu-right"></span></a>'
-			dropdown += '<ul class="dropdown-menu "><li data-toggle="modal" data-target="#add-folder">Folder추가</li><li id="side-insert-step" data-toggle="modal" data-target="#insert-step">Step추가</li></ul></li>'
-			dropdown += '<li id="side-complete-project">완료</li>'
-			dropdown += '<li data-action="third" data-toggle="modal" data-target="#update-project">수정</li>'
-			dropdown += '<li data-action="fourth" data-toggle="modal" data-target="#delete-project">삭제</li>'
+			dropdown += '<ul class="dropdown-menu "><li id="side-add-folder" data-toggle="modal" data-target="#add-folder">Folder추가</li><li id="side-insert-step" data-toggle="modal" data-target="#insert-step">Step추가</li></ul></li>'
+			dropdown += '<li data-toggle="modal" data-target="#complete-project" id="side-complete-project">완료</li>'
+			dropdown += '<li data-toggle="modal" data-target="#update-project">수정</li>'
+			dropdown += '<li data-toggle="modal" data-target="#delete-project">삭제</li>'
 			
 			$(dropdown_ul).attr("class", "custom-menu").append(
 					dropdown);
@@ -108,10 +108,26 @@ $(function() {
 			
 		});
 		
-		//프로젝트 완료 버튼 클릭
+		//사이드 드롭다운에서 프로젝트 완료 버튼 클릭시 모달창 생성
 		$(document).on("click","#side-complete-project",function(){
+			var custom_menu =  $(this).parents("ul.custom-menu")[0];
+			var pid =  $(custom_menu).find("input[name=pid]").val();
 			
+			$("#complete-project-pid").val(pid);
+		})
+		
+		//프로젝트 완료 모달창에서 완료 버튼을 클릭할 경우 실행되는 비동기 함수 
+		$(document).on("click","#complete-project-btn",function(){
+			var pid= $(custom_menu).find("input[name=pid]").val();
 			
+			$.ajax({
+				url:"completeProject.htm",
+				data:{pid:pid},
+				dataType:"json",
+				success:function(data){
+					
+				}
+			})
 		})
 		
 		
@@ -173,7 +189,7 @@ $(function() {
 			if (!$(e.target).parents(".custom-menu").length > 0) {
 
 				// Hide it
-				$(".custom-menu").hide(100);
+				$(".custom-menu").remove();
 			}
 		});
 	
@@ -278,7 +294,15 @@ $(function() {
 
 		 });	
 	});
-
+	
+	//사이드바에서 폴더생성 버튼을 클릭할 때
+	$(document).on("click","#side-add-folder",function(){
+		var custom_menu =  $(this).parents("ul.custom-menu")[0];
+		var pid =  $(custom_menu).find("input[name=pid]").val();
+		$("#add-folder-pid").val(pid);
+		
+	})
+	
 
 	//폴더 생성 클릭 버튼시 alert 창 화면
 	$('#insert-folder-btn').click(function() {
