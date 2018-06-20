@@ -62,14 +62,14 @@ $(document).on("click",".profile-img-container",function(evt){
  기      능 : Task 수정/ 삭제 페이지에 날짜 클릭으로 넣는 datepicker 넣는 코드
  작성자명 : 김 정 권
  */
-$( ".date-img" ).datepicker({
-    showOn: "button",
-    buttonImage: "img/calendar.png",
-    buttonImageOnly: true,
-    dateFormat: 'yy-mm-dd'
-
-
-});
+//$( ".date-img" ).datepicker({
+//    showOn: "button",
+//    buttonImage: "img/calendar.png",
+//    buttonImageOnly: true,
+//    dateFormat: 'yy-mm-dd'
+//
+//
+//});
 
 
 /**
