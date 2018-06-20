@@ -35,5 +35,11 @@ public interface FolderDAO {
 	 작성자명 : 김 래 영
 	 */
 	public int updateFolder(FolderDTO folderdto);
-
+	
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 폴더 삭제 (영구삭제)
+	 작성자명 : 김 래 영
+	 */
+	public int deleteFolder(String fid);
 }

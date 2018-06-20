@@ -150,7 +150,7 @@ $(function() {
          dropdown +=   '<input type="hidden" name="fid" value='+fid+'>';
          dropdown +=   '<li data-toggle="modal" id="side-insert-step" data-target="#insert-step">Step 추가</li>';
          dropdown += '<li id="side-update-folder" data-toggle="modal" data-target="#update-folder">수정</li>';
-         dropdown += '<li >삭제</li>';
+         dropdown += '<li id="side-delete-folder" data-toggle="modal" data-target="#delete-folder">삭제</li>';
          $(dropdown_ul).attr("class", "custom-menu").append(dropdown);
          console.log(dropdown_ul)
          $(dropdown_ul).css({
@@ -357,7 +357,7 @@ $(function() {
 	   });
    });
    
-   //폴더 modal 에서 수정 버튼 클릭시
+   //폴더 modal 에서 수정 버튼 클릭시 이벤트
    $('#update-folder-btn').click(function() {
 	   var updatefolder = $('#update-folder-form').serialize();	   
 	   
@@ -379,6 +379,46 @@ $(function() {
 	   }); // end - ajax
    }); //end - event
    
+   
+   //폴더 우클릭하여 삭제 버튼 클릭시 실행되는 이벤트
+   $(document).on("click","#side-delete-folder",function(){
+	   var custom_menu =  $(this).parents("ul.custom-menu")[0];
+	   var fid = $(custom_menu).find("input[name=fid]").val();
+	   $.ajax({
+		   type:"post",
+		   url:"selectfolder.htm",
+			data:{fid:fid},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				console.log(data.selectfolder);
+				$('#delete-folder-fid').val(fid);
+				
+			}
+	   }); // end-ajax
+   });
+   
+   //폴더 modal 에서 삭제 버튼 클릭시 이벤트
+   $('#delete-folder-btn').click(function() {
+	   var deletefolder = $('#delete-folder-form').serialize();
+	   
+	   $.ajax({
+		   type:"post",
+		   url:"deletefolder.htm",
+		   data:deletefolder,
+		   dataType:"json",
+		   success:function(data){
+			   console.log(data);
+			   console.log(data.deletefolder);
+			   
+			   if(data.updatefolder > 0){
+				   alert('폴더 삭제가 실패되었습니다');
+			   }else {
+				   alert('폴더 삭제이 완료되었습니다!');
+			   }
+		   }
+	   }); // end - ajax	   
+   })
    
 }); // end - doc.on.ready
 

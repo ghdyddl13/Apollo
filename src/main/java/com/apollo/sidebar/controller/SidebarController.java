@@ -214,7 +214,19 @@ public class SidebarController {
 		return jsonview;
 		
 	}
-
+	
+	@RequestMapping("/deletefolder.htm")
+	public View deleteFolder(String fid, Model model) {
+		System.out.println("delete folder");
+		int deletefolder = 0;
+		try {
+			deletefolder = sidebarservice.deleteFolder(fid);
+			model.addAttribute("deletefolder", deletefolder);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
 
 }
 

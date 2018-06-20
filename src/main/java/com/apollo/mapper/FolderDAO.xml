@@ -20,4 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectFolder" resultType="com.apollo.vo.FolderDTO">
 		select * from folder where fid=#{fid}
 	</select>
+	<delete id="deleteFolder">
+		delete from folder where fid=#{fid}
+	</delete>
 </mapper>
