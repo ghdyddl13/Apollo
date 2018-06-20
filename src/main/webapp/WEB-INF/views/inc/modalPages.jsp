@@ -265,44 +265,23 @@
 		</div>
 	</div>	
 	
-	<!-- Project 삭제 Modal 창 -->
-	<div class="modal fade" id="delete-project" role="dialog">
-		<div class="modal-dialog modal-delete-project-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Project 삭제</h4>
-				</div>
-				<div class="modal-body">
-					<p>해당 프로젝트를 삭제하시겠습니까?</p>
-					<p>프로젝트 삭제시 14일동안 휴지통에 보관됩니다.</p>
-				</div>
-				<div align="center">
-					<input type="submit" class="btn delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
-					<input type="button" class="btn cancel-btn"
-						data-dismiss="modal" value="취소">
-				</div>
-				<br>
-			</div>
-		</div>
-	</div>	
 
 <!-- Project 완료 Modal 창 -->
-	<div class="modal fade" id="complete-project" role="dialog">
+	<div class="modal fade" id="move-project" role="dialog">
 		<div class="modal-dialog modal-delete-project-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Project 완료</h4>
+					<h4 id="move-project-header" class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
-					<input type="hidden" id="complete-project-pname">
-					<p>해당 프로젝트를 완료하시겠습니까?</p>
+					<input type="hidden" id="move-project-pid">
+					<input type="hidden" id="move-project-pstatuscode">
+					<p id="move-project-message"></p>
 				</div>
 				<div align="center">
-					<input id="complete-project-btn" type="button" class="btn delete-btn" value="완료">&nbsp;&nbsp;&nbsp;
+					<input id="move-project-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn cancel-btn"
 						data-dismiss="modal" value="취소">
 				</div>

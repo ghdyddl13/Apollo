@@ -13,12 +13,12 @@
 		<div>
 			<a data-toggle="collapse" data-target="#working-project">진행중인
 				프로젝트</a>
-			<div class="side-dir collapse in" id="working-project" aria-expanded="true">
+			<div class="project-status-wrapper side-dir collapse in" id="working-project" aria-expanded="true">
 		   </div>
 		</div>
 		<div>
 			<a data-toggle="collapse" data-target="#finished-project">완료 프로젝트</a>
-			<div class="side-dir collapse" id="finished-project">
+			<div class="project-status-wrapper side-dir collapse" id="finished-project">
 				<a class="side-project"><span
 					class=" glyphicon glyphicon-duplicate"></span>Project2</a>
 			</div>
@@ -26,7 +26,7 @@
 		<div>
 			<a data-toggle="collapse" data-target="#trash-bean"><span
 				class="glyphicon glyphicon-trash"></span>휴지통</a>
-			<div class="side-dir collapse" id="trash-bean">
+			<div class="project-status-wrapper side-dir collapse" id="trash-bean">
 				<a class="side-project"><span
 					class="glyphicon glyphicon-duplicate"></span>Project3</a>
 			</div>
