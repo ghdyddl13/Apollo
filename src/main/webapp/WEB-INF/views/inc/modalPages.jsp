@@ -6,7 +6,9 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<script>
+	
+</script>
 	<!-- 프로젝트 생성 Modal 창 -->
 	<div class="modal fade" id="project-insert" role="dialog">
 		<div class="modal-dialog modal-add-project-dialog">
@@ -135,7 +137,7 @@
 							</div>
 							<input type="text" name="sname" class="add-step-name" placeholder="step명을 입력하세요">
 							<br><br>
-							<div class="modal-title" id="testabc">
+							<div class="modal-title">
 								<p>책임자</p>
 							</div>
 							<div >
@@ -396,3 +398,52 @@
 		</div>
 	</div>
 </div>	
+
+	<!-- 프로필 모달 -->
+	<c:set var="member" value="${profileinfolist}"></c:set>
+	<div class="modal fade" id="profile-modal-dialog" role="dialog">
+		<div class="modal-dialog profile-modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Profile</h4>
+				</div>
+				<div class="modal-body">
+					<div class="col-sm-3">
+						
+					</div>
+					<div class="col-sm-9">
+						<table>
+							<tr>
+								<td>이름</td>
+								<th id="profile-modal-mname"></th>
+							</tr>
+							<tr>
+								<td>이메일</td>
+								<th></th>
+							</tr>
+							<tr>
+								<td>휴대폰번호</td>
+								<th></th>
+							</tr>
+							<tr>
+								<td>부서명</td>
+								<th></th>
+							</tr>
+							<tr>
+								<td>직위</td>
+								<th></th>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div align="center">
+					<input type="submit" class="btn delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn cancel-btn"
+						data-dismiss="modal" value="취소">
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>

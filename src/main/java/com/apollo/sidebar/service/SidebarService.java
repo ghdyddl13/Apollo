@@ -78,7 +78,6 @@ public class SidebarService {
 	 작성자명 : 김 래 영
 	 */
 	public int insertStep(StepDTO stepdto) {
-		System.out.println("service step");
 		int result = 0;
 		
 		try {

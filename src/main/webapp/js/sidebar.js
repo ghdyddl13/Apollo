@@ -196,13 +196,14 @@ $(function() {
 	});
 
 	// 스텝 생성 버튼 클릭시  alert 창 화면
-	$("#insert-step-btn").click(function(evt){	 
+	$("#insert-step-btn").click(function(){	 
 		 if($(".add-step-name").val().trim() == ""){
 			alert("스텝명을 입력하세요.");
 			$(".add-step-name").focus();	
-			
-		 } else if($('#add-folder-name').val().trim() == ""){
+			return false;
+		 } else if($('#add-step-mgr-assignee').val() == ""){
 			 alert("책입자를 선택하세요.");
+			 return false;
 		 }
 		 var newstep = $('#step-add-form').serialize();
 		 console.log(newstep);
@@ -232,7 +233,7 @@ $(function() {
 	          });// end-ajax	
 
 	
-	});
+	}); //end-step
 
 	//폴더 생성 클릭 버튼시 alert 창 화면
 	$('#insert-folder-btn').click(function() {

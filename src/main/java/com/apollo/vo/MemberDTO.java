@@ -71,5 +71,12 @@ public class MemberDTO {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+	@Override
+	public String toString() {
+		return "MemberDTO [mid=" + mid + ", mname=" + mname + ", pwd=" + pwd + ", rday=" + rday + ", pnum=" + pnum
+				+ ", image=" + image + ", deptname=" + deptname + ", apollokey=" + apollokey + ", position=" + position
+				+ "]";
+	}
+	
 	
 }
