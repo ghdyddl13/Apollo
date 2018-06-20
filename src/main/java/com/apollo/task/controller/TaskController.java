@@ -118,6 +118,29 @@ public class TaskController {
 	}
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : task 삭제
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/deletetask.htm")
+	public View deleteTask(int tid, Model model) {
+
+		System.out.println("tid : " + tid);
+		int result;
+		result = service.deleteTask(tid);
+		model.addAttribute("result", result);
+
+		System.out.println("결과는? : " + result);
+		
+		return jsonview;
+	
+	}
+	
+	
+	
+	
 	
 	
 	

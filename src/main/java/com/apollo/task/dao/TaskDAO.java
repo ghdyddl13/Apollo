@@ -16,4 +16,5 @@ public interface TaskDAO {
 	public TaskDTO getTask(String tid);
 	public int addStar(StarredTaskDTO dto);
 	public int deleteStar(StarredTaskDTO dto);
+	public int deleteTask(int tid);
 }

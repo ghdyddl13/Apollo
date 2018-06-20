@@ -418,10 +418,11 @@ $(function() {
 
                     if(rdata.result == 1){
                        alert('프로젝트 멤버로 추가되었습니다')
-                       location.href = "login.htm";
+                       $('#add_project_member').click();
                     } else{
                        alert('프로젝트 멤버 추가 실패')
-                       location.href = "login.htm";
+                       $('#add_project_member').click();
+                      
                     }
                     
                      } // end - success

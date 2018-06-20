@@ -297,7 +297,7 @@
 					<div class="col-sm-6" id="star_trash">
 						<span id="span_task_star"></span>&nbsp&nbsp
 						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
 					</div>
 					
 					<div class="col-sm-12" id="Task_Modal_snames">
@@ -401,7 +401,7 @@
 			<!-- Modal content-->
 			<div class="modal-content modal-sm">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" id="task_delete_dismiss_btn">&times;</button>
 					<h4 class="modal-title">Task 삭제</h4>
 				</div>
 				
