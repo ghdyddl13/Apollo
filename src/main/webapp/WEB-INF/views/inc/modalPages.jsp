@@ -265,31 +265,7 @@
 		</div>
 	</div>	
 	
-<<<<<<< HEAD
-	<!-- Project 삭제 Modal 창 -->
-	<div class="modal fade" id="delete-project" role="dialog">
-		<div class="modal-dialog modal-delete-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Project 삭제</h4>
-				</div>
-				<div class="modal-body">
-					<p>해당 프로젝트를 삭제하시겠습니까?</p>
-					<p>프로젝트 삭제시 14일동안 휴지통에 보관됩니다.</p>
-				</div>
-				<div align="center">
-					<input type="submit" class="btn delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
-					<input type="button" class="btn cancel-btn"
-						data-dismiss="modal" value="취소">
-				</div>
-				<br>
-			</div>
-		</div>
-	</div>	
-=======
->>>>>>> f23e2f52ccde02973650b6792af323ee5a9a9191
+
 
 <!-- Project 완료 Modal 창 -->
 	<div class="modal fade" id="move-project" role="dialog">
