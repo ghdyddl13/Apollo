@@ -24,6 +24,13 @@ public interface FolderDAO {
 	
 	/*
 	 날      짜 : 2018. 6. 20.
+	 기      능 : fid 로 폴더 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public FolderDTO selectFolder(String fid);
+	
+	/*
+	 날      짜 : 2018. 6. 20.
 	 기      능 : 폴더명 수정 
 	 작성자명 : 김 래 영
 	 */

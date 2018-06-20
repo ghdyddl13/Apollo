@@ -149,7 +149,7 @@ $(function() {
          dropdown +=   '<input type="hidden" name="methodologyid" value='+methodologyid+'>';
          dropdown +=   '<input type="hidden" name="fid" value='+fid+'>';
          dropdown +=   '<li data-toggle="modal" id="side-insert-step" data-target="#insert-step">Step 추가</li>';
-         dropdown += '<li >수정</li>';
+         dropdown += '<li id="side-update-folder" data-toggle="modal" data-target="#update-folder">수정</li>';
          dropdown += '<li >삭제</li>';
          $(dropdown_ul).attr("class", "custom-menu").append(dropdown);
          console.log(dropdown_ul)
@@ -335,6 +335,50 @@ $(function() {
                 } // end - error
              });// end-ajax   
    });
+   
+   //폴더 우클릭하여 수정 버튼 클릭시 이벤트
+   $(document).on("click","#side-update-folder",function(){
+	   var custom_menu =  $(this).parents("ul.custom-menu")[0];
+	   var fid = $(custom_menu).find("input[name=fid]").val();
+	   var pid = $(custom_menu).find("input[name=pid]").val();
+	   $.ajax({
+		   type:"post",
+		   url:"selectfolder.htm",
+			data:{fid:fid},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				console.log(data.selectfolder);
+				$('#update-folder-fid').val(fid);
+				$('#update-folder-pid').val(pid);
+				$('#update-folder-name').val(data.selectfolder.fname);
+				
+			}
+	   });
+   });
+   
+   //폴더 modal 에서 수정 버튼 클릭시
+   $('#update-folder-btn').click(function() {
+	   var updatefolder = $('#update-folder-form').serialize();	   
+	   
+	   $.ajax({
+		   type:"post",
+		   url:"updatefolder.htm",
+		   data:updatefolder,
+		   dataType:"json",
+		   success:function(data){
+			   console.log(data);
+			   console.log(data.updatefolder);
+			   
+			   if(data.updatefolder > 0){
+				   alert('폴더 수정이 완료되었습니다!');
+			   }else {
+				   alert('폴더 수정이 실패되었습니다');
+			   }
+		   }
+	   }); // end - ajax
+   }); //end - event
+   
    
 }); // end - doc.on.ready
 

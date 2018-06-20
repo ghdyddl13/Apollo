@@ -166,17 +166,47 @@ public class SidebarController {
 		return jsonview; 
 		
 	}
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 프로젝트가 없을 때 실행되는 함수
+	 작성자명 : 김 래 영
+	 */
 	@RequestMapping("/noproject.htm")
 	public String noproject() {
 		return "project/noproject";
 		
 	}
-	
-	@RequestMapping("/updatefolder.htm")
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : fid 로 폴더 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/selectfolder.htm")
+	public View selectFolder(String fid, Model model) {
+		System.out.println("selectfolder 들어옴");
+		FolderDTO selectfolder = null;
+		try {
+			selectfolder = sidebarservice.selectFolder(fid);
+			model.addAttribute("selectfolder", selectfolder);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+		
+	}	
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 폴더 수정
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/updatefolder.htm", method=RequestMethod.POST)
 	public View updateFolder(FolderDTO folderdto, Model model) {
 		System.out.println("update folder");
+		System.out.println(folderdto.toString());
+		int updatefolder = 0;
 		try {
-			int updatefolder = sidebarservice.updateFolder(folderdto);
+			updatefolder = sidebarservice.updateFolder(folderdto);
 			model.addAttribute("updatefolder", updatefolder);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -184,6 +214,7 @@ public class SidebarController {
 		return jsonview;
 		
 	}
+
 
 }
 

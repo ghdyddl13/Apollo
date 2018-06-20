@@ -105,13 +105,8 @@
 				<div class="modal-body">
 					<form id="insert-folder-form" method="post" onsubmit="return false;">
 						<fieldset>
-<<<<<<< HEAD
-							<input type="text" id="add-folder-name" name="fname" class="modal-folder-text" placeholder="folder명을 입력하세요">
-							<input type="hidden" name="pid" value="1">
-=======
 							<input type="text" id="add-folder-name" name="fname" class="add-folder-text" placeholder="folder명을 입력하세요">
 							<input type="hidden" id="add-folder-pid" name="pid">
->>>>>>> develop
 							<br><br>
 							<div align="center">
 								<input type="button" class="btn add-btn" id="insert-folder-btn" value="생성">&nbsp;&nbsp;&nbsp;
@@ -486,13 +481,14 @@
 					<h4 class="modal-title">Folder 수정</h4>
 				</div>
 				<div class="modal-body">
-					<form id="insert-folder-form" method="post" onsubmit="return false;">
+					<form id="update-folder-form" method="post">
 						<fieldset>
 							<input type="text" id="update-folder-name" name="fname" class="modal-folder-text">
-							<input type="hidden" name="pid" value="1">
+							<input type="hidden" name="fid" id="update-folder-fid">
+							<input type="hidden" name="pid" id="update-folder-pid">
 							<br><br>
 							<div align="center">
-								<input type="button" class="btn add-btn" id="insert-folder-btn" value="수정">&nbsp;&nbsp;&nbsp;
+								<input type="button" class="btn add-btn" id="update-folder-btn" value="수정">&nbsp;&nbsp;&nbsp;
 								<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
 							</div>
 						</fieldset>

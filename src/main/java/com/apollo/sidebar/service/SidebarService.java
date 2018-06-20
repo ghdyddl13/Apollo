@@ -189,26 +189,37 @@ public class SidebarService {
 		
 		return steplist;
 	};
+	
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : fid 로 폴더 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public FolderDTO selectFolder(String fid) {
+		FolderDTO folderinfo = null;
+		try {
+			FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
+			folderinfo = dao.selectFolder(fid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return folderinfo;
+		
+	}
 	/*
 	 날      짜 : 2018. 6. 20.
 	 기      능 : 푤더 수정
 	 작성자명 : 김 래 영
 	 */
 	public int updateFolder(FolderDTO folderdto) {
-		int result = 0;
+		int folderresult = 0;
 		try {
 			FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
-			result = dao.updateFolder(folderdto);
+			folderresult = dao.updateFolder(folderdto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(result > 0) {
-			System.out.println("Folder update success");
-		}else {
-			System.out.println("Folder update fail");
-		}
-		
-		return result;
+		return folderresult;
 		
 	};
 	
