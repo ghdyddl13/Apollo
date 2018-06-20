@@ -515,12 +515,6 @@ background-color: 999999;
     width: 100%;
     height: 100%;
 }
-/* task 수정,삭제 모달_정권 ---------------------- 시작 */
-#star_trash{
-  text-align: right;
-}
-
-/* task 수정,삭제 모달_정권 ---------------------- 종료 */
 
 .main-noproject-content {
 	position: absolute;
@@ -565,4 +559,16 @@ background-color: 999999;
 	border-left:white;
 	border-top:white;
 	border-bottom:white;
+
 }
+
+/* task 수정,삭제 모달_정권 ---------------------- 시작 */
+#star_trash{
+  text-align: right;
+}
+
+#task_star{
+ color : #ffc30d
+}
+/* task 수정,삭제 모달_정권 ---------------------- 종료 */
+
