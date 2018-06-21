@@ -148,6 +148,7 @@ public class ProjectInfoService {
 	 */
 	public int insertPmember(MidpidDTO midpiddto){
 		
+		System.out.println("서비스 탔음");
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		int result = dao.insertPmember(midpiddto);
 		

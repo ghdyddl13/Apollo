@@ -82,9 +82,10 @@ $(document).on("click",".Task_RUD_Modal",function(){
 
 		// tid를 클릭한 태그의 id에서 가져올 것
 		// var tid = $(this).attr("id"); 
+	    //     tid = tid.substr(1);   
 		
 		var pid = '1';
-		var tid = '12';
+		var tid = '10';
 		
 		$.ajax(
 			       {
