@@ -27,6 +27,7 @@ public class StepTimelineService {
 
 		ArrayList<TaskDTO> tasklist= new ArrayList<TaskDTO>();
 		try {
+
 			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
 			tasklist = dao.getTasksByStepId(sid);
 		} catch (Exception e) {
@@ -37,7 +38,7 @@ public class StepTimelineService {
 	
 	
 	public ArrayList<TstatusDTO> selectTstatusBySid(int sid){
-		System.out.println("보드 서비스 들어왔다");
+	
 		ArrayList<TstatusDTO> result = null;
 		try {
 			StepDAO dao = sqlsession.getMapper(StepDAO.class);

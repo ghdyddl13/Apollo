@@ -34,7 +34,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <if test="detail != null">detail=#{detail},</if>
       <if test="importance != 0">importance=#{importance},</if>
       <if test="tstatusid != 0">tstatusid=#{tstatusid},</if>
-     	ctime=sysdate
+     	ctime=TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS')
     	where tid= #{tid}
     </update>
+    
+    <select id="getTask" parameterType="String" resultType="com.apollo.vo.TaskDTO">
+    	select * from task where tid = #{tid}
+    </select>
+    
+    <insert id="addStar" parameterType="com.apollo.vo.StarredTaskDTO">
+    	insert into starredtask values(#{mid}, #{tid})
+    </insert>
+    
+    <delete id="deleteStar" parameterType="com.apollo.vo.StarredTaskDTO">
+    	delete from starredtask where mid = #{mid} and tid = #{tid}
+    </delete>
+    
+    <delete id="deleteTask">
+    	delete from task where tid = #{tid}
+    </delete>
+    
 </mapper>

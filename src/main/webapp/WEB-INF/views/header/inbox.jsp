@@ -4,26 +4,22 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
-	$(function() {
-		
+	$(function() {	
 		$("#incomming-page").click(function(evt){
 			$.ajax({
 				url:"inbox.htm",
 				dataType:"html",
 				success:function(data){
-					console.log(data);
 					$("#main-box").empty();
 					$("#main-box").append(data);
 				}
 			})
 		});
-		
 		$("#sent-page").click(function(evt){
 			$.ajax({
 				url:"sent.htm",
 				dataType:"html",
 				success:function(data){
-					console.log(data)
 					$("#main-box").empty();
 					$("#main-box").append(data);
 					
@@ -35,7 +31,6 @@
 				url:"archive.htm",
 				dataType:"html",
 				success:function(data){
-					console.log(data)
 					$("#main-box").empty();
 					$("#main-box").append(data);
 					
@@ -51,10 +46,8 @@
 				data:{cmtid:$(this).children(".cmtid").val(),
 					  inboxkind:$("#inboxkind").val()},
 				success:function(data){
-					console.log(data)
 					$("#main-box").empty();
 					$("#main-box").append(data);
-					
 				}
 			})
 		});
@@ -67,7 +60,6 @@
 				data:{cmtid:$(this).children(".cmtid").val(),
 					  inboxkind:$("#inboxkind").val()},
 				success:function(data){
-					console.log(data)
 					$("#main-box").empty();
 					$("#main-box").append(data);
 					
@@ -105,10 +97,9 @@
 		}
 	});
 </script>
-
 	<input id ="inboxkind" type="hidden" value="${inbox}">
-	<div class ="main-container container">
-		<div class ="main-section-left" id="left">
+	<div class ="inbox-main-container">
+		<div class ="inbox-section-left" id="left">
 		<p class ="inbox-header">&nbsp; inbox</p>
 		<div class = "inbox-nav">
 		<div class="inbox-topnav" id="myTopnav">
@@ -129,7 +120,7 @@
 						<!-- <div id="archiveupdate" style="cursor: pointer;">
 							<img src="img/archive.png" width="18px" height="18px">
 						</div> -->
-						<span class="inbox-span1">${commentlist.tname}</span>&#60; 
+						<div class ="Task_RUD_Modal" id="t${commentlist.cmtid}" style="cursor: pointer;"><span class="inbox-span1">${commentlist.tname}</span></div>&#60; 
 						<span class="inbox-span2">${commentlist.pname}</span>
 						<span class="inbox-span3">
 						<c:choose>
@@ -159,7 +150,7 @@
 						</center>
 					</c:if>
 					<div class="inbox-list">
-						<span class="inbox-span1">${commentlist.tname}</span>&#60; 
+						<div class ="Task_RUD_Modal" id="t${commentlist.cmtid}" style="cursor: pointer;"><span class="inbox-span1">${commentlist.tname}</span></div>&#60; 
 						<span class="inbox-span2">${commentlist.pname}</span> 
 						<span class="inbox-span3">
 						<c:choose>
@@ -184,8 +175,9 @@
 			</c:choose>
 			</c:forEach>
 		</div>
-		<div class ="main-section-center" id="center">
+		<div class ="inbox-section-center" id="center">
 		</div>
-		<div class ="main-section-right" id="right">
+		<div class ="inbox-section-right" id="right">
+
 		</div>
 	</div>

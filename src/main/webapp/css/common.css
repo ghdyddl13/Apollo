@@ -13,14 +13,14 @@ html, body{
     padding-left: 250px;
     height:100%;
     padding-top: 50px;
+    margin-left: 0;
 }
 
-}
 .navbar.inside-header{
    background-color: #f4faff;
    color:black;
    min-height:35px;
-   text-align: center
+   text-align: center;
 }
 
 .inside-header ul li{
@@ -45,6 +45,13 @@ html, body{
 
 .navbar.inside-header.inside-header-step a:hover{
    background-color: transparent;
+}
+
+.dropdown-submenu > a:hover{
+	text-decoration: none
+}
+.dropdown-submenu > a{
+	color: black
 }
 
 /* /////////////////////////// 로그인 css /////////////////////////////////////////////////////  */
@@ -250,6 +257,10 @@ width:40px;
    padding-left: 20px;
 }
 
+.side-dir-project{
+   padding-left: 20px;
+}
+
 .side-dir a {
    font-size: 12px
 }
@@ -380,23 +391,26 @@ label {
   min-height: 100%;
   border-radius: 0; 
 }
-.modal-add-folder-dialog {
+.modal-folder-dialog {
    position:absolute; 
    top:50%; 
    left:50%; 
    width: 330px;
-   height: 70%;
    vertical-align: middle;
    margin-top:-115px; 
    margin-left:-230px;
 }
-.add-folder-text {
+.modal-folder-text {
    width: 100%;
-   padding-left: 15px;
-   padding-right: 15px;
 }
 
-.modal-add-step-dialog {
+.modal-folder-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0; 
+}
+
+.modal-step-dialog {
    position:absolute; 
    top:50%; 
    left:50%; 
@@ -407,7 +421,7 @@ label {
    margin-left:-250px;
 }
 
-.modal-add-step-content {
+.modal-step-content {
   height: auto;
   min-height: 100%;
   border-radius: 0; 
@@ -417,7 +431,7 @@ label {
    width: 100%;
    height: 30%;
 }
-.add-step-text {
+.add-step-name {
    width: 100%;
    padding-left: 15px;
    padding-right: 15px;
@@ -503,9 +517,71 @@ background-color: 999999;
     width: 100%;
     height: 100%;
 }
+
+.main-noproject-content {
+	position: absolute;
+	top:50%;
+	left:55%;
+	transform:translate(-50%, -50%);
+	font-weight: bold;
+	
+}
+#main-project-add-btn {
+	background-color:#ffc30d;
+	color:white;
+	width:250px;
+	height:50px;
+	font-size:20px;
+}
+#main-add-project-img {
+	width:20px;
+	height:10px;
+}
+
+#profile-modal-content{
+	height:220px;
+	width:400px;
+}
+#profile-modal-img {
+	margin-top:20px;
+	width:50px;
+	height:50px;
+}
+.profile-modal-dialog {
+	width:500px;
+	
+}
+.profile-modal-info-table {
+	width: 200px;
+	border-left-color:white;
+	border-right-color:white;
+}
+.profile-modal-info-table > tr, th, tbody: {
+	border-right:white;
+	border-left:white;
+	border-top:white;
+	border-bottom:white;
+
+}
+.update-step-name {
+   width: 100%;
+   padding-left: 15px;
+   padding-right: 15px;
+}
 /* task 수정,삭제 모달_정권 ---------------------- 시작 */
 #star_trash{
   text-align: right;
 }
 
+#task_star{
+ color : #ffc30d
+}
+
+.modal-task-delete{
+	 display: inline-block;
+     text-align: left;
+     vertical-align: right;
+}
+
 /* task 수정,삭제 모달_정권 ---------------------- 종료 */
+

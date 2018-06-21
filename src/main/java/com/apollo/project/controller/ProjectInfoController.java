@@ -1,13 +1,14 @@
 package com.apollo.project.controller;
-import org.springframework.web.servlet.View;
-
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.View;
 
 import com.apollo.project.service.ProjectInfoService;
 import com.apollo.vo.MemberDTO;
@@ -37,16 +38,14 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
-
-
-	public String projectInfoShow(String[] data, Model map) {
-		String tempstr = data[0];
-		String[] data_arr = tempstr.split(",");
+	public String projectInfoShow(String pid, HttpSession session, Model map) {
+		System.out.println("information이 실행되었다");
+		session.setAttribute("location", "/information.htm");
+		session.setAttribute("pid", pid);
 		
-		String pid = data_arr[0];
-		String mid = data_arr[1];
-
-
+		String mid = (String) session.getAttribute("mid");
+		map.addAttribute("pid", pid);
+		
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
 		map.addAttribute("steplist", steplist);
@@ -66,6 +65,7 @@ public class ProjectInfoController {
         invitememberlist = projectinfoservice.getInviteMemberList(midpiddto);
         map.addAttribute("invitememberlist", invitememberlist);
 
+        System.out.println("여기까지 오나?");
         return "project/information";
 	}
 	
@@ -178,7 +178,9 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/insertMidToPmember.htm")
-	public View projectMemberAdd(String[] data, Model map) {
+	public String projectMemberAdd(String[] data, HttpSession session) {
+		
+		String location = (String) session.getAttribute("location");
 		
 		String tempstr = data[0];
 		String[] data_arr = tempstr.split(",");
@@ -186,18 +188,18 @@ public class ProjectInfoController {
 		String pid = data_arr[0];
 		String mid = data_arr[1];
 
-		System.out.println("테스트출력");
-		System.out.println("mid : " + mid);
-		System.out.println("pid : " + pid);
-		
         MidpidDTO midpiddto = new MidpidDTO();
         midpiddto.setMid(mid);
         midpiddto.setPid(pid);
 		
 		int result = 0;
 		result = projectinfoservice.insertPmember(midpiddto);
-        map.addAttribute("result", result);
-		return jsonview;
+
+	    if(location.equals("/information.htm")) {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    }else {
+	    	return null;
+	    }
 		
 	}
 	

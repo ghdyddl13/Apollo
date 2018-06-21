@@ -346,4 +346,23 @@ public class MemberController {
 		}
 		return jsonview;
 	}
+	
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 프로필 사진 클릭시 프로필모달에 들어갈 멤버정보 불러오기
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping("/profilemember.htm")
+	public View getProfileInfoMember(String mid, Model model) {
+		System.out.println("mid : " + mid);
+		MemberDTO profileinfo = null;
+		try {
+			profileinfo = service.getProfileInfoMember(mid);
+			model.addAttribute("profileinfo", profileinfo);
+			System.out.println("profileinfo : " + profileinfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
 }

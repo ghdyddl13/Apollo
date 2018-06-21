@@ -2,11 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script type="text/javascript" src="js/utils.js"></script>
 <script type="text/javascript" src="js/projectInfo.js"></script>
 <link href="css/projectinfo.css" type="text/css" rel="stylesheet">
 
 <h3>인포메이션</h3>
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
+
+<div class="Task_RUD_Modal" id="t11" data-toggle="modal" data-target="#Task_RUD_Modal">테스트 tid 10</div>
 
 <div id=projectinfo_outerbox>
   <div class="row" id="projectinfo_first_row"> <!-- row_1 -->
@@ -62,6 +65,8 @@
 	</div>
   </div> <!-- end_row_3 -->
 
+<input type="hidden" id="project_infopage_pid" value="${pid}">
+
 </div> <!-- end_outerbox -->
 
 
@@ -71,7 +76,7 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" id="add_project_member">&times;</button>
 					<h4 class="modal-title">New Project Member</h4>
 				</div>
 				<div class="modal-body ">

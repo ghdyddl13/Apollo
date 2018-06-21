@@ -37,6 +37,8 @@
 <link href="css/myWork.css" type="text/css" rel="stylesheet">
 <!-- PROJECT CSS -->
 <link href="css/project.css" type="text/css" rel="stylesheet">
+<!-- SIDEBAR JAVASCRIPT _RY -->
+<script type="text/javascript" src="js/sidebar_raeyoung.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -45,7 +47,7 @@
 	<jsp:include page="/WEB-INF/views/inc/sidebar.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
 	
-	<div id="main-box"></div>
+	<div  id="main-box"></div>
 	
 </body>
 </html>
