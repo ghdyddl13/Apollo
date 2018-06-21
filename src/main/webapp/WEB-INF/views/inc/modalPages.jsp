@@ -532,67 +532,99 @@
 	</div>
 	
 	
+
 	<!-- 스텝 수정 Modal 창 -->
-	<div class="modal fade" id="update-step" role="dialog">
-		<div class="modal-dialog modal-step-dialog">
+<div class="modal fade" id="update-step" role="dialog">
+	<div class="modal-dialog modal-step-dialog">
+		<!-- Modal content-->
+		<div class="modal-content modal-step-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Step 수정</h4>
+			</div>
+			<div class="modal-body">
+
+				<form id="update-step-form" method="post" onsubmit="return false;">
+					<fieldset>
+						<div class="modal-title">
+							<p>Step명</p>
+						</div>
+						<input type="text" name="sname" class="update-step-name"
+							placeholder="step명을 입력하세요"> <br>
+						<br>
+						<div class="modal-title">
+							<p>책임자</p>
+						</div>
+						<div>
+							<select name="mid" id="update-step-mgr-assignee">
+
+							</select>
+						</div>
+						<br>
+						<div class="modal-title">
+							<p>기간 설정</p>
+						</div>
+						<div class="col-sm-6">
+							<div class="modal-title">
+								<p>시작일</p>
+							</div>
+							<input type="text" id="update-step-sday-id" name="sday"
+								placeholder="Start Date" class="date sdate-img"><br>
+						</div>
+						<div class="col-sm-6">
+							<div class="modal-title">
+								<p>종료일</p>
+							</div>
+							<input type="text" id="update-step-eday-id" name="eday"
+								placeholder="End Date" class="date edate-img"><br>
+							<br>
+							<br>
+						</div>
+						<div class="modal-title">
+							<p>상세설명</p>
+						</div>
+						<textarea rows="7%" cols="68%" id="update-step-detail"
+							name="detail" placeholder="내용을 입력하세요"></textarea>
+						<br>
+						<br> <input type="hidden" id="update-step-methodologyid"
+							name="methodologyid"> <input type="hidden"
+							id="update-step-sid" name="sid"> <input type="hidden"
+							id="update-step-pid" name="pid"> <input type="hidden"
+							id="update-step-fid" name="fid">
+						<div align="center">
+							<input type="button" class="btn add-btn" id="update-step-btn"
+								value="생성">&nbsp;&nbsp;&nbsp; <input type="button"
+								class="btn cancel-btn" data-dismiss="modal" value="취소">
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 스텝 이동 모달창  -->
+	
+	<div class="modal fade" id="move-step" role="dialog">
+		<div class="modal-dialog modal-delete-project-dialog">
 			<!-- Modal content-->
-			<div class="modal-content modal-step-content">
+			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Step 수정</h4>
+					<h4 id="move-step-header" class="modal-title">Step 이동</h4>
 				</div>
 				<div class="modal-body">
-				
-					<form id="update-step-form" method="post" onsubmit="return false;">
-						<fieldset>
-							<div class="modal-title">
-								<p>Step명</p>
-							</div>
-							<input type="text" name="sname" class="update-step-name" placeholder="step명을 입력하세요">
-							<br><br>
-							<div class="modal-title">
-								<p>책임자</p>
-							</div>
-							<div>
-								<select name="mid" id="update-step-mgr-assignee">
-									
-								</select> 
-							</div>
-							<br>
-							<div class="modal-title">
-								<p>기간 설정</p>
-							</div>
-							<div class="col-sm-6">
-								<div class="modal-title">
-									<p>시작일</p>
-								</div>
-								<input type="text" id="update-step-sday-id" name="sday" placeholder="Start Date"
-									class="date sdate-img"><br>
-							</div>
-							<div class="col-sm-6">
-								<div class="modal-title">
-									<p>종료일</p>
-								</div>
-								<input type="text" id="update-step-eday-id" name="eday" placeholder="End Date"
-									class="date edate-img"><br><br><br>
-							</div>
-							<div class="modal-title">
-								<p>상세설명</p>
-							</div>
-							<textarea rows="7%" cols="68%" id="update-step-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
-								<br><br>
-							<input type="hidden" id="update-step-methodologyid" name="methodologyid" >
-							<input type="hidden" id="update-step-sid" name="sid">
-							<input type="hidden" id="update-step-pid" name="pid">
-							<input type="hidden" id="update-step-fid" name="fid">
-							<div align="center">
-								<input type="button" class="btn add-btn" id="update-step-btn" value="생성">&nbsp;&nbsp;&nbsp;
-								<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
-							</div>
-						</fieldset>
-					</form>
+					<select id="move-step-select" name="fid">
+					
+					</select>
+				</div>
+				<div align="center">
+					<input id="move-step-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn cancel-btn"
+						data-dismiss="modal" value="취소">
 				</div>
 				<br>
 			</div>
 		</div>
 	</div>
+
