@@ -139,7 +139,7 @@
     }
     .task-status{
       text-align: center;
-      width:32px;
+      width:auto;
       border-radius: 2px;
       font-size: 15px;
       color: rgba(0,0,0,.87);

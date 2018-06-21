@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!--MyWork 첫 페이지에 데이터를 가지고옴  -->
 	<select id="getMyWorkList" parameterType="String" resultType="com.apollo.vo.MyWorkTaskDTO">
-		select t.TID, t.TNAME, t.SDAY, t.EDAY,t.DETAIL, t.PID, t.IMPORTANCE, t.CTIME, t.TSTATUSID, s.TSTATUS,s.COLOR  
+		select t.TID, t.TNAME, t.SDAY, t.EDAY,t.DETAIL, t.PID,t.CTIME, t.TSTATUSID, s.TSTATUS,s.COLOR  
 		from task t join TSTATUS s on t.TSTATUSID = s.TSTATUSID 
 		where t.TID in (select TID from ASSIGNEE where MID = #{mid}) and s.TSTATUS !='Completed'
 		order by t.EDAY

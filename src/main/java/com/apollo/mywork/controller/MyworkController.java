@@ -53,11 +53,18 @@ public class MyworkController {
 		}
 		
 		map.addAttribute("todaylist", taskmap.get("todaylist"));
+		map.addAttribute("counttodaylist", taskmap.get("todaylist").size());
+		map.addAttribute("today",service.dateToString(service.getdate("today")));
 		map.addAttribute("thisweeklist", taskmap.get("thisweeklist"));
+		map.addAttribute("countthisweeklist", taskmap.get("thisweeklist").size());
+		map.addAttribute("thisweek",service.dateToString(service.getdate("thisweekfirst"))+" - "+service.dateToString(service.getdate("thisweeklast")));
 		map.addAttribute("nextweeklist", taskmap.get("nextweeklist"));
+		map.addAttribute("countnextweeklist", taskmap.get("nextweeklist").size());
+		map.addAttribute("nextweek",service.dateToString(service.getdate("nextweekfirst"))+" - "+service.dateToString(service.getdate("nextweeklast")));
 		map.addAttribute("laterlist", taskmap.get("laterlist"));
+		map.addAttribute("countlaterlist", taskmap.get("laterlist").size());
+		map.addAttribute("later", "After "+service.dateToString(service.getdate("laterfirst")));
 
-		
 		return "header/myWork";
 	}
 	/**
