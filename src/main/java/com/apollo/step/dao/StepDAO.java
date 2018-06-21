@@ -58,5 +58,13 @@ public interface StepDAO {
 	 작성자명 : 김 정 권
 	 */
 	public ArrayList<StepDTO> getStepsid(String tid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 스텝 위치 이동
+	 작성자명 : 박 민 식
+	 */
+	public int moveStep(StepDTO stepdto);
 
 }

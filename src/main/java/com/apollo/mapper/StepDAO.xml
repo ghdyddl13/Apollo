@@ -32,4 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    	 select * from step where sid in (select sid from taskinstep where tid = #{tid})
     </select>
 
+	<update id="moveStep" parameterType="com.apollo.vo.StepDTO" >
+		update step set fid=#{fid} where sid=#{sid}
+	</update>
 </mapper>

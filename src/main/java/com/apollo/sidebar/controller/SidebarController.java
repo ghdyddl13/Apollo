@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.RequestWrapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -254,6 +256,27 @@ public class SidebarController {
 		try {
 			project = sidebarservice.selectProject(pid);
 			model.addAttribute("project",project);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 스텝 폴더이동
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping(value="/moveStep.htm", method=RequestMethod.POST)
+	public View moveStep(StepDTO stepdto, Model model) {
+		
+		int result = 0;
+		try {
+			result = sidebarservice.moveStep(stepdto);
+			model.addAttribute("result", result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -542,10 +542,15 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 id="move-step-header" class="modal-title">Step 이동</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body"align="center">
+				<br>
+				<form id="move-step-form">
 					<select id="move-step-select" name="fid">
 					
 					</select>
+					<input type="hidden" name="sid" id="move-step-sid">
+				</form>
+				<br>
 				</div>
 				<div align="center">
 					<input id="move-step-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;

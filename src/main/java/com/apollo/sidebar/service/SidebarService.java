@@ -237,7 +237,7 @@ public class SidebarService {
 	/**
 	 * 
 	 날      짜 : 2018. 6. 21.
-	 기      능 : 프로젝트 정보 가져오기ㄴ
+	 기      능 : 프로젝트 정보 가져오기
 	 작성자명 : 박 민 식
 	 */
 	public ProjectDTO selectProject(int pid) {
@@ -251,4 +251,15 @@ public class SidebarService {
 		return projectdto;
 	}
 	
+	public int moveStep(StepDTO stepdto) {
+		
+		int result = 0;
+		try {
+			StepDAO dao = sqlsession.getMapper(StepDAO.class);
+			result = dao.moveStep(stepdto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
