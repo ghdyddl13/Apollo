@@ -352,14 +352,14 @@
 	                    <div class="modal-title">
 	                    <p>시작일</p>
 	                    </div>
-                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date-img">
+                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date-im">
 					</div>
 
 					<div class="col-sm-6">
 	                    <div class="modal-title">
 	                      <p>종료일</p>
 	                    </div>
-	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date-img">
+	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date-im">
 	                    <br><br>
 					</div>
 					</div>

@@ -62,14 +62,13 @@ $(document).on("click",".profile-img-container",function(evt){
  기      능 : Task 수정/ 삭제 페이지에 날짜 클릭으로 넣는 datepicker 넣는 코드
  작성자명 : 김 정 권
  */
-//$( ".date-img" ).datepicker({
-//    showOn: "button",
-//    buttonImage: "img/calendar.png",
-//    buttonImageOnly: true,
-//    dateFormat: 'yy-mm-dd'
-//
-//
-//});
+$( ".date-im" ).datepicker({
+    showOn: "button",
+    buttonImage: "img/calendar.png",
+    buttonImageOnly: true,
+    dateFormat: 'yy-mm-dd'
+
+});
 
 
 /**
@@ -80,19 +79,15 @@ $(document).on("click",".profile-img-container",function(evt){
  */
 $(document).on("click",".Task_RUD_Modal",function(){
 
-		// tid를 클릭한 태그의 id에서 가져올 것
-		// var tid = $(this).attr("id"); 
-	    //     tid = tid.substr(1);   
-		
-		var pid = '1';
-		var tid = '10';
+	
+		var tid = $(this).attr('id'); 
+	    tid = tid.substring(1);   
 		
 		$.ajax(
 			       {
 			           type : "post",
 			           url  : "getTask.htm",
 			           data : {
-			        	   'pid': pid,
 			        	   'tid': tid
 			           },
 			           success : function(rdata){

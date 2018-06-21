@@ -63,10 +63,10 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/getTask.htm")
-	public View getTask(String pid, String tid, HttpSession session, Model model) {
+	public View getTask(String tid, HttpSession session, Model model) {
 
+	String pid = (String) session.getAttribute("pid");
     String mid = (String) session.getAttribute("mid");
-    System.out.println("겟타스크 mid : " + mid);
     
     ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
     starredtasklist = service.getStarredTaskList(mid);
