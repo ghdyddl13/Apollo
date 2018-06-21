@@ -65,6 +65,8 @@
 	</div>
   </div> <!-- end_row_3 -->
 
+<input type="hidden" id="project_infopage_pid" value="${pid}">
+
 </div> <!-- end_outerbox -->
 
 

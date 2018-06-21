@@ -1,8 +1,8 @@
 $(function() {
-   
+
    makeSideProjectDir();
    
-   //스텝 추가 클릭시 이벤트   
+   //스텝 추가 클릭시 프로젝트 멤버 리스트 가져오기
    $(document).on("click","#side-insert-step",function(){ 
       var custom_menu =  $(this).parents("ul.custom-menu")[0];
       var pid =  $(custom_menu).find("input[name=pid]").val();
@@ -66,6 +66,7 @@ $(function() {
                 $('#insert-step-sday-id').val("");
                 $('#insert-step-eday-id').val("");
                 $('#step-detail').val("");
+                $(".close").click();
                 //$('#project-insert').close();
                 } // end - success
                 ,error:function(error){
@@ -158,13 +159,62 @@ $(function() {
       });
       
       ////사이드 드롭다운에서 프로젝트 수정 버튼 클릭시 모달창 생성
-      $(document).on("click","#side-udpate-project",function(){
+      $(document).on("click","#side-update-project",function(){
          var custom_menu =  $(this).parents("ul.custom-menu")[0];
          var pid =  $(custom_menu).find("input[name=pid]").val();
-         
+         console.log("클릭");
+         console.log(pid);
+         $.ajax({
+            url:"sideSelectProject.htm",
+            type:"post",
+            data:{pid:pid},
+            dataType:"json",
+            success:function(data){
+               var project = data.project;
+               $("#update-project-pid").val(project.pid);
+               $("#update-project-sday").val(project.sday.split(" ")[0]);
+               $("#update-project-eday").val(project.eday.split(" ")[0]);
+               $("#update-project-detail").val(project.detail);
+               $("#update-project-detail-"+project.methodologyid).attr("checked","checked");
+               $("#update-project-pname").val(project.pname);
+            
+            },
+            error:function(error){
+               console.log(error);
+            }
+         })
       });
       
-      //프로젝트 완료 모달창에서 완료 버튼을 클릭할 경우 실행되는 비동기 함수 
+      /// 프로젝트 수정 모달창에서 수정 버튼 클릭 시 
+      $(document).on("click","#update-project-btn",function(){
+         
+          if($("#update-project-pname").val().trim() == ""){
+               alert("프로젝트명을 입력해주세요.");
+               $("#update-project-name").focus();   
+               return false;
+             }
+          
+         var project = $("#update-project-form").serialize();
+         console.log(project);
+         
+         $.when(updateProject(project)).done(function(data){
+            if(data.result=="1"){
+               alert("프로젝트 정보가 수정되었습니다");
+            }else{
+               alert("프로젝트 정보 수정에 실패하였습니다.");
+            }
+            $("#update-project-pid").val("");
+            $("#update-project-sday").val("");
+            $("#update-project-eday").val("");
+            $("#update-project-detail").val("");
+            $("#update-project-detail-3").attr("checked","checked");
+            $("#update-project-pname").val("");
+            $(".close").click();
+         })
+      })
+      
+      
+      //프로젝트 완료/삭제/재진행 모달창에서 완료 버튼을 클릭할 경우 실행되는 비동기 함수 
       $(document).on("click","#move-project-btn",function(){
          var pdata = new Object();
          pdata.pid= $("#move-project-pid").val();
@@ -173,25 +223,22 @@ $(function() {
          
          $.when(updateProject(pdata)).done(function(data){
             console.log(data);
-            
-            var moveto ;
-            
-            switch(pdata.pstatuscode){
-            case "1": moveto="#working-project"; break;
-            case "2": moveto="#finished-project"; break;
-            case "3": moveto="#trash-bean"; break;    
+            if(data.result=="1"){
+               var moveto;
+               switch(pdata.pstatuscode){
+               case "1": moveto="#working-project"; break;
+               case "2": moveto="#finished-project"; break;
+               case "3": moveto="#trash-bean"; break;    
+               }
+               $("#p"+pdata.pid).remove().appendTo(moveto);
+            }else{
+               alert("프로젝트 상태변경에 실패하였습니다.");
             }
-            $("#p"+pdata.pid).remove().appendTo(moveto);
-            
+            $(".close").click();
          });
       });
       
-      
-      
-
-   
-
-      // 사이드바 폴더 우클릭  >> 추후 폴더 id(DB상 기본키)를 받아와 li 태그에 넣어주는 작업 필요
+      // 사이드바 폴더 우클릭  
       $(document).on("contextmenu",".side-folder",function() {
          var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
          var pid = project_wrapper.id.substr(1);
@@ -217,7 +264,7 @@ $(function() {
          }).appendTo("body");
       });
 
-      // 사이드바 스텝 우클릭  >> 추후 스텝 id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
+      // 사이드바 스텝 우클릭  
 
       $(document).on("contextmenu",".side-step",function(event) {
          var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
@@ -230,7 +277,7 @@ $(function() {
          var dropdown ='<input type="hidden" name="pid" value='+pid+'>';
          dropdown +=   '<input type="hidden" name="sid" value='+sid+'>';
          dropdown += '<li id="side-update-step" data-action="second" data-toggle="modal" data-target="#update-step">수정</li>'
-         dropdown += '<li data-action="third">이동</li>'
+         dropdown += '<li data-toggle="modal" data-target="#move-step" id="side-step-move">이동</li>'
          dropdown += '<li data-action="third">삭제</li>'
          $(dropdown_ul).attr("class", "custom-menu").append(dropdown);
          console.log(dropdown_ul)
@@ -240,6 +287,25 @@ $(function() {
          }).appendTo("body");
 
       });
+      
+      // 사이드바 스텝 이동 버튼 클릭시
+      
+      $(document).on("click","#side-step-move",function(){
+         $("#move-step-select").selectmenu();
+         var custom_menu =  $(this).parents("ul.custom-menu")[0];
+         var pid =  $(custom_menu).find("input[name=pid]").val();
+         var pids = [pid];
+         var sid =  $(custom_menu).find("input[name=sid]").val();
+         console.log(pid);
+         console.log(sid);
+         $.when(selectFolderList(pids)).done(function(data){
+            console.log(data.folderlist);
+            
+         });
+      });
+      
+      
+      
       // 사이드 우클릭 메뉴 닫는 함수
       $(document).bind("mousedown", function(e) {
 
@@ -249,6 +315,7 @@ $(function() {
             // Hide it
             $(".custom-menu").remove();
          }
+         
       });
    
 
@@ -265,16 +332,10 @@ $(function() {
          var methodologyid = $(project_wrapper).children("input[name='methodologyid']").val();
          console.log("프로젝트 클릭시 pid " + pid);
          console.log("프로젝트 클릭시 methodologyid " + methodologyid);
-         // mid도 필요하므로 일단 가정
-         var mid = 'testid1';
-         
-          var send_data = new Array();
-          send_data[0] = pid;
-          send_data[1] = mid;
          
          $.ajax({
             url:"information.htm",
-            data: "data=" + send_data,
+            data: "pid=" + pid,
             dataType:"html",
             success:function(data){
                 $("#main-box").empty();
@@ -412,7 +473,6 @@ $(function() {
                    $('#update-folder-fid').val(fid);
                    $('#update-folder-pid').val(pid);
                    $('#update-folder-name').val(data.selectfolder.fname);
-                   
                }
           });
       });
@@ -478,6 +538,7 @@ $(function() {
               }
           }); // end - ajax       
       })
+
 }); // end - doc.on.ready
 
 
@@ -564,6 +625,7 @@ function noProjectPage() {
  */
 
 function selectProjectList(){
+   console.log("프로젝트 실행");
    $("#working-project").empty();
    $("#finished-project").empty();
    $("#trash-bean").empty();
@@ -574,6 +636,7 @@ function selectProjectList(){
       dataType:"json",
       type:"post",
       success:function(data){
+        console.log(data);
          if(data!=null){ /// 참여중인 프로젝트가 있을 경우 
             $(data.projectlist).each(function(index,el){
                pids.push(el.pid);
@@ -649,6 +712,7 @@ function makeSideSubDir(pids){
       if(folders!=null){ //폴더가 하나라도 있다면 만들어 붙혀주세요
          
          $(folders).each(function(index,folder){
+           var wrapper_div = jQuery("<a>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
             var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
             var span = jQuery("<span>",{"class":"glyphicon glyphicon-folder-close", 
                                  "data-toggle":"collapse",
@@ -656,8 +720,10 @@ function makeSideSubDir(pids){
             var div = jQuery("<div>",{"class":"side-dir collapse",
                                 "id": "f-dir"+folder.fid});
             console.log(folder.pid);
-            $(a).prepend(span).appendTo($('#p-dir'+folder.pid));
-            $(div).appendTo($('#p-dir'+folder.pid));      
+            
+            $(a).prepend(span).appendTo(wrapper_div);
+            $(div).appendTo(wrapper_div);
+            $(wrapper_div).appendTo($('#p-dir'+folder.pid));
          })
          
       }

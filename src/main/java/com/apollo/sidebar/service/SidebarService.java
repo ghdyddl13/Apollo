@@ -59,20 +59,8 @@ public class SidebarService {
 		
 		return result;
 		
-	}
-	/* 
-	 날      짜 : 2018. 6. 13.
-	 기      능 : 프로젝트 삭제
-	 작성자명 : 김 래 영
-	 */
-	public int deleteProject(ProjectDTO projectdto) {
-		int result = 0;
-		ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
-		result = dao.deleteProject(projectdto);
-		
-		return result;
-	}
-	/*
+	}	
+		/*
 	 날      짜 : 2018. 6. 18.
 	 기      능 : 스텝 생성
 	 작성자명 : 김 래 영
@@ -176,7 +164,12 @@ public class SidebarService {
 		
 		return folderlist;
 	};
-	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 참여중인 프로젝트들에 포함된 모든 스텝을 가져오는 함수
+	 작성자명 : 박 민 식
+	 */
 	public ArrayList<StepDTO>  selectStepList(List<Integer> pids){
 		ArrayList<StepDTO> steplist = null;
 		try {
@@ -240,6 +233,22 @@ public class SidebarService {
 		
 		return result;
 		
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 프로젝트 정보 가져오기ㄴ
+	 작성자명 : 박 민 식
+	 */
+	public ProjectDTO selectProject(int pid) {
+		ProjectDTO projectdto= null;
+		try {
+			ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
+			projectdto =dao.selectProject(pid);
+		} catch (Exception e) {
+			e.printStackTrace();	
+		}
+		return projectdto;
 	}
 	
 	/**
