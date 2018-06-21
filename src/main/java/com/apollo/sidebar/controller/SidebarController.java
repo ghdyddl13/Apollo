@@ -227,7 +227,12 @@ public class SidebarController {
 		return jsonview;
 		
 	}
-	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 폴더 삭제 (영구삭제)
+	 작성자명 : 김 래 영
+	 */
 	@RequestMapping("/deletefolder.htm")
 	public View deleteFolder(String fid, Model model) {
 		System.out.println("delete folder");
@@ -240,7 +245,48 @@ public class SidebarController {
 		}
 		return jsonview;
 	}
-
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : sid 로 step 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/selectstep.htm")
+	public View selectStep(int sid, Model model) {
+		System.out.println("select step 들어옴");
+		System.out.println("sid : " + sid);
+		StepDTO selectstep = null;
+		try {
+			selectstep = sidebarservice.selectStep(sid);
+			model.addAttribute("selectstep", selectstep);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : step 수정
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/updatestep.htm", method=RequestMethod.POST)
+	public View updateStep(StepDTO stepdto, Model model) {
+		System.out.println("update step controller");
+		System.out.println(stepdto.toString());
+		int updatestep = 0;
+		try {
+			updatestep = sidebarservice.updateStep(stepdto);
+			model.addAttribute("updatestep", updatestep);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return jsonview;
+		
+	}
 }
 
 

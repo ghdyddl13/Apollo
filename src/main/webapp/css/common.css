@@ -398,8 +398,6 @@ label {
 }
 .modal-folder-text {
    width: 100%;
-   padding-left: 15px;
-   padding-right: 15px;
 }
 
 .modal-folder-content {
@@ -408,7 +406,7 @@ label {
   border-radius: 0; 
 }
 
-.modal-add-step-dialog {
+.modal-step-dialog {
    position:absolute; 
    top:50%; 
    left:50%; 
@@ -419,7 +417,7 @@ label {
    margin-left:-250px;
 }
 
-.modal-add-step-content {
+.modal-step-content {
   height: auto;
   min-height: 100%;
   border-radius: 0; 
@@ -561,7 +559,11 @@ background-color: 999999;
 	border-bottom:white;
 
 }
-
+.update-step-name {
+   width: 100%;
+   padding-left: 15px;
+   padding-right: 15px;
+}
 /* task 수정,삭제 모달_정권 ---------------------- 시작 */
 #star_trash{
   text-align: right;

@@ -242,4 +242,45 @@ public class SidebarService {
 		
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : sid 로 폴더 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public StepDTO selectStep(int sid) {
+		StepDTO stepinfo = null;
+		try {
+			StepDAO dao = sqlsession.getMapper(StepDAO.class);
+			stepinfo = dao.selectStep(sid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return stepinfo;		
+		
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 스텝 수정
+	 작성자명 : 김 래 영
+	 */
+	public int updateStep(StepDTO stepdto) {
+		int stepresult = 0;		
+		try {
+			StepDAO dao = sqlsession.getMapper(StepDAO.class);
+			stepresult = dao.updateStep(stepdto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(stepresult > 0) {
+			System.out.println("step update success");
+		}else {
+			System.out.println("step update fail");
+		}
+		return stepresult;
+		
+	}
+	
 }
