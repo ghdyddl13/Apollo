@@ -104,7 +104,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 		// var tid = $(this).attr("id"); 
 		
 		var pid = '1';
-		var tid = '14';
+		var tid = '1';
 		
 		$.ajax(
 			       {
