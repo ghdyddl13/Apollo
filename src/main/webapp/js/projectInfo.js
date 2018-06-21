@@ -68,7 +68,8 @@ $(function() {
    
    // pid를 1로 가정하고 시행
    // 이 부분은 나중에 사이드바에서 가져온 pid로 변경한다
-   var pid = 1;
+   var pid = $('#project_infopage_pid').attr('value');
+   console.log('pid 테스트 : ' + pid)
    
    // DB로 Task들을 호출
    // 위에서 선언한 배열에 데이터들을 넣기 위함
@@ -313,12 +314,11 @@ $(function() {
     기      능 : Step별 진행률 그래프 데이터 가져와서 세팅
     작성자명 : 김 정 권
     */
-   // 일단 pid를 1로 가정
    $.ajax(
              {
                  type : "post",
                  url  : "getProgressData.htm",
-                 data : "pid="+ 1,
+                 data : "pid="+ pid,
                  success : function(rdata){
                      console.log(rdata);
                      
@@ -403,7 +403,6 @@ $(function() {
       
       // 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
       // 지금은 pid가 1이라고 가정하고 실시
-      var pid = '1';
       
       var send_data = new Array();
       send_data[0] = pid;

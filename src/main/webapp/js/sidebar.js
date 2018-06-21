@@ -312,16 +312,10 @@ $(function() {
 			var methodologyid = $(project_wrapper).children("input[name='methodologyid']").val();
 			console.log("프로젝트 클릭시 pid " + pid);
 			console.log("프로젝트 클릭시 methodologyid " + methodologyid);
-			// mid도 필요하므로 일단 가정
-			var mid = 'testid1';
-			
-			 var send_data = new Array();
-			 send_data[0] = pid;
-			 send_data[1] = mid;
 			
 			$.ajax({
 				url:"information.htm",
-				data: "data=" + send_data,
+				data: "pid=" + pid,
 				dataType:"html",
 				success:function(data){
 					 $("#main-box").empty();
