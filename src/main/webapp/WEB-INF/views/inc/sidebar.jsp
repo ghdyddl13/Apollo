@@ -24,7 +24,7 @@
 			</div>
 		</div>
 		<div>
-			<a data-toggle="collapse" data-target="#trash-bean"><span
+			<a data-toggle="collapse" data-target="#trash-bin"><span
 				class="glyphicon glyphicon-trash"></span>휴지통</a>
 			<div class="project-status-wrapper side-dir collapse" id="trash-bean">
 				<a class="side-project"><span

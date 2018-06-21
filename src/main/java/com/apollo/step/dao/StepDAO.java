@@ -1,13 +1,8 @@
 package com.apollo.step.dao;
-
 import java.util.ArrayList;
-
 import java.util.List;
-import com.apollo.vo.MemberDTO;
-
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TstatusDTO;
-
 
 public interface StepDAO {
 	
@@ -66,6 +61,13 @@ public interface StepDAO {
 	 작성자명 : 김 래 영
 	 */
 	public StepDTO selectStep(int sid);
+	 
+	/* 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 스텝 위치 이동
+	 작성자명 : 박 민 식
+	 */
+	public int moveStep(StepDTO stepdto);
 
 	/**
 	 * 
