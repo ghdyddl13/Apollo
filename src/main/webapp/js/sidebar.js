@@ -66,6 +66,7 @@ $(function() {
 					 $('#insert-step-sday-id').val("");
 					 $('#insert-step-eday-id').val("");
 					 $('#step-detail').val("");
+					 $(".close").click();
 					 //$('#project-insert').close();
 	             } // end - success
 	          	,error:function(error){
@@ -158,13 +159,62 @@ $(function() {
 		});
 		
 		////사이드 드롭다운에서 프로젝트 수정 버튼 클릭시 모달창 생성
-		$(document).on("click","#side-udpate-project",function(){
+		$(document).on("click","#side-update-project",function(){
 			var custom_menu =  $(this).parents("ul.custom-menu")[0];
 			var pid =  $(custom_menu).find("input[name=pid]").val();
-			
+			console.log("클릭");
+			console.log(pid);
+			$.ajax({
+				url:"sideSelectProject.htm",
+				type:"post",
+				data:{pid:pid},
+				dataType:"json",
+				success:function(data){
+					var project = data.project;
+					$("#update-project-pid").val(project.pid);
+					$("#update-project-sday").val(project.sday.split(" ")[0]);
+					$("#update-project-eday").val(project.eday.split(" ")[0]);
+					$("#update-project-detail").val(project.detail);
+					$("#update-project-detail-"+project.methodologyid).attr("checked","checked");
+					$("#update-project-pname").val(project.pname);
+				
+				},
+				error:function(error){
+					console.log(error);
+				}
+			})
 		});
 		
-		//프로젝트 완료 모달창에서 완료 버튼을 클릭할 경우 실행되는 비동기 함수 
+		/// 프로젝트 수정 모달창에서 수정 버튼 클릭 시 
+		$(document).on("click","#update-project-btn",function(){
+			
+			 if($("#update-project-pname").val().trim() == ""){
+					alert("프로젝트명을 입력해주세요.");
+					$("#update-project-name").focus();	
+					return false;
+				 }
+			 
+			var project = $("#update-project-form").serialize();
+			console.log(project);
+			
+			$.when(updateProject(project)).done(function(data){
+				if(data.result=="1"){
+					alert("프로젝트 정보가 수정되었습니다");
+				}else{
+					alert("프로젝트 정보 수정에 실패하였습니다.");
+				}
+				$("#update-project-pid").val("");
+				$("#update-project-sday").val("");
+				$("#update-project-eday").val("");
+				$("#update-project-detail").val("");
+				$("#update-project-detail-3").attr("checked","checked");
+				$("#update-project-pname").val("");
+				$(".close").click();
+			})
+		})
+		
+		
+		//프로젝트 완료/삭제/재진행 모달창에서 완료 버튼을 클릭할 경우 실행되는 비동기 함수 
 		$(document).on("click","#move-project-btn",function(){
 			var pdata = new Object();
 			pdata.pid= $("#move-project-pid").val();
@@ -173,25 +223,22 @@ $(function() {
 			
 			$.when(updateProject(pdata)).done(function(data){
 				console.log(data);
-				
-				var moveto ;
-				
-				switch(pdata.pstatuscode){
-				case "1": moveto="#working-project"; break;
-				case "2": moveto="#finished-project"; break;
-				case "3": moveto="#trash-bean"; break;	 
+				if(data.result.trim()=="1"){
+					var moveto;
+					switch(pdata.pstatuscode){
+					case "1": moveto="#working-project"; break;
+					case "2": moveto="#finished-project"; break;
+					case "3": moveto="#trash-bean"; break;	 
+					}
+					$("#p"+pdata.pid).remove().appendTo(moveto);
+				}else{
+					alert("프로젝트 상태변경에 실패하였습니다.");
 				}
-				$("#p"+pdata.pid).remove().appendTo(moveto);
-				
+				$(".close").click();
 			});
 		});
 		
-		
-		
-
-	
-
-		// 사이드바 폴더 우클릭  >> 추후 폴더 id(DB상 기본키)를 받아와 li 태그에 넣어주는 작업 필요
+		// 사이드바 폴더 우클릭  
 		$(document).on("contextmenu",".side-folder",function() {
 			var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
 			var pid = project_wrapper.id.substr(1);
@@ -217,7 +264,7 @@ $(function() {
 			}).appendTo("body");
 		});
 
-		// 사이드바 스텝 우클릭  >> 추후 스텝 id(DB상 기본키)를 받아와 li태그에 넣어주는 작업 필요
+		// 사이드바 스텝 우클릭  
 
 		$(document).on("contextmenu",".side-step",function(event) {
 			var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];

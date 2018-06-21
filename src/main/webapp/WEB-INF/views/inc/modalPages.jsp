@@ -195,31 +195,31 @@
 					<h4 class="modal-title">Project 수정</h4>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form id="update-project-form">
 						<fieldset>
 							<div class="row">
+								<input type="hidden" id="update-project-pid" name ="pid">
 								<br>
 								<div class="col-sm-6 project-setting-left">
-									<input type="text" name="pname" id="add-project-name"
-										placeholder="프로젝트명을 입력하세요"
+									<input type="text" name="pname" id="update-project-pname"
 										class="text ui-widget-content ui-corner-all"><br>
 									<br> 
 									<div class="modal-title">
 										<p>방법론</p>
 									</div>
-										<input type="radio" name="methodologyid" value="customizing"
-										checked><span class="method"> Customizing</span> <br>
+										<input type="radio" id="udpate-project-methodologyid-3" name="methodologyid" value="3"
+										checked><span class="method"  disabled="true"> Customizing</span> <br>
 									<div>
 										<!-- Customizing 설명 작성  -->
 										가나다라마바사아자차카타파하 커스텀마이징 설명작성 필요
 									</div>
-									<br> <input type="radio" name="methodologyid" value="agile"><span
+									<br> <input type="radio" id="udpate-project-methodologyid-1" name="methodologyid" value="1"  disabled="true"><span
 										class="method"> Agile</span><br>
 									<div>
 										<!-- Agile 설명 작성  -->
 										가나다라마바사아자차카타파하 애자일 설명작성 필요
 									</div>
-									<br> <input type="radio" name="methodologyid" value="waterfall"><span
+									<br> <input type="radio" id="udpate-project-methodologyid-2" name="methodologyid" value="2"  disabled="true"><span
 										class="method"> Waterfall</span><br>
 									<div>
 										<!-- Waterfall 설명 작성  -->
@@ -237,24 +237,24 @@
 										<div class="modal-title">
 											<p>시작일</p>
 										</div>
-										<input type="text" name="sday" placeholder="Start Date" class="date sdate-img">
+										<input type="text" name="sday" readonly id="update-project-sday" placeholder="Start Date" class="date sdate-img">
 									</div>
 									<div class="col-sm-6">
 										<div class="modal-title">
 											<p>종료일</p>
 										</div>
-										<input type="text" name="eday" placeholder="End Date" class="date edate-img">
+										<input type="text" name="eday" readonly id ="update-project-eday" placeholder="End Date" class="date edate-img">
 										<br><br>
 									</div>
 									<div class="modal-title">
 										<p>상세설명</p>
 									</div>
-									<textarea rows="7%" cols="49%" name="detail" placeholder="내용을 입력하세요"></textarea>
+									<textarea rows="7%" cols="49%" name="detail" id ="update-project-detail" placeholder="내용을 입력하세요"></textarea>
 								</div>
 							</div>
 							<br><br>
 						<div align="center">
-							<input type="submit" class="btn add-btn" value="수정">&nbsp;&nbsp;&nbsp;
+							<input type="button" id ="update-project-btn" class="btn add-btn" value="수정">&nbsp;&nbsp;&nbsp;
 							<input type="button" class="btn cancel-btn"
 								data-dismiss="modal" value="취소">
 						</div>

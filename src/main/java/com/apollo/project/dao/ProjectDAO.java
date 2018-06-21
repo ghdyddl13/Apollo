@@ -23,7 +23,7 @@ public interface ProjectDAO {
 	 기      능 : pid 가져와서 project 상세정보 보여주기
 	 작성자명 : 김 래 영
 	 */
-	public ArrayList<ProjectDTO> getProject(int pid);
+	public ProjectDTO selectProject(int pid);
 	
 	/*
 	 날      짜 : 2018. 6. 12.
@@ -32,12 +32,6 @@ public interface ProjectDAO {
 	 */
 	public int updateProject(ProjectDTO projectdto);
 	
-	/*
-	 날      짜 : 2018. 6. 12.
-	 기      능 : 프로젝트 삭제
-	 작성자명 : 김 래 영
-	 */
-	public int deleteProject(ProjectDTO projectdto);
 	/**
 	 * 
 	 날      짜 : 2018. 6. 18.
