@@ -387,7 +387,7 @@ label {
   min-height: 100%;
   border-radius: 0; 
 }
-.modal-add-folder-dialog {
+.modal-folder-dialog {
    position:absolute; 
    top:50%; 
    left:50%; 
@@ -396,13 +396,13 @@ label {
    margin-top:-115px; 
    margin-left:-230px;
 }
-.add-folder-text {
+.modal-folder-text {
    width: 100%;
    padding-left: 15px;
    padding-right: 15px;
 }
 
-.modal-add-folder-content {
+.modal-folder-content {
   height: auto;
   min-height: 100%;
   border-radius: 0; 
@@ -533,7 +533,33 @@ background-color: 999999;
 }
 #main-add-project-img {
 	width:20px;
-	hegith:10px;
+	height:10px;
+}
+
+#profile-modal-content{
+	height:220px;
+	width:400px;
+}
+#profile-modal-img {
+	margin-top:20px;
+	width:50px;
+	height:50px;
+}
+.profile-modal-dialog {
+	width:500px;
+	
+}
+.profile-modal-info-table {
+	width: 200px;
+	border-left-color:white;
+	border-right-color:white;
+}
+.profile-modal-info-table > tr, th, tbody: {
+	border-right:white;
+	border-left:white;
+	border-top:white;
+	border-bottom:white;
+
 }
 
 /* task 수정,삭제 모달_정권 ---------------------- 시작 */
@@ -552,3 +578,4 @@ background-color: 999999;
 }
 
 /* task 수정,삭제 모달_정권 ---------------------- 종료 */
+

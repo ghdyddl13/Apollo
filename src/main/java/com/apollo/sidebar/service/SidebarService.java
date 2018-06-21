@@ -52,7 +52,7 @@ public class SidebarService {
 	 기      능 : 프로젝트 수정
 	 작성자명 : 김 래 영
 	 */
-	public int updateProejct(ProjectDTO projectdto) {
+	public int updateProject(ProjectDTO projectdto) {
 		int result = 0;
 		ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
 		result = dao.updateProject(projectdto);
@@ -189,5 +189,57 @@ public class SidebarService {
 		
 		return steplist;
 	};
+	
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : fid 로 폴더 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public FolderDTO selectFolder(String fid) {
+		FolderDTO folderinfo = null;
+		try {
+			FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
+			folderinfo = dao.selectFolder(fid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return folderinfo;
+		
+	}
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 푤더 수정
+	 작성자명 : 김 래 영
+	 */
+	public int updateFolder(FolderDTO folderdto) {
+		int folderresult = 0;
+		try {
+			FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
+			folderresult = dao.updateFolder(folderdto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return folderresult;
+		
+		
+		
+	};
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 폴더 삭제 (영구삭제)
+	 작성자명 : 김 래 영
+	 */
+	public int deleteFolder(String fid) {
+		int result = 0;		
+		try {
+			FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
+			result = dao.deleteFolder(fid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
 	
 }

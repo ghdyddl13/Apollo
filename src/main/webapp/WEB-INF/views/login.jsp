@@ -88,6 +88,8 @@
 			return false;
 		}
 		$("#f").submit();
+		$("#mid").val("");
+		$("#pwd").val("");
 	}
 </script>
 </head>

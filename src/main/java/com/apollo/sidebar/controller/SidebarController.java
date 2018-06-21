@@ -45,13 +45,26 @@ public class SidebarController {
 		return jsonview; //result 가 json 형태로 변환되어 저장
 	}
 
-	public View changeProjectStatus(int i1, Model model) {
-		return null;
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 프로젝트 변경
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping(value="updateProject.htm", method=RequestMethod.POST)
+	public View updateProject(ProjectDTO projectdto, Model model) {
+		System.out.println(projectdto.toString());
+		int result = 0;
+		try {
+			result=sidebarservice.updateProject(projectdto);
+			model.addAttribute("result",result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return jsonview;
 	}
 	
-	public View changeProject(ProjectDTO projectdto) {
-		return null;
-	}
 	
 	@RequestMapping(value="/insertstep.htm", method=RequestMethod.POST)
 	public View insertStep(StepDTO stepdto, Model model) {
@@ -166,10 +179,66 @@ public class SidebarController {
 		return jsonview; 
 		
 	}
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 프로젝트가 없을 때 실행되는 함수
+	 작성자명 : 김 래 영
+	 */
 	@RequestMapping("/noproject.htm")
 	public String noproject() {
 		return "project/noproject";
 		
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : fid 로 폴더 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/selectfolder.htm")
+	public View selectFolder(String fid, Model model) {
+		System.out.println("selectfolder 들어옴");
+		FolderDTO selectfolder = null;
+		try {
+			selectfolder = sidebarservice.selectFolder(fid);
+			model.addAttribute("selectfolder", selectfolder);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+		
+	}	
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 폴더 수정
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/updatefolder.htm", method=RequestMethod.POST)
+	public View updateFolder(FolderDTO folderdto, Model model) {
+		System.out.println("update folder");
+		System.out.println(folderdto.toString());
+		int updatefolder = 0;
+		try {
+			updatefolder = sidebarservice.updateFolder(folderdto);
+			model.addAttribute("updatefolder", updatefolder);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+		
+	}
+	
+	@RequestMapping("/deletefolder.htm")
+	public View deleteFolder(String fid, Model model) {
+		System.out.println("delete folder");
+		int deletefolder = 0;
+		try {
+			deletefolder = sidebarservice.deleteFolder(fid);
+			model.addAttribute("deletefolder", deletefolder);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
 	}
 
 }
