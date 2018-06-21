@@ -1,13 +1,14 @@
 package com.apollo.project.controller;
-import org.springframework.web.servlet.View;
-
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.View;
 
 import com.apollo.project.service.ProjectInfoService;
 import com.apollo.vo.MemberDTO;
@@ -37,15 +38,14 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
-	public String projectInfoShow(String[] data, Model map) {
-		
-		String tempstr = data[0];
-		String[] data_arr = tempstr.split(",");
-		
-		String pid = data_arr[0];
-		String mid = data_arr[1];
+	public String projectInfoShow(String pid, HttpSession session,Model map) {
 
-
+		
+		
+		
+		String mid = (String) session.getAttribute("mid");
+		map.addAttribute("pid", pid);
+		
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
 		map.addAttribute("steplist", steplist);
