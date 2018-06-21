@@ -57,6 +57,6 @@ public interface StepDAO {
 	 기      능 : tid 이용해서 sid 목록 가져오기
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<StepDTO> getStepsid(String tid);
+	public ArrayList<StepDTO> getStepsid(int tid);
 
 }
