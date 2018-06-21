@@ -13,9 +13,9 @@ public class MyWorkTaskDTO {
 	private String tname;
 	private String sday;
 	private String eday;
+	private String overdue;
 	private String detail;
 	private int pid;
-	private int importance;
 	private Date ctime;
 	private int tstatusid;
 	private String tstatus;
@@ -25,7 +25,12 @@ public class MyWorkTaskDTO {
 	private ArrayList<MyWorkMemberDTO> members;
 	
 	
-
+	public String getOverdue() {
+		return overdue;
+	}
+	public void setOverdue(String overdue) {
+		this.overdue = overdue;
+	}
 	public String getDate() {
 		return date;
 	}
@@ -68,12 +73,6 @@ public class MyWorkTaskDTO {
 	public void setPid(int pid) {
 		this.pid = pid;
 	}
-	public int getImportance() {
-		return importance;
-	}
-	public void setImportance(int importance) {
-		this.importance = importance;
-	}
 	public Date getCtime() {
 		return ctime;
 	}
@@ -112,11 +111,13 @@ public class MyWorkTaskDTO {
 	}
 	@Override
 	public String toString() {
-		return "MyWorkTaskDTO [tid=" + tid + ", tname=" + tname + ", sday=" + sday + ", eday=" + eday + ", detail="
-				+ detail + ", pid=" + pid + ", importance=" + importance + ", ctime=" + ctime + ", tstatusid="
-				+ tstatusid + ", tstatus=" + tstatus + ", color=" + color + ", date=" + date + ", steps=" + steps
-				+ ", members=" + members + "]";
+		return "MyWorkTaskDTO [tid=" + tid + ", tname=" + tname + ", sday=" + sday + ", eday=" + eday + ", overdue="
+				+ overdue + ", detail=" + detail + ", pid=" + pid + ", ctime=" + ctime + ", tstatusid=" + tstatusid
+				+ ", tstatus=" + tstatus + ", color=" + color + ", date=" + date + ", steps=" + steps + ", members="
+				+ members + "]";
 	}
+
+	
 
 	
 	
