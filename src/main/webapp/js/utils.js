@@ -33,14 +33,9 @@ function getTaskAssignees(tid){
  작성자명 : 박 민 식
  */
 function makeProfileIcon(memberdata, imgsize){
-
-	var profile_container = jQuery("<div>",{"class":"profile-img-container",
-											"id":"profile"+memberdata.mid,
-											"data-toggle":"modal",
-											"data-target":"#profile-modal-dialog"});
-
+	var profile_container = jQuery("<div>",{"class":"profile-img-container"});
 	profile_container.css({"width":imgsize,"height":imgsize});
-	var img = jQuery("<img>",{"class":"profile-img"});
+	var img = jQuery("<img>",{"class":"profile-img","id":memberdata.mid});
 	var src = (memberdata.image ==null)?"img/user_image.png" :"profileImg/"+memberdata.image;
 	img.attr("src",src);
 	$(profile_container).append(img);
@@ -55,32 +50,11 @@ function makeProfileIcon(memberdata, imgsize){
  작성자명 : 박 민 식
  */
 $(document).on("click",".profile-img-container",function(evt){
-	console.log("프로필 띄워주기 - targetId : " + this.id);
+	console.log("프로필 띄워주기 - targetId : " + evt.target.id);
+})
 
-	var mid = this.id.substr(7); // mid 만 가져오기
-	console.log(mid);
-	
-	
-	$.ajax({
-		url:"profilemember.htm",
-		data:{mid:mid},
-		dataType:"json",
-		success:function(data) {
-			var image = (data.profileinfo.image)?data.profileinfo.image :"img/user_image.png"
-			$('#profile-modal-img').attr("src",image);
-			$('#profile-modal-mname').text(data.profileinfo.mname)
-			$('#profile-modal-mid').text(data.profileinfo.mid);
-			$('#profile-modal-pnum').text(data.profileinfo.pnum);
-			$('#profile-modal-deptname').text(data.profileinfo.deptname);
-			$('#profile-modal-position').text(data.profileinfo.position);
-			
-			
-			
-			
-		}
-	});
 
-});
+
 
 /**
  * 
@@ -88,14 +62,14 @@ $(document).on("click",".profile-img-container",function(evt){
  기      능 : Task 수정/ 삭제 페이지에 날짜 클릭으로 넣는 datepicker 넣는 코드
  작성자명 : 김 정 권
  */
-$( ".date-img" ).datepicker({
-    showOn: "button",
-    buttonImage: "img/calendar.png",
-    buttonImageOnly: true,
-    dateFormat: 'yy-mm-dd'
-
-
-});
+//$( ".date-img" ).datepicker({
+//    showOn: "button",
+//    buttonImage: "img/calendar.png",
+//    buttonImageOnly: true,
+//    dateFormat: 'yy-mm-dd'
+//
+//
+//});
 
 
 /**
@@ -110,7 +84,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 		// var tid = $(this).attr("id"); 
 		
 		var pid = '1';
-		var tid = '14';
+		var tid = '12';
 		
 		$.ajax(
 			       {
@@ -190,7 +164,6 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			           } // end-success
 			        } 
 			      ); // end-ajax
-		
 });
 
 /**
@@ -251,20 +224,29 @@ $(document).on("click","#task_star",function(){
  작성자명 : 김 정 권
  */
 $(document).on("click","#task_trash_btn",function(){
-	var tid = $('#tidhidden').attr('value');
-
+	
 	$.ajax(
 		       {
 		           type : "post",
-		           url  : "deletetask.htm",
+		           url  : "addordeletestar.htm",
 		           data : {
 		        	   'tid': tid,
+		        	   'starAddOrDel': starAddOrDel
 		           },
 		           success : function(rdata){
 
 		        	   console.log(rdata);
-		        	   $('#task_delete_dismiss_btn').click();
-		        	   $('#task_dismiss_btn').click();
+		        	   
+		        	   if(rdata.result == 'added'){
+		        		  
+		        		   // 클릭시 별을 채워준다
+		        		   $('#task_star').attr('class','fas fa-star');
+		        		   
+		        	   }else {
+		        		 
+		        			// 클릭시 별을 비워준다
+		        			$('#task_star').attr('class','far fa-star');
+		        	   }
 		        	   
 		           } // end-success
 		        }); // end-ajax
