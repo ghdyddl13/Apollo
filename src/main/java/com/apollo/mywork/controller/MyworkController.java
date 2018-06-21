@@ -43,11 +43,10 @@ public class MyworkController {
 	public String showMyworkPage(HttpServletRequest request,ModelMap map) {
 		String mid = (String)request.getSession().getAttribute("mid");
 		System.out.println("아이디 : " +mid);
-		String id = "testid4";
 		
 		Map<String, List<MyWorkTaskDTO>> taskmap=null;
 		try {
-			taskmap = service.getMyWork(id);
+			taskmap = service.getMyWork(mid);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
