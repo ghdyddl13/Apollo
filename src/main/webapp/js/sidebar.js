@@ -279,7 +279,7 @@ $(function() {
 			dropdown +=	'<input type="hidden" name="sid" value='+sid+'>';
 			dropdown += '<li id="side-update-step" data-action="second" data-toggle="modal" data-target="#update-step">수정</li>'
 			dropdown += '<li data-toggle="modal" data-target="#move-step" id="side-step-move">이동</li>'
-			dropdown += '<li data-action="third">삭제</li>'
+			dropdown += '<li id="side-delete-step" data-action="third" data-toggle="modal" data-target="#delete-step">삭제</li>'
 			$(dropdown_ul).attr("class", "custom-menu").append(dropdown);
 			console.log(dropdown_ul)
 			$(dropdown_ul).css({
@@ -409,7 +409,7 @@ $(function() {
 				 $('#insert-project-sday-id').val("");
 				 $('#insert-proejct-eday-id').val("");
 				 $('#proejct-detail').val("");
-				 //$('#project-insert').close();
+				 $('.close').click();
 			 }
 
 		 });	
@@ -448,7 +448,7 @@ $(function() {
                    alert("폴더 생성에 실패했습니다");
                 }   
                 $('.add-step-name').val("");
-                //$('#add-folder').close();
+                $('.close').click();
                 } // end - success
 
              	,error:function(error){
@@ -498,6 +498,7 @@ $(function() {
 	               }else {
 	                   alert('폴더 수정이 실패되었습니다');
 	               }
+	               $('.close').click();
 	           }
 	       }); // end - ajax
 	   }); //end - event
@@ -506,6 +507,7 @@ $(function() {
 	   $(document).on("click","#side-delete-folder",function(){
 	       var custom_menu =  $(this).parents("ul.custom-menu")[0];
 	       var fid = $(custom_menu).find("input[name=fid]").val();
+	       console.log(fid);
 	       $.ajax({
 	           type:"post",
 	           url:"selectfolder.htm",
@@ -523,7 +525,7 @@ $(function() {
 	   //폴더 modal 에서 삭제 버튼 클릭시 이벤트
 	   $('#delete-folder-btn').click(function() {
 	       var deletefolder = $('#delete-folder-form').serialize();
-	       
+	       console.log(deletefolder);
 	       $.ajax({
 	           type:"post",
 	           url:"deletefolder.htm",
@@ -538,6 +540,7 @@ $(function() {
 	               }else {
 	                   alert('폴더 삭제이 완료되었습니다!');
 	               }
+	               $('.close').click();
 	           }
 	       }); // end - ajax       
 	   })

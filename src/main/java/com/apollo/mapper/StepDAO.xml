@@ -46,4 +46,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="detail != null">detail=#{detail}</if>
 		where sid=#{sid}
 	</update>
+ 	<delete id="deleteTaskInStep">
+		delete from task where tid = (select tid from taskinstep where (1 = (select count(*) from taskinstep where sid = #{sid})) and sid = #{sid})
+	</delete>
+	<delete id="deleteStep">
+		delete from step where sid = #{sid}
+	</delete>
 </mapper>
