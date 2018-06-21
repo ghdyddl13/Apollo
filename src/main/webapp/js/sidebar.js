@@ -2,7 +2,7 @@ $(function() {
 
 	makeSideProjectDir();
 	
-	//스텝 추가 클릭시 이벤트	
+	//스텝 추가 클릭시 프로젝트 멤버 리스트 가져오기
 	$(document).on("click","#side-insert-step",function(){ 
 		var custom_menu =  $(this).parents("ul.custom-menu")[0];
 		var pid =  $(custom_menu).find("input[name=pid]").val();
@@ -277,7 +277,7 @@ $(function() {
 			var dropdown ='<input type="hidden" name="pid" value='+pid+'>';
 			dropdown +=	'<input type="hidden" name="sid" value='+sid+'>';
 			dropdown += '<li data-action="second">수정</li>'
-			dropdown += '<li data-action="third">이동</li>'
+			dropdown += '<li data-toggle="modal" data-target="#move-step" id="side-step-move">이동</li>'
 			dropdown += '<li data-action="third">삭제</li>'
 			$(dropdown_ul).attr("class", "custom-menu").append(dropdown);
 			console.log(dropdown_ul)
@@ -287,6 +287,25 @@ $(function() {
 			}).appendTo("body");
 
 		});
+		
+		// 사이드바 스텝 이동 버튼 클릭시
+		
+		$(document).on("click","#side-step-move",function(){
+			$("#move-step-select").selectmenu();
+			var custom_menu =  $(this).parents("ul.custom-menu")[0];
+			var pid =  $(custom_menu).find("input[name=pid]").val();
+			var pids = [pid];
+			var sid =  $(custom_menu).find("input[name=sid]").val();
+			console.log(pid);
+			console.log(sid);
+			$.when(selectFolderList(pids)).done(function(data){
+				console.log(data.folderlist);
+				
+			});
+		});
+		
+		
+		
 		// 사이드 우클릭 메뉴 닫는 함수
 		$(document).bind("mousedown", function(e) {
 
@@ -296,6 +315,7 @@ $(function() {
 				// Hide it
 				$(".custom-menu").remove();
 			}
+			
 		});
 	
 
@@ -459,7 +479,6 @@ $(function() {
 	                $('#update-folder-fid').val(fid);
 	                $('#update-folder-pid').val(pid);
 	                $('#update-folder-name').val(data.selectfolder.fname);
-	                
 	            }
 	       });
 	   });
@@ -699,6 +718,7 @@ function makeSideSubDir(pids){
       if(folders!=null){ //폴더가 하나라도 있다면 만들어 붙혀주세요
          
          $(folders).each(function(index,folder){
+        	var wrapper_div = jQuery("<a>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
             var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
             var span = jQuery("<span>",{"class":"glyphicon glyphicon-folder-close", 
                                  "data-toggle":"collapse",
@@ -706,8 +726,10 @@ function makeSideSubDir(pids){
             var div = jQuery("<div>",{"class":"side-dir collapse",
                                 "id": "f-dir"+folder.fid});
             console.log(folder.pid);
-            $(a).prepend(span).appendTo($('#p-dir'+folder.pid));
-            $(div).appendTo($('#p-dir'+folder.pid));      
+            
+            $(a).prepend(span).appendTo(wrapper_div);
+            $(div).appendTo(wrapper_div);
+            $(wrapper_div).appendTo($('#p-dir'+folder.pid));
          })
          
       }
