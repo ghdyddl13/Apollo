@@ -221,29 +221,23 @@ $(document).on("click","#task_star",function(){
  */
 $(document).on("click","#task_trash_btn",function(){
 	
+	var tid = $('#tidhidden').attr('value');
+	
 	$.ajax(
 		       {
 		           type : "post",
-		           url  : "addordeletestar.htm",
+		           url  : "deletetask.htm",
 		           data : {
 		        	   'tid': tid,
-		        	   'starAddOrDel': starAddOrDel
 		           },
 		           success : function(rdata){
-
-		        	   console.log(rdata);
 		        	   
-		        	   if(rdata.result == 'added'){
-		        		  
-		        		   // 클릭시 별을 채워준다
-		        		   $('#task_star').attr('class','fas fa-star');
-		        		   
-		        	   }else {
-		        		 
-		        			// 클릭시 별을 비워준다
-		        			$('#task_star').attr('class','far fa-star');
-		        	   }
-		        	   
+		        	     $('#task_delete_dismiss_btn').click();
+		        	     $('#task_dismiss_btn').click();
+		        	     
+	                	 $("#main-box").empty();
+						 $("#main-box").append(rdata);
+	                	 
 		           } // end-success
 		        }); // end-ajax
 	

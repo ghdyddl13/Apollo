@@ -144,7 +144,7 @@ public class TaskService {
 	 */
 	public int deleteTask(int tid) {
 		
-		System.out.println("delete tid 탔음");
+		System.out.println("delete tid 서비스 탔음");
 		TaskDAO taskdao = session.getMapper(TaskDAO.class);
 		int result = taskdao.deleteTask(tid);
 		return result;

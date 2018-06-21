@@ -301,11 +301,11 @@
 				<div class="modal-header">
 				<!-- row 1 -->
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-sm-10">
 						<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
 					</div>
 
-					<div class="col-sm-6" id="star_trash">
+					<div class="col-sm-2" id="star_trash">
 						<span id="span_task_star"></span>&nbsp&nbsp
 						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
 						<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>

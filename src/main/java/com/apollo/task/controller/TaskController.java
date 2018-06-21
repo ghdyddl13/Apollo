@@ -131,14 +131,18 @@ public class TaskController {
 		String location = (String) request.getSession().getAttribute("location");
 		
 		System.out.println("tid : " + tid);
-		int result;
-		result = service.deleteTask(tid);
+		int result = service.deleteTask(tid);
 		
-		model.addAttribute("result", result);
-
 		System.out.println("결과는? : " + result);
 		
-		return null;
+		//pid는 지금은 그냥 가정
+		String pid = "18";
+		
+	    if(location.equals("/information.htm")) {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    }else {
+	    	return null;
+	    }
 	
 	}
 	
