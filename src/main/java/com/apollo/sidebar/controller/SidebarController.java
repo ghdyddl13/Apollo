@@ -242,6 +242,23 @@ public class SidebarController {
 		return jsonview;
 	}
 
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 사이드바에서 프로젝트 수정클릭시 정보를 뿌려주기 위해 가져오는 프로젝트 정보 
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping(value="/sideSelectProject.htm",method=RequestMethod.POST)
+	public View SelectProject(int pid, Model model) {
+		ProjectDTO project = null;
+		try {
+			project = sidebarservice.selectProject(pid);
+			model.addAttribute("project",project);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
 }
 
 

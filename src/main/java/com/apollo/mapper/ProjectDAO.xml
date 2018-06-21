@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into project(pid, pname, sday, eday, methodologyid, mid, pstatuscode, stmtime, detail)
 		values(seq_pid.nextval, #{pname}, #{sday}, #{eday}, #{methodologyid}, #{mid}, 1, sysdate, #{detail})
 	</insert>
-	<select id="getProject" parameterType="String" resultType="com.apollo.vo.ProjectDTO">
-		select pname, sday, eday, detail
+	<select id="selectProject" parameterType="Integer" resultType="com.apollo.vo.ProjectDTO">
+		select pid, pname, sday, eday, methodologyid,mid, pstatuscode,detail
 		from project
 		where pid=#{pid}
 	</select>
