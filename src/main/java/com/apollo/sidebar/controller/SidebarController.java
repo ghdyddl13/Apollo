@@ -97,6 +97,7 @@ public class SidebarController {
 	@RequestMapping(value="/selectProjectList.htm", method=RequestMethod.POST)
 	public View selectProjectList(Model model,HttpServletRequest request) {
 		String mid =  (String) request.getSession().getAttribute("mid");
+		System.out.println(mid);
 		ArrayList<ProjectDTO> projectlist = null;
 		try {
 			projectlist = sidebarservice.selectProjectList(mid);

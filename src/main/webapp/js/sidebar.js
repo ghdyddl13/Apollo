@@ -565,6 +565,7 @@ function noProjectPage() {
  */
 
 function selectProjectList(){
+	console.log("프로젝트 실행");
    $("#working-project").empty();
    $("#finished-project").empty();
    $("#trash-bean").empty();
@@ -575,6 +576,7 @@ function selectProjectList(){
       dataType:"json",
       type:"post",
       success:function(data){
+    	 console.log(data);
          if(data!=null){ /// 참여중인 프로젝트가 있을 경우 
             $(data.projectlist).each(function(index,el){
                pids.push(el.pid);
