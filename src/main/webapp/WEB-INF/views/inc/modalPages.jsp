@@ -95,9 +95,9 @@
 
 	<!-- Folder 생성 Modal 창 -->
 	<div class="modal fade" id="add-folder" role="dialog">
-		<div class="modal-dialog modal-add-folder-dialog">
+		<div class="modal-dialog modal-folder-dialog">
 			<!-- Modal content-->
-			<div class="modal-content modal-add-folder-content">
+			<div class="modal-content modal-folder-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Folder 생성</h4>
@@ -106,7 +106,7 @@
 					<form id="insert-folder-form" method="post" onsubmit="return false;">
 						<fieldset>
 							<input type="text" id="add-folder-name" name="fname" class="add-folder-text" placeholder="folder명을 입력하세요">
-							<input type="hidden" name="pid" value="1">
+							<input type="hidden" id="add-folder-pid" name="pid">
 							<br><br>
 							<div align="center">
 								<input type="button" class="btn add-btn" id="insert-folder-btn" value="생성">&nbsp;&nbsp;&nbsp;
@@ -122,9 +122,9 @@
 
 <!-- 스텝 생성 Modal 창 -->
 	<div class="modal fade" id="insert-step" role="dialog">
-		<div class="modal-dialog modal-add-step-dialog">
+		<div class="modal-dialog modal-step-dialog">
 			<!-- Modal content-->
-			<div class="modal-content modal-add-step-content">
+			<div class="modal-content modal-step-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Step 생성</h4>
@@ -195,31 +195,31 @@
 					<h4 class="modal-title">Project 수정</h4>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form id="update-project-form">
 						<fieldset>
 							<div class="row">
+								<input type="hidden" id="update-project-pid" name ="pid">
 								<br>
 								<div class="col-sm-6 project-setting-left">
-									<input type="text" name="pname" id="add-project-name"
-										placeholder="프로젝트명을 입력하세요"
+									<input type="text" name="pname" id="update-project-pname"
 										class="text ui-widget-content ui-corner-all"><br>
 									<br> 
 									<div class="modal-title">
 										<p>방법론</p>
 									</div>
-										<input type="radio" name="methodologyid" value="customizing"
-										checked><span class="method"> Customizing</span> <br>
+										<input type="radio" id="udpate-project-methodologyid-3" name="methodologyid" value="3"
+										checked><span class="method"  disabled="true"> Customizing</span> <br>
 									<div>
 										<!-- Customizing 설명 작성  -->
 										가나다라마바사아자차카타파하 커스텀마이징 설명작성 필요
 									</div>
-									<br> <input type="radio" name="methodologyid" value="agile"><span
+									<br> <input type="radio" id="udpate-project-methodologyid-1" name="methodologyid" value="1"  disabled="true"><span
 										class="method"> Agile</span><br>
 									<div>
 										<!-- Agile 설명 작성  -->
 										가나다라마바사아자차카타파하 애자일 설명작성 필요
 									</div>
-									<br> <input type="radio" name="methodologyid" value="waterfall"><span
+									<br> <input type="radio" id="udpate-project-methodologyid-2" name="methodologyid" value="2"  disabled="true"><span
 										class="method"> Waterfall</span><br>
 									<div>
 										<!-- Waterfall 설명 작성  -->
@@ -237,24 +237,24 @@
 										<div class="modal-title">
 											<p>시작일</p>
 										</div>
-										<input type="text" name="sday" placeholder="Start Date" class="date sdate-img">
+										<input type="text" name="sday" readonly id="update-project-sday" placeholder="Start Date" class="date sdate-img">
 									</div>
 									<div class="col-sm-6">
 										<div class="modal-title">
 											<p>종료일</p>
 										</div>
-										<input type="text" name="eday" placeholder="End Date" class="date edate-img">
+										<input type="text" name="eday" readonly id ="update-project-eday" placeholder="End Date" class="date edate-img">
 										<br><br>
 									</div>
 									<div class="modal-title">
 										<p>상세설명</p>
 									</div>
-									<textarea rows="7%" cols="49%" name="detail" placeholder="내용을 입력하세요"></textarea>
+									<textarea rows="7%" cols="49%" name="detail" id ="update-project-detail" placeholder="내용을 입력하세요"></textarea>
 								</div>
 							</div>
 							<br><br>
 						<div align="center">
-							<input type="submit" class="btn add-btn" value="수정">&nbsp;&nbsp;&nbsp;
+							<input type="button" id ="update-project-btn" class="btn add-btn" value="수정">&nbsp;&nbsp;&nbsp;
 							<input type="button" class="btn cancel-btn"
 								data-dismiss="modal" value="취소">
 						</div>
@@ -265,21 +265,24 @@
 		</div>
 	</div>	
 	
-	<!-- Project 삭제 Modal 창 -->
-	<div class="modal fade" id="delete-project" role="dialog">
+
+
+<!-- Project 완료 Modal 창 -->
+	<div class="modal fade" id="move-project" role="dialog">
 		<div class="modal-dialog modal-delete-project-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Project 삭제</h4>
+					<h4 id="move-project-header" class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
-					<p>해당 프로젝트를 삭제하시겠습니까?</p>
-					<p>프로젝트 삭제시 14일동안 휴지통에 보관됩니다.</p>
+					<input type="hidden" id="move-project-pid">
+					<input type="hidden" id="move-project-pstatuscode">
+					<p id="move-project-message"></p>
 				</div>
 				<div align="center">
-					<input type="submit" class="btn delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
+					<input id="move-project-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn cancel-btn"
 						data-dismiss="modal" value="취소">
 				</div>
@@ -287,6 +290,7 @@
 			</div>
 		</div>
 	</div>	
+
 
 
 <!-- Task 수정/삭제 Modal 창 -->
@@ -297,14 +301,14 @@
 				<div class="modal-header">
 				<!-- row 1 -->
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-sm-10">
 						<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
 					</div>
 
-					<div class="col-sm-6" id="star_trash">
+					<div class="col-sm-2" id="star_trash">
 						<span id="span_task_star"></span>&nbsp&nbsp
-						<i class="fas fa-trash" id="task_trash"></i>&nbsp&nbsp&nbsp
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
+						<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
 					</div>
 					
 					<div class="col-sm-12" id="Task_Modal_snames">
@@ -348,14 +352,14 @@
 	                    <div class="modal-title">
 	                    <p>시작일</p>
 	                    </div>
-                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date-img">
+                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date-im">
 					</div>
 
 					<div class="col-sm-6">
 	                    <div class="modal-title">
 	                      <p>종료일</p>
 	                    </div>
-	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date-img">
+	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date-im">
 	                    <br><br>
 					</div>
 					</div>
@@ -402,46 +406,98 @@
 </div>	
 
 	<!-- 프로필 모달 -->
-	<c:set var="member" value="${profileinfolist}"></c:set>
 	<div class="modal fade" id="profile-modal-dialog" role="dialog">
 		<div class="modal-dialog profile-modal-dialog">
 			<!-- Modal content-->
-			<div class="modal-content">
+			<div class="modal-content" id="profile-modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Profile</h4>
 				</div>
 				<div class="modal-body">
-					<div class="col-sm-3">
-						
+					<div class="col-sm-5">
+						<div id="profile-modal-img-content">
+							<img id="profile-modal-img" src="">
+						</div>
 					</div>
-					<div class="col-sm-9">
-						<table>
+					<div class="col-sm-7" id="profile-modal-info">
+						<table class="profile-modal-info-table">
 							<tr>
 								<td>이름</td>
 								<th id="profile-modal-mname"></th>
 							</tr>
 							<tr>
 								<td>이메일</td>
-								<th></th>
+								<th id="profile-modal-mid"></th>
 							</tr>
 							<tr>
 								<td>휴대폰번호</td>
-								<th></th>
+								<th id="profile-modal-pnum"></th>
 							</tr>
 							<tr>
 								<td>부서명</td>
-								<th></th>
+								<th id="profile-modal-deptname"></th>
 							</tr>
 							<tr>
 								<td>직위</td>
-								<th></th>
+								<th id="profile-modal-position"></th>
 							</tr>
 						</table>
 					</div>
 				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Folder 수정 Modal 창 -->
+	<div class="modal fade" id="update-folder" role="dialog">
+		<div class="modal-dialog modal-folder-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-folder-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Folder 수정</h4>
+				</div>
+				<div class="modal-body">
+					<form id="update-folder-form" method="post">
+						<fieldset>
+							<input type="text" id="update-folder-name" name="fname" class="modal-folder-text">
+							<input type="hidden" name="fid" id="update-folder-fid">
+							<input type="hidden" name="pid" id="update-folder-pid">
+							<br><br>
+							<div align="center">
+								<input type="button" class="btn add-btn" id="update-folder-btn" value="수정">&nbsp;&nbsp;&nbsp;
+								<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>	
+
+	<!-- Folder 삭제 Modal 창 -->
+	<div class="modal fade" id="delete-folder" role="dialog">
+		<div class="modal-dialog modal-delete-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Folder 삭제</h4>
+				</div>
+				<div class="modal-body" style="text-align:center">
+				<form id="delete-folder-form" method="post">
+					<p>해당  폴더를 삭제하시겠습니까?</p>
+					<p>(삭제 후 복구 불가능합니다)</p>
+					<input type="hidden" name="fid" id="delete-folder-fid">
+				</form>
+				</div>
+				
 				<div align="center">
-					<input type="submit" class="btn delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn delete-btn" id="delete-folder-btn" value="삭제">&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn cancel-btn"
 						data-dismiss="modal" value="취소">
 				</div>
@@ -449,3 +505,126 @@
 			</div>
 		</div>
 	</div>
+	
+
+<!-- Task 삭제 창 -->
+	<div class="modal fade" id="Trash_Modal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" id="task_delete_dismiss_btn">&times;</button>
+					<h4 class="modal-title">Task 삭제</h4>
+				</div>
+				
+				<div class="modal-body" style="text-align:center">
+				<h4>해당 Task를 삭제하시겠습니까?<br><h5 style="color:red">(삭제 후 복구 불가능합니다)</h5></h4>					
+
+					<div align="center">
+						<input type="button" class="btn add-btn" id="task_trash_btn" value="삭제">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	<!-- 스텝 수정 Modal 창 -->
+<div class="modal fade" id="update-step" role="dialog">
+	<div class="modal-dialog modal-step-dialog">
+		<!-- Modal content-->
+		<div class="modal-content modal-step-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Step 수정</h4>
+			</div>
+			<div class="modal-body">
+
+				<form id="update-step-form" method="post" onsubmit="return false;">
+					<fieldset>
+						<div class="modal-title">
+							<p>Step명</p>
+						</div>
+						<input type="text" name="sname" class="update-step-name"
+							placeholder="step명을 입력하세요"> <br>
+						<br>
+						<div class="modal-title">
+							<p>책임자</p>
+						</div>
+						<div>
+							<select name="mid" id="update-step-mgr-assignee">
+
+							</select>
+						</div>
+						<br>
+						<div class="modal-title">
+							<p>기간 설정</p>
+						</div>
+						<div class="col-sm-6">
+							<div class="modal-title">
+								<p>시작일</p>
+							</div>
+							<input type="text" id="update-step-sday-id" name="sday"
+								placeholder="Start Date" class="date sdate-img"><br>
+						</div>
+						<div class="col-sm-6">
+							<div class="modal-title">
+								<p>종료일</p>
+							</div>
+							<input type="text" id="update-step-eday-id" name="eday"
+								placeholder="End Date" class="date edate-img"><br>
+							<br>
+							<br>
+						</div>
+						<div class="modal-title">
+							<p>상세설명</p>
+						</div>
+						<textarea rows="7%" cols="68%" id="update-step-detail"
+							name="detail" placeholder="내용을 입력하세요"></textarea>
+						<br>
+						<br> <input type="hidden" id="update-step-methodologyid"
+							name="methodologyid"> <input type="hidden"
+							id="update-step-sid" name="sid"> <input type="hidden"
+							id="update-step-pid" name="pid"> <input type="hidden"
+							id="update-step-fid" name="fid">
+						<div align="center">
+							<input type="button" class="btn add-btn" id="update-step-btn"
+								value="생성">&nbsp;&nbsp;&nbsp; <input type="button"
+								class="btn cancel-btn" data-dismiss="modal" value="취소">
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 스텝 이동 모달창  -->
+	
+	<div class="modal fade" id="move-step" role="dialog">
+		<div class="modal-dialog modal-delete-project-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 id="move-step-header" class="modal-title">Step 이동</h4>
+				</div>
+				<div class="modal-body">
+					<select id="move-step-select" name="fid">
+					
+					</select>
+				</div>
+				<div align="center">
+					<input id="move-step-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn cancel-btn"
+						data-dismiss="modal" value="취소">
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+

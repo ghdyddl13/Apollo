@@ -135,6 +135,21 @@ public class TaskService {
 		return result;
 	}
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : task 삭제
+	 작성자명 : 김 정 권
+	 */
+	public int deleteTask(int tid) {
+		
+		System.out.println("delete tid 서비스 탔음");
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.deleteTask(tid);
+		return result;
+	}
+	
 }
 
 

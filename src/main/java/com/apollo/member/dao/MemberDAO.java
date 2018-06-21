@@ -34,6 +34,6 @@ public interface MemberDAO {
 	 기      능 : 프로필 사진 클릭시 프로필모달에 들어갈 멤버정보 불러오기
 	 작성자명 : 김 래 영
 	 */
-	public ArrayList<MemberDTO> getProfileInfoMemberList(String mid);
+	public MemberDTO getProfileInfoMember(String mid);
 	
 }

@@ -58,5 +58,20 @@ public interface StepDAO {
 	 작성자명 : 김 정 권
 	 */
 	public ArrayList<StepDTO> getStepsid(String tid);
+	
+	/**
+	 *
+	 날      짜 : 2018. 6. 21.
+	 기      능 : sid 로 step 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public StepDTO selectStep(int sid);
 
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : step 수정
+	 작성자명 : 김 래 영
+	 */
+	public int updateStep(StepDTO stepdto);
 }

@@ -2,6 +2,7 @@ package com.apollo.task.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,10 +63,10 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/getTask.htm")
-	public View getTask(String pid, String tid, HttpSession session, Model model) {
+	public View getTask(String tid, HttpSession session, Model model) {
 
+	String pid = (String) session.getAttribute("pid");
     String mid = (String) session.getAttribute("mid");
-    System.out.println("겟타스크 mid : " + mid);
     
     ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
     starredtasklist = service.getStarredTaskList(mid);
@@ -116,6 +117,36 @@ public class TaskController {
 	return jsonview;
 	
 	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : task 삭제
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/deletetask.htm")
+	public String deleteTask(int tid, Model model, HttpServletRequest request) {
+		
+		String location = (String) request.getSession().getAttribute("location");
+		
+		System.out.println("tid : " + tid);
+		int result = service.deleteTask(tid);
+		
+		System.out.println("결과는? : " + result);
+		
+		//pid는 지금은 그냥 가정
+		String pid = "18";
+		
+	    if(location.equals("/information.htm")) {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    }else {
+	    	return null;
+	    }
+	
+	}
+	
+	
 	
 	
 	

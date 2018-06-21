@@ -1,5 +1,7 @@
 $(function() {
-   
+	   
+	var pid = $('#project_infopage_pid').attr('value');
+	
    /*
     날      짜 : 2018. 6. 13.
     기      능 : 서버시각 추출을 위한 함수 / 호출 형식은 YYYYMMDDHHMMSS / 활용 예시 : var nowdate = serverToday();
@@ -62,13 +64,9 @@ $(function() {
    var now_month = parseInt(nowtime.substring(4,6)); 
    var now_day = parseInt(nowtime.substring(6,8));
    
-    // 오늘에 해당하는 요일의 숫자값을 반환
+   // 오늘에 해당하는 요일의 숫자값을 반환
    // 일, 월, 화 ... ,토 = 0, 1, 2 ... ,6
-    var today = new Date(now_year+'-'+now_month+'-'+now_day).getDay();
-   
-   // pid를 1로 가정하고 시행
-   // 이 부분은 나중에 사이드바에서 가져온 pid로 변경한다
-   var pid = 1;
+   var today = new Date(now_year+'-'+now_month+'-'+now_day).getDay();
    
    // DB로 Task들을 호출
    // 위에서 선언한 배열에 데이터들을 넣기 위함
@@ -258,20 +256,21 @@ $(function() {
                     var completedtasks = [];
                     var uncompletedtasks = [];
                     
+                    var completedtasks_tid = [];
+                    var uncompletedtasks_tid = [];
+                    
                      $(rdata.tasklist).each(function(index, el){
                        
                         if((el.tstatusid == 3)||(el.tstatusid == 11)||(el.tstatusid == 15)){
                            completedtasks.push(el.tname);
+                           completedtasks_tid.push(el.tid);
 
                          }else{
                             uncompletedtasks.push(el.tname);
+                            uncompletedtasks_tid.push(el.tid);
                          }
                      });
                      
-                     console.log('11111111111111111111111');
-                     console.log(completedtasks.length);
-                     console.log(uncompletedtasks.length);
-                                                               
                      if(completedtasks.length > uncompletedtasks.length){
                         var c1 = completedtasks.length - uncompletedtasks.length
                         for(var i = 0; i < c1; i++){
@@ -289,18 +288,21 @@ $(function() {
                      // 위 로직에 의해 두 배열의 길이가 같아졌으므로
                      // 아무 배열이나 잡아서 length 만큼 돌려도 상관없음
                      var tablestr = '<tr><th>완료 task</th><th>미완료 task</th></tr>';
+//                     for(var i = 0; i < completedtasks.length; i++){
+//                    	 tablestr += '<tr><td class="Task_RUD_Modal" id="' 
+//                    		 + completedtasks_tid[i] + '">' + completedtasks[i] 
+//                    	 + '</td><td  class="Task_RUD_Modal" id="' 
+//                    	 + uncompletedtasks_tid[i] + '">' + uncompletedtasks[i] + '</td></tr>'
+//                     }
+                     
                      for(var i = 0; i < completedtasks.length; i++){
-                        tablestr += '<tr><td>' + completedtasks[i] + '</td><td>' + uncompletedtasks[i] + '</td></tr>'
-                     }
+                         tablestr += '<tr><td>' + completedtasks[i] + '</td><td>' + uncompletedtasks[i] + '</td></tr>'
+                      }
                      
                      
+
                      $('#task_progress_table').empty();
                      $('#task_progress_table').append(tablestr);
-                       
-                     
-                     console.log('22222222222222222222');
-                     console.log(completedtasks.length);
-                     console.log(uncompletedtasks.length);
                      
                      } // end - success
                  }
@@ -313,12 +315,11 @@ $(function() {
     기      능 : Step별 진행률 그래프 데이터 가져와서 세팅
     작성자명 : 김 정 권
     */
-   // 일단 pid를 1로 가정
    $.ajax(
              {
                  type : "post",
                  url  : "getProgressData.htm",
-                 data : "pid="+ 1,
+                 data : "pid="+ pid,
                  success : function(rdata){
                      console.log(rdata);
                      
@@ -399,11 +400,8 @@ $(function() {
    // 일반적으로 위에서 써오던 함수와 형태가 다르다
    $(document).on("click","#pmember_add_btn",function(){
 
+	  $('#add_project_member').click(); 
       var mid = $(this).children().attr("id");
-      
-      // 여기서 누르면 pid 받아오는 로직을 처리해서 요청 주소에 붙여 보낸다
-      // 지금은 pid가 1이라고 가정하고 실시
-      var pid = '1';
       
       var send_data = new Array();
       send_data[0] = pid;
@@ -411,19 +409,14 @@ $(function() {
       
       $.ajax(
               {
-                 type : "post",
+               type : "post",
                url:"insertMidToPmember.htm",
                data: "data=" + send_data,
                  success : function(rdata){
-
-                    if(rdata.result == 1){
-                       alert('프로젝트 멤버로 추가되었습니다')
-                       location.href = "login.htm";
-                    } else{
-                       alert('프로젝트 멤버 추가 실패')
-                       location.href = "login.htm";
-                    }
-                    
+                                
+                	 $("#main-box").empty();
+					 $("#main-box").append(rdata);
+                	 
                      } // end - success
                  }
                 );

@@ -52,27 +52,15 @@ public class SidebarService {
 	 기      능 : 프로젝트 수정
 	 작성자명 : 김 래 영
 	 */
-	public int updateProejct(ProjectDTO projectdto) {
+	public int updateProject(ProjectDTO projectdto) {
 		int result = 0;
 		ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
 		result = dao.updateProject(projectdto);
 		
 		return result;
 		
-	}
-	/* 
-	 날      짜 : 2018. 6. 13.
-	 기      능 : 프로젝트 삭제
-	 작성자명 : 김 래 영
-	 */
-	public int deleteProject(ProjectDTO projectdto) {
-		int result = 0;
-		ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
-		result = dao.deleteProject(projectdto);
-		
-		return result;
-	}
-	/*
+	}	
+		/*
 	 날      짜 : 2018. 6. 18.
 	 기      능 : 스텝 생성
 	 작성자명 : 김 래 영
@@ -176,7 +164,12 @@ public class SidebarService {
 		
 		return folderlist;
 	};
-	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 참여중인 프로젝트들에 포함된 모든 스텝을 가져오는 함수
+	 작성자명 : 박 민 식
+	 */
 	public ArrayList<StepDTO>  selectStepList(List<Integer> pids){
 		ArrayList<StepDTO> steplist = null;
 		try {
@@ -189,5 +182,114 @@ public class SidebarService {
 		
 		return steplist;
 	};
+	
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : fid 로 폴더 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public FolderDTO selectFolder(String fid) {
+		FolderDTO folderinfo = null;
+		try {
+			FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
+			folderinfo = dao.selectFolder(fid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return folderinfo;
+		
+	}
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 푤더 수정
+	 작성자명 : 김 래 영
+	 */
+	public int updateFolder(FolderDTO folderdto) {
+		int folderresult = 0;
+		try {
+			FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
+			folderresult = dao.updateFolder(folderdto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return folderresult;
+		
+		
+		
+	};
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 폴더 삭제 (영구삭제)
+	 작성자명 : 김 래 영
+	 */
+	public int deleteFolder(String fid) {
+		int result = 0;		
+		try {
+			FolderDAO dao = sqlsession.getMapper(FolderDAO.class);
+			result = dao.deleteFolder(fid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 프로젝트 정보 가져오기ㄴ
+	 작성자명 : 박 민 식
+	 */
+	public ProjectDTO selectProject(int pid) {
+		ProjectDTO projectdto= null;
+		try {
+			ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
+			projectdto =dao.selectProject(pid);
+		} catch (Exception e) {
+			e.printStackTrace();	
+		}
+		return projectdto;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : sid 로 폴더 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public StepDTO selectStep(int sid) {
+		StepDTO stepinfo = null;
+		try {
+			StepDAO dao = sqlsession.getMapper(StepDAO.class);
+			stepinfo = dao.selectStep(sid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return stepinfo;		
+		
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 스텝 수정
+	 작성자명 : 김 래 영
+	 */
+	public int updateStep(StepDTO stepdto) {
+		int stepresult = 0;		
+		try {
+			StepDAO dao = sqlsession.getMapper(StepDAO.class);
+			stepresult = dao.updateStep(stepdto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(stepresult > 0) {
+			System.out.println("step update success");
+		}else {
+			System.out.println("step update fail");
+		}
+		return stepresult;
+		
+	}
 	
 }

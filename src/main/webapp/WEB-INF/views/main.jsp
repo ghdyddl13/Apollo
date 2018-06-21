@@ -37,6 +37,8 @@
 <link href="css/myWork.css" type="text/css" rel="stylesheet">
 <!-- PROJECT CSS -->
 <link href="css/project.css" type="text/css" rel="stylesheet">
+<!-- SIDEBAR JAVASCRIPT _RY -->
+<script type="text/javascript" src="js/sidebar_raeyoung.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
