@@ -192,7 +192,7 @@
 		</div>
 		<div class ="inbox-section-right" id="right">
 			<input type="text" id = "cmt_cmts" >
-			<input type="text" id = "cmt_tid" value="1">
+			<input type="text" id = "cmt_tid" value="2">
 			<input type="button" id="cmt_insert" value="입력">
 		</div>
 	</div>

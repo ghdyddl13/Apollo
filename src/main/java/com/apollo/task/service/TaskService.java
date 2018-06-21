@@ -2,10 +2,15 @@ package com.apollo.task.service;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.CommentDAO;
@@ -90,17 +95,39 @@ public class TaskService {
 		return tstatuslist;
 	}
 	
-	public int insertComment(CommentDTO commentdto) {
+	public int insertComment(CommentDTO commentdto){
 		System.out.println("!!인서트 코멘트 서비스!!");
 		CommentDAO commentdao = session.getMapper(CommentDAO.class);
+		Map map = new HashMap();
 		
 		 int insertcmt =commentdao.insertComment(commentdto);
-		 System.out.println("!!코멘트 테이블에 인서트 성공?!!   "+ insertcmt);
-		 ArrayList<String> midlist = commentdao.selectCommentMidlist();
-		 System.out.println("!!코멘트 태스크아이디에 할당된 멤버 아이디 select 성공??!!   "+ midlist.get(0));
-		 int receiverinsert = commentdao.insertReceiver(midlist);
-		 System.out.println("!!리시버 테이블에 인서트 성공??!!   "+receiverinsert);
-		 return receiverinsert;
+		 System.out.println("!!코멘트 테이블에 인서트 성공?!!"+ insertcmt);
+		 int pid = commentdto.getTid();
+	
+		 
+		 List<String> midlist = commentdao.selectCommentMidlist(pid);
+		 System.out.println("!!코멘트 태스크아이디에 할당된 멤버 아이디 select 성공??!!");
+		 
+		 
+		 map.put("cmtid", commentdto.getCmtid());
+		 int result = 0;
+		 boolean exist = false;
+		 for(int i =0 ;i<midlist.size();i++) {
+			 if(midlist.get(i).equals(commentdto.getMid())){
+				 exist = true;
+			 }
+			 map.put("mid", midlist.get(i));
+			 result = commentdao.insertReceiver(map);
+			 System.out.println("!!리시버 테이블에 인서트중!!");
+		 }
+		 if(exist == false) {
+			 map.put("mid", commentdto.getMid());
+			 result = commentdao.insertReceiver(map);
+			 System.out.println("!!그 테스크에 할당된 사람이 아니어도 보낸 사람이면 넣어줌!!");
+
+		 }
+		 System.out.println("!!리시버 테이블에 인서트 성공??!!");
+		 return result;
 	}
 	
 	
