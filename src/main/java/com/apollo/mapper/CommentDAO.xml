@@ -35,4 +35,5 @@ UPDATE RECEIVER SET ISARCHIVE = 0 where mid=#{mid} and cmtid=#{cmtid}
 </select>
 
 
+
 </mapper>

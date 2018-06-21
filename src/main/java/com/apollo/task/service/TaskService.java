@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apollo.step.dao.StepDAO;
+import com.apollo.task.dao.CommentDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
+import com.apollo.vo.CommentDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TstatusDTO;
@@ -85,11 +87,21 @@ public class TaskService {
 		ArrayList<TstatusDTO> tstatuslist = new ArrayList();
 		TstatusDAO tstatusdao = session.getMapper(TstatusDAO.class);
 		tstatuslist = tstatusdao.getTstatuslist(pid);
-		
 		return tstatuslist;
 	}
 	
-	
+	public int insertComment(CommentDTO commentdto) {
+		System.out.println("!!인서트 코멘트 서비스!!");
+		CommentDAO commentdao = session.getMapper(CommentDAO.class);
+		
+		 int insertcmt =commentdao.insertComment(commentdto);
+		 System.out.println("!!코멘트 테이블에 인서트 성공?!!   "+ insertcmt);
+		 ArrayList<String> midlist = commentdao.selectCommentMidlist();
+		 System.out.println("!!코멘트 태스크아이디에 할당된 멤버 아이디 select 성공??!!   "+ midlist.get(0));
+		 int receiverinsert = commentdao.insertReceiver(midlist);
+		 System.out.println("!!리시버 테이블에 인서트 성공??!!   "+receiverinsert);
+		 return receiverinsert;
+	}
 	
 	
 }

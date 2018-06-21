@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apollo.task.dao.CommentDAO">
+	<insert id="insertComment"
+		parameterType="com.apollo.vo.CommentDTO">
+		insert into comments values(seq_cmtid.nextval,#{comments}, #{tid}, #{mid},
+		#{cmtkind}, TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+
+	<select id="selectCommentMidlist" resultType="java.util.List">
+		select mid from ASSIGNEE where tid = (select tid from COMMENTS where
+		cmtid = seq_cmtid.CURRVAL)
+	</select>
+
+	<insert id="insertReceiver" parameterType="java.util.List">
+		insert into RECEIVER VALUES
+		<foreach collection="list" item="midlist" open="(" close=")"
+			separator=",">
+			(seq_cmtid.CURRVAL, #{midlist} ,0);
+		</foreach>
+	</insert>
+</mapper>

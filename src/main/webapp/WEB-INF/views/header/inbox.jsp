@@ -51,7 +51,6 @@
 				}
 			})
 		});
-		
 		$(".archiveupdate2").click(function(evt){
 			$.ajax({
 				url:"archiveupdate2.htm",
@@ -59,6 +58,20 @@
 				type: 'POST',
 				data:{cmtid:$(this).children(".cmtid").val(),
 					  inboxkind:$("#inboxkind").val()},
+				success:function(data){
+					$("#main-box").empty();
+					$("#main-box").append(data);	
+				}
+			})
+		});
+		
+		$("#cmt_insert").click(function(evt){
+			$.ajax({
+				url:"insertcomment.htm",
+				dataType:"html",
+				type: 'POST',
+				data:{comments:$("#cmt_cmts").val(),
+					  tid:$("#cmt_tid").val()},
 				success:function(data){
 					$("#main-box").empty();
 					$("#main-box").append(data);
@@ -178,6 +191,8 @@
 		<div class ="inbox-section-center" id="center">
 		</div>
 		<div class ="inbox-section-right" id="right">
-
+			<input type="text" id = "cmt_cmts" >
+			<input type="text" id = "cmt_tid" value="1">
+			<input type="button" id="cmt_insert" value="입력">
 		</div>
 	</div>
