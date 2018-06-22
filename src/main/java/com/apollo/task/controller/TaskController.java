@@ -237,4 +237,19 @@ public class TaskController {
 		return jsonview;
 	}
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : 해당 task가 속한 프로젝트의 모든 스텝들을 가져온다
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/getStepListByTid.htm")
+	public View getStepListByTid(int tid, Model model) {
+		
+		ArrayList<StepDTO> steplist = service.getStepListByTid(tid);
+		model.addAttribute("steplist", steplist);
+		return jsonview;
+	}
+	
 }

@@ -125,9 +125,9 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   $(rdata.steps).each(function(){
 			        		   snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + this.sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
 			        	   });
-			        	   snames += '<i class="fas fa-plus-circle"></i>'
+			        	   snames += '<i data-toggle="modal" data-target="#step_add_modal_in_taskmodal" id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 			        	   $('#Task_Modal_snames').append(snames);
-				        	   
+
 			        	   
 			        	   // tstatus
 			        	   $('#Task_Modal_tstatus_selectbox').empty();
@@ -150,7 +150,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        		   }
 				           });
 			        	   $('#Task_Modal_tstatus_selectbox').append(tstatusoptions);
-			        	   
+
 			        	   
 			        	   // assignee
 //			        	   $('#Task_Modal_assignee').empty();
@@ -249,8 +249,6 @@ $(document).on("click","#task_trash_btn",function(){
 	                	 
 		           } // end-success
 		        }); // end-ajax
-	
-	
 });
 
 
@@ -346,3 +344,58 @@ $('#Task_Modal_tstatus_selectbox').on('change', function() {
 });
 
 
+/**
+ * 
+ 날      짜 : 2018. 6. 21.
+ 기      능 : Task 페이지 내 step 추가 버튼
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#task_modal_add_step",function(){
+	
+	var tid = $('#tidhidden').attr('value');
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "getStepListByTid.htm",
+		           data : {
+		        	   'tid': tid,
+		           },
+		           success : function(rdata){
+		        	   
+		        	   console.log(rdata.steplist);
+		        	   $('#steplist_in_taskmodal').empty();
+		        	   
+		        	   var tablestr = '';
+		        	   tablestr += '<tr><th>스텝이름</th><th>시작일</th><th>종료일</th><th>추가</th></tr>';
+		        	   $(rdata.steplist).each(function(){
+		        		   
+		        		  var sday = '';
+		        		  var eday = '';
+		        		   
+		        		  if(this.sday == null){
+		        			  sday = '';
+		        		  }
+
+		        		  if(this.eday == null){
+		        			  eday = '';
+		        		  }
+		        		  
+		        		  if(this.sday != null){
+		        			  sday = this.sday.substring(0, 10);
+		        		  }
+		        		  
+		        		  if(this.eday != null){
+		        			  eday = this.eday.substring(0, 10);
+		        		  }
+		        		  
+		        		  
+		        		   
+		        		  tablestr += '<tr><th>' + this.sname + '</th><th>' + sday + '</th><th>' + eday + '</th><th><i class="fas fa-plus-circle" id="' + this.sid + '"></i></th></tr>';
+		        	   });
+		        	   $('#steplist_in_taskmodal').append(tablestr);
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+});

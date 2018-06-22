@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.StarredTaskDTO;
+import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TidvalueDTO;
@@ -25,5 +26,6 @@ public interface TaskDAO {
 	public int changeTstatus(TidvalueDTO dto);
 	public int insertComment(CommentDTO commentdto);
 	public String getTaskModifierName(String mid);
+	public ArrayList<StepDTO> getStepListByTid(int tid);
 	
 }

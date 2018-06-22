@@ -232,6 +232,23 @@ public class TaskService {
 	}
 	
 	
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : tid로 스텝들 가져오기
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepListByTid(int tid) {
+
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		ArrayList<StepDTO> steplist = new ArrayList();
+		steplist = taskdao.getStepListByTid(tid);
+		
+		return steplist;
+	}
+	
+	
 }
 
 
