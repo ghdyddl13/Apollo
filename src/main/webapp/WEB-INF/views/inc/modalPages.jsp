@@ -627,6 +627,12 @@
 					<input id="move-step-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn cancel-btn"
 						data-dismiss="modal" value="취소">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 
 	<!-- TaskInStep 돌고 1:1 매핑일때 스텝 삭제 모달창 -->
 	<div class="modal fade" id="step_delete_Modal" role="dialog">
@@ -653,4 +659,4 @@
 		</div>
 	</div>
 
-	</div>
+
