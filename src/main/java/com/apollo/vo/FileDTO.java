@@ -4,6 +4,8 @@ public class FileDTO {
 	private int fileid;
 	private int tid;
 	private String filename;
+	private String sname;
+	private String pname;
 	
 	public int getFileid() {
 		return fileid;
@@ -23,6 +25,18 @@ public class FileDTO {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	
 	
 }

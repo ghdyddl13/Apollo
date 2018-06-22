@@ -3,6 +3,7 @@ package com.apollo.step.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -81,7 +82,10 @@ public class StepBoardController {
 	 작성자명 : 이 창 훈
 	 */
 	@RequestMapping("/board.htm")
-    public String selectBoard(Model model,HttpServletRequest request) {
+    public String selectBoard(Model model,HttpServletRequest request, HttpSession session) {
+		
+		session.setAttribute("location", "/board.htm");
+		
         int sid = (Integer) request.getSession().getAttribute("sid");
         System.out.println("보드컨트롤러에요");
         try {

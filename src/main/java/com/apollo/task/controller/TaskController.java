@@ -69,6 +69,7 @@ public class TaskController {
 
 	int pid = (Integer) session.getAttribute("pid");
     String mid = (String) session.getAttribute("mid");
+
     
     ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
     starredtasklist = service.getStarredTaskList(mid);
@@ -140,7 +141,9 @@ public class TaskController {
 		String pid = "18";
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
-	    }else {
+	    } else if(location.equals("/board.htm")) {
+	    	return "redirect:/board.htm";
+	    } else {
 	    	return null;
 	    }
 	    
