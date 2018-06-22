@@ -13,6 +13,7 @@ public class TstatusDTO {
 	private String color;
 	private int ordering;
 	private int methodologyid;
+	
 	public int getTstatusid() {
 		return tstatusid;
 	}

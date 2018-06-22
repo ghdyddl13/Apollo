@@ -322,8 +322,8 @@
 							
 				<!-- row 2 -->
 				<div class="row">
-					<div class="col-sm-3" id="Task_Modal_tstatus">
-							<select>
+					<div class="col-sm-3">
+							<select id="Task_Modal_tstatus_selectbox">
 							<option>New</option>
 							<option>Development</option>
 							<option>Testing</option>
@@ -395,6 +395,7 @@
 					<input type="text" placeholder="코멘트 입력.." class="">
 					<input id="Task_Modal_enter_comments" type="button" value="전송">
 					<input type="hidden" id="tidhidden" value="">
+					<input type="hidden" id="tnamehidden" value="">
 					<input type="hidden" id="stepdeletehidden" data-toggle="modal" data-target="#step_delete_Modal">
 					
 					

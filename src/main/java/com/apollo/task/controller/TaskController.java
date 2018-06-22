@@ -17,6 +17,7 @@ import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
+import com.apollo.vo.TidvalueDTO;
 import com.apollo.vo.TstatusDTO;
 
 @Controller
@@ -66,13 +67,9 @@ public class TaskController {
 	@RequestMapping("/getTask.htm")
 	public View getTask(int tid, HttpSession session, Model model) {
 
-	System.out.println("컨트롤러는 탔음");
-	int temp_pid = (Integer) session.getAttribute("pid");
-	String pid = String.valueOf(temp_pid);
-	String mid = (String) session.getAttribute("mid");
+	int pid = (Integer) session.getAttribute("pid");
+    String mid = (String) session.getAttribute("mid");
 
-	System.out.println("pid : " + pid);
-	System.out.println("mid : " + mid);
     
     ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
     starredtasklist = service.getStarredTaskList(mid);
@@ -166,7 +163,6 @@ public class TaskController {
 		dto.setTid(tid);
 		
 		int result = service.deleteStepInTaskModal(dto);
-		System.out.println("스텝이 지워졌니? : " + result);
 		
 		ArrayList<StepDTO> steplist = new ArrayList();
 		steplist = service.getStepid(tid);
@@ -187,7 +183,6 @@ public class TaskController {
 	public View countTaskInStep(int tid, Model model) {
 	
 		int result = service.countTaskInStep(tid);
-		System.out.println("몇 개의 스텝이니? : " + result);
 		model.addAttribute("countresult", result);
 		
 		return jsonview;
@@ -195,6 +190,54 @@ public class TaskController {
 	
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : 해당 task 상태 변경하기
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/changetstatus.htm")
+	public View changeTstatus(int tid, int value, String tname, Model model, HttpSession session) {
 	
+		TidvalueDTO dto = new TidvalueDTO();
+		dto.setTid(tid);
+		dto.setValue(value);
+		
+		int result = service.changeTstatus(dto);
+		
+		// 상태 변경 성공시 코멘트 입력
+		if(result == 1) {
+			
+			System.out.println("상태변경 성공! 상태변경 코멘트 입력 시작!");
+			String comment = "";
+			String mid = (String) session.getAttribute("mid");
+			int pid = (Integer) session.getAttribute("pid");
+			ArrayList<TstatusDTO> tstatuslist = new ArrayList();
+			tstatuslist = service.gettstatuslist(pid);
+
+			for(TstatusDTO tstatusdto : tstatuslist) {
+				int tstatusid = tstatusdto.getTstatusid();
+					if(tstatusid == value) {
+						
+						String modifier = service.getTaskModifierName(mid);
+						comment = modifier + "님이 " + tname +"의 상태를 " + tstatusdto.getTstatus() + "로 변경하였습니다";
+					}
+			}
+			
+			CommentDTO commentdto = new CommentDTO();
+			commentdto.setComments(comment);
+			commentdto.setTid(tid);
+			commentdto.setMid(mid);
+			commentdto.setCmtkind(2);
+			
+			int insert_comment_result = service.insertComment(commentdto);
+			System.out.println("코멘트 입력 여부 : " + insert_comment_result);
+			
+		} // end - 상태 변경 성공시 발동 조건문 
+		
+		model.addAttribute("result", result);
+		
+		return jsonview;
+	}
 	
 }

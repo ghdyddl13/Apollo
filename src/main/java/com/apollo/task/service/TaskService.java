@@ -11,10 +11,12 @@ import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
+import com.apollo.vo.CommentDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
+import com.apollo.vo.TidvalueDTO;
 import com.apollo.vo.TstatusDTO;
 
 @Service
@@ -83,7 +85,7 @@ public class TaskService {
 	 기      능 : pid로 tstatus 가져오기
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<TstatusDTO> gettstatuslist(String pid) {
+	public ArrayList<TstatusDTO> gettstatuslist(int pid) {
 		
 		ArrayList<TstatusDTO> tstatuslist = new ArrayList();
 		TstatusDAO tstatusdao = session.getMapper(TstatusDAO.class);
@@ -183,6 +185,51 @@ public class TaskService {
 		return result;
 	}
 	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : 해당 task가 몇 개의 step에 속해 있는지 확인
+	 작성자명 : 김 정 권
+	 */
+	public int changeTstatus(TidvalueDTO dto) {
+		
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.changeTstatus(dto);
+		return result;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : 코멘트 입력
+	 작성자명 : 김 정 권
+	 */
+	public int insertComment(CommentDTO commentdto) {
+		
+		System.out.println("insertComment 서비스 메소드 실행");
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.insertComment(commentdto);
+		return result;
+		
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : Task 상태 변경자 이름 가져오기
+	 작성자명 : 김 정 권
+	 */
+	public String getTaskModifierName(String mid) {
+		
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		String name = taskdao.getTaskModifierName(mid);
+		return name;
+		
+	}
 	
 	
 }

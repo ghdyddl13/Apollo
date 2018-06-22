@@ -12,7 +12,7 @@ public interface StepDAO {
 	 기      능 : 프로젝트 생성
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<StepDTO> getSteps(String pid);
+	public ArrayList<StepDTO> getSteps(int pid);
 	
 	/**
 	 * 
