@@ -17,48 +17,15 @@
 
 
 <script>
+
+
+
+
+
+
+
+
 //task 생성하기 위해 이름 입력하는 text 창 생성
-/* function addCardView(e, tstatusid) {
-   console.log("addcardview 왓낭 : " + e + " / " + tstatusid)
-   var div = "<div class='' id='addcard'>" +
-         "<input class='inputtext' type='text' placeholder='task 이름을 입력하세요' name='title' >" +
-         "<a onclick='addCard(this, "+ tstatusid + ")'>완료</a></div>";
-   console.log("이건뭘까여>>>"+$(e).before(div));
-   $('#addcard').children('input').focus();
-
-   
-
-
-
-} */
-
-
-
-
-//task 생성 성공
-/* function addCard(obj, tstatusid){
-   console.log("addCard 들어왔어요");
-   var parent = $(obj).closest('div')
-   var value = parent[0].firstChild.value //cardname
-   var pid = $("#board-pid").val()
-   console.log("board-pid : " + $("#board-pid").val())
-   console.log("parent : " + parent)
-   console.log("tstatusid : " + tstatusid)
-   console.log("value : " + value)
-    if(value.trim() != ""){
-      $.ajax({
-         url : "boardInsertTask.htm",
-         data : {
-               tstatusid : tstatusid, 
-               tname : value
-               },
-         success:function(data){
-            $("#main-box").empty();
-            $("#main-box").append(data);
-         }  
-      })
-   }  
-} */
 function addTaskView(tstatusid){
    $("#task-adder"+tstatusid).remove();
    let inputtag="<div class='board-task-adder-addmode'><input class='form-control' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
@@ -66,6 +33,7 @@ function addTaskView(tstatusid){
     $("#insert-task"+tstatusid).focus();
 }
 
+//keyup(엔터)으로 task 생성 성공
 function addTask_keyup(tstatusid){
    let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
       if(event.which==13){
@@ -92,6 +60,7 @@ function addTask_keyup(tstatusid){
       } 
 }
 
+//focusout으로 task 생성 성공
 function addTask_focusout(tstatusid){
    let newtask=$.trim($('#insert-task'+tstatusid).val());
    let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";

@@ -12,10 +12,7 @@ import com.apollo.step.service.StepListService;
 public class TestController {
 	
 
-	@RequestMapping("/file.htm")
-	public String projectFilelist() {
-		return "project/files";
-	}
+
 	
 
 	@RequestMapping("/table.htm")

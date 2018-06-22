@@ -1,11 +1,21 @@
 package com.apollo.project.controller;
 
-import org.springframework.ui.Model;
+import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
 public class ProjectFilesController {
 
-	public String projectFiles(String s1, Model model) {
-		return null;
+	
+	@RequestMapping("/files.htm")
+	public String projectFilelist(HttpServletRequest request) {
+
+	
+		
+		return "project/files";
 	}
 	
 }
