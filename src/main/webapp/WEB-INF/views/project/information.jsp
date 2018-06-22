@@ -9,7 +9,7 @@
 <h3>인포메이션</h3>
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 
-<div class="Task_RUD_Modal" id="t62" data-toggle="modal" data-target="#Task_RUD_Modal">테스트 tid</div>
+<div class="Task_RUD_Modal" id="t73" data-toggle="modal" data-target="#Task_RUD_Modal">테스트 tid</div>
 
 <div id=projectinfo_outerbox>
   <div class="row" id="projectinfo_first_row"> <!-- row_1 -->
