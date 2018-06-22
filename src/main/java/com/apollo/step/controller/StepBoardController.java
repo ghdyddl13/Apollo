@@ -33,17 +33,25 @@ public class StepBoardController {
 	 작성자명 : 이 창 훈
 	 */
 	@RequestMapping("/boardInsertTask.htm")
-	public View createTask(TaskDTO taskdto, HttpServletRequest request) {
-		System.out.println("boardInsertTask : " + taskdto.getTname() + "/" + request.getSession().getAttribute("pid") + "/" + taskdto.getTstatusid());
-		
+	public String createTask(TaskDTO taskdto, HttpServletRequest request) {
+		System.out.println("boardInsertTask : " + taskdto.getTname() + "/" + request.getSession().getAttribute("pid") + "/" + taskdto.getTstatusid()+"/"+request.getSession().getAttribute("sid"));
+		taskdto.setPid((Integer)request.getSession().getAttribute("pid"));
+		int sid = (Integer) request.getSession().getAttribute("sid");
 		try {
+			//task insert service
 			boardservice.insertBoardTask(taskdto);
+			//task 생성 후 시퀀스로 생성된 tid를 해당 step에 insert 하는 하는
+			boardservice.insertBoardTaskInStep(taskdto.getTid(), sid);
+			
+			
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
-		return jsonview;
+		return "redirect:/board.htm";
 	}
+	
 	
 	public String showBoardStepList(String s1, Model model) {
 		return null;
@@ -75,7 +83,7 @@ public class StepBoardController {
 	@RequestMapping("/board.htm")
     public String selectBoard(Model model,HttpServletRequest request) {
         int sid = (Integer) request.getSession().getAttribute("sid");
-        System.out.println("sid : " + sid);
+        System.out.println("보드컨트롤러에요");
         try {
         	  ArrayList<TstatusDTO> tstatusdto = boardservice.selectTstatusBySid(sid);
               model.addAttribute("b", tstatusdto);

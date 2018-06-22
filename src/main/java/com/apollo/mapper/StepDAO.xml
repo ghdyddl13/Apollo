@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (seq_sid.nextval, #{sname}, #{sday}, #{eday}, #{pid}, #{fid}, #{methodologyid}, #{mid}, #{detail})
 	</insert>
 
-	<select id ="getProjectIdByStepId" parameterType="Integer"> 
+	<select id ="getProjectIdByStepId" parameterType="Integer" resultType="Integer"> 
 	 	select pid from step where sid=#{sid}
 	</select>
 	

@@ -390,10 +390,12 @@
 					</div>
 					<input type="text" placeholder="코멘트 입력.." class="">
 					<input id="Task_Modal_enter_comments" type="button" value="전송">
-
+					<input type="hidden" id="tidhidden" value="">
+					
+					
 			 	</div>
 			 	<!-- end modal-body -->
-
+				
 			</div>
 		</div>
 	</div>

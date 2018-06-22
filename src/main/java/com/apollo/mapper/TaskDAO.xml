@@ -39,11 +39,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <insert id="insertBoardTask" parameterType="com.apollo.vo.TaskDTO">
-    	insert INTO task(tid, tname, tstatusid, pid, ctime) values(seq_tid.nextval, tname=#{tname}, tstatusid=#{tstatusid}, pid=#{pid}, sysdate)
+    	 <selectKey keyProperty="tid" resultType="int" order="BEFORE">
+        	  select seq_tid.nextval FROM DUAL
+   		 </selectKey>
+    	insert into task(tid, tname, pid, ctime, tstatusid) values(#{tid}, #{tname}, #{pid}, sysdate, #{tstatusid})
     </insert>
 
+    <insert id="insertBoardTaskInStep" parameterType="com.apollo.vo.TaskinstepDTO">
+    	insert into taskinstep values(#{sid}, #{tid})
+    </insert>
+  
+
     <select id="getTask" parameterType="String" resultType="com.apollo.vo.TaskDTO">
-    select * from task where tid = #{tid}
+    	select * from task where tid = #{tid}
     </select>
+
+    
+    <insert id="addStar" parameterType="com.apollo.vo.StarredTaskDTO">
+    	insert into starredtask values(#{mid}, #{tid})
+    </insert>
+    
+    <delete id="deleteStar" parameterType="com.apollo.vo.StarredTaskDTO">
+    	delete from starredtask where mid = #{mid} and tid = #{tid}
+    </delete>
 
 </mapper>

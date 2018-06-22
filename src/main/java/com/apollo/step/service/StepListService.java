@@ -10,23 +10,24 @@ import com.apollo.step.dao.StepDAO;
 public class StepListService {
 	
 	@Autowired
-	SqlSession session;
-	
+	private SqlSession sqlsession;
 	
 	/**
 	 * 
-	 ��      ¥ : 2018. 6. 14.
-	 ��      �� : Step id�� �� ������ ���� ������Ʈ�� id�� �����´�.
-	 �ۼ��ڸ� : �� �� ��
+	 날      짜 : 2018. 6. 20.
+	 기      능 : Step클릭 시 소속 프로젝트의 아이디를 가져오기 
+	 작성자명 : 박 민 식
 	 */
 	public int getProjectIdByStepId(int sid) {
 		
 		int pid = 0;
 		try {
-			StepDAO dao= session.getMapper(StepDAO.class);
+			System.out.println("sess "+sqlsession); 
+			
+			StepDAO dao= sqlsession.getMapper(StepDAO.class);
 			pid =dao.getProjectIdByStepId(sid);
 		} catch (Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 		}
 		
 		return pid;

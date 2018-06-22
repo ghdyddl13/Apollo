@@ -2,6 +2,7 @@ package com.apollo.inbox.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,6 +11,7 @@ import com.apollo.step.service.StepListService;
 @Controller
 public class TestController {
 	
+
 	@RequestMapping("/file.htm")
 	public String projectFilelist() {
 		return "project/files";
@@ -32,21 +34,7 @@ public class TestController {
 		return "header/starredTask";
 	}
     
-	   @RequestMapping("/list.htm")
-	    public String list(int sid, HttpServletRequest request) {
-	       
-	    	System.out.println("list sid : " + sid);
-	    	
-	        StepListService service = new StepListService();
-	        int pid = service.getProjectIdByStepId(sid);
-	        System.out.println(pid);
-	        request.getSession().setAttribute("sid", sid);
-	        request.getSession().setAttribute("pid", pid);
-	        
-	        return "step/list";
-	    }
 
-    
     
     @RequestMapping("/workload.htm")
     public String workLoad() {

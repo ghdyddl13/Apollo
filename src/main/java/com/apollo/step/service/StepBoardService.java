@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.vo.TaskDTO;
+import com.apollo.vo.TaskinstepDTO;
 import com.apollo.vo.TstatusDTO;
 
 @Service
@@ -33,6 +34,25 @@ public class StepBoardService {
 		}
 		return result;
 	}
+	
+	public int insertBoardTaskInStep(int tid, int sid) {
+		System.out.println("tid : " + tid + "/ sid : " + sid);
+		int result = 0;
+		try {
+			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
+			
+			TaskinstepDTO dto = new TaskinstepDTO();
+			dto.setSid(sid);
+			dto.setTid(tid);
+			
+			result = dao.insertBoardTaskInStep(dto);
+			System.out.println("result : " + result);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	
 	
 	/**
 	 * 
@@ -59,17 +79,13 @@ public class StepBoardService {
 	 */
 
 	public ArrayList<TstatusDTO> selectTstatusBySid(int sid) {
-		System.out.println("보드 서비스 들어왔다 : " + sid);
 		ArrayList<TstatusDTO> result = null;
 		try {
 			StepDAO dao = sqlsession.getMapper(StepDAO.class);
-			System.out.println(" sess-board " + sqlsession);
 			result = dao.selectTstatusBySid(sid);
 		}catch (Exception e) {
 		   System.out.println(e.getMessage());
 		}
-		
-		System.out.println("result : " + result);
 		return result;
 	}
 	
