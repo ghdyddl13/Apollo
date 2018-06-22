@@ -16,6 +16,7 @@ import com.apollo.vo.CommentDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
+import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TstatusDTO;
 
 @Controller
@@ -63,7 +64,7 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/getTask.htm")
-	public View getTask(String tid, HttpSession session, Model model) {
+	public View getTask(int tid, HttpSession session, Model model) {
 
 	String pid = (String) session.getAttribute("pid");
     String mid = (String) session.getAttribute("mid");
@@ -118,7 +119,6 @@ public class TaskController {
 	
 	}
 	
-	
 	/**
 	 * 
 	 날      짜 : 2018. 6. 20.
@@ -137,16 +137,54 @@ public class TaskController {
 		
 		//pid는 지금은 그냥 가정
 		String pid = "18";
-		
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    }else {
 	    	return null;
 	    }
+	    
+	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : step 삭제
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/deletestepintaskmodal.htm")
+	public View deleteStepInTaskModal(int tid, int sid, Model model) {
+	
+		TaskInStepDTO dto = new TaskInStepDTO();
+		dto.setSid(sid);
+		dto.setTid(tid);
+		
+		int result = service.deleteStepInTaskModal(dto);
+		System.out.println("스텝이 지워졌니? : " + result);
+		
+		ArrayList<StepDTO> steplist = new ArrayList();
+		steplist = service.getStepid(tid);
+		model.addAttribute("steplist_after_delete_step", steplist);
+		
+		return jsonview;
 	}
 	
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 해당 task가 몇 개의 step에 속해 있는지 확인
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/counttaskinstep.htm")
+	public View countTaskInStep(int tid, Model model) {
+	
+		int result = service.countTaskInStep(tid);
+		System.out.println("몇 개의 스텝이니? : " + result);
+		model.addAttribute("countresult", result);
+		
+		return jsonview;
+	}
 	
 	
 	

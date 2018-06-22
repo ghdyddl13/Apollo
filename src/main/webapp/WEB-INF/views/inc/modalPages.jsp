@@ -395,6 +395,7 @@
 					<input type="text" placeholder="코멘트 입력.." class="">
 					<input id="Task_Modal_enter_comments" type="button" value="전송">
 					<input type="hidden" id="tidhidden" value="">
+					<input type="hidden" id="stepdeletehidden" data-toggle="modal" data-target="#step_delete_Modal">
 					
 					
 			 	</div>
@@ -531,7 +532,6 @@
 		</div>
 	</div>
 	
-	
 
 	<!-- 스텝 수정 Modal 창 -->
 <div class="modal fade" id="update-step" role="dialog">
@@ -628,10 +628,37 @@
 					<input type="button" class="btn cancel-btn"
 						data-dismiss="modal" value="취소">
 				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- TaskInStep 돌고 1:1 매핑일때 스텝 삭제 모달창 -->
+	<div class="modal fade" id="step_delete_Modal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" id="task_delete_dismiss_btn">&times;</button>
+					<h4 class="modal-title">Step 삭제</h4>
+				</div>
+				
+				<div class="modal-body" style="text-align:center">
+				<h4>해당 Task가 속한 마지막 Step을 삭제하면 Task도 같이 삭제됩니다.<br>
+				진행하시겠습니까?<br><h5 style="color:red">(삭제 후 복구 불가능합니다)</h5></h4>					
+
+					<div align="center">
+						<input type="button" class="btn add-btn" id="task_trash_btn" value="삭제">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
+				</div>
 				<br>
 			</div>
 		</div>
 	</div>
+
 
 	<!-- Step 삭제 Modal 창 -->
 	<div class="modal fade" id="delete-step" role="dialog">
@@ -658,3 +685,4 @@
 			</div>
 		</div>
 	</div>
+

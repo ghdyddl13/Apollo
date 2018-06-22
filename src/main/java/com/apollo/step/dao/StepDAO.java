@@ -69,6 +69,8 @@ public interface StepDAO {
 	 작성자명 : 박 민 식
 	 */
 	public int moveStep(StepDTO stepdto);
+	
+	public ArrayList<StepDTO> getStepsid(int tid);
 
 	/**
 	 * 
