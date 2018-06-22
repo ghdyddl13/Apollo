@@ -74,5 +74,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="countTaskInStep" resultType="Integer">
 		select count(*) from taskinstep where tid = #{tid}
 	</select>    
-
+	
+	<update id="changeTstatus" parameterType="com.apollo.vo.TidvalueDTO">
+		update task set tstatusid = #{value} where tid = #{tid}
+	</update>
+	
 </mapper>

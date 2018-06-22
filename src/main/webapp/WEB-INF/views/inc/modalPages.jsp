@@ -322,8 +322,8 @@
 							
 				<!-- row 2 -->
 				<div class="row">
-					<div class="col-sm-3" id="Task_Modal_tstatus">
-							<select>
+					<div class="col-sm-3">
+							<select id="Task_Modal_tstatus_selectbox">
 							<option>New</option>
 							<option>Development</option>
 							<option>Testing</option>

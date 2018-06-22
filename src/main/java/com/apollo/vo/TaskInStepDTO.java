@@ -15,7 +15,4 @@ public class TaskInStepDTO {
    public void setTid(int tid) {
       this.tid = tid;
    }
-
-   
-
 }
