@@ -4,7 +4,7 @@ import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidpidDTO;
 
 public interface MemberDAO {
-	public ArrayList<MemberDTO> getProjectMemberlist(String pid);
+	public ArrayList<MemberDTO> getProjectMemberlist(int pid);
 	
 	public ArrayList<MemberDTO> getMemberlist(String pid);
 	

@@ -395,6 +395,7 @@
 					<input type="text" placeholder="코멘트 입력.." class="">
 					<input id="Task_Modal_enter_comments" type="button" value="전송">
 					<input type="hidden" id="tidhidden" value="">
+					<input type="hidden" id="tnamehidden" value="">
 					<input type="hidden" id="stepdeletehidden" data-toggle="modal" data-target="#step_delete_Modal">
 					
 					

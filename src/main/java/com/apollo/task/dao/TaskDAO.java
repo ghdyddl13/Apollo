@@ -2,6 +2,7 @@ package com.apollo.task.dao;
 
 import java.util.ArrayList;
 
+import com.apollo.vo.CommentDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
@@ -22,5 +23,7 @@ public interface TaskDAO {
 	public int deleteStepInTaskModal(TaskInStepDTO dto);
 	public int countTaskInStep(int tid);
 	public int changeTstatus(TidvalueDTO dto);
+	public int insertComment(CommentDTO commentdto);
+	public String getTaskModifierName(String mid);
 	
 }

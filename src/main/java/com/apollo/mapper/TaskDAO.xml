@@ -65,6 +65,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="changeTstatus" parameterType="com.apollo.vo.TidvalueDTO">
 		update task set tstatusid = #{value} where tid = #{tid}
 	</update>
-    
+	
+	<insert id="insertComment" parameterType="com.apollo.vo.CommentDTO">
+		insert into comments values(seq_cmtid.nextval, #{comments}, #{tid}, #{mid}, #{cmtkind}, TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	
+	<select id="getTaskModifierName" parameterType="String" resultType="String">
+		select mname from member where mid = #{mid}
+	</select>    
     
 </mapper>
