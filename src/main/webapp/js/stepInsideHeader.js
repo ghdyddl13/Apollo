@@ -26,7 +26,6 @@ $(function() {
 			url:"board.htm",
 			dataType:"html",
 			success:function(data){
-				console.log
 				$("#main-box").empty();
 				$("#main-box").append(data);
 			}

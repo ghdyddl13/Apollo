@@ -6,6 +6,7 @@ import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
 
+
 public interface TaskDAO {
 
 	public ArrayList<TaskDTO> getTasks(String pid);
@@ -14,6 +15,8 @@ public interface TaskDAO {
 	public ArrayList<TaskDTO> getTasksInSteps(String sid);
 	public ArrayList<TaskDTO> getTasksByStepId(int sid);	
 	public int updateTask(TaskDTO taskdto);
+	public int insertBoardTask(TaskDTO taskdto);
+	public int insertBoardTaskInStep(TaskInStepDTO dto);
 	public TaskDTO getTask(int tid);
 	public int addStar(StarredTaskDTO dto);
 	public int deleteStar(StarredTaskDTO dto);
