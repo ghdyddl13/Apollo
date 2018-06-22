@@ -24,3 +24,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from folder where fid=#{fid}
 	</delete>
 </mapper>
+

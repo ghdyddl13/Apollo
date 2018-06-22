@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.apollo.task.dao.CommentDAO">
+	<insert id="insertComment" parameterType="com.apollo.vo.CommentDTO">
+		<selectKey keyProperty="cmtid" resultType="int" order="BEFORE">
+		    select seq_cmtid.nextval FROM DUAL
+		</selectKey>
+		insert into comments values(#{cmtid},#{comments}, #{tid}, #{mid},
+		#{cmtkind}, sysdate)
+	</insert>
+	<select id="selectCommentMidlist" resultType="String" parameterType="integer">
+		select mid from ASSIGNEE where tid = #{tid}
+	</select>
+
+	<insert id="insertReceiver" parameterType="hashmap">
+		insert into RECEIVER VALUES	(#{cmtid}, 	#{mid},0)
+	</insert>
+</mapper>

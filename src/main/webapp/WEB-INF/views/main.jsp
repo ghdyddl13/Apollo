@@ -42,7 +42,8 @@
 <!-- Project Page Table 관련 -->
 <script type="text/javascript" src="js/project_table.js"></script>
 <link rel="stylesheet" href="css/project_table.css" />
-
+<!-- stream css -->
+<link href="css/stream.css" type="text/css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>

@@ -37,7 +37,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      	ctime=TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS')
     	where tid= #{tid}
     </update>
-
     <insert id="insertBoardTask" parameterType="com.apollo.vo.TaskDTO">
     	 <selectKey keyProperty="tid" resultType="int" order="BEFORE">
         	  select seq_tid.nextval FROM DUAL

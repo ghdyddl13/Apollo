@@ -157,25 +157,6 @@ public class InboxController {
 	 기      능 : stream 데이터 가져오는 controller
 	 작성자명 : 신 호 용
 	 */
-	@RequestMapping("/stream.htm")
-	public String stream(HttpSession session,Model model) {
-		System.out.println("stream controller");
-		String mid = (String)session.getAttribute("mid");
-		System.out.println(mid);
-		ArrayList<CommentDTO> streamlist = service.getStreamlist("testid1");//테스트용 아이디
-		model.addAttribute("streamlist", streamlist);
-/*		
-		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd", Locale.KOREA);
-		java.util.Date currenttime = new java.util.Date();
-		
-		Calendar cal = Calendar.getInstance();
-	    cal.setTime(currenttime);
-	    String today = formatter.format (cal.getTime());
-	    
-	    System.out.println (today);
-		model.addAttribute("today", today);
-		model.addAttribute("inbox", "incomming");*/
-		return "header/stream";
-	}
+
 	
 }

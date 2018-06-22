@@ -1,0 +1,15 @@
+@charset "UTF-8";
+.stream-main-container{
+    background: rgb(239, 239, 243);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.stream_main{
+	display : inline-block;
+	background: white;
+	width:50%;
+	text-align: left;
+	
+}

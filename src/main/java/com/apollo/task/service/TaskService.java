@@ -2,10 +2,15 @@ package com.apollo.task.service;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.StarredTaskDAO;
@@ -13,6 +18,7 @@ import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.StarredTaskDTO;
+import com.apollo.task.dao.CommentDAO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
@@ -90,10 +96,8 @@ public class TaskService {
 		ArrayList<TstatusDTO> tstatuslist = new ArrayList();
 		TstatusDAO tstatusdao = session.getMapper(TstatusDAO.class);
 		tstatuslist = tstatusdao.getTstatuslist(pid);
-		
 		return tstatuslist;
 	}
-	
 	/**
 	 * 
 	 날      짜 : 2018. 6. 20.
@@ -208,7 +212,6 @@ public class TaskService {
 	 작성자명 : 김 정 권
 	 */
 	public int insertComment(CommentDTO commentdto) {
-		
 		System.out.println("insertComment 서비스 메소드 실행");
 		TaskDAO taskdao = session.getMapper(TaskDAO.class);
 		int result = taskdao.insertComment(commentdto);
@@ -228,7 +231,41 @@ public class TaskService {
 		TaskDAO taskdao = session.getMapper(TaskDAO.class);
 		String name = taskdao.getTaskModifierName(mid);
 		return name;
+	}
+
+	public int insertInboxComment(CommentDTO commentdto){
+		System.out.println("!!인서트 코멘트 서비스!!");
+		CommentDAO commentdao = session.getMapper(CommentDAO.class);
+		Map map = new HashMap();
 		
+		 int insertcmt =commentdao.insertComment(commentdto);
+		 System.out.println("!!코멘트 테이블에 인서트 성공?!!"+ insertcmt);
+		 int pid = commentdto.getTid();
+	
+		 
+		 List<String> midlist = commentdao.selectCommentMidlist(pid);
+		 System.out.println("!!코멘트 태스크아이디에 할당된 멤버 아이디 select 성공??!!");
+		 
+		 
+		 map.put("cmtid", commentdto.getCmtid());
+		 int result = 0;
+		 boolean exist = false;
+		 for(int i =0 ;i<midlist.size();i++) {
+			 if(midlist.get(i).equals(commentdto.getMid())){
+				 exist = true;
+			 }
+			 map.put("mid", midlist.get(i));
+			 result = commentdao.insertReceiver(map);
+			 System.out.println("!!리시버 테이블에 인서트중!!");
+		 }
+		 
+		 if(exist == false) {
+			 map.put("mid", commentdto.getMid());
+			 result = commentdao.insertReceiver(map);
+			 System.out.println("!!그 테스크에 할당된 사람이 아니어도 보낸 사람이면 넣어줌!!");
+		 }
+		 System.out.println("!!리시버 테이블에 인서트 성공??!!");
+		 return result;
 	}
 	
 	
