@@ -491,7 +491,7 @@
 				<div class="modal-body" style="text-align:center">
 				<form id="delete-folder-form" method="post">
 					<p>해당  폴더를 삭제하시겠습니까?</p>
-					<p>(삭제 후 복구 불가능합니다)</p>
+					<p>(삭제시 해당 폴더는 복구 불가능하며, 폴더에 속한 스텝도 삭제됩니다.)</p>
 					<input type="hidden" name="fid" id="delete-folder-fid">
 				</form>
 				</div>
@@ -633,3 +633,28 @@
 		</div>
 	</div>
 
+	<!-- Step 삭제 Modal 창 -->
+	<div class="modal fade" id="delete-step" role="dialog">
+		<div class="modal-dialog modal-delete-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Step 삭제</h4>
+				</div>
+				<div class="modal-body" style="text-align:center">
+				<form id="delete-step-form" method="post">
+					<p>해당 스텝을 삭제하시겠습니까?</p>
+					<p>(삭제시 해당 스텝은 영구삭제되며, 해당 스텝에 속한 task도 삭제됩니다)</p>
+					<input type="hidden" name="sid" id="delete-step-sid">
+				</form>
+				<div align="center">
+					<input type="button" class="btn delete-btn" id="delete-step-btn" value="삭제">&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn cancel-btn"
+						data-dismiss="modal" value="취소">
+				</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>

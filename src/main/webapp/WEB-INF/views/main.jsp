@@ -39,6 +39,10 @@
 <link href="css/project.css" type="text/css" rel="stylesheet">
 <!-- SIDEBAR JAVASCRIPT _RY -->
 <script type="text/javascript" src="js/sidebar_raeyoung.js"></script>
+<!-- Project Page Table 관련 -->
+<script type="text/javascript" src="js/project_table.js"></script>
+<link rel="stylesheet" href="css/project_table.css" />
+
 <title>Insert title here</title>
 </head>
 <body>

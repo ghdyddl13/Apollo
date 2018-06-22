@@ -2,6 +2,7 @@ package com.apollo.step.dao;
 import java.util.ArrayList;
 import java.util.List;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TstatusDTO;
 
 public interface StepDAO {
@@ -76,4 +77,20 @@ public interface StepDAO {
 	 작성자명 : 김 래 영
 	 */
 	public int updateStep(StepDTO stepdto);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : sid 에 속한 task 삭제 (선행)
+	 작성자명 : 김 래 영
+	 */
+	public int deleteTaskInStep(int sid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : sid 로 step 삭제 (후행)
+	 작성자명 : 김 래 영
+	 */
+	public int deleteStep(int sid);
 }
