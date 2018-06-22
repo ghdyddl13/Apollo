@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getTasksByStepId"  resultType="com.apollo.vo.TaskDTO">
     select t.*, s.tstatus, s.color 
     from task t join tstatus s on t.tstatusid = s.tstatusid 
-    where tid in (select tid from taskinstep where sid= #{sid})
+    where tid in (select tid from taskinstep where sid= #{sid}) order by t.ctime
     </select>
     
     <update id="updateTask" parameterType="com.apollo.vo.TaskDTO">
@@ -37,10 +37,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      	ctime=TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS')
     	where tid= #{tid}
     </update>
-    
+
+    <insert id="insertBoardTask" parameterType="com.apollo.vo.TaskDTO">
+    	 <selectKey keyProperty="tid" resultType="int" order="BEFORE">
+        	  select seq_tid.nextval FROM DUAL
+   		 </selectKey>
+    	insert into task(tid, tname, pid, ctime, tstatusid) values(#{tid}, #{tname}, #{pid}, sysdate, #{tstatusid})
+    </insert>
+
+    <insert id="insertBoardTaskInStep" parameterType="com.apollo.vo.TaskInStepDTO">
+    	insert into taskinstep values(#{sid}, #{tid})
+    </insert>
+  
+
     <select id="getTask" parameterType="String" resultType="com.apollo.vo.TaskDTO">
     	select * from task where tid = #{tid}
     </select>
+
     
     <insert id="addStar" parameterType="com.apollo.vo.StarredTaskDTO">
     	insert into starredtask values(#{mid}, #{tid})
@@ -49,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteStar" parameterType="com.apollo.vo.StarredTaskDTO">
     	delete from starredtask where mid = #{mid} and tid = #{tid}
     </delete>
-    
+
     <delete id="deleteTask">
     	delete from task where tid = #{tid}
     </delete>
@@ -61,6 +74,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="countTaskInStep" resultType="Integer">
 		select count(*) from taskinstep where tid = #{tid}
 	</select>    
-    
-    
+
 </mapper>
