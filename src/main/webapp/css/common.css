@@ -257,6 +257,10 @@ width:40px;
    padding-left: 20px;
 }
 
+.side-dir-project{
+   padding-left: 20px;
+}
+
 .side-dir a {
    font-size: 12px
 }

@@ -108,7 +108,7 @@ $(function() {
 				dropdown += '<li data-toggle="modal" data-target="#move-project"  id="side-restart-project">재진행</li>'
 				dropdown += '<li data-toggle="modal" data-target="#update-project"  id="side-update-project">수정</li>'
 				dropdown += '<li data-toggle="modal" data-target="#move-project" id="side-delete-project">삭제</li>'
-			}else if(p_location == "trash-bean"){
+			}else if(p_location == "trash-bin"){
 				dropdown += '<li data-toggle="modal" data-target="#move-project"  id="side-restart-project">진행중인 프로젝트로 복구</li>'
 				dropdown += '<li data-toggle="modal" data-target="#move-project" id="side-complete-project">완료 프로젝트로 복구</li>'
 					
@@ -229,7 +229,7 @@ $(function() {
 					switch(pdata.pstatuscode){
 					case "1": moveto="#working-project"; break;
 					case "2": moveto="#finished-project"; break;
-					case "3": moveto="#trash-bean"; break;	 
+					case "3": moveto="#trash-bin"; break;	 
 					}
 					$("#p"+pdata.pid).remove().appendTo(moveto);
 				}else{
@@ -269,6 +269,10 @@ $(function() {
 
 		$(document).on("contextmenu",".side-step",function(event) {
 			var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
+			var folder_wrapper= $(this).parents("div.side-folder-wrapper")[0];
+			/*var fid = folder_wrapper.id.substr(7);*/
+			var fid= (folder_wrapper)?folder_wrapper.id.substr(8):"";
+			console.log(fid);
 			var pid = project_wrapper.id.substr(1);
 			var sid= this.id.substr(1);
 			console.log("스텝 우 클릭시 sid " + sid);
@@ -277,6 +281,7 @@ $(function() {
 			var dropdown_ul = document.createElement("ul");
 			var dropdown ='<input type="hidden" name="pid" value='+pid+'>';
 			dropdown +=	'<input type="hidden" name="sid" value='+sid+'>';
+			dropdown +=	'<input type="hidden" name="fid" value='+fid+'>';
 			dropdown += '<li id="side-update-step" data-action="second" data-toggle="modal" data-target="#update-step">수정</li>'
 			dropdown += '<li data-toggle="modal" data-target="#move-step" id="side-step-move">이동</li>'
 			dropdown += '<li id="side-delete-step" data-action="third" data-toggle="modal" data-target="#delete-step">삭제</li>'
@@ -292,19 +297,62 @@ $(function() {
 		// 사이드바 스텝 이동 버튼 클릭시
 		
 		$(document).on("click","#side-step-move",function(){
-			$("#move-step-select").selectmenu();
+			$("#move-step-select").selectmenu({
+											width:"70%",
+											open: function(event, ui){	
+												console.log("here"),
+												$(".ui-front").css("zIndex","1200")}
+											
+											});
+												
 			var custom_menu =  $(this).parents("ul.custom-menu")[0];
 			var pid =  $(custom_menu).find("input[name=pid]").val();
 			var pids = [pid];
 			var sid =  $(custom_menu).find("input[name=sid]").val();
-			console.log(pid);
-			console.log(sid);
+			var fid =  $(custom_menu).find("input[name=fid]").val();
+			
+			$("#move-step-sid").val(sid);
 			$.when(selectFolderList(pids)).done(function(data){
 				console.log(data.folderlist);
-				
+				var optiondefault = jQuery("<option>",{"text":"폴더 밖으로 이동","value":""})
+				$("#move-step-select").empty();
+				$(optiondefault).appendTo($("#move-step-select"));	
+				$(data.folderlist).each(function(index,folder){
+					var option = jQuery("<option>",{"text":folder.fname,
+													"value":folder.fid});
+					if(folder.fid==fid){
+						option.attr("selected",true);
+
+					}
+					$(option).appendTo($("#move-step-select"));								
+				});
 			});
 		});
 		
+		///// 스텝이동 모달창에서 확인버튼 클릭 시 
+		$(document).on("click","#move-step-btn",function(){
+			var movestep = $("#move-step-form").serialize();
+			console.log(movestep);
+			$.ajax({
+				url:"moveStep.htm",
+				data:movestep,
+				type:'post',
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					if(data.result==1){
+						var step = data.stepDTO;
+						if(step.fid !=""){
+							$("#s"+step.sid).remove().appendTo("#f-dir"+step.fid);
+						}else{
+							var default_ = $("#s"+step.sid).parents("div.side-dir-project")[0];
+							console.log(default_);
+							$("#s"+step.sid).remove().appendTo(default_);
+						}
+					}
+				}
+			})
+		})
 		
 		
 		// 사이드 우클릭 메뉴 닫는 함수
@@ -634,7 +682,7 @@ function selectProjectList(){
    console.log("프로젝트 실행");
    $("#working-project").empty();
    $("#finished-project").empty();
-   $("#trash-bean").empty();
+   $("#trash-bin").empty();
    var dfd = $.Deferred(); // 비동기 함수의 순서를 정해주기 위해(동기화) Defferred의 객체의 Promise를 활용한다.
    var pids=[];
    $.ajax({
@@ -654,7 +702,7 @@ function selectProjectList(){
                var span = jQuery("<span>",{"class":"glyphicon glyphicon-duplicate", 
                   "data-toggle":"collapse",
                   "data-target":"#p-dir"+el.pid})
-               var div = jQuery("<div>",{"class":"side-dir  collapse",
+               var div = jQuery("<div>",{"class":"side-dir-project  collapse",
                   "id": "p-dir"+el.pid});
                   
                console.log(el.pstatuscode);
@@ -667,7 +715,7 @@ function selectProjectList(){
                }else if(el.pstatuscode ==2){
                   $(wrapper).appendTo("#finished-project");
                }else if(el.pstatuscode==3){
-                  $(wrapper).appendTo("#trash-bean");
+                  $(wrapper).appendTo("#trash-bin");
                }
             })
          }else{ // 참여중인 프로젝트가 없을 경우 
@@ -718,8 +766,7 @@ function makeSideSubDir(pids){
       if(folders!=null){ //폴더가 하나라도 있다면 만들어 붙혀주세요
          
          $(folders).each(function(index,folder){
-
-           var wrapper_div = jQuery("<a>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
+        	var wrapper_div = jQuery("<div>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
             var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
             var span = jQuery("<span>",{"class":"glyphicon glyphicon-folder-close", 
                                  "data-toggle":"collapse",
