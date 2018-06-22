@@ -14,7 +14,7 @@ public class TaskDTO {
 	private int tstatusid;
 	private String tstatus;
 	private String color;
-
+	private int sid;
 	
 	
 	
@@ -169,14 +169,26 @@ public class TaskDTO {
 		this.color = color;
 	}
 
+	
 
 
+	public int getSid() {
+		return sid;
+	}
+
+
+
+
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
 
 	@Override
 	public String toString() {
 		return "TaskDTO [tid=" + tid + ", tname=" + tname + ", sday=" + sday + ", eday=" + eday + ", detail=" + detail
-				+ ", pid=" + pid + ", importance=" + importance + ", ctime=" + ctime + ", statusid=" + tstatusid
-				+ ", tstatus=" + tstatus + ", color=" + color + "]";
+				+ ", pid=" + pid + ", importance=" + importance + ", ctime=" + ctime + ", tstatusid=" + tstatusid
+				+ ", tstatus=" + tstatus + ", color=" + color + ", sid=" + sid + "]";
 	}
+	
 	
 }

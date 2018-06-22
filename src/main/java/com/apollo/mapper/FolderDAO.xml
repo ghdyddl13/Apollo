@@ -23,4 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteFolder">
 		delete from folder where fid=#{fid}
 	</delete>
+	
+<!-- 	<select id="getFolder" parameterType="Integer" resultType="com.apollo.vo.FolderDTO">
+		select fid from folder where pid = #{pid}
+    </select> -->
 </mapper>

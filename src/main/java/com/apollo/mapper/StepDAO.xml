@@ -59,4 +59,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update step set fid=#{fid} where sid=#{sid}
 	</update>
 
+	<select id="getStepInProject" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
+    	select * from step where pid = #{pid}
+    </select>
+	
 </mapper>

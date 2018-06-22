@@ -1,4 +1,5 @@
 package com.apollo.step.dao;
+
 import java.util.ArrayList;
 import java.util.List;
 import com.apollo.vo.StepDTO;
@@ -97,4 +98,13 @@ public interface StepDAO {
 	 작성자명 : 김 래 영
 	 */
 	public int deleteStep(int sid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : pid로 step 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<StepDTO> getStepInProject(int pid);
+
 }

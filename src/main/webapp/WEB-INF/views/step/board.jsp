@@ -16,7 +16,7 @@
 
 <script>
 //task 생성하기 위해 이름 입력하는 text 창 생성
-/* function addCardView(e, tstatusid) {
+ function addCardView(e, tstatusid) {
    console.log("addcardview 왓낭 : " + e + " / " + tstatusid)
    var div = "<div class='' id='addcard'>" +
          "<input class='inputtext' type='text' placeholder='task 이름을 입력하세요' name='title' >" +
@@ -26,18 +26,14 @@
 
    
 
-function addTaskView(tstatusid){
-   
-}
 
-
-} */
+} 
 
 
 
 
 //task 생성 성공
-/* function addCard(obj, tstatusid){
+ function addCard(obj, tstatusid){
    console.log("addCard 들어왔어요");
    var parent = $(obj).closest('div')
    var value = parent[0].firstChild.value //cardname
@@ -59,17 +55,17 @@ function addTaskView(tstatusid){
          }  
       })
    }  
-} */
+} 
    
-$(function() {
+/* $(function() {
     $(document).on("click","#task-adder",function() {
    $("#task-adder").remove();
-   let inputtag="<div class='list-task-adder-addmode'><input class='form-control' id='insert-task' name='tname' type='text' placeholder='새로운 작업을 입력하세요'></div>"
+   let inputtag="<div class='board-task-adder-addmode'><input class='form-control' id='insert-task' name='tname' type='text' placeholder='새로운 작업을 입력하세요'></div>"
    $("#body-start").prepend(inputtag);
    $("#insert-task").focus();
  })
  $(document).on("keyup","#insert-task",function(event) {
-   let addtag="<div class='list-task-adder' id='task-adder'></div>";
+   let addtag="<div class='board-task-adder' id='task-adder'></div>";
    if(event.which==13){
      let newtask=$.trim($(this).val());
      if(newtask===""){
@@ -77,7 +73,7 @@ $(function() {
      }else{
        console.log(newtask);
      $("#insert-task").val("");
-       /*
+       
        $.ajax(
                {
                  type:"POST",
@@ -88,18 +84,18 @@ $(function() {
                  }
                }
        )
-       */
+       
      }
    }
  });
  $(document).on("focusout","#insert-task",function() {
    let newtask = $.trim($(this).val());
-   let addtag="<div class='list-task-adder' id='task-adder'>New task</div>";
+   let addtag="<div class='board-task-adder' id='task-adder'>New task</div>";
    if(newtask===""){//빈 문자일 경우 그냥 바로 나온다
-     $(".list-task-adder-addmode").remove();
+     $(".board-task-adder-addmode").remove();
      $("#body-start").prepend(addtag);
    }else{
-     /*
+     
      $.ajax(
              {
                type:"POST",
@@ -110,12 +106,12 @@ $(function() {
                }
              }
      )
-     */
-     $(".list-task-adder-addmode").remove();
+     
+     $(".board-task-adder-addmode").remove();
      $("#body-start").prepend(addtag);
    }
  })
-  })   
+  })    */
    
    
    //board에서 나오는 status 목록 width 크기 지정하는 함수
@@ -254,12 +250,12 @@ $(function() {
    
 }
 
-.list-task-adder_containers{
+.board-task-adder_containers{
     box-sizing: border-box;
     position: relative;
     background-color: #fff;
     }
-.list-task-adder{
+.board-task-adder{
     border:1px solid black;
     background: url("img/adder.png") no-repeat 49px center #fff;
     display: block;
@@ -275,7 +271,7 @@ $(function() {
     cursor: pointer;
     list-style: none;
     }
-.list-task-adder-addmode{
+.board-task-adder-addmode{
     border:1px solid black;
     height:50px;
     width: 220px;
@@ -308,16 +304,16 @@ $(function() {
                
                </p>
                <hr id="board-hr" style="background-color:${b.color};">
-                 <%-- <div class="listbox">
+                  <div class="listbox">
                          <div class="listtitle" id="listnum">
                                <a class="cardcreate" onclick="addCardView(this, ${b.tstatusid})">Add a card...</a>
                          </div>
-                    </div> --%>
-                    <div class="list-task-adder_containers" id="body-start">
-                    <div class="list-task-adder" id="task-adder">
-						<input type="hidden" id="board-tstatusid" value="${b.tstatusid}">
+                    </div> 
+                   <%-- <div class="board-task-adder_containers" id="body-start">
+                    <div class="board-task-adder" id="task-adder" onclick="addTaskView(${b.tstatusid})">
+                         New Task
                     </div>
-                   </div>
+                   </div>--%>
                     
                
                <ul id="board-sortable" class="tstatuslist">
