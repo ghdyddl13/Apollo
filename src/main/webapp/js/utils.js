@@ -272,6 +272,7 @@ $(document).on("click","#task_trash_btn",function(){
 		           },
 		           success : function(rdata){
 		        	   
+	        		     $('#taskinstep_delete_dismiss_btn').click();
 		        	     $('#task_delete_dismiss_btn').click();
 		        	     $('#task_dismiss_btn').click();
 		        	     
@@ -297,11 +298,6 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 	var tid = $('#tidhidden').attr('value');
 	var sid = $(this).attr('id');
 	
-	console.log('step이 왜 안지워질까?')
-	console.log('응?')
-	console.log('tid : ' + tid)
-	console.log('sid : ' + sid)
-	
 	$.ajax(
 		       {
 		           type : "post",
@@ -312,6 +308,7 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 		           success : function(rdata){
 		        	   
 		        	   var count = rdata.countresult;
+		        	   console.log('count는 : ' + count)
 		        	   
 		        	   $.ajax(
 		        		       {
@@ -326,20 +323,22 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 		        		        	   console.log(rdata);
 
 		        		        	   if(count == 1) {
-		        		        		   $('#step_delete_Modal').click();
+		        		        		   $('#stepdeletehidden').click();
+		        		        		   
+		        		        	   } else {
+		        		        		   
+		        		        		// step name
+			        		        	   $('#Task_Modal_snames').empty();
+			        		        	   
+			        		        	   var snames = '<br>'
+			        		        	   $(rdata.steplist_after_delete_step).each(function(){
+			        		        		   var sname = this.sname;
+			        		        		       snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + sname + '&nbsp&nbsp' + '<i class="far fas fa-times task_page_delete_step_btn" style="color:#808B96" id="' + this.sid + '"></i></span>';
+			        		        	   });
+			        		        	   snames += '<i class="fas fa-plus-circle"></i>'
+			        		        	   $('#Task_Modal_snames').append(snames);
+			        		        	   
 		        		        	   }
-		        		        	   
-		        		        	   // step name
-		        		        	   $('#Task_Modal_snames').empty();
-		        		        	   
-		        		        	   var snames = '<br>'
-		        		        	   $(rdata.steplist_after_delete_step).each(function(){
-		        		        		   var sname = this.sname;
-		        		        		       snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + sname + '&nbsp&nbsp' + '<i class="far fas fa-times task_page_delete_step_btn" style="color:#808B96" id="' + this.sid + '"></i></span>';
-		        		        	   });
-		        		        	   snames += '<i class="fas fa-plus-circle"></i>'
-		        		        	   $('#Task_Modal_snames').append(snames);
-		        		        	   
 		        		        	   
 		        		           } // end-success
 		        		        }); // end-ajax
