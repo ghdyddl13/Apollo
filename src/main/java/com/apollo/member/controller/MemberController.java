@@ -352,14 +352,14 @@ public class MemberController {
 	 기      능 : 프로필 사진 클릭시 프로필모달에 들어갈 멤버정보 불러오기
 	 작성자명 : 김 래 영
 	 */
-	@RequestMapping("/profilememberlist.htm")
-	public View getProfileInfoMemberList(String mid, Model model) {
-		System.out.println("프로필에 들어갈 멤버 정보 컨트롤러 들어옴");
-		ArrayList<MemberDTO> profileinfolist = null;
+	@RequestMapping("/profilemember.htm")
+	public View getProfileInfoMember(String mid, Model model) {
+		System.out.println("mid : " + mid);
+		MemberDTO profileinfo = null;
 		try {
-			profileinfolist = service.getProfileInfoMemberList(mid);
-			model.addAttribute("profileinfolist", profileinfolist);
-			System.out.println("profileinfolist : " + profileinfolist);
+			profileinfo = service.getProfileInfoMember(mid);
+			model.addAttribute("profileinfo", profileinfo);
+			System.out.println("profileinfo : " + profileinfo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

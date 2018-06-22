@@ -9,7 +9,7 @@
 <h3>인포메이션</h3>
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 
-<a class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal"><div id="t10">테스트 tid 10</div></a>
+<div class="Task_RUD_Modal" id="t90" data-toggle="modal" data-target="#Task_RUD_Modal">테스트 tid</div>
 
 <div id=projectinfo_outerbox>
   <div class="row" id="projectinfo_first_row"> <!-- row_1 -->
@@ -65,6 +65,8 @@
 	</div>
   </div> <!-- end_row_3 -->
 
+<input type="hidden" id="project_infopage_pid" value="${pid}">
+
 </div> <!-- end_outerbox -->
 
 
@@ -74,7 +76,7 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" id="add_project_member">&times;</button>
 					<h4 class="modal-title">New Project Member</h4>
 				</div>
 				<div class="modal-body ">

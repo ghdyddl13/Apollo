@@ -14,6 +14,7 @@ import com.apollo.task.dao.TstatusDAO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
+import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TstatusDTO;
 
 @Service
@@ -51,7 +52,7 @@ public class TaskService {
 	 기      능 : tid로 task 가져오기
 	 작성자명 : 김 정 권
 	 */
-	public TaskDTO getTask(String tid) {
+	public TaskDTO getTask(int tid) {
 		
 		TaskDTO taskdto = new TaskDTO();
 		TaskDAO taskdao = session.getMapper(TaskDAO.class);
@@ -66,7 +67,7 @@ public class TaskService {
 	 기      능 : tid로 해당 task가 속한 step들 가져오기
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<StepDTO> getStepid(String tid) {
+	public ArrayList<StepDTO> getStepid(int tid) {
 		
 		ArrayList<StepDTO> steplist = new ArrayList();
 		StepDAO stepdao = session.getMapper(StepDAO.class);
@@ -134,6 +135,55 @@ public class TaskService {
 		int result = taskdao.deleteStar(dto);
 		return result;
 	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : task 삭제
+	 작성자명 : 김 정 권
+	 */
+	public int deleteTask(int tid) {
+		
+		System.out.println("delete tid 서비스 탔음");
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.deleteTask(tid);
+		return result;
+	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : task가 속한 스텝 삭제
+	 작성자명 : 김 정 권
+	 */
+	public int deleteStepInTaskModal(TaskInStepDTO dto) {
+		
+		System.out.println("deleteStepInTaskModal 서비스 탔음");
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.deleteStepInTaskModal(dto);
+		return result;
+	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 해당 task가 몇 개의 step에 속해 있는지 확인
+	 작성자명 : 김 정 권
+	 */
+	public int countTaskInStep(int tid) {
+		
+		System.out.println("countTaskInStep 서비스 탔음");
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.countTaskInStep(tid);
+		return result;
+	}
+	
+	
 	
 }
 

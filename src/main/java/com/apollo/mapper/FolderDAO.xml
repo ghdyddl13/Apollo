@@ -14,4 +14,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into folder (fid, fname, pid) 
 		values (seq_fid.nextval, #{fname}, #{pid})
 	</insert>
+	<update id="updateFolder" parameterType="com.apollo.vo.FolderDTO">
+		update folder set fname=#{fname} where fid=#{fid}
+	</update>
+	<select id="selectFolder" resultType="com.apollo.vo.FolderDTO">
+		select * from folder where fid=#{fid}
+	</select>
+	<delete id="deleteFolder">
+		delete from folder where fid=#{fid}
+	</delete>
 </mapper>

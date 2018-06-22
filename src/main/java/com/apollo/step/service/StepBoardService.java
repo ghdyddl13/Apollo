@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.vo.TaskDTO;
-import com.apollo.vo.TaskinstepDTO;
+import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TstatusDTO;
 
 @Service
@@ -41,7 +41,7 @@ public class StepBoardService {
 		try {
 			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
 			
-			TaskinstepDTO dto = new TaskinstepDTO();
+			TaskInStepDTO dto = new TaskInStepDTO();
 			dto.setSid(sid);
 			dto.setTid(tid);
 			

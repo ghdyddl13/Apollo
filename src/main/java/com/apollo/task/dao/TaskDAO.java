@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.TaskDTO;
-import com.apollo.vo.TaskinstepDTO;
+import com.apollo.vo.TaskInStepDTO;
+
 
 public interface TaskDAO {
 
@@ -15,8 +16,12 @@ public interface TaskDAO {
 	public ArrayList<TaskDTO> getTasksByStepId(int sid);	
 	public int updateTask(TaskDTO taskdto);
 	public int insertBoardTask(TaskDTO taskdto);
-	public int insertBoardTaskInStep(TaskinstepDTO dto);
-	public TaskDTO getTask(String tid);
+	public int insertBoardTaskInStep(TaskInStepDTO dto);
+	public TaskDTO getTask(int tid);
 	public int addStar(StarredTaskDTO dto);
 	public int deleteStar(StarredTaskDTO dto);
+	public int deleteTask(int tid);
+	public int deleteStepInTaskModal(TaskInStepDTO dto);
+	public int countTaskInStep(int tid);
+	
 }

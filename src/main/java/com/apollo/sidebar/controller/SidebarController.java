@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import javax.xml.ws.RequestWrapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,7 @@ import com.apollo.vo.FolderDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.TaskDTO;
 
 
 @Controller
@@ -45,13 +49,26 @@ public class SidebarController {
 		return jsonview; //result 가 json 형태로 변환되어 저장
 	}
 
-	public View changeProjectStatus(int i1, Model model) {
-		return null;
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 프로젝트 변경
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping(value="updateProject.htm", method=RequestMethod.POST)
+	public View updateProject(ProjectDTO projectdto, Model model) {
+		System.out.println(projectdto.toString());
+		int result = 0;
+		try {
+			result=sidebarservice.updateProject(projectdto);
+			model.addAttribute("result",result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return jsonview;
 	}
 	
-	public View changeProject(ProjectDTO projectdto) {
-		return null;
-	}
 	
 	@RequestMapping(value="/insertstep.htm", method=RequestMethod.POST)
 	public View insertStep(StepDTO stepdto, Model model) {
@@ -84,6 +101,7 @@ public class SidebarController {
 	@RequestMapping(value="/selectProjectList.htm", method=RequestMethod.POST)
 	public View selectProjectList(Model model,HttpServletRequest request) {
 		String mid =  (String) request.getSession().getAttribute("mid");
+		System.out.println(mid);
 		ArrayList<ProjectDTO> projectlist = null;
 		try {
 			projectlist = sidebarservice.selectProjectList(mid);
@@ -166,12 +184,183 @@ public class SidebarController {
 		return jsonview; 
 		
 	}
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 프로젝트가 없을 때 실행되는 함수
+	 작성자명 : 김 래 영
+	 */
 	@RequestMapping("/noproject.htm")
 	public String noproject() {
 		return "project/noproject";
 		
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : fid 로 폴더 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/selectfolder.htm")
+	public View selectFolder(String fid, Model model) {
+		System.out.println("selectfolder 들어옴");
+		FolderDTO selectfolder = null;
+		try {
+			selectfolder = sidebarservice.selectFolder(fid);
+			model.addAttribute("selectfolder", selectfolder);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+		
+	}	
+	/*
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 폴더 수정
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/updatefolder.htm", method=RequestMethod.POST)
+	public View updateFolder(FolderDTO folderdto, Model model) {
+		System.out.println("update folder");
+		System.out.println(folderdto.toString());
+		int updatefolder = 0;
+		try {
+			updatefolder = sidebarservice.updateFolder(folderdto);
+			model.addAttribute("updatefolder", updatefolder);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+		
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 20.
+	 기      능 : 폴더 삭제 (영구삭제)
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping("/deletefolder.htm")
+	public View deleteFolder(String fid, Model model) {
+		System.out.println("delete folder");
+		int deletefolder = 0;
+		try {
+			deletefolder = sidebarservice.deleteFolder(fid);
+			model.addAttribute("deletefolder", deletefolder);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
 
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 사이드바에서 프로젝트 수정클릭시 정보를 뿌려주기 위해 가져오는 프로젝트 정보 
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping(value="/sideSelectProject.htm",method=RequestMethod.POST)
+	public View SelectProject(int pid, Model model) {
+		ProjectDTO project = null;
+		try {
+			project = sidebarservice.selectProject(pid);
+			model.addAttribute("project",project);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : sid 로 step 정보 가져오기
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/selectstep.htm")
+	public View selectStep(int sid, Model model) {
+		System.out.println("select step 들어옴");
+		System.out.println("sid : " + sid);
+		StepDTO selectstep = null;
+		try {
+			selectstep = sidebarservice.selectStep(sid);
+			model.addAttribute("selectstep", selectstep);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
+	
+	/**
+	 날      짜 : 2018. 6. 21.
+	 기      능 : step 수정
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/updatestep.htm", method=RequestMethod.POST)
+	public View updateStep(StepDTO stepdto, Model model) {
+		System.out.println("update step controller");
+		System.out.println(stepdto.toString());
+		int updatestep = 0;
+		try {
+			updatestep = sidebarservice.updateStep(stepdto);
+			model.addAttribute("updatestep", updatestep);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return jsonview;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 스텝 폴더이동
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping(value="/moveStep.htm", method=RequestMethod.POST)
+	public View moveStep(StepDTO stepdto, Model model) {
+		
+		int result = 0;
+		try {
+			result = sidebarservice.moveStep(stepdto);
+			model.addAttribute("result", result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : sid 에 속한 task 삭제 및 step 삭제 (선행)
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/deletestep.htm", method=RequestMethod.POST)
+	public View deleteTaskInStep(int sid, Model model) {
+		System.out.println("deleteTaskInStep controller");
+		
+		int deletetaskinstep = 0;
+		int deletestep = 0;
+		
+		try {
+			deletetaskinstep = sidebarservice.deleteTaskInStep(sid);
+			model.addAttribute("deletetaskinstep", deletetaskinstep);
+			System.out.println("task delete : " + deletetaskinstep);
+			
+			deletestep = sidebarservice.deleteStep(sid);
+			model.addAttribute("deletestep", deletestep);
+			System.out.println("step : " + deletestep);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+		
+	}
+
+	
 }
 
 

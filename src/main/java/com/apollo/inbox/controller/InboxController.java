@@ -130,7 +130,6 @@ public class InboxController {
 			result = "redirect:/archive.htm";
 		}
 		
-		
 		return result;
 	}
 	/**
