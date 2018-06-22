@@ -79,9 +79,8 @@ $( ".date-im" ).datepicker({
  */
 $(document).on("click",".Task_RUD_Modal",function(){
 
-	
-		var tid = $(this).attr('id'); 
-	    tid = tid.substring(1);   
+		var temptid = $(this).attr('id'); 
+	    var tid = parseInt(temptid.substring(1));   
 		
 		$.ajax(
 			       {
@@ -121,14 +120,33 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   // step name
 			        	   $('#Task_Modal_snames').empty();
 			        	   
+			        	   /////////////////////////////////
+			        	   var stepnamesarr = [];
+			        	   $(rdata.steps).each(function(){
+			        		   stepnamesarr.push(this.sid);
+			        	   });			        	   
+			        	   /////////////////////////////////
+			        	   
 			        	   var snames = '<br>'
 			        	   $(rdata.steps).each(function(){
-			        		   var sname = this.sname;
-			        		       snames += '<span>' + sname + '</span>';
+			        		   console.log('여기여기')
+			        		   console.log(rdata.steps)
+			        		   snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + this.sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
 			        	   });
 			        	   snames += '<i class="fas fa-plus-circle"></i>'
 			        	   $('#Task_Modal_snames').append(snames);
+				        	   
 			        	   
+//			        	   var snames = '<br>'
+//				        
+//			        	   for(var i = 0; i < rdata.steps.length; i++){
+//		        		   snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + rdata.steps[i].sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer">' 
+//		        		   snames += '<input type="hidden" class="sid" value="'+ rdata.steps[i].sid +'"></i></span>';
+//			        	   }
+//			        	   snames += '<i class="fas fa-plus-circle"></i>'
+//			        	   $('#Task_Modal_snames').append(snames);
+			        	   
+		        	   
 			        	   
 			        	   // tstatus
 			        	   $('#Task_Modal_tstatus').empty();
@@ -246,4 +264,66 @@ $(document).on("click","#task_trash_btn",function(){
 
 
 
+/**
+ * 
+ 날      짜 : 2018. 6. 21.
+ 기      능 : Task 페이지 내 step 삭제 버튼 클릭시 작동
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".task_page_delete_step_btn",function(){
+
+	var tid = $('#tidhidden').attr('value');
+	var sid = $(this).attr('id');
+	
+	console.log('step이 왜 안지워질까?')
+	console.log('응?')
+	console.log('tid : ' + tid)
+	console.log('sid : ' + sid)
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "counttaskinstep.htm",
+		           data : {
+		        	   'tid': tid,
+		           },
+		           success : function(rdata){
+		        	   
+		        	   var count = rdata.countresult;
+		        	   
+		        	   $.ajax(
+		        		       {
+		        		           type : "post",
+		        		           url  : "deletestepintaskmodal.htm",
+		        		           data : {
+		        		        	   'tid': tid,
+		        		        	   'sid': sid
+		        		           },
+		        		           success : function(rdata){
+		        		        	   
+		        		        	   console.log(rdata);
+
+		        		        	   if(count == 1) {
+		        		        		   $('#step_delete_Modal').click();
+		        		        	   }
+		        		        	   
+		        		        	   // step name
+		        		        	   $('#Task_Modal_snames').empty();
+		        		        	   
+		        		        	   var snames = '<br>'
+		        		        	   $(rdata.steplist_after_delete_step).each(function(){
+		        		        		   var sname = this.sname;
+		        		        		       snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + sname + '&nbsp&nbsp' + '<i class="far fas fa-times task_page_delete_step_btn" style="color:#808B96" id="' + this.sid + '"></i></span>';
+		        		        	   });
+		        		        	   snames += '<i class="fas fa-plus-circle"></i>'
+		        		        	   $('#Task_Modal_snames').append(snames);
+		        		        	   
+		        		        	   
+		        		           } // end-success
+		        		        }); // end-ajax
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+});
 

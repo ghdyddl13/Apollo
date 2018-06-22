@@ -54,4 +54,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	delete from task where tid = #{tid}
     </delete>
     
+    <delete id="deleteStepInTaskModal" parameterType="com.apollo.vo.TaskInStepDTO">
+    	delete from taskinstep where sid = #{sid} and tid = #{tid}
+    </delete>
+	
+	<select id="countTaskInStep" resultType="Integer">
+		select count(*) from taskinstep where tid = #{tid}
+	</select>    
+    
+    
 </mapper>
