@@ -66,8 +66,13 @@ public class TaskController {
 	@RequestMapping("/getTask.htm")
 	public View getTask(int tid, HttpSession session, Model model) {
 
-	String pid = (String) session.getAttribute("pid");
-    String mid = (String) session.getAttribute("mid");
+	System.out.println("컨트롤러는 탔음");
+	int temp_pid = (Integer) session.getAttribute("pid");
+	String pid = String.valueOf(temp_pid);
+	String mid = (String) session.getAttribute("mid");
+
+	System.out.println("pid : " + pid);
+	System.out.println("mid : " + mid);
     
     ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
     starredtasklist = service.getStarredTaskList(mid);
@@ -139,7 +144,9 @@ public class TaskController {
 		String pid = "18";
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
-	    }else {
+	    } else if(location.equals("/board.htm")) {
+	    	return "redirect:/board.htm";
+	    } else {
 	    	return null;
 	    }
 	    

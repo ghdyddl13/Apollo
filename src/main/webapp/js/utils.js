@@ -100,7 +100,7 @@ $( ".date-im" ).datepicker({
  작성자명 : 김 정 권
  */
 $(document).on("click",".Task_RUD_Modal",function(){
-
+		
 		var temptid = $(this).attr('id'); 
 	    var tid = parseInt(temptid.substring(1));   
 		
@@ -112,7 +112,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   'tid': tid
 			           },
 			           success : function(rdata){
-
+			        	   console.log('성공!')
 			        	   console.log(rdata);
 
 			        	   //tid

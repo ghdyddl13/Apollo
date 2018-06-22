@@ -2,6 +2,8 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script type="text/javascript" src="js/utils.js"></script>
+
 <h3></h3>
 <jsp:include page="/WEB-INF/views/inc/stepInsideHeader.jsp"></jsp:include>
 <nav class="navbar inside-header ">
@@ -234,7 +236,7 @@ function addTask_focusout(tstatusid){
 }
 
 #board-hr{
-   margin-right : 50px;
+   margin-right : 46px;
    margin-top : -5px;
    border: 0; 
    height: 10px; 
@@ -254,20 +256,19 @@ function addTask_focusout(tstatusid){
     background-color: #fff;
     }
 .board-task-adder{
-    border:1px solid black;
     background: url("img/adder.png") no-repeat 49px center #fff;
     display: block;
     box-sizing: border-box;
-    padding: 7.5px 1px 10px 70px;
+    padding: 6px 1px 10px 70px;
     margin-left:15px;
     height:50px;
     width: 220px;
     font-size: 20px;
     line-height: 31px;
     color: #5285b8;
-    border-top: 1px solid #e0e0e0;
     cursor: pointer;
     list-style: none;
+    border-style: outset;
     }
 .board-task-adder-addmode{
     border:1px solid black;
@@ -322,7 +323,7 @@ function addTask_focusout(tstatusid){
                      <c:choose>
                      
                         <c:when test="${b.tstatus eq t.tstatus}">
-                           <li class="ui-state-default Task_RUD_Modal" id="t${t.tid}" value="${t.tid}">${t.tname}</li>
+                           <li class="ui-state-default Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${t.tid}" value="${t.tid}">${t.tname}</li>
                                                       
                         </c:when>
                      </c:choose>
