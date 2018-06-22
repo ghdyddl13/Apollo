@@ -26,9 +26,6 @@
 
    
 
-function addTaskView(tstatusid){
-   
-}
 
 
 } */
@@ -60,63 +57,60 @@ function addTaskView(tstatusid){
       })
    }  
 } */
-   
-$(function() {
-    $(document).on("click","#task-adder",function() {
-   $("#task-adder").remove();
-   let inputtag="<div class='list-task-adder-addmode'><input class='form-control' id='insert-task' name='tname' type='text' placeholder='새로운 작업을 입력하세요'></div>"
-   $("#body-start").prepend(inputtag);
-   $("#insert-task").focus();
- })
- $(document).on("keyup","#insert-task",function(event) {
-   let addtag="<div class='list-task-adder' id='task-adder'></div>";
-   if(event.which==13){
-     let newtask=$.trim($(this).val());
-     if(newtask===""){
-       //문자열이 빈값이면 발생하는 함수가 아무것도 없음
-     }else{
-       console.log(newtask);
-     $("#insert-task").val("");
-       /*
-       $.ajax(
-               {
-                 type:"POST",
-                 url:"",
-                 date:"",
-                 success:function(data) {
+function addTaskView(tstatusid){
+   $("#task-adder"+tstatusid).remove();
+   let inputtag="<div class='board-task-adder-addmode'><input class='form-control' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
+    $("#body-start"+tstatusid).prepend(inputtag);
+    $("#insert-task"+tstatusid).focus();
+}
 
-                 }
-               }
-       )
-       */
-     }
-   }
- });
- $(document).on("focusout","#insert-task",function() {
-   let newtask = $.trim($(this).val());
-   let addtag="<div class='list-task-adder' id='task-adder'>New task</div>";
-   if(newtask===""){//빈 문자일 경우 그냥 바로 나온다
-     $(".list-task-adder-addmode").remove();
-     $("#body-start").prepend(addtag);
+function addTask_keyup(tstatusid){
+   let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
+      if(event.which==13){
+         let newtask=$.trim($('#insert-task'+tstatusid).val());
+      
+        if(newtask===""){
+             $(".board-task-adder-addmode").remove();
+             $("#body-start"+tstatusid).prepend(addtag);
+         }else{
+            console.log(newtask);
+            $('#insert-task'+tstatusid).val('');
+               $.ajax({
+                   url : "boardInsertTask.htm",
+                   data : {
+                         tstatusid : tstatusid, 
+                         tname : newtask
+                         },
+                   success:function(data){
+                      $("#main-box").empty();
+                      $("#main-box").append(data);
+                   }  
+                })
+         } 
+      } 
+}
+
+function addTask_focusout(tstatusid){
+   let newtask=$.trim($('#insert-task'+tstatusid).val());
+   let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
+   if(newtask===""){
+       $(".board-task-adder-addmode").remove();
+       $("#body-start"+tstatusid).prepend(addtag);
    }else{
-     /*
-     $.ajax(
-             {
-               type:"POST",
-               url:"",
-               date:"",
-               success:function(data) {
-
-               }
-             }
-     )
-     */
-     $(".list-task-adder-addmode").remove();
-     $("#body-start").prepend(addtag);
+         $.ajax({
+              url : "boardInsertTask.htm",
+              data : {
+                    tstatusid : tstatusid, 
+                    tname : newtask
+                    },
+              success:function(data){
+                 $("#main-box").empty();
+                 $("#main-box").append(data);
+              }  
+           })
+              
    }
- })
-  })   
-   
+}
    
    //board에서 나오는 status 목록 width 크기 지정하는 함수
    function autoWidth() {
@@ -254,12 +248,12 @@ $(function() {
    
 }
 
-.list-task-adder_containers{
+.board-task-adder_containers{
     box-sizing: border-box;
     position: relative;
     background-color: #fff;
     }
-.list-task-adder{
+.board-task-adder{
     border:1px solid black;
     background: url("img/adder.png") no-repeat 49px center #fff;
     display: block;
@@ -275,7 +269,7 @@ $(function() {
     cursor: pointer;
     list-style: none;
     }
-.list-task-adder-addmode{
+.board-task-adder-addmode{
     border:1px solid black;
     height:50px;
     width: 220px;
@@ -313,9 +307,11 @@ $(function() {
                                <a class="cardcreate" onclick="addCardView(this, ${b.tstatusid})">Add a card...</a>
                          </div>
                     </div> --%>
-                    <div class="list-task-adder_containers" id="body-start">
-                    <div class="list-task-adder" id="task-adder">
-						<input type="hidden" id="board-tstatusid" value="${b.tstatusid}">
+                    <div class="board-task-adder_containers" id="body-start${b.tstatusid}">
+                    <div class="board-task-adder" id="task-adder${b.tstatusid}" onclick="addTaskView(${b.tstatusid})">
+                    
+                          <input type="hidden" id="board-tstatusid" value="${b.tstatusid}">
+                            New Task
                     </div>
                    </div>
                     
@@ -326,7 +322,7 @@ $(function() {
                      <c:choose>
                      
                         <c:when test="${b.tstatus eq t.tstatus}">
-                           <li class="ui-state-default" value="${t.tid}">${t.tname}</li>
+                           <li class="ui-state-default Task_RUD_Modal" id="t${t.tid}" value="${t.tid}">${t.tname}</li>
                                                       
                         </c:when>
                      </c:choose>
