@@ -120,11 +120,11 @@ public class TaskService {
 			 result = commentdao.insertReceiver(map);
 			 System.out.println("!!리시버 테이블에 인서트중!!");
 		 }
+		 
 		 if(exist == false) {
 			 map.put("mid", commentdto.getMid());
 			 result = commentdao.insertReceiver(map);
 			 System.out.println("!!그 테스크에 할당된 사람이 아니어도 보낸 사람이면 넣어줌!!");
-
 		 }
 		 System.out.println("!!리시버 테이블에 인서트 성공??!!");
 		 return result;

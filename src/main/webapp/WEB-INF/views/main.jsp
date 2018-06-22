@@ -37,6 +37,8 @@
 <link href="css/myWork.css" type="text/css" rel="stylesheet">
 <!-- PROJECT CSS -->
 <link href="css/project.css" type="text/css" rel="stylesheet">
+<!-- stream css -->
+<link href="css/stream.css" type="text/css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
