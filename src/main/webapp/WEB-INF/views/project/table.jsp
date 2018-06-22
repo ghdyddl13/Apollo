@@ -9,7 +9,7 @@
 
 <div>
 
-	<table style="width:100%;">
+	<table class="table project-page-table">
 		<thead>
 			<tr>
 				<th>Title</th>
