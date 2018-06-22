@@ -121,6 +121,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   
 			        	   // tname
 			        	   $('#Task_Modal_tname').empty();
+			        	   $('#tnamehidden').attr('value', rdata.task.tname);
 			        	   $('#Task_Modal_tname').append(rdata.task.tname);
 
 			        	   
@@ -348,6 +349,7 @@ $('#Task_Modal_tstatus_selectbox').on('change', function() {
 
 	var tid = $('#tidhidden').attr('value');
 	var value = $('#Task_Modal_tstatus_selectbox').val();
+	var tname = $('#tnamehidden').attr('value');
 	
 	  $.ajax(
 		       {
@@ -355,7 +357,8 @@ $('#Task_Modal_tstatus_selectbox').on('change', function() {
 		           url  : "changetstatus.htm",
 		           data : {
 		        	   'tid': tid,
-		        	   'value' : value
+		        	   'value' : value,
+		        	   'tname' : tname
 		           },
 		           success : function(rdata){
 		        	   

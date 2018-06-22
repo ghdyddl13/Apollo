@@ -6,6 +6,6 @@ import com.apollo.vo.TstatusDTO;
 
 public interface TstatusDAO {
 	
-	public ArrayList<TstatusDTO> getTstatuslist(String pid);
+	public ArrayList<TstatusDTO> getTstatuslist(int pid);
 
 }

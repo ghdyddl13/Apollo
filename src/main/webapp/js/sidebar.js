@@ -376,11 +376,8 @@ $(function() {
 	
 			
 			var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
-			
 			var pid = project_wrapper.id.substr(1);
 			var methodologyid = $(project_wrapper).children("input[name='methodologyid']").val();
-			console.log("프로젝트 클릭시 pid " + pid);
-			console.log("프로젝트 클릭시 methodologyid " + methodologyid);
 			
 			$.ajax({
 				url:"information.htm",
