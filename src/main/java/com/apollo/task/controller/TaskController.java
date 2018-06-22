@@ -17,6 +17,7 @@ import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
+import com.apollo.vo.TidvalueDTO;
 import com.apollo.vo.TstatusDTO;
 
 @Controller
@@ -188,6 +189,23 @@ public class TaskController {
 	
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : 해당 task 상태 변경하기
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/changetstatus.htm")
+	public View changeTstatus(int tid, int value, Model model) {
 	
+		TidvalueDTO dto = new TidvalueDTO();
+		dto.setTid(tid);
+		dto.setValue(value);
+		
+		int result = service.changeTstatus(dto);
+		model.addAttribute("result", result);
+		
+		return jsonview;
+	}
 	
 }

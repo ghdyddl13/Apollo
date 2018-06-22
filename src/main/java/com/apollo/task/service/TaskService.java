@@ -15,6 +15,7 @@ import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
+import com.apollo.vo.TidvalueDTO;
 import com.apollo.vo.TstatusDTO;
 
 @Service
@@ -183,6 +184,20 @@ public class TaskService {
 		return result;
 	}
 	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : 해당 task가 몇 개의 step에 속해 있는지 확인
+	 작성자명 : 김 정 권
+	 */
+	public int changeTstatus(TidvalueDTO dto) {
+		
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.changeTstatus(dto);
+		return result;
+	}
 	
 	
 }

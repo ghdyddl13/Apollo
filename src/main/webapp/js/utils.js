@@ -120,46 +120,35 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   // step name
 			        	   $('#Task_Modal_snames').empty();
 			        	   
-			        	   /////////////////////////////////
-			        	   var stepnamesarr = [];
-			        	   $(rdata.steps).each(function(){
-			        		   stepnamesarr.push(this.sid);
-			        	   });			        	   
-			        	   /////////////////////////////////
-			        	   
 			        	   var snames = '<br>'
 			        	   $(rdata.steps).each(function(){
-			        		   console.log('여기여기')
-			        		   console.log(rdata.steps)
 			        		   snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + this.sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
 			        	   });
 			        	   snames += '<i class="fas fa-plus-circle"></i>'
 			        	   $('#Task_Modal_snames').append(snames);
 				        	   
 			        	   
-//			        	   var snames = '<br>'
-//				        
-//			        	   for(var i = 0; i < rdata.steps.length; i++){
-//		        		   snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + rdata.steps[i].sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer">' 
-//		        		   snames += '<input type="hidden" class="sid" value="'+ rdata.steps[i].sid +'"></i></span>';
-//			        	   }
-//			        	   snames += '<i class="fas fa-plus-circle"></i>'
-//			        	   $('#Task_Modal_snames').append(snames);
-			        	   
-		        	   
-			        	   
 			        	   // tstatus
-			        	   $('#Task_Modal_tstatus').empty();
+			        	   $('#Task_Modal_tstatus_selectbox').empty();
 			        	   
-			        	   var tstatusoptions = '<select>'
+			        	   var selected_tstatusid = rdata.task.tstatusid;
+			        	   var tstatusoptions = '';
+			        	   
 			        	   $(rdata.tstatuslist).each(function(){
-			        		   tstatusoptions += '<option style='
-			        		   tstatusoptions += '"color: ' + this.color + '">'
-			        		   tstatusoptions += this.tstatus
-			        		   tstatusoptions += '</option>'
+			        		   
+			        		   if(selected_tstatusid == this.tstatusid){
+				        		   tstatusoptions += '<option value="' + this.tstatusid + '" selected="selected" style='
+				        		   tstatusoptions += '"color: ' + this.color + '">'
+				        		   tstatusoptions += this.tstatus
+				        		   tstatusoptions += '</option>'
+			        		   }else {
+				        		   tstatusoptions += '<option value="' + this.tstatusid + '" style='
+				        		   tstatusoptions += '"color: ' + this.color + '">'
+				        		   tstatusoptions += this.tstatus
+				        		   tstatusoptions += '</option>'
+			        		   }
 				           });
-			        	   tstatusoptions += '</select>'
-			        	   $('#Task_Modal_tstatus').append(tstatusoptions);
+			        	   $('#Task_Modal_tstatus_selectbox').append(tstatusoptions);
 			        	   
 			        	   
 			        	   // assignee
@@ -325,4 +314,32 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 		        }); // end-ajax
 	
 });
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 22.
+ 기      능 : Task 모달 창에서 Task 상태 변경
+ 작성자명 : 김 정 권
+ */
+$('#Task_Modal_tstatus_selectbox').on('change', function() {
+
+	var tid = $('#tidhidden').attr('value');
+	var value = $('#Task_Modal_tstatus_selectbox').val();
+	
+	  $.ajax(
+		       {
+		           type : "post",
+		           url  : "changetstatus.htm",
+		           data : {
+		        	   'tid': tid,
+		        	   'value' : value
+		           },
+		           success : function(rdata){
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+});
+
 
