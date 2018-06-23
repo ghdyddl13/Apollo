@@ -299,7 +299,7 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 									   var snames = '<br>'
 									   $(rdata.steplist_after_delete_step).each(function(){
 										   var sname = this.sname;
-										       snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + sname + '&nbsp&nbsp' + '<i class="far fas fa-times task_page_delete_step_btn" style="color:#808B96" cursor:pointer" id="' + this.sid + '"></i></span>';
+										       snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + sname + '&nbsp&nbsp' + '<i class="far fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
 									   });
 									   snames += '<i data-toggle="modal" data-target="#step_add_modal_in_taskmodal" id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 									   $('#Task_Modal_snames').append(snames);
@@ -409,7 +409,6 @@ $(document).on("click","#task_modal_add_step",function(){
  */
 $(document).on("click",".addbtn_taskinstep",function(){
 	
-	alert('버튼 작동함');
 	var sid = $(this).attr('id');
 	var tid = $('#tidhidden').attr('value');
 	
@@ -435,6 +434,7 @@ $(document).on("click",".addbtn_taskinstep",function(){
 		        		           },
 		        		           success : function(rdata){
 
+		        		        	console.log('아래에서 확인')
 		        		        	console.log(rdata.steplist);
 		        		        	   
 		        		        	// step name

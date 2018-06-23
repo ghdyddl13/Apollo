@@ -280,10 +280,16 @@ public class TaskService {
 		TaskDAO taskdao = session.getMapper(TaskDAO.class);
 		list = taskdao.getStepNamesbytid(tid);
 		
+		System.out.println("서비스 내 sname list 출력 테스트");
+		System.out.println("list사이즈 : " + list.size());
+		
+		for(StepDTO dto : list) {
+			System.out.println("sname 반복출력 고고");
+			System.out.println(dto.getSname());
+		}
+		
 		return list;
 	}
-	
-	
 	
 	
 }

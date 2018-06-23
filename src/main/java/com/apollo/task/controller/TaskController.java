@@ -284,7 +284,7 @@ public class TaskController {
 	@RequestMapping("/addTaskInStepInTaskModal_2.htm")
 	public View getStepNamesbytid(int tid, Model model){
 		
-		System.out.println("이중모달 내 추가버튼 누르면 실행");
+		System.out.println("tid 들어오는지 ? : " + tid);
 
 		ArrayList<StepDTO> steplist = service.getStepNamesbytid(tid);
 		model.addAttribute("steplist", steplist);
