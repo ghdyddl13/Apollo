@@ -568,28 +568,3 @@ background-color: 999999;
    padding-left: 15px;
    padding-right: 15px;
 }
-/* task 수정,삭제 모달_정권 ---------------------- 시작 */
-#star_trash{
-  text-align: right;
-}
-
-#task_star{
- color : #ffc30d
-}
-
-.modal-task-delete{
-	 display: inline-block;
-     text-align: left;
-     vertical-align: right;
-}
-
-#steplist_in_taskmodal th{
-	text-align: center;
-}
-
-#steplist_in_taskmodal td{
-	text-align: center;
-}
-
-/* task 수정,삭제 모달_정권 ---------------------- 종료 */
-

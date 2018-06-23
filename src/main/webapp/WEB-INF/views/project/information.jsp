@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="js/task.js"></script>
 <script type="text/javascript" src="js/projectInfo.js"></script>
 <link href="css/projectinfo.css" type="text/css" rel="stylesheet">
 

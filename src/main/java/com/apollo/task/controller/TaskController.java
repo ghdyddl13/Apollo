@@ -303,8 +303,6 @@ public class TaskController {
 	 */
 	@RequestMapping("/addTaskInStepInTaskModal_2.htm")
 	public View getStepNamesbytid(int tid, Model model){
-		
-		System.out.println("tid 들어오는지 ? : " + tid);
 
 		ArrayList<StepDTO> steplist = service.getStepNamesbytid(tid);
 		model.addAttribute("steplist", steplist);

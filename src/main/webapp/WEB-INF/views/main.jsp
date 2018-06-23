@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- 
 
 <!DOCTYPE html>
 <html>
@@ -44,7 +43,9 @@
 <link rel="stylesheet" href="css/project_table.css" />
 <!-- stream css -->
 <link href="css/stream.css" type="text/css" rel="stylesheet">
-<title>Insert title here</title>
+<!-- task CSS -->
+<link href="css/task.css" type="text/css" rel="stylesheet">
+<title>Project Apollo</title>
 </head>
 <body>
 
@@ -52,7 +53,7 @@
 	<jsp:include page="/WEB-INF/views/inc/sidebar.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
 	
-	<div  id="main-box"></div>
+	<div id="main-box"></div>
 	
 </body>
 </html>
