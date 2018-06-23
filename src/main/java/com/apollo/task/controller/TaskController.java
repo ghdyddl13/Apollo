@@ -68,6 +68,8 @@ public class TaskController {
 	@RequestMapping("/getTask.htm")
 	public View getTask(int tid, HttpSession session, Model model) {
 
+	System.out.println("getTask 작동");
+		
 	int pid = (Integer) session.getAttribute("pid");
     String mid = (String) session.getAttribute("mid");
 
@@ -254,6 +256,62 @@ public class TaskController {
 		
 		return "redirect:/inbox.htm";
 	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : 해당 task가 속한 프로젝트의 모든 스텝들을 가져온다
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/getStepListByTid.htm")
+	public View getStepListByTid(int tid, Model model) {
+		
+		ArrayList<StepDTO> steplist = service.getStepListByTid(tid);
+		model.addAttribute("steplist", steplist);
+		return jsonview;
+	}
+
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 23.
+	 기      능 : 테스크 모달 창에서 스텝 추가를 위한 모달을 불러오는 기능
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/addTaskInStepInTaskModal.htm")
+	public View addTaskInStepInTaskModal(int sid, int tid, Model model){
+		
+		System.out.println("테스크 모달 내 스텝 추가 컨트롤러 탔음");
+
+		TaskInStepDTO taskinstepdto = new TaskInStepDTO();
+		taskinstepdto.setSid(sid);
+		taskinstepdto.setTid(tid);
+		
+		int result = service.addTaskInStepInTaskModal(taskinstepdto);
+		model.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 23.
+	 기      능 : 테스크 모달 창에서 스텝 추가(이중모달) 모달 내에 추가 버튼을 누르면 실행
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/addTaskInStepInTaskModal_2.htm")
+	public View getStepNamesbytid(int tid, Model model){
+		
+		System.out.println("tid 들어오는지 ? : " + tid);
+
+		ArrayList<StepDTO> steplist = service.getStepNamesbytid(tid);
+		model.addAttribute("steplist", steplist);
+		
+		return jsonview;
+	}
+	
 	
 	
 }

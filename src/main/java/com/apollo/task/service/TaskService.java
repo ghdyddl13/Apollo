@@ -269,6 +269,66 @@ public class TaskService {
 	}
 	
 	
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : tid로 스텝들 가져오기
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepListByTid(int tid) {
+
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		ArrayList<StepDTO> steplist = new ArrayList();
+		steplist = taskdao.getStepListByTid(tid);
+		
+		return steplist;
+	}
+	
+		
+	/**
+	 * 
+	 날      짜 : 2018. 6. 23.
+	 기      능 : 테스크 모달 창에서 스텝 추가 버튼을 누르면 실행
+	 작성자명 : 김 정 권
+	 */
+	public int addTaskInStepInTaskModal(TaskInStepDTO taskinstepdto) {
+		
+		System.out.println("테스크 모달 내 스텝 추가 서비스 메소드 실행");
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.addTaskInStepInTaskModal(taskinstepdto);
+		
+		System.out.println("스텝 추가 결과 : " + result);
+		
+		return result;
+	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 23.
+	 기      능 : tid를 통해 step들의 이름을 가져온다
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepNamesbytid(int tid) {
+		
+		ArrayList<StepDTO> list = new ArrayList();
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		list = taskdao.getStepNamesbytid(tid);
+		
+		System.out.println("서비스 내 sname list 출력 테스트");
+		System.out.println("list사이즈 : " + list.size());
+		
+		for(StepDTO dto : list) {
+			System.out.println("sname 반복출력 고고");
+			System.out.println(dto.getSname());
+		}
+		
+		return list;
+	}
+	
+	
 }
 
 
