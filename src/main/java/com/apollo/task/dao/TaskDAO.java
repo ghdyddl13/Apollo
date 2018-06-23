@@ -27,5 +27,7 @@ public interface TaskDAO {
 	public int insertComment(CommentDTO commentdto);
 	public String getTaskModifierName(String mid);
 	public ArrayList<StepDTO> getStepListByTid(int tid);
+	public int addTaskInStepInTaskModal(TaskInStepDTO taskinstepdto);
+	public ArrayList<StepDTO> getStepNamesbytid(int tid);
 	
 }

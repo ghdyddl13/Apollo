@@ -668,7 +668,7 @@
 				
 				
 				<div class="modal-body ">
-				
+
 		<table id="steplist_in_taskmodal" class="table">
 		
 		</table>

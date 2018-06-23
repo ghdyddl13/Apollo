@@ -293,17 +293,17 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 		        		        		   
 		        		        	   } else {
 		        		        		   
-		        		        		// step name
-			        		        	   $('#Task_Modal_snames').empty();
-			        		        	   
-			        		        	   var snames = '<br>'
-			        		        	   $(rdata.steplist_after_delete_step).each(function(){
-			        		        		   var sname = this.sname;
-			        		        		       snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + sname + '&nbsp&nbsp' + '<i class="far fas fa-times task_page_delete_step_btn" style="color:#808B96" id="' + this.sid + '"></i></span>';
-			        		        	   });
-			        		        	   snames += '<i class="fas fa-plus-circle"></i>'
-			        		        	   $('#Task_Modal_snames').append(snames);
-			        		        	   
+									// step name
+									   $('#Task_Modal_snames').empty();
+									   
+									   var snames = '<br>'
+									   $(rdata.steplist_after_delete_step).each(function(){
+										   var sname = this.sname;
+										       snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + sname + '&nbsp&nbsp' + '<i class="far fas fa-times task_page_delete_step_btn" style="color:#808B96" cursor:pointer" id="' + this.sid + '"></i></span>';
+									   });
+									   snames += '<i data-toggle="modal" data-target="#step_add_modal_in_taskmodal" id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+									   $('#Task_Modal_snames').append(snames);
+												        		        	   
 		        		        	   }
 		        		        	   
 		        		           } // end-success
@@ -391,7 +391,7 @@ $(document).on("click","#task_modal_add_step",function(){
 		        		  
 		        		  
 		        		   
-		        		  tablestr += '<tr><th>' + this.sname + '</th><th>' + sday + '</th><th>' + eday + '</th><th><i class="fas fa-plus-circle" id="' + this.sid + '"></i></th></tr>';
+		        		  tablestr += '<tr><th>' + this.sname + '</th><th>' + sday + '</th><th>' + eday + '</th><th><i class="fas fa-plus-circle addbtn_taskinstep" id="' + this.sid + '" style="cursor:pointer"></i></th></tr>';
 		        	   });
 		        	   $('#steplist_in_taskmodal').append(tablestr);
 		        	   
@@ -399,3 +399,64 @@ $(document).on("click","#task_modal_add_step",function(){
 		        }); // end-ajax
 	
 });
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 23.
+ 기      능 : 테스크 모달 내에서 스텝 추가 버튼을 클릭시에 작동
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".addbtn_taskinstep",function(){
+	
+	alert('버튼 작동함');
+	var sid = $(this).attr('id');
+	var tid = $('#tidhidden').attr('value');
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "addTaskInStepInTaskModal.htm",
+		           data : {
+		        	   'sid': sid,
+		        	   'tid': tid
+		           },
+		           success : function(rdata){
+		        	   
+		        	   console.log(rdata.result);
+		        	   $('#step_add_modal_in_taskmodal_dismiss').click();
+		        	   
+		        	   $.ajax(
+		        		       {
+		        		           type : "post",
+		        		           url  : "addTaskInStepInTaskModal_2.htm",
+		        		           data : {
+		        		        	   'tid': tid
+		        		           },
+		        		           success : function(rdata){
+
+		        		        	console.log(rdata.steplist);
+		        		        	   
+		        		        	// step name
+		        		        	$('#Task_Modal_snames').empty();
+
+		        		        	var snames = '<br>'
+		        		        	$(rdata.steplist).each(function(){
+		        		        	snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + this.sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
+		        		        	});
+		        		        	snames += '<i data-toggle="modal" data-target="#step_add_modal_in_taskmodal" id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+		        		        	$('#Task_Modal_snames').append(snames);
+		        		        	   
+		        		           } // end-success
+		        		        }); // end-ajax
+		        	   
+		           } // end-success
+		        }); // end-ajax
+});
+
+
+
+
+
+
+

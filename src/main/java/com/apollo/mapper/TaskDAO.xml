@@ -75,7 +75,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>   
 	
     <select id="getStepListByTid" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
-		select * from step where pid = (select pid from task where tid = #{tid})
+		select * from step where pid = (select pid from task where tid = #{tid}) and sid not in (select sid from taskinstep where tid = #{tid})
 	</select>   
+    
+    <insert id="addTaskInStepInTaskModal" parameterType="com.apollo.vo.TaskInStepDTO">
+		insert into taskinstep values(#{sid}, #{tid})
+	</insert>
+	
+	<select id="getStepNamesbytid" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
+		select * from taskinstep where tid = #{tid}
+	</select>  
     
 </mapper>

@@ -251,5 +251,50 @@ public class TaskController {
 		model.addAttribute("steplist", steplist);
 		return jsonview;
 	}
+
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 23.
+	 기      능 : 테스크 모달 창에서 스텝 추가를 위한 모달을 불러오는 기능
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/addTaskInStepInTaskModal.htm")
+	public View addTaskInStepInTaskModal(int sid, int tid, Model model){
+		
+		System.out.println("테스크 모달 내 스텝 추가 컨트롤러 탔음");
+
+		TaskInStepDTO taskinstepdto = new TaskInStepDTO();
+		taskinstepdto.setSid(sid);
+		taskinstepdto.setTid(tid);
+		
+		int result = service.addTaskInStepInTaskModal(taskinstepdto);
+		model.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 23.
+	 기      능 : 테스크 모달 창에서 스텝 추가(이중모달) 모달 내에 추가 버튼을 누르면 실행
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/addTaskInStepInTaskModal_2.htm")
+	public View getStepNamesbytid(int tid, Model model){
+		
+		System.out.println("이중모달 내 추가버튼 누르면 실행");
+
+		ArrayList<StepDTO> steplist = service.getStepNamesbytid(tid);
+		model.addAttribute("steplist", steplist);
+		
+		return jsonview;
+	}
+	
+	
+	
+	
+	
 	
 }

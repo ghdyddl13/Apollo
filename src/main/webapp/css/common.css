@@ -583,5 +583,13 @@ background-color: 999999;
      vertical-align: right;
 }
 
+#steplist_in_taskmodal th{
+	text-align: center;
+}
+
+#steplist_in_taskmodal td{
+	text-align: center;
+}
+
 /* task 수정,삭제 모달_정권 ---------------------- 종료 */
 
