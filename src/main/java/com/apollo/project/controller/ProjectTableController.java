@@ -41,8 +41,6 @@ public class ProjectTableController {
 		
 		int pid =  Integer.parseInt((String) request.getSession().getAttribute("pid"));
 		System.out.println("pid : " + pid);
-		System.out.println(session.getAttribute("pid"));
-		
 		
 		ArrayList<Integer> pids = new ArrayList<Integer>();
 		pids.add(pid);
@@ -60,7 +58,7 @@ public class ProjectTableController {
 			model.addAttribute("folderlist", folderlist);
 			System.out.println("folderlist : " + folderlist);
 			
-			ArrayList<TaskDTO> tasklist = null; // sid 에 속한 task 및 tstatus 가져오기
+			ArrayList<TaskDTO> tasklist = null; //sid 에 속한 task 및 tstatus 가져오기
 			tasklist = tableservice.getTasksInStep(steplist);
 			model.addAttribute("tasklist", tasklist);
 			System.out.println("steplist : " + tasklist);

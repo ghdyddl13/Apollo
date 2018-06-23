@@ -1,8 +1,6 @@
-$(function(pid) {
-	console.log("aaaa");
-	
-	
-	
-	
-}); // end - function
+// project table page js
+
+function getstep(){
+
+}
 
