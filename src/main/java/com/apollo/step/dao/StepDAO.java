@@ -97,4 +97,9 @@ public interface StepDAO {
 	 작성자명 : 김 래 영
 	 */
 	public int deleteStep(int sid);
+	
+	
+	public ArrayList<StepDTO> getStepNamesbytid(int tid);
+	
+	public ArrayList<StepDTO> getStepListByTid(int tid);
 }

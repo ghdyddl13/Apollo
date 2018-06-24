@@ -96,11 +96,14 @@ $(document).on("click",".Task_RUD_Modal",function(){
 
 			        	   
 			        	   // assignee
-//			        	   $('#Task_Modal_assignee').empty();
-//			        	   $('#Task_Modal_assignee').append(rdata.task.tname);
-//			        	   
-//			        	   
-//			        	   
+			        	   $('#Task_Modal_assignee').empty();
+			        	   
+			        	   
+			        	   
+			        	   $('#Task_Modal_assignee').append(rdata.task.tname);
+			        	   
+			        	   
+			        	   
 //			        	   $('#').empty();
 //			        	   $('#').append(rdata.task.tname);
 //			        	   

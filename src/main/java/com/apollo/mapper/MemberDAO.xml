@@ -61,4 +61,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getProfileInfoMember" resultType="com.apollo.vo.MemberDTO">
 		select * from member where mid=#{mid}
 	</select>
+	
+	
+	
+	
+	
+	<select id="getTaskModifierName" parameterType="String" resultType="String">
+		select mname from member where mid = #{mid}
+	</select>   
+		
+	<select id="getSameTaskMemberList" parameterType="Integer" resultType="com.apollo.vo.MemberDTO">
+		select * from member where mid in (select mid from assignee where tid = #{tid})
+	</select>  
+	
+	<select id="getSameProjectButNotSameTaskMemberList" parameterType="com.apollo.vo.TidpidDTO" resultType="com.apollo.vo.MemberDTO">
+		select * from member where mid not in (select mid from assignee where tid = #{tid}) and mid in (select mid from pmember where pid = #{pid})
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
