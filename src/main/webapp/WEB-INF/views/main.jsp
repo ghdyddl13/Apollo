@@ -21,7 +21,6 @@
 
 <!-- 공통 JavaScript 함수 모음(Utils) -->
 <script type="text/javascript" src="js/utils.js"></script>
-
 <!-- Timeline관련  -->
 <script type="text/javascript" src="js/stepTimeline.js"></script>
 <link rel="stylesheet" href="css/stepTimeline.css" />
@@ -45,6 +44,8 @@
 <link href="css/stream.css" type="text/css" rel="stylesheet">
 <!-- task CSS -->
 <link href="css/task.css" type="text/css" rel="stylesheet">
+<!-- STEP LIST CSS_ JW -->
+<link href="css/stepList.css" type="text/css" rel="stylesheet">
 <title>Project Apollo</title>
 </head>
 <body>
