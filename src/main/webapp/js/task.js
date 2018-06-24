@@ -93,14 +93,31 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        		   }
 				           });
 			        	   $('#Task_Modal_tstatus_selectbox').append(tstatusoptions);
-
 			        	   
+
 			        	   // assignee
 			        	   $('#Task_Modal_assignee').empty();
+
+			        	   var assigneestr = '';
+			        	   var profile_count = 0;
+			        	   $(rdata.sametaskmemberlist).each(function(){
+			        		   
+			        		   if((profile_count%4 == 0)&&(profile_count != 0)) {
+			        			   assigneestr += '<br><br>'
+			        		   }
+			        		   
+			        		   assigneestr += '<span>'
+//			        	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+			        	       assigneestr += '<img src="img/'+ '프로필사진테스트.jpg' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+			        	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
+			        	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
+			        	       assigneestr += '</span>'
+			        	       assigneestr += '&nbsp&nbsp&nbsp'
+			        	       profile_count ++;
+			        	   });
+			        	   	   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 			        	   
-			        	   
-			        	   
-			        	   $('#Task_Modal_assignee').append(rdata.task.tname);
+			        	   $('#Task_Modal_assignee').append(assigneestr);
 			        	   
 			        	   
 			        	   
@@ -399,3 +416,132 @@ $(document).on("click",".addbtn_taskinstep",function(){
 		           } // end-success
 		        }); // end-ajax
 });
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 24.
+ 기      능 : 테스크 모달 내에서 각 프로필 사진 옆에 x 버튼을 누르면 해당 담당자가 삭제되고 다시 정보 불러와서 append
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".task_page_delete_assignee_btn",function(){
+	
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "addTaskInStepInTaskModal.htm",
+		           data : {
+		        	   'sid': sid,
+		        	   'tid': tid
+		           },
+		           success : function(rdata){
+		        	   
+		        	   console.log(rdata.result);
+		        	   $('#step_add_modal_in_taskmodal_dismiss').click();
+		        	   
+		        	   $.ajax(
+		        		       {
+		        		           type : "post",
+		        		           url  : "addTaskInStepInTaskModal_2.htm",
+		        		           data : {
+		        		        	   'tid': tid
+		        		           },
+		        		           success : function(rdata){
+
+		        		        	console.log(rdata)
+		        		        	
+		        		           } // end-success
+		        		        }); // end-ajax
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+	
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 24.
+ 기      능 : 테스크 모달 내에서 담당자를 추가하는 플러스 버튼으로 이걸 누르면 데이터를 가져와서 이중 모달에 채워준다
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#task_modal_add_assignee",function(){
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "addTaskInStepInTaskModal.htm",
+		           data : {
+		        	   'sid': sid,
+		        	   'tid': tid
+		           },
+		           success : function(rdata){
+		        	   
+		        	   console.log(rdata.result);
+		        	   $('#step_add_modal_in_taskmodal_dismiss').click();
+		        	   
+		        	   $.ajax(
+		        		       {
+		        		           type : "post",
+		        		           url  : "addTaskInStepInTaskModal_2.htm",
+		        		           data : {
+		        		        	   'tid': tid
+		        		           },
+		        		           success : function(rdata){
+
+		        		        	console.log(rdata)
+		        		        	
+		        		           } // end-success
+		        		        }); // end-ajax
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 24.
+ 기      능 : 업무 담당자 추가 이중 모달 내에서 추가 버튼을 누르면 실행되는 것으로 DB 변화를 하고 이중 모달을 닫은 뒤
+  			  업무 담당자를 다시 empty-> append 해준다
+ 작성자명 : 김 정 권
+ */
+//$(document).on("click",".",function(){
+
+/*
+$.ajax(
+	       {
+	           type : "post",
+	           url  : "addTaskInStepInTaskModal.htm",
+	           data : {
+	        	   'sid': sid,
+	        	   'tid': tid
+	           },
+	           success : function(rdata){
+	        	   
+	        	   console.log(rdata.result);
+	        	   $('#step_add_modal_in_taskmodal_dismiss').click();
+	        	   
+	        	   $.ajax(
+	        		       {
+	        		           type : "post",
+	        		           url  : "addTaskInStepInTaskModal_2.htm",
+	        		           data : {
+	        		        	   'tid': tid
+	        		           },
+	        		           success : function(rdata){
+
+	        		        	console.log(rdata)
+	        		        	
+	        		           } // end-success
+	        		        }); // end-ajax
+	        	   
+	           } // end-success
+	        }); // end-ajax
+*/
+
+//});
+

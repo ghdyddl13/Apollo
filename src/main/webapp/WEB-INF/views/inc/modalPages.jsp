@@ -322,42 +322,32 @@
 							
 				<!-- row 2 -->
 				<div class="row">
-					<div class="col-sm-3">
-							<select id="Task_Modal_tstatus_selectbox" style="height: 50px; width: 120px; margin: -15px -15px -15px -10px">
-	
+					<div class="col-sm-2">
+							<select id="Task_Modal_tstatus_selectbox">
 							</select>
 					</div>
-	
-		
-					<div class="col-sm-9" style="margin: -15px -15px -15px -15px" id="Task_Modal_assignee"">여기는 담당자들이 뜨는 공간입니다&nbsp<i class="fas fa-plus-circle"></i></div>
+							
+					<div class="col-sm-5">
+	                    <span>시작일&nbsp:&nbsp</span>
+                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date-im">
+					</div>
+
+					<div class="col-sm-5">
+						<span>종료일&nbsp:&nbsp</span>
+	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date-im">
+					</div>
 				</div>
 				<!-- end row 2 -->
 				<hr>
+				
 				<!-- end modal-header -->
 
 				<div class="modal-body">
 
-					<!-- row 1 -->
-					<div class="row">
-                	<div class="col-sm-12 modal-title">기간 설정</div><br /><br />
+					<div class="modal-title">업무 담당자</div><br />
+					<div id="Task_Modal_assignee">여기는 담당자들이 뜨는 공간입니다</div>
 
-					<div class="col-sm-6">
-	                    <div class="modal-title">
-	                    <p>시작일</p>
-	                    </div>
-                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date-im">
-					</div>
-
-					<div class="col-sm-6">
-	                    <div class="modal-title">
-	                      <p>종료일</p>
-	                    </div>
-	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date-im">
-	                    <br><br>
-					</div>
-					</div>
-					<!-- end row 1 -->
-
+								
                 <hr />
 					<div class="modal-title">파일 업로드</div><br />
 	                <div id="Task_Modal_files">파일들이 여기 잡히게 된다</div>
