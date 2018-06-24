@@ -3,7 +3,6 @@ package com.apollo.task.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
+import com.apollo.project.service.ProjectInfoService;
 import com.apollo.task.service.TaskService;
 import com.apollo.vo.CommentDTO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
+import com.apollo.vo.TidpidDTO;
 import com.apollo.vo.TidvalueDTO;
 import com.apollo.vo.TstatusDTO;
 
@@ -26,6 +28,9 @@ public class TaskController {
 	
 	@Autowired
 	private TaskService service;
+	
+	@Autowired 
+	private ProjectInfoService projectinfoservice;
 	
 	@Autowired
 	private View jsonview;
@@ -89,7 +94,27 @@ public class TaskController {
 	ArrayList<TstatusDTO> tstatuslist = new ArrayList();
 	tstatuslist = service.gettstatuslist(pid);
 	model.addAttribute("tstatuslist", tstatuslist);
-
+	
+	// 해당 테스크의 담당자들
+	ArrayList<MemberDTO> sametaskmemberlist = new ArrayList<MemberDTO>();
+	sametaskmemberlist = service.getSameTaskAssignee(tid);
+	model.addAttribute("sametaskmemberlist", sametaskmemberlist);
+	
+	
+	// 같은 프로젝트이지만 해당 테스크의 담당자가 아닌 사람들
+	ArrayList<MemberDTO> getSameProjectButNotSameTaskMemberList = new ArrayList<MemberDTO>();
+	
+	TidpidDTO tidpiddto = new TidpidDTO();
+	tidpiddto.setPid(pid);
+	tidpiddto.setTid(tid);
+	
+	System.out.println("테스트");
+	System.out.println(pid);
+	System.out.println(tid);
+	
+	getSameProjectButNotSameTaskMemberList = service.getSameProjectButNotSameTaskMemberList(tidpiddto);
+	model.addAttribute("getSameProjectButNotSameTaskMemberList", getSameProjectButNotSameTaskMemberList);
+	
 	return jsonview;
 	}
 	

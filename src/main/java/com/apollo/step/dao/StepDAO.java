@@ -138,4 +138,19 @@ public interface StepDAO {
 	 */
 	public ArrayList<StepListMemberDTO> getStepListMember(int sid);
 
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 해당 테스크가 속한 스텝들을 가져온다 
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepNamesbytid(int tid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 해당 테스크와 같은 프로젝트에 있지만 아직 속하지 않은 스텝들을 가져온다
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepListByTid(int tid);
 }

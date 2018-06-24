@@ -329,7 +329,7 @@
 					</div>
 	
 		
-					<div class="col-sm-9" id="Task_Modal_assignee"">여기는 담당자들이 뜨는 공간입니다&nbsp<i class="fas fa-plus-circle"></i></div>
+					<div class="col-sm-9" style="margin: -15px -15px -15px -15px" id="Task_Modal_assignee"">여기는 담당자들이 뜨는 공간입니다&nbsp<i class="fas fa-plus-circle"></i></div>
 				</div>
 				<!-- end row 2 -->
 				<hr>
