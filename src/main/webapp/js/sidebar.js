@@ -1,7 +1,8 @@
 $(function() {
 
-
+		
 	makeSideProjectDir();
+	
 	
 	//스텝 추가 클릭시 프로젝트 멤버 리스트 가져오기
 	$(document).on("click","#side-insert-step",function(){ 
@@ -173,12 +174,11 @@ $(function() {
 				success:function(data){
 					var project = data.project;
 					$("#update-project-pid").val(project.pid);
-					$("#update-project-sday").val(project.sday.split(" ")[0]);
-					$("#update-project-eday").val(project.eday.split(" ")[0]);
+					if(project.sday !=null) $("#update-project-sday").val(project.sday.split(" ")[0]);
+					if(project.eday !=null) $("#update-project-eday").val(project.eday.split(" ")[0]);
 					$("#update-project-detail").val(project.detail);
 					$("#update-project-detail-"+project.methodologyid).attr("checked","checked");
 					$("#update-project-pname").val(project.pname);
-				
 				},
 				error:function(error){
 					console.log(error);
@@ -349,7 +349,10 @@ $(function() {
 							console.log(default_);
 							$("#s"+step.sid).remove().appendTo(default_);
 						}
+					}else{
+						alert("Step이동에 실패하였습니다.");
 					}
+					$(".close").click();
 				}
 			})
 		})
@@ -368,7 +371,6 @@ $(function() {
 		});
 	
 
-	
 	
 	/////////////////////////// 비동기 화면전환 - 프로젝트 /////////////////////////
 		
@@ -401,6 +403,7 @@ $(function() {
 			var pid = project_wrapper.id.substr(1);
 			var methodologyid = $(project_wrapper).children("input[name='methodologyid']").val();
 			var sid= this.id.substr(1);
+			console.log(sid);
 			$.ajax({
 				url:"list.htm",
 				data:{sid:sid},
@@ -590,6 +593,7 @@ $(function() {
 	       }); // end - ajax       
 	   })
 
+	 //  loadCurrentPage();
 }); // end - doc.on.ready
 
 
@@ -804,7 +808,12 @@ function makeSideSubDir(pids){
 }   
 
 
-///// 프로젝트 업데이트시 사용하는 함수
+/**
+ * 
+ 날   짜 : 2018. 6. 22.
+ 기   능 : 프로젝트 업데이트 함수
+ 작성자명 : 박 민 식
+ */
 function updateProject(data){
    var ajax = $.ajax({
       url:"updateProject.htm",
@@ -817,5 +826,29 @@ function updateProject(data){
    })
    return ajax;
 }
+
+/**
+ * 
+ 날   짜 : 2018. 6. 22.
+ 기   능 : View 로드 시 현재 페이지를 뿌려주는 함수 
+ 작성자명 : 박 민 식
+ */
+/*
+function loadCurrentPage(){	
+	console.log("loadCurrentPage");
+	var currentpage= $("#currentPage").val();
+	if(currentpage != null){
+		$.ajax({
+			url:currentpage,
+			dataType:"html",
+			success:function(data){
+			   console.log(data);
+		       $("#main-box").empty();
+		       $("#main-box").append(data);           
+			}
+		})
+	}
+}
+*/
    
    

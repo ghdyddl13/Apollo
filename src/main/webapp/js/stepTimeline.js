@@ -5,21 +5,17 @@
  기      능 : 간트차트에 뿌릴 데이터 가져오는 함수
  작성자명 : 박 민 식
  */
-function getGanttItems(sid) {
-	var tasks;
-	$.ajax({
+function getGanttItems() {
+	
+	var ajax =	$.ajax({
 		url : "step/getTimelineTasks.htm",
-		data : {
-			sid : sid
-		},
-		async:false,
 		dataType : "json",
 		success : function(data) {
 			tasks = data;
 		},
 		
 	});
-	return tasks;
+	return ajax;
 };
 
 /**
@@ -51,12 +47,12 @@ function makeTimelineGantt(tasks) {
 	var ganttdatabundle =[];
 	// 간트차트에 들어 갈 데이터 가공 작업
 	$(tasks).each(function(index,item){
-		
+		console.log(item.tstatusid);
 		var start = (item.sday==null)?new Date().toISOString().substr(0,10):item.sday;
 		var end = (item.eday==null)?new Date().toISOString().substr(0,10):item.eday;
-		var custom_calss= (item.sday==null)?"no-day-task":"day-task";
+		var custom_class= "timeline-tstatus-"+item.tstatusid;
 		
-		console.log(custom_calss);
+		console.log(custom_class);
 		
 		
 		var ganttdata={
@@ -64,12 +60,24 @@ function makeTimelineGantt(tasks) {
 				end:end,
 				name:item.tname,
 				id: 'Task '+item.tid,
-				custom_class: custom_calss
+				custom_class: custom_class
 				
 		 };
 
 		ganttdatabundle.push(ganttdata);
 	})
+	/// 데이터가 부족할 경우 간트차트의 row 수를 채워주기 위해 샘플 데이터를 추가해준다
+	for(var count = ganttdatabundle.length; count<=15;count++){
+		var sample={
+				start:new Date().toISOString().substr(0,10),	
+				end:new Date().toISOString().substr(0,10),
+				name:" ",
+				id: 'Task 0',
+				custom_class: "sample-task"
+				
+		 };
+		ganttdatabundle.push(sample);
+	}
 	
 	$(".gantt-target").empty();
 	//간트차트 객체 생성
@@ -99,39 +107,61 @@ function makeTimelineGantt(tasks) {
 			})
 		},
 		on_progress_change : function(task, progress) {
-			console.log(task, progress);
+
 		},
 		on_view_change : function(mode) {
 			console.log(mode);
 		}
 	});
+	/// 추가한 샘플데이터 역시 드래그앤 드랍을 할 수 있기 때문에, 이를 막기 위해 삭제해준다
+	$(".bar-wrapper[data-id='Task 0']").remove();
 	
-/*
-	$('.gantt-container').draggable(
-			{
-				axis: "x"
-			},{
-				stop: function() {
-					 var left = $('.gantt-container').offset().left
-		                console.log(left);
-		                var maxwidth = $(window).width() - $('.gantt-container').width()
-		                
-		                if(left > 0){
-		                    $('.gantt-container').css('left','0px')
-		                }else if($(window).width() > $('.gantt-container').width()){
-		                    if(left < 0){ //화면크기가 div길이보다 크고 left가 0보다 작으면!!
-		                        $('.gantt-container').css('left','0px')
-		                    }
-		                }else if($(window).width() < $('#content-md').width()){
-		                    if(left < maxwidth){ //화면크기가 div길이보다 작고 left가 maxwidth보다 작으면!!
-		                        $('.gantt-container').css('left',maxwidth-80)
-		                    }
-		                }
-		                $('.gantt-container').off('mousemove')
-				
-				}
-			}
-	) */
+	
+	 $('.gantt').draggable(
+	          {
+	             axis: "x"
+	        },{
+	            stop: function() {
+	                
+	                var gantt = $('.gantt').offset();
+	                var gantt_container = $($('.gantt').parents()[0]).offset();
+	                var gantt_width=$('.gantt').width();
+	                var gantt_container_width=$($('.gantt').parents()[0]).width();
+	                var right_border= gantt_width - gantt_container_width;
+	                var diff_left= gantt_container.left -gantt.left;
+	                //console.log(gantt.left)
+	                //console.log(gantt_container.left)
+	                //console.log("gantt_width - gantt_container_width : " +(gantt_width - gantt_container_width));
+	                //console.log(" gantt_container.left - gantt.left  : " + (gantt_container.left -gantt.left ));
+	                if(gantt_container.left <=gantt.left){
+	                	 $('.gantt').offset({left:gantt_container.left});
+	                	console.log("here");
+	                }else if(diff_left >= right_border){
+	                	console.log("else");
+	                	$('.gantt').offset({left:gantt_container.left-right_border});
+	                }
+	            }
+	        }
+	    ) 	
+	    $(".bar-group").mouseup(
+	    		function(){
+	    			console.log("dd");
+	    			$('.gantt').draggable("enable")}
+	    	
+	    )
+        $(".bar-group").mousedown(
+        		function(){
+        			$('.gantt').draggable({disabled:true})
+        		}
+	    	
+	    )
+	    		
+	  
+	   /* $(".bar-group").draggable(
+	    	 {
+	             axis: "x" ,
+	        }
+	    );*/
 }
 
 /**
@@ -144,26 +174,39 @@ function makeTimelineTable(tasks){
 	var no = 1;
 	$("#timeline-table > tbody").empty();
 	$(tasks).each(function(index,item){
-	
+		
 		//좌측 테이블에 들어갈 데이터 작업
 	
 		var row = jQuery("<tr>");
-		var td_no = jQuery("<td>",{"text": no++}) 
-		var td_tname = jQuery("<td>",{"text": item.tname,"class":"timeline-task-edit","id":item.tid})
+		var td_no = jQuery("<td>",{"text": no++,"align":"center"}) 
+		var td_tname = jQuery("<td>",{"text": item.tname,"class":"timeline-task-edit","id":"t" + item.tid})
 		var td_tstatus = jQuery("<td>",{"text": item.tstatus,
 										"css":{"background-color":item.color,
 											   "color":"white",
 											   "font-size":"10px",
 											   "padding-left":"0px",
 											   "padding-right":"0px",
-											   "text-align":"center"}});
+											   "text-align":"center"},
+										"class":"timeline-task-status"});
 		var td_assingee= jQuery("<td>",{"css":{"padding":"1px"}}).append(getTaskAssignees(item.tid,"27px"));
 		$(row).append(td_no);
 		$(row).append(td_tstatus);
 		$(row).append(td_tname);
 		$(row).append(td_assingee);
 		$("#timeline-table > tbody").append(row);
-	})
+	});
+	var rows = $("#timeline-table > tbody").children();
+	console.log(rows.length);
+	
+	for(var rowcount =rows.length;rowcount<=15;rowcount++){
+		var row = jQuery("<tr>");
+		var td1 = jQuery("<td>");
+		var td2 = jQuery("<td>");
+		var td3 = jQuery("<td>");
+		var td4 = jQuery("<td>");
+		$(row).append(td1).append(td2).append(td3).append(td4);
+		$("#timeline-table > tbody").append(row);
+	}
 }
 
 
@@ -176,33 +219,31 @@ function makeTimelineTable(tasks){
 
 
 $(document).on("change","#timeline-tstatus-filter",function(){
-	
-	var data = getGanttItems($("#current-sid").val());
-	var tasks = data.tasks;
-	if($(this).val()=="all"){
-		makeTimelineTable(tasks);
-		makeTimelineGantt(tasks);
-	}else{
-		var selecedtasks = [];
-		$(tasks).each(function(index,item){
-			console.log(item);
-			if(item.statusid==$("#timeline-tstatus-filter").val()){
-				selecedtasks.push(item);
-			}
-		})
+	var selectedstatus= $(this).val();
+	$.when(getGanttItems()).done(function(data){
 		
-		if(selecedtasks.length==0){
-			alert("해당 상태의 task가 없습니다.");
+		var tasks = data.tasks;
+		console.log(tasks);
+		if(selectedstatus=="all"){
+			makeTimelineTable(tasks);
+			makeTimelineGantt(tasks);
 		}else{
-			makeTimelineTable(selecedtasks);
-			makeTimelineGantt(selecedtasks);
+			var selecedtasks = [];
+			$(tasks).each(function(index,item){
+				if(item.tstatusid==$("#timeline-tstatus-filter").val()){
+					selecedtasks.push(item);
+				}
+			})
+			console.log(selecedtasks);
+			if(selecedtasks.length==0){
+				alert("해당 상태의 task가 없습니다.");
+			}else{
+				makeTimelineTable(selecedtasks);
+				makeTimelineGantt(selecedtasks);
+			}
 		}
-	}
-	
+	})
 })
 
-/**
- * 
- */
 
 

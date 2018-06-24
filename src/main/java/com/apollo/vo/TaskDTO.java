@@ -14,7 +14,6 @@ public class TaskDTO {
 	private int tstatusid;
 	private String tstatus;
 	private String color;
-
 	
 	
 	

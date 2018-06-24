@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html >
 
-
+<input type="hidden" id="currentPage" value="<%=session.getAttribute("location")%>">
 <div id="my-side-nav" class="side-nav">
 		<div class="text-center container-fluid">
 			<a class="side-bar-add-project" id="side-bar-add-project" data-toggle="modal"

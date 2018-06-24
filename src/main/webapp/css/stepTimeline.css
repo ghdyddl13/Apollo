@@ -70,6 +70,104 @@
 	
 }
 
+.gantt .day-task .bar{
+	fill: #b8c2cc !important ;
+	
+}
+.gantt .timeline-tstatus-1 .bar{
+	fill: rgb(241, 196, 15) !important ;
+	
+}
+.gantt .timeline-tstatus-2 .bar{
+	fill: rgb(46, 204, 113) !important ;
+	
+}
+.gantt .timeline-tstatus-3 .bar{
+	fill: rgb(52, 152, 219) !important ;
+	
+}
+.gantt .timeline-tstatus-4 .bar{
+	fill: rgb(127, 127, 127) !important ;
+	
+}
+.gantt .timeline-tstatus-5 .bar{
+	fill: rgb(127, 127, 127) !important ;
+	
+}
+.gantt .timeline-tstatus-6 .bar{
+	fill: rgb(241, 196, 15) !important ;
+	
+}
+.gantt .timeline-tstatus-7 .bar{
+	fill: rgb(46, 204, 113) !important ;
+	
+}
+.gantt .timeline-tstatus-8 .bar{
+	fill: rgba(211, 84, 0, 0.74) !important ;
+	
+}
+.gantt .timeline-tstatus-9 .bar{
+	fill: rgba(211, 0, 68, 0.74) !important ;
+	
+}
+.gantt .timeline-tstatus-10 .bar{
+	fill: rgb(142, 68, 173) !important ;
+	
+}
+.gantt .timeline-tstatus-11 .bar{
+	fill: rgb(52, 152, 219) !important ;
+	
+}
+.gantt .timeline-tstatus-12 .bar{
+	fill: rgb(127, 127, 127) !important ;
+	
+}
+.gantt .timeline-tstatus-13 .bar{
+	fill: rgb(127, 127, 127) !important ;
+	
+}
+.gantt .timeline-tstatus-14 .bar{
+	fill: rgb(46, 204, 113) !important ;
+	
+}
+.gantt .timeline-tstatus-15 .bar{
+	fill: rgb(52, 152, 219) !important ;
+	
+}
+.gantt .timeline-tstatus-16 .bar{
+	fill: rgb(127, 127, 127) !important ;
+	
+}
+.gantt .timeline-tstatus-17 .bar{
+	fill: rgb(127, 127, 127) !important ;
+	
+}
+
+
+
+
+
+.gantt .day-task .bar{
+	fill: #b8c2cc !important ;
+	
+}
+
+
 .gantt .no-day-task .bar{
 	fill: #b8c2cc;
+}
+.gantt .sample-task .bar{
+	fill: none;
+	
+}
+
+.gantt .sample-task .bar:hover{
+	cursor: inherit;
+	
+}
+
+.timeline-task-edit:hover{
+  border: 1px solid #a0a0a0;
+  border-collapse:separate;
+  cursor: pointer;
 }

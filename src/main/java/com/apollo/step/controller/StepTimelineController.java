@@ -33,6 +33,7 @@ public class StepTimelineController {
 	@RequestMapping("/timeline.htm")
 	public String getTimelineView(Model model,HttpServletRequest request) {
 		ArrayList<TstatusDTO> tstatuses = null;
+		request.getSession().setAttribute("location", "step/timeline.htm");
 		int sid = (Integer) request.getSession().getAttribute("sid");
 		try {
 			tstatuses = steptimelineservice.selectTstatusBySid(sid);
@@ -44,9 +45,10 @@ public class StepTimelineController {
 	}
 	
 	@RequestMapping("/getTimelineTasks.htm")
-	public View getTimelineTasks(int sid, Model model) {
+	public View getTimelineTasks(Model model,HttpServletRequest request) {
+
+		int sid= (Integer) request.getSession().getAttribute("sid");
 		ArrayList<TaskDTO> tasks = null;
-		
 		try {
 			tasks = steptimelineservice.getTasksByStepId(sid);
 			model.addAttribute("tasks", tasks);
