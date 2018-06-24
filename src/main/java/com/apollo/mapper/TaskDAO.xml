@@ -72,9 +72,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into taskinstep values(#{sid}, #{tid})
 	</insert>
 	
-	
-	
-	
-	
+	<delete id="deleteAssignee" parameterType="com.apollo.vo.MidtidDTO">
+    	delete from assignee where mid = #{mid} and tid = #{tid}
+    </delete>
+		
     
 </mapper>

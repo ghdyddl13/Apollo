@@ -15,6 +15,7 @@ import com.apollo.project.service.ProjectInfoService;
 import com.apollo.task.service.TaskService;
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
@@ -335,6 +336,35 @@ public class TaskController {
 		return jsonview;
 	}
 	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 테스크 모달 창에서 업무 담당자 삭제 버튼을 누르면 실행
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/deleteassignee.htm")
+	public View deleteAssignee(String mid, int tid, Model model){
+		
+		System.out.println("테스크 모달 내 업무 담당자 삭제 컨트롤러 메소드 실행");
+		
+		MidtidDTO dto = new MidtidDTO();
+		dto.setMid(mid);
+		dto.setTid(tid);
+		int deleteresult = service.deleteAssignee(dto);
+		if(deleteresult == 1) {
+			System.out.println("업무 담당자 1명 삭제 완료");
+		}
+		model.addAttribute("deleteresult", deleteresult);
+		
+		// 해당 테스크 담당자들
+		ArrayList<MemberDTO> sametaskmemberlist = new ArrayList<MemberDTO>();
+		sametaskmemberlist = service.getSameTaskAssignee(tid);
+		model.addAttribute("sametaskmemberlist", sametaskmemberlist);
+		
+		return jsonview;
+	}
 	
 	
 }

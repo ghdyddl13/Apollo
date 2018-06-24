@@ -18,6 +18,7 @@ import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
@@ -352,6 +353,20 @@ public class TaskService {
 		return list;
 	}
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 테스크 모달 내 업무 담당자 삭제
+	 작성자명 : 김 정 권
+	 */
+	public int deleteAssignee(MidtidDTO dto) {
+		
+		System.out.println("deleteAssignee 서비스 탔음");
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.deleteAssignee(dto);
+		return result;
+	}
 	
 }
 
