@@ -703,3 +703,33 @@
 		</div>
 	</div>
 
+
+	<!-- Assignee 추가 Modal -->
+	<div class="modal fade" id="assignee_add_modal_in_taskmodal">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			
+			
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" id="assignee_add_modal_in_taskmodal_dismiss">&times;</button>
+						<h4 class="modal-title">New Assignee</h4>
+					</div>
+				
+				
+				<div class="modal-body ">
+
+				<table id="assignee_in_taskmodal" class="table">
+		
+				</table>
+		
+				</div>
+				
+				<div align="center">
+					<input type="button" class="btn" id="cancel-btn"
+						data-dismiss="modal" value="돌아가기">
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>

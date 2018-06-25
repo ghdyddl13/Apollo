@@ -491,19 +491,36 @@ $(document).on("click",".task_page_delete_assignee_btn",function(){
  */
 $(document).on("click","#task_modal_add_assignee",function(){
 	
+	var tid = $('#tidhidden').attr('value');
+	
 	$.ajax(
 		       {
 		           type : "post",
-		           url  : "addTaskInStepInTaskModal.htm",
+		           url  : "addtaskassigneemodalinfo.htm",
 		           data : {
-		        	   'sid': sid,
-		        	   'tid': tid
+		        	    'tid': tid
 		           },
 		           success : function(rdata){
 		        	   
-		        	   console.log(rdata.result);
-		        	   $('#step_add_modal_in_taskmodal_dismiss').click();
-		        	 
+		        	   $('#assignee_in_taskmodal').empty();
+		        	   
+		        	   var tablestr = '';
+		        	   tablestr += '<tr><th>이름</th><th>직위</th><th>부서명</th><th>이메일</th><th>핸드폰 번호</th><th>초대</th></tr>';
+		        	   $(rdata.getSameProjectButNotSameTaskMemberList).each(function(){
+		        		   
+		        		   if(this.position == null){
+		        			   this.position = '';
+		        		   } 
+		        		   if(this.deptname == null){
+		        			   this.deptname = '';
+		        		   } 
+		        		   if(this.pnum == null){
+		        			   this.pnum = '';
+		        		   } 
+		        		  tablestr += '<tr><th>' + this.mname + '</th><th>' + this.position + '</th><th>' + this.deptname + '</th><th>' + this.mid + '</th><th>' + this.pnum + '</th><th><i class="fas fa-plus-circle addbtn_assingeebtninmodal" id="' + this.mid + '" style="cursor:pointer"></i></th></tr>';
+		        	   });
+		        	   
+		        	   $('#assignee_in_taskmodal').append(tablestr);
 		        	   
 		           } // end-success
 		        }); // end-ajax
@@ -519,45 +536,70 @@ $(document).on("click","#task_modal_add_assignee",function(){
   			  업무 담당자가 추가되면 그 후 incoming과 stream에 insert가 발생하여야 한다
  작성자명 : 김 정 권
  */
-//$(document).on("click",".",function(){
+$(document).on("click",".addbtn_assingeebtninmodal",function(){
 
-/*
+	var mid = $(this).attr('id'); // 추가할 대상자
+	var tid = $('#tidhidden').attr('value');
+	var tname = $('#tnamehidden').attr('value');
+
 $.ajax(
 	       {
 	           type : "post",
-	           url  : "addTaskInStepInTaskModal.htm",
+	           url  : "addassigneeintaskmodal.htm",
 	           data : {
-	        	   'sid': sid,
-	        	   'tid': tid
+	        	   'mid': mid,
+	        	   'tid': tid,
+	        	   'tname' : tname
 	           },
 	           success : function(rdata){
 	        	   
 	        	   console.log(rdata.result);
-	        	   $('#step_add_modal_in_taskmodal_dismiss').click();
+	        	   $('#assignee_add_modal_in_taskmodal_dismiss').click();
 	        	   
+	        	   // 갱신된 assignee들 append
 	        	   $.ajax(
 	        		       {
 	        		           type : "post",
-	        		           url  : "addTaskInStepInTaskModal_2.htm",
+	        		           url  : "reappendassignee.htm",
 	        		           data : {
-	        		        	   'tid': tid
+	        		        	   'tid': tid,
 	        		           },
 	        		           success : function(rdata){
 
-	        		        	console.log(rdata)
-	        		        	
-	        		        	*************************************************************************
-	        		        	*************************************************************************
-	        		        	업무 담당자가 추가되면 그 후 incoming과 stream에 insert가 발생하여야 한다
-    							*************************************************************************
-								*************************************************************************
-	        		        	
+	        		        	console.log(rdata);
+	     		        	   $('#Task_Modal_assignee').empty();
+
+	     		        	   var assigneestr = '';
+	     		        	   var profile_count = 0;
+	     		        	   $(rdata.sametaskmemberlist).each(function(){
+	     		        		   
+	     		        		   if(this == null){
+	     		        			   assigneestr += '<span>해당 Task의 담당자가 존재하지 않습니다</span>&nbsp&nbsp&nbsp';
+	     		        			   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+	     		        			   return false;
+	     		        		   }
+	     		        		   
+	     		        		   if((profile_count%4 == 0)&&(profile_count != 0)) {
+	     		        			   assigneestr += '<br><br>'
+	     		        		   }
+	     		        		   
+	     		        		   assigneestr += '<span>'
+//	     		        	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+	     		        	       assigneestr += '<img src="img/'+ '프로필사진테스트.jpg' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+	     		        	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
+	     		        	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
+	     		        	       assigneestr += '</span>'
+	     		        	       assigneestr += '&nbsp&nbsp&nbsp'
+	     		        	       profile_count ++;
+	     		        	   });
+	     		        	   	   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+	     		        	   
+	     		        	   $('#Task_Modal_assignee').append(assigneestr);
+	     		        	   
 	        		           } // end-success
 	        		        }); // end-ajax
 	        	   
 	           } // end-success
 	        }); // end-ajax
-*/
 
-//});
-
+});

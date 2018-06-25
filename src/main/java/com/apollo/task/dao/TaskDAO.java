@@ -24,8 +24,6 @@ public interface TaskDAO {
 	public int countTaskInStep(int tid);
 	public int changeTstatus(TidvalueDTO dto);
 	public int addTaskInStepInTaskModal(TaskInStepDTO taskinstepdto);
-	
 	public int deleteAssignee(MidtidDTO dto);
-	
 
 }
