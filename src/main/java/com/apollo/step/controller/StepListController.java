@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
+import com.apollo.step.service.StepBoardService;
 import com.apollo.step.service.StepListService;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.StepListTaskDTO;
@@ -22,6 +23,8 @@ public class StepListController {
 	
 	@Autowired
 	private StepListService service;
+	@Autowired
+	private StepBoardService boardservice;
 	
 	
 	/**
@@ -49,9 +52,31 @@ public class StepListController {
         
         return "step/list";
     }
-	
-	public View createTask(TaskDTO taskdto) {
-		return null;
+    /**
+     * 
+     날      짜 : 2018. 6. 25.
+     기      능 : Task insert 해주는 함수 
+     작성자명 : 이 진 우
+     */
+	@RequestMapping(value="/listtaskcreate.htm",method=RequestMethod.GET)
+	public String createTask(TaskDTO taskdto, HttpServletRequest request,ModelMap map) {
+		System.out.println("boardInsertTask : " + taskdto.getTname() + "/" + request.getSession().getAttribute("pid") + "/" + taskdto.getTstatusid()+"/"+request.getSession().getAttribute("sid"));
+		taskdto.setPid((Integer)request.getSession().getAttribute("pid"));
+		int sid = (Integer) request.getSession().getAttribute("sid");
+		try {
+			//task insert service
+			boardservice.insertBoardTask(taskdto);
+			//task 생성 후 시퀀스로 생성된 tid를 해당 step에 insert 하는 하는
+			boardservice.insertBoardTaskInStep(taskdto.getTid(), sid);
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		return "redirect:/list.htm?sid="+sid;
 	}
 	
 	public String showTaskList(String s1, Model model) {
