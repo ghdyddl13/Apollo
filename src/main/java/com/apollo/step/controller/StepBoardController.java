@@ -85,7 +85,7 @@ public class StepBoardController {
     public String selectBoard(Model model,HttpServletRequest request, HttpSession session) {
 		
 		session.setAttribute("location", "/board.htm");
-		
+
         int sid = (Integer) request.getSession().getAttribute("sid");
         System.out.println("보드컨트롤러에요");
         try {

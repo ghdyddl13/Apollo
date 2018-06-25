@@ -1,0 +1,17 @@
+.project-page-table thead>tr>th {
+	text-align: center;
+	padding-bottom: 14px
+}
+#project-table-tr-steps {
+	background-color: #f4faff
+}
+#project-table-td-tstatus {
+	color:white;
+	text-align:center;
+}
+#project-table-tr-folders {
+	background-color: #f4faff
+}
+.project-table-day {
+	text-align:center;
+}

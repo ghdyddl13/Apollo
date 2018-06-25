@@ -90,6 +90,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where a.TID in (select tid from TASKINSTEP where SID =#{sid})
 	</select>
 
+	<select id="getStepInProject" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
+    	select * from step where pid = #{pid}
+    </select>
 	
 	<select id="getStepNamesbytid" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
 		select * from step where sid in (select sid from taskinstep where tid = #{tid})

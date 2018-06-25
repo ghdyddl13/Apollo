@@ -37,9 +37,19 @@ public interface MemberDAO {
 	 */
 	public MemberDTO getProfileInfoMember(String mid);
 	
+
 	
 	public String getTaskModifierName(String mid);
 	public ArrayList<MemberDTO> getSameTaskMemberList(int tid);
 	public ArrayList<MemberDTO> getSameProjectButNotSameTaskMemberList(TidpidDTO dto);
 	
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 스텝에 속한 테스트의 어사이니 정보 불러오기 (for filter)
+	 작성자명 : 박 민 식
+	 */
+	public ArrayList<MemberDTO> selectAssigneesBySid(int sid);
+
 }
