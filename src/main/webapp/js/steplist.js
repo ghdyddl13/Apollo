@@ -198,7 +198,7 @@ $(function() {
 	  $(this).removeClass("list-task-checkbox").addClass("list-task-checkbox-selected");
 	  $(".list-section-third-default").css({"visibility":"hidden","position":"absolute","height":"50%"});
 	  $(".list-section-third-selectpage").css({"visibility":"visible","position":"relative","height":"100%"})
-	  checkbox.push($(this).parent().parent().attr('id'));
+	  checkbox.push($(this).parent().parent().children(".center-container").attr('id'));
 	  console.log(checkbox);
 	  if(checkbox.length>0){
 	    $("#selected-tag-count").text(checkbox.length+"개 선택됨");
@@ -206,7 +206,7 @@ $(function() {
 	})
 	$(document).on("click",".list-task-checkbox-selected",function () {//선택된 select box를 클릭했을 시에
 	  $(this).removeClass("list-task-checkbox-selected").addClass("list-task-checkbox");
-	  checkbox.splice(checkbox.indexOf($(this).parent().parent().attr('id')),1);// 선택을 풀면서 거기에 담겨있는 id를 가지고와 중복되는 값을 제거한다
+	  checkbox.splice(checkbox.indexOf($(this).parent().parent().children(".center-container").attr('id')),1);// 선택을 풀면서 거기에 담겨있는 id를 가지고와 중복되는 값을 제거한다
 	  console.log(checkbox);
 	  $("#selected-tag-count").text(checkbox.length+"개 선택됨");
 	  if(checkbox.length==0){

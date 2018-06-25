@@ -97,12 +97,12 @@
                   <!--LIST CONTAINER  -->
                   <div class="list-task-containers" >
                   	<c:forEach var="task" items="${tasklist}">
-	                    <div  class="list-task-container Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}">
+	                    <div  class="list-task-container">
 	                      <div class= "list-task-checkbox-container">
 	                        <span class="list-task-checkbox"></span>
 	                      </div>
 	                      <div class= "image-container"><img class="profile-image" src="img/frog.png" alt=""></div>
-	                      <div class="center-container">
+	                      <div class="center-container Task_RUD_Modal"data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}">
 	                        <div class= "task-name-container">${task.tname}</div>
 	                        <div class= "task-step-container">
 								<c:forEach var="step" items="${task.steps}">
