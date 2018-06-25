@@ -1,7 +1,8 @@
 $(function() {
 
-
+		
 	makeSideProjectDir();
+	
 	
 	//스텝 추가 클릭시 프로젝트 멤버 리스트 가져오기
 	$(document).on("click","#side-insert-step",function(){ 
@@ -173,12 +174,11 @@ $(function() {
 				success:function(data){
 					var project = data.project;
 					$("#update-project-pid").val(project.pid);
-					$("#update-project-sday").val(project.sday.split(" ")[0]);
-					$("#update-project-eday").val(project.eday.split(" ")[0]);
+					if(project.sday !=null) $("#update-project-sday").val(project.sday.split(" ")[0]);
+					if(project.eday !=null) $("#update-project-eday").val(project.eday.split(" ")[0]);
 					$("#update-project-detail").val(project.detail);
 					$("#update-project-detail-"+project.methodologyid).attr("checked","checked");
 					$("#update-project-pname").val(project.pname);
-				
 				},
 				error:function(error){
 					console.log(error);
@@ -349,7 +349,10 @@ $(function() {
 							console.log(default_);
 							$("#s"+step.sid).remove().appendTo(default_);
 						}
+					}else{
+						alert("Step이동에 실패하였습니다.");
 					}
+					$(".close").click();
 				}
 			})
 		})
@@ -369,7 +372,6 @@ $(function() {
 	
 
 	
-	
 	/////////////////////////// 비동기 화면전환 - 프로젝트 /////////////////////////
 		
 		$(document).on("click",".side-project",function(){
@@ -384,14 +386,12 @@ $(function() {
 				data: "pid=" + pid,
 				dataType:"html",
 				success:function(data){
-					 $("#main-box").empty();
-					 $("#main-box").append(data);	 		
+					$("#main-box").empty();
+					$("#main-box").append(data);	 		
 					 
 				}
 			})
 	    });
-
-	
 
 		
 		
@@ -431,6 +431,8 @@ $(function() {
 			 success: function(data){
 				 if(data.result > 0){
 					 alert("프로젝트 생성이 완료되었습니다!");
+					 $(".close").click();
+					 makeSideProjectDir();
 				 }else {
 					 alert("프로젝트 생성에 실패했습니다");
 				 }	
@@ -473,11 +475,13 @@ $(function() {
                    console.log(data);
                    if(data.folderresult > 0){
                    alert("폴더 생성이 완료되었습니다!");
+                   $(".close").click();
                 }else {
                    alert("폴더 생성에 실패했습니다");
                 }   
                 $('.add-step-name').val("");
                 $('.close').click();
+               
                 } // end - success
 
              	,error:function(error){
@@ -524,6 +528,7 @@ $(function() {
 	               
 	               if(data.updatefolder > 0){
 	                   alert('폴더 수정이 완료되었습니다!');
+	                   $(".close").click();
 	               }else {
 	                   alert('폴더 수정이 실패되었습니다');
 	               }
@@ -574,6 +579,7 @@ $(function() {
 	       }); // end - ajax       
 	   })
 
+	 //  loadCurrentPage();
 }); // end - doc.on.ready
 
 
@@ -675,20 +681,7 @@ function selectProjectList(){
          if(data!=null){ /// 참여중인 프로젝트가 있을 경우 
             $(data.projectlist).each(function(index,el){
                pids.push(el.pid);
-               var wrapper = jQuery("<div>",{"class":"side-project-wrapper","id":"p"+el.pid});
-               var a = jQuery("<a>",{"class":"side-project","text":el.pname})
-               var hidden = jQuery("<input>",{"type":"hidden",
-                                       "name":"methodologyid",
-                                       "value":el.methodologyid});
-               var span = jQuery("<span>",{"class":"glyphicon glyphicon-duplicate", 
-                  "data-toggle":"collapse",
-                  "data-target":"#p-dir"+el.pid})
-               var div = jQuery("<div>",{"class":"side-dir-project  collapse",
-                  "id": "p-dir"+el.pid});
-                  
-               console.log(el.pstatuscode);
-               $(a).prepend(span);
-               $(wrapper).append(a).append(div).append(hidden);
+                var wrapper = MakeprojectWrapper(el);
                //////프로젝트의 상태에 따라 진행, 완료, 휴지통에 구분하여 append
                if(el.pstatuscode ==1){
                   $(wrapper).appendTo("#working-project");
@@ -707,6 +700,31 @@ function selectProjectList(){
    });
    return dfd.promise(); // 함수가 종료될 때, Promise로 리턴해주면 
 }
+
+/**
+ * 
+ 날   짜 : 2018. 6. 24.
+ 기   능 : 사이드바에 들어갈 프로젝트 구성 태그들을 만들어주는 함수
+ 작성자명 : 박 민 식
+ */
+function MakeprojectWrapper(project){
+    var wrapper = jQuery("<div>",{"class":"side-project-wrapper","id":"p"+project.pid});
+    var a = jQuery("<a>",{"class":"side-project","text":project.pname})
+    var hidden = jQuery("<input>",{"type":"hidden",
+                            "name":"methodologyid",
+                            "value":project.methodologyid});
+    var span = jQuery("<span>",{"class":"glyphicon glyphicon-duplicate", 
+       "data-toggle":"collapse",
+       "data-target":"#p-dir"+project.pid})
+    var div = jQuery("<div>",{"class":"side-dir-project  collapse",
+       "id": "p-dir"+project.pid});
+       
+    console.log(project.pstatuscode);
+    $(a).prepend(span);
+    $(wrapper).append(a).append(div).append(hidden);
+    return wrapper;
+}
+
 
 
 /**
@@ -788,7 +806,12 @@ function makeSideSubDir(pids){
 }   
 
 
-///// 프로젝트 업데이트시 사용하는 함수
+/**
+ * 
+ 날   짜 : 2018. 6. 22.
+ 기   능 : 프로젝트 업데이트 함수
+ 작성자명 : 박 민 식
+ */
 function updateProject(data){
    var ajax = $.ajax({
       url:"updateProject.htm",
@@ -801,5 +824,29 @@ function updateProject(data){
    })
    return ajax;
 }
+
+/**
+ * 
+ 날   짜 : 2018. 6. 22.
+ 기   능 : View 로드 시 현재 페이지를 뿌려주는 함수 
+ 작성자명 : 박 민 식
+ */
+/*
+function loadCurrentPage(){	
+	console.log("loadCurrentPage");
+	var currentpage= $("#currentPage").val();
+	if(currentpage != null){
+		$.ajax({
+			url:currentpage,
+			dataType:"html",
+			success:function(data){
+			   console.log(data);
+		       $("#main-box").empty();
+		       $("#main-box").append(data);           
+			}
+		})
+	}
+}
+*/
    
    

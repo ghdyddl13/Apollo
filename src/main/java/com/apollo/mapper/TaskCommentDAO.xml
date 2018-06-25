@@ -8,9 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey keyProperty="cmtid" resultType="int" order="BEFORE">
 		    select seq_cmtid.nextval FROM DUAL
 		</selectKey>
-		insert into comments values(#{cmtid},#{comments}, #{tid}, #{mid},
-		#{cmtkind}, sysdate)
+		insert into comments values(#{cmtid}, #{comments}, #{tid}, #{mid}, #{cmtkind}, sysdate)
 	</insert>
+	
 	<select id="selectCommentMidlist" resultType="String" parameterType="integer">
 		select mid from ASSIGNEE where tid = #{tid}
 	</select>
@@ -18,4 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertReceiver" parameterType="hashmap">
 		insert into RECEIVER VALUES	(#{cmtid}, 	#{mid},0)
 	</insert>
+	
+	<insert id="insertComment2" parameterType="com.apollo.vo.CommentDTO">
+		insert into comments values(seq_cmtid.nextval, #{comments}, #{tid}, #{mid}, #{cmtkind}, TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	
 </mapper>

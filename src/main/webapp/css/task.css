@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 #star_trash{
@@ -24,4 +23,37 @@
 	text-align: center;
 }
 
+.taskmodal_memberprofile{
+	  width: 40px;
+	  height:40px;
+	  border-radius: 20px
+}
 
+#Task_Modal_tstatus_selectbox{
+	font-size: 12px;
+	height: 50px;
+	width: 100px;
+	margin: -15px -15px -15px -10px
+}
+
+
+#Task_Modal_sday{
+	  width: 140px;
+}
+
+#Task_Modal_eday{
+	  width: 140px;
+}
+
+#Task_Modal_assignee{
+     text-align: center;
+}
+
+
+assignee_in_taskmodal th{
+	text-align: center;
+}
+
+assignee_in_taskmodal td{
+	text-align: center;
+}

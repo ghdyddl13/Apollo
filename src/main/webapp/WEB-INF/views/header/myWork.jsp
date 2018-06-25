@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<script type="text/javascript" src="js/task.js"></script>
+
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <div class="main-container container">
@@ -11,7 +14,7 @@
 				<div class="week-count-section" id="todaycount" style="float: right">${counttodaylist}</div>
 			</div>
 			<c:forEach var="todaytask" items="${todaylist}">
-				<div class="main-section-task" id="t${todaytask.tid}">
+				<div class="main-section-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${todaytask.tid}">
 					<div class="task-image-section"></div>
 					<c:choose>
 						<c:when test="${todaytask.overdue=='overdue'}">

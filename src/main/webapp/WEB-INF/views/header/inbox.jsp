@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<!-- TASK_JK -->
+<script type="text/javascript" src="js/task.js"></script>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
 	$(function() {	
@@ -113,7 +117,7 @@
 	<input id ="inboxkind" type="hidden" value="${inbox}">
 	<div class ="inbox-main-container">
 		<div class ="inbox-section-left" id="left">
-		<p class ="inbox-header">&nbsp; inbox</p>
+		<p class ="inbox-header">&nbsp; Inbox</p>
 		<div class = "inbox-nav">
 		<div class="inbox-topnav" id="myTopnav">
  			<a id="incomming-page" href="#Inbox">Incomming</a>
@@ -133,7 +137,7 @@
 						<!-- <div id="archiveupdate" style="cursor: pointer;">
 							<img src="img/archive.png" width="18px" height="18px">
 						</div> -->
-						<div class ="Task_RUD_Modal" id="t${commentlist.cmtid}" style="cursor: pointer;"><span class="inbox-span1">${commentlist.tname}</span></div>&#60; 
+						<div data-toggle="modal" data-target="#Task_RUD_Modal" class ="yyTask_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;"><span class="inbox-span1">${commentlist.tname}</span></div>&#60; 
 						<span class="inbox-span2">${commentlist.pname}</span>
 						<span class="inbox-span3">
 						<c:choose>
@@ -163,7 +167,7 @@
 						</center>
 					</c:if>
 					<div class="inbox-list">
-						<div class ="Task_RUD_Modal" id="t${commentlist.cmtid}" style="cursor: pointer;"><span class="inbox-span1">${commentlist.tname}</span></div>&#60; 
+						<div data-toggle="modal" data-target="#Task_RUD_Modal" class ="yyTask_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;"><span class="inbox-span1">${commentlist.tname}</span></div>&#60; 
 						<span class="inbox-span2">${commentlist.pname}</span> 
 						<span class="inbox-span3">
 						<c:choose>

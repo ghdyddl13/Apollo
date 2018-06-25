@@ -29,7 +29,7 @@ public class StreamController {
 		System.out.println(mid);
 		int pid = 0;
 		
-		ArrayList<ProjectDTO> pidlist = service.getPidlist("testid1");//테스트용 아이디
+		ArrayList<ProjectDTO> pidlist = service.getPidlist(mid);//테스트용 아이디
 		if(!pidlist.isEmpty()) {
 			pid = pidlist.get(0).getPid();
 		}
@@ -46,8 +46,8 @@ public class StreamController {
 	@RequestMapping("/selectstream.htm")
 	public String selectstream(int pid,HttpSession session, Model model) {
 		System.out.println("selectstream controller");
-		
-		ArrayList<ProjectDTO> pidlist = service.getPidlist("testid1");//테스트용 아이디
+		String mid = (String)session.getAttribute("mid");
+		ArrayList<ProjectDTO> pidlist = service.getPidlist(mid);//테스트용 아이디
 		ArrayList<CommentDTO> streamlist = service.getStreamlist(pid);//테스트용 아이디
 		
 		

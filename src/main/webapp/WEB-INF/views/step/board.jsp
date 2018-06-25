@@ -2,7 +2,8 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script type="text/javascript" src="js/utils.js"></script>
+<!-- TASK_JK -->
+<script type="text/javascript" src="js/task.js"></script>
 
 <h3></h3>
 <jsp:include page="/WEB-INF/views/inc/stepInsideHeader.jsp"></jsp:include>
@@ -17,13 +18,6 @@
 
 
 <script>
-
-
-
-
-
-
-
 
 //task 생성하기 위해 이름 입력하는 text 창 생성
 function addTaskView(tstatusid){
@@ -163,7 +157,7 @@ function addTask_focusout(tstatusid){
 #board-sortable{
    list-style-type: none;
    margin: 0;
-    float: left; 
+   float: left; 
    margin-right: 10px;
    padding: 5px;
    width: 270px;
@@ -178,7 +172,6 @@ function addTask_focusout(tstatusid){
    width: 220px;
    text-align: center;
    background: white;
-   
    border-style: outset;
    
    
@@ -272,6 +265,13 @@ function addTask_focusout(tstatusid){
                
                </p>
                <hr id="board-hr" style="background-color:${b.color};">
+                 
+                   <%-- <div class="board-task-adder_containers" id="body-start">
+                    <div class="board-task-adder" id="task-adder" onclick="addTaskView(${b.tstatusid})">
+                         New Task
+                    </div>
+                   </div>--%>
+
                  <%-- <div class="listbox">
                          <div class="listtitle" id="listnum">
                                <a class="cardcreate" onclick="addCardView(this, ${b.tstatusid})">Add a card...</a>
@@ -292,8 +292,9 @@ function addTask_focusout(tstatusid){
                      <c:choose>
                      
                         <c:when test="${b.tstatus eq t.tstatus}">
+                           <li class="ui-state-default" value="${t.tid}">${t.tname}</li>
                            <li class="ui-state-default Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${t.tid}" value="${t.tid}">${t.tname}</li>
-                                                      
+                                   
                         </c:when>
                      </c:choose>
                   </c:forEach>

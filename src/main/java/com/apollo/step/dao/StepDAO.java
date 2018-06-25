@@ -1,4 +1,5 @@
 package com.apollo.step.dao;
+
 import java.util.ArrayList;
 import java.util.List;
 import com.apollo.vo.StepDTO;
@@ -103,6 +104,13 @@ public interface StepDAO {
 	
 	/**
 	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : pid로 step 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<StepDTO> getStepInProject(int pid);
+
+	/**
 	 날      짜 : 2018. 6. 24.
 	 기      능 : sid로 Tstatus list 가지고옴
 	 작성자명 : 이 진 우
@@ -138,4 +146,19 @@ public interface StepDAO {
 	 */
 	public ArrayList<StepListMemberDTO> getStepListMember(int sid);
 
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 해당 테스크가 속한 스텝들을 가져온다 
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepNamesbytid(int tid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 해당 테스크와 같은 프로젝트에 있지만 아직 속하지 않은 스텝들을 가져온다
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepListByTid(int tid);
 }

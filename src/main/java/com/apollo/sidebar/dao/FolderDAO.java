@@ -42,4 +42,5 @@ public interface FolderDAO {
 	 작성자명 : 김 래 영
 	 */
 	public int deleteFolder(String fid);
+
 }

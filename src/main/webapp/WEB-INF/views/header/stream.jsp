@@ -40,10 +40,10 @@ $(function() {
 <c:forEach var="streamlist" items="${streamlist}">
 
 <div>
-	${streamlist.cmtid}<br>
-	${streamlist.tname}<br>
-	${streamlist.cmtmtime}<br>
-	${streamlist.mname} : ${streamlist.comments}<br>
+	코멘트 아이디 : ${streamlist.cmtid}<br>
+	테스크 이름 :  ${streamlist.tname}<br>
+	수정 시간 : ${streamlist.cmtmtime}<br>
+	코멘트 내용 :  ${streamlist.mname} : ${streamlist.comments}<br><hr>
 </div>
 </c:forEach>
 

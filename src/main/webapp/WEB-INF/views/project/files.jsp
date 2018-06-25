@@ -6,18 +6,31 @@
 <h4>파일페이지</h4>
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include> 
 
+<style>
+	th{
+		background-color:lightgray;
+	}
+</style>
+
 
 <div>
 
-	<table style="width:100%;">
+	<table>
 		<thead>
 			<tr>
-				<th>Title</th>
-				<th>Start</th>
-				<th>Due</th>
-				<th>Duration</th>
-				<th>Status</th>
+				<th>번호</th>
+				<th>File명</th>
+				<th>관련 Task</th>
 			</tr>
+			<c:forEach var="f" items="${f}">
+			<c:set var="count" value="${count + 1}" />
+			<tr>
+		
+			<td>${count}</td>
+			<td>${f.filename}</td>
+			<td>${f.tname}&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp; ${f.sname}</td>
+			</tr>
+			</c:forEach>
 		</thead>
 		<tbody>
 		</tbody>

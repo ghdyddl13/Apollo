@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<script type="text/javascript" src="js/task.js"></script>
+    
 <!DOCTYPE html >
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <div class="main-body">
@@ -94,7 +97,7 @@
                   <!--LIST CONTAINER  -->
                   <div class="list-task-containers" >
                   	<c:forEach var="task" items="${tasklist}">
-	                    <div class="list-task-container" id="t${task.tid}">
+	                    <div  class="list-task-container Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}">
 	                      <div class= "list-task-checkbox-container">
 	                        <span class="list-task-checkbox"></span>
 	                      </div>
