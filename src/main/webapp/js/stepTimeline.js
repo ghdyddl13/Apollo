@@ -148,8 +148,6 @@ function makeTimelineGantt(tasks) {
 	    //// 태스크 사이즈 조절 시, 간트차트의 드래그기능 일시 중지
         $(".handle").mousedown(
         		function(event){
-        			console.log(event.target);
-        			console.log("mousedown");
         			$('.gantt').draggable({disabled:true})
         		}
 	    	
@@ -157,8 +155,6 @@ function makeTimelineGantt(tasks) {
 	    ///다시 간트차트 내부를 클릭하게 되면 간트차트 드래그 가능하게 만듦
 	      $(".grid-row").mousedown(
         		function(event){
-        			console.log(event.target);
-        			console.log("mousedown");
         			$('.gantt').draggable({disabled:false});
         		}
 	    	

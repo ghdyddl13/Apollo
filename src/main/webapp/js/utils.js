@@ -63,9 +63,9 @@ function getTaskAssignees(tid){
  작성자명 : 박 민 식
  */
 function makeProfileIcon(memberdata, imgsize){
-	var profile_container = jQuery("<div>",{"class":"profile-img-container"});
+	var profile_container = jQuery("<div>",{"class":"profile-img-container","id":"profile"+memberdata.mid});
 	profile_container.css({"width":imgsize,"height":imgsize});
-	var img = jQuery("<img>",{"class":"profile-img","id":memberdata.mid});
+	var img = jQuery("<img>",{"class":"profile-img"});
 	var src = (memberdata.image ==null)?"img/user_image.png" :"profileImg/"+memberdata.image;
 	img.attr("src",src);
 	$(profile_container).append(img);
@@ -80,9 +80,9 @@ function makeProfileIcon(memberdata, imgsize){
  작성자명 : 김 래 영
  */
 $(document).on("click",".profile-img-container",function(evt){
-	console.log("프로필 띄워주기 - targetId : " + evt.target.id);
     var mid = this.id.substr(7); // mid 만 가져오기
     console.log(mid);
+    console.log(this);
 
 	
 	$.ajax({
@@ -90,16 +90,15 @@ $(document).on("click",".profile-img-container",function(evt){
         data:{mid:mid},
         dataType:"json",
         success:function(data) {
-            $('#profile-modal-img').text(data.profileinfo.image);
+        	var img = (data.profileinfo.image)?data.profileinfo.image:"img/user_image.png";
+            $('#profile-modal-img').attr("src",img);
             $('#profile-modal-mname').text(data.profileinfo.mname)
             $('#profile-modal-mid').text(data.profileinfo.mid);
             $('#profile-modal-pnum').text(data.profileinfo.pnum);
             $('#profile-modal-deptname').text(data.profileinfo.deptname);
             $('#profile-modal-position').text(data.profileinfo.position);
+            $("#profile-modal-dialog").modal("show");
             
-            if($('#profile-modal-img').text() == null) {
-                $('#profile-modal-img').text("");
-            }
 
         }
 	}); // end - ajax
