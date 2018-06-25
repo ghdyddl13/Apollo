@@ -2,6 +2,9 @@ package com.apollo.step.dao;
 import java.util.ArrayList;
 import java.util.List;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.StepListMemberDTO;
+import com.apollo.vo.StepListStepDTO;
+import com.apollo.vo.StepListTaskDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TstatusDTO;
 
@@ -97,4 +100,57 @@ public interface StepDAO {
 	 작성자명 : 김 래 영
 	 */
 	public int deleteStep(int sid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : sid로 Tstatus list 가지고옴
+	 작성자명 : 이 진 우
+	 */
+	public ArrayList<TstatusDTO> getListTstatus(int sid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : List페이지에 Step의 이름을 가지고 오기 위한 함수
+	 작성자명 : 이 진 우
+	 */
+	public StepDTO getListStepName(int sid);
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : List페이지에 Task를 뿌려주기위한 Task리스트 
+	 작성자명 : 이 진 우
+	 */
+	public ArrayList<StepListTaskDTO> getStepListTask(int sid);
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : List 페이지의 Task에 뿌려줄 Step을 위한 Step 리스트 
+	 작성자명 : 이 진 우
+	 */
+	public ArrayList<StepListStepDTO> getStepListStep(int sid);
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : List페이지의 Task에 뿌려줄 Member을 위한 Member리스트
+	 작성자명 : 이 진 우
+	 */
+	public ArrayList<StepListMemberDTO> getStepListMember(int sid);
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 해당 테스크가 속한 스텝들을 가져온다 
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepNamesbytid(int tid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 해당 테스크와 같은 프로젝트에 있지만 아직 속하지 않은 스텝들을 가져온다
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepListByTid(int tid);
 }

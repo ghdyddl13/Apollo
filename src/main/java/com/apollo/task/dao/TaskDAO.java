@@ -3,9 +3,12 @@ package com.apollo.task.dao;
 import java.util.ArrayList;
 
 import com.apollo.vo.CommentDTO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StarredTaskDTO;
+import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
+import com.apollo.vo.TidpidDTO;
 import com.apollo.vo.TidvalueDTO;
 
 
@@ -20,13 +23,14 @@ public interface TaskDAO {
 	public int insertBoardTask(TaskDTO taskdto);
 	public int insertBoardTaskInStep(TaskInStepDTO dto);
 	public TaskDTO getTask(int tid);
-	public int addStar(StarredTaskDTO dto);
-	public int deleteStar(StarredTaskDTO dto);
+
 	public int deleteTask(int tid);
 	public int deleteStepInTaskModal(TaskInStepDTO dto);
 	public int countTaskInStep(int tid);
 	public int changeTstatus(TidvalueDTO dto);
-	public int insertComment(CommentDTO commentdto);
-	public String getTaskModifierName(String mid);
-	
+
+
+	public int addTaskInStepInTaskModal(TaskInStepDTO taskinstepdto);
+
+
 }

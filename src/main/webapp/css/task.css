@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+#star_trash{
+  text-align: right;
+}
+
+#task_star{
+ color : #ffc30d
+}
+
+.modal-task-delete{
+	 display: inline-block;
+     text-align: left;
+     vertical-align: right;
+}
+
+#steplist_in_taskmodal th{
+	text-align: center;
+}
+
+#steplist_in_taskmodal td{
+	text-align: center;
+}

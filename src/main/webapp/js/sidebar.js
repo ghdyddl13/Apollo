@@ -384,8 +384,8 @@ $(function() {
 				data: "pid=" + pid,
 				dataType:"html",
 				success:function(data){
-					 $("#main-box").empty();
-					 $("#main-box").append(data);	 		
+					$("#main-box").empty();
+					$("#main-box").append(data);	 		
 					 
 				}
 			})
@@ -403,8 +403,8 @@ $(function() {
 				data:{sid:sid},
 				dataType:"html",
 				success:function(data){
-					 $("#main-box").empty();
-					 $("#main-box").append(data);	 		
+					$("#main-box").empty();
+    				$("#main-box").append(data);	 		
 					 
 				}
 			})

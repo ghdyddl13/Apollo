@@ -48,20 +48,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	insert into taskinstep values(#{sid}, #{tid})
     </insert>
   
-
     <select id="getTask" parameterType="String" resultType="com.apollo.vo.TaskDTO">
     	select * from task where tid = #{tid}
     </select>
-
-    
-    <insert id="addStar" parameterType="com.apollo.vo.StarredTaskDTO">
-    	insert into starredtask values(#{mid}, #{tid})
-    </insert>
-    
-    <delete id="deleteStar" parameterType="com.apollo.vo.StarredTaskDTO">
-    	delete from starredtask where mid = #{mid} and tid = #{tid}
-    </delete>
-
+     
     <delete id="deleteTask">
     	delete from task where tid = #{tid}
     </delete>
@@ -77,13 +67,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="changeTstatus" parameterType="com.apollo.vo.TidvalueDTO">
 		update task set tstatusid = #{value} where tid = #{tid}
 	</update>
-	
-	<insert id="insertComment" parameterType="com.apollo.vo.CommentDTO">
-		insert into comments values(seq_cmtid.nextval, #{comments}, #{tid}, #{mid}, #{cmtkind}, TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+
+    <insert id="addTaskInStepInTaskModal" parameterType="com.apollo.vo.TaskInStepDTO">
+		insert into taskinstep values(#{sid}, #{tid})
 	</insert>
 	
-	<select id="getTaskModifierName" parameterType="String" resultType="String">
-		select mname from member where mid = #{mid}
-	</select>    
+	
+	
+	
+	
     
 </mapper>

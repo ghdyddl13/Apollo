@@ -16,6 +16,4 @@ public class TaskInStepDTO {
       this.tid = tid;
    }
 
-   
-
 }

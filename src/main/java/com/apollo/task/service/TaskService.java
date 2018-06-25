@@ -9,19 +9,20 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
+import com.apollo.member.dao.MemberDAO;
 import com.apollo.step.dao.StepDAO;
+import com.apollo.task.dao.CommentDAO;
 import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
 import com.apollo.vo.CommentDTO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StarredTaskDTO;
-import com.apollo.task.dao.CommentDAO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
+import com.apollo.vo.TidpidDTO;
 import com.apollo.vo.TidvalueDTO;
 import com.apollo.vo.TstatusDTO;
 
@@ -121,8 +122,8 @@ public class TaskService {
 	public int addstar(StarredTaskDTO dto) {
 		
 		System.out.println("addstar 탔음");
-		TaskDAO taskdao = session.getMapper(TaskDAO.class);
-		int result = taskdao.addStar(dto);
+		StarredTaskDAO stardao = session.getMapper(StarredTaskDAO.class);
+		int result = stardao.addStar(dto);
 		return result;
 	}
 	
@@ -137,8 +138,8 @@ public class TaskService {
 		
 		System.out.println("deletestar 탔음");
 
-		TaskDAO taskdao = session.getMapper(TaskDAO.class);
-		int result = taskdao.deleteStar(dto);
+		StarredTaskDAO stardao = session.getMapper(StarredTaskDAO.class);
+		int result = stardao.deleteStar(dto);
 		return result;
 	}
 	
@@ -213,10 +214,9 @@ public class TaskService {
 	 */
 	public int insertComment(CommentDTO commentdto) {
 		System.out.println("insertComment 서비스 메소드 실행");
-		TaskDAO taskdao = session.getMapper(TaskDAO.class);
-		int result = taskdao.insertComment(commentdto);
+		CommentDAO commentdao = session.getMapper(CommentDAO.class);
+		int result = commentdao.insertComment2(commentdto);
 		return result;
-		
 	}
 	
 	
@@ -228,8 +228,8 @@ public class TaskService {
 	 */
 	public String getTaskModifierName(String mid) {
 		
-		TaskDAO taskdao = session.getMapper(TaskDAO.class);
-		String name = taskdao.getTaskModifierName(mid);
+		MemberDAO memberdao = session.getMapper(MemberDAO.class);
+		String name = memberdao.getTaskModifierName(mid);
 		return name;
 	}
 
@@ -266,6 +266,90 @@ public class TaskService {
 		 }
 		 System.out.println("!!리시버 테이블에 인서트 성공??!!");
 		 return result;
+	}
+	
+	
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : tid로 스텝들 가져오기
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepListByTid(int tid) {
+
+		StepDAO stepdao = session.getMapper(StepDAO.class);
+		ArrayList<StepDTO> steplist = new ArrayList();
+		steplist = stepdao.getStepListByTid(tid);
+		
+		return steplist;
+	}
+	
+		
+	/**
+	 * 
+	 날      짜 : 2018. 6. 23.
+	 기      능 : 테스크 모달 창에서 스텝 추가 버튼을 누르면 실행
+	 작성자명 : 김 정 권
+	 */
+	public int addTaskInStepInTaskModal(TaskInStepDTO taskinstepdto) {
+		
+		System.out.println("테스크 모달 내 스텝 추가 서비스 메소드 실행");
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.addTaskInStepInTaskModal(taskinstepdto);
+		
+		System.out.println("스텝 추가 결과 : " + result);
+		
+		return result;
+	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 23.
+	 기      능 : tid를 통해 step들의 이름을 가져온다
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<StepDTO> getStepNamesbytid(int tid) {
+		
+		ArrayList<StepDTO> list = new ArrayList();
+		StepDAO stepdao = session.getMapper(StepDAO.class);
+		list = stepdao.getStepNamesbytid(tid);
+		
+		return list;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 같은 테스크 담당자들 불러옴 
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<MemberDTO> getSameTaskAssignee(int tid){
+		
+		ArrayList<MemberDTO> list = new ArrayList();
+		MemberDAO memberdao = session.getMapper(MemberDAO.class);
+		list = memberdao.getSameTaskMemberList(tid);
+		
+		return list;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 같은 프로젝트이지만 해당 테스크의 담당자가 아닌 사람들 목록을 불러온다 
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<MemberDTO> getSameProjectButNotSameTaskMemberList(TidpidDTO dto){
+		
+		ArrayList<MemberDTO> list = new ArrayList();
+		MemberDAO memberdao = session.getMapper(MemberDAO.class);
+		list = memberdao.getSameProjectButNotSameTaskMemberList(dto);
+		
+		return list;
 	}
 	
 	
