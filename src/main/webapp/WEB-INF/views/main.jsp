@@ -46,6 +46,9 @@
 <link href="css/task.css" type="text/css" rel="stylesheet">
 <!-- STEP LIST CSS_ JW -->
 <link href="css/stepList.css" type="text/css" rel="stylesheet">
+<!-- STEP LIST JAVASCRIPT_ JW-->
+<script type="text/javascript" src="js/stepInsideHeader.js"></script>
+<script type="text/javascript" src="js/steplist.js?q=123"></script>
 <title>Project Apollo</title>
 </head>
 <body>

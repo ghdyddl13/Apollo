@@ -392,23 +392,7 @@ $(function() {
 	    });
 
 	
-		////// 사이드바 스텝 클릭 시 
-		$(document).on("click",".side-step",function(){
-			var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
-			var pid = project_wrapper.id.substr(1);
-			var methodologyid = $(project_wrapper).children("input[name='methodologyid']").val();
-			var sid= this.id.substr(1);
-			$.ajax({
-				url:"list.htm",
-				data:{sid:sid},
-				dataType:"html",
-				success:function(data){
-					 $("#main-box").empty();
-					 $("#main-box").append(data);	 		
-					 
-				}
-			})
-	    });
+
 		
 		
 	/* modal 창(project, step) dateficker */
