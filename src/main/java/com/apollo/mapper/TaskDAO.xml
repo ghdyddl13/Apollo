@@ -54,4 +54,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	delete from task where tid = #{tid}
     </delete>
     
+    <select id ="selectTasksByMidAndSid" parameterType="hashmap" resultType="com.apollo.vo.TaskDTO">
+    	select t.*, s.tstatus, s.color 
+    	from task t join tstatus s on t.tstatusid = s.tstatusid 
+    	where tid in (select tid from taskinstep 
+    	where sid= #{sid} and tid in(select tid from assignee 
+    	where mid= #{mid}))
+    </select>
+    
 </mapper>

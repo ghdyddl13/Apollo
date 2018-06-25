@@ -1,6 +1,7 @@
 package com.apollo.task.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.TaskDTO;
@@ -17,4 +18,5 @@ public interface TaskDAO {
 	public int addStar(StarredTaskDTO dto);
 	public int deleteStar(StarredTaskDTO dto);
 	public int deleteTask(int tid);
+	public ArrayList<TaskDTO> selectTasksByMidAndSid(HashMap<String, Object> map);
 }

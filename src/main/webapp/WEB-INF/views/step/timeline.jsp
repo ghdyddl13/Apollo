@@ -16,6 +16,13 @@
 	       	<option class="timeline-tstatus-filter" value="${tstatus.tstatusid}">${tstatus.tstatus}</option>		
 		</c:forEach>
       </select>
+      
+      <select  id="timeline-assignee-filter">
+	  	<option value="all">All Assignees</option>
+		<c:forEach var="assignee" items="${assignees}">
+	       	<option class="timeline-tstatus-filter" value="${assignee.mid}">${assignee.mname}</option>		
+		</c:forEach>
+      </select>
 </div>
 
 <div class="container-fluid row" id="timeline">

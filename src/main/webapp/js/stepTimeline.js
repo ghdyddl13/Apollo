@@ -140,28 +140,36 @@ function makeTimelineGantt(tasks) {
 	                	console.log("else");
 	                	$('.gantt').offset({left:gantt_container.left-right_border});
 	                }
-	            }
+	            },
+	        
 	        }
 	    ) 	
-	    $(".bar-group").mouseup(
-	    		function(){
-	    			console.log("dd");
-	    			$('.gantt').draggable("enable")}
-	    	
-	    )
-        $(".bar-group").mousedown(
-        		function(){
+	    
+	    //// 태스크 사이즈 조절 시, 간트차트의 드래그기능 일시 중지
+        $(".handle").mousedown(
+        		function(event){
+        			console.log(event.target);
+        			console.log("mousedown");
         			$('.gantt').draggable({disabled:true})
         		}
 	    	
 	    )
+	    ///다시 간트차트 내부를 클릭하게 되면 간트차트 드래그 가능하게 만듦
+	      $(".grid-row").mousedown(
+        		function(event){
+        			console.log(event.target);
+        			console.log("mousedown");
+        			$('.gantt').draggable({disabled:false});
+        		}
+	    	
+	    )
 	    		
-	  
-	   /* $(".bar-group").draggable(
+	    //// 간트차트에 드래그를 입힘으로써 후순위가 되어 버린 태스크의 드래그 기능을 다시 살리기 위한 코드
+	    $(".bar-group").draggable(
 	    	 {
 	             axis: "x" ,
 	        }
-	    );*/
+	    );
 }
 
 /**
@@ -213,37 +221,96 @@ function makeTimelineTable(tasks){
 /**
  * 
  날   짜 : 2018. 6. 15.
- 기   능 : 타임라인 Task 상태로 필터걸어주는 함수 
+ 기   능 : 타임라인 Task 상태로 필터걸어주기
  작성자명 : 박 민 식
  */
 
 
 $(document).on("change","#timeline-tstatus-filter",function(){
-	var selectedstatus= $(this).val();
-	$.when(getGanttItems()).done(function(data){
-		
-		var tasks = data.tasks;
-		console.log(tasks);
-		if(selectedstatus=="all"){
-			makeTimelineTable(tasks);
-			makeTimelineGantt(tasks);
-		}else{
-			var selecedtasks = [];
-			$(tasks).each(function(index,item){
-				if(item.tstatusid==$("#timeline-tstatus-filter").val()){
-					selecedtasks.push(item);
-				}
-			})
-			console.log(selecedtasks);
-			if(selecedtasks.length==0){
-				alert("해당 상태의 task가 없습니다.");
-			}else{
-				makeTimelineTable(selecedtasks);
-				makeTimelineGantt(selecedtasks);
-			}
-		}
-	})
+	var mid = $("#timeline-assignee-filter").val();
+	assigneeFilter(mid);
 })
 
+
+
+/**
+ * 
+ 날   짜 : 2018. 6. 24.
+ 기   능 : 타임라인 태스크 담당자로 필터걸어주기
+ 작성자명 : 박 민 식
+ */
+
+$(document).on("change","#timeline-assignee-filter",function(){
+	var mid = $(this).val();
+	assigneeFilter(mid);
+})	
+
+/**
+ * 
+ 날   짜 : 2018. 6. 24.
+ 기   능 : assigneeFilter를 적용하는 함수
+ 작성자명 : 박 민 식
+ */
+function assigneeFilter(mid){
+	if(mid=="all"){ // 모든 태스크
+		$.when(getGanttItems()).done(function(ajax){
+			makeFilterdTimeline(ajax.tasks);	
+		});
+	}else{ // 특정 mid가 할당받고있는 태스크
+		$.when(selectTasksByMidAndSid(mid)).done(function(ajax){	
+			makeFilterdTimeline(ajax.tasksbymid);
+		});
+	};
+};
+
+
+/**
+ * 
+ 날   짜 : 2018. 6. 24.
+ 기   능 : 특정 멤버가 할당받은 task를 가져오는 함수
+ 작성자명 : 박 민 식
+ */
+function selectTasksByMidAndSid(mid){
+	var ajax = $.ajax({
+		url:"step/selectTasksByMidAndSid.htm",
+		type:"post",
+		data:{mid:mid},
+		dataType:"json",
+		success:function(data){
+			console.log("selectTasksByMidAndSid 후")
+			console.log(data);
+		}
+	})
+	return ajax;
+}
+
+
+/**
+ * 
+ 날   짜 : 2018. 6. 24.
+ 기   능 : 상태 및 담당자 필터를 통해 새로운 간트차트를 생성해주는 함수
+ 작성자명 : 박 민 식
+ */
+function makeFilterdTimeline(tasks){
+	var selectedstatus= $("#timeline-tstatus-filter").val();
+	if(selectedstatus=="all"){
+		makeTimelineTable(tasks);
+		makeTimelineGantt(tasks);
+	}else{
+		var selecedtasks = [];
+		$(tasks).each(function(index,item){
+			if(item.tstatusid==$("#timeline-tstatus-filter").val()){
+				selecedtasks.push(item);
+			}
+		})
+		console.log(selecedtasks);
+		if(selecedtasks.length==0){
+			alert("해당 상태의 task가 없습니다.");
+		}else{
+			makeTimelineTable(selecedtasks);
+			makeTimelineGantt(selecedtasks);
+		}
+	}
+}
 
 

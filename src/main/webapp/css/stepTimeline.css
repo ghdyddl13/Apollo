@@ -57,7 +57,7 @@
 	overflow: auto 
 }
 
-#timeline-tstatus-filter{
+#timeline-tstatus-filter, #timeline-assignee-filter{
 	float:left;
 	margin: 10px;
 	background-color: transparent;

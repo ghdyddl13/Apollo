@@ -47,8 +47,7 @@ $(function() {
 				success:function(data){
 					$("#main-box").empty();
 					$("#main-box").append(data);
-					
-					var tasks = getGanttItems(3);
+
 					makeTimelineTable(ajax.tasks);
 					makeTimelineGantt(ajax.tasks);
 				}
