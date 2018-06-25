@@ -35,21 +35,22 @@ $(function() {
 	
 	// 스텝 timeline 페이지
 	$("#timeline-page").click(function(evt){
-		$.ajax({
-			url:"step/timeline.htm",
-			dataType:"html",
-			success:function(data){
-				$("#main-box").empty();
-				$("#main-box").append(data);
-				
-				/*var tasks = getGanttItems(3);*/
-				
-				var data = getGanttItems(3);
-				
-				console.log(data.tasks);
-				makeTimelineTable(data.tasks);
-				makeTimelineGantt(data.tasks);
-			}
+		
+		$.when(getGanttItems()).done(function(ajax){
+			console.log(ajax);
+			console.log(ajax.tasks);
+			
+			$.ajax({
+				url:"step/timeline.htm",
+				dataType:"html",
+				success:function(data){
+					$("#main-box").empty();
+					$("#main-box").append(data);
+
+					makeTimelineTable(ajax.tasks);
+					makeTimelineGantt(ajax.tasks);
+				}
+			})
 		})
 	})
 	

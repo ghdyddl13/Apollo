@@ -212,7 +212,7 @@ width:40px;
 
 #my-side-nav {
    background-color: rgba(180, 197, 209, 0.15);
-   overflow: scroll;
+   overflow: auto;
    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
 }
 
@@ -568,3 +568,28 @@ background-color: 999999;
    padding-left: 15px;
    padding-right: 15px;
 }
+
+/* task 수정,삭제 모달_정권 ---------------------- 시작 */
+#star_trash{
+  text-align: right;
+}
+
+#task_star{
+ color : #ffc30d
+}
+
+.modal-task-delete{
+	 display: inline-block;
+     text-align: left;
+     vertical-align: right;
+}
+
+/* task 수정,삭제 모달_정권 ---------------------- 종료 */
+
+.assignee-left-div{
+	padding: 20px;
+	padding-right: 20px;
+	background-color: white;
+	border-radius: 3px
+}
+

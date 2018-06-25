@@ -35,7 +35,7 @@ public class StepListController {
        
     	System.out.println(sid);
     	
-      // 스텝 id 와 프로젝트 id 세션값 갱신ㄴ
+      // 스텝 id 와 프로젝트 id 세션값 갱신
         int pid = service.getProjectIdByStepId(sid);
         request.getSession().setAttribute("sid", sid);
         request.getSession().setAttribute("pid", pid);

@@ -1,6 +1,7 @@
 package com.apollo.task.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.MemberDTO;
@@ -25,12 +26,11 @@ public interface TaskDAO {
 	public TaskDTO getTask(int tid);
 
 	public int deleteTask(int tid);
+
 	public int deleteStepInTaskModal(TaskInStepDTO dto);
 	public int countTaskInStep(int tid);
 	public int changeTstatus(TidvalueDTO dto);
-
-
 	public int addTaskInStepInTaskModal(TaskInStepDTO taskinstepdto);
-
+	public ArrayList<TaskDTO> selectTasksByMidAndSid(HashMap<String, Object> map);
 
 }
