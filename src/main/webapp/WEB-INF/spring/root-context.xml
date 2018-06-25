@@ -12,7 +12,6 @@
         <property name="username" value="Apollo" />
         <property name="password" value="1004" />
     </bean> -->
-    
     <bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
         <property name="url" value="jdbc:oracle:thin:@192.168.0.27:1521:XE" />
@@ -53,4 +52,5 @@
 	</bean>
 	
 	<bean name="jsonview" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	
 </beans>

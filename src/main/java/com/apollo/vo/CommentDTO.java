@@ -1,5 +1,7 @@
 package com.apollo.vo;
 
+
+
 public class CommentDTO {
 	private int cmtid;
 	private String comments;
@@ -78,6 +80,12 @@ public class CommentDTO {
 	}
 	public void setImage(String image) {
 		this.image = image;
+	}
+	@Override
+	public String toString() {
+		return "CommentDTO [cmtid=" + cmtid + ", comments=" + comments + ", tid=" + tid + ", mid=" + mid + ", mname="
+				+ mname + ", cmtkind=" + cmtkind + ", cmtmtime=" + cmtmtime + ", isarchive=" + isarchive + ", tname="
+				+ tname + ", pname=" + pname + ", image=" + image + "]";
 	}
 	
 	

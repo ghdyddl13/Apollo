@@ -7,6 +7,13 @@
 
 package com.apollo.stream.dao;
 
-public interface StreamDAO {
+import java.util.ArrayList;
 
+import com.apollo.vo.CommentDTO;
+import com.apollo.vo.ProjectDTO;
+
+public interface StreamDAO {
+	public ArrayList<ProjectDTO> getPidlist(String mid);
+	
+	public ArrayList<CommentDTO> getStreamlist(int pid);
 }

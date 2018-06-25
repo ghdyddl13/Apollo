@@ -2,6 +2,8 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script type="text/javascript" src="js/utils.js"></script>
+
 <h3></h3>
 <jsp:include page="/WEB-INF/views/inc/stepInsideHeader.jsp"></jsp:include>
 <nav class="navbar inside-header ">
@@ -15,104 +17,64 @@
 
 
 <script>
+
 //task 생성하기 위해 이름 입력하는 text 창 생성
- function addCardView(e, tstatusid) {
-   console.log("addcardview 왓낭 : " + e + " / " + tstatusid)
-   var div = "<div class='' id='addcard'>" +
-         "<input class='inputtext' type='text' placeholder='task 이름을 입력하세요' name='title' >" +
-         "<a onclick='addCard(this, "+ tstatusid + ")'>완료</a></div>";
-   console.log("이건뭘까여>>>"+$(e).before(div));
-   $('#addcard').children('input').focus();
+function addTaskView(tstatusid){
+   $("#task-adder"+tstatusid).remove();
+   let inputtag="<div class='board-task-adder-addmode'><input class='form-control' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
+    $("#body-start"+tstatusid).prepend(inputtag);
+    $("#insert-task"+tstatusid).focus();
+}
 
-   
+//keyup(엔터)으로 task 생성 성공
+function addTask_keyup(tstatusid){
+   let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
+      if(event.which==13){
+         let newtask=$.trim($('#insert-task'+tstatusid).val());
+      
+        if(newtask===""){
+             $(".board-task-adder-addmode").remove();
+             $("#body-start"+tstatusid).prepend(addtag);
+         }else{
+            console.log(newtask);
+            $('#insert-task'+tstatusid).val('');
+               $.ajax({
+                   url : "boardInsertTask.htm",
+                   data : {
+                         tstatusid : tstatusid, 
+                         tname : newtask
+                         },
+                   success:function(data){
+                      $("#main-box").empty();
+                      $("#main-box").append(data);
+                   }  
+                })
+         } 
+      } 
+}
 
-
-} 
-
-
-
-
-//task 생성 성공
- function addCard(obj, tstatusid){
-   console.log("addCard 들어왔어요");
-   var parent = $(obj).closest('div')
-   var value = parent[0].firstChild.value //cardname
-   var pid = $("#board-pid").val()
-   console.log("board-pid : " + $("#board-pid").val())
-   console.log("parent : " + parent)
-   console.log("tstatusid : " + tstatusid)
-   console.log("value : " + value)
-    if(value.trim() != ""){
-      $.ajax({
-         url : "boardInsertTask.htm",
-         data : {
-               tstatusid : tstatusid, 
-               tname : value
-               },
-         success:function(data){
-            $("#main-box").empty();
-            $("#main-box").append(data);
-         }  
-      })
-   }  
-} 
-   
-/* $(function() {
-    $(document).on("click","#task-adder",function() {
-   $("#task-adder").remove();
-   let inputtag="<div class='board-task-adder-addmode'><input class='form-control' id='insert-task' name='tname' type='text' placeholder='새로운 작업을 입력하세요'></div>"
-   $("#body-start").prepend(inputtag);
-   $("#insert-task").focus();
- })
- $(document).on("keyup","#insert-task",function(event) {
-   let addtag="<div class='board-task-adder' id='task-adder'></div>";
-   if(event.which==13){
-     let newtask=$.trim($(this).val());
-     if(newtask===""){
-       //문자열이 빈값이면 발생하는 함수가 아무것도 없음
-     }else{
-       console.log(newtask);
-     $("#insert-task").val("");
-       
-       $.ajax(
-               {
-                 type:"POST",
-                 url:"",
-                 date:"",
-                 success:function(data) {
-
-                 }
-               }
-       )
-       
-     }
-   }
- });
- $(document).on("focusout","#insert-task",function() {
-   let newtask = $.trim($(this).val());
-   let addtag="<div class='board-task-adder' id='task-adder'>New task</div>";
-   if(newtask===""){//빈 문자일 경우 그냥 바로 나온다
-     $(".board-task-adder-addmode").remove();
-     $("#body-start").prepend(addtag);
+//focusout으로 task 생성 성공
+function addTask_focusout(tstatusid){
+   let newtask=$.trim($('#insert-task'+tstatusid).val());
+   let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
+   if(newtask===""){
+       $(".board-task-adder-addmode").remove();
+       $("#body-start"+tstatusid).prepend(addtag);
    }else{
-     
-     $.ajax(
-             {
-               type:"POST",
-               url:"",
-               date:"",
-               success:function(data) {
-
-               }
-             }
-     )
-     
-     $(".board-task-adder-addmode").remove();
-     $("#body-start").prepend(addtag);
+         $.ajax({
+              url : "boardInsertTask.htm",
+              data : {
+                    tstatusid : tstatusid, 
+                    tname : newtask
+                    },
+              success:function(data){
+                 $("#main-box").empty();
+                 $("#main-box").append(data);
+              }  
+           })
+              
    }
- })
-  })    */
-   
+}
    
    //board에서 나오는 status 목록 width 크기 지정하는 함수
    function autoWidth() {
@@ -194,7 +156,7 @@
 #board-sortable{
    list-style-type: none;
    margin: 0;
-    float: left; 
+   float: left; 
    margin-right: 10px;
    padding: 5px;
    width: 270px;
@@ -209,7 +171,6 @@
    width: 220px;
    text-align: center;
    background: white;
-   
    border-style: outset;
    
    
@@ -236,7 +197,7 @@
 }
 
 #board-hr{
-   margin-right : 50px;
+   margin-right : 46px;
    margin-top : -5px;
    border: 0; 
    height: 10px; 
@@ -256,20 +217,19 @@
     background-color: #fff;
     }
 .board-task-adder{
-    border:1px solid black;
     background: url("img/adder.png") no-repeat 49px center #fff;
     display: block;
     box-sizing: border-box;
-    padding: 7.5px 1px 10px 70px;
+    padding: 6px 1px 10px 70px;
     margin-left:15px;
     height:50px;
     width: 220px;
     font-size: 20px;
     line-height: 31px;
     color: #5285b8;
-    border-top: 1px solid #e0e0e0;
     cursor: pointer;
     list-style: none;
+    border-style: outset;
     }
 .board-task-adder-addmode{
     border:1px solid black;
@@ -314,6 +274,19 @@
                          New Task
                     </div>
                    </div>--%>
+
+                 <%-- <div class="listbox">
+                         <div class="listtitle" id="listnum">
+                               <a class="cardcreate" onclick="addCardView(this, ${b.tstatusid})">Add a card...</a>
+                         </div>
+                    </div> --%>
+                    <div class="board-task-adder_containers" id="body-start${b.tstatusid}">
+                    <div class="board-task-adder" id="task-adder${b.tstatusid}" onclick="addTaskView(${b.tstatusid})">
+                    
+                          <input type="hidden" id="board-tstatusid" value="${b.tstatusid}">
+                            New Task
+                    </div>
+                   </div>
                     
                
                <ul id="board-sortable" class="tstatuslist">
@@ -323,7 +296,8 @@
                      
                         <c:when test="${b.tstatus eq t.tstatus}">
                            <li class="ui-state-default" value="${t.tid}">${t.tname}</li>
-                                                      
+                           <li class="ui-state-default Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${t.tid}" value="${t.tid}">${t.tname}</li>
+                                   
                         </c:when>
                      </c:choose>
                   </c:forEach>

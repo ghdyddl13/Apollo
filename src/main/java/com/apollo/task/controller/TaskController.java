@@ -11,12 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
+import com.apollo.project.service.ProjectInfoService;
 import com.apollo.task.service.TaskService;
 import com.apollo.vo.CommentDTO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
+import com.apollo.vo.TidpidDTO;
+import com.apollo.vo.TidvalueDTO;
 import com.apollo.vo.TstatusDTO;
 
 @Controller
@@ -24,6 +28,9 @@ public class TaskController {
 	
 	@Autowired
 	private TaskService service;
+	
+	@Autowired 
+	private ProjectInfoService projectinfoservice;
 	
 	@Autowired
 	private View jsonview;
@@ -66,8 +73,11 @@ public class TaskController {
 	@RequestMapping("/getTask.htm")
 	public View getTask(int tid, HttpSession session, Model model) {
 
-	String pid = (String) session.getAttribute("pid");
+	System.out.println("getTask 작동");
+		
+	int pid = (Integer) session.getAttribute("pid");
     String mid = (String) session.getAttribute("mid");
+
     
     ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
     starredtasklist = service.getStarredTaskList(mid);
@@ -84,7 +94,27 @@ public class TaskController {
 	ArrayList<TstatusDTO> tstatuslist = new ArrayList();
 	tstatuslist = service.gettstatuslist(pid);
 	model.addAttribute("tstatuslist", tstatuslist);
-
+	
+	// 해당 테스크의 담당자들
+	ArrayList<MemberDTO> sametaskmemberlist = new ArrayList<MemberDTO>();
+	sametaskmemberlist = service.getSameTaskAssignee(tid);
+	model.addAttribute("sametaskmemberlist", sametaskmemberlist);
+	
+	
+	// 같은 프로젝트이지만 해당 테스크의 담당자가 아닌 사람들
+	ArrayList<MemberDTO> getSameProjectButNotSameTaskMemberList = new ArrayList<MemberDTO>();
+	
+	TidpidDTO tidpiddto = new TidpidDTO();
+	tidpiddto.setPid(pid);
+	tidpiddto.setTid(tid);
+	
+	System.out.println("테스트");
+	System.out.println(pid);
+	System.out.println(tid);
+	
+	getSameProjectButNotSameTaskMemberList = service.getSameProjectButNotSameTaskMemberList(tidpiddto);
+	model.addAttribute("getSameProjectButNotSameTaskMemberList", getSameProjectButNotSameTaskMemberList);
+	
 	return jsonview;
 	}
 	
@@ -139,7 +169,9 @@ public class TaskController {
 		String pid = "18";
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
-	    }else {
+	    } else if(location.equals("/board.htm")) {
+	    	return "redirect:/board.htm";
+	    } else {
 	    	return null;
 	    }
 	    
@@ -159,7 +191,6 @@ public class TaskController {
 		dto.setTid(tid);
 		
 		int result = service.deleteStepInTaskModal(dto);
-		System.out.println("스텝이 지워졌니? : " + result);
 		
 		ArrayList<StepDTO> steplist = new ArrayList();
 		steplist = service.getStepid(tid);
@@ -180,13 +211,129 @@ public class TaskController {
 	public View countTaskInStep(int tid, Model model) {
 	
 		int result = service.countTaskInStep(tid);
-		System.out.println("몇 개의 스텝이니? : " + result);
 		model.addAttribute("countresult", result);
 		
 		return jsonview;
 	}
 	
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : 해당 task 상태 변경하기
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/changetstatus.htm")
+	public View changeTstatus(int tid, int value, String tname, Model model, HttpSession session) {
+	
+		TidvalueDTO dto = new TidvalueDTO();
+		dto.setTid(tid);
+		dto.setValue(value);
+		
+		int result = service.changeTstatus(dto);
+		
+		// 상태 변경 성공시 코멘트 입력
+		if(result == 1) {
+			
+			System.out.println("상태변경 성공! 상태변경 코멘트 입력 시작!");
+			String comment = "";
+			String mid = (String) session.getAttribute("mid");
+			int pid = (Integer) session.getAttribute("pid");
+			ArrayList<TstatusDTO> tstatuslist = new ArrayList();
+			tstatuslist = service.gettstatuslist(pid);
+
+			for(TstatusDTO tstatusdto : tstatuslist) {
+				int tstatusid = tstatusdto.getTstatusid();
+					if(tstatusid == value) {
+						
+						String modifier = service.getTaskModifierName(mid);
+						comment = modifier + "님이 " + tname +"의 상태를 " + tstatusdto.getTstatus() + "로 변경하였습니다";
+					}
+			}
+			
+			CommentDTO commentdto = new CommentDTO();
+			commentdto.setComments(comment);
+			commentdto.setTid(tid);
+			commentdto.setMid(mid);
+			commentdto.setCmtkind(2);
+			
+			int insert_comment_result = service.insertComment(commentdto);
+			System.out.println("코멘트 입력 여부 : " + insert_comment_result);
+			
+		} // end - 상태 변경 성공시 발동 조건문 
+		
+		model.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	
+	@RequestMapping("/insertcomment.htm")
+	public String insertComment(CommentDTO commentdto, HttpSession session){
+		System.out.println(commentdto.getComments());
+		System.out.println(commentdto.getTid());
+		System.out.println("!코멘트 인서트 컨트롤러!");
+		String mid=(String)session.getAttribute("mid");
+		mid="testid1";//테스트아이디
+		commentdto.setMid(mid);
+		commentdto.setCmtkind(0);
+		service.insertInboxComment(commentdto);
+		
+		return "redirect:/inbox.htm";
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 22.
+	 기      능 : 해당 task가 속한 프로젝트의 모든 스텝들을 가져온다
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/getStepListByTid.htm")
+	public View getStepListByTid(int tid, Model model) {
+		
+		ArrayList<StepDTO> steplist = service.getStepListByTid(tid);
+		model.addAttribute("steplist", steplist);
+		return jsonview;
+	}
+
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 23.
+	 기      능 : 테스크 모달 창에서 스텝 추가를 위한 모달을 불러오는 기능
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/addTaskInStepInTaskModal.htm")
+	public View addTaskInStepInTaskModal(int sid, int tid, Model model){
+		
+		System.out.println("테스크 모달 내 스텝 추가 컨트롤러 탔음");
+
+		TaskInStepDTO taskinstepdto = new TaskInStepDTO();
+		taskinstepdto.setSid(sid);
+		taskinstepdto.setTid(tid);
+		
+		int result = service.addTaskInStepInTaskModal(taskinstepdto);
+		model.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 23.
+	 기      능 : 테스크 모달 창에서 스텝 추가(이중모달) 모달 내에 추가 버튼을 누르면 실행
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/addTaskInStepInTaskModal_2.htm")
+	public View getStepNamesbytid(int tid, Model model){
+
+		ArrayList<StepDTO> steplist = service.getStepNamesbytid(tid);
+		model.addAttribute("steplist", steplist);
+		
+		return jsonview;
+	}
 	
 	
 	

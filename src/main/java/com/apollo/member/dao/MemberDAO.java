@@ -2,9 +2,10 @@ package com.apollo.member.dao;
 import java.util.ArrayList;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidpidDTO;
+import com.apollo.vo.TidpidDTO;
 
 public interface MemberDAO {
-	public ArrayList<MemberDTO> getProjectMemberlist(String pid);
+	public ArrayList<MemberDTO> getProjectMemberlist(int pid);
 	
 	public ArrayList<MemberDTO> getMemberlist(String pid);
 	
@@ -35,5 +36,10 @@ public interface MemberDAO {
 	 작성자명 : 김 래 영
 	 */
 	public MemberDTO getProfileInfoMember(String mid);
+	
+	
+	public String getTaskModifierName(String mid);
+	public ArrayList<MemberDTO> getSameTaskMemberList(int tid);
+	public ArrayList<MemberDTO> getSameProjectButNotSameTaskMemberList(TidpidDTO dto);
 	
 }

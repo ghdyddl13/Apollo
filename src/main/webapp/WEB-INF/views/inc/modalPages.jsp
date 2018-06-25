@@ -312,7 +312,7 @@
 					</div>
 					
 					<div class="col-sm-12" id="Task_Modal_snames">
-					<br>여기는 소속된 스텝들이 뜨는 공간입니다&nbsp<i class="fas fa-plus-circle"></i>
+					<br>여기는 소속된 스텝들이 뜨는 공간입니다&nbsp<i class="fas fa-plus-circle" id="task_modal_add_step"></i>
 					</div>
 					
 				</div>
@@ -322,21 +322,14 @@
 							
 				<!-- row 2 -->
 				<div class="row">
-					<div class="col-sm-3" id="Task_Modal_tstatus">
-							<select>
-							<option>New</option>
-							<option>Development</option>
-							<option>Testing</option>
-							<option>Reopened</option>
-							<option>Ready</option>
-							<option>Completed</option>
-							<option>On hold</option>
-							<option>Cancelled</option>
+					<div class="col-sm-3">
+							<select id="Task_Modal_tstatus_selectbox" style="height: 50px; width: 120px; margin: -15px -15px -15px -10px">
+	
 							</select>
 					</div>
 	
 		
-					<div class="col-sm-9" id="Task_Modal_assignee"">여기는 담당자들이 뜨는 공간입니다&nbsp<i class="fas fa-plus-circle"></i></div>
+					<div class="col-sm-9" style="margin: -15px -15px -15px -15px" id="Task_Modal_assignee"">여기는 담당자들이 뜨는 공간입니다&nbsp<i class="fas fa-plus-circle"></i></div>
 				</div>
 				<!-- end row 2 -->
 				<hr>
@@ -395,6 +388,7 @@
 					<input type="text" placeholder="코멘트 입력.." class="">
 					<input id="Task_Modal_enter_comments" type="button" value="전송">
 					<input type="hidden" id="tidhidden" value="">
+					<input type="hidden" id="tnamehidden" value="">
 					<input type="hidden" id="stepdeletehidden" data-toggle="modal" data-target="#step_delete_Modal">
 					
 					
@@ -640,7 +634,7 @@
 			<!-- Modal content-->
 			<div class="modal-content modal-sm">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" id="task_delete_dismiss_btn">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" id="taskinstep_delete_dismiss_btn">&times;</button>
 					<h4 class="modal-title">Step 삭제</h4>
 				</div>
 				
@@ -658,6 +652,39 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- 스텝 추가 Modal -->
+	<div class="modal fade" id="step_add_modal_in_taskmodal">
+		<div class="modal-dialog modal-add-project-dialog">
+			<!-- Modal content-->
+			
+			
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" id="step_add_modal_in_taskmodal_dismiss">&times;</button>
+						<h4 class="modal-title">New Step</h4>
+					</div>
+				
+				
+				<div class="modal-body ">
+
+		<table id="steplist_in_taskmodal" class="table">
+		
+		</table>
+		
+				</div>
+				
+				<div align="center">
+					<input type="button" class="btn" id="cancel-btn"
+						data-dismiss="modal" value="돌아가기">
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	
+	
 
 
 	<!-- Step 삭제 Modal 창 -->

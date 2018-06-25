@@ -8,4 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from starredtask where mid = #{mid}
 	</select>
 	
+	<insert id="addStar" parameterType="com.apollo.vo.StarredTaskDTO">
+    	insert into starredtask values(#{mid}, #{tid})
+    </insert>
+    
+    <delete id="deleteStar" parameterType="com.apollo.vo.StarredTaskDTO">
+    	delete from starredtask where mid = #{mid} and tid = #{tid}
+    </delete>
+	
+	
+	
 </mapper>

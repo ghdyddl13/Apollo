@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- 
 
 <!DOCTYPE html>
 <html>
@@ -22,7 +21,6 @@
 
 <!-- 공통 JavaScript 함수 모음(Utils) -->
 <script type="text/javascript" src="js/utils.js"></script>
-
 <!-- Timeline관련  -->
 <script type="text/javascript" src="js/stepTimeline.js"></script>
 <link rel="stylesheet" href="css/stepTimeline.css" />
@@ -42,8 +40,13 @@
 <!-- Project Page Table 관련 -->
 <script type="text/javascript" src="js/project_table.js"></script>
 <link rel="stylesheet" href="css/project_table.css" />
-
-<title>Insert title here</title>
+<!-- stream css -->
+<link href="css/stream.css" type="text/css" rel="stylesheet">
+<!-- task CSS -->
+<link href="css/task.css" type="text/css" rel="stylesheet">
+<!-- STEP LIST CSS_ JW -->
+<link href="css/stepList.css" type="text/css" rel="stylesheet">
+<title>Project Apollo</title>
 </head>
 <body>
 
@@ -51,7 +54,7 @@
 	<jsp:include page="/WEB-INF/views/inc/sidebar.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
 	
-	<div  id="main-box"></div>
+	<div id="main-box"></div>
 	
 </body>
 </html>

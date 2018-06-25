@@ -58,9 +58,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="moveStep" parameterType="com.apollo.vo.StepDTO" >
 		update step set fid=#{fid} where sid=#{sid}
 	</update>
+	
+	<!--List 페이지에 Tstatus를 뿌려준다  -->
+	<select id="getListTstatus" resultType="com.apollo.vo.TstatusDTO">
+		select TSTATUSID, TSTATUS, COLOR, ORDERING from TSTATUS where METHODOLOGYID= (select METHODOLOGYID from step where sid=#{sid})
+	</select>
+	<!--List 페이지에 Step 이름을 뿌려준다  -->
+	<select id="getListStepName" resultType="com.apollo.vo.StepDTO">
+		select sid, sname from step where sid=#{sid}
+	</select>
+	<!--List페이지에 Task를 뿌려주기위한 Task리스트  -->
+	<select id="getStepListTask" resultType="com.apollo.vo.StepListTaskDTO">
+		select t.TID, t.TNAME, t.SDAY, t.EDAY,t.DETAIL,t.PID, t.CTIME,t.TSTATUSID, ts.SID , s.TSTATUS,s.COLOR  
+		from task t 
+		join TASKINSTEP ts on t.TID = ts.TID
+		join TSTATUS s on t.TSTATUSID = s.TSTATUSID
+		where ts.SID =#{sid} order by CTIME
+	</select>
+	<!-- List 페이지의 Task에 뿌려줄 Step을 위한 Step 리스트  -->
+	<select id="getStepListStep" resultType="com.apollo.vo.StepListStepDTO">
+		select ts.TID, s.SID,s.SNAME
+		from step s
+		join TASKINSTEP ts on s.SID = ts.SID
+		where ts.TID in (select tid from TASKINSTEP where SID =#{sid})
+	</select>
+	<!-- List페이지의 Task에 뿌려줄 Member을 위한 Member리스트 -->
+	<select id="getStepListMember" resultType="com.apollo.vo.StepListMemberDTO">
+		select a.TID, m.MID, m.MNAME, m.IMAGE
+		from member m 
+		join ASSIGNEE a on m.MID = a.MID 
+		where a.TID in (select tid from TASKINSTEP where SID =#{sid})
+	</select>
 
 	<select id="getStepInProject" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
     	select * from step where pid = #{pid}
     </select>
+	
+	<select id="getStepNamesbytid" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
+		select * from step where sid in (select sid from taskinstep where tid = #{tid})
+	</select>  
+	
+    <select id="getStepListByTid" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
+		select * from step where pid = (select pid from task where tid = #{tid}) and sid not in (select sid from taskinstep where tid = #{tid})
+	</select>   
 	
 </mapper>

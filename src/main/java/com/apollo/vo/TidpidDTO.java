@@ -1,13 +1,13 @@
 package com.apollo.vo;
 
-public class MidpidDTO {
-	private String mid;
+public class TidpidDTO {
+	private int tid;
 	private int pid;
-	public String getMid() {
-		return mid;
+	public int getTid() {
+		return tid;
 	}
-	public void setMid(String mid) {
-		this.mid = mid;
+	public void setTid(int tid) {
+		this.tid = tid;
 	}
 	public int getPid() {
 		return pid;
@@ -15,6 +15,7 @@ public class MidpidDTO {
 	public void setPid(int pid) {
 		this.pid = pid;
 	}
-
+	
+	
 
 }
