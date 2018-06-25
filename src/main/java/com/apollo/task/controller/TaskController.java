@@ -274,7 +274,6 @@ public class TaskController {
 		System.out.println(commentdto.getTid());
 		System.out.println("!코멘트 인서트 컨트롤러!");
 		String mid=(String)session.getAttribute("mid");
-		mid="testid1";//테스트아이디
 		commentdto.setMid(mid);
 		commentdto.setCmtkind(0);
 		service.insertInboxComment(commentdto);

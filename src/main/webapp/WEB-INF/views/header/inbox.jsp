@@ -113,7 +113,7 @@
 	<input id ="inboxkind" type="hidden" value="${inbox}">
 	<div class ="inbox-main-container">
 		<div class ="inbox-section-left" id="left">
-		<p class ="inbox-header">&nbsp; inbox</p>
+		<p class ="inbox-header">&nbsp; Inbox</p>
 		<div class = "inbox-nav">
 		<div class="inbox-topnav" id="myTopnav">
  			<a id="incomming-page" href="#Inbox">Incomming</a>
