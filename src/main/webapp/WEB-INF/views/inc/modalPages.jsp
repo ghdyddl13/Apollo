@@ -587,7 +587,7 @@
 							id="update-step-fid" name="fid">
 						<div align="center">
 							<input type="button" class="btn add-btn" id="update-step-btn"
-								value="생성">&nbsp;&nbsp;&nbsp; <input type="button"
+								value="수정">&nbsp;&nbsp;&nbsp; <input type="button"
 								class="btn cancel-btn" data-dismiss="modal" value="취소">
 						</div>
 					</fieldset>
