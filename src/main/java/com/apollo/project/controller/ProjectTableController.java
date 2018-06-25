@@ -36,9 +36,7 @@ public class ProjectTableController {
 	 작성자명 : 김 래 영
 	 */
 	@RequestMapping("/table.htm")
-	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {
-		System.out.println("project table controller");
-		
+	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {		
 		int pid = (Integer) request.getSession().getAttribute("pid");
 		System.out.println("pid : " + pid);
 		
