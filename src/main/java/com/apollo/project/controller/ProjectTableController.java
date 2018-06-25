@@ -38,7 +38,7 @@ public class ProjectTableController {
 	@RequestMapping("/table.htm")
 	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {		
 		int pid = (Integer) request.getSession().getAttribute("pid");
-		System.out.println("pid : " + pid);
+		//System.out.println("pid : " + pid);
 		
 		ArrayList<Integer> pids = new ArrayList<Integer>();
 		pids.add(pid);

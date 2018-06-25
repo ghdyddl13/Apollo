@@ -63,7 +63,7 @@ function getTaskAssignees(tid){
  작성자명 : 박 민 식
  */
 function makeProfileIcon(memberdata, imgsize){
-	var profile_container = jQuery("<div>",{"class":"profile-img-container"});
+	var profile_container = jQuery("<div>",{"class":"profile-img-container","id":"profile"+memberdata.mid});
 	profile_container.css({"width":imgsize,"height":imgsize});
 	var img = jQuery("<img>",{"class":"profile-img","id":memberdata.mid});
 	var src = (memberdata.image ==null)?"img/user_image.png" :"profileImg/"+memberdata.image;
@@ -90,7 +90,8 @@ $(document).on("click",".profile-img-container",function(evt){
         data:{mid:mid},
         dataType:"json",
         success:function(data) {
-            $('#profile-modal-img').text(data.profileinfo.image);
+            var image = (data.profileinfo.image)?data.profileinfo.image :"img/user_image.png"
+            $('#profile-modal-img').attr("src",image);
             $('#profile-modal-mname').text(data.profileinfo.mname)
             $('#profile-modal-mid').text(data.profileinfo.mid);
             $('#profile-modal-pnum').text(data.profileinfo.pnum);

@@ -2,12 +2,16 @@
 	text-align: center;
 	padding-bottom: 14px
 }
-#steps {
+#project-table-tr-steps {
 	background-color: #f4faff
 }
-#tstatus {
-	font-color:white;
+#project-table-td-tstatus {
+	color:white;
+	text-align:center;
 }
-#folders {
+#project-table-tr-folders {
 	background-color: #f4faff
+}
+.project-table-day {
+	text-align:center;
 }
