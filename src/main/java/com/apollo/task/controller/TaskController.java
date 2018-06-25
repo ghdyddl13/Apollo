@@ -401,6 +401,7 @@ public class TaskController {
 	@RequestMapping("/addassigneeintaskmodal.htm")
 	public View addAssigneeInTaskModal(String mid, int tid, String tname, HttpSession session, Model model){
 		
+		String myname = (String) session.getAttribute("mid");
 		System.out.println("mid : " + mid);
 		System.out.println("tid : " + tid);
 		System.out.println("tname : " + tname);
@@ -417,7 +418,7 @@ public class TaskController {
 				System.out.println("assignee 할당 성공! 코멘트 입력 시작!");
 				
 				String modifier = (String) session.getAttribute("mid");
-				modifier = service.getTaskModifierName(mid);
+				modifier = service.getTaskModifierName(myname);
 				String assignee_name = service.getTaskModifierName(mid);
 
 				String comment = "";
@@ -428,8 +429,8 @@ public class TaskController {
 				commentdto.setComments(comment);
 				commentdto.setTid(tid);
 				
-				String myname = (String) session.getAttribute("mid");
-				commentdto.setMid(myname);
+				String mymid = (String) session.getAttribute("mid");
+				commentdto.setMid(mymid);
 				commentdto.setCmtkind(2);
 				int final_result = service.insertAssignComment(commentdto);
 				System.out.println("receiver insert(기 할당자 몇 명?): " + final_result);
