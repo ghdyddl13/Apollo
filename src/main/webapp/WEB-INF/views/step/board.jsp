@@ -2,7 +2,8 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script type="text/javascript" src="js/utils.js"></script>
+<!-- TASK_JK -->
+<script type="text/javascript" src="js/task.js"></script>
 
 <h3></h3>
 <jsp:include page="/WEB-INF/views/inc/stepInsideHeader.jsp"></jsp:include>
@@ -264,11 +265,7 @@ function addTask_focusout(tstatusid){
                
                </p>
                <hr id="board-hr" style="background-color:${b.color};">
-                  <div class="listbox">
-                         <div class="listtitle" id="listnum">
-                               <a class="cardcreate" onclick="addCardView(this, ${b.tstatusid})">Add a card...</a>
-                         </div>
-                    </div> 
+                 
                    <%-- <div class="board-task-adder_containers" id="body-start">
                     <div class="board-task-adder" id="task-adder" onclick="addTaskView(${b.tstatusid})">
                          New Task

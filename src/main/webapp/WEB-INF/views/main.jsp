@@ -28,24 +28,32 @@
 <link rel="stylesheet" href="dist/frappe-gantt.css" />
 <script src="dist/frappe-gantt.js"></script>
 
-
 <!-- 공통 CSS -->
 <link href="css/common.css" type="text/css" rel="stylesheet">
+
 <!--MY WORK CSS  -->
 <link href="css/myWork.css" type="text/css" rel="stylesheet">
+
 <!-- PROJECT CSS -->
 <link href="css/project.css" type="text/css" rel="stylesheet">
+
 <!-- SIDEBAR JAVASCRIPT _RY -->
 <script type="text/javascript" src="js/sidebar_raeyoung.js"></script>
+
 <!-- Project Page Table 관련 -->
 <script type="text/javascript" src="js/project_table.js"></script>
 <link rel="stylesheet" href="css/project_table.css" />
+
 <!-- stream css -->
 <link href="css/stream.css" type="text/css" rel="stylesheet">
+
 <!-- task CSS -->
 <link href="css/task.css" type="text/css" rel="stylesheet">
+
 <!-- STEP LIST CSS_ JW -->
 <link href="css/stepList.css" type="text/css" rel="stylesheet">
+
+
 <title>Project Apollo</title>
 </head>
 <body>
