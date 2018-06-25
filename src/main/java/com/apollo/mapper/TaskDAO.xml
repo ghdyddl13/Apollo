@@ -64,16 +64,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from taskinstep where tid = #{tid}
 	</select>    
 
-    <insert id="insertBoardTask" parameterType="com.apollo.vo.TaskDTO">
-        <selectKey keyProperty="tid" resultType="int" order="BEFORE">
-             select seq_tid.nextval FROM DUAL
-          </selectKey>
-       insert into task(tid, tname, pid, ctime, tstatusid) values(#{tid}, #{tname}, #{pid}, sysdate, #{tstatusid})
-    </insert>
-
-    <insert id="insertBoardTaskInStep" parameterType="com.apollo.vo.TaskInStepDTO">
-       insert into taskinstep values(#{sid}, #{tid})
-    </insert>
     
     <select id="getTasksAndTstatusInStep"  parameterType="java.util.List" resultType="com.apollo.vo.TaskDTO">
 		select * from taskinstep tis join task t on tis.tid = t.tid join TSTATUS tt

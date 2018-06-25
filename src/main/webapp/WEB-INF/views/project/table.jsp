@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!DOCTYPE html>
-<script type="text/javascript" src="js/project_table.js"></script>
-<link href="css/project_table.css" type="text/css" rel="stylesheet">
 
 <div class="container-fluid">
 	<h4>해당 프로젝트명 들어가는 곳</h4>

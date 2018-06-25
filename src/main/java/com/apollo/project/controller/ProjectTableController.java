@@ -39,7 +39,7 @@ public class ProjectTableController {
 	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("project table controller");
 		
-		int pid =  Integer.parseInt((String) request.getSession().getAttribute("pid"));
+		int pid = (Integer) request.getSession().getAttribute("pid");
 		System.out.println("pid : " + pid);
 		
 		ArrayList<Integer> pids = new ArrayList<Integer>();
@@ -51,17 +51,14 @@ public class ProjectTableController {
 			ArrayList<StepDTO> steplist = null; // pid 에 속한 step 가져오기
 			steplist = tableservice.getStepInProject(pid);
 			model.addAttribute("steplist", steplist);
-			System.out.println("steplist : " + steplist);
 			
 			ArrayList<FolderDTO> folderlist = null; // pid 에 속한 folder 가져오기
 			folderlist = tableservice.selectFolderList(pids);
 			model.addAttribute("folderlist", folderlist);
-			System.out.println("folderlist : " + folderlist);
 			
 			ArrayList<TaskDTO> tasklist = null; //sid 에 속한 task 및 tstatus 가져오기
 			tasklist = tableservice.getTasksInStep(steplist);
 			model.addAttribute("tasklist", tasklist);
-			System.out.println("steplist : " + tasklist);
 		
 		} catch (Exception e) {
 			e.printStackTrace();
