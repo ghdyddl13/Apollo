@@ -33,7 +33,7 @@ $(function() {
     	<option value="${pidlist.pid}">${pidlist.pname}</option>
     </c:forEach>
 </select>
-<div class = "stream_main">
+<div class = "stream_main" style="overflow:auto;">
 
 
 

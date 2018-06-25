@@ -8,6 +8,8 @@ $(function() {
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
+				$('#incomming-page').css('border-bottom','2px solid transparent');
+				$('#incomming-page').css('border-color','#286cb0');
 			}
 		})
 	});
