@@ -56,6 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	delete from task where tid = #{tid}
     </delete>
     
+
     <delete id="deleteStepInTaskModal" parameterType="com.apollo.vo.TaskInStepDTO">
     	delete from taskinstep where sid = #{sid} and tid = #{tid}
     </delete>
@@ -81,6 +82,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="addTaskInStepInTaskModal" parameterType="com.apollo.vo.TaskInStepDTO">
 		insert into taskinstep values(#{sid}, #{tid})
 	</insert>
-
+    <select id ="selectTasksByMidAndSid" parameterType="hashmap" resultType="com.apollo.vo.TaskDTO">
+    	select t.*, s.tstatus, s.color 
+    	from task t join tstatus s on t.tstatusid = s.tstatusid 
+    	where tid in (select tid from taskinstep 
+    	where sid= #{sid} and tid in(select tid from assignee 
+    	where mid= #{mid}))
+    </select>
     
 </mapper>
