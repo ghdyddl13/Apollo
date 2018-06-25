@@ -14,11 +14,8 @@ public class TaskDTO {
 	private int tstatusid;
 	private String tstatus;
 	private String color;
-<<<<<<< HEAD
 	private int sid;
-=======
->>>>>>> develop
-	
+
 	
 	
 	public int getTid() {
