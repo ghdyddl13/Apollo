@@ -12,12 +12,14 @@ import org.springframework.stereotype.Service;
 
 import com.apollo.member.dao.MemberDAO;
 import com.apollo.step.dao.StepDAO;
+import com.apollo.task.dao.AssigneeDAO;
 import com.apollo.task.dao.CommentDAO;
 import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
@@ -222,6 +224,38 @@ public class TaskService {
 	
 	/**
 	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 할당시 코멘트 입력
+	 작성자명 : 김 정 권
+	 */
+	public int insertAssignComment(CommentDTO commentdto) {
+		
+		System.out.println("insertAssignComment 서비스 메소드 실행");
+		
+		CommentDAO commentdao = session.getMapper(CommentDAO.class);
+		int insert_comment_result = commentdao.insertComment(commentdto);
+		
+		// receiver 테이블에 insert
+		Map map = new HashMap();
+		int tid = commentdto.getTid();
+		int cmtid = commentdto.getCmtid();
+		 
+		List<String> midlist = commentdao.selectCommentMidlist(tid);
+		System.out.println("코멘트 태스크아이디에 할당된 멤버 아이디 select 성공");
+		 
+		map.put("cmtid", commentdto.getCmtid());
+		int result = 0;
+		for(int i =0 ;i<midlist.size();i++) {
+			 map.put("mid", midlist.get(i));
+			 result += commentdao.insertReceiver(map);
+			 System.out.println("receiver 테이블에 인서트 횟수 : " + result);
+		 }
+		return result;
+	}
+	
+	
+	/**
+	 * 
 	 날      짜 : 2018. 6. 22.
 	 기      능 : Task 상태 변경자 이름 가져오기
 	 작성자명 : 김 정 권
@@ -233,17 +267,24 @@ public class TaskService {
 		return name;
 	}
 
+	/**
+	 * 
+	 날      짜 : 2018. 6. ??.
+	 기      능 : 
+	 작성자명 : 신 호 용
+	 */
 	public int insertInboxComment(CommentDTO commentdto){
 		System.out.println("!!인서트 코멘트 서비스!!");
 		CommentDAO commentdao = session.getMapper(CommentDAO.class);
 		Map map = new HashMap();
-		
+		//넘어오는 commentdto  안에는 현재 mid이름 , tid , 코멘트 내용
 		 int insertcmt =commentdao.insertComment(commentdto);
 		 System.out.println("!!코멘트 테이블에 인서트 성공?!!"+ insertcmt);
-		 int pid = commentdto.getTid();
-	
+		 int tid = commentdto.getTid();
 		 
-		 List<String> midlist = commentdao.selectCommentMidlist(pid);
+	     int cmtid = commentdto.getCmtid();
+		 
+		 List<String> midlist = commentdao.selectCommentMidlist(tid);
 		 System.out.println("!!코멘트 태스크아이디에 할당된 멤버 아이디 select 성공??!!");
 		 
 		 
@@ -345,6 +386,8 @@ public class TaskService {
 	 */
 	public ArrayList<MemberDTO> getSameProjectButNotSameTaskMemberList(TidpidDTO dto){
 		
+		System.out.println("assignee 추가를 위한 이중 모달 데이터 서비스 실행");
+		
 		ArrayList<MemberDTO> list = new ArrayList();
 		MemberDAO memberdao = session.getMapper(MemberDAO.class);
 		list = memberdao.getSameProjectButNotSameTaskMemberList(dto);
@@ -352,6 +395,37 @@ public class TaskService {
 		return list;
 	}
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 테스크 모달 내 업무 담당자 삭제
+	 작성자명 : 김 정 권
+	 */
+	public int deleteAssignee(MidtidDTO dto) {
+		
+		System.out.println("deleteAssignee 서비스 탔음");
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.deleteAssignee(dto);
+		return result;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 테스크 모달에서 assignee 추가하는 이중모달 내에서 플러스 버튼 누르면 실행
+	 			  테스크에 업무 담당자를 할당하고 코멘트 입력한다
+	 작성자명 : 김 정 권
+	 */
+	public int addAssigneeInTaskModal(MidtidDTO midtiddto) {
+		
+		System.out.println("assignee 추가 서비스 탔음");
+		AssigneeDAO dao = session.getMapper(AssigneeDAO.class);
+		int result = dao.addAssigneeInTaskModal(midtiddto);
+		System.out.println("assignee 추가 결과 : " + result);
+		return result;
+	}
 	
 }
 

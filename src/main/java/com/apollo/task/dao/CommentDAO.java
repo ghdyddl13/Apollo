@@ -10,9 +10,11 @@ public interface CommentDAO {
 	public int insertComment(CommentDTO commentdto);
 	
 	public int insertComment2(CommentDTO commentdto);
-	
+
 	public List<String> selectCommentMidlist(int pid);
 
 	public int insertReceiver(Map map);
+	
+	public int insertReceiver2(CommentDTO commentdto);
 	
 }

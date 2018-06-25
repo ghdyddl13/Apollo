@@ -15,6 +15,7 @@ import com.apollo.project.service.ProjectInfoService;
 import com.apollo.task.service.TaskService;
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
@@ -100,21 +101,6 @@ public class TaskController {
 	sametaskmemberlist = service.getSameTaskAssignee(tid);
 	model.addAttribute("sametaskmemberlist", sametaskmemberlist);
 	
-	
-	// 같은 프로젝트이지만 해당 테스크의 담당자가 아닌 사람들
-	ArrayList<MemberDTO> getSameProjectButNotSameTaskMemberList = new ArrayList<MemberDTO>();
-	
-	TidpidDTO tidpiddto = new TidpidDTO();
-	tidpiddto.setPid(pid);
-	tidpiddto.setTid(tid);
-	
-	System.out.println("테스트");
-	System.out.println(pid);
-	System.out.println(tid);
-	
-	getSameProjectButNotSameTaskMemberList = service.getSameProjectButNotSameTaskMemberList(tidpiddto);
-	model.addAttribute("getSameProjectButNotSameTaskMemberList", getSameProjectButNotSameTaskMemberList);
-	
 	return jsonview;
 	}
 	
@@ -156,22 +142,33 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/deletetask.htm")
-	public String deleteTask(int tid, Model model, HttpServletRequest request) {
+	public String deleteTask(int tid, Model model, HttpSession session) {
 		
-		String location = (String) request.getSession().getAttribute("location");
+		String location = (String) session.getAttribute("location");
+		int pid = (Integer) session.getAttribute("pid");
+		int sid = (Integer) session.getAttribute("sid");
 		
+		System.out.println("테스트 출력 pid/sid/tid");
+		System.out.println("pid : " + pid);
+		System.out.println("sid : " + sid);
 		System.out.println("tid : " + tid);
+		
 		int result = service.deleteTask(tid);
+		System.out.println("delete Task 결과 : " + result);
 		
-		System.out.println("결과는? : " + result);
-		
-		//pid는 지금은 그냥 가정
-		String pid = "18";
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    } else if(location.equals("/board.htm")) {
 	    	return "redirect:/board.htm";
-	    } else {
+	    }else if(location.equals("/list.htm")) {
+	    	return "redirect:/list.htm?sid=" + sid;
+	    }
+//	    else if(location.equals("/.htm")) {
+//	    	return "redirect:/.htm";
+//	    }else if(location.equals("/.htm")) {
+//	    	return "redirect:/.htm";
+//	    }
+	    else {
 	    	return null;
 	    }
 	    
@@ -256,7 +253,7 @@ public class TaskController {
 			commentdto.setComments(comment);
 			commentdto.setTid(tid);
 			commentdto.setMid(mid);
-			commentdto.setCmtkind(2);
+			commentdto.setCmtkind(1);
 			
 			int insert_comment_result = service.insertComment(commentdto);
 			System.out.println("코멘트 입력 여부 : " + insert_comment_result);
@@ -332,6 +329,132 @@ public class TaskController {
 		model.addAttribute("steplist", steplist);
 		
 		return jsonview;
+	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 24.
+	 기      능 : 테스크 모달 창에서 업무 담당자 삭제 버튼을 누르면 실행
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/deleteassignee.htm")
+	public View deleteAssignee(String mid, int tid, Model model){
+		
+		System.out.println("테스크 모달 내 업무 담당자 삭제 컨트롤러 메소드 실행");
+		
+		MidtidDTO dto = new MidtidDTO();
+		dto.setMid(mid);
+		dto.setTid(tid);
+		int deleteresult = service.deleteAssignee(dto);
+		if(deleteresult == 1) {
+			System.out.println("업무 담당자 1명 삭제 완료");
+		}
+		model.addAttribute("deleteresult", deleteresult);
+		
+		// 해당 테스크 담당자들
+		ArrayList<MemberDTO> sametaskmemberlist = new ArrayList<MemberDTO>();
+		sametaskmemberlist = service.getSameTaskAssignee(tid);
+		model.addAttribute("sametaskmemberlist", sametaskmemberlist);
+		
+		return jsonview;
+	}
+
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 테스크 모달에서 업무 담당자 추가하는 이중 모달시 데이터 불러온다
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/addtaskassigneemodalinfo.htm")
+	public View addTaskAssigneeModalInfo(int tid, HttpSession session, Model model){
+		
+		System.out.println("assignee 추가를 위한 이중 모달 데이터 컨트롤러 실행");
+		int pid = (Integer) session.getAttribute("pid");
+		
+		// 같은 프로젝트이지만 해당 테스크의 담당자가 아닌 사람들
+		ArrayList<MemberDTO> getSameProjectButNotSameTaskMemberList = new ArrayList<MemberDTO>();
+		
+		TidpidDTO tidpiddto = new TidpidDTO();
+		tidpiddto.setPid(pid);
+		tidpiddto.setTid(tid);
+		
+		getSameProjectButNotSameTaskMemberList = service.getSameProjectButNotSameTaskMemberList(tidpiddto);
+		model.addAttribute("getSameProjectButNotSameTaskMemberList", getSameProjectButNotSameTaskMemberList);
+
+		return jsonview;
+		 		
+	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 테스크 모달에서 assignee 추가하는 이중모달 내에서 플러스 버튼 누르면 실행
+	 			  테스크에 업무 담당자를 할당하고 코멘트 입력한다
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/addassigneeintaskmodal.htm")
+	public View addAssigneeInTaskModal(String mid, int tid, String tname, HttpSession session, Model model){
+		
+		String myname = (String) session.getAttribute("mid");
+		System.out.println("mid : " + mid);
+		System.out.println("tid : " + tid);
+		System.out.println("tname : " + tname);
+		
+		System.out.println("이중 모달 내에서 assignee 할당과 코멘트 입력을 위한 컨트롤러 실행");
+		MidtidDTO midtiddto = new MidtidDTO();
+		midtiddto.setMid(mid);
+		midtiddto.setTid(tid);
+		int result = service.addAssigneeInTaskModal(midtiddto);
+		
+		// assignee 추가 성공시 코멘트 입력
+			if(result == 1) {
+
+				System.out.println("assignee 할당 성공! 코멘트 입력 시작!");
+				
+				String modifier = (String) session.getAttribute("mid");
+				modifier = service.getTaskModifierName(myname);
+				String assignee_name = service.getTaskModifierName(mid);
+
+				String comment = "";
+				comment = modifier + "님이 " + tname +" 업무를 " + assignee_name +"님에게 할당하였습니다";
+				
+				// comments 테이블에 insert
+				CommentDTO commentdto = new CommentDTO();
+				commentdto.setComments(comment);
+				commentdto.setTid(tid);
+				
+				String mymid = (String) session.getAttribute("mid");
+				commentdto.setMid(mymid);
+				commentdto.setCmtkind(2);
+				int final_result = service.insertAssignComment(commentdto);
+				System.out.println("receiver insert(기 할당자 몇 명?): " + final_result);
+			}
+		
+		return jsonview;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 테스크 모달에서 assignee 추가하는 이중모달 내에서 플러스 버튼 누르면 assignee 갱신
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/reappendassignee.htm")
+	public View reAppendAssignee(int tid, HttpSession session, Model model){
+		
+		// 해당 테스크의 담당자들
+		ArrayList<MemberDTO> sametaskmemberlist = new ArrayList<MemberDTO>();
+		sametaskmemberlist = service.getSameTaskAssignee(tid);
+		model.addAttribute("sametaskmemberlist", sametaskmemberlist);
+		
+		return jsonview;
+		 		
 	}
 	
 	
