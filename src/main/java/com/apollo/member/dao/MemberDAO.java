@@ -51,5 +51,27 @@ public interface MemberDAO {
 	 작성자명 : 박 민 식
 	 */
 	public ArrayList<MemberDTO> selectAssigneesBySid(int sid);
-
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 개인정보수정을 위한 데이터 불러오기
+	 작성자명 : 김 래 영
+	 */
+	public MemberDTO updateMemberInfo(String mid);
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 개인정보수정
+	 작성자명 : 김 래 영
+	 */
+	public int updateMemberInfo(MemberDTO memberdto);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 비밀번호 변경
+	 작성자명 : 김 래 영
+	 */
+	public int updatePwd(int mid);
 }

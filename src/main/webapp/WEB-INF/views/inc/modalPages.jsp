@@ -713,3 +713,130 @@
 		</div>
 	</div>
 
+<!-- 개인정보수정 Modal -->
+<div class="modal fade" id="edit-profile" role="dialog">
+	<div class="modal-dialog modal-edit-profile-dialog">
+		<div class="modal-content modal-edit-profile-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">개인정보수정</h4>
+			</div>
+			<div class="modal-body">
+				<form id="edit-profile-form" method="post">
+					<fieldset>
+						<div class="edit-profile-part1">
+							<br>
+							<div>
+								<div id="edit-profile-img-content">
+									<img id="edit-profile-modal-img" src="">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">이름</div>
+									<input type="text" name="mname" id="edit-profile-mname">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">이메일</div>
+									<input type="text" name="mid" id="edit-profile-mid"
+										readonly="readonly">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">인증키</div>
+									<input type="text" name="apollokey" id="edit-profile-apollokey">
+									<input class="btn" type="button" value="인증확인">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">휴대폰 번호</div>
+									<input type="text" name="pnum" id="edit-profile-pnum">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">부서명</div>
+									<input type="text" name="deptname" id="edit-profile-deptname">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">직위</div>
+									<input type="text" name="position" id="edit-profile-position">
+								</div>
+								<br>
+							</div>
+							<br>
+						</div>
+						<div align="center">
+							<input type="button" class="btn add-btn"
+								id="update-edit-profile-btn" value="수정">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn cancel-btn" data-dismiss="modal"
+								value="취소">
+						</div>
+					</fieldset>
+				</form>
+				<hr id="edit-memberinfo-hr">
+				<form id="edit-pwd-form" method="post">
+					<fieldset>
+						<div class="edit-profile-part2">
+							<h4>비밀번호 변경</h4>
+							<br>
+							<div class="edit-profile-title">현재 비밀번호</div>
+							<input type="password" name="pwd" id="edit-profile-cpwd">
+							<br>
+							<div class="edit-profile-title">변경 비밀번호</div>
+							<input type="password" name="pwd" id="edit-profile-upwd">
+							<br>
+							<div class="edit-profile-title">변경 비밀번호 확인</div>
+							<input type="password" name="pwd" id="edit-profile-upwd2">
+							<br>
+						</div>
+						<div align="center">
+							<input type="button" class="btn add-btn" id="update-edit-pwd-btn"
+								value="수정">&nbsp;&nbsp;&nbsp; <input type="button"
+								class="btn cancel-btn" data-dismiss="modal" value="취소">
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 사원목록 Modal -->
+<div class="modal fade" id="memberlist" role="dialog">
+	<div class="modal-dialog modal-memberlist-dialog">
+		<div class="modal-content modal-memberlist-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">사원목록</h4>
+			</div>
+			<div class="modal-body container-fluid">
+				<form id="memberlist-form" method="post">
+					<fieldset>
+						<div class="edit-profile-part1">
+							<br>
+							<div>
+								<table>
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>이름</th>
+											<th>직위</th>
+											<th>이메일</th>
+											<th>핸드폰번호</th>
+										</tr>
+									</thead>
+									<tbody>
+									
+									</tbody>
+								</table>
+							</div>
+							<br>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

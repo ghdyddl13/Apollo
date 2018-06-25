@@ -22,9 +22,15 @@
 				id="stream-page" style="color: white">Stream</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li class="nav-item"><a class="nav-link" href="#"
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 				style="color: white"><span class="glyphicon glyphicon-user"
-					id="loginimg"></span>김래영님</a></li>
+					id="loginimg"></span>김래영님</a>
+				<ul class="dropdown-menu">
+					<li data-toggle="modal" data-target="#edit-profile" id="header-profile-edit"><a>개인정보수정</a></li>
+					<li data-toggle="modal" data-target="#memberlist" id="header-memberlist"><a>사원목록</a></li>
+					<li><a href="#">로그아웃</a></li>
+				</ul></li>
 		</ul>
 	</div>
 </nav>

@@ -46,6 +46,8 @@
 <link href="css/task.css" type="text/css" rel="stylesheet">
 <!-- STEP LIST CSS_ JW -->
 <link href="css/stepList.css" type="text/css" rel="stylesheet">
+<!-- Header Edit Profile_ RY -->
+<link href="css/profileheader.css" type="text/css" rel="stylesheet">
 <title>Project Apollo</title>
 </head>
 <body>

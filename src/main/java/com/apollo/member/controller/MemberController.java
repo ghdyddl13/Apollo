@@ -19,6 +19,7 @@ import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.velocity.app.VelocityEngine;
@@ -363,6 +364,55 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return jsonview;
+	}
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 개인정보수정을 위한 정보 불러오기
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping("/updatememberinfo.htm")
+	public View updateMemberInfo(HttpServletRequest request, Model model, HttpSession session) {
+		System.out.println("개인정보수정 controller");
+		
+		String mid = (String) request.getSession().getAttribute("mid");
+		model.addAttribute("mid", mid);
+		System.out.println("mid : " + mid);
+		
+		MemberDTO updatememberinfo = null;
+		try {
+			updatememberinfo = service.updateMemberInfo(mid);
+			model.addAttribute("updatememberinfo", updatememberinfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 개인정보수정
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/updatemember.htm", method=RequestMethod.POST)
+	public View updateMemberInfo(MemberDTO memberdto, Model model) {
+		System.out.println("개인정보수정 controller");
+		int updatemember = 0;
+		try {
+			updatemember = service.updateMemberInfo(memberdto);
+			model.addAttribute("updatemember", updatemember);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
+	@RequestMapping(value="/updatepwd.htm", method=RequestMethod.POST)
+	public View updatePwd(int mid, Model model) {
+		
 		return jsonview;
 	}
 }
