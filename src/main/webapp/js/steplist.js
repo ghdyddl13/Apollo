@@ -1,5 +1,10 @@
 $(function() {
-	////// 사이드바 스텝 클릭 시 
+	/**
+	 * 
+	 날   짜 : 2018. 6. 25.
+	 기   능 : SIDESTEP에서 STEP을 클릭할 시에 발생하는 함수
+	 작성자명 : 이 진 우
+	 */
 	$(document).on("click",".side-step",function(){
 		var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
 		var pid = project_wrapper.id.substr(1);
@@ -60,14 +65,21 @@ $(function() {
 			}
 		})
     });
-	/////////////////////////////////태스크 새로 입력하는 부분/////////////////////////////////////////
-	$(document).on("click","#list-task-adder",function() {
+	
+	
+	/**
+	 * 
+	 날   짜 : 2018. 6. 25.
+	 기   능 : TASK ADD를 할 시에 입력해주는 함수
+	 작성자명 : 이 진 우
+	 */
+	$(document).on("click","#list-task-adder",function() {//클릭할 시에 새로운 입력 태그가 생성
 	  $("#list-task-adder").remove();
 	  let inputtag="<div class='list-task-adder-addmode'><input class='form-control' id='insert-task' name='tname' type='text' placeholder='새로운 작업을 입력하세요'></div>"
 	  $("#body-start").prepend(inputtag);
 	  $("#insert-task").focus();
 	})
-	$(document).on("keyup","#insert-task",function(event) {
+	$(document).on("keyup","#insert-task",function(event) {//키업함수를 통해 
 	  let addtag="<div class='list-task-adder' id='list-task-adder'>New task</div>";
 	  if(event.which==13){
 		let tstatus =$(".list-header-filter-status-items").children(".list-header-menu-list-item").attr("id");
@@ -87,6 +99,48 @@ $(function() {
 	                success:function(data) {
 						$("#main-box").empty();
 						$("#main-box").append(data);
+						/////////////////////////////////STATUS OF TASK GRAPH/////////////////////////////////////////
+						let ctx = document.getElementById('Step-list-DonutChart').getContext('2d');
+						let myDoughnutChart = new Chart(ctx, {
+						
+						      type: 'doughnut',
+						      data: {
+						              datasets: [{
+						                  data: [3, 4, 5, 6, 7],
+						                  backgroundColor: [
+						                                    'rgba(190, 190, 190, 1)',
+						                                    'rgba(241, 196, 15, 1)',
+						                                    'rgba(244, 7, 7, 1)',
+						                                    'rgba(52, 152, 219, 1)',
+						                                    'rgba(46, 204, 113, 1)'
+						                  ],
+						                  borderColor:[
+						                                'rgba(190, 190, 190, 1)',
+						                                'rgba(241, 196, 15, 1)',
+						                                'rgba(244, 7, 7, 1)',
+						                                'rgba(52, 152, 219, 1)',
+						                                'rgba(46, 204, 113, 1)'
+						                  ],
+						                  borderWidth: 1
+						              }],
+						              labels:
+						        ['미지정','다음주 이후','이번주 까지','완료','기한 만료']
+						      },
+						      options: {
+						                maintainAspectRatio: false,
+						                cutoutPercentage: 50,
+						                legend: {
+						                          display: true,
+						                          position: 'right',
+						                          labels: {
+						                                    fontSize: 12,
+						                                    fontFamily: 'sans-serif',
+						                                    fontColor: '#ffffff',
+						                                    fontStyle: 'bold'
+						                }
+						      }
+						      }
+						});
 	                }
 	              }
 	      )
@@ -96,6 +150,12 @@ $(function() {
 	    $("#body-start").prepend("<div class='list-task-adder' id='list-task-adder'>New task</div>");
 	  }
 	});
+	/**
+	 * 
+	 날   짜 : 2018. 6. 25.
+	 기   능 : TASK ADD를 하는 INPUT TAG에서 나오면 빈문자일시 그냥 다시 태그생성, 빈문자가 아니면 새로 로드됨
+	 작성자명 : 이 진 우
+	 */
 	$(document).on("focusout","#insert-task",function() {
 	  let newtask = $.trim($(this).val());
 	  let addtag="<div class='list-task-adder' id='list-task-adder'>New task</div>";
@@ -103,26 +163,31 @@ $(function() {
 	    $(".list-task-adder-addmode").remove();
 	    $("#body-start").prepend(addtag);
 	  }else{
-	    /*
-	    $.ajax(
-	            {
-	              type:"POST",
-	              url:"",
-	              date:"",
-	              success:function(data) {
-	
+		  let tstatus =$(".list-header-filter-status-items").children(".list-header-menu-list-item").attr("id");
+		  $(".list-task-adder-addmode").remove();
+		  $("#body-start").prepend(addtag);
+	      $.ajax(
+	              {
+	                url:"listtaskcreate.htm",
+	                data:{
+	                	tstatusid : tstatus, 
+                        tname : newtask
+                        },
+	                dataType:"html",
+	                success:function(data) {
+						$("#main-box").empty();
+						$("#main-box").append(data);
+	                }
 	              }
-	            }
-	    )
-	    */
-	    $(".list-task-adder-addmode").remove();
-	    $("#body-start").prepend(addtag);
+	      )
 	  }
 	})
-	
-	
-
-	/////////////////////////////////TASK CONTAINER HOVER/////////////////////////////////////////
+	/**
+	 * 
+	 날   짜 : 2018. 6. 25.
+	 기   능 : TASK CONTAINER을 HOVER하거나 마우스로 클릭할시 발생하는 함수
+	 작성자명 : 이 진 우
+	 */
 	let checkbox=[];
 	$(document).on("mouseenter",".list-task-container",function() {//마우스 호버 하면 checkbox가 보임
 	  $(this).children(".list-task-checkbox-container").children(".list-task-checkbox").css("visibility","visible");
@@ -131,8 +196,8 @@ $(function() {
 	})
 	$(document).on("click",".list-task-checkbox",function() {//선택되지 않은 select box를 않은 눌렀을 시에
 	  $(this).removeClass("list-task-checkbox").addClass("list-task-checkbox-selected");
-	  $(".list-section-third-default").css({"visibility":"hidden","position":"absolute"});
-	  $(".list-section-third-selectpage").css({"visibility":"visible","position":"relative"})
+	  $(".list-section-third-default").css({"visibility":"hidden","position":"absolute","height":"50%"});
+	  $(".list-section-third-selectpage").css({"visibility":"visible","position":"relative","height":"100%"})
 	  checkbox.push($(this).parent().parent().attr('id'));
 	  console.log(checkbox);
 	  if(checkbox.length>0){
@@ -145,13 +210,13 @@ $(function() {
 	  console.log(checkbox);
 	  $("#selected-tag-count").text(checkbox.length+"개 선택됨");
 	  if(checkbox.length==0){
-	    $(".list-section-third-selectpage").css({"visibility":"hidden","position":"absolute"});
-	    $(".list-section-third-default").css({"visibility":"visible","position":"relative"})
+	    $(".list-section-third-selectpage").css({"visibility":"hidden","position":"absolute","height":"50%"});
+	    $(".list-section-third-default").css({"visibility":"visible","position":"relative","height":"100%"})
 	  }
 	})
 	$(document).on("click","#list-closebutton",function() {//닫기 버튼을 누를시
-	  $(".list-section-third-selectpage").css({"visibility":"hidden","position":"absolute"});
-	  $(".list-section-third-default").css({"visibility":"visible","position":"relative"})
+	  $(".list-section-third-selectpage").css({"visibility":"hidden","position":"absolute","height":"50%"});
+	  $(".list-section-third-default").css({"visibility":"visible","position":"relative","height":"100%"})
 	  checkbox=[];
 	  $(".list-task-checkbox-selected").removeClass("list-task-checkbox-selected").addClass("list-task-checkbox");
 	  console.log(checkbox);
@@ -164,7 +229,7 @@ $(function() {
 	            {
 	              type:"POST",
 	              url:"",
-	              date:"",
+	              data:"",
 	              success:function(data) {
 	
 	              }
@@ -252,7 +317,12 @@ $(function() {
 	
 	
 	
-	
+	/**
+	 * 
+	 날   짜 : 2018. 6. 25.
+	 기   능 : TASK ADD를 하는 INPUT TAG에서 나오면 빈문자일시 그냥 다시 태그생성, 빈문자가 아니면 새로 로드됨
+	 작성자명 : 이 진 우
+	 */
 	/////////////////////////////////STATUS SELECTING BOTTON/////////////////////////////////////////
 	$(document).on("click","#status-button",function() {
 	  /**/
