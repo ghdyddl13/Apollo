@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+
 <!DOCTYPE html >
  <h3>타임라인</h3>
 <jsp:include page="/WEB-INF/views/inc/stepInsideHeader.jsp"></jsp:include>

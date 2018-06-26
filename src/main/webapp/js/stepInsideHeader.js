@@ -28,6 +28,8 @@ $(function() {
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
+				doDraggable();
+				
 			}
 		})
 	})
