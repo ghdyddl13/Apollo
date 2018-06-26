@@ -68,26 +68,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select sid, sname from step where sid=#{sid}
 	</select>
 	<!--List페이지에 Task를 뿌려주기위한 Task리스트  -->
-	<select id="getStepListTask" resultType="com.apollo.vo.StepListTaskDTO">
+	<select id="getStepListTask" parameterType="hashmap" resultType="com.apollo.vo.StepListTaskDTO">
 		select t.TID, t.TNAME, t.SDAY, t.EDAY,t.DETAIL,t.PID, t.CTIME,t.TSTATUSID, ts.SID , s.TSTATUS,s.COLOR  
 		from task t 
 		join TASKINSTEP ts on t.TID = ts.TID
 		join TSTATUS s on t.TSTATUSID = s.TSTATUSID
-		where ts.SID =#{sid} order by CTIME
+		where ts.SID =#{sid}
+		<if test="tstatusid != 0">and t.TSTATUSID=#{tstatusid}</if> 
+		order by CTIME
 	</select>
 	<!-- List 페이지의 Task에 뿌려줄 Step을 위한 Step 리스트  -->
-	<select id="getStepListStep" resultType="com.apollo.vo.StepListStepDTO">
+	<select id="getStepListStep" parameterType="hashmap" resultType="com.apollo.vo.StepListStepDTO">
 		select ts.TID, s.SID,s.SNAME
 		from step s
 		join TASKINSTEP ts on s.SID = ts.SID
-		where ts.TID in (select tid from TASKINSTEP where SID =#{sid}) and s.SID !=#{sid}
+		where ts.TID in 
+		(select tis.tid 
+		from TASKINSTEP tis 
+		join task t on tis.TID = t.TID 
+		where tis.SID=77 
+		<if test="tstatusid != 0">and t.TSTATUSID=#{tstatusid}</if>
+		)and s.SID !=#{sid}
 	</select>
 	<!-- List페이지의 Task에 뿌려줄 Member을 위한 Member리스트 -->
-	<select id="getStepListMember" resultType="com.apollo.vo.StepListMemberDTO">
+	<select id="getStepListMember" parameterType="hashmap" resultType="com.apollo.vo.StepListMemberDTO">
 		select a.TID, m.MID, m.MNAME, m.IMAGE
 		from member m 
 		join ASSIGNEE a on m.MID = a.MID 
-		where a.TID in (select tid from TASKINSTEP where SID =#{sid})
+		where a.TID in 
+		(select tis.tid 
+		from TASKINSTEP tis join task t on tis.TID = t.TID 
+		where tis.SID=#{sid} 
+		<if test="tstatusid != 0">and t.TSTATUSID=#{tstatusid}</if>
+		)
 	</select>
 
 	<select id="getStepInProject" parameterType="Integer" resultType="com.apollo.vo.StepDTO">

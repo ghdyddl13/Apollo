@@ -131,21 +131,21 @@ public interface StepDAO {
 	 기      능 : List페이지에 Task를 뿌려주기위한 Task리스트 
 	 작성자명 : 이 진 우
 	 */
-	public ArrayList<StepListTaskDTO> getStepListTask(int sid);
+	public ArrayList<StepListTaskDTO> getStepListTask(HashMap<String, Integer> map);
 	/**
 	 * 
 	 날      짜 : 2018. 6. 24.
 	 기      능 : List 페이지의 Task에 뿌려줄 Step을 위한 Step 리스트 
 	 작성자명 : 이 진 우
 	 */
-	public ArrayList<StepListStepDTO> getStepListStep(int sid);
+	public ArrayList<StepListStepDTO> getStepListStep(HashMap<String, Integer> map);
 	/**
 	 * 
 	 날      짜 : 2018. 6. 24.
 	 기      능 : List페이지의 Task에 뿌려줄 Member을 위한 Member리스트
 	 작성자명 : 이 진 우
 	 */
-	public ArrayList<StepListMemberDTO> getStepListMember(int sid);
+	public ArrayList<StepListMemberDTO> getStepListMember(HashMap<String, Integer> map);
 
 	/**
 	 * 

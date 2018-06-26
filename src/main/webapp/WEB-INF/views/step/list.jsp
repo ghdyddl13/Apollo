@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<script type="text/javascript" src="js/task.js"></script>
-    
-<!DOCTYPE html >
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<!DOCTYPE html >
+<script type="text/javascript" src="js/task.js"></script>
+<script type="text/javascript" src="js/stepInsideHeader.js"></script>    
 <div class="main-body">
   <div class="main-section-left" id="left">
     <div class="main-section-left-container">
@@ -30,8 +29,8 @@
           </div>
           <div class="list-header-bottom">
             <div class="list-header-filter">
-              <span class="list-header-filter-status" id="status-button">
-                <span class="list-header-filter-status-tag">STATUS:ALL</span>
+              <span class="list-header-filter-status">
+                <span class="list-header-filter-status-tag" id="status-button">STATUS:ALL</span>
               </span>
               <span class="list-header-filter-people" id="people-button">
                 <span class="list-header-filter-people-tag">TO:ALL</span>

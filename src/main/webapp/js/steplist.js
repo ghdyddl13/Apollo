@@ -320,12 +320,11 @@ $(function() {
 	/**
 	 * 
 	 날   짜 : 2018. 6. 25.
-	 기   능 : TASK ADD를 하는 INPUT TAG에서 나오면 빈문자일시 그냥 다시 태그생성, 빈문자가 아니면 새로 로드됨
+	 기   능 : STATUS SELECTING BUTTON을 클릭할시 발생하는 함수들
 	 작성자명 : 이 진 우
 	 */
-	/////////////////////////////////STATUS SELECTING BOTTON/////////////////////////////////////////
+	//상태 버튼을 눌렀을시 발생하는 함수
 	$(document).on("click","#status-button",function() {
-	  /**/
 	  let p =$("#status-button");
 	  let position = p.position();
 	  $(".list-header-filter-status").css("background-color","#dfe6f0")
@@ -342,22 +341,52 @@ $(function() {
 	  }
 	});
 	$(document).on("click",".list-header-menu-list-item",function () {
-	  let status = $(this).attr("id");
+	  let tstatusid = $(this).attr("id");
+	  let stepid = $(".list-header-title").attr("id").substring(1);
+	  let statusname = $.trim($(this).text());
+	  console.log(tstatusid +"/"+stepid+"/"+statusname);
 	  $(".list-header-filter-status").css("background-color","")
 	  $(".list-header-filter-status-selecting").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
-	      /*
-	      $.ajax(
+      $.ajax(
+              {
+                type:"POST",
+                url:"liststatusfilter.htm",
+                data:{tstatusid:tstatusid,
+                	  stepid:stepid
+                },
+                success:function(data) {
+                	$(".list-header-filter-status").empty();
+                	$(".list-header-filter-status").append("<span class='list-header-filter-status-tag' id='status-button'>"+statusname+"</span><span class='list-header-filter-status-remove' id='task-status-remove'></span>");
+                	$(".list-header-filter-status").css("background-color","#dfe6f0")
+                	$(".list-task-containers").empty();
+                	$(".list-task-containers").append(data);
+                }
+              }
+      )
+	});
+	$(document).on("click",'#task-status-remove',function(){
+		let stepid = $(".list-header-title").attr("id").substring(1);
+		let tstatusid=0;
+	    $.ajax(
 	              {
 	                type:"POST",
-	                url:"",
-	                date:"",
+	                url:"liststatusfilter.htm",
+	                data:{tstatusid:tstatusid,
+	                	  stepid:stepid
+	                },
 	                success:function(data) {
-	
+	                	$(".list-header-filter-status").empty();
+	                	$(".list-header-filter-status").append("<span class='list-header-filter-status-tag' id='status-button'>STATUS:ALL</span>");
+	                	$(".list-header-filter-status").css("background-color","")
+	                	$(".list-task-containers").empty();
+	                	$(".list-task-containers").append(data);
 	                }
-	              }
-	      )
-	      */
+	            }
+	    )
 	});
+	
+	
+	
 	
 	/////////////////////////////////PEOPLE SELECTING BOTTON/////////////////////////////////////////
 	$(document).on("click","#people-button",function(){
