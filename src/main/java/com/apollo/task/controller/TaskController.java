@@ -645,6 +645,32 @@ public class TaskController {
 	}
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : task의 상세설명 부분을 update
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/updateTaskDetail.htm")
+	public View updateTaskDetail(int tid, String content, Model model) {
+		
+		System.out.println("updateTaskDetail 컨트롤러 실행됨");
+
+		TaskDTO dto = new TaskDTO();
+		dto.setTid(tid);
+		dto.setDetail(content);
+		
+		int result = service.updateTask(dto);
+		model.addAttribute("result", result);
+		
+		if(result == 1) {
+			System.out.println("Task Detail update 완료!");
+		}
+		
+		return jsonview;
+	}
+	
+	
 	
 	
 	

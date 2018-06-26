@@ -144,11 +144,13 @@ $(document).on("click",".Task_RUD_Modal",function(){
 	   		        	   $('#Task_Modal_subtasks').append(div_str);
 			        	   
 			        	   
+	   		        	   
+	   		        	   // detail
+	   		        	   $('#task_detail_status').css("visibility","hidden");
+			        	   $('#Task_Modal_detail').val("");
+			        	   $('#Task_Modal_detail').val(rdata.task.detail);
 			        	   
 			        	   
-			        	   
-//			        	   $('#').empty();
-//			        	   $('#').append(rdata.task.tname);
 			        	   
 //			        	   $('#').empty();
 //			        	   $('#').append(rdata.task.tname);
@@ -792,6 +794,52 @@ $(document).on("mouseenter",".hover_div",function() {
   }).on("mouseleave",".hover_div",function() {//마우스 호버 아웃 하면 checkbox가 다시 안보이게 함
 	  $(this).children('i').css("visibility","hidden");
   });
+
+
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 26.
+ 기      능 : task 상세설명에서 시간 지연 후 DB로 가서 저장하는 함수
+ 작성자명 : 김 정 권
+ */
+$(document).on("keyup","#Task_Modal_detail",function() {
+	$('#task_detail_status').css("visibility","visible");
+	$('#task_detail_status').attr('src','img/loader.gif');
+
+	delay(function(){
+		   
+		   var tid = $('#tidhidden').attr('value');
+		   var detail_content = $('#Task_Modal_detail').val();
+		   
+		   $.ajax(
+	  		       {
+	  		           type : "post",
+	  		           url  : "updateTaskDetail.htm",
+	  		           data : {
+	  		        	   'tid' : tid,
+	  		        	   'content' : detail_content 
+	  		           },
+	  		           success : function(rdata){
+	  		        	   console.log('detail update 완료');
+	  		        	   $('#task_detail_status').attr('src','img/checked.jpg');
+	  		           } // end-success
+	  		        }); // end-ajax
+		      
+		      // 3초 지연
+		    }, 3000 );
+});
+
+var delay = (function(){
+	  var timer = 0;
+	  return function(callback, ms){
+	    clearTimeout (timer);
+	    timer = setTimeout(callback, ms);
+	  };
+	})();
+
+
 
 
 	

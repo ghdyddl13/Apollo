@@ -102,3 +102,8 @@ assignee_in_taskmodal td{
 .subtask_unchecked {
   font-size: 15px;
 }
+
+#task_detail_status{
+	width: 20px;
+	height:20px;
+}
