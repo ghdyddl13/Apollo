@@ -17,10 +17,11 @@ public class ProjectFilesService {
 	
 	public ArrayList<FileDTO> selectFileListByProjectId(int pid){
 		ArrayList<FileDTO> result = null;
-		System.out.println("파일 서비스 들어왔다.");
+		System.out.println("파일 서비스 들어왔다." + pid);
 		try {
 			FileDAO dao = sqlsession.getMapper(FileDAO.class);
 			result = dao.selectFileListByProjectId(pid);
+			System.out.println("result : " + result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

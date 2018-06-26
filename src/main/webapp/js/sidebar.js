@@ -368,6 +368,12 @@ $(function() {
 				$(".custom-menu").remove();
 			}
 			
+			if (!$(e.target).parents("#search-nav").length > 0) {
+			    document.getElementById("search-nav").style.width = "0";
+			    $("#search-content-box").empty();
+				$("#search-bar").val("")
+			}
+			
 		});
 	
 

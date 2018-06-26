@@ -90,9 +90,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	where sid= #{sid} and tid in(select tid from assignee 
     	where mid= #{mid}))
     </select>
+
+
+	<select id="getRecentTasks" resultType="com.apollo.vo.TaskDTO">
+		select * from task t join tstatus s 
+		on t.tstatusid = s.tstatusid 
+		where (ctime between sysdate-3 and sysdate) 
+		and pid in (select pid from pmember where mid =#{mid}) 
+		and rownum &lt;= 10 order by tid desc
+	</select>
+    
+    <select id ="getSearchTasks" parameterType="hashmap" resultType="com.apollo.vo.TaskDTO">
+	    select * from task t join tstatus s 
+		on t.tstatusid = s.tstatusid 
+		where tname like '%'||#{input}||'%'
+		and pid in (select pid from pmember where mid =#{mid}) order by tid desc
+    </select>
+
 	
 	<delete id="deleteAssignee" parameterType="com.apollo.vo.MidtidDTO">
     	delete from assignee where mid = #{mid} and tid = #{tid}
     </delete>
-		
+
 </mapper>

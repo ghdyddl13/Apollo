@@ -163,4 +163,11 @@ public interface StepDAO {
 	 */
 	public ArrayList<StepDTO> getStepListByTid(int tid);
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 스텝 검색결과를 가져온다 
+	 작성자명 : 박 민 식
+	 */
+	public ArrayList<StepDTO> getSearchSteps(HashMap<String, String> map);
 }

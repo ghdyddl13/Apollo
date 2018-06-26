@@ -38,6 +38,8 @@ public interface TaskDAO {
 	public int changeTstatus(TidvalueDTO dto);
 	public int addTaskInStepInTaskModal(TaskInStepDTO taskinstepdto);
 	public ArrayList<TaskDTO> selectTasksByMidAndSid(HashMap<String, Object> map);
+	public ArrayList<TaskDTO> getRecentTasks(String mid);
+	public ArrayList<TaskDTO> getSearchTasks(HashMap<String, String> map);
 	public int deleteAssignee(MidtidDTO dto);
 
 }

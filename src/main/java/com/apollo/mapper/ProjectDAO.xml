@@ -31,4 +31,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from project where pid in (select pid from pmember where mid=#{mid})
 	</select>
 	
+	<select id="getSearchProjects" parameterType="hashmap" resultType="com.apollo.vo.ProjectDTO">
+		select * from project
+		where pname like '%'||#{input}||'%'
+		and pid in (select pid from pmember where mid = #{mid}) order by pid desc
+	</select>
 </mapper>

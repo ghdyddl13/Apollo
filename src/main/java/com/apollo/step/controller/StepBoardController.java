@@ -82,6 +82,7 @@ public class StepBoardController {
 	 */
 	@RequestMapping("/board.htm")
     public String selectBoard(Model model,HttpServletRequest request, HttpSession session) {
+
 		
 		session.setAttribute("location", "/board.htm");
 
@@ -100,5 +101,8 @@ public class StepBoardController {
         
         return "step/board";
     }
+
+
+
 	
 }
