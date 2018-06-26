@@ -1,6 +1,7 @@
 package com.apollo.project.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.apollo.vo.FileDTO;
 import com.apollo.vo.MemberDTO;
@@ -40,6 +41,14 @@ public interface ProjectDAO {
 	 작성자명 : 박 민 식
 	 */
 	public ArrayList<ProjectDTO> selectProjectList(String mid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 프로젝트 검색 결과
+	 작성자명 : 박 민 식
+	 */
+	public ArrayList<ProjectDTO> getSearchProjects(HashMap<String, String> map);
 
 	
 }

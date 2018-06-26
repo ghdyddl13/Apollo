@@ -1,5 +1,6 @@
 package com.apollo.step.dao;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.StepListMemberDTO;
@@ -153,4 +154,12 @@ public interface StepDAO {
 	 작성자명 : 김 정 권
 	 */
 	public ArrayList<StepDTO> getStepListByTid(int tid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 스텝 검색결과를 가져온다 
+	 작성자명 : 박 민 식
+	 */
+	public ArrayList<StepDTO> getSearchSteps(HashMap<String, String> map);
 }
