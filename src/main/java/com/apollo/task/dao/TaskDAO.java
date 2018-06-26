@@ -40,4 +40,9 @@ public interface TaskDAO {
 	public ArrayList<TaskDTO> selectTasksByMidAndSid(HashMap<String, Object> map);
 	public int deleteAssignee(MidtidDTO dto);
 
+	public int changeSdayOfTask(TaskDTO dto);
+	public int changeEdayOfTask(TaskDTO dto);
+	public String getTname(int tid);
+	
+	
 }

@@ -427,6 +427,57 @@ public class TaskService {
 		return result;
 	}
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 테스크 모달에서 sday 를 데이트 피커에서 누르면 sday를 변경
+	 작성자명 : 김 정 권
+	 */
+	public int changeSdayOfTask(TaskDTO dto) {
+	
+		System.out.println("sday service 실행");
+		
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.changeSdayOfTask(dto);
+		
+		return result;	
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 테스크 모달에서 eday 를 데이트 피커에서 누르면 eday를 변경
+	 작성자명 : 김 정 권
+	 */
+	public int changeEdayOfTask(TaskDTO dto) {
+
+		System.out.println("eday service 실행");
+	
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.changeEdayOfTask(dto);
+		
+		return result;	
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : tid로 tname 을 가져온다
+	 작성자명 : 김 정 권
+	 */
+	public String getTname(int tid) {
+		
+		System.out.println("getTname service 실행");
+		
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		String tname = taskdao.getTname(tid);
+		System.out.println("tname 테스트 출력: " + tname);
+		return tname;
+		
+	}
+	
 }
 
 
