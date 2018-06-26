@@ -654,7 +654,7 @@ $(document).on("keyup","#add_sub_task",function(){
    		        	   'subtaskstr' : subtaskstr
    		           },
    		           success : function(rdata){
-   		        	   
+   		        	   $('#add_sub_task').val('');
    		        	   console.log('success 성공 테스트 출력 : ' + rdata.result);
    		        	   
 		        	   // subtask
@@ -674,7 +674,7 @@ $(document).on("keyup","#add_sub_task",function(){
    		        		   
    		        	   });
    		        	   $('#Task_Modal_subtasks').append(div_str);
-		        	   
+   		        	 
    		        	   
    		           } // end-success
    		        }); // end-ajax
@@ -792,12 +792,6 @@ $(document).on("mouseenter",".hover_div",function() {
   }).on("mouseleave",".hover_div",function() {//마우스 호버 아웃 하면 checkbox가 다시 안보이게 함
 	  $(this).children('i').css("visibility","hidden");
   });
-
-
-
-
-
-
 
 
 	
