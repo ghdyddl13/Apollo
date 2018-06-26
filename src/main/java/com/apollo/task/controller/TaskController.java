@@ -2,7 +2,6 @@ package com.apollo.task.controller;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import com.apollo.project.service.ProjectInfoService;
+import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.service.TaskService;
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.SubtaskDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TidpidDTO;
@@ -100,6 +101,11 @@ public class TaskController {
 	ArrayList<MemberDTO> sametaskmemberlist = new ArrayList<MemberDTO>();
 	sametaskmemberlist = service.getSameTaskAssignee(tid);
 	model.addAttribute("sametaskmemberlist", sametaskmemberlist);
+	
+	// 해당 테스크의 서브테스크들
+	ArrayList<SubtaskDTO> subtasklist = new ArrayList<SubtaskDTO>();
+	subtasklist = service.getSubTasks(tid);
+	model.addAttribute("subtasklist", subtasklist);
 	
 	return jsonview;
 	}
@@ -557,5 +563,90 @@ public class TaskController {
 		
 		return jsonview;
 	}
+	
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 테스크 모달에서 eday 를 데이트 피커에서 누르면 eday를 변경
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/addsubtask.htm")
+	public View addSubTask(int tid, String subtaskstr, Model model){
+		
+		System.out.println("addSubTask 컨트롤러 실행");
+		
+		SubtaskDTO dto = new SubtaskDTO();
+		dto.setTid(tid);
+		dto.setSubtask(subtaskstr);
+		dto.setIschecked(0);
+
+		int result = service.addSubTask(dto);
+		
+		System.out.println("addSubTask 실행 결과 : " + result);
+		model.addAttribute("result", result);
+		
+		// 해당 테스크의 서브테스크들
+		ArrayList<SubtaskDTO> subtasklist = new ArrayList<SubtaskDTO>();
+		subtasklist = service.getSubTasks(tid);
+		model.addAttribute("subtasklist", subtasklist);
+		
+		return jsonview;
+	}
+		
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 서브테스크의 완료/미완료 여부를 변경한다
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/changesubtask.htm")
+	public View changeSubtask(int subtaskid, int tid, int subtask_fini_or_unfini, Model model) {
+		
+		System.out.println("changeSubtask 컨트롤러 실행됨");
+
+		SubtaskDTO dto = new SubtaskDTO();
+		dto.setSubtaskid(subtaskid);
+		dto.setTid(tid);
+		dto.setIschecked(subtask_fini_or_unfini);
+		
+		int result = service.changeSubtask(dto);
+		
+		System.out.println("changeSubtask 실행 결과 : " + result);
+		model.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : subtask 를 삭제
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/deletesubtask.htm")
+	public View deleteSubtask(int tid, int subtaskid, Model model) {
+		
+		System.out.println("deleteSubtask 컨트롤러 실행됨");
+
+		int result = service.deleteSubtask(subtaskid);
+		
+		System.out.println("deleteSubtask 실행 결과 : " + result);
+		model.addAttribute("result", result);
+		
+		// 해당 테스크의 서브테스크들
+		ArrayList<SubtaskDTO> subtasklist = new ArrayList<SubtaskDTO>();
+		subtasklist = service.getSubTasks(tid);
+		model.addAttribute("subtasklist", subtasklist);
+		
+		
+		return jsonview;
+	}
+	
+	
+	
+	
+	
 	
 }

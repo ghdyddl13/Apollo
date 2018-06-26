@@ -356,11 +356,12 @@
                 <hr>
 
 				<div class="modal-title">Sub Task</div><br />
+				
+				 <input type="text" name="pname" id="add_sub_task"
+							placeholder="Sub Task의 제목을 입력 후 Enter..."
+							class="text ui-widget-content ui-corner-all"><br><br>
 				 <div id="Task_Modal_subtasks">subtask들이 들어가게 된다</div><br>
-					<input type="text" name="pname" id="add_sub_task"
-							placeholder="Sub Task 입력"
-							class="text ui-widget-content ui-corner-all">
-					<input type="button" value="Sub Task 추가">
+
                 <hr />
                 
 				<div class="modal-title">

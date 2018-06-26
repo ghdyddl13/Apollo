@@ -57,3 +57,48 @@ assignee_in_taskmodal th{
 assignee_in_taskmodal td{
 	text-align: center;
 }
+
+#add_sub_task{
+	width: 500px;
+}
+
+
+.hover_div{
+	cursor: pointer;
+	margin: 10px 10px 10px 25px;
+	font-size: 15px;
+	display: flex;
+	white-space:nowrap;
+	align-items: center
+}
+
+.hover_div:hover{
+	cursor: pointer;
+	margin: 10px 10px 10px 20px;
+	font-size: 15px;
+	background-color: rgba(163, 172, 182, 0.2);
+}
+
+.subtask_name{
+	overflow:hidden;
+	display:block;
+	flex: 1 1 auto;
+}
+
+.subtask_del_btn{
+	flex: 0 0 auto;
+	display: block;
+	cursor: pointer;
+	visibility: hidden
+}
+
+
+.subtask_checked {
+  text-decoration: line-through;
+  font-size: 15px;
+  
+}
+
+.subtask_unchecked {
+  font-size: 15px;
+}

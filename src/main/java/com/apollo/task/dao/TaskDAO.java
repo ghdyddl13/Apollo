@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.SubtaskDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TidvalueDTO;
@@ -43,6 +44,7 @@ public interface TaskDAO {
 	public int changeSdayOfTask(TaskDTO dto);
 	public int changeEdayOfTask(TaskDTO dto);
 	public String getTname(int tid);
+
 	
 	
 }

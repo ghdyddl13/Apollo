@@ -125,8 +125,27 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   $('#Task_Modal_eday').val(neweday);
 			        	   
 
-//			        	   $('#').empty();
-//			        	   $('#').append(rdata.task.tname);
+			        	   // subtask
+			        	   $('#Task_Modal_subtasks').empty();
+	   		        	   var div_str = '';
+	   		        	   $(rdata.subtasklist).each(function(){
+	   		        		   
+	   		        		   var ischecked_class = '';
+	   		        		   if(this.ischecked == 1){
+	   		        			ischecked_class = 'subtask_name subtask_checked subtask_span';
+	   		        		   }else{
+			        			ischecked_class = 'subtask_name subtask_unchecked subtask_span';
+	   		        		   }
+	   		        		   
+	   		        		div_str += '<div class="hover_div"><span class="' + ischecked_class + '">' + this.subtask + '</span>';
+	   		        		div_str += '<i id="' + this.subtaskid + '" class="fas fa-times subtask_del_btn" style="cursor:pointer"></i></div>';
+	   		        		   
+	   		        	   });
+	   		        	   $('#Task_Modal_subtasks').append(div_str);
+			        	   
+			        	   
+			        	   
+			        	   
 			        	   
 //			        	   $('#').empty();
 //			        	   $('#').append(rdata.task.tname);
@@ -392,6 +411,8 @@ $(document).on("click",".addbtn_taskinstep",function(){
 		        		        	snames += '<i data-toggle="modal" data-target="#step_add_modal_in_taskmodal" id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 		        		        	$('#Task_Modal_snames').append(snames);
 		        		        	   
+		        		        	
+		        		        	
 		        		           } // end-success
 		        		        }); // end-ajax
 		        	   
@@ -590,8 +611,6 @@ $.ajax(
 
 $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 	
-// $('#Task_Modal_tstatus_selectbox').on('change', function() {
-
 	var tid = $('#tidhidden').attr('value');
 	var value = $('#Task_Modal_tstatus_selectbox').val();
 	var tname = $('#tnamehidden').attr('value');
@@ -612,3 +631,173 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 	
 });
 
+
+/**
+ * 
+ 날      짜 : 2018. 6. 26.
+ 기      능 : subtask 입력에서 sub task 명을 입력하고 엔터를 치면 작동
+ 작성자명 : 김 정 권
+ */
+$(document).on("keyup","#add_sub_task",function(){
+	 event.preventDefault();
+	 var tid = $('#tidhidden').attr('value');
+	
+	 
+     if (event.keyCode === 13) {
+    	 var subtaskstr = $('#add_sub_task').val();
+    	  $.ajax(
+   		       {
+   		           type : "post",
+   		           url  : "addsubtask.htm",
+   		           data : {
+   		        	   'tid': tid,
+   		        	   'subtaskstr' : subtaskstr
+   		           },
+   		           success : function(rdata){
+   		        	   
+   		        	   console.log('success 성공 테스트 출력 : ' + rdata.result);
+   		        	   
+		        	   // subtask
+		        	   $('#Task_Modal_subtasks').empty();
+   		        	   var div_str = '';
+   		        	   $(rdata.subtasklist).each(function(){
+   		        		   
+   		        		   var ischecked_class = '';
+   		        		   if(this.ischecked == 1){
+   		        			ischecked_class = 'subtask_name subtask_checked subtask_span';
+   		        		   }else{
+		        			ischecked_class = 'subtask_name subtask_unchecked subtask_span';
+   		        		   }
+   		        		   
+   		        		div_str += '<div class="hover_div"><span class="' + ischecked_class + '">' + this.subtask + '</span>';
+   		        		div_str += '<i id="' + this.subtaskid + '" class="fas fa-times subtask_del_btn" style="cursor:pointer"></i></div>';
+   		        		   
+   		        	   });
+   		        	   $('#Task_Modal_subtasks').append(div_str);
+		        	   
+   		        	   
+   		           } // end-success
+   		        }); // end-ajax
+   	
+     } // end - keyCode=13
+});
+
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 26.
+ 기      능 : Task 모달 창내 subtask내 각각의 div를 클릭시 발동
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".hover_div",function(){
+	
+	 var tid = $('#tidhidden').attr('value');
+	
+	// 완료면 미완료로, 미완료시 완료로 토글
+	var span_class = $(this).children('span').attr('class');
+	var subtask_fini_or_unfini = 0;
+	
+		// 완료일 때 발동하는 조건으로 밑줄을 풀게 된다 
+		if(span_class == 'subtask_name subtask_checked subtask_span'){
+			$(this).children('span').attr('class','subtask_name subtask_unchecked subtask_span');
+			subtask_fini_or_unfini = 0;
+		}
+		
+		// 미완료일 때 발동하는 조건으로 밑줄을 치게 된다 
+		else {
+			$(this).children('span').attr('class','subtask_name subtask_checked subtask_span');
+			subtask_fini_or_unfini = 1;
+		}
+	
+	var subtaskid = $(this).children('i').attr('id');
+
+	  $.ajax(
+  		       {
+  		           type : "post",
+  		           url  : "changesubtask.htm",
+  		           data : {
+  		        	   'subtaskid': subtaskid,
+  		        	   'tid' : tid,
+  		        	   'subtask_fini_or_unfini' : subtask_fini_or_unfini
+  		           },
+  		           success : function(rdata){
+  		        	   
+  		        	   console.log('서브테스크 상태 변경 완료');
+  		        	   
+  		           } // end-success
+  		        }); // end-ajax
+	  
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 26.
+ 기      능 : Task 모달 창내 subtask를 삭제
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".subtask_del_btn",function(){
+	
+	 var tid = $('#tidhidden').attr('value');
+	 var subtaskid = $(this).attr('id');
+	 
+	  $.ajax(
+  		       {
+  		           type : "post",
+  		           url  : "deletesubtask.htm",
+  		           data : {
+  		        	   'tid': tid,
+  		        	   'subtaskid': subtaskid
+  		           },
+  		           success : function(rdata){
+  		        	   
+  		        	   // 서브테스크 삭제 성공 -> 서브테스크 목록 다시 불러오기
+  		        	   if(rdata.result == 1){
+  		        		   
+			        	   // subtask
+			        	   $('#Task_Modal_subtasks').empty();
+	   		        	   var div_str = '';
+	   		        	   $(rdata.subtasklist).each(function(){
+	   		        		   
+	   		        		   var ischecked_class = '';
+	   		        		   if(this.ischecked == 1){
+	   		        			ischecked_class = 'subtask_name subtask_checked subtask_span';
+	   		        		   }else{
+			        			ischecked_class = 'subtask_name subtask_unchecked subtask_span';
+	   		        		   }
+	   		        		   
+	   		        		div_str += '<div class="hover_div"><span class="' + ischecked_class + '">' + this.subtask + '</span>';
+	   		        		div_str += '<i id="' + this.subtaskid + '" class="fas fa-times subtask_del_btn" style="cursor:pointer"></i></div>';
+	   		        		   
+	   		        	   });
+	   		        	   $('#Task_Modal_subtasks').append(div_str);
+  		        		   
+  		        	   }
+  		        	   
+  		           } // end-success
+  		        }); // end-ajax
+	  
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 26.
+ 기      능 : 서브테스크 hover시에만 x 표 보이도록 설정
+ 작성자명 : 김 정 권
+ */
+$(document).on("mouseenter",".hover_div",function() {
+    $(this).children('i').css("visibility","visible");
+  }).on("mouseleave",".hover_div",function() {//마우스 호버 아웃 하면 checkbox가 다시 안보이게 함
+	  $(this).children('i').css("visibility","hidden");
+  });
+
+
+
+
+
+
+
+
+	

@@ -15,6 +15,7 @@ import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.AssigneeDAO;
 import com.apollo.task.dao.CommentDAO;
 import com.apollo.task.dao.StarredTaskDAO;
+import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
 import com.apollo.vo.CommentDTO;
@@ -22,6 +23,7 @@ import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.SubtaskDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TidpidDTO;
@@ -475,6 +477,74 @@ public class TaskService {
 		String tname = taskdao.getTname(tid);
 		System.out.println("tname 테스트 출력: " + tname);
 		return tname;
+		
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : sub task 추가 창에서 enter(keycode = 13) 실행시 작동
+	 작성자명 : 김 정 권
+	 */
+	public int addSubTask(SubtaskDTO dto) {
+		
+		System.out.println("addSubTask 서비스 실행");
+		
+		SubtaskDAO subtaskdao = session.getMapper(SubtaskDAO.class);
+		int result = subtaskdao.addSubTask(dto);
+		
+		return result;
+	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : Task 모달 띄울 때에 해당 task의 서브 테스크들을 가져온다 
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<SubtaskDTO> getSubTasks(int tid){
+		
+		System.out.println("getSubTasks 서비스 실행됨");
+		
+		ArrayList<SubtaskDTO> list = new ArrayList();
+		SubtaskDAO subtaskdao = session.getMapper(SubtaskDAO.class);
+		list = subtaskdao.getSubTasks(tid);
+		
+		return list;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 서브테스크의 완료/미완료 여부를 변경한다
+	 작성자명 : 김 정 권
+	 */
+	public int changeSubtask(SubtaskDTO dto) {
+		
+		System.out.println("changeSubtask 서비스 실행됨");
+		
+		SubtaskDAO subtaskdao = session.getMapper(SubtaskDAO.class);
+		int result = subtaskdao.changeSubtask(dto);
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : subtask 를 삭제
+	 작성자명 : 김 정 권
+	 */
+	public int deleteSubtask(int subtaskid) {
+		
+		System.out.println("deleteSubtask 서비스 실행됨");
+		
+		SubtaskDAO subtaskdao = session.getMapper(SubtaskDAO.class);
+		int result = subtaskdao.deleteSubtask(subtaskid);
+		return result;
 		
 	}
 	
