@@ -135,8 +135,7 @@ $(function() {
 
                                var daygap = eday_day - now_day;
                                
-                               console.log('today :' + today)
-                               console.log('daygap :' + daygap)
+
                                
                                // 같은 년도, 같은 달, 과거 일
                                if(daygap < 0) {
@@ -181,16 +180,7 @@ $(function() {
                          } // end - else1
                      }); // assignedtasklist .each 반복종료
                      
-                       ////////////////////////////////////////////////////////////////////
-                       console.log('---------------최종개수---------------')
-                          console.log('unassigned.length : ' + unassigned.length)
-                       console.log('nextweek.length : ' + nextweek.length)
-                       console.log('thisweek.length : ' + thisweek.length)
-                       console.log('completed.length : ' + completed.length)
-                       console.log('expired.length : ' + expired.length)
-                       ////////////////////////////////////////////////////////////////////
-                       
-                       
+                 
                       var ctx = document.getElementById('projectinfo_DonutChart').getContext('2d');
                       var myDoughnutChart = new Chart(ctx, {
                           
@@ -335,9 +325,6 @@ $(function() {
                         var completedcount = 0;
                         var uncompletedcount = 0;
                         
-                        console.log('********************')
-                        console.log(element.length)
-                        console.log('********************')
                         
                            $(element).each(function (index,el) {
                               if((el.tstatusid == 3)||(el.tstatusid == 11)||(el.tstatusid == 15)){
@@ -352,10 +339,6 @@ $(function() {
                         
                      });                     
                      
-                     console.log('------------------')
-                     console.log('완료 : ' + completedtasks)
-                     console.log('미완료 : ' + uncompletedtasks)
-                     console.log('------------------')
                      
                      
                      var ctx = document.getElementById('projectinfo_progressbar').getContext('2d');
