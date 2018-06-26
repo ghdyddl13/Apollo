@@ -733,3 +733,29 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- File 삭제 창 -->
+	<div class="modal fade" id="file_delete_modal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" id="file_delete_dismiss_btn">&times;</button>
+					<h4 class="modal-title">File 삭제</h4>
+				</div>
+				
+				<div class="modal-body" style="text-align:center">
+				<h4>해당 File를 삭제하시겠습니까?<br><h5 style="color:red">(삭제 후 복구 불가능합니다)</h5></h4>					
+
+					<div align="center">
+						<input type="button" class="btn add-btn" id="file_delete_btn" value="삭제">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+						<input type="hidden" id="starbucks" value="">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
