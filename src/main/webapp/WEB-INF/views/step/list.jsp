@@ -30,8 +30,8 @@
           </div>
           <div class="list-header-bottom">
             <div class="list-header-filter">
-              <span class="list-header-filter-status" id="status-button">
-                <span class="list-header-filter-status-tag">STATUS:ALL</span>
+              <span class="list-header-filter-status">
+                <span class="list-header-filter-status-tag" id="status-button">STATUS:ALL</span>
               </span>
               <span class="list-header-filter-people" id="people-button">
                 <span class="list-header-filter-people-tag">TO:ALL</span>

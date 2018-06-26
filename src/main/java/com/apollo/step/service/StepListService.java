@@ -5,14 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apollo.step.dao.StepDAO;
-import com.apollo.vo.MyWorkMemberDTO;
-import com.apollo.vo.MyWorkStepDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.StepListMemberDTO;
 import com.apollo.vo.StepListStepDTO;
@@ -73,12 +72,15 @@ public class StepListService {
 	 기      능 : Step List 첫 페이지 로드
 	 작성자명 : 이 진 우
 	 */
-	public ArrayList<StepListTaskDTO> getListTask(int sid){
+	public ArrayList<StepListTaskDTO> getListTask(int sid, int tstatusid){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd") ;
-		StepDAO dao= sqlsession.getMapper(StepDAO.class);	
-		ArrayList<StepListTaskDTO> tasklist = dao.getStepListTask(sid);
-		ArrayList<StepListMemberDTO> memberlist = dao.getStepListMember(sid);
-		ArrayList<StepListStepDTO> steplist = dao.getStepListStep(sid);
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("sid", sid);
+		map.put("tstatusid" , tstatusid);
+		ArrayList<StepListTaskDTO> tasklist = dao.getStepListTask(map);
+		ArrayList<StepListMemberDTO> memberlist = dao.getStepListMember(map);
+		ArrayList<StepListStepDTO> steplist = dao.getStepListStep(map);
 		
 		for(StepListTaskDTO task: tasklist) {
 			for(StepListStepDTO step :steplist) {// Task가 할당된 step을 집어넣어준다
@@ -116,6 +118,7 @@ public class StepListService {
 		}
 		return tasklist;
 	}
+
 	/**
 	 * 
 	 날      짜 : 2018. 6. 18.
@@ -190,6 +193,7 @@ public class StepListService {
 		date += " "+day;
 		return date;
 	}
+	
 	public void createTask(String tname) {
 		
 	}

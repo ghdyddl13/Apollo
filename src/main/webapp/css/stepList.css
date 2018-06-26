@@ -116,14 +116,16 @@
 }
 /* STATUS FILTER &TAG */
 .list-header-filter{
-  display: block;
+  display: flex;
   padding-bottom: 10px;
+  white-space: nowrap;
+  align-items: center;
 }
 .list-header-filter-status{
   width: auto;
   cursor: pointer;
   border-radius: 9px;
-  display: inline-block;
+  display: flex;
   font-weight: 600;
   height: 20px;
   line-height: 20px;
@@ -131,9 +133,23 @@
   padding: 0 9px;
   user-select: none;
   white-space: nowrap;
+  align-items: center;
 }
 .list-header-filter-status:hover{
   background-color: #dfe6f0;
+}
+.list-header-filter-status-tag{
+	display:block;
+}
+.list-header-filter-status-remove{
+	display:block;
+	height: 16px;
+    width: 16px;
+    cursor: pointer;
+    background: url(../img/index.env=web.locale=.stage=release.sprite-0.png?=jite3ija) 0px -3804px no-repeat;
+}
+.list-header-filter-status-remove:hover{
+
 }
 .list-header-filter-status-selecting{
   display: block;
@@ -147,6 +163,7 @@
   animation: wrike-animation-fadein ease-in .1s;
   box-shadow: 0 0 6px #6f6f6f;
 }
+
 .list-header-filter-status-items{
   display: block;
   padding: 10px 0;
