@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select ts.TID, s.SID,s.SNAME
 		from step s
 		join TASKINSTEP ts on s.SID = ts.SID
-		where ts.TID in (select tid from TASKINSTEP where SID =#{sid})
+		where ts.TID in (select tid from TASKINSTEP where SID =#{sid}) and s.SID !=#{sid}
 	</select>
 	<!-- List페이지의 Task에 뿌려줄 Member을 위한 Member리스트 -->
 	<select id="getStepListMember" resultType="com.apollo.vo.StepListMemberDTO">
@@ -90,6 +90,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where a.TID in (select tid from TASKINSTEP where SID =#{sid})
 	</select>
 
+	<select id="getStepInProject" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
+    	select * from step where pid = #{pid}
+    </select>
 	
 	<select id="getStepNamesbytid" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
 		select * from step where sid in (select sid from taskinstep where tid = #{tid})

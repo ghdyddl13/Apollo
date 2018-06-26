@@ -64,6 +64,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="countTaskInStep" resultType="Integer">
 		select count(*) from taskinstep where tid = #{tid}
 	</select>    
+
+    
+    <select id="getTasksAndTstatusInStep"  parameterType="java.util.List" resultType="com.apollo.vo.TaskDTO">
+		select * from taskinstep tis join task t on tis.tid = t.tid join TSTATUS tt
+		on tt.TSTATUSID  = t.TSTATUSID where 
+		tis.sid in
+		<foreach collection="list" item="step"  open="(" close=")" separator=",">
+			#{step.sid}
+		</foreach>
+    </select>
 	
 	<update id="changeTstatus" parameterType="com.apollo.vo.TidvalueDTO">
 		update task set tstatusid = #{value} where tid = #{tid}
@@ -72,7 +82,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="addTaskInStepInTaskModal" parameterType="com.apollo.vo.TaskInStepDTO">
 		insert into taskinstep values(#{sid}, #{tid})
 	</insert>
-	
 
     <select id ="selectTasksByMidAndSid" parameterType="hashmap" resultType="com.apollo.vo.TaskDTO">
     	select t.*, s.tstatus, s.color 
@@ -81,6 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	where sid= #{sid} and tid in(select tid from assignee 
     	where mid= #{mid}))
     </select>
+
 
 	<select id="getRecentTasks" resultType="com.apollo.vo.TaskDTO">
 		select * from task t join tstatus s 
@@ -96,4 +106,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where tname like '%'||#{input}||'%'
 		and pid in (select pid from pmember where mid =#{mid}) order by tid desc
     </select>
+
+	
+	<delete id="deleteAssignee" parameterType="com.apollo.vo.MidtidDTO">
+    	delete from assignee where mid = #{mid} and tid = #{tid}
+    </delete>
+
 </mapper>

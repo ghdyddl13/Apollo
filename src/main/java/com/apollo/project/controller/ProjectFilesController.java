@@ -24,8 +24,10 @@ public class ProjectFilesController {
 	public String projectFilelist(Model model, HttpServletRequest request, HttpSession session) {
 		session.setAttribute("location", "/files.htm");
 		int pid = (Integer) request.getSession().getAttribute("pid");
+		System.out.println("pid : " + pid);
 		try {
 			ArrayList<FileDTO> filedto = fileservice.selectFileListByProjectId(pid);
+			System.out.println("filedto : " + filedto);
 			model.addAttribute("f", filedto);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

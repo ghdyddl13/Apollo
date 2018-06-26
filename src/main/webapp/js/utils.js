@@ -90,8 +90,8 @@ $(document).on("click",".profile-img-container",function(evt){
         data:{mid:mid},
         dataType:"json",
         success:function(data) {
-        	var img = (data.profileinfo.image)?data.profileinfo.image:"img/user_image.png";
-            $('#profile-modal-img').attr("src",img);
+            var image = (data.profileinfo.image)?data.profileinfo.image :"img/user_image.png"
+            $('#profile-modal-img').attr("src",image);
             $('#profile-modal-mname').text(data.profileinfo.mname)
             $('#profile-modal-mid').text(data.profileinfo.mid);
             $('#profile-modal-pnum').text(data.profileinfo.pnum);

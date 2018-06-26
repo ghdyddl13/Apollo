@@ -183,7 +183,11 @@ function makeTimelineTable(tasks){
 	
 		var row = jQuery("<tr>");
 		var td_no = jQuery("<td>",{"text": no++,"align":"center"}) 
-		var td_tname = jQuery("<td>",{"text": item.tname,"class":"timeline-task-edit","id":"t" + item.tid})
+		var td_tname = jQuery("<td>",{"text": item.tname,"class":"timeline-task-edit Task_RUD_Modal",
+														 "id":"t" + item.tid,
+														 "data-toggle" : "modal",
+														 "data-target" : "#Task_RUD_Modal"
+														 })
 		var td_tstatus = jQuery("<td>",{"text": item.tstatus,
 										"css":{"background-color":item.color,
 											   "color":"white",

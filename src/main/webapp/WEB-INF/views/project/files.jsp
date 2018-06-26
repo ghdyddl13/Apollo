@@ -7,13 +7,22 @@
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include> 
 
 <style>
+	.files_Table{
+	  height:400px;
+      margin: 1px;
+ 	  padding:10px;
+  	  
+	}
+	
+	
+	
 	th{
 		background-color:lightgray;
 	}
 </style>
 
 
-<div>
+<div class="files_Table">
 
 	<table>
 		<thead>

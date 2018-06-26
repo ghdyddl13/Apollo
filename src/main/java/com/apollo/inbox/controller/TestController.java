@@ -12,10 +12,10 @@ public class TestController {
 
 	
 
-	@RequestMapping("/table.htm")
+/*	@RequestMapping("/table.htm")
 	public String projectTable() {
 		return "project/table";
-	}
+	}*/
 	
 
 	@RequestMapping("/report.htm")
