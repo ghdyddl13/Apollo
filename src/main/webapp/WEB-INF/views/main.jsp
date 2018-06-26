@@ -28,6 +28,10 @@
 <link rel="stylesheet" href="dist/frappe-gantt.css" />
 <script src="dist/frappe-gantt.js"></script>
 
+
+<!-- Board관련 script-->
+<script type="text/javascript" src="js/stepBoard.js"></script>
+
 <!-- 공통 CSS -->
 <link href="css/common.css" type="text/css" rel="stylesheet">
 
@@ -55,6 +59,9 @@
 <!-- STEP LIST JAVASCRIPT_ JW-->
 <script type="text/javascript" src="js/stepInsideHeader.js"></script>
 <script type="text/javascript" src="js/steplist.js?q=123"></script>
+
+<!-- Board관련 css -->
+<link rel="stylesheet" href="css/stepBoard.css" /> 
 
 <title>Project Apollo</title>
 </head>
