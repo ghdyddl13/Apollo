@@ -73,5 +73,5 @@ public interface MemberDAO {
 	 기      능 : 비밀번호 변경
 	 작성자명 : 김 래 영
 	 */
-	public int updatePwd(int mid);
+	public int updatePwd(MemberDTO memberdto);
 }

@@ -375,11 +375,8 @@ public class MemberController {
 	 */
 	@RequestMapping("/updatememberinfo.htm")
 	public View updateMemberInfo(HttpServletRequest request, Model model, HttpSession session) {
-		System.out.println("개인정보수정 controller");
-		
 		String mid = (String) request.getSession().getAttribute("mid");
 		model.addAttribute("mid", mid);
-		System.out.println("mid : " + mid);
 		
 		MemberDTO updatememberinfo = null;
 		try {
@@ -399,7 +396,6 @@ public class MemberController {
 	 */
 	@RequestMapping(value="/updatemember.htm", method=RequestMethod.POST)
 	public View updateMemberInfo(MemberDTO memberdto, Model model) {
-		System.out.println("개인정보수정 controller");
 		int updatemember = 0;
 		try {
 			updatemember = service.updateMemberInfo(memberdto);
@@ -409,10 +405,61 @@ public class MemberController {
 		}
 		return jsonview;
 	}
-	
-	@RequestMapping(value="/updatepwd.htm", method=RequestMethod.POST)
-	public View updatePwd(int mid, Model model) {
-		
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 개인정보수정 modal 에서 인증키 확인
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value = "/updatekeycheck.htm", method = RequestMethod.POST)
+	public View updatekeycheck(String apollokey, Model model) {
+		int result = service.keycheck(apollokey);
+		if (result > 0) {
+			System.out.println("키 인증 성공");
+			model.addAttribute("result", "success");
+		} else {
+			System.out.println("키 인증 실패");
+			model.addAttribute("result", "fail");
+		}
 		return jsonview;
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 개인정보수정 modal 에서 비밀번호 변경
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/updatepwd.htm", method=RequestMethod.POST)
+	public View updatePwd(String cpwd, String upwd, HttpServletRequest request, Model model, HttpSession session) {
+		String mid = (String) request.getSession().getAttribute("mid");
+		model.addAttribute("mid", mid);
+		
+		MemberDTO memberdto = null;
+		int result = 0;
+		int count =0;
+		try {
+			//member 정보 불러오기
+			memberdto = service.updateMemberInfo(mid);
+			
+			//암호화된 비밀번호를 DB에서 불러오기
+			if(bCryptPasswordEncoder.matches(cpwd, memberdto.getPwd())) {
+				result = 1; //현재 비밀번호와 DB 비변이 일치할 경우 1을 리턴
+			}else {
+				result = 0; //불일치할 경우 0 리턴
+			}
+			model.addAttribute("result", result);
+	
+			//비밀번호 업데이트하기 
+			if(result == 1) { // 현재 비밀번호와 DB에 저장된 비밀번호가 일치할 경우 
+				memberdto.setPwd(this.bCryptPasswordEncoder.encode(upwd));
+				count = service.updatePwd(memberdto);
+				System.out.println("비밀번호 변경 완료");
+			}
+			model.addAttribute("count", count);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
 }

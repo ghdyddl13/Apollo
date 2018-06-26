@@ -728,7 +728,7 @@
 							<br>
 							<div>
 								<div id="edit-profile-img-content">
-									<img id="edit-profile-modal-img" src="">
+									<img name="image" id="edit-profile-modal-img" src="">
 								</div>
 								<br>
 								<div class="edit-profile-all-title">
@@ -745,7 +745,7 @@
 								<div class="edit-profile-all-title">
 									<div class="edit-profile-title">인증키</div>
 									<input type="text" name="apollokey" id="edit-profile-apollokey">
-									<input class="btn" type="button" value="인증확인">
+									<input class="btn" id="profile-apollokey-check" type="button" value="인증확인">
 								</div>
 								<br>
 								<div class="edit-profile-all-title">
@@ -764,7 +764,6 @@
 								</div>
 								<br>
 							</div>
-							<br>
 						</div>
 						<div align="center">
 							<input type="button" class="btn add-btn"
@@ -787,11 +786,11 @@
 							<input type="password" name="pwd" id="edit-profile-upwd">
 							<br>
 							<div class="edit-profile-title">변경 비밀번호 확인</div>
-							<input type="password" name="pwd" id="edit-profile-upwd2">
+							<input type="password" name="pwd2" id="edit-profile-upwd2">
 							<br>
 						</div>
 						<div align="center">
-							<input type="button" class="btn add-btn" id="update-edit-pwd-btn"
+							<input type="button" class="btn add-btn" id="update-pwd-btn"
 								value="수정">&nbsp;&nbsp;&nbsp; <input type="button"
 								class="btn cancel-btn" data-dismiss="modal" value="취소">
 						</div>

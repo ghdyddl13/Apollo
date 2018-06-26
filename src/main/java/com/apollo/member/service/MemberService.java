@@ -199,11 +199,11 @@ public class MemberService {
 	 기      능 : 비밀번호 변경
 	 작성자명 : 김 래 영
 	 */
-	public int updatePwd(int mid) {
+	public int updatePwd(MemberDTO memberdto) {
 		int result = 0;
 		try {
 			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
-			result = dao.updatePwd(mid);
+			result = dao.updatePwd(memberdto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
