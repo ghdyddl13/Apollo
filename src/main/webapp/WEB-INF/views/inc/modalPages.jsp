@@ -722,13 +722,14 @@
 				<h4 class="modal-title">개인정보수정</h4>
 			</div>
 			<div class="modal-body">
-				<form id="edit-profile-form" method="post">
+				<form id="edit-profile-form" method="post" enctype="multipart/form-data">
 					<fieldset>
 						<div class="edit-profile-part1">
 							<br>
 							<div>
 								<div id="edit-profile-img-content">
-									<img name="image" id="edit-profile-modal-img" src="">
+									<!-- <img name="image" id="edit-profile-modal-img" src=""> -->
+									<input type="file" name="image" id="edit-profile-image">
 								</div>
 								<br>
 								<div class="edit-profile-all-title">
@@ -802,40 +803,4 @@
 </div>
 
 
-<!-- 사원목록 Modal -->
-<div class="modal fade" id="memberlist" role="dialog">
-	<div class="modal-dialog modal-memberlist-dialog">
-		<div class="modal-content modal-memberlist-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">사원목록</h4>
-			</div>
-			<div class="modal-body container-fluid">
-				<form id="memberlist-form" method="post">
-					<fieldset>
-						<div class="edit-profile-part1">
-							<br>
-							<div>
-								<table>
-									<thead>
-										<tr>
-											<th>No</th>
-											<th>이름</th>
-											<th>직위</th>
-											<th>이메일</th>
-											<th>핸드폰번호</th>
-										</tr>
-									</thead>
-									<tbody>
-									
-									</tbody>
-								</table>
-							</div>
-							<br>
-						</div>
-					</fieldset>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
+

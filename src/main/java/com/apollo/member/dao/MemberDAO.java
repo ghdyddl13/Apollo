@@ -74,4 +74,11 @@ public interface MemberDAO {
 	 작성자명 : 김 래 영
 	 */
 	public int updatePwd(MemberDTO memberdto);
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 같은 인증키를 가진 사원목록 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<MemberDTO> selectMemberList(String mid);
 }

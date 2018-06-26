@@ -48,6 +48,8 @@
 <link href="css/stepList.css" type="text/css" rel="stylesheet">
 <!-- Header Edit Profile_ RY -->
 <link href="css/profileheader.css" type="text/css" rel="stylesheet">
+<!-- Header Member List_ RY -->
+<link href="css/memberlist.css" type="text/css" rel="stylesheet">
 <title>Project Apollo</title>
 </head>
 <body>

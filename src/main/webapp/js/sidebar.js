@@ -59,16 +59,17 @@ $(function() {
 	            	 if(data.stepresult > 0){
 						alert("스텝 생성이 완료되었습니다!");
 						var step = makeSideStep(data.stepDTO);
-						//console.log(step);
+						console.log(step);
 						
 						if($('#insert-step-fid').val() == "") {
-							(step.sname=="백로그")?$(step).prependTo("#p-dir"+step.pid):$(step).appendTo("#p-dir"+step.pid);
+							(data.stepDTO.sname=="백로그")?$(step).prependTo("#p-dir"+step.pid):$(step).appendTo("#p-dir"+data.stepDTO.pid);
 							$(".close").click();
 						} else {
-							step.appendTo("#f-dir"+step.fid);
+							$(step).appendTo("#f-dir"+data.stepDTO.fid);
 							$(".close").click();
 						}
 					 }else {
+						 
 						 alert("스텝 생성에 실패했습니다");
 						 $(".close").click();
 					 }	
@@ -497,17 +498,17 @@ $(function() {
                 success:function(data){
                    if(data.folderresult > 0){
                    alert("폴더 생성이 완료되었습니다!");
-                   var folder = makeSideFolder(data.folderDTO);
+                   makeSideFolder(data.folderDTO);
                    //console.log(folder);
                    $(".close").click();
                 }else {
                    alert("폴더 생성에 실패했습니다");
                 }   
-                $('.add-step-name').val("");
+                $('#add-folder-name').val("");
                 $('.close').click();
                
                 } // end - success
-
+		 		
              	,error:function(error){
              		console.log(error);
              	
@@ -849,8 +850,6 @@ function makeSideFolder(folder) {
     $(a).prepend(span).appendTo(wrapper_div);
     $(div).appendTo(wrapper_div);
     $(wrapper_div).appendTo($('#p-dir'+folder.pid));
-    
-    return a;
 }
 
 /**

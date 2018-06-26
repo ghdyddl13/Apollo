@@ -1,6 +1,9 @@
 package com.apollo.vo;
 
 import java.sql.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class MemberDTO {
 
@@ -71,6 +74,16 @@ public class MemberDTO {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+	
+	//파일 업로드를 위한 추가
+	private String files;
+    public String getFiles() {
+		return files;
+	}
+	public void setFiles(String files) {
+		this.files = files;
+	}
+	
 	@Override
 	public String toString() {
 		return "MemberDTO [mid=" + mid + ", mname=" + mname + ", pwd=" + pwd + ", rday=" + rday + ", pnum=" + pnum

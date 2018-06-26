@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.apollo.member.dao.AuthkeyDAO;
 import com.apollo.member.dao.MemberDAO;
@@ -162,6 +163,8 @@ public class MemberService {
 	 */
 	public MemberDTO updateMemberInfo(String mid) {
 		MemberDTO result = null;
+		
+			
 		try {
 			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 			result = dao.getProfileInfoMember(mid);
@@ -192,7 +195,6 @@ public class MemberService {
 		
 	}
 	
-	
 	/**
 	 * 
 	 날      짜 : 2018. 6. 25.
@@ -207,9 +209,25 @@ public class MemberService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return result;
-		
 	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 같은 인증키를 가진 사원목록 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<MemberDTO> selectMemberList(String mid) {
+		ArrayList<MemberDTO> result = null;
+		try {
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			result = dao.selectMemberList(mid);
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		return result;
+	}
+	
 	
 }

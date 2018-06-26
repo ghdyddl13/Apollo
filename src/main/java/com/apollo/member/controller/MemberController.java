@@ -7,14 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.View;
 
 import com.apollo.member.service.MemberService;
 import com.apollo.vo.AuthkeyDTO;
 import com.apollo.vo.MemberDTO;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
@@ -394,15 +401,39 @@ public class MemberController {
 	 기      능 : 개인정보수정
 	 작성자명 : 김 래 영
 	 */
-	@RequestMapping(value="/updatemember.htm", method=RequestMethod.POST)
-	public View updateMemberInfo(MemberDTO memberdto, Model model) {
+	@RequestMapping(value = "/updatemember.htm", method = RequestMethod.POST)
+	public View updateMemberInfo(MemberDTO memberdto, Model model, MultipartHttpServletRequest multi) {
 		int updatemember = 0;
-		try {
-			updatemember = service.updateMemberInfo(memberdto);
-			model.addAttribute("updatemember", updatemember);
-		} catch (Exception e) {
-			e.printStackTrace();
+		String uploadPath = "/upload/";
+
+		File dir = new File(uploadPath);
+
+		if (!dir.isDirectory()) {
+			dir.mkdirs();
 		}
+
+		Iterator<String> iter = multi.getFileNames();
+		while (iter.hasNext()) {
+			String uploadfilename = iter.next();
+
+			MultipartFile mfile = multi.getFile(uploadfilename);
+			String originalfilename = mfile.getOriginalFilename();
+			String savefilename = originalfilename;
+
+			if (originalfilename != null && !savefilename.equals("")) {
+				if (new File(uploadPath + savefilename).exists()) {
+					savefilename = savefilename + "_" + System.currentTimeMillis();
+				}
+				
+				try {
+					mfile.transferTo(new File(uploadPath + savefilename));
+					updatemember = service.updateMemberInfo(memberdto);
+					model.addAttribute("updatemember", updatemember);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} // if end
+		} // while end
 		return jsonview;
 	}
 	/**
@@ -460,6 +491,30 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		return jsonview;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 같은 인증키를 가진 사원목록 가져오기
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping("/selectmemberlist.htm")
+	public String selectMemberList(HttpServletRequest request, Model model, HttpSession session) {
+		String mid = (String) request.getSession().getAttribute("mid");
+		model.addAttribute("mid", mid);
+		System.out.println("mid : " + mid);
+		
+		ArrayList<MemberDTO> memberlist = null;
+		try {
+			memberlist = service.selectMemberList(mid);
+			model.addAttribute("memberlist", memberlist);
+			System.out.println(memberlist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "memberlist";
+		
 	}
 	
 }

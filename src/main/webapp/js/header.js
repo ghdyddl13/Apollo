@@ -69,6 +69,19 @@ $(function() {
 		})
 	});
 	
+	//// 헤더 stream 페이지
+	$("#header-memberlist").click(function(evt){
+		$.ajax({
+			url:"selectmemberlist.htm",
+			dataType:"html",
+			success:function(data){
+				$("#main-box").empty();
+				$("#main-box").append(data);
+				
+			}
+		})
+	});
+	
 	// 헤더에서 우상단 개인정보수정 클릭시 실행되는 함수
 	// 헤더 개인정보수정 Modal
 	$('#header-profile-edit').click(function(evt) {
@@ -80,14 +93,15 @@ $(function() {
 			data:{mid:mid},
 			dataType:"json",
 			success:function(data) {
-				var image = (data.updatememberinfo.image)?data.updatememberinfo.image :"img/user_image.png"
-				$('#edit-profile-modal-img').attr("src",image);
+				//var image = (data.updatememberinfo.image)?data.updatememberinfo.image :"img/user_image.png"
+				//$('#edit-profile-modal-img').attr("src",image);
 				$('#edit-profile-mname').val(data.updatememberinfo.mname);
 				$('#edit-profile-mid').val(data.updatememberinfo.mid);
 				$('#edit-profile-apollokey').val(data.updatememberinfo.apollokey);
 				$('#edit-profile-pnum').val(data.updatememberinfo.pnum);
 				$('#edit-profile-deptname').val(data.updatememberinfo.deptname);
 				$('#edit-profile-position').val(data.updatememberinfo.position);
+				$('#edit-profile-image')
 				
 			} // end - success
 		
