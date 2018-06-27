@@ -157,11 +157,9 @@
 			<c:choose>
 				<c:when test="${fn:substring(commentlist.cmtmtime,0,10) eq today}">
 					<div class="inbox-list"><div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
-						<!-- <div id="archiveupdate" style="cursor: pointer;">
-							<img src="img/archive.png" width="18px" height="18px">
-						</div> -->
-						<div class ="yyTask_RUD_Modal"><div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;"><span class="inbox-span1-color"><span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div></div>&#60; 
-						<span class="inbox-span2">${commentlist.pname}</span>
+						<div class ="yyTask_RUD_Modal"><div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;"><span class="inbox-span1-color">
+						<span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div></div>
+						<span class="inbox-span2"><span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span>${commentlist.pname}</span>
 						<span class="inbox-span3">
 						<c:choose>
 							<c:when test="${inbox eq 'archive'}">
@@ -178,7 +176,8 @@
 							</c:otherwise>
 						</c:choose>
 						&nbsp;&nbsp;&nbsp;${commentlist.cmtmtime}</span>
-						<div class="inbox-div4"><img src="img/user.png" width="30px" height="30px">&nbsp;&nbsp;&nbsp;${commentlist.mname} : ${commentlist.comments}</div>
+						<div class="inbox-div4"><img src="img/user.png" width="30px" height="30px">&nbsp;&nbsp;&nbsp;
+						<c:if test="${commentlist.cmtkind eq 0}">${commentlist.mname} : </c:if>${commentlist.comments}</div>
 					</div>
 					</div>
 					<hr class="inbox-hr">
@@ -191,8 +190,8 @@
 						</center>
 					</c:if>
 					<div class="inbox-list"><div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
-						<div class ="yyTask_RUD_Modal"><div><span class="inbox-span1-color"><span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div></div>&#60; 
-						<span class="inbox-span2" >${commentlist.pname}</span> 
+						<div class ="yyTask_RUD_Modal"><div><span class="inbox-span1-color"><span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div></div>
+						<span class="inbox-span2" ><span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span> ${commentlist.pname}</span> 
 						<span class="inbox-span3">
 						<c:choose>
 							<c:when test="${inbox eq 'archive'}">

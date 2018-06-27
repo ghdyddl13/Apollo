@@ -23,6 +23,11 @@
 	margin-left: 0.66%;
 }
 
+
+.inbox-section-left::-webkit-scrollbar { 
+    display: none; 
+}
+
 .inbox-section-right {
 	float: left;
 	margin-right: 0.66%;
@@ -51,7 +56,6 @@
 
 .yyTask_RUD_Modal{
 	margin-left: 10px;
-	margin-right: 10px;
 	font-size: 13px;
 	margin-bottom:0px;
 	float: left;
@@ -71,6 +75,7 @@
 	margin-right: 10px;
 	margin-bottom:0px;
 	color:#717171;
+	font-size: 11px;
 }
 .inbox-span3{
 	float: right;
