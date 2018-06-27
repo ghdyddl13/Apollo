@@ -232,9 +232,9 @@ function getSearchResult(){
  	}
 	 var div =jQuery("<div>",{"class":"search-item-box search-item-project row" ,"id":"srch-p"+project.pid});  
 	 var projecticon= jQuery("<div>",{"class":"search-item-left col-sm-2"});
-	 var span = jQuery("<b>",{"text":methodology, "css":{"font-size":"20spx","color":"white"}});
+	 var b = jQuery("<b>",{"text":methodology, "css":{"font-size":"20px","color":"white"}});
 	 var iconwrapper = jQuery("<div>",{"class":"search-item-left-icon "});
-	 $(iconwrapper).append(span).appendTo(projecticon);
+	 $(iconwrapper).append(b).appendTo(projecticon);
 	 var project_info_div= jQuery("<div>",{"class":"search-item-right col-sm-10"});
 	 var project_name_div= jQuery("<div>",{"class":"search-info-div","text":project.pname});
 	 var project_status_div= jQuery("<div>",{"class":"search-info-div","text":pstatus,"css":{"color":pstatuscolor}});
