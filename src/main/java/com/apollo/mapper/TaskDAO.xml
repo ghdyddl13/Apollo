@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <if test="detail != null">detail=#{detail},</if>
       <if test="importance != 0">importance=#{importance},</if>
       <if test="tstatusid != 0">tstatusid=#{tstatusid},</if>
-     	ctime=TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS')
+     	ctime= sysdate 
     	where tid= #{tid}
     </update>
     <insert id="insertBoardTask" parameterType="com.apollo.vo.TaskDTO">

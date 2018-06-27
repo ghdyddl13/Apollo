@@ -36,4 +36,15 @@ public class ProjectFilesController {
 		return "project/files";
 	}
 	
+	@RequestMapping("/filesDeleteByFileId.htm")
+	public String filesDeleteByFileId(int fileid) {
+		System.out.println("파일 컨트롤러 들어왔어요 : " + fileid);
+		try {
+			fileservice.filesDeleteByFileId(fileid);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "redirect:/files.htm";
+	}
+	
 }

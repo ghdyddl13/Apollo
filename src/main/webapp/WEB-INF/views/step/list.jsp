@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html >
 <script type="text/javascript" src="js/task.js"></script>
 <script type="text/javascript" src="js/stepInsideHeader.js"></script>    
+
 <div class="main-body">
   <div class="main-section-left" id="left">
     <div class="main-section-left-container">

@@ -27,4 +27,15 @@ public class ProjectFilesService {
 		}
 		return result;
 	}
+	
+	public int filesDeleteByFileId(int fileid) {
+		int result = 0;
+		try {
+			FileDAO dao = sqlsession.getMapper(FileDAO.class);
+			result = dao.filesDeleteByFileId(fileid);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
 }

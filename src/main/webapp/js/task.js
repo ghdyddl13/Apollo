@@ -291,11 +291,9 @@ $(document).on("click",".task_page_delete_step_btn",function(){
  작성자명 : 김 정 권
  */
 $('#Task_Modal_tstatus_selectbox').on('change', function() {
-
 	var tid = $('#tidhidden').attr('value');
 	var value = $('#Task_Modal_tstatus_selectbox').val();
 	var tname = $('#tnamehidden').attr('value');
-	
 	  $.ajax(
 		       {
 		           type : "post",
@@ -389,6 +387,7 @@ $(document).on("click",".addbtn_taskinstep",function(){
 		        	   'sid': sid,
 		        	   'tid': tid
 		           },
+		           
 		           success : function(rdata){
 		        	   
 		        	   console.log(rdata.result);
