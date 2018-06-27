@@ -277,6 +277,12 @@ public class TaskController {
 		return jsonview;
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 일반 채팅시 코멘트 insert + receiver에 할당자 고려하여 insert
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping("/insertcomment.htm")
 	public String insertComment(CommentDTO commentdto, HttpSession session){
 		System.out.println(commentdto.getComments());
@@ -697,5 +703,53 @@ public class TaskController {
 		return jsonview;
 	
 	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 테스크 모달 내부에서 @ 로 같은 프로젝트 사람들 popup div에 띄워야 할 때 쓰는 함수
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/getsameprojectmembersintaskmodal.htm")
+	public View getSameprojectMembersInTaskmodal(int pid, Model map){
+	
+		System.out.println("getSameprojectMembersInTaskmodal 컨트롤러 실행됨");
+		
+		ArrayList<MemberDTO> sameprojectmembers = new ArrayList<MemberDTO>();
+		sameprojectmembers = projectinfoservice.getProjectMembers(pid);
+        map.addAttribute("sameprojectmembers", sameprojectmembers);
+		
+		return jsonview;
+	
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 일반 채팅 입력시 comment insert + receiver insert (할당자 고려하여) 
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/insertcommentandreceiver.htm")
+	public View insertCommentAndReceiver(int tid, String comments, HttpSession session, Model map){
+		
+		System.out.println("insertCommentAndReceiver 컨트롤러 실행");
+		String mid=(String)session.getAttribute("mid");
+		
+		CommentDTO dto = new CommentDTO();
+		dto.setMid(mid);
+		dto.setTid(tid);
+		dto.setComments(comments);
+		dto.setCmtkind(0);
+		
+		int result = service.insertInboxComment(dto);
+		map.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	
+	
+	
+	
 	
 }

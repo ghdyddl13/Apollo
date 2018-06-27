@@ -34,6 +34,9 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   var tid = rdata.task.tid;
 			        	   $('#tidhidden').attr('value', tid);
 			        	   
+			        	   var pid = rdata.task.pid;
+			        	   $('#pidhidden').attr('value', pid);
+			        	   
 			        	   // tname
 			        	   $('#Task_Modal_tname').empty();
 			        	   $('#tnamehidden').attr('value', rdata.task.tname);
@@ -872,7 +875,6 @@ var delay = (function(){
  기      능 : 코멘트 생성
  작성자명 : 김 정 권
  */
-
 var getCommentAndMemberlist = (function (){
 	   
 	var tid = $('#tidhidden').attr('value');
@@ -912,4 +914,123 @@ var getCommentAndMemberlist = (function (){
 		           } // end-success
 		        }); // end-ajax
 	   
+});
+
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 27.
+ 기      능 : 테스크 모달 내 코멘트 입력 부분(인풋태그)에서 작동하는 함수
+ 작성자명 : 김 정 권
+ */
+$(document).on("keyup","#comment_input_box_in_taskmodal",function(){
+
+	
+  // @ 쳤을 시
+  if (event.keyCode === 50) {
+
+	  var pid = $('#pidhidden').attr('value');
+    $.ajax(
+           {
+               type : "post",
+               url  : "getsameprojectmembersintaskmodal.htm",
+               data : {
+                 'pid': pid
+               },
+               success : function(rdata){
+                 
+            	 var popupdiv_str = '';
+                 $(rdata.sameprojectmembers).each(function(){
+                  
+                  popupdiv_str += '<div class="wrapper_comment popup_mid" id="' + this.mid + '">';	 
+//                popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/' + this.image + '"/>';	
+                  popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/프로필사진테스트.jpg"/>';	
+                  popupdiv_str += '<div class="each_comment">';	
+                  popupdiv_str += '<div class="first_row">' + this.mname + '</div>';	
+                  popupdiv_str += '<div class="second_row">' + this.mid + '</div>';	
+                  popupdiv_str += '</div></div>';
+                  
+                 });
+
+                 
+                 $('#project_member_popup_div').empty();
+                 $('#project_member_popup_div').append(popupdiv_str);
+                 let popupdiv_width = $('#project_member_popup_div').width();
+                 let popupdiv_height = $('#project_member_popup_div').height();
+                 
+                 let position = $('#comment_input_box_in_taskmodal').position();
+                 $('#project_member_popup_div').css("left",position.left-popupdiv_width-29);
+                 $('#project_member_popup_div').css("top",position.top-popupdiv_height+23);
+                 $("#project_member_popup_div").css("background-color","#FFFFFF")
+                 $('#project_member_popup_div').css("display","block");
+                 
+               } // end-success
+            }); // end-ajax
+   
+
+  } // end - keyCode=13
+
+  
+  // @ 아닐 시
+  if(event.keyCode != 50){
+	  
+	    $('#project_member_popup_div').css("display", "none");
+	    $('#project_member_popup_div').css("left", "-20000");
+	    $('#project_member_popup_div').css("top", "-20000");
+  } // end - != 50
+  
+  
+  // 엔터키 칠 시
+  if (event.keyCode === 13) {
+	  
+	   var tid = $('#tidhidden').attr('value');
+	   var comments = $('#comment_input_box_in_taskmodal').val();
+
+	   $.ajax(
+		       {
+		           type : "post",
+		           url  : "insertcommentandreceiver.htm",
+		           data : {
+		        	   'tid': tid,
+		        	   'comments' : comments
+		           },
+		           success : function(rdata){
+		        	   console.log('success 성공 테스트 출력 : ' + rdata);
+		        	   
+			           // comment
+			           getCommentAndMemberlist();
+			           $('#comment_input_box_in_taskmodal').val('');
+			           
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	    
+
+  } // end - keyCode=13
+
+});
+
+
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 27.
+ 기      능 : 테스크 모달 내 pop up div 내에 있는 사람을 클릭하면 발생하는 일
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".popup_mid",function(){
+	
+    $('#project_member_popup_div').css("display", "none");
+    $('#project_member_popup_div').css("left", "-20000");
+    $('#project_member_popup_div').css("top", "-20000");
+    
+	var mid = $(this).attr('id');
+	alert('제대로 mid 가져옴? : ' + mid);
+	
+	$('#comment_input_box_in_taskmodal').val()
+	
+	
+	
 });

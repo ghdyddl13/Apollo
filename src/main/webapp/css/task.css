@@ -142,3 +142,33 @@ assignee_in_taskmodal td{
 .second_row{
  	margin-top: 5px;
 }
+
+#comment_input_box_in_taskmodal{
+	border:none;
+	width: 500px
+}
+
+#comment_input_box_in_taskmodal:focus {
+  outline: none;
+}
+
+#project_member_popup_div{
+  display: none;
+  position: absolute;
+  left : -20000px;
+  top : -20000px;
+  float: left;
+}
+
+.popup_mid{
+	cursor: pointer;
+	padding : 10px;
+}
+
+.popup_mid:hover{
+	cursor: pointer;
+	background-color: rgba(163, 172, 182, 0.2);
+}
+
+
+

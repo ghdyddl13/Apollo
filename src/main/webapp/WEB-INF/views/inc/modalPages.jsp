@@ -374,12 +374,12 @@
                 
 					<div class="modal-title">Comment</div><br />
 					<div id="Task_Modal_comments">여기는 코멘트 들이 추가되는 공간입니다
-					<br>
 					</div>
-					
-					<input type="text" placeholder="코멘트 입력.." class="">
-					<input id="Task_Modal_enter_comments" type="button" value="전송">
-					
+					<hr>
+					<div id="project_member_popup_div"></div>
+					<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter.." class="">
+							
+					<input type="hidden" id="pidhidden" value="">					
 					<input type="hidden" id="tidhidden" value="">
 					<input type="hidden" id="tnamehidden" value="">
 					<input type="hidden" id="origin_sday" value="">
