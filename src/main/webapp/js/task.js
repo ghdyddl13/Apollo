@@ -10,8 +10,39 @@ $( ".date_sday" ).datepicker({
     buttonImageOnly: true,
     dateFormat: 'yy-mm-dd',
     onSelect: function(dateText, inst) {
+    	var origin_date = $('#origin_sday').val();
         var date = $(this).val();
     	var tid = $('#tidhidden').attr('value');
+    	
+    	var sday_year = parseInt(date.substring(0,4));
+    	var sday_month = parseInt(date.substring(5,7));
+    	var sday_day = parseInt(date.substring(8,10));
+    	console.log('테스트 sday : ' + sday_year + '/' + sday_month + '/' + sday_day);
+    	
+    	var eday = $('#Task_Modal_eday').val();
+    	var eday_year = parseInt(eday.substring(0,4));
+    	var eday_month = parseInt(eday.substring(5,7));
+    	var eday_day = parseInt(eday.substring(8,10));
+    	console.log('테스트 eday : ' + eday_year + '/' + eday_month + '/' + eday_day);
+    	
+    	
+    	if(eday_year < sday_year){
+    		alert('시작일을 종료일 이후로 설정할 수 없습니다');
+    		$('#Task_Modal_sday').val(origin_date);
+    		return;
+    	}
+    	
+    	if(eday_month < sday_month) {
+    		alert('시작일을 종료일 이후로 설정할 수 없습니다');
+    		$('#Task_Modal_sday').val(origin_date);
+			return;
+		}
+    	
+    	if(eday_day < sday_day) {
+    		alert('시작일을 종료일 이후로 설정할 수 없습니다');
+    		$('#Task_Modal_sday').val(origin_date);
+			return;
+		} 
         
         $.ajax(
  		       {
@@ -23,6 +54,11 @@ $( ".date_sday" ).datepicker({
  		           },
  		           success : function(rdata){
  		        	   
+ 		        	   $('#origin_sday').val(date);
+ 		        	   
+		        	   // comment
+		        	   getCommentAndMemberlist();
+		        	   
  		           } // end-success
  		        }); // end-ajax
         
@@ -43,6 +79,7 @@ $( ".date_eday" ).datepicker({
     buttonImageOnly: true,
     dateFormat: 'yy-mm-dd',
     onSelect: function(dateText, inst) {
+    	var origin_date = $('#origin_eday').val();
     	var date = $(this).val();
     	var tid = $('#tidhidden').attr('value');
     	
@@ -60,16 +97,19 @@ $( ".date_eday" ).datepicker({
     	
     	if(eday_year < sday_year){
     		alert('종료일을 시작일 이전으로 설정할 수 없습니다');
+    		$('#Task_Modal_eday').val(origin_date);
     		return;
     	}
     	
     	if(eday_month < sday_month) {
 			alert('종료일을 시작일 이전으로 설정할 수 없습니다');
+			$('#Task_Modal_eday').val(origin_date);
 			return;
 		}
     	
     	if(eday_day < sday_day) {
 			alert('종료일을 시작일 이전으로 설정할 수 없습니다');
+			$('#Task_Modal_eday').val(origin_date);
 			return;
 		} 
     	
@@ -82,15 +122,14 @@ $( ".date_eday" ).datepicker({
  		        	   'eday' : date
  		           },
  		           success : function(rdata){
- 		        	   
+ 		        	  $('#origin_eday').val(date);
+ 		        	  
+		        	   // comment
+		        	   getCommentAndMemberlist();
+		        	   
+ 		        	  
  		           } // end-success
  		        }); // end-ajax
         
    }
 });
-
-
-
-
-
-

@@ -365,7 +365,7 @@
                 <hr />
                 
 				<div class="modal-title">
-					<p>상세설명&nbsp&nbsp<img id="task_detail_status" src=""></p>
+					<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
 					<div style="text-align:center">
 					<textarea id="Task_Modal_detail" rows="7%" cols="65%" name="detail" placeholder="내용을 입력하세요"></textarea>
 					</div>
@@ -375,15 +375,16 @@
 					<div class="modal-title">Comment</div><br />
 					<div id="Task_Modal_comments">여기는 코멘트 들이 추가되는 공간입니다
 					<br>
-					<br>
-					<br>
 					</div>
+					
 					<input type="text" placeholder="코멘트 입력.." class="">
 					<input id="Task_Modal_enter_comments" type="button" value="전송">
+					
 					<input type="hidden" id="tidhidden" value="">
 					<input type="hidden" id="tnamehidden" value="">
+					<input type="hidden" id="origin_sday" value="">
+					<input type="hidden" id="origin_eday" value="">
 					<input type="hidden" id="stepdeletehidden" data-toggle="modal" data-target="#step_delete_Modal">
-					
 					
 			 	</div>
 			 	<!-- end modal-body -->

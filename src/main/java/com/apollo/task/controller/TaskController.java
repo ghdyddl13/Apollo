@@ -13,6 +13,7 @@ import org.springframework.web.servlet.View;
 import com.apollo.project.service.ProjectInfoService;
 import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.service.TaskService;
+import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
@@ -106,6 +107,11 @@ public class TaskController {
 	ArrayList<SubtaskDTO> subtasklist = new ArrayList<SubtaskDTO>();
 	subtasklist = service.getSubTasks(tid);
 	model.addAttribute("subtasklist", subtasklist);
+	
+	// 해당 테스크의 코멘트들과 행위자에 대한 member 테이블 정보
+	ArrayList<CommentAndMemberDTO> commentandmemberlist =  new  ArrayList<CommentAndMemberDTO>();
+	commentandmemberlist = service.getCommentsAndMember(tid);
+	model.addAttribute("commentandmemberlist", commentandmemberlist);
 	
 	return jsonview;
 	}
@@ -671,8 +677,25 @@ public class TaskController {
 	}
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 해당 테스크에 관련한 코멘트 모든 정보와 mid에 관한 member 테이블 모두 가져옴
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/getcommentsandmember.htm")
+	public View getCommentsAndMember(int tid, Model model){
 	
+		System.out.println("getCommentsAndMember 컨트롤러 실행됨");
+		
+		ArrayList<CommentAndMemberDTO> commentandmemberlist =  new  ArrayList<CommentAndMemberDTO>();
+		commentandmemberlist = service.getCommentsAndMember(tid);
+		model.addAttribute("commentandmemberlist", commentandmemberlist);
+		
+		System.out.println("getCommentsAndMember 컨트롤러->서비스 모두 거치고 돌아옴");
+		
+		return jsonview;
 	
-	
+	}
 	
 }

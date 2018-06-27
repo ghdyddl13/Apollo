@@ -107,3 +107,38 @@ assignee_in_taskmodal td{
 	width: 20px;
 	height:20px;
 }
+
+#Task_Modal_comments{
+
+   overflow:auto;
+   height:400px;
+   margin: 10px;
+   padding:10px;
+   background-color:#f0f0f0
+
+}
+
+.taskmodal_memberprofile2{
+	
+	  width: 40px;
+	  height:40px;
+	  border-radius: 20px;
+	  float:left
+	  
+}
+
+.each_comment{
+    margin-left: 10px;
+    float:left;
+    font-size: 13px
+}
+
+.wrapper_comment{
+  display: flex;
+  white-space:nowrap;
+  align-items: center
+}
+
+.second_row{
+ 	margin-top: 5px;
+}

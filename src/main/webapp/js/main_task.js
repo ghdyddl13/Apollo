@@ -1,3 +1,13 @@
+/////////////////////////////
+
+
+
+////////////////////////////
+
+
+
+
+
 /**
  * 
  날   짜 : 2018. 6. 19.
@@ -151,9 +161,12 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   $('#Task_Modal_detail').val(rdata.task.detail);
 			        	   
 			        	   
+			        	   // comment
+			        	   getCommentAndMemberlist();
 			        	   
-//			        	   $('#').empty();
-//			        	   $('#').append(rdata.task.tname);
+			        	   
+			        	   
+			        	   
 			        	   
 //			        	   $('#').empty();
 //			        	   $('#').append(rdata.task.tname);
@@ -594,7 +607,10 @@ $.ajax(
 	     		        	   	   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 	     		        	   
 	     		        	   $('#Task_Modal_assignee').append(assigneestr);
-	     		        	   
+	    			        	   
+	    			           // comment
+	    			           getCommentAndMemberlist();
+	    			        	   
 	        		           } // end-success
 	        		        }); // end-ajax
 	        	   
@@ -627,6 +643,9 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 		        	   'tname' : tname
 		           },
 		           success : function(rdata){
+		        	   
+			           // comment
+			           getCommentAndMemberlist();
 		        	   
 		           } // end-success
 		        }); // end-ajax
@@ -805,11 +824,12 @@ $(document).on("mouseenter",".hover_div",function() {
  작성자명 : 김 정 권
  */
 $(document).on("keyup","#Task_Modal_detail",function() {
-	$('#task_detail_status').css("visibility","visible");
+	
+	$('#task_detail_status').css("visibility","hidden");
 	$('#task_detail_status').attr('src','img/loader.gif');
-
+	
 	delay(function(){
-		   
+		   $('#task_detail_status').css("visibility","visible");
 		   var tid = $('#tidhidden').attr('value');
 		   var detail_content = $('#Task_Modal_detail').val();
 		   
@@ -822,13 +842,18 @@ $(document).on("keyup","#Task_Modal_detail",function() {
 	  		        	   'content' : detail_content 
 	  		           },
 	  		           success : function(rdata){
+	  		        	   
 	  		        	   console.log('detail update 완료');
-	  		        	   $('#task_detail_status').attr('src','img/checked.jpg');
+	  		        		
+	  		        	   delay(function(){
+	  		        			$('#task_detail_status').attr('src','img/checked.jpg');
+	  		       		    }, 1000 );
+	  		        	   
 	  		           } // end-success
 	  		        }); // end-ajax
 		      
-		      // 3초 지연
-		    }, 3000 );
+		      // 0.5초 지연
+		    }, 500 );
 });
 
 var delay = (function(){
@@ -841,5 +866,50 @@ var delay = (function(){
 
 
 
+/**
+ * 
+ 날      짜 : 2018. 6. 27.
+ 기      능 : 코멘트 생성
+ 작성자명 : 김 정 권
+ */
 
-	
+var getCommentAndMemberlist = (function (){
+	   
+	var tid = $('#tidhidden').attr('value');
+	var comment_str = '';
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "getcommentsandmember.htm",
+		           data : {
+		        	   'tid' : tid
+		           },
+		           success : function(rdata){
+		        	   
+		        	   console.log('getCommentAndMemberlist get 완료');
+		        	   console.log(rdata.commentandmemberlist);
+		        	   
+		        	   $(rdata.commentandmemberlist).each(function(){
+		        		 
+		        		   comment_str += '<div class="wrapper_comment">' 
+		        		 //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
+		        		   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="img/프로필사진테스트.jpg"/>';
+		        		   comment_str += '<div class="each_comment">';
+		        		   comment_str += '<div class="first_row">' + this.mname + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + this.cmtmtime + '</div>'
+		        		   comment_str += '<div class="second_row">' + this.comments + '</div>'
+		        		   comment_str += '</div>'
+	        			   comment_str += '</div><br><br>'
+	        				   
+	        				   
+		        	   });
+		        	   $('#Task_Modal_comments').empty();
+		        	   $('#Task_Modal_comments').append(comment_str);
+		        	   
+		        	   var textarea = $('#Task_Modal_comments');
+		        	   textarea.scrollTop(textarea[0].scrollHeight);
+		        
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	   
+});

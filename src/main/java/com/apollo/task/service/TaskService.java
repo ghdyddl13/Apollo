@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apollo.inbox.dao.InboxDAO;
 import com.apollo.member.dao.MemberDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.AssigneeDAO;
@@ -18,6 +19,7 @@ import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
+import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
@@ -545,6 +547,25 @@ public class TaskService {
 		SubtaskDAO subtaskdao = session.getMapper(SubtaskDAO.class);
 		int result = subtaskdao.deleteSubtask(subtaskid);
 		return result;
+		
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 해당 테스크에 관련한 코멘트 모든 정보와 mid에 관한 member 테이블 모두 가져옴
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<CommentAndMemberDTO> getCommentsAndMember(int tid){
+		
+		System.out.println("getCommentsAndMember 서비스 실행됨");
+		
+		InboxDAO dao = session.getMapper(InboxDAO.class);
+		ArrayList<CommentAndMemberDTO> list =  new  ArrayList<CommentAndMemberDTO>();
+		list = dao.getCommentsAndMember(tid);
+		
+		return list;
 		
 	}
 	

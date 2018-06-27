@@ -87,6 +87,6 @@ public class CommentDTO {
 				+ mname + ", cmtkind=" + cmtkind + ", cmtmtime=" + cmtmtime + ", isarchive=" + isarchive + ", tname="
 				+ tname + ", pname=" + pname + ", image=" + image + "]";
 	}
-	
+
 	
 }
