@@ -9,16 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.View;
-
 import com.apollo.member.service.MemberService;
 import com.apollo.vo.AuthkeyDTO;
 import com.apollo.vo.MemberDTO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -362,7 +364,6 @@ public class MemberController {
 	 */
 	@RequestMapping("/profilemember.htm")
 	public View getProfileInfoMember(String mid, Model model) {
-		System.out.println("mid : " + mid);
 		MemberDTO profileinfo = null;
 		try {
 			profileinfo = service.getProfileInfoMember(mid);
@@ -381,11 +382,11 @@ public class MemberController {
 	 작성자명 : 김 래 영
 	 */
 	@RequestMapping("/updatememberinfo.htm")
-	public View updateMemberInfo(HttpServletRequest request, Model model, HttpSession session) {
+	public View updateMemberInfo(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		String mid = (String) request.getSession().getAttribute("mid");
 		model.addAttribute("mid", mid);
-		
 		MemberDTO updatememberinfo = null;
+		
 		try {
 			updatememberinfo = service.updateMemberInfo(mid);
 			model.addAttribute("updatememberinfo", updatememberinfo);
@@ -400,40 +401,43 @@ public class MemberController {
 	 날      짜 : 2018. 6. 25.
 	 기      능 : 개인정보수정
 	 작성자명 : 김 래 영
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
-	@RequestMapping(value = "/updatemember.htm", method = RequestMethod.POST)
-	public View updateMemberInfo(MemberDTO memberdto, Model model, MultipartHttpServletRequest multi) {
+	@RequestMapping(value="/updatemember.htm", method=RequestMethod.POST)
+	public View updateMemberInfo(MemberDTO memberdto, Model model, MultipartHttpServletRequest mrequest) {
 		int updatemember = 0;
-		String uploadPath = "/upload/";
-
-		File dir = new File(uploadPath);
-
+		System.out.println(memberdto);
+		
+		//경로 설정
+		String path = "C:\\bitcamp104\\Final\\Apollo\\src\\main\\webapp\\profile";
+		
+		File dir = new File(path);
 		if (!dir.isDirectory()) {
 			dir.mkdirs();
-		}
-
-		Iterator<String> iter = multi.getFileNames();
-		while (iter.hasNext()) {
-			String uploadfilename = iter.next();
-
-			MultipartFile mfile = multi.getFile(uploadfilename);
-			String originalfilename = mfile.getOriginalFilename();
-			String savefilename = originalfilename;
-
-			if (originalfilename != null && !savefilename.equals("")) {
-				if (new File(uploadPath + savefilename).exists()) {
-					savefilename = savefilename + "_" + System.currentTimeMillis();
-				}
+		} //경로가 지정되어 있지 않은 경우 자동 폴더 생성
+		
+		try {
+			
+			Iterator<String> files = mrequest.getFileNames();
+			while(files.hasNext()) {
+				String uploadfile = files.next();
+				MultipartFile mfile = mrequest.getFile(uploadfile);
+				String filename = mfile.getOriginalFilename();
+				System.out.println(filename);
 				
-				try {
-					mfile.transferTo(new File(uploadPath + savefilename));
-					updatemember = service.updateMemberInfo(memberdto);
-					model.addAttribute("updatemember", updatemember);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} // if end
-		} // while end
+				mfile.transferTo(new File(path + filename)); //원하는 위치에 해당 파일명으로 저장됨
+				memberdto.setImage(filename);
+				
+				updatemember = service.updateMemberInfo(memberdto);
+				model.addAttribute("updatemember", updatemember);
+			}
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonview;
 	}
 	/**
@@ -503,13 +507,11 @@ public class MemberController {
 	public String selectMemberList(HttpServletRequest request, Model model, HttpSession session) {
 		String mid = (String) request.getSession().getAttribute("mid");
 		model.addAttribute("mid", mid);
-		System.out.println("mid : " + mid);
 		
 		ArrayList<MemberDTO> memberlist = null;
 		try {
 			memberlist = service.selectMemberList(mid);
 			model.addAttribute("memberlist", memberlist);
-			System.out.println(memberlist);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

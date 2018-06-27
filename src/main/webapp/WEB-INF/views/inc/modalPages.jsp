@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
 <script>
 	
 </script>
@@ -32,19 +33,19 @@
 									<div class="modal-title">
 										<p>방법론</p>
 									</div>
-										<input type="radio" id="method" name="methodologyid" value="3"
+										<input type="radio" id="method1" name="methodologyid" value="3"
 										checked><span class="method"> Customizing</span> <br>
 									<div>
 										<!-- Customizing 설명 작성  -->
 										가나다라마바사아자차카타파하 커스텀마이징 설명작성 필요
 									</div>
-									<br> <input type="radio" id="method" name="methodologyid" value="2"><span
+									<br> <input type="radio" id="method2" name="methodologyid" value="2"><span
 										class="method"> Agile</span><br>
 									<div>
 										<!-- Agile 설명 작성  -->
 										가나다라마바사아자차카타파하 애자일 설명작성 필요
 									</div>
-									<br> <input type="radio" id="method" name="methodologyid" value="1"><span
+									<br> <input type="radio" id="method3" name="methodologyid" value="1"><span
 										class="method"> Waterfall</span><br>
 									<div>
 										<!-- Waterfall 설명 작성  -->

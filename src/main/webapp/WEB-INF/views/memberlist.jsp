@@ -2,10 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<h3>사원 목록</h3>
-
+<h4>사원 목록</h4>
 <div class="container-fluid">
-	<div>
+	<div align="center">
 		<table class="table" id="header-member-table">
 			<thead>
 				<tr>

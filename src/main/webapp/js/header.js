@@ -81,6 +81,7 @@ $(function() {
 			}
 		})
 	});
+
 	
 	// 헤더에서 우상단 개인정보수정 클릭시 실행되는 함수
 	// 헤더 개인정보수정 Modal
@@ -88,10 +89,14 @@ $(function() {
 		var mid = $('#edit-profile-mid').val(mid);
 		//console.log(mid);
 		
+		
 		$.ajax({
 			url:"updatememberinfo.htm",
 			data:{mid:mid},
 			dataType:"json",
+			contentType:'multipart/form-data',
+			contentType:false,
+			processData:false,
 			success:function(data) {
 				//var image = (data.updatememberinfo.image)?data.updatememberinfo.image :"img/user_image.png"
 				//$('#edit-profile-modal-img').attr("src",image);
@@ -101,26 +106,32 @@ $(function() {
 				$('#edit-profile-pnum').val(data.updatememberinfo.pnum);
 				$('#edit-profile-deptname').val(data.updatememberinfo.deptname);
 				$('#edit-profile-position').val(data.updatememberinfo.position);
-				$('#edit-profile-image')
+				$('#edit-profile-image').val(data.updatememberinfo.image);
 				
 			} // end - success
-		
 		}); // end- ajax
-		
 	}); // end - click
 	
 	
 	// 개인정보수정 Modal 에서 1번째 수정버튼 클릭시 실행되는 함수
 	$('#update-edit-profile-btn').click(function() {
+		//var form = $('#edit-profile-form')[0];
+		//var updateprofile = new FormData(form); 
+		//var updateprofile = $('#edit-profile-form').serialize();
+		//console.log(updateprofile);
+		var formData = new FormData($('#edit-profile-form')[0]);
+		formData.append('iamge', $('input[type=file]')[0].files[0]);
 		
-		var updateprofile = $('#edit-profile-form').serialize();
-		
-		$.ajax({
+		$('#edit-profile-form').ajaxForm({
 			type:"post",
 			url:"updatemember.htm",
-			data:updateprofile,
-			dataType:"json",
+			data:formData,
+			//dataType:"json",
+			enctype:"multipart/form-data",
+			processData: false,
+			contentType: false,
 			success:function(data){
+				console.log(data);
 				
 				if(data.updatemember > 0) {
 					alert('개인정보수정이 완료되었습니다!');
@@ -131,9 +142,8 @@ $(function() {
 				}
 				
 			} // end - success
-		
 		}); // end- ajax
-		
+		$("#edit-profile-form").submit();
 	}); // end - click
 	
 	//개인정보수정 Modal에서 인증확인 버튼 클릭시 실행되는 함수

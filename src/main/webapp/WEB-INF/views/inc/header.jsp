@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html >
 <script type="text/javascript" src="js/header.js"></script>
+
 <nav class="navbar navbar-default navbar-fixed-top" id="header">
 
 	<div class="container-fluid">
@@ -29,7 +30,7 @@
 				<ul class="dropdown-menu">
 					<li data-toggle="modal" data-target="#edit-profile" id="header-profile-edit"><a>개인정보수정</a></li>
 					<li id="header-memberlist"><a>사원목록</a></li>
-					<li><a href="#">로그아웃</a></li>
+					<li><a href="logout.htm">로그아웃</a></li>
 				</ul></li>
 		</ul>
 	</div>

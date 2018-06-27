@@ -3,6 +3,8 @@ package com.apollo.member.service;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -163,8 +165,7 @@ public class MemberService {
 	 */
 	public MemberDTO updateMemberInfo(String mid) {
 		MemberDTO result = null;
-		
-			
+
 		try {
 			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 			result = dao.getProfileInfoMember(mid);
@@ -184,6 +185,7 @@ public class MemberService {
 	 */
 	public int updateMemberInfo(MemberDTO memberdto) {
 		int result = 0;
+		
 		try {
 			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 			result = dao.updateMemberInfo(memberdto);
