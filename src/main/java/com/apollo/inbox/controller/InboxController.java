@@ -33,6 +33,10 @@ public class InboxController {
 		String mid = (String)session.getAttribute("mid");
 		System.out.println(mid);
 		ArrayList<CommentDTO> commentlist = service.getCommentlist(mid);//테스트용 아이디
+		for(int i = 0;i<commentlist.size();i++) {
+			System.out.println("코멘트의 tid는?? " + commentlist.get(i).getTid());	
+		}
+		
 		model.addAttribute("cmtlist", commentlist);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd", Locale.KOREA);

@@ -77,6 +77,7 @@ public class TaskController {
 	System.out.println("getTask 작동");
 		
 	int pid = (Integer) session.getAttribute("pid");
+	
     String mid = (String) session.getAttribute("mid");
 
     
