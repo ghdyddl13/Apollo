@@ -377,10 +377,15 @@
 					</div>
 					<hr>
 					<div id="project_member_popup_div"></div>
-					<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter.." class="">
+					
+					<div id="div_for_comment_input_box">
+					<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">
+					</div>
 							
 					<input type="hidden" id="pidhidden" value="">					
 					<input type="hidden" id="tidhidden" value="">
+					<input type="hidden" id="receiverhidden" value="">
+					<input type="hidden" id="receivernamehidden" value="">
 					<input type="hidden" id="tnamehidden" value="">
 					<input type="hidden" id="origin_sday" value="">
 					<input type="hidden" id="origin_eday" value="">

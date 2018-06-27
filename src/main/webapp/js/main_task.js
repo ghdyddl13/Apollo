@@ -973,7 +973,7 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
 
   
   // @ 아닐 시
-  if(event.keyCode != 50){
+  if((event.keyCode != 50) && (event.keyCode != 27) && (event.keyCode != 13)){
 	  
 	    $('#project_member_popup_div').css("display", "none");
 	    $('#project_member_popup_div').css("left", "-20000");
@@ -1005,12 +1005,10 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
 		        	   
 		           } // end-success
 		        }); // end-ajax
-	    
 
   } // end - keyCode=13
-
+  
 });
-
 
 
 
@@ -1025,12 +1023,100 @@ $(document).on("click",".popup_mid",function(){
     $('#project_member_popup_div').css("display", "none");
     $('#project_member_popup_div').css("left", "-20000");
     $('#project_member_popup_div').css("top", "-20000");
+
+    $('#div_for_comment_input_box').empty();
+    var inputboxstr = '<input id="receivermid" type="button" value="">'
+    	inputboxstr+= '<input id="comment_input_box_in_taskmodal2" type="text" placeholder="코멘트를 입력 후 Enter..">'
+    $('#div_for_comment_input_box').append(inputboxstr);
     
 	var mid = $(this).attr('id');
-	alert('제대로 mid 가져옴? : ' + mid);
+	$('#receiverhidden').attr('value', mid);
+	var speaker_name = '';
+	var inputstr = '';
 	
-	$('#comment_input_box_in_taskmodal').val()
-	
-	
+	 $.ajax(
+		       {
+		           type : "post",
+		           url  : "findmname.htm",
+		           data : {
+		        	   'mid': mid
+		           },
+		           success : function(rdata){
+		        	   speaker_name = rdata.speaker;
+		        	   inputstr = 'TO. ' + speaker_name;
+		        	   $('#receivernamehidden').attr('value', inputstr);
+		        	   
+		        	   $('#receivermid').attr('value', inputstr);
+		        	   $('#comment_input_box_in_taskmodal2').focus();
+		        		
+		           } // end-success
+		        }); // end-ajax
 	
 });
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 27.
+ 기      능 : 테스크 모달 내 코멘트 입력 부분(인풋태그)에서 @ 를 사용해 새로운 input 만들고 거기서 작동하는 함수
+ 작성자명 : 김 정 권
+ */
+$(document).on("keyup","#comment_input_box_in_taskmodal2",function(){
+
+  // 엔터키 칠 시
+  if (event.keyCode === 13) {
+	  
+	   var tid = $('#tidhidden').attr('value');
+	   var temp_comments = $('#comment_input_box_in_taskmodal2').val();
+	   var receiver = $('#receiverhidden').attr('value');
+	   
+	   var receivername = $('#receivernamehidden').attr('value');
+	   var comments = '(' + receivername + ') ' + temp_comments;
+	   
+	   $.ajax(
+		       {
+		           type : "post",
+		           url  : "selectandchatintaskmodal.htm",
+		           data : {
+		        	   'tid': tid,
+		        	   'comments' : comments,
+		        	   'receiver' : receiver
+		           },
+		           success : function(rdata){
+		        	   console.log('success 성공 테스트 출력 : ' + rdata.result);
+		        	   
+			           // comment
+			           getCommentAndMemberlist();
+			           $('#comment_input_box_in_taskmodal2').val('');
+			           $('#comment_input_box_in_taskmodal2').focus();
+		        	   
+		           } // end-success
+		        }); // end-ajax
+
+  } // end - keyCode=13
+  
+  if(event.keyCode === 107){
+	  alert('작동함');
+	  var temp = $('#receiverhidden').attr('id');
+	  alert(temp);
+  }
+
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 27.
+ 기      능 : @ 를 이용해서 작동한 귓속말 모드를 해지하는 함수
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#receivermid",function(){
+	
+	 $('#div_for_comment_input_box').empty();
+	    var origin_inputboxstr = '<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">'
+	 $('#div_for_comment_input_box').append(origin_inputboxstr);
+	 $('#comment_input_box_in_taskmodal').focus();
+	
+});
+
+

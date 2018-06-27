@@ -749,6 +749,54 @@ public class TaskController {
 	}
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 이름을 찾아준다
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/findmname.htm")
+	public View findMname(String mid, Model map){
+		
+		System.out.println("findMname 컨트롤러 실행");
+		
+		String speaker = service.getTaskModifierName(mid);
+		map.addAttribute("speaker", speaker);
+		
+		return jsonview;
+	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 테스크 모달 내에서 @ 붙여서 지목하여 보내기 
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/selectandchatintaskmodal.htm")
+	public View selectAndChatInTaskmodal(int tid, String comments, String receiver, HttpSession session, Model map){
+		
+		System.out.println("리시버 들어오냐? : " + receiver);
+		
+		System.out.println("selectAndChatInTaskmodal 컨트롤러 실행");
+		String mid=(String)session.getAttribute("mid");
+		
+		CommentDTO dto = new CommentDTO();
+		dto.setMid(mid);
+		dto.setTid(tid);
+		dto.setComments(comments);
+		dto.setCmtkind(0);
+		
+		int result = service.insertInboxComment2(dto, receiver);
+		map.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	
+	
+	
+	
 	
 	
 	

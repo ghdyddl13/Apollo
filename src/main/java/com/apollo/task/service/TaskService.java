@@ -23,6 +23,7 @@ import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
+import com.apollo.vo.ReceiverDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.SubtaskDTO;
@@ -567,6 +568,43 @@ public class TaskService {
 		
 		return list;
 		
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : @ 를 사용한 코멘트 입력시 작동 함수 
+	 작성자명 : 김 정 권
+	 */
+	public int insertInboxComment2(CommentDTO commentdto, String receiver){
+		
+		System.out.println("insertInboxComment2 서비스 실행");
+		CommentDAO commentdao = session.getMapper(CommentDAO.class);
+		
+     	int insertcmt =commentdao.insertComment(commentdto);
+		System.out.println("코멘트 테이블에 인서트 성공 여부 : "+ insertcmt);
+		
+		System.out.println("----------------------------");
+		System.out.println("mid : " + commentdto.getMid());
+		System.out.println("receiver : " + receiver);
+		System.out.println("----------------------------");
+		
+		ReceiverDTO receiverdto = new ReceiverDTO();
+		receiverdto.setCmtid(commentdto.getCmtid());
+		receiverdto.setMid(commentdto.getMid());
+		receiverdto.setIsarchive(0);
+		int result = commentdao.insertReceiver2(receiverdto);
+		System.out.println("Receiver에 insert 완료!");
+		
+		// mid 를 receiver 말고 보낸이를 넣어서 다시 receiver에 insert
+		receiverdto.setMid(receiver);
+		result += commentdao.insertReceiver2(receiverdto);
+		
+		System.out.println("@를 이용한 코멘트 입력 총 결과 : " + result);
+		
+		return result;
+	
 	}
 	
 }
