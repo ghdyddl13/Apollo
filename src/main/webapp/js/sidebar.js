@@ -411,6 +411,8 @@ $(function() {
 			var pid = project_wrapper.id.substr(1);
 			var methodologyid = $(project_wrapper).children("input[name='methodologyid']").val();
 			
+			$('#pidhidden').attr('value', pid);
+			
 			$.ajax({
 				url:"information.htm",
 				data: "pid=" + pid,
