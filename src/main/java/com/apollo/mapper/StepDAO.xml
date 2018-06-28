@@ -123,4 +123,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where sname like '%'||#{input}||'%'
 		and pid in (select pid from pmember where mid = #{mid}) order by sid desc
 	</select>
+	<!-- UPPER GRAPH 완료되고 완료되지 않은 일을 가지고오는 함수  -->
+	<select id="listCountCompletedTask" parameterType="Integer" resultType="Integer">
+		select count(*) 
+		from task t join TASKINSTEP ts on t.TID = ts.TID 
+		where t.TSTATUSID in (3,11,15) and ts.SID=#{sid}
+	</select>
+	<select id="listCountUnfinishedTask" parameterType="Integer" resultType="Integer">
+		select count(*) 
+		from task t join TASKINSTEP ts on t.TID = ts.TID 
+		where t.TSTATUSID not in (3,11,15) and ts.SID=#{sid}
+	</select>
+	<!-- MIDDLE GRAPH남은 날과 지나온날을 가지고 오는 함수  -->
+	<select id="listCountThePast" parameterType="Integer" resultType="Integer">
+		select ROUND(sysdate-SDAY) from step where sid=#{sid}
+	</select>
+	<select id="listCountTheRest" parameterType="Integer" resultType="Integer">
+		select  ROUND(EDAY-sysdate) from step where sid=#{sid}
+	</select>
+
+	<!-- LOWER GRAPH 테스크 상태  -->
+	<select id="listCountNoDay" parameterType="Integer" resultType="Integer">
+		select count(*)
+		from (select * from task t join TASKINSTEP ts on t.TID = ts.TID where ts.SID=#{sid} and t.TSTATUSID not in (3,11,15))
+		where SDAY is null or EDAY is null 
+	</select>
+	<select id="listCountAfterNextWeek" parameterType="Integer" resultType="Integer">
+		select count(*) 
+		from task t join TASKINSTEP ts on t.TID = ts.TID 
+		where ts.SID=#{sid} 
+		and t.TSTATUSID not in (3,11,15) 
+		and t.SDAY>=TO_DATE(SUBSTR(sysdate +(8-TO_CHAR(SYSDATE,'D')),1,10),'YYYY/MM/DD')
+	</select>
+	<select id="listCountUntilThisWeek" parameterType="Integer" resultType="Integer">
+		select count(*) 
+		from task t join TASKINSTEP ts on t.TID = ts.TID 
+		where ts.SID=#{sid}
+		and t.TSTATUSID not in (3,11,15) 
+		and TO_DATE(SUBSTR(sysdate +(8-TO_CHAR(SYSDATE,'D')),1,10),'YYYY/MM/DD')>t.EDAY
+	</select>
+	<select id="listCountOverdueTask" parameterType="Integer" resultType="Integer">
+		select count(*)
+		from task t join TASKINSTEP ts on t.TID = ts.TID 
+		where ts.SID=#{sid} 
+		and t.TSTATUSID not in (3,11,15) 
+		and TO_DATE(SUBSTR(sysdate,1,10),'YYYY/MM/DD')>t.EDAY
+	</select>
+
+	<!-- 특정STEP을 포함한 프로젝트에 소속된 인원의 정보 -->
+	<select id="listProjectMemberList" resultType="com.apollo.vo.MemberDTO">
+		select m.MID,m.MNAME,m.IMAGE 
+		from MEMBER m join PMEMBER p on m.MID=p.MID 
+		where p.PID = (select pid from step where sid=#{sid})	
+	</select>
 </mapper>

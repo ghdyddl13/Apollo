@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.View;
 
 import com.apollo.step.service.StepBoardService;
 import com.apollo.step.service.StepListService;
@@ -21,8 +20,7 @@ import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TstatusDTO;
 @Controller
 public class StepListController {
-	@Autowired
-	private View jsonview;
+
 	@Autowired
 	private StepListService service;
 	@Autowired
@@ -45,14 +43,36 @@ public class StepListController {
         int pid = service.getProjectIdByStepId(sid);
         request.getSession().setAttribute("sid", sid);
         request.getSession().setAttribute("pid", pid);
+        //스텝이 소속된 프로젝트의 방법론 정보
         ArrayList<TstatusDTO> tstatuslist = service.getListTstatusList(sid);
+        //스텝 정보
         StepDTO stepinfo =service.getListStepName(sid);
-		int tstatusid =0;
+		//테스크 리스트
+        int tstatusid =0;
         ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid);
+        //그래프 관련 데이터
+  	  	int completedtask = service.listCountCompletedTask(sid);
+  		int unfinishedtask = service.listCountUnfinishedTask(sid);
+  		int thepast = service.listCountThePast(sid);
+  		int therest = service.listCountTheRest(sid);
+  		int noday = service.listCountNoDay(sid);
+  		int afternextweek = service.listCountAfterNextWeek(sid);
+  		int untilthisweek = service.listCountUntilThisWeek(sid);
+  		int overduetask = service.listCountOverdueTask(sid);
         
+       
+        System.out.println("미지정: "+noday+"/다음주 이후: "+afternextweek+"/이번주까지: "+untilthisweek+"/완료: "+completedtask+"/기간만료: "+overduetask);
         map.addAttribute("stepinfo", stepinfo);
         map.addAttribute("tstatuslist", tstatuslist);
         map.addAttribute("tasklist",tasklist);
+        map.addAttribute("completedtask",completedtask);
+        map.addAttribute("unfinishedtask",unfinishedtask);
+        map.addAttribute("thepast",thepast);
+        map.addAttribute("therest",therest);
+        map.addAttribute("noday",noday);
+        map.addAttribute("afternextweek",afternextweek);
+        map.addAttribute("untilthisweek",untilthisweek);
+        map.addAttribute("overduetask",overduetask);
         
         return "step/list";
     }
