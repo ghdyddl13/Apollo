@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html >
 <script type="text/javascript" src="js/header.js"></script>
+<link rel="stylesheet" href="css/search.css" />
 
 <nav class="navbar navbar-default navbar-fixed-top" id="header">
 
@@ -22,7 +23,11 @@
 			<li class="nav-item"><a class="nav-link header-menu"
 				id="stream-page" style="color: white">Stream</a></li>
 		</ul>
-		<ul class="nav navbar-nav navbar-right">
+		<ul id = "header-right-wrapper" class="nav navbar-nav navbar-right">
+			<div class="container-fluid search-bar-container">
+  	    		<i  class="search-bar-imo fas fa-search"></i>
+          		<input id ="open-right-nav" type="text">
+       		</div>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 				style="color: white"><span class="glyphicon glyphicon-user"
@@ -35,4 +40,20 @@
 		</ul>
 	</div>
 </nav>
+
+
+<div id="search-nav" class="search-nav">
+  <div class="container-fluid search-nav-head row">
+  	<div class="col-sm-2">
+		<i  class="fas fa-search"></i>
+  	</div>
+  	<div class="col-sm-10 container-fluid">
+		<input id ="search-bar" type="text">
+  	</div>
+  </div>
+  <div class= "search-nav-body">
+	  <div id="search-content-box">
+	  </div>
+  </div>
+</div>
 

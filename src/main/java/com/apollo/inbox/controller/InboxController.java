@@ -32,7 +32,11 @@ public class InboxController {
 		System.out.println("inbox controller");
 		String mid = (String)session.getAttribute("mid");
 		System.out.println(mid);
-		ArrayList<CommentDTO> commentlist = service.getCommentlist("testid1");//테스트용 아이디
+		ArrayList<CommentDTO> commentlist = service.getCommentlist(mid);//테스트용 아이디
+		for(int i = 0;i<commentlist.size();i++) {
+			System.out.println("코멘트의 tid는?? " + commentlist.get(i).getTid());	
+		}
+		
 		model.addAttribute("cmtlist", commentlist);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd", Locale.KOREA);
@@ -59,7 +63,7 @@ public class InboxController {
 		System.out.println("sent controller");
 		String mid = (String)session.getAttribute("mid");
 		System.out.println(mid);
-		ArrayList<CommentDTO> sentlist = service.getSentlist("testid1");//테스트용 아이디
+		ArrayList<CommentDTO> sentlist = service.getSentlist(mid);//테스트용 아이디
 		model.addAttribute("cmtlist", sentlist);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd", Locale.KOREA);
@@ -85,7 +89,7 @@ public class InboxController {
 		System.out.println("archive controller");
 		String mid = (String)session.getAttribute("mid");
 		System.out.println(mid);
-		ArrayList<CommentDTO> archivelist = service.getArchivelist("testid1");//테스트용 아이디
+		ArrayList<CommentDTO> archivelist = service.getArchivelist(mid);//테스트용 아이디
 		model.addAttribute("cmtlist", archivelist);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd", Locale.KOREA);
@@ -116,9 +120,7 @@ public class InboxController {
 		System.out.println(inboxkind);
 		CommentDTO comment = new CommentDTO();
 		comment.setCmtid(cmtid);
-		comment.setMid("testid1");//테스트용 아이디
-		
-		
+		comment.setMid(mid);//테스트용 아이디
 		
 		service.updateArchive(comment);
 		
@@ -146,7 +148,7 @@ public class InboxController {
 		System.out.println("cmtid : " + cmtid);
 		CommentDTO comment = new CommentDTO();
 		comment.setCmtid(cmtid);
-		comment.setMid("testid1");//테스트용 아이디
+		comment.setMid(mid);//테스트용 아이디
 		service.updateArchive2(comment);
 		
 		return "redirect:/archive.htm";

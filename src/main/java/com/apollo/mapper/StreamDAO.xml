@@ -3,15 +3,27 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.stream.dao.StreamDAO">
-
 <select id="getPidlist" resultType="com.apollo.vo.ProjectDTO" parameterType="String">
 	select * from project where pid in (select pid from pmember where mid=#{mid})
 </select>
 
-<select id="getStreamlist" resultType="com.apollo.vo.CommentDTO">
-select c.*, m.mname,t.tname 
-from comments c join member m on c.mid = m.mid join task t on t.tid = c.tid 
-where c.tid in (select tid from task where pid = #{pid}) and (cmtkind = 1 or cmtkind=2)
+<select id="getNewtid" parameterType="Integer" resultType="Integer">
+select c.tid from comments c join task t on c.tid = t.tid where t.pid = #{pid}  and (cmtkind = 1 or cmtkind=2) ORDER BY c.CMTMTIME DESC 
 </select>
 
+
+<select id="getStreamlist" parameterType="hashmap" resultType="com.apollo.vo.CommentDTO">
+select c.*, m.mname,t.tname,p.pname 
+from comments c join member m on c.mid = m.mid join task t on t.tid = c.tid join project p on p.pid = t.pid
+where c.tid in (select tid from task where pid = #{pid}) and (cmtkind = 1 or cmtkind=2) 
+ORDER BY decode(c.TID,#{newtid},c.TID),c.TID DESC,c.CMTMTIME DESC
+</select>
+
+<select id="selectSidlist" parameterType="hashmap" resultType="com.apollo.vo.TaskInStepDTO">
+select tins.tid, tins.sid, s.sname from taskinstep tins join step s on tins.sid = s.sid where tins.tid in
+<foreach collection="tidlist" item="tidlist"  open="(" close=")" separator=",">
+            #{tidlist}
+</foreach>
+ 
+</select>
 </mapper>

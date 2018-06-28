@@ -93,14 +93,37 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        		   }
 				           });
 			        	   $('#Task_Modal_tstatus_selectbox').append(tstatusoptions);
-
 			        	   
+
 			        	   // assignee
 			        	   $('#Task_Modal_assignee').empty();
+
+			        	   var assigneestr = '';
+			        	   var profile_count = 0;
+			        	   $(rdata.sametaskmemberlist).each(function(){
+			        		   
+			        		   if(this == null){
+			        			   assigneestr += '<span>해당 Task의 담당자가 존재하지 않습니다</span>&nbsp&nbsp&nbsp';
+			        			   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+			        			   return false;
+			        		   }
+			        		   
+			        		   if((profile_count%4 == 0)&&(profile_count != 0)) {
+			        			   assigneestr += '<br><br>'
+			        		   }
+			        		   
+			        		   assigneestr += '<span>'
+//			        	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+			        	       assigneestr += '<img src="img/'+ '프로필사진테스트.jpg' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+			        	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
+			        	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
+			        	       assigneestr += '</span>'
+			        	       assigneestr += '&nbsp&nbsp&nbsp'
+			        	       profile_count ++;
+			        	   });
+			        	   	   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 			        	   
-			        	   
-			        	   
-			        	   $('#Task_Modal_assignee').append(rdata.task.tname);
+			        	   $('#Task_Modal_assignee').append(assigneestr);
 			        	   
 			        	   
 			        	   
@@ -268,11 +291,9 @@ $(document).on("click",".task_page_delete_step_btn",function(){
  작성자명 : 김 정 권
  */
 $('#Task_Modal_tstatus_selectbox').on('change', function() {
-
 	var tid = $('#tidhidden').attr('value');
 	var value = $('#Task_Modal_tstatus_selectbox').val();
 	var tname = $('#tnamehidden').attr('value');
-	
 	  $.ajax(
 		       {
 		           type : "post",
@@ -350,7 +371,7 @@ $(document).on("click","#task_modal_add_step",function(){
 /**
  * 
  날      짜 : 2018. 6. 23.
- 기      능 : 테스크 모달 내에서 스텝 추가 버튼을 클릭시에 작동
+ 기      능 : 테스크 모달 내에서 스텝 추가 버튼을 클릭시에 뜬 이중모달 내에서 추가 버튼을 누르면 작동
  작성자명 : 김 정 권
  */
 $(document).on("click",".addbtn_taskinstep",function(){
@@ -366,6 +387,7 @@ $(document).on("click",".addbtn_taskinstep",function(){
 		        	   'sid': sid,
 		        	   'tid': tid
 		           },
+		           
 		           success : function(rdata){
 		        	   
 		        	   console.log(rdata.result);
@@ -398,4 +420,185 @@ $(document).on("click",".addbtn_taskinstep",function(){
 		        	   
 		           } // end-success
 		        }); // end-ajax
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 24.
+ 기      능 : 테스크 모달 내에서 각 프로필 사진 옆에 x 버튼을 누르면 해당 담당자가 삭제되고 다시 정보 불러와서 append
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".task_page_delete_assignee_btn",function(){
+	
+	var mid = $(this).attr('id');
+	var tid = $('#tidhidden').attr('value');
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "deleteassignee.htm",
+		           data : {
+		        	   'mid': mid,
+		        	   'tid': tid
+		           },
+		           success : function(rdata){
+		        	   
+		        	   console.log(rdata);
+		        	   
+		        	   $('#Task_Modal_assignee').empty();
+
+		        	   var assigneestr = '';
+		        	   var profile_count = 0;
+		        	   $(rdata.sametaskmemberlist).each(function(){
+		        		   
+		        		   if(this == null){
+		        			   assigneestr += '<span>해당 Task의 담당자가 존재하지 않습니다</span>&nbsp&nbsp&nbsp';
+		        			   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+		        			   return false;
+		        		   }
+		        		   
+		        		   if((profile_count%4 == 0)&&(profile_count != 0)) {
+		        			   assigneestr += '<br><br>'
+		        		   }
+		        		   
+		        		   assigneestr += '<span>'
+//		        	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+		        	       assigneestr += '<img src="img/'+ '프로필사진테스트.jpg' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+		        	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
+		        	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
+		        	       assigneestr += '</span>'
+		        	       assigneestr += '&nbsp&nbsp&nbsp'
+		        	       profile_count ++;
+		        	   });
+		        	   	   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+		        	   
+		        	   $('#Task_Modal_assignee').append(assigneestr);
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+	
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 24.
+ 기      능 : 테스크 모달 내에서 담당자를 추가하는 플러스 버튼으로 이걸 누르면 데이터를 가져와서 이중 모달에 채워준다
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#task_modal_add_assignee",function(){
+	
+	var tid = $('#tidhidden').attr('value');
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "addtaskassigneemodalinfo.htm",
+		           data : {
+		        	    'tid': tid
+		           },
+		           success : function(rdata){
+		        	   
+		        	   $('#assignee_in_taskmodal').empty();
+		        	   
+		        	   var tablestr = '';
+		        	   tablestr += '<tr><th>이름</th><th>직위</th><th>부서명</th><th>이메일</th><th>핸드폰 번호</th><th>초대</th></tr>';
+		        	   $(rdata.getSameProjectButNotSameTaskMemberList).each(function(){
+		        		   
+		        		   if(this.position == null){
+		        			   this.position = '';
+		        		   } 
+		        		   if(this.deptname == null){
+		        			   this.deptname = '';
+		        		   } 
+		        		   if(this.pnum == null){
+		        			   this.pnum = '';
+		        		   } 
+		        		  tablestr += '<tr><th>' + this.mname + '</th><th>' + this.position + '</th><th>' + this.deptname + '</th><th>' + this.mid + '</th><th>' + this.pnum + '</th><th><i class="fas fa-plus-circle addbtn_assingeebtninmodal" id="' + this.mid + '" style="cursor:pointer"></i></th></tr>';
+		        	   });
+		        	   
+		        	   $('#assignee_in_taskmodal').append(tablestr);
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 24.
+ 기      능 : 업무 담당자 추가 이중 모달 내에서 추가 버튼을 누르면 실행되는 것으로 DB 변화를 하고 이중 모달을 닫은 뒤
+  			  업무 담당자를 다시 empty-> append 해준다 (이중 ajax 필요한 로직이다)
+  			  업무 담당자가 추가되면 그 후 incoming과 stream에 insert가 발생하여야 한다
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".addbtn_assingeebtninmodal",function(){
+
+	var mid = $(this).attr('id'); // 추가할 대상자
+	var tid = $('#tidhidden').attr('value');
+	var tname = $('#tnamehidden').attr('value');
+
+$.ajax(
+	       {
+	           type : "post",
+	           url  : "addassigneeintaskmodal.htm",
+	           data : {
+	        	   'mid': mid,
+	        	   'tid': tid,
+	        	   'tname' : tname
+	           },
+	           success : function(rdata){
+	        	   
+	        	   console.log(rdata.result);
+	        	   $('#assignee_add_modal_in_taskmodal_dismiss').click();
+	        	   
+	        	   // 갱신된 assignee들 append
+	        	   $.ajax(
+	        		       {
+	        		           type : "post",
+	        		           url  : "reappendassignee.htm",
+	        		           data : {
+	        		        	   'tid': tid,
+	        		           },
+	        		           success : function(rdata){
+
+	        		        	console.log(rdata);
+	     		        	   $('#Task_Modal_assignee').empty();
+
+	     		        	   var assigneestr = '';
+	     		        	   var profile_count = 0;
+	     		        	   $(rdata.sametaskmemberlist).each(function(){
+	     		        		   
+	     		        		   if(this == null){
+	     		        			   assigneestr += '<span>해당 Task의 담당자가 존재하지 않습니다</span>&nbsp&nbsp&nbsp';
+	     		        			   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+	     		        			   return false;
+	     		        		   }
+	     		        		   
+	     		        		   if((profile_count%4 == 0)&&(profile_count != 0)) {
+	     		        			   assigneestr += '<br><br>'
+	     		        		   }
+	     		        		   
+	     		        		   assigneestr += '<span>'
+//	     		        	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+	     		        	       assigneestr += '<img src="img/'+ '프로필사진테스트.jpg' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+	     		        	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
+	     		        	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
+	     		        	       assigneestr += '</span>'
+	     		        	       assigneestr += '&nbsp&nbsp&nbsp'
+	     		        	       profile_count ++;
+	     		        	   });
+	     		        	   	   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+	     		        	   
+	     		        	   $('#Task_Modal_assignee').append(assigneestr);
+	     		        	   
+	        		           } // end-success
+	        		        }); // end-ajax
+	        	   
+	           } // end-success
+	        }); // end-ajax
+
 });

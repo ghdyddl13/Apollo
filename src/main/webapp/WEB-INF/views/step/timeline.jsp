@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script type="text/javascript" src="js/task.js"></script>
+
 
 <!DOCTYPE html >
  <h3>타임라인</h3>

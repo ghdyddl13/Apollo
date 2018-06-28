@@ -24,14 +24,27 @@ public class ProjectFilesController {
 	public String projectFilelist(Model model, HttpServletRequest request, HttpSession session) {
 		session.setAttribute("location", "/files.htm");
 		int pid = (Integer) request.getSession().getAttribute("pid");
+		System.out.println("pid : " + pid);
 		try {
 			ArrayList<FileDTO> filedto = fileservice.selectFileListByProjectId(pid);
+			System.out.println("filedto : " + filedto);
 			model.addAttribute("f", filedto);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
 		return "project/files";
+	}
+	
+	@RequestMapping("/filesDeleteByFileId.htm")
+	public String filesDeleteByFileId(int fileid) {
+		System.out.println("파일 컨트롤러 들어왔어요 : " + fileid);
+		try {
+			fileservice.filesDeleteByFileId(fileid);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "redirect:/files.htm";
 	}
 	
 }

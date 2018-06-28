@@ -11,22 +11,28 @@
 		</div>
 
 		<div>
-			<a data-toggle="collapse" data-target="#working-project">진행중인
-				프로젝트</a>
+			<a class="side-pstatus">
+			<i data-toggle="collapse" data-target="#working-project" class="side-dir-arrow fas fa-angle-down"></i>
+			<b>Working Projects</b></a>
 			<div class="project-status-wrapper side-dir collapse in" id="working-project" aria-expanded="true">
 		   </div>
 		</div>
 		<div>
-			<a data-toggle="collapse" data-target="#finished-project">완료 프로젝트</a>
+			<a  class="side-pstatus">
+			<i data-toggle="collapse" data-target="#finished-project" class="side-dir-arrow fas fa-angle-right"></i>
+			<b>Completed Projects</b></a>
 			<div class="project-status-wrapper side-dir collapse" id="finished-project">
 				<a class="side-project"><span
 					class=" glyphicon glyphicon-duplicate"></span>Project2</a>
 			</div>
 		</div>
 		<div>
-			<a data-toggle="collapse" data-target="#trash-bin"><span
-				class="glyphicon glyphicon-trash"></span>휴지통</a>
-			<div class="project-status-wrapper side-dir collapse" id="trash-bean">
+			<a class="side-pstatus">
+				<i data-toggle="collapse" data-target="#trash-bin" class=" side-dir-arrow fas fa-angle-right"></i>
+				<b>Recycle Bin&nbsp;&nbsp;&nbsp;</b>
+				<i class="far fa-trash-alt"></i>
+			</a>
+			<div class="project-status-wrapper side-dir collapse" id="trash-bin">
 				<a class="side-project"><span
 					class="glyphicon glyphicon-duplicate"></span>Project3</a>
 			</div>

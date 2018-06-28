@@ -18,5 +18,6 @@ public interface FileDAO {
 	 작성자명 : 이 창 훈
 	 */
 	public ArrayList<FileDTO> selectFileListByProjectId(int pid);
+	public int filesDeleteByFileId(int fileid);
 	
 }

@@ -49,7 +49,6 @@ public class MyworkService {
 		List<MyWorkTaskDTO> nextweeklist = new ArrayList<MyWorkTaskDTO>();	
 		List<MyWorkTaskDTO> laterlist = new ArrayList<MyWorkTaskDTO>();
 		Map<String, List<MyWorkTaskDTO>> taskmap = new HashMap<String, List<MyWorkTaskDTO>>();
-		
 	
 		for(MyWorkTaskDTO task:tasklist) {// Task를 하나하나 비교하기 시작한다
 			for(MyWorkStepDTO step :steplist) {// Task가 할당된 step을 집어넣어준다
@@ -58,7 +57,7 @@ public class MyworkService {
 						task.setSteps(new ArrayList<MyWorkStepDTO>());
 					}
 					task.getSteps().add(step);
-				}	
+				}
 			}//안쪽for문 end
 			for(MyWorkMemberDTO member: memberlist) {//Task에 할당된 Memb
 				if(task.getTid() ==member.getTid()) {

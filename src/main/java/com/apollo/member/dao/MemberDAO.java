@@ -1,5 +1,7 @@
 package com.apollo.member.dao;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidpidDTO;
 import com.apollo.vo.TidpidDTO;
@@ -51,6 +53,7 @@ public interface MemberDAO {
 	 작성자명 : 박 민 식
 	 */
 	public ArrayList<MemberDTO> selectAssigneesBySid(int sid);
+<<<<<<< HEAD
 	
 	/**
 	 * 
@@ -81,4 +84,14 @@ public interface MemberDAO {
 	 작성자명 : 김 래 영
 	 */
 	public ArrayList<MemberDTO> selectMemberList(String mid);
+=======
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 멤버 검색결과
+	 작성자명 : 박 민 식
+	 */
+	public ArrayList<MemberDTO> getSearchMembers(HashMap<String, String> map);
+>>>>>>> develop
 }

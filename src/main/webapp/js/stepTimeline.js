@@ -148,8 +148,6 @@ function makeTimelineGantt(tasks) {
 	    //// 태스크 사이즈 조절 시, 간트차트의 드래그기능 일시 중지
         $(".handle").mousedown(
         		function(event){
-        			console.log(event.target);
-        			console.log("mousedown");
         			$('.gantt').draggable({disabled:true})
         		}
 	    	
@@ -157,8 +155,6 @@ function makeTimelineGantt(tasks) {
 	    ///다시 간트차트 내부를 클릭하게 되면 간트차트 드래그 가능하게 만듦
 	      $(".grid-row").mousedown(
         		function(event){
-        			console.log(event.target);
-        			console.log("mousedown");
         			$('.gantt').draggable({disabled:false});
         		}
 	    	
@@ -187,7 +183,11 @@ function makeTimelineTable(tasks){
 	
 		var row = jQuery("<tr>");
 		var td_no = jQuery("<td>",{"text": no++,"align":"center"}) 
-		var td_tname = jQuery("<td>",{"text": item.tname,"class":"timeline-task-edit","id":"t" + item.tid})
+		var td_tname = jQuery("<td>",{"text": item.tname,"class":"timeline-task-edit Task_RUD_Modal",
+														 "id":"t" + item.tid,
+														 "data-toggle" : "modal",
+														 "data-target" : "#Task_RUD_Modal"
+														 })
 		var td_tstatus = jQuery("<td>",{"text": item.tstatus,
 										"css":{"background-color":item.color,
 											   "color":"white",
