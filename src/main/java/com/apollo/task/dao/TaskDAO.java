@@ -41,5 +41,5 @@ public interface TaskDAO {
 	public ArrayList<TaskDTO> getRecentTasks(String mid);
 	public ArrayList<TaskDTO> getSearchTasks(HashMap<String, String> map);
 	public int deleteAssignee(MidtidDTO dto);
-
+	public ArrayList<TaskDTO> selectNotAssignedTasksBySid(int sid);
 }

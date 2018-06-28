@@ -73,6 +73,7 @@ public class SidebarService {
 		try {
 			StepDAO stepdao = sqlsession.getMapper(StepDAO.class);
 			result = stepdao.insertStep(stepdto);
+			System.out.println("result " + result);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

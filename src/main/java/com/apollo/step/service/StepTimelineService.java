@@ -77,4 +77,15 @@ public class StepTimelineService {
 		}
 		return result;
 	}
+	
+	public ArrayList<TaskDTO> selectNotAssignedTasksBySid(int sid){
+		ArrayList<TaskDTO> result = null;
+		try {
+			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
+			result= dao.selectNotAssignedTasksBySid(sid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
