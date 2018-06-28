@@ -1,11 +1,3 @@
-/////////////////////////////
-
-
-
-////////////////////////////
-
-
-
 
 
 /**
@@ -17,7 +9,7 @@
 $(document).on("click",".Task_RUD_Modal",function(){
 		
 		var temptid = $(this).attr('id'); 
-	    var tid = parseInt(temptid.substring(1));   
+	    var tid = parseInt(temptid.substring(1));
 		
 		$.ajax(
 			       {
@@ -30,12 +22,17 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   console.log('성공!')
 			        	   console.log(rdata);
 
-			        	   //tid
+			        	   // tid
 			        	   var tid = rdata.task.tid;
 			        	   $('#tidhidden').attr('value', tid);
 			        	   
+			        	   // pid
 			        	   var pid = rdata.task.pid;
 			        	   $('#pidhidden').attr('value', pid);
+			        	   
+			        	   // user-mid
+			        	   var usermid = rdata.userid;
+			        	   $('#usermidhidden').attr('value', usermid);
 			        	   
 			        	   // tname
 			        	   $('#Task_Modal_tname').empty();
@@ -97,43 +94,60 @@ $(document).on("click",".Task_RUD_Modal",function(){
 
 			        	   var assigneestr = '';
 			        	   var profile_count = 0;
+			        	   
+			        	   var count_sametaskmemberlist = 0;
 			        	   $(rdata.sametaskmemberlist).each(function(){
-			        		   
-			        		   if(this == null){
-			        			   assigneestr += '<span>해당 Task의 담당자가 존재하지 않습니다</span>&nbsp&nbsp&nbsp';
-			        			   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
-			        			   return false;
-			        		   }
-			        		   
-			        		   if((profile_count%4 == 0)&&(profile_count != 0)) {
-			        			   assigneestr += '<br><br>'
-			        		   }
-			        		   
-			        		   assigneestr += '<span>'
-//			        	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
-			        	       assigneestr += '<img src="img/'+ '프로필사진테스트.jpg' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
-			        	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
-			        	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
-			        	       assigneestr += '</span>'
-			        	       assigneestr += '&nbsp&nbsp&nbsp'
-			        	       profile_count ++;
+			        		   count_sametaskmemberlist++;
 			        	   });
-			        	   	   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+			        	   
+		        		   if(count_sametaskmemberlist == 0){
+		        			   assigneestr += '<span>해당 Task의 담당자가 존재하지 않습니다</span>&nbsp&nbsp&nbsp';
+		        		   } else{
+				        	   $(rdata.sametaskmemberlist).each(function(){
+				        		   
+				        		   if((profile_count%4 == 0)&&(profile_count != 0)) {
+				        			   assigneestr += '<br><br>'
+				        		   }
+				        		   
+				        		   assigneestr += '<span>'
+//				        	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+				        	       assigneestr += '<img src="img/'+ '프로필사진테스트.jpg' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+				        	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
+				        	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
+				        	       assigneestr += '</span>'
+				        	       assigneestr += '&nbsp&nbsp&nbsp'
+				        	       profile_count ++;
+				        	   });
+		        		   } // end - else
+			        	   
+			        	   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 			        	   
 			        	   $('#Task_Modal_assignee').append(assigneestr);
 			        	   
 			        	   // sday
 		        	   	   var sday = rdata.task.sday;
-		        	   	   var newsday = sday.substring(0,10);
-		        	   	   console.log('sday : ' + newsday);
+		        	   	   var newsday = '';
+		        	   	   
+		        	   	   if(sday == undefined){
+
+		        	   	   }else{
+		        	   		   newsday = sday.substring(0,10);
+		        	   	   }
+		        	   	   
 			        	   $('#Task_Modal_sday').empty();
 			        	   $('#Task_Modal_sday').val(newsday);
 
 			        	   
 			        	   // eday
 			        	   var eday = rdata.task.eday;
-			        	   var neweday = eday.substring(0,10);
-			        	   console.log('eday : ' + neweday);
+		        	   	   var neweday = '';
+		        	   	   
+		        	   	   if(eday == undefined){
+
+		        	   	   }else{
+		        	   		   neweday = eday.substring(0,10);
+		        	   	   }
+		        	   	   
 			        	   $('#Task_Modal_eday').empty();
 			        	   $('#Task_Modal_eday').val(neweday);
 			        	   
@@ -159,16 +173,18 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   
 	   		        	   
 	   		        	   // detail
-	   		        	   $('#task_detail_status').css("visibility","hidden");
 			        	   $('#Task_Modal_detail').val("");
 			        	   $('#Task_Modal_detail').val(rdata.task.detail);
 			        	   
 			        	   
 			        	   // comment
+			        	   $('#task_detail_status').attr('src','img/loader.gif');
+			        	   $('#task_detail_status').css('visibility','hidden');
+			        	   
 			        	   getCommentAndMemberlist();
-			        	   
-			        	   
-			        	   
+			        	   $('#div_for_comment_input_box').empty();
+			        	   var origin_inputboxstr = '<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">'
+			        	   $('#div_for_comment_input_box').append(origin_inputboxstr);
 			        	   
 			        	   
 //			        	   $('#').empty();
@@ -649,6 +665,12 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 		        	   
 			           // comment
 			           getCommentAndMemberlist();
+			           
+		        	   
+		        	  $('#task_dismiss_btn').click();
+		        	     
+	                  $("#main-box").empty();
+					  $("#main-box").append(rdata);
 		        	   
 		           } // end-success
 		        }); // end-ajax
@@ -850,6 +872,7 @@ $(document).on("keyup","#Task_Modal_detail",function() {
 	  		        		
 	  		        	   delay(function(){
 	  		        			$('#task_detail_status').attr('src','img/checked.jpg');
+	  		        			
 	  		       		    }, 1000 );
 	  		        	   
 	  		           } // end-success
@@ -926,6 +949,7 @@ var getCommentAndMemberlist = (function (){
  */
 $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
 
+	var usermid = $('#usermidhidden').attr('value');
 	
   // @ 쳤을 시
   if (event.keyCode === 50) {
@@ -942,7 +966,11 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
                  
             	 var popupdiv_str = '';
                  $(rdata.sameprojectmembers).each(function(){
-                  
+                	 
+              	 if(this.mid == usermid){
+              		 return true;
+               	 }
+                	 
                   popupdiv_str += '<div class="wrapper_comment popup_mid" id="' + this.mid + '">';	 
 //                popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/' + this.image + '"/>';	
                   popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/프로필사진테스트.jpg"/>';	
@@ -1118,5 +1146,4 @@ $(document).on("click","#receivermid",function(){
 	 $('#comment_input_box_in_taskmodal').focus();
 	
 });
-
 

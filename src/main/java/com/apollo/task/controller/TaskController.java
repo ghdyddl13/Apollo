@@ -113,6 +113,9 @@ public class TaskController {
 	ArrayList<CommentAndMemberDTO> commentandmemberlist =  new  ArrayList<CommentAndMemberDTO>();
 	commentandmemberlist = service.getCommentsAndMember(tid);
 	model.addAttribute("commentandmemberlist", commentandmemberlist);
+
+	// 유저의 mid
+	model.addAttribute("userid", mid);
 	
 	return jsonview;
 	}
@@ -175,13 +178,9 @@ public class TaskController {
 	    	return "redirect:/board.htm";
 	    }else if(location.equals("/list.htm")) {
 	    	return "redirect:/list.htm?sid=" + sid;
-	    }
-//	    else if(location.equals("/.htm")) {
-//	    	return "redirect:/.htm";
-//	    }else if(location.equals("/.htm")) {
-//	    	return "redirect:/.htm";
-//	    }
-	    else {
+	    }else if(location.equals("step/timeline.htm")) {
+	    	return "redirect:step/timeline.htm";
+	    }else {
 	    	return null;
 	    }
 	    
@@ -235,7 +234,7 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/changetstatus.htm")
-	public View changeTstatus(int tid, int value, String tname, Model model, HttpSession session) {
+	public String changeTstatus(int tid, int value, String tname, Model model, HttpSession session) {
 	
 		TidvalueDTO dto = new TidvalueDTO();
 		dto.setTid(tid);
@@ -275,7 +274,27 @@ public class TaskController {
 		
 		model.addAttribute("result", result);
 		
-		return jsonview;
+		String location = (String) session.getAttribute("location");
+		int pid = (Integer) session.getAttribute("pid");
+		int sid = (Integer) session.getAttribute("sid");
+		
+	    if(location.equals("/information.htm")) {
+	    	System.out.println("information반환");
+	    	return "redirect:/information.htm?pid=" + pid;
+	    } else if(location.equals("/board.htm")) {
+	    	System.out.println("board반환");
+	    	return "redirect:/board.htm";
+	    }else if(location.equals("/list.htm")) {
+	    	System.out.println("list반환");
+	    	return "redirect:/list.htm?sid=" + sid;
+	    }else if(location.equals("step/timeline.htm")) {
+	    	System.out.println("timeline반환");
+	    	return "redirect:step/timeline.htm";
+	    }else {
+	    	System.out.println("null반환");
+	    	return null;
+	    }
+		
 	}
 	
 	/**

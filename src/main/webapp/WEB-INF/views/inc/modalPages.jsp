@@ -313,7 +313,7 @@
 					</div>
 					
 					<div class="col-sm-12" id="Task_Modal_snames">
-					<br>여기는 소속된 스텝들이 뜨는 공간입니다&nbsp<i class="fas fa-plus-circle" id="task_modal_add_step"></i>
+					<br><i class="fas fa-plus-circle" id="task_modal_add_step"></i>
 					</div>
 					
 				</div>
@@ -346,7 +346,7 @@
 				<div class="modal-body">
 
 					<div class="modal-title">업무 담당자</div><br />
-					<div id="Task_Modal_assignee">여기는 담당자들이 뜨는 공간입니다</div>
+					<div id="Task_Modal_assignee"></div>
 
 								
                 <hr />
@@ -361,7 +361,7 @@
 				 <input type="text" name="pname" id="add_sub_task"
 							placeholder="Sub Task의 제목을 입력 후 Enter..."
 							class="text ui-widget-content ui-corner-all"><br><br>
-				 <div id="Task_Modal_subtasks">subtask들이 들어가게 된다</div><br>
+				 <div id="Task_Modal_subtasks"></div><br>
 
                 <hr />
                 
@@ -374,7 +374,7 @@
                 <hr />
                 
 					<div class="modal-title">Comment</div><br />
-					<div id="Task_Modal_comments">여기는 코멘트 들이 추가되는 공간입니다
+					<div id="Task_Modal_comments">
 					</div>
 					<hr>
 					<div id="project_member_popup_div"></div>
@@ -384,6 +384,7 @@
 					</div>
 							
 					<input type="hidden" id="pidhidden" value="">					
+					<input type="hidden" id="usermidhidden" value="">					
 					<input type="hidden" id="tidhidden" value="">
 					<input type="hidden" id="receiverhidden" value="">
 					<input type="hidden" id="receivernamehidden" value="">

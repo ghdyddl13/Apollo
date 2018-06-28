@@ -106,6 +106,7 @@ assignee_in_taskmodal td{
 #task_detail_status{
 	width: 20px;
 	height:20px;
+	visibility: hidden
 }
 
 #Task_Modal_comments{
