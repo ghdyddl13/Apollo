@@ -82,6 +82,7 @@ $(function() {
 		})
 	});
 
+	//////////////////////////// 래영 /////////////////////////////////
 	
 	// 헤더에서 우상단 개인정보수정 클릭시 실행되는 함수
 	// 헤더 개인정보수정 Modal
@@ -113,20 +114,21 @@ $(function() {
 	}); // end - click
 	
 	
+	
 	// 개인정보수정 Modal 에서 1번째 수정버튼 클릭시 실행되는 함수
 	$('#update-edit-profile-btn').click(function() {
 		//var form = $('#edit-profile-form')[0];
 		//var updateprofile = new FormData(form); 
-		//var updateprofile = $('#edit-profile-form').serialize();
+		var updateprofile = $('#edit-profile-form').serialize();
 		//console.log(updateprofile);
-		var formData = new FormData($('#edit-profile-form')[0]);
-		formData.append('iamge', $('input[type=file]')[0].files[0]);
+		//var formData = new FormData($('#edit-profile-form')[0]);
+		//formData.append('iamge', $('input[type=file]')[0].files[0]);
 		
 		$('#edit-profile-form').ajaxForm({
 			type:"post",
 			url:"updatemember.htm",
-			data:formData,
-			//dataType:"json",
+			data:updateprofile,
+			dataType:"json",
 			enctype:"multipart/form-data",
 			processData: false,
 			contentType: false,
@@ -222,10 +224,8 @@ $(function() {
 				}
 			}
 		}); // end - ajax
-		
-
 	});
-
+	////////////////////////////래영  end/////////////////////////////////
 	
 	
 });

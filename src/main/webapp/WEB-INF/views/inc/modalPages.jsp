@@ -723,7 +723,7 @@
 				<h4 class="modal-title">개인정보수정</h4>
 			</div>
 			<div class="modal-body">
-				<form id="edit-profile-form" method="post" enctype="multipart/form-data">
+				<form id="edit-profile-form">
 					<fieldset>
 						<div class="edit-profile-part1">
 							<br>

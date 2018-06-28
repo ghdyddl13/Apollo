@@ -17,7 +17,7 @@ public class MemberDTO {
 	private String deptname;
 	private String apollokey;
 	private String position;
-
+	
 	public String getMid() {
 		return mid;
 	}
@@ -48,6 +48,7 @@ public class MemberDTO {
 	public void setPnum(String pnum) {
 		this.pnum = pnum;
 	}
+
 	public String getImage() {
 		return image;
 	}

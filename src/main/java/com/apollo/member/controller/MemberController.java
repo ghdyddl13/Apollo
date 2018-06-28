@@ -401,8 +401,6 @@ public class MemberController {
 	 날      짜 : 2018. 6. 25.
 	 기      능 : 개인정보수정
 	 작성자명 : 김 래 영
-	 * @throws IOException 
-	 * @throws IllegalStateException 
 	 */
 	@RequestMapping(value="/updatemember.htm", method=RequestMethod.POST)
 	public View updateMemberInfo(MemberDTO memberdto, Model model, MultipartHttpServletRequest mrequest) {
@@ -418,23 +416,19 @@ public class MemberController {
 		} //경로가 지정되어 있지 않은 경우 자동 폴더 생성
 		
 		try {
-			
-			Iterator<String> files = mrequest.getFileNames();
+			Iterator<String> files = mrequest.getFileNames(); //업로드된 파일들의 이름 목록 가져오기
 			while(files.hasNext()) {
-				String uploadfile = files.next();
-				MultipartFile mfile = mrequest.getFile(uploadfile);
+				String image = files.next();
+				MultipartFile mfile = mrequest.getFile(image); //param 이 image 인 파일 정보 
 				String filename = mfile.getOriginalFilename();
 				System.out.println(filename);
 				
 				mfile.transferTo(new File(path + filename)); //원하는 위치에 해당 파일명으로 저장됨
-				memberdto.setImage(filename);
+				memberdto.setImage(memberdto.getImage());
 				
 				updatemember = service.updateMemberInfo(memberdto);
 				model.addAttribute("updatemember", updatemember);
 			}
-			
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
