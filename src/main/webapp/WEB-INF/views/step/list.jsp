@@ -219,7 +219,7 @@
 	          },
 	          series: [
 	              {
-	                  name: '지나간',
+	                  name: '미완료 작업',
 	                  type: 'bar',
 	                  stack: '일',
 	                  label: {
@@ -227,10 +227,10 @@
 	                          show: true
 	                      }
 	                  },
-	                  data: [40]
+	                  data: [<%=(Integer)request.getAttribute("unfinishedtask")%>]
 	              },
 	              {
-	                  name: '남은일',
+	                  name: '완료된 작업',
 	                  type: 'bar',
 	                  stack: '일',
 	                  label: {
@@ -238,7 +238,7 @@
 	                          show: true
 	                      }
 	                  },
-	                  data: [60]
+	                  data: [<%=(Integer)request.getAttribute("completedtask")%>]
 	              }
 	          ],
 	          color:['#96add6','#c4d97f'],
@@ -279,7 +279,7 @@
 	          },
 	          series: [
 	              {
-	                  name: '지나간',
+	                  name: '지난 일',
 	                  type: 'bar',
 	                  stack: '일',
 	                  label: {
@@ -287,10 +287,10 @@
 	                          show: true
 	                      }
 	                  },
-	                  data: [10]
+	                  data: [<%=(Integer)request.getAttribute("thepast")%>]
 	              },
 	              {
-	                  name: '남은일',
+	                  name: '남은 일',
 	                  type: 'bar',
 	                  stack: '일',
 	                  label: {
@@ -298,7 +298,7 @@
 	                          show: true
 	                      }
 	                  },
-	                  data: [4]
+	                  data: [<%=(Integer)request.getAttribute("therest")%>]
 	              }
 	          ],
 	          color:['#96add6','#c4d97f'],
@@ -329,11 +329,11 @@
 	                  radius : '60%',
 	                  center: ['45%', '50%'],
 	                  data:[
-	                      {value:3, name:'미지정'},
-	                      {value:4, name:'다음주 이후'},
-	                      {value:5, name:'이번주까지'},
-	                      {value:6, name:'완료'},
-	                      {value:7, name:'기한만료'}
+	                      {value:<%=(Integer)request.getAttribute("noday")%>, name:'미지정'},
+	                      {value:<%=(Integer)request.getAttribute("afternextweek")%>, name:'다음주 이후'},
+	                      {value:<%=(Integer)request.getAttribute("untilthisweek")%>, name:'이번주까지'},
+	                      {value:<%=(Integer)request.getAttribute("completedtask")%>, name:'완료'},
+	                      {value:<%=(Integer)request.getAttribute("overduetask")%>, name:'기한만료'}
 	                  ],
 	                  itemStyle: {
 	                      emphasis: {
