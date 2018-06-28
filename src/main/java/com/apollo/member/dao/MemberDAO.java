@@ -53,7 +53,6 @@ public interface MemberDAO {
 	 작성자명 : 박 민 식
 	 */
 	public ArrayList<MemberDTO> selectAssigneesBySid(int sid);
-<<<<<<< HEAD
 	
 	/**
 	 * 
@@ -84,7 +83,6 @@ public interface MemberDAO {
 	 작성자명 : 김 래 영
 	 */
 	public ArrayList<MemberDTO> selectMemberList(String mid);
-=======
 
 	/**
 	 * 
@@ -93,5 +91,4 @@ public interface MemberDAO {
 	 작성자명 : 박 민 식
 	 */
 	public ArrayList<MemberDTO> getSearchMembers(HashMap<String, String> map);
->>>>>>> develop
 }
