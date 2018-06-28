@@ -305,6 +305,7 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 		        	   if(count == 1) {
 		        		   $('#stepdeletehidden').click();
 		        		   return;
+		        		   
 		        	   } 
 		        	   
 		        	   $.ajax(
@@ -419,8 +420,9 @@ $(document).on("click",".addbtn_taskinstep",function(){
 		           success : function(rdata){
 		        	   
 		        	   console.log(rdata.result);
-		        	   $('#step_add_modal_in_taskmodal_dismiss').click();
-		        	   
+		        	  $('#step_add_modal_in_taskmodal_dismiss').click();
+		        	  //$('#step_add_modal_in_taskmodal').css('visibility','hidden');
+		        	  
 		        	   $.ajax(
 		        		       {
 		        		           type : "post",
@@ -442,8 +444,6 @@ $(document).on("click",".addbtn_taskinstep",function(){
 		        		        	});
 		        		        	snames += '<i data-toggle="modal" data-target="#step_add_modal_in_taskmodal" id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 		        		        	$('#Task_Modal_snames').append(snames);
-		        		        	   
-		        		        	
 		        		        	
 		        		           } // end-success
 		        		        }); // end-ajax
