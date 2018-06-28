@@ -7,16 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TestController {
-	
 
-
-	
-
-/*	@RequestMapping("/table.htm")
-	public String projectTable() {
-		return "project/table";
-	}*/
-	
 
 	@RequestMapping("/report.htm")
 	public String report() {

@@ -3,6 +3,28 @@ $(function() {
 		
 	makeSideProjectDir();
 	
+	// 사이드바 디렉토리 화살표 변경
+	$(document).on("click",".side-dir-arrow",function(){
+		console.log($(this).attr("aria-expanded"));
+		if($(this).attr("aria-expanded") =="true"){
+			$(this).removeClass("fa-angle-right").addClass("fa-angle-down");
+		}else{
+			$(this).removeClass("fa-angle-down").addClass("fa-angle-right");
+		}
+	});
+	
+	$(document).on("click",".side-project",function(){
+		$(".side-project").css("background-color","transparent");
+		$(".side-step").css("background-color","transparent");
+		$(this).css("background-color","#e0e0e0");
+	});
+	
+	$(document).on("click",".side-step",function(){
+		$(".side-project").css("background-color","transparent");
+		$(".side-step").css("background-color","transparent");
+		$(this).css("background-color","#e0e0e0");
+	})
+	
 	
 	//스텝 추가 클릭시 프로젝트 멤버 리스트 가져오기
 	$(document).on("click","#side-insert-step",function(){ 
@@ -20,7 +42,6 @@ $(function() {
 		        	   $("#insert-step-methodologyid").val(methodologyid);
 		        	   $("#insert-step-pid").val(pid);
 		        	   $("#insert-step-fid").val(fid);
-		               console.log(data.memberlist);
 	            	   var optiondefault = jQuery("<option>",{
 	            		   "text":"책임자를 선택하세요", //default 값 
 	            		   "value":""
@@ -32,7 +53,6 @@ $(function() {
 		            		   "value":this.mid,
 		            		   "text":this.mname
 		            	   })
-		            	   	console.log(option);
 		            	   $('#add-step-mgr-assignee').append(option);
 		               });
 		              
@@ -47,29 +67,40 @@ $(function() {
 			$(".add-step-name").focus();	
 			return false;
 		 } else if($('#add-step-mgr-assignee').val() == ""){
-			 alert("책입자를 선택하세요.");
+			 alert("책임자를 선택하세요.");
 			 return false;
 		 }
 		 var newstep = $('#step-add-form').serialize();
-		 
 		 $.ajax({
+			 
 	             type:"POST",
 	             url:"insertstep.htm",
 	             data:newstep,
 	             dataType:"json",
 	             success:function(data){
-	            	 console.log(data);
 	            	 if(data.stepresult > 0){
-						 alert("스텝 생성이 완료되었습니다!");
+						alert("스텝 생성이 완료되었습니다!");
+						var step = makeSideStep(data.stepDTO);
+						console.log(step);
+						
+						if($('#insert-step-fid').val() == "") {
+							(data.stepDTO.sname=="백로그")?$(step).prependTo("#p-dir"+step.pid):$(step).appendTo("#p-dir"+data.stepDTO.pid);
+							$(".close").click();
+						} else {
+							$(step).appendTo("#f-dir"+data.stepDTO.fid);
+							$(".close").click();
+						}
 					 }else {
+						 
 						 alert("스텝 생성에 실패했습니다");
+						 $(".close").click();
 					 }	
 					 $('.add-step-name').val("");
 					 $('#insert-step-sday-id').val("");
 					 $('#insert-step-eday-id').val("");
 					 $('#step-detail').val("");
 					 $(".close").click();
-					 //$('#project-insert').close();
+
 	             } // end - success
 	          	,error:function(error){
 	          		console.log(error);
@@ -80,9 +111,6 @@ $(function() {
 	
 	}); //end-step	
 
-	
-	
-	
 	
 		// 사이드바 프로젝트 우클릭 
 		$(document).on("contextmenu",".side-project",function() {
@@ -295,7 +323,6 @@ $(function() {
 		});
 		
 		// 사이드바 스텝 이동 버튼 클릭시
-		
 		$(document).on("click","#side-step-move",function(){
 			$("#move-step-select").selectmenu({
 											width:"70%",
@@ -343,11 +370,11 @@ $(function() {
 					if(data.result==1){
 						var step = data.stepDTO;
 						if(step.fid !=""){
-							$("#s"+step.sid).remove().appendTo("#f-dir"+step.fid);
+							$("#s"+step.sid).addClass("side-step-in-folder").remove().appendTo("#f-dir"+step.fid);
 						}else{
 							var default_ = $("#s"+step.sid).parents("div.side-dir-project")[0];
 							console.log(default_);
-							$("#s"+step.sid).remove().appendTo(default_);
+							$("#s"+step.sid).removeClass("side-step-in-folder").remove().appendTo(default_);
 						}
 					}else{
 						alert("Step이동에 실패하였습니다.");
@@ -427,7 +454,6 @@ $(function() {
 			return false;
 		 }
 		 var newproject = $("#project-add-form").serialize(); //serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
-		 console.log(newproject);
 
 		 $.ajax({
 			 url:"insertproject.htm",
@@ -469,7 +495,6 @@ $(function() {
 			return false;
 		}
 		var newfolder = $('#insert-folder-form').serialize();
-		 console.log(newfolder);
 		 
 		 $.ajax({
 
@@ -478,18 +503,19 @@ $(function() {
                 data:newfolder,
                 dataType:"json",
                 success:function(data){
-                   console.log(data);
                    if(data.folderresult > 0){
                    alert("폴더 생성이 완료되었습니다!");
+                   makeSideFolder(data.folderDTO);
+                   //console.log(folder);
                    $(".close").click();
                 }else {
                    alert("폴더 생성에 실패했습니다");
                 }   
-                $('.add-step-name').val("");
+                $('#add-folder-name').val("");
                 $('.close').click();
                
                 } // end - success
-
+		 		
              	,error:function(error){
              		console.log(error);
              	
@@ -510,8 +536,6 @@ $(function() {
 	            data:{fid:fid},
 	            dataType:"json",
 	            success:function(data){
-	                console.log(data);
-	                console.log(data.selectfolder);
 	                $('#update-folder-fid').val(fid);
 	                $('#update-folder-pid').val(pid);
 	                $('#update-folder-name').val(data.selectfolder.fname);
@@ -529,8 +553,6 @@ $(function() {
 	           data:updatefolder,
 	           dataType:"json",
 	           success:function(data){
-	               console.log(data);
-	               console.log(data.updatefolder);
 	               
 	               if(data.updatefolder > 0){
 	                   alert('폴더 수정이 완료되었습니다!');
@@ -547,15 +569,12 @@ $(function() {
 	   $(document).on("click","#side-delete-folder",function(){
 	       var custom_menu =  $(this).parents("ul.custom-menu")[0];
 	       var fid = $(custom_menu).find("input[name=fid]").val();
-	       console.log(fid);
 	       $.ajax({
 	           type:"post",
 	           url:"selectfolder.htm",
 	            data:{fid:fid},
 	            dataType:"json",
 	            success:function(data){
-	                console.log(data);
-	                console.log(data.selectfolder);
 	                $('#delete-folder-fid').val(fid);
 	                
 	            }
@@ -564,21 +583,20 @@ $(function() {
 	   
 	   //폴더 modal 에서 삭제 버튼 클릭시 이벤트
 	   $('#delete-folder-btn').click(function() {
+		   var fid = $('#delete-folder-fid').val();
 	       var deletefolder = $('#delete-folder-form').serialize();
-	       console.log(deletefolder);
 	       $.ajax({
 	           type:"post",
 	           url:"deletefolder.htm",
 	           data:deletefolder,
 	           dataType:"json",
 	           success:function(data){
-	               console.log(data);
-	               console.log(data.deletefolder);
 	               
 	               if(data.updatefolder > 0){
 	                   alert('폴더 삭제가 실패되었습니다');
 	               }else {
 	                   alert('폴더 삭제이 완료되었습니다!');
+	                   $("#f"+fid).remove();
 	               }
 	               $('.close').click();
 	           }
@@ -606,7 +624,6 @@ function selectFolderList(pids){
       dataType:"json",
       data: {'pids':pids},
       success:function(data){
-         console.log(data);
       },
       error:function(error){
          console.log(error);
@@ -631,7 +648,6 @@ function selectStepList(pids){
       dataType:"json",
       data: {'pids':pids},
       success:function(data){
-         console.log(data);
       },
       error:function(error){
          console.log(error);
@@ -647,7 +663,7 @@ function selectStepList(pids){
 /**
  * 
  날      짜 : 2018. 6. 19.
- 기      능 : 프로젝트 생성이 없을 떄 실행되는 함수
+ 기      능 : 프로젝트 생성이 없을 때 실행되는 함수
  작성자명 : 김 래 영
  */
 function noProjectPage() {
@@ -672,7 +688,6 @@ function noProjectPage() {
  */
 
 function selectProjectList(){
-   console.log("프로젝트 실행");
    $("#working-project").empty();
    $("#finished-project").empty();
    $("#trash-bin").empty();
@@ -683,7 +698,6 @@ function selectProjectList(){
       dataType:"json",
       type:"post",
       success:function(data){
-        console.log(data);
          if(data!=null){ /// 참여중인 프로젝트가 있을 경우 
             $(data.projectlist).each(function(index,el){
                pids.push(el.pid);
@@ -719,14 +733,32 @@ function MakeprojectWrapper(project){
     var hidden = jQuery("<input>",{"type":"hidden",
                             "name":"methodologyid",
                             "value":project.methodologyid});
-    var span = jQuery("<span>",{"class":"glyphicon glyphicon-duplicate", 
+    var i = jQuery("<i>",{"class":"side-dir-arrow fas fa-angle-right", 
        "data-toggle":"collapse",
        "data-target":"#p-dir"+project.pid})
+
+     var methodology;
+	 switch (project.methodologyid){
+	 case 1: 
+		 methodology="W";
+		 break;
+	 case 2:
+		 methodology="A";
+		 break;
+	 case 3:	 
+		 methodology="C";
+		 break;
+	}   
+       
+	var projecticon= jQuery("<div>",{"class":"side-dir-project-icon"});
+    var b = jQuery("<b>",{"text":methodology, "css":{"font-size":"3px","color":"white"}});
+
+    $(b).appendTo(projecticon);   
+       
     var div = jQuery("<div>",{"class":"side-dir-project  collapse",
        "id": "p-dir"+project.pid});
        
-    console.log(project.pstatuscode);
-    $(a).prepend(span);
+    $(a).prepend(i,projecticon);
     $(wrapper).append(a).append(div).append(hidden);
     return wrapper;
 }
@@ -765,22 +797,20 @@ function makeSideSubDir(pids){
 
       var folders = folders[0].folderlist; //폴더 list
       var steps= steps[0].steplist; // 스텝 list
-      console.log(folders);
-      console.log(steps);
       ///// 먼저 폴더를 화면에 뿌려준다. 
       if(folders!=null){ //폴더가 하나라도 있다면 만들어 붙혀주세요
          
          $(folders).each(function(index,folder){
         	var wrapper_div = jQuery("<div>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
             var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
-            var span = jQuery("<span>",{"class":"glyphicon glyphicon-folder-close", 
+            var i = jQuery("<i>",{"class":"side-dir-arrow fas fa-angle-right", 
                                  "data-toggle":"collapse",
                                  "data-target":"#f-dir"+folder.fid});
+            var foldericon = jQuery("<i>",{"class":"side-dir-folder-icon fas fa-folder"});
             var div = jQuery("<div>",{"class":"side-dir collapse",
                                 "id": "f-dir"+folder.fid});
-            console.log(folder.pid);
             
-            $(a).prepend(span).appendTo(wrapper_div);
+            $(a).prepend(i,foldericon).appendTo(wrapper_div);
             $(div).appendTo(wrapper_div);
             $(wrapper_div).appendTo($('#p-dir'+folder.pid));
          })
@@ -796,12 +826,13 @@ function makeSideSubDir(pids){
                            "id":"s"+step.sid,
                            "text":step.sname
                            });
-            var span = jQuery("<span>",{"class":"glyphicon glyphicon glyphicon-list-alt"})
+            var i = jQuery("<i>",{"class":"side-dir-step-icon far fa-file-alt"})
 
-            $(a).prepend(span);
+            $(a).prepend(i);
       
             if(step.fid !=null){ // 스텝이 속해있는 폴더가 있다면 폴더 밑에 넣어주고 
-               $(a).appendTo("#f-dir"+step.fid);
+            	
+               $(a).addClass("side-step-in-folder").appendTo("#f-dir"+step.fid);
             }else{ //속해있는 폴더가 없다면, Default경로, 즉 프로젝트 밑으로 넣어준다.
                (step.sname=="백로그")?$(a).prependTo("#p-dir"+step.pid):$(a).appendTo("#p-dir"+step.pid);
             }
@@ -810,6 +841,44 @@ function makeSideSubDir(pids){
       
    })
 }   
+/**
+ * 
+ 날      짜 : 2018. 6. 25.
+ 기      능 : 폴더 업데이트 후 바로 반영되는 함수
+ 작성자명 : 김 래 영
+ */
+function makeSideFolder(folder) {
+	var wrapper_div = jQuery("<div>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
+    var a = jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
+    var span = jQuery("<span>",{"class":"glyphicon glyphicon-folder-close", 
+                         "data-toggle":"collapse",
+                         "data-target":"#f-dir"+folder.fid});
+    var div = jQuery("<div>",{"class":"side-dir collapse",
+                        "id": "f-dir"+folder.fid});
+    console.log(folder.pid);
+    
+    $(a).prepend(span).appendTo(wrapper_div);
+    $(div).appendTo(wrapper_div);
+    $(wrapper_div).appendTo($('#p-dir'+folder.pid));
+}
+
+/**
+ * 
+ 날      짜 : 2018. 6. 25.
+ 기      능 : 스텝 업데이트 후 바로 반영되는 함수
+ 작성자명 : 김 래 영
+ */
+function makeSideStep(step) {
+	 var a =jQuery("<a>",{
+         "class":"side-step",
+         "id":"s"+step.sid,
+         "text":step.sname
+         });
+	 var span = jQuery("<span>",{"class":"glyphicon glyphicon glyphicon-list-alt"})
+	 $(a).prepend(span);
+	 
+	 return a;
+}
 
 
 /**
@@ -825,7 +894,6 @@ function updateProject(data){
       data:data,
       dataType:"json",
       success:function(data){
-         console.log(data);
       }
    })
    return ajax;

@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
 <script>
 	
 </script>
@@ -32,19 +33,19 @@
 									<div class="modal-title">
 										<p>방법론</p>
 									</div>
-										<input type="radio" id="method" name="methodologyid" value="3"
+										<input type="radio" id="method1" name="methodologyid" value="3"
 										checked><span class="method"> Customizing</span> <br>
 									<div>
 										<!-- Customizing 설명 작성  -->
 										가나다라마바사아자차카타파하 커스텀마이징 설명작성 필요
 									</div>
-									<br> <input type="radio" id="method" name="methodologyid" value="2"><span
+									<br> <input type="radio" id="method2" name="methodologyid" value="2"><span
 										class="method"> Agile</span><br>
 									<div>
 										<!-- Agile 설명 작성  -->
 										가나다라마바사아자차카타파하 애자일 설명작성 필요
 									</div>
-									<br> <input type="radio" id="method" name="methodologyid" value="1"><span
+									<br> <input type="radio" id="method3" name="methodologyid" value="1"><span
 										class="method"> Waterfall</span><br>
 									<div>
 										<!-- Waterfall 설명 작성  -->
@@ -702,6 +703,95 @@
 			</div>
 		</div>
 	</div>
+
+<!-- 개인정보수정 Modal -->
+<div class="modal fade" id="edit-profile" role="dialog">
+	<div class="modal-dialog modal-edit-profile-dialog">
+		<div class="modal-content modal-edit-profile-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">개인정보수정</h4>
+			</div>
+			<div class="modal-body">
+				<form id="edit-profile-form">
+					<fieldset>
+						<div class="edit-profile-part1">
+							<br>
+							<div>
+								<div id="edit-profile-img-content">
+									<!-- <img name="image" id="edit-profile-modal-img" src=""> -->
+									<input type="file" name="image" id="edit-profile-image">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">이름</div>
+									<input type="text" name="mname" id="edit-profile-mname">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">이메일</div>
+									<input type="text" name="mid" id="edit-profile-mid"
+										readonly="readonly">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">인증키</div>
+									<input type="text" name="apollokey" id="edit-profile-apollokey">
+									<input class="btn" id="profile-apollokey-check" type="button" value="인증확인">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">휴대폰 번호</div>
+									<input type="text" name="pnum" id="edit-profile-pnum">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">부서명</div>
+									<input type="text" name="deptname" id="edit-profile-deptname">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">직위</div>
+									<input type="text" name="position" id="edit-profile-position">
+								</div>
+								<br>
+							</div>
+						</div>
+						<div align="center">
+							<input type="button" class="btn add-btn"
+								id="update-edit-profile-btn" value="수정">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn cancel-btn" data-dismiss="modal"
+								value="취소">
+						</div>
+					</fieldset>
+				</form>
+				<hr id="edit-memberinfo-hr">
+				<form id="edit-pwd-form" method="post">
+					<fieldset>
+						<div class="edit-profile-part2">
+							<h4>비밀번호 변경</h4>
+							<br>
+							<div class="edit-profile-title">현재 비밀번호</div>
+							<input type="password" name="pwd" id="edit-profile-cpwd">
+							<br>
+							<div class="edit-profile-title">변경 비밀번호</div>
+							<input type="password" name="pwd" id="edit-profile-upwd">
+							<br>
+							<div class="edit-profile-title">변경 비밀번호 확인</div>
+							<input type="password" name="pwd2" id="edit-profile-upwd2">
+							<br>
+						</div>
+						<div align="center">
+							<input type="button" class="btn add-btn" id="update-pwd-btn"
+								value="수정">&nbsp;&nbsp;&nbsp; <input type="button"
+								class="btn cancel-btn" data-dismiss="modal" value="취소">
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 	<!-- Assignee 추가 Modal -->

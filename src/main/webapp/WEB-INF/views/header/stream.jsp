@@ -75,7 +75,7 @@ $(function() {
 						<div class="stream_division"></div>
 					</c:if>
 					
-					<span style="padding-top: 10px; padding-left: 10px;"><span style="font-size: 25px;">${streamlists.tname}</span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<span style="padding-top: 10px; padding-left: 10px;"><span style="font-size: 25px;"><b>${streamlists.tname}</b></span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					<span style="font-size: 15px; color: #666;">&#60;</span>&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="sidlist" items="${sidlist}">
 						<c:if test="${streamlists.tid eq sidlist.tid}">

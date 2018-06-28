@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 
 <div class="container-fluid">
@@ -37,7 +38,8 @@
 									<td style="padding-left: 30px">┗ ${task.tname}</td>
 									<td class="project-table-day">${fn:substring(task.sday,0,10)}</td>
 									<td class="project-table-day">${fn:substring(task.eday,0,10)}</td>
-									<td class="project-table-day">${task.eday - task.sday}</td>
+									<td>${task.eday  - task.sday}</td>
+									
 									<td id="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
 								</tr>
 							</c:if>

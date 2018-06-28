@@ -7,18 +7,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.View;
-
 import com.apollo.member.service.MemberService;
 import com.apollo.vo.AuthkeyDTO;
 import com.apollo.vo.MemberDTO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.velocity.app.VelocityEngine;
@@ -354,7 +364,6 @@ public class MemberController {
 	 */
 	@RequestMapping("/profilemember.htm")
 	public View getProfileInfoMember(String mid, Model model) {
-		System.out.println("mid : " + mid);
 		MemberDTO profileinfo = null;
 		try {
 			profileinfo = service.getProfileInfoMember(mid);
@@ -365,4 +374,143 @@ public class MemberController {
 		}
 		return jsonview;
 	}
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 개인정보수정을 위한 정보 불러오기
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping("/updatememberinfo.htm")
+	public View updateMemberInfo(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		String mid = (String) request.getSession().getAttribute("mid");
+		model.addAttribute("mid", mid);
+		MemberDTO updatememberinfo = null;
+		
+		try {
+			updatememberinfo = service.updateMemberInfo(mid);
+			model.addAttribute("updatememberinfo", updatememberinfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 25.
+	 기      능 : 개인정보수정
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/updatemember.htm", method=RequestMethod.POST)
+	public View updateMemberInfo(MemberDTO memberdto, Model model, MultipartHttpServletRequest mrequest) {
+		int updatemember = 0;
+		System.out.println(memberdto);
+		
+		//경로 설정
+		String path = "C:\\bitcamp104\\Final\\Apollo\\src\\main\\webapp\\profile";
+		
+		File dir = new File(path);
+		if (!dir.isDirectory()) {
+			dir.mkdirs();
+		} //경로가 지정되어 있지 않은 경우 자동 폴더 생성
+		
+		try {
+			Iterator<String> files = mrequest.getFileNames(); //업로드된 파일들의 이름 목록 가져오기
+			while(files.hasNext()) {
+				String image = files.next();
+				MultipartFile mfile = mrequest.getFile(image); //param 이 image 인 파일 정보 
+				String filename = mfile.getOriginalFilename();
+				System.out.println(filename);
+				
+				mfile.transferTo(new File(path + filename)); //원하는 위치에 해당 파일명으로 저장됨
+				memberdto.setImage(memberdto.getImage());
+				
+				updatemember = service.updateMemberInfo(memberdto);
+				model.addAttribute("updatemember", updatemember);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 개인정보수정 modal 에서 인증키 확인
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value = "/updatekeycheck.htm", method = RequestMethod.POST)
+	public View updatekeycheck(String apollokey, Model model) {
+		int result = service.keycheck(apollokey);
+		if (result > 0) {
+			System.out.println("키 인증 성공");
+			model.addAttribute("result", "success");
+		} else {
+			System.out.println("키 인증 실패");
+			model.addAttribute("result", "fail");
+		}
+		return jsonview;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 개인정보수정 modal 에서 비밀번호 변경
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/updatepwd.htm", method=RequestMethod.POST)
+	public View updatePwd(String cpwd, String upwd, HttpServletRequest request, Model model, HttpSession session) {
+		String mid = (String) request.getSession().getAttribute("mid");
+		model.addAttribute("mid", mid);
+		
+		MemberDTO memberdto = null;
+		int result = 0;
+		int count =0;
+		try {
+			//member 정보 불러오기
+			memberdto = service.updateMemberInfo(mid);
+			
+			//암호화된 비밀번호를 DB에서 불러오기
+			if(bCryptPasswordEncoder.matches(cpwd, memberdto.getPwd())) {
+				result = 1; //현재 비밀번호와 DB 비변이 일치할 경우 1을 리턴
+			}else {
+				result = 0; //불일치할 경우 0 리턴
+			}
+			model.addAttribute("result", result);
+	
+			//비밀번호 업데이트하기 
+			if(result == 1) { // 현재 비밀번호와 DB에 저장된 비밀번호가 일치할 경우 
+				memberdto.setPwd(this.bCryptPasswordEncoder.encode(upwd));
+				count = service.updatePwd(memberdto);
+				System.out.println("비밀번호 변경 완료");
+			}
+			model.addAttribute("count", count);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 같은 인증키를 가진 사원목록 가져오기
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping("/selectmemberlist.htm")
+	public String selectMemberList(HttpServletRequest request, Model model, HttpSession session) {
+		String mid = (String) request.getSession().getAttribute("mid");
+		model.addAttribute("mid", mid);
+		
+		ArrayList<MemberDTO> memberlist = null;
+		try {
+			memberlist = service.selectMemberList(mid);
+			model.addAttribute("memberlist", memberlist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "memberlist";
+		
+	}
+	
 }
