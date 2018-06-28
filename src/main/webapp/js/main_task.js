@@ -420,6 +420,7 @@ $(document).on("click",".addbtn_taskinstep",function(){
 		        	   
 		        	   console.log(rdata.result);
 		        	   $('#step_add_modal_in_taskmodal_dismiss').click();
+		        	 
 		        	   
 		        	   $.ajax(
 		        		       {
