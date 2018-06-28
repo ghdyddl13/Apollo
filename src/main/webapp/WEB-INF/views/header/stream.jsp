@@ -60,20 +60,25 @@ $(function() {
 
 <div class ="inbox-main-container">
 		<div class ="inbox-section-left" id="left" style="overflow:auto;">
-		<div class="stream-main-container">
-		<span class = "stream_header">STREAM</span><select class="form-control" id="pidselect" name="book_no" style="width:200px; float: right; margin-top: 10px; margin-bottom: 10px;margin-right: 10px;">
+		<div class="stream_header_container"><span class = "stream_header">STREAM</span><select class="form-control" id="pidselect" name="book_no" style="width:200px; float: right; margin-top: 10px; margin-bottom: 10px;margin-right: 10px;">
 		
 		<c:forEach var="pidlist" items="${pidlist}">
 			<option value="${pidlist.pid}">${pidlist.pname}</option>
 		</c:forEach>	
-	</select>
+	</select></div>
+		<div class="stream-main-container">
+		
 	<div class="stream_main" style="overflow: auto;">
+	
 		<c:forEach var="streamlists" items="${streamlist}" varStatus="status">
+			<!-- <div class = "stream_task_division"> -->
 			<c:if test="${streamlist[status.index-1].tname ne streamlists.tname}">
+			
 				<c:set var="count" value="${count + 1}" />
-					<c:if test="${count > 1}">
+				<%-- 	<c:if test="${count > 1}"> --%>
+						
 						<div class="stream_division"></div>
-					</c:if>
+					<%-- </c:if> --%>
 					<span style="padding-top: 10px; padding-left: 10px;"><span style="font-size: 25px;"><b>${streamlists.tname}</b></span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					<span style="font-size: 15px; color: #666;">&#60;</span>&nbsp;&nbsp;&nbsp;&nbsp;
 					<c:forEach var="sidlist" items="${sidlist}">
@@ -85,20 +90,14 @@ $(function() {
 					<center><h4>수정사항</h4></center>
 					<hr class = "stream_hr">
 			</c:if>
-			
+			<!-- </div> -->
 			<div class = "stream_list">
 				<span><img src="img/user.png" width="30px" height="30px"></span>
 				<span style="flex: 1 1 auto;" class = "stream_comments"><c:if test="${streamlists.cmtkind eq 0}">${streamlists.mname} : </c:if>${streamlists.comments}</span>
-				<div style="flex: 0 0 auto; float: right;">${streamlists.cmtmtime}</div> 
-				<%-- task 아이디 : ${streamlists.tid}<br> --%>
-				<%-- 코멘트 아이디 : ${streamlists.cmtid}<br>  --%>
-				<%-- 테스크 이름 : ${streamlists.tname}<br> --%>
-				
-				
-			</div>
-			
+				<div style="flex: 0 0 auto; float: right;">${streamlists.cmtmtime}</div> 						
+			</div>		
+		
 		</c:forEach>
-
 	</div>
 </div>
 		

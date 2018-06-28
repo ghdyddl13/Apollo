@@ -230,6 +230,18 @@ public class MemberService {
 		}
 		return result;
 	}
-	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 28.
+	 기      능 : 시험판 기간 제한
+	 작성자명 : 신 호 용
+	 */
+	public int freeTrialCheck(String mid){
+		System.out.println("service freeTrialCheck");
+		int result = 0;
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		result = dao.freeTrialCheck(mid);
+		return result;
+	}
 	
 }
