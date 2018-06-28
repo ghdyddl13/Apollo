@@ -14,6 +14,9 @@
 
 <!-- chart js 를 위한 cdn-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<!-- ECHART.JS CDN-->
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+
 <!-- SIDEBAR JAVASCRIPT -->
 <script type="text/javascript" src="js/sidebar.js"></script>
 <!-- AWESOMEFONT를 위한 cdn -->

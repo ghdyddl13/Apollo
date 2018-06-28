@@ -18,50 +18,6 @@ $(function() {
 			success:function(data){
 				 $("#main-box").empty();
 				 $("#main-box").append(data);
-				 	
-					/////////////////////////////////STATUS OF TASK GRAPH/////////////////////////////////////////
-					let ctx = document.getElementById('Step-list-DonutChart').getContext('2d');
-					let myDoughnutChart = new Chart(ctx, {
-					
-					      type: 'doughnut',
-					      data: {
-					              datasets: [{
-					                  data: [3, 4, 5, 6, 7],
-					                  backgroundColor: [
-					                                    'rgba(190, 190, 190, 1)',
-					                                    'rgba(241, 196, 15, 1)',
-					                                    'rgba(244, 7, 7, 1)',
-					                                    'rgba(52, 152, 219, 1)',
-					                                    'rgba(46, 204, 113, 1)'
-					                  ],
-					                  borderColor:[
-					                                'rgba(190, 190, 190, 1)',
-					                                'rgba(241, 196, 15, 1)',
-					                                'rgba(244, 7, 7, 1)',
-					                                'rgba(52, 152, 219, 1)',
-					                                'rgba(46, 204, 113, 1)'
-					                  ],
-					                  borderWidth: 1
-					              }],
-					              labels:
-					        ['미지정','다음주 이후','이번주 까지','완료','기한 만료']
-					      },
-					      options: {
-					                maintainAspectRatio: false,
-					                cutoutPercentage: 50,
-					                legend: {
-					                          display: true,
-					                          position: 'right',
-					                          labels: {
-					                                    fontSize: 12,
-					                                    fontFamily: 'sans-serif',
-					                                    fontColor: '#ffffff',
-					                                    fontStyle: 'bold'
-					                }
-					      }
-					      }
-					});
-
 			}
 		})
     });
@@ -389,10 +345,91 @@ $(function() {
 	
 	
 	/////////////////////////////////PEOPLE SELECTING BOTTON/////////////////////////////////////////
-	$(document).on("click","#people-button",function(){
-	  $(".list-header-filter-people").css("background-color","#dfe6f0")
-	
-	});
+    $(document).on("click","#people-button-tag",function(){
+        let p =$("#people-button");
+        let position = p.position();
+        $(".list-header-filter-people").css("background-color","#dfe6f0")
+        $(".list-header-filter-people-selecting").css({"visibility":"visible","left":position.left,"top":position.top+24});
+      });
+
+      // 사이드 우클릭 메뉴 닫는 함수
+      $(document).bind("mousedown", function(e) {
+        // If the clicked element is not the menu
+        if (!$(e.target).parents(".list-header-filter-people-selecting").length > 0) {
+        // Hide it
+          $("#people-button").css("background-color","");
+          $("#filter-people-input").val("");
+          $(".list-header-filter-people-selecting").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+        }
+      });
+      $(document).on("click",".list-header-filter-people-remove",function(params) {
+        $("#people-button").empty();
+        $("#people-button").removeClass("list-header-filter-people-selected").addClass("list-header-filter-people");
+        $("#people-button").css("background-color","")
+        $("#people-button").append("<span class='list-header-filter-people-tag' id='people-button-tag'>TO:ALL</span>");
+      })
+
+      $(document).on("click",".list-header-filter-people-tagwrap",function() {
+        let mid= $.trim($(this).children(".list-header-filter-people-tag").children(".list-header-filter-people-info").children(".list-people-email").text());
+        let mname=$.trim($(this).children(".list-header-filter-people-tag").children(".list-header-filter-people-info").children(".list-people-name").text());
+        console.log(mid+"/"+mname);
+        $(".list-header-filter-people-selecting").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+        $("#people-button").css("background-color","#dfe6f0")
+        $("#people-button").empty();
+        $("#people-button").append("<span class='list-header-filter-people-tag-selected list-header-filter-people-tag' id='people-button-tag'>TO: "+mname+"</span><span class='list-header-filter-people-remove'></span>");
+        $("#people-button").removeClass("list-header-filter-people").addClass("list-header-filter-people-selected")
+      })
+      var data = [{"mname":"jinwoo lee","mid":"sangsang0607@naver.com"},{"mname":"minsik park","mid":"pms123@naver.com"},{"mname":"jungkwon kim","mid":"sirhomme@naver.com"},{"mname":"hoyong","mid":"yongyong2@naver.com"}]
+      $(document).on("keyup","#filter-people-input",function(event) {
+        var piece=$.trim($(this).val());
+        let nametag='';
+        $(".list-header-filter-people-tagscontainer").empty();
+        $.each(data,function(index,element) {
+          let name = element.mname;
+          let id = element.mid;
+          let namecheck=name.indexOf(piece);
+          let emailcheck=id.indexOf(piece);
+          if(namecheck==-1&&emailcheck==-1){
+            //다른 연산 없이 그냥 패스
+          }else{
+            name = name.replace(piece,"<b>"+piece+"</b>");
+            id= id.replace(piece,"<b>"+piece+"</b>");
+            nametag+= '<div class="list-header-filter-people-tagwrap"><div class="list-header-filter-people-tag"><div class="list-header-filter-people-image">';
+            nametag+='<img class="list-people-image"src="img/frog.png" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
+            nametag+= name;
+            nametag+= '</div><div class="list-people-email">';
+            nametag+= id;
+            nametag+= '</div></div></div></div>';
+          }
+
+        })
+        $(".list-header-filter-people-tagscontainer").append(nametag);
+        
+        if(event.which==13){
+          if(piece===""){
+            //문자열이 빈값이면 발생하는 함수가 아무것도 없음
+          }else{
+            console.log(piece);
+          $("#filter-people-input").val("");
+            /*
+            $.ajax(
+                    {
+                      type:"POST",
+                      url:"",
+                      date:"",
+                      success:function(data) {
+
+                      }
+                    }
+            )
+            */
+          }
+        }else if(event.which==27){
+          $("#people-button").css("background-color","");
+          $("#filter-people-input").val("");
+          $(".list-header-filter-people-selecting").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+        }
+      });
 	
 	/////////////////////////////////SORTING BOTTON//////////////////////////////////////////////////
 	$(document).on("click","#sorting-button",function() {
