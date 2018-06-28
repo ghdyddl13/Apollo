@@ -169,21 +169,3 @@ function deletetaskinstep(sid) {
 	return ajax;
 }
 
-
-/**
- * 
- 날      짜 : 2018. 6. 25.
- 기      능 : 스텝 업데이트 후 바로 반영되는 함수
- 작성자명 : 김 래 영
- */
-function makeSideStep(step) {
-	 var a =jQuery("<a>",{
-         "class":"side-step",
-         "id":"s"+step.sid,
-         "text":step.sname
-         });
-	 var span = jQuery("<span>",{"class":"glyphicon glyphicon glyphicon-list-alt"})
-	 $(a).prepend(span);
-	 
-	 return a;
-}

@@ -189,9 +189,9 @@ function makeTimelineTable(tasks){
 														 "data-target" : "#Task_RUD_Modal"
 														 })
 		var td_tstatus = jQuery("<td>",{"text": item.tstatus,
-										"css":{"background-color":item.color,
-											   "color":"white",
-											   "font-size":"10px",
+										"css":{
+											   "color":item.color,
+											   "font-size":"12px",
 											   "padding-left":"0px",
 											   "padding-right":"0px",
 											   "text-align":"center"},
@@ -256,11 +256,18 @@ function assigneeFilter(mid){
 		$.when(getGanttItems()).done(function(ajax){
 			makeFilterdTimeline(ajax.tasks);	
 		});
-	}else{ // 특정 mid가 할당받고있는 태스크
-		$.when(selectTasksByMidAndSid(mid)).done(function(ajax){	
-			makeFilterdTimeline(ajax.tasksbymid);
+	}else if(mid=="No"){ //어사인되지 않은 태스크 
+		$.when(selectNotAssignedTasks()).done(function(ajax){
+			makeFilterdTimeline(ajax.tasks);	
 		});
-	};
+	}else{ // 특정 mid가 할당받고있는 태스크
+	
+	$.when(selectTasksByMidAndSid(mid)).done(function(ajax){	
+		makeFilterdTimeline(ajax.tasksbymid);
+	});
+};
+		
+		
 };
 
 
@@ -280,7 +287,26 @@ function selectTasksByMidAndSid(mid){
 			console.log("selectTasksByMidAndSid 후")
 			console.log(data);
 		}
-	})
+	});
+	return ajax;
+};
+
+/**
+ * 
+ 날   짜 : 2018. 6. 28.
+ 기   능 : 어사인 되지 않은 task를 가져오는 함수
+ 작성자명 : 박 민 식
+ */
+function selectNotAssignedTasks(){
+	var ajax = $.ajax({
+		url:"step/selectNotAssignedTasksBySid.htm",
+		type:"post",
+		dataType:"json",
+		success:function(data){
+			console.log("selectNotAssignedTasks 후")
+			console.log(data);
+		}
+	});
 	return ajax;
 }
 
@@ -312,5 +338,18 @@ function makeFilterdTimeline(tasks){
 		}
 	}
 }
+
+$(function(){
+	
+	$("#timeline").on(function(){
+		console.log("만들어짐");
+	})
+})
+
+
+
+
+
+
 
 

@@ -13,7 +13,7 @@
 
 <div class="step-subheader container">
 	  <select  id="timeline-tstatus-filter">
-	  	<option value="all">All Tasks</option>
+	  	<option value="all">All Status</option>
 		<c:forEach var="tstatus" items="${tstatuses}">
 	       	<option class="timeline-tstatus-filter" value="${tstatus.tstatusid}">${tstatus.tstatus}</option>		
 		</c:forEach>
@@ -21,6 +21,7 @@
       
       <select  id="timeline-assignee-filter">
 	  	<option value="all">All Assignees</option>
+	  	<option value="No">No Assigned</option>
 		<c:forEach var="assignee" items="${assignees}">
 	       	<option class="timeline-tstatus-filter" value="${assignee.mid}">${assignee.mname}</option>		
 		</c:forEach>

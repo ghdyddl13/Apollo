@@ -82,18 +82,15 @@ $(function() {
 						alert("스텝 생성이 완료되었습니다!");
 						var step = makeSideStep(data.stepDTO);
 						console.log(step);
-						
+												
 						if($('#insert-step-fid').val() == "") {
 							(data.stepDTO.sname=="백로그")?$(step).prependTo("#p-dir"+step.pid):$(step).appendTo("#p-dir"+data.stepDTO.pid);
-							$(".close").click();
 						} else {
-							$(step).appendTo("#f-dir"+data.stepDTO.fid);
-							$(".close").click();
+							$(step).addClass("side-step-in-folder").appendTo("#f-dir"+data.stepDTO.fid);
 						}
 					 }else {
 						 
 						 alert("스텝 생성에 실패했습니다");
-						 $(".close").click();
 					 }	
 					 $('.add-step-name').val("");
 					 $('#insert-step-sday-id').val("");
@@ -849,15 +846,15 @@ function makeSideSubDir(pids){
  */
 function makeSideFolder(folder) {
 	var wrapper_div = jQuery("<div>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
-    var a = jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
-    var span = jQuery("<span>",{"class":"glyphicon glyphicon-folder-close", 
+    var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
+    var i = jQuery("<i>",{"class":"side-dir-arrow fas fa-angle-right", 
                          "data-toggle":"collapse",
                          "data-target":"#f-dir"+folder.fid});
+    var foldericon = jQuery("<i>",{"class":"side-dir-folder-icon fas fa-folder"});
     var div = jQuery("<div>",{"class":"side-dir collapse",
                         "id": "f-dir"+folder.fid});
-    console.log(folder.pid);
     
-    $(a).prepend(span).appendTo(wrapper_div);
+    $(a).prepend(i,foldericon).appendTo(wrapper_div);
     $(div).appendTo(wrapper_div);
     $(wrapper_div).appendTo($('#p-dir'+folder.pid));
 }
@@ -869,13 +866,15 @@ function makeSideFolder(folder) {
  작성자명 : 김 래 영
  */
 function makeSideStep(step) {
-	 var a =jQuery("<a>",{
-         "class":"side-step",
-         "id":"s"+step.sid,
-         "text":step.sname
-         });
-	 var span = jQuery("<span>",{"class":"glyphicon glyphicon glyphicon-list-alt"})
-	 $(a).prepend(span);
+    var a =jQuery("<a>",{
+        "class":"side-step",
+        "id":"s"+step.sid,
+        "text":step.sname
+        });
+    var i = jQuery("<i>",{"class":"side-dir-step-icon far fa-file-alt"})
+
+    $(a).prepend(i);
+
 	 
 	 return a;
 }
