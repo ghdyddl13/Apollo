@@ -2,7 +2,6 @@ package com.apollo.task.controller;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import com.apollo.project.service.ProjectInfoService;
+import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.service.TaskService;
+import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.SubtaskDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TidpidDTO;
@@ -101,6 +103,16 @@ public class TaskController {
 	ArrayList<MemberDTO> sametaskmemberlist = new ArrayList<MemberDTO>();
 	sametaskmemberlist = service.getSameTaskAssignee(tid);
 	model.addAttribute("sametaskmemberlist", sametaskmemberlist);
+	
+	// 해당 테스크의 서브테스크들
+	ArrayList<SubtaskDTO> subtasklist = new ArrayList<SubtaskDTO>();
+	subtasklist = service.getSubTasks(tid);
+	model.addAttribute("subtasklist", subtasklist);
+	
+	// 해당 테스크의 코멘트들과 행위자에 대한 member 테이블 정보
+	ArrayList<CommentAndMemberDTO> commentandmemberlist =  new  ArrayList<CommentAndMemberDTO>();
+	commentandmemberlist = service.getCommentsAndMember(tid);
+	model.addAttribute("commentandmemberlist", commentandmemberlist);
 	
 	return jsonview;
 	}
@@ -266,6 +278,12 @@ public class TaskController {
 		return jsonview;
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 일반 채팅시 코멘트 insert + receiver에 할당자 고려하여 insert
+	 작성자명 : 신 호 용
+	 */
 	@RequestMapping("/insertcomment.htm")
 	public String insertComment(CommentDTO commentdto, HttpSession session){
 		System.out.println(commentdto.getComments());
@@ -457,6 +475,329 @@ public class TaskController {
 		return jsonview;
 		 		
 	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 테스크 모달에서 sday 를 데이트 피커에서 누르면 sday를 변경
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/changesdayoftask.htm")
+	public View changeSdayOfTask(int tid, String sday, HttpSession session, Model model){
+		
+		System.out.println("sday 컨트롤러 실행");
+		
+		System.out.println("tid : " + tid);
+		System.out.println("sday : " + sday);
+		
+		TaskDTO dto = new TaskDTO();
+		dto.setSday(sday);
+		dto.setTid(tid);
+		
+		int result = service.changeSdayOfTask(dto);
+		System.out.println("sday 변경 결과 : " + result);
+		
+		
+		// sday 변경 제대로 되었을 시 stream 저장
+		if(result == 1) {
+			
+			System.out.println("sday 변경 성공! 코멘트 입력 시작!");
+			
+			String modifier = (String) session.getAttribute("mid");
+			String modifier_name = service.getTaskModifierName(modifier);
+			String tname = service.getTname(tid);
+			String comment = "";
+			comment = modifier_name + "님이 " + tname +" 업무의 시작일을 " + sday +"로 변경하였습니다";
+			
+			// comments 테이블에 insert
+			CommentDTO commentdto = new CommentDTO();
+			commentdto.setComments(comment);
+			commentdto.setTid(tid);
+			commentdto.setMid(modifier);
+			commentdto.setCmtkind(1);
+			int final_result = service.insertComment(commentdto);
+			
+			System.out.println("sday 변경 코멘트 입력 성공 여부 : " + final_result);
+			
+		}
+		
+		return jsonview;
+		 		
+	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 테스크 모달에서 eday 를 데이트 피커에서 누르면 eday를 변경
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/changeedayoftask.htm")
+	public View changeEdayOfTask(int tid, String eday, HttpSession session, Model model){
+		
+		System.out.println("eday 컨트롤러 실행");
+		
+		System.out.println("tid : " + tid);
+		System.out.println("eday : " + eday);
+		
+		TaskDTO dto = new TaskDTO();
+		dto.setEday(eday);
+		dto.setTid(tid);
+		
+		int result = service.changeEdayOfTask(dto);
+		System.out.println("eday 변경 결과 : " + result);
+		
+		
+		// eday 변경 제대로 되었을 시 stream 저장
+		if(result == 1) {
+			
+			System.out.println("sday 변경 성공! 코멘트 입력 시작!");
+			
+			String modifier = (String) session.getAttribute("mid");
+			String modifier_name = service.getTaskModifierName(modifier);
+			String tname = service.getTname(tid);
+			String comment = "";
+			comment = modifier_name + "님이 " + tname +" 업무의 종료일을 " + eday +"로 변경하였습니다";
+			
+			// comments 테이블에 insert
+			CommentDTO commentdto = new CommentDTO();
+			commentdto.setComments(comment);
+			commentdto.setTid(tid);
+			commentdto.setMid(modifier);
+			commentdto.setCmtkind(1);
+			int final_result = service.insertComment(commentdto);
+			
+			System.out.println("eday 변경 코멘트 입력 성공 여부 : " + final_result);
+			
+		}
+		
+		return jsonview;
+	}
+	
+
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 테스크 모달에서 eday 를 데이트 피커에서 누르면 eday를 변경
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/addsubtask.htm")
+	public View addSubTask(int tid, String subtaskstr, Model model){
+		
+		System.out.println("addSubTask 컨트롤러 실행");
+		
+		SubtaskDTO dto = new SubtaskDTO();
+		dto.setTid(tid);
+		dto.setSubtask(subtaskstr);
+		dto.setIschecked(0);
+
+		int result = service.addSubTask(dto);
+		
+		System.out.println("addSubTask 실행 결과 : " + result);
+		model.addAttribute("result", result);
+		
+		// 해당 테스크의 서브테스크들
+		ArrayList<SubtaskDTO> subtasklist = new ArrayList<SubtaskDTO>();
+		subtasklist = service.getSubTasks(tid);
+		model.addAttribute("subtasklist", subtasklist);
+		
+		return jsonview;
+	}
+		
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : 서브테스크의 완료/미완료 여부를 변경한다
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/changesubtask.htm")
+	public View changeSubtask(int subtaskid, int tid, int subtask_fini_or_unfini, Model model) {
+		
+		System.out.println("changeSubtask 컨트롤러 실행됨");
+
+		SubtaskDTO dto = new SubtaskDTO();
+		dto.setSubtaskid(subtaskid);
+		dto.setTid(tid);
+		dto.setIschecked(subtask_fini_or_unfini);
+		
+		int result = service.changeSubtask(dto);
+		
+		System.out.println("changeSubtask 실행 결과 : " + result);
+		model.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : subtask 를 삭제
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/deletesubtask.htm")
+	public View deleteSubtask(int tid, int subtaskid, Model model) {
+		
+		System.out.println("deleteSubtask 컨트롤러 실행됨");
+
+		int result = service.deleteSubtask(subtaskid);
+		
+		System.out.println("deleteSubtask 실행 결과 : " + result);
+		model.addAttribute("result", result);
+		
+		// 해당 테스크의 서브테스크들
+		ArrayList<SubtaskDTO> subtasklist = new ArrayList<SubtaskDTO>();
+		subtasklist = service.getSubTasks(tid);
+		model.addAttribute("subtasklist", subtasklist);
+		
+		
+		return jsonview;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 26.
+	 기      능 : task의 상세설명 부분을 update
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/updateTaskDetail.htm")
+	public View updateTaskDetail(int tid, String content, Model model) {
+		
+		System.out.println("updateTaskDetail 컨트롤러 실행됨");
+
+		TaskDTO dto = new TaskDTO();
+		dto.setTid(tid);
+		dto.setDetail(content);
+		
+		int result = service.updateTask(dto);
+		model.addAttribute("result", result);
+		
+		if(result == 1) {
+			System.out.println("Task Detail update 완료!");
+		}
+		
+		return jsonview;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 해당 테스크에 관련한 코멘트 모든 정보와 mid에 관한 member 테이블 모두 가져옴
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/getcommentsandmember.htm")
+	public View getCommentsAndMember(int tid, Model model){
+	
+		System.out.println("getCommentsAndMember 컨트롤러 실행됨");
+		
+		ArrayList<CommentAndMemberDTO> commentandmemberlist =  new  ArrayList<CommentAndMemberDTO>();
+		commentandmemberlist = service.getCommentsAndMember(tid);
+		model.addAttribute("commentandmemberlist", commentandmemberlist);
+		
+		System.out.println("getCommentsAndMember 컨트롤러->서비스 모두 거치고 돌아옴");
+		
+		return jsonview;
+	
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 테스크 모달 내부에서 @ 로 같은 프로젝트 사람들 popup div에 띄워야 할 때 쓰는 함수
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/getsameprojectmembersintaskmodal.htm")
+	public View getSameprojectMembersInTaskmodal(int pid, Model map){
+	
+		System.out.println("getSameprojectMembersInTaskmodal 컨트롤러 실행됨");
+		
+		ArrayList<MemberDTO> sameprojectmembers = new ArrayList<MemberDTO>();
+		sameprojectmembers = projectinfoservice.getProjectMembers(pid);
+        map.addAttribute("sameprojectmembers", sameprojectmembers);
+		
+		return jsonview;
+	
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 일반 채팅 입력시 comment insert + receiver insert (할당자 고려하여) 
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/insertcommentandreceiver.htm")
+	public View insertCommentAndReceiver(int tid, String comments, HttpSession session, Model map){
+		
+		System.out.println("insertCommentAndReceiver 컨트롤러 실행");
+		String mid=(String)session.getAttribute("mid");
+		
+		CommentDTO dto = new CommentDTO();
+		dto.setMid(mid);
+		dto.setTid(tid);
+		dto.setComments(comments);
+		dto.setCmtkind(0);
+		
+		int result = service.insertInboxComment(dto);
+		map.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 이름을 찾아준다
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/findmname.htm")
+	public View findMname(String mid, Model map){
+		
+		System.out.println("findMname 컨트롤러 실행");
+		
+		String speaker = service.getTaskModifierName(mid);
+		map.addAttribute("speaker", speaker);
+		
+		return jsonview;
+	}
+	
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 테스크 모달 내에서 @ 붙여서 지목하여 보내기 
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/selectandchatintaskmodal.htm")
+	public View selectAndChatInTaskmodal(int tid, String comments, String receiver, HttpSession session, Model map){
+		
+		System.out.println("리시버 들어오냐? : " + receiver);
+		
+		System.out.println("selectAndChatInTaskmodal 컨트롤러 실행");
+		String mid=(String)session.getAttribute("mid");
+		
+		CommentDTO dto = new CommentDTO();
+		dto.setMid(mid);
+		dto.setTid(tid);
+		dto.setComments(comments);
+		dto.setCmtkind(0);
+		
+		int result = service.insertInboxComment2(dto, receiver);
+		map.addAttribute("result", result);
+		
+		return jsonview;
+	}
+	
+	
+	
+	
 	
 	
 	

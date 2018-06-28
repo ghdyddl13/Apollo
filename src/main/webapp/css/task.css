@@ -57,3 +57,134 @@ assignee_in_taskmodal th{
 assignee_in_taskmodal td{
 	text-align: center;
 }
+
+#add_sub_task{
+	width: 500px;
+}
+
+
+.hover_div{
+	cursor: pointer;
+	margin: 10px 10px 10px 25px;
+	font-size: 15px;
+	display: flex;
+	white-space:nowrap;
+	align-items: center
+}
+
+.hover_div:hover{
+	cursor: pointer;
+	margin: 10px 10px 10px 20px;
+	font-size: 15px;
+	background-color: rgba(163, 172, 182, 0.2);
+}
+
+.subtask_name{
+	overflow:hidden;
+	display:block;
+	flex: 1 1 auto;
+}
+
+.subtask_del_btn{
+	flex: 0 0 auto;
+	display: block;
+	cursor: pointer;
+	visibility: hidden
+}
+
+
+.subtask_checked {
+  text-decoration: line-through;
+  font-size: 15px;
+  
+}
+
+.subtask_unchecked {
+  font-size: 15px;
+}
+
+#task_detail_status{
+	width: 20px;
+	height:20px;
+}
+
+#Task_Modal_comments{
+
+   overflow:auto;
+   height:400px;
+   margin: 10px;
+   padding:10px;
+   background-color:#f0f0f0
+
+}
+
+.taskmodal_memberprofile2{
+	
+	  width: 40px;
+	  height:40px;
+	  border-radius: 20px;
+	  float:left
+	  
+}
+
+.each_comment{
+    margin-left: 10px;
+    float:left;
+    font-size: 13px
+}
+
+.wrapper_comment{
+  display: flex;
+  white-space:nowrap;
+  align-items: center
+}
+
+.second_row{
+ 	margin-top: 5px;
+}
+
+#comment_input_box_in_taskmodal{
+	border:none;
+	width: 100%;
+}
+
+#comment_input_box_in_taskmodal:focus {
+  outline: none;
+}
+
+#project_member_popup_div{
+  display: none;
+  position: absolute;
+  left : -20000px;
+  top : -20000px;
+  float: left;
+}
+
+.popup_mid{
+	cursor: pointer;
+	padding : 10px;
+}
+
+.popup_mid:hover{
+	cursor: pointer;
+	background-color: rgba(163, 172, 182, 0.2);
+}
+
+#receivermid{
+	width: 80px;
+	background-color: white;
+    color: black;
+    border: 1px solid #4CAF50;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-right: 5px
+}
+
+#comment_input_box_in_taskmodal2{
+	border:none;
+	width: 450px;
+}
+
+#comment_input_box_in_taskmodal2:focus {
+  outline: none;
+}

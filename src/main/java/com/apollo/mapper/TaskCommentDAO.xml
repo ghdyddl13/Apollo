@@ -16,11 +16,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insertReceiver" parameterType="hashmap">
-		insert into RECEIVER VALUES	(#{cmtid}, 	#{mid},0)
+		insert into RECEIVER VALUES	(#{cmtid}, #{mid}, 0)
 	</insert>
 	
 	<insert id="insertComment2" parameterType="com.apollo.vo.CommentDTO">
-		insert into comments values(seq_cmtid.nextval, #{comments}, #{tid}, #{mid}, #{cmtkind}, TO_DATE(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+		insert into comments values(seq_cmtid.nextval, #{comments}, #{tid}, #{mid}, #{cmtkind}, sysdate)
+	</insert>
+	
+	<insert id="insertReceiver2" parameterType="com.apollo.vo.ReceiverDTO">
+		insert into RECEIVER VALUES	(#{cmtid}, #{mid}, #{isarchive})
 	</insert>
 	
 </mapper>

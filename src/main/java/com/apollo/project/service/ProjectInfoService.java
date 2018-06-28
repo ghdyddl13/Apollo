@@ -96,6 +96,9 @@ public class ProjectInfoService {
 	 */
 	public ArrayList<MemberDTO> getProjectMembers(int pid){
 		
+		System.out.println("테스트 출력 pid : " + pid);
+		System.out.println("getProjectMembers 서비스 실행됨");
+		
 		ArrayList<MemberDTO> getProjectMemberlist = new ArrayList<MemberDTO>();
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		getProjectMemberlist = dao.getProjectMemberlist(pid);

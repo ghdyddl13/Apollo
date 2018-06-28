@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.SubtaskDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TidvalueDTO;
@@ -42,4 +43,9 @@ public interface TaskDAO {
 	public ArrayList<TaskDTO> getSearchTasks(HashMap<String, String> map);
 	public int deleteAssignee(MidtidDTO dto);
 	public ArrayList<TaskDTO> selectNotAssignedTasksBySid(int sid);
+
+	public int changeSdayOfTask(TaskDTO dto);
+	public int changeEdayOfTask(TaskDTO dto);
+	public String getTname(int tid);
+	
 }
