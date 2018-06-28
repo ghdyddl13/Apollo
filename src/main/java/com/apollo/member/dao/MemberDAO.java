@@ -91,4 +91,6 @@ public interface MemberDAO {
 	 작성자명 : 박 민 식
 	 */
 	public ArrayList<MemberDTO> getSearchMembers(HashMap<String, String> map);
+
+	public int freeTrialCheck(String mid);
 }
