@@ -11,8 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
 	</select>
 	<insert id="insertfolder" parameterType="com.apollo.vo.FolderDTO">
+		<selectKey keyProperty="fid" resultType="String" order="BEFORE">
+        	  select seq_fid.nextval FROM DUAL
+		</selectKey>
 		insert into folder (fid, fname, pid) 
-		values (seq_fid.nextval, #{fname}, #{pid})
+		values (#{fid}, #{fname}, #{pid})
 	</insert>
 	<update id="updateFolder" parameterType="com.apollo.vo.FolderDTO">
 		update folder set fname=#{fname} where fid=#{fid}

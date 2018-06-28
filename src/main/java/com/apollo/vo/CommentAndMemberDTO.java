@@ -1,14 +1,14 @@
 package com.apollo.vo;
 
 import java.sql.Date;
-import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
-public class MemberDTO {
-
+public class CommentAndMemberDTO {
+	private int cmtid;
+	private String comments;
+	private int tid;
 	private String mid;
+	private int cmtkind;
+	private String cmtmtime;
 	private String mname;
 	private String pwd;
 	private Date rday;
@@ -17,12 +17,41 @@ public class MemberDTO {
 	private String deptname;
 	private String apollokey;
 	private String position;
-	
+	public int getCmtid() {
+		return cmtid;
+	}
+	public void setCmtid(int cmtid) {
+		this.cmtid = cmtid;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	public int getTid() {
+		return tid;
+	}
+	public void setTid(int tid) {
+		this.tid = tid;
+	}
 	public String getMid() {
 		return mid;
 	}
 	public void setMid(String mid) {
 		this.mid = mid;
+	}
+	public int getCmtkind() {
+		return cmtkind;
+	}
+	public void setCmtkind(int cmtkind) {
+		this.cmtkind = cmtkind;
+	}
+	public String getCmtmtime() {
+		return cmtmtime;
+	}
+	public void setCmtmtime(String cmtmtime) {
+		this.cmtmtime = cmtmtime;
 	}
 	public String getMname() {
 		return mname;
@@ -48,7 +77,6 @@ public class MemberDTO {
 	public void setPnum(String pnum) {
 		this.pnum = pnum;
 	}
-
 	public String getImage() {
 		return image;
 	}
@@ -74,12 +102,6 @@ public class MemberDTO {
 		this.position = position;
 	}
 	
-	@Override
-	public String toString() {
-		return "MemberDTO [mid=" + mid + ", mname=" + mname + ", pwd=" + pwd + ", rday=" + rday + ", pnum=" + pnum
-				+ ", image=" + image + ", deptname=" + deptname + ", apollokey=" + apollokey + ", position=" + position
-				+ "]";
-	}
 	
 	
 }

@@ -59,12 +59,18 @@
 
 <!-- STEP LIST CSS_ JW -->
 <link href="css/stepList.css" type="text/css" rel="stylesheet">
+<!-- Header Edit Profile_ RY -->
+<link href="css/profileheader.css" type="text/css" rel="stylesheet">
+<!-- Header Member List_ RY -->
+<link href="css/memberlist.css" type="text/css" rel="stylesheet">
 <!-- STEP LIST JAVASCRIPT_ JW-->
-
 <script type="text/javascript" src="js/steplist.js?q=123"></script>
-
 <!-- Board관련 css -->
 <link rel="stylesheet" href="css/stepBoard.css" /> 
+
+<!-- main에 있어야 할 Task js -->
+<script type="text/javascript" src="js/main_task.js"></script>
+
 
 <title>Project Apollo</title>
 </head>

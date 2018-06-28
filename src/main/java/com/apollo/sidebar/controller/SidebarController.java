@@ -73,10 +73,10 @@ public class SidebarController {
 	@RequestMapping(value="/insertstep.htm", method=RequestMethod.POST)
 	public View insertStep(StepDTO stepdto, Model model) {
 		System.out.println("insert step");
+		System.out.println(stepdto.toString());
 		try {
+			System.out.println("here");
 			int stepresult = sidebarservice.insertStep(stepdto);
-			System.out.println(stepdto.toString());
-			
 			model.addAttribute("stepresult", stepresult);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,14 +84,7 @@ public class SidebarController {
 		return jsonview; 
 	}
 	
-	public String changeStep(StepDTO stepdto, Model model) {
-		return null;
-	}
-	
-	public String deleteStep(String s1) {
-		return null;
-	}
-	
+
 	/**
 	 * 
 	 날      짜 : 2018. 6. 18.

@@ -42,7 +42,6 @@ $(function() {
 		        	   $("#insert-step-methodologyid").val(methodologyid);
 		        	   $("#insert-step-pid").val(pid);
 		        	   $("#insert-step-fid").val(fid);
-		               console.log(data.memberlist);
 	            	   var optiondefault = jQuery("<option>",{
 	            		   "text":"책임자를 선택하세요", //default 값 
 	            		   "value":""
@@ -54,7 +53,6 @@ $(function() {
 		            		   "value":this.mid,
 		            		   "text":this.mname
 		            	   })
-		            	   	console.log(option);
 		            	   $('#add-step-mgr-assignee').append(option);
 		               });
 		              
@@ -69,21 +67,29 @@ $(function() {
 			$(".add-step-name").focus();	
 			return false;
 		 } else if($('#add-step-mgr-assignee').val() == ""){
-			 alert("책입자를 선택하세요.");
+			 alert("책임자를 선택하세요.");
 			 return false;
 		 }
 		 var newstep = $('#step-add-form').serialize();
-		 
 		 $.ajax({
+			 
 	             type:"POST",
 	             url:"insertstep.htm",
 	             data:newstep,
 	             dataType:"json",
 	             success:function(data){
-	            	 console.log(data);
 	            	 if(data.stepresult > 0){
-						 alert("스텝 생성이 완료되었습니다!");
+						alert("스텝 생성이 완료되었습니다!");
+						var step = makeSideStep(data.stepDTO);
+						console.log(step);
+												
+						if($('#insert-step-fid').val() == "") {
+							(data.stepDTO.sname=="백로그")?$(step).prependTo("#p-dir"+step.pid):$(step).appendTo("#p-dir"+data.stepDTO.pid);
+						} else {
+							$(step).addClass("side-step-in-folder").appendTo("#f-dir"+data.stepDTO.fid);
+						}
 					 }else {
+						 
 						 alert("스텝 생성에 실패했습니다");
 					 }	
 					 $('.add-step-name').val("");
@@ -91,7 +97,7 @@ $(function() {
 					 $('#insert-step-eday-id').val("");
 					 $('#step-detail').val("");
 					 $(".close").click();
-					 //$('#project-insert').close();
+
 	             } // end - success
 	          	,error:function(error){
 	          		console.log(error);
@@ -102,9 +108,6 @@ $(function() {
 	
 	}); //end-step	
 
-	
-	
-	
 	
 		// 사이드바 프로젝트 우클릭 
 		$(document).on("contextmenu",".side-project",function() {
@@ -317,7 +320,6 @@ $(function() {
 		});
 		
 		// 사이드바 스텝 이동 버튼 클릭시
-		
 		$(document).on("click","#side-step-move",function(){
 			$("#move-step-select").selectmenu({
 											width:"70%",
@@ -408,6 +410,8 @@ $(function() {
 			var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
 			var pid = project_wrapper.id.substr(1);
 			var methodologyid = $(project_wrapper).children("input[name='methodologyid']").val();
+			
+			$('#pidhidden').attr('value', pid);
 			
 			$.ajax({
 				url:"information.htm",
@@ -500,15 +504,17 @@ $(function() {
                 success:function(data){
                    if(data.folderresult > 0){
                    alert("폴더 생성이 완료되었습니다!");
+                   makeSideFolder(data.folderDTO);
+                   //console.log(folder);
                    $(".close").click();
                 }else {
                    alert("폴더 생성에 실패했습니다");
                 }   
-                $('.add-step-name').val("");
+                $('#add-folder-name').val("");
                 $('.close').click();
                
                 } // end - success
-
+		 		
              	,error:function(error){
              		console.log(error);
              	
@@ -576,6 +582,7 @@ $(function() {
 	   
 	   //폴더 modal 에서 삭제 버튼 클릭시 이벤트
 	   $('#delete-folder-btn').click(function() {
+		   var fid = $('#delete-folder-fid').val();
 	       var deletefolder = $('#delete-folder-form').serialize();
 	       $.ajax({
 	           type:"post",
@@ -588,6 +595,7 @@ $(function() {
 	                   alert('폴더 삭제가 실패되었습니다');
 	               }else {
 	                   alert('폴더 삭제이 완료되었습니다!');
+	                   $("#f"+fid).remove();
 	               }
 	               $('.close').click();
 	           }
@@ -654,7 +662,7 @@ function selectStepList(pids){
 /**
  * 
  날      짜 : 2018. 6. 19.
- 기      능 : 프로젝트 생성이 없을 떄 실행되는 함수
+ 기      능 : 프로젝트 생성이 없을 때 실행되는 함수
  작성자명 : 김 래 영
  */
 function noProjectPage() {
@@ -832,6 +840,46 @@ function makeSideSubDir(pids){
       
    })
 }   
+/**
+ * 
+ 날      짜 : 2018. 6. 25.
+ 기      능 : 폴더 업데이트 후 바로 반영되는 함수
+ 작성자명 : 김 래 영
+ */
+function makeSideFolder(folder) {
+	var wrapper_div = jQuery("<div>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
+    var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
+    var i = jQuery("<i>",{"class":"side-dir-arrow fas fa-angle-right", 
+                         "data-toggle":"collapse",
+                         "data-target":"#f-dir"+folder.fid});
+    var foldericon = jQuery("<i>",{"class":"side-dir-folder-icon fas fa-folder"});
+    var div = jQuery("<div>",{"class":"side-dir collapse",
+                        "id": "f-dir"+folder.fid});
+    
+    $(a).prepend(i,foldericon).appendTo(wrapper_div);
+    $(div).appendTo(wrapper_div);
+    $(wrapper_div).appendTo($('#p-dir'+folder.pid));
+}
+
+/**
+ * 
+ 날      짜 : 2018. 6. 25.
+ 기      능 : 스텝 업데이트 후 바로 반영되는 함수
+ 작성자명 : 김 래 영
+ */
+function makeSideStep(step) {
+    var a =jQuery("<a>",{
+        "class":"side-step",
+        "id":"s"+step.sid,
+        "text":step.sname
+        });
+    var i = jQuery("<i>",{"class":"side-dir-step-icon far fa-file-alt"})
+
+    $(a).prepend(i);
+
+	 
+	 return a;
+}
 
 
 /**

@@ -28,10 +28,15 @@
   	    		<i  class="search-bar-imo fas fa-search"></i>
           		<input id ="open-right-nav" type="text">
        		</div>
-			<li class="nav-item"><a class="nav-link" href="#"
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 				style="color: white"><span class="glyphicon glyphicon-user"
 					id="loginimg"></span>김래영님</a>
-			</li>
+				<ul class="dropdown-menu">
+					<li data-toggle="modal" data-target="#edit-profile" id="header-profile-edit"><a>개인정보수정</a></li>
+					<li id="header-memberlist"><a>사원목록</a></li>
+					<li><a href="logout.htm">로그아웃</a></li>
+				</ul></li>
 		</ul>
 	</div>
 </nav>

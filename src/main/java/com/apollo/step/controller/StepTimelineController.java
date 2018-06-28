@@ -61,10 +61,7 @@ public class StepTimelineController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-	
-		
-		
+
 		return jsonview;
 	}
 
@@ -86,4 +83,22 @@ public class StepTimelineController {
 		
 		return jsonview;
 	}
+
+	@RequestMapping(value="selectNotAssignedTasksBySid.htm", method=RequestMethod.POST)
+	public View selectNotAssignedTasksBySid(Model model, HttpServletRequest request) {
+		int sid= (Integer) request.getSession().getAttribute("sid");
+		ArrayList<TaskDTO> tasks = null;
+		try {
+			tasks = steptimelineservice.selectNotAssignedTasksBySid(sid);
+			model.addAttribute("tasks", tasks);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
 }
+
+
+
+
+

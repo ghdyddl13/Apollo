@@ -8,7 +8,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from member where mid in (select mid from pmember where pid =
 		#{pid})
 	</select>
-
+	
+	<select id="freeTrialCheck" resultType="Integer">
+		select count(*) from member where mid = #{mid} and RDAY <![CDATA[<]]> (SYSDATE -13) and APOLLOKEY is null
+	</select>
+	
 	<insert id="insertMember"
 		parameterType="com.apollo.vo.MemberDTO">
 		insert into member(mid, mname, pwd, rday, pnum,
@@ -81,7 +85,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where tid in (select tid from taskinstep 
 		where sid= #{sid}))
 	</select>
-	
+	<update id="updateMemberInfo" parameterType="com.apollo.vo.MemberDTO">
+		update member set
+		<if test="image !=null">image=#{image},</if>
+		<if test="mname !=null">mname=#{mname},</if>
+		<if test="pwd !=null">pwd=#{pwd},</if>
+		<if test="apollokey !=null">apollokey=#{apollokey},</if>
+		<if test="pnum !=null">pnum=#{pnum},</if>
+		<if test="deptname !=null">deptname=#{deptname},</if>
+		<if test="position !=null">position=#{position}</if>
+		where mid=#{mid}
+	</update>
+	<update id="updatePwd" parameterType="com.apollo.vo.MemberDTO">
+		update member set pwd=#{pwd}
+		where mid=#{mid}
+	</update>
+	<select id="selectMemberList" resultType="com.apollo.vo.MemberDTO">
+		select * from member where apollokey=(select apollokey from member where mid=#{mid})
+	</select>
 	<select id="getSearchMembers"  parameterType="hashmap"  resultType="com.apollo.vo.MemberDTO">
 		select * from member 
 		where (mid like '%'||#{input}||'%' or mname like '%'||#{input}||'%') 

@@ -14,7 +14,5 @@ function getpname(pid){
     	type:"post",
     	data:{pid:pid},
     });
-    
-    $('.project-table-day').val().split(" ")[0];
 }
 

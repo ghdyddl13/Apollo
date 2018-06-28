@@ -57,6 +57,15 @@ $(function() {
                 
                 if(data.updatestep > 0){
                     alert('스텝 수정이 완료되었습니다!');
+                    var step = makeSideStep(data.stepDTO);
+                    
+                    if($('#insert-step-fid').val() == "") {
+						(step.sname=="백로그")?$(step).prependTo("#p-dir"+step.pid):$(step).appendTo("#p-dir"+step.pid);
+						$(".close").click();
+					} else {
+						step.appendTo("#f-dir"+step.fid);
+						$(".close").click();
+					}
                 }else {
                     alert('스텝 수정이 실패되었습니다');
                 }
@@ -79,11 +88,14 @@ $(function() {
     // 스텝 삭제 Modal 에서 삭제버튼 클릭시 발생
     $('#delete-step-btn').click(function() {
     	
+    	var sid = $('#delete-step-sid').val();
+    	
     	$.when(deletetaskinstep(sid)).done(function(data){
     		console.log(data);
     		
     		if(data.deletestep > 0){
                 alert('스텝 삭제가 완료되었습니다!');
+                $("#s"+sid).remove();
             }else {
             	 alert('스텝 삭제가 실패되었습니다');
             }
