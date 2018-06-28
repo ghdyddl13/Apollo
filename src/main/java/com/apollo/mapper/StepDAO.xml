@@ -124,12 +124,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listCountCompletedTask" parameterType="Integer" resultType="Integer">
 		select count(*) 
 		from task t join TASKINSTEP ts on t.TID = ts.TID 
-		where t.TID in (3,11,15) and ts.SID=#{sid}
+		where t.TSTATUSID in (3,11,15) and ts.SID=#{sid}
 	</select>
 	<select id="listCountUnfinishedTask" parameterType="Integer" resultType="Integer">
 		select count(*) 
 		from task t join TASKINSTEP ts on t.TID = ts.TID 
-		where t.TID not in (3,11,15) and ts.SID=#{sid}
+		where t.TSTATUSID not in (3,11,15) and ts.SID=#{sid}
 	</select>
 	<!-- MIDDLE GRAPH남은 날과 지나온날을 가지고 오는 함수  -->
 	<select id="listCountThePast" parameterType="Integer" resultType="Integer">

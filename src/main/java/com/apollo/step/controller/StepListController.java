@@ -59,7 +59,7 @@ public class StepListController {
   		int overduetask = service.listCountOverdueTask(sid);
         
        
-        
+        System.out.println("미지정: "+noday+"/다음주 이후: "+afternextweek+"/이번주까지: "+untilthisweek+"/완료: "+completedtask+"/기간만료: "+overduetask);
         map.addAttribute("stepinfo", stepinfo);
         map.addAttribute("tstatuslist", tstatuslist);
         map.addAttribute("tasklist",tasklist);

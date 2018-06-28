@@ -55,48 +55,7 @@ $(function() {
 	                success:function(data) {
 						$("#main-box").empty();
 						$("#main-box").append(data);
-						/////////////////////////////////STATUS OF TASK GRAPH/////////////////////////////////////////
-						let ctx = document.getElementById('Step-list-DonutChart').getContext('2d');
-						let myDoughnutChart = new Chart(ctx, {
 						
-						      type: 'doughnut',
-						      data: {
-						              datasets: [{
-						                  data: [3, 4, 5, 6, 7],
-						                  backgroundColor: [
-						                                    'rgba(190, 190, 190, 1)',
-						                                    'rgba(241, 196, 15, 1)',
-						                                    'rgba(244, 7, 7, 1)',
-						                                    'rgba(52, 152, 219, 1)',
-						                                    'rgba(46, 204, 113, 1)'
-						                  ],
-						                  borderColor:[
-						                                'rgba(190, 190, 190, 1)',
-						                                'rgba(241, 196, 15, 1)',
-						                                'rgba(244, 7, 7, 1)',
-						                                'rgba(52, 152, 219, 1)',
-						                                'rgba(46, 204, 113, 1)'
-						                  ],
-						                  borderWidth: 1
-						              }],
-						              labels:
-						        ['미지정','다음주 이후','이번주 까지','완료','기한 만료']
-						      },
-						      options: {
-						                maintainAspectRatio: false,
-						                cutoutPercentage: 50,
-						                legend: {
-						                          display: true,
-						                          position: 'right',
-						                          labels: {
-						                                    fontSize: 12,
-						                                    fontFamily: 'sans-serif',
-						                                    fontColor: '#ffffff',
-						                                    fontStyle: 'bold'
-						                }
-						      }
-						      }
-						});
 	                }
 	              }
 	      )
