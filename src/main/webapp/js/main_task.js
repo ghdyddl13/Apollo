@@ -300,7 +300,12 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 		           success : function(rdata){
 		        	   
 		        	   var count = rdata.countresult;
-		        	   console.log('count는 : ' + count)
+		        	   console.log('count는 : ' + count);
+		        	   
+		        	   if(count == 1) {
+		        		   $('#stepdeletehidden').click();
+		        		   return;
+		        	   } 
 		        	   
 		        	   $.ajax(
 		        		       {
@@ -313,12 +318,7 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 		        		           success : function(rdata){
 		        		        	   
 		        		        	   console.log(rdata);
-
-		        		        	   if(count == 1) {
-		        		        		   $('#stepdeletehidden').click();
-		        		        		   
-		        		        	   } else {
-		        		        		   
+		        		        	   
 									// step name
 									   $('#Task_Modal_snames').empty();
 									   
@@ -329,8 +329,6 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 									   });
 									   snames += '<i data-toggle="modal" data-target="#step_add_modal_in_taskmodal" id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 									   $('#Task_Modal_snames').append(snames);
-												        		        	   
-		        		        	   }
 		        		        	   
 		        		           } // end-success
 		        		        }); // end-ajax
