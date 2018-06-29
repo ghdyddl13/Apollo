@@ -47,13 +47,9 @@ function makeTimelineGantt(tasks) {
 	var ganttdatabundle =[];
 	// 간트차트에 들어 갈 데이터 가공 작업
 	$(tasks).each(function(index,item){
-		console.log(item.tstatusid);
 		var start = (item.sday==null)?new Date().toISOString().substr(0,10):item.sday;
 		var end = (item.eday==null)?new Date().toISOString().substr(0,10):item.eday;
 		var custom_class= "timeline-tstatus-"+item.tstatusid;
-		
-		console.log(custom_class);
-		
 		
 		var ganttdata={
 				start:start,	
@@ -61,9 +57,7 @@ function makeTimelineGantt(tasks) {
 				name:item.tname,
 				id: 'Task '+item.tid,
 				custom_class: custom_class
-				
 		 };
-
 		ganttdatabundle.push(ganttdata);
 	})
 	/// 데이터가 부족할 경우 간트차트의 row 수를 채워주기 위해 샘플 데이터를 추가해준다
@@ -74,7 +68,6 @@ function makeTimelineGantt(tasks) {
 				name:" ",
 				id: 'Task 0',
 				custom_class: "sample-task"
-				
 		 };
 		ganttdatabundle.push(sample);
 	}
@@ -110,7 +103,6 @@ function makeTimelineGantt(tasks) {
 
 		},
 		on_view_change : function(mode) {
-			console.log(mode);
 		}
 	});
 	/// 추가한 샘플데이터 역시 드래그앤 드랍을 할 수 있기 때문에, 이를 막기 위해 삭제해준다
@@ -175,45 +167,37 @@ function makeTimelineGantt(tasks) {
  작성자명 : 박 민 식
  */
 function makeTimelineTable(tasks){
-	var no = 1;
-	$("#timeline-table > tbody").empty();
+	var count = 1;
+	$("#timeline-table-body").empty();
 	$(tasks).each(function(index,item){
-		
 		//좌측 테이블에 들어갈 데이터 작업
-	
-		var row = jQuery("<tr>");
-		var td_no = jQuery("<td>",{"text": no++,"align":"center"}) 
-		var td_tname = jQuery("<td>",{"text": item.tname,"class":"timeline-task-edit Task_RUD_Modal",
+		var row = jQuery("<div>",{"class":"timeline-table-item"});
+		var no = jQuery("<div>",{"class":"timeline-table-item-no","text": count++}) 
+		var tname_wrapper = jQuery("<div>",{"class":"timeline-table-item-task Task_RUD_Modal",
 														 "id":"t" + item.tid,
 														 "data-toggle" : "modal",
 														 "data-target" : "#Task_RUD_Modal"
-														 })
-		var td_tstatus = jQuery("<td>",{"text": item.tstatus,
-										"css":{
-											   "color":item.color,
-											   "font-size":"12px",
-											   "padding-left":"0px",
-											   "padding-right":"0px",
-											   "text-align":"center"},
-										"class":"timeline-task-status"});
-		var td_assingee= jQuery("<td>",{"css":{"padding":"1px"}}).append(getTaskAssignees(item.tid,"27px"));
-		$(row).append(td_no);
-		$(row).append(td_tstatus);
-		$(row).append(td_tname);
-		$(row).append(td_assingee);
-		$("#timeline-table > tbody").append(row);
+														 });
+		var tname =	jQuery("<div>",{"text": item.tname,
+									"class":"timeline-table-item-task-name"});
+		$(tname_wrapper).append(tname);
+
+		var tstatus = jQuery("<span>",{"text": item.tstatus,
+										"css":{"color":item.color,},
+										"class":"timeline-table-item-tstatus"});
+		$(tname_wrapper).append(tstatus);
+		var assingee= jQuery("<div>",{"css":{"padding":"1px"},
+									  "class":"timeline-table-item-assignee"}).append(getTaskAssignees(item.tid,"30"));
+		$(row).append(no);
+		$(row).append(assingee);
+		$(row).append(tname_wrapper);
+		$("#timeline-table-body").append(row);
 	});
-	var rows = $("#timeline-table > tbody").children();
-	console.log(rows.length);
-	
+	var rows = $("#timeline-table-body").children();
 	for(var rowcount =rows.length;rowcount<=15;rowcount++){
-		var row = jQuery("<tr>");
-		var td1 = jQuery("<td>");
-		var td2 = jQuery("<td>");
-		var td3 = jQuery("<td>");
-		var td4 = jQuery("<td>");
-		$(row).append(td1).append(td2).append(td3).append(td4);
-		$("#timeline-table > tbody").append(row);
+		var row = jQuery("<div>",{"class":"timeline-table-item"});
+
+		$("#timeline-table-body").append(row);
 	}
 }
 

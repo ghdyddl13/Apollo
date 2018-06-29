@@ -63,8 +63,8 @@
 	}
 
 .search-nav-body{
-	flex-glow:1;
-	overflow: auto;
+
+	overflow-y: auto;
 	display:flex;
 	flex-direction: column;
 	bottom:0;
@@ -125,13 +125,16 @@
 .search-info-div{
 	font-size:11px;
 	height: 50%;
-	display: flex;
+	display: block;
 	align-items:center;
   	white-space: nowrap;
+  	overflow:hidden;
+  	text-overflow:ellipsis;
   	width: 100%;
  
 }
 .search-item-pname{
+
 	color:rgba(0, 0, 0, 0.3);
 	padding: 2px 5px 2px 5px;
 	border-radius: 5px;

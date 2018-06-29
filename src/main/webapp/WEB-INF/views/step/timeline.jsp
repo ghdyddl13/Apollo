@@ -32,19 +32,19 @@
 <div class="timeline-wrapper">
 	<div class="container-fluid row" id="timeline">
 		<div class="col-lg-3 step-timeline-div-table" >	
-			<div class="table-responsive step-timeline-table">
-				<table style="border-right:none" class="table step-timeline-table table-hover" id="timeline-table" width="100%" cellspacing="0">
-					<thead>
-						<tr>
-							<th>No</th>
-							<th>상태</th>
-							<th>Task이름</th>
-							<th>담당자</th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
+			<div>
+				<div style="border-right:none" class="table step-timeline-table table-hover" id="timeline-table" width="100%" cellspacing="0">
+					<div>
+						<div class="timeline-table-header">
+							<div class="timeline-table-header-no">No</div>
+							<div class="timeline-table-header-assignee">담당자</div>
+							<div class="timeline-table-header-task">Title</div>
+						</div>
+					</div>
+					<div id="timeline-table-body">
+						
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="gantt-border" class="col-lg-9 step-timeline-div">
