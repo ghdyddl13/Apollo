@@ -47,5 +47,6 @@ public interface TaskDAO {
 	public int changeSdayOfTask(TaskDTO dto);
 	public int changeEdayOfTask(TaskDTO dto);
 	public String getTname(int tid);
+	public int changeTname(TaskDTO dto);
 	
 }

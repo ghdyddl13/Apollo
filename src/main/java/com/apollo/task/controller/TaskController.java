@@ -162,12 +162,6 @@ public class TaskController {
 		
 		String location = (String) session.getAttribute("location");
 		int pid = (Integer) session.getAttribute("pid");
-		int sid = (Integer) session.getAttribute("sid");
-		
-		System.out.println("테스트 출력 pid/sid/tid");
-		System.out.println("pid : " + pid);
-		System.out.println("sid : " + sid);
-		System.out.println("tid : " + tid);
 		
 		int result = service.deleteTask(tid);
 		System.out.println("delete Task 결과 : " + result);
@@ -177,6 +171,7 @@ public class TaskController {
 	    } else if(location.equals("/board.htm")) {
 	    	return "redirect:/board.htm";
 	    }else if(location.equals("/list.htm")) {
+	    	int sid = (Integer) session.getAttribute("sid");
 	    	return "redirect:/list.htm?sid=" + sid;
 	    }else if(location.equals("step/timeline.htm")) {
 	    	return "redirect:step/timeline.htm";
@@ -276,16 +271,13 @@ public class TaskController {
 		
 		String location = (String) session.getAttribute("location");
 		int pid = (Integer) session.getAttribute("pid");
-		int sid = (Integer) session.getAttribute("sid");
 		
 	    if(location.equals("/information.htm")) {
-	    	System.out.println("information반환");
 	    	return "redirect:/information.htm?pid=" + pid;
 	    } else if(location.equals("/board.htm")) {
-	    	System.out.println("board반환");
 	    	return "redirect:/board.htm";
 	    }else if(location.equals("/list.htm")) {
-	    	System.out.println("list반환");
+	    	int sid = (Integer) session.getAttribute("sid");
 	    	return "redirect:/list.htm?sid=" + sid;
 	    }else if(location.equals("step/timeline.htm")) {
 	    	System.out.println("timeline반환");
@@ -815,6 +807,44 @@ public class TaskController {
 	}
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 27.
+	 기      능 : 테스크 모달 내에서 @ 붙여서 지목하여 보내기 
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/changetname.htm")
+	public String changeTname(int tid, String tname, HttpSession session, Model map){
+		
+		System.out.println("changeTname 컨트롤러 실행");
+		
+		TaskDTO dto = new TaskDTO();
+		dto.setTid(tid);
+		dto.setTname(tname);
+		
+		int result = service.changeTname(dto);
+		map.addAttribute("result", result);
+		
+		String location = (String) session.getAttribute("location");
+		int pid = (Integer) session.getAttribute("pid");
+		
+	    if(location.equals("/information.htm")) {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    } else if(location.equals("/board.htm")) {
+	    	return "redirect:/board.htm";
+	    }else if(location.equals("/list.htm")) {
+	    	int sid = (Integer) session.getAttribute("sid");
+	    	return "redirect:/list.htm?sid=" + sid;
+	    }else if(location.equals("step/timeline.htm")) {
+	    	return "redirect:step/timeline.htm";
+	    }else {
+	    	return null;
+	    }
+		
+		
+		
+		
+	}
 	
 	
 	

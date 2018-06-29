@@ -133,4 +133,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select tname from task where tid = #{tid}
     </select>
     
+    <update id="changeTname" parameterType="com.apollo.vo.TaskDTO">
+		update task set tname = #{tname} where tid = #{tid}
+	</update>
+    
 </mapper>
