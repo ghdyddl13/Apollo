@@ -437,7 +437,7 @@ function resultSearchProject(projectlist){
 	 var step_info_div= jQuery("<div>",{"class":"search-item-right col-sm-10 container-fluid"});
 	 var step_name_div= jQuery("<div>",{"class":"search-info-div","text":step.sname});
 	 var step_dir_div= jQuery("<div>",{"class":"search-info-div"});
-	 var pname= jQuery("<span>",{"class":"search-item-pname","text":$($("#p"+step.pid).find("a")[0]).text()});
+	 var pname= jQuery("<span>",{"class":"search-item-pname","text":$($("#p"+step.pid).find(".side-content-name")[0]).text()});
 	 $(step_dir_div).append(pname);
 	 if(step.fid!=null){
 		 var fname= jQuery("<span>",{"class":"search-item-pname","text":$("#f"+step.fid).text()});
@@ -625,3 +625,7 @@ function resultSearchProject(projectlist){
 		}) // end ajax
  }) //end func
 
+/* $('#logout-btn').click(function() {
+	 location.href="logout.htm";
+ });
+*/

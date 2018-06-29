@@ -73,14 +73,31 @@
 
 
 <title>Project Apollo</title>
+
+
+<style>
+
+
+
+</style>
+
 </head>
 <body>
-
-	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/inc/sidebar.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
+<div class="Apollo-main">
+	<div class="main-header-panel" >
+		<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
+	</div>
+	<div class="main-body-panel">
+		<div class="main-side-panel" >
+			<jsp:include page="/WEB-INF/views/inc/sidebar.jsp"></jsp:include>
+		</div >
+		<div  class="main-box-panel">
+			<div  id="main-box"></div>
+		</div>	
+	</div>
+</div>
 	
-	<div id="main-box"></div>
 	
 </body>
 </html>

@@ -5,36 +5,36 @@
 <input type="hidden" id="currentPage" value="<%=session.getAttribute("location")%>">
 <div id="my-side-nav" class="side-nav">
 		<div class="text-center container-fluid">
-			<a class="side-bar-add-project" id="side-bar-add-project" data-toggle="modal"
-				data-target="#project-insert">프로젝트 생성 <img class="add-project-img"
-				src="img/if_001_01_9588.gif"></a>
+			<div class="side-bar-add-project" id="side-bar-add-project" data-toggle="modal"
+				data-target="#project-insert">New Project<img class="add-project-img"
+				src="img/if_001_01_9588.gif"></div>
 		</div>
 
 		<div>
-			<a class="side-pstatus">
+			<div class="side-pstatus">
 			<i data-toggle="collapse" data-target="#working-project" class="side-dir-arrow fas fa-angle-down"></i>
-			<b>Working Projects</b></a>
+			<b>Working Projects</b></div>
 			<div class="project-status-wrapper side-dir collapse in" id="working-project" aria-expanded="true">
 		   </div>
 		</div>
 		<div>
-			<a  class="side-pstatus">
+			<div  class="side-pstatus">
 			<i data-toggle="collapse" data-target="#finished-project" class="side-dir-arrow fas fa-angle-right"></i>
-			<b>Completed Projects</b></a>
+			<b>Completed Projects</b></div>
 			<div class="project-status-wrapper side-dir collapse" id="finished-project">
-				<a class="side-project"><span
-					class=" glyphicon glyphicon-duplicate"></span>Project2</a>
+				
 			</div>
 		</div>
 		<div>
-			<a class="side-pstatus">
+			<div class="side-pstatus">
 				<i data-toggle="collapse" data-target="#trash-bin" class=" side-dir-arrow fas fa-angle-right"></i>
-				<b>Recycle Bin&nbsp;&nbsp;&nbsp;</b>
+	
 				<i class="far fa-trash-alt"></i>
-			</a>
+				&nbsp;&nbsp;
+				<b>Recycle Bin</b>
+			</div>
 			<div class="project-status-wrapper side-dir collapse" id="trash-bin">
-				<a class="side-project"><span
-					class="glyphicon glyphicon-duplicate"></span>Project3</a>
+				
 			</div>
 		</div>
 

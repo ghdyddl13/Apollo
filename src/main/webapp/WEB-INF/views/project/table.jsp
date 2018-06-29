@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 
 <div class="container-fluid">
-	<jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 	<h4 id="project-table-page-pname">해당 프로젝트명 들어가는 곳</h4>
+	<jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 	<div>
 		<input type="hidden" name="pid" id="proejct-table-pid">
 		<table class="table project-page-table">
