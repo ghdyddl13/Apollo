@@ -555,6 +555,7 @@ $(function() {
 	               
 	               if(data.updatefolder > 0){
 	                   alert('폴더 수정이 완료되었습니다!');
+	                   $("#f"+data.folderDTO.fid).text(data.folderDTO.fname);
 	                   $(".close").click();
 	               }else {
 	                   alert('폴더 수정이 실패되었습니다');
@@ -728,7 +729,8 @@ function selectProjectList(){
  */
 function MakeprojectWrapper(project){
     var wrapper = jQuery("<div>",{"class":"side-project-wrapper","id":"p"+project.pid});
-    var a = jQuery("<a>",{"class":"side-project","text":project.pname})
+    var a = jQuery("<div>",{"class":"side-content side-project"})
+    var projectname = jQuery("<div>",{"class":"side-content-name","text":project.pname});
     var hidden = jQuery("<input>",{"type":"hidden",
                             "name":"methodologyid",
                             "value":project.methodologyid});
@@ -739,25 +741,25 @@ function MakeprojectWrapper(project){
      var methodology;
 	 switch (project.methodologyid){
 	 case 1: 
-		 methodology="W";
+		 methodology="waterfallicon.png";
 		 break;
 	 case 2:
-		 methodology="A";
+		 methodology="agileicon.png";
 		 break;
 	 case 3:	 
-		 methodology="C";
+		 methodology="customicon.png";
 		 break;
 	}   
        
 	var projecticon= jQuery("<div>",{"class":"side-dir-project-icon"});
-    var b = jQuery("<b>",{"text":methodology, "css":{"font-size":"3px","color":"white"}});
+    var img = jQuery("<img>",{"src":"img/"+methodology, "css":{"width":"15px","height":"15px"}});
 
-    $(b).appendTo(projecticon);   
+    $(img).appendTo(projecticon);   
        
     var div = jQuery("<div>",{"class":"side-dir-project  collapse",
        "id": "p-dir"+project.pid});
        
-    $(a).prepend(i,projecticon);
+    $(a).append(i,projecticon,projectname);
     $(wrapper).append(a).append(div).append(hidden);
     return wrapper;
 }
@@ -801,7 +803,8 @@ function makeSideSubDir(pids){
          
          $(folders).each(function(index,folder){
         	var wrapper_div = jQuery("<div>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
-            var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
+            var a =jQuery("<div>",{"class":"side-content side-folder","id":"f"+folder.fid});
+            var foldername = jQuery("<div>",{"class":"side-content-name","text":folder.fname});
             var i = jQuery("<i>",{"class":"side-dir-arrow fas fa-angle-right", 
                                  "data-toggle":"collapse",
                                  "data-target":"#f-dir"+folder.fid});
@@ -809,7 +812,7 @@ function makeSideSubDir(pids){
             var div = jQuery("<div>",{"class":"side-dir collapse",
                                 "id": "f-dir"+folder.fid});
             
-            $(a).prepend(i,foldericon).appendTo(wrapper_div);
+            $(a).prepend(i,foldericon,foldername).appendTo(wrapper_div);
             $(div).appendTo(wrapper_div);
             $(wrapper_div).appendTo($('#p-dir'+folder.pid));
          })
@@ -820,15 +823,14 @@ function makeSideSubDir(pids){
       if(steps!=null){
          
          $(steps).each(function(index,step){ // Step관련 태그 생성
-            var a =jQuery("<a>",{
-                           "class":"side-step",
-                           "id":"s"+step.sid,
-                           "text":step.sname
-                           });
-            var i = jQuery("<i>",{"class":"side-dir-step-icon far fa-file-alt"})
+            var a =jQuery("<div>",{
+                           "class":"side-content side-step",
+                           "id":"s"+step.sid });
+            var stepname = jQuery("<div>",{"class":"side-content-name","text":step.sname});
+            
+            var i = jQuery("<i>",{"class":"side-dir-step-icon far fa-file-alt"});
 
-            $(a).prepend(i);
-      
+            $(a).append(i,stepname);
             if(step.fid !=null){ // 스텝이 속해있는 폴더가 있다면 폴더 밑에 넣어주고 
             	
                $(a).addClass("side-step-in-folder").appendTo("#f-dir"+step.fid);
