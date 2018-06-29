@@ -11,7 +11,6 @@
 
 
 function getTaskAssignees(tid){
-	console.log("getTaskAssignees실행")
 	var div = jQuery("<div>",{"class":"container-fluid"});
 	var left_member = [];
 	var left_count = 0;
@@ -43,7 +42,7 @@ function getTaskAssignees(tid){
 												  	 }});
 				
 				$(left_member).each(function(index,left){
-					console.log("left " + left);
+					//console.log("left " + left);
 					var left_assigee_container = makeProfileIcon(left);
 					$(left_div).append(left_assigee_container);
 				});
@@ -63,7 +62,7 @@ function getTaskAssignees(tid){
  작성자명 : 박 민 식
  */
 function makeProfileIcon(memberdata, imgsize){
-	var profile_container = jQuery("<div>",{"class":"profile-img-container","id":"profile"+memberdata.mid});
+	var profile_container = jQuery("<div>",{"class":"profile-img-container","id":"profile"+memberdata.mid,"data-toggle":"modal", "data-target":"#profile-modal-dialog"});
 	profile_container.css({"width":imgsize,"height":imgsize});
 	var img = jQuery("<img>",{"class":"profile-img"});
 	var src = (memberdata.image ==null)?"img/user_image.png" :"profileImg/"+memberdata.image;
@@ -81,25 +80,57 @@ function makeProfileIcon(memberdata, imgsize){
  */
 $(document).on("click",".profile-img-container",function(evt){
     var mid = this.id.substr(7); // mid 만 가져오기
-    console.log(mid);
-    console.log(this);
 
-	
+    profileinfo(mid);
+    
+}); // end - profile modal
+
+/**
+ * 
+ 날      짜 : 2018. 6. 28.
+ 기      능 : 프로필 사진 클릭시 프로필 Modal 이 뜨는 함수
+ 작성자명 : 김 래 영
+ */
+function profileinfo(mid) {
 	$.ajax({
         url:"profilemember.htm",
         data:{mid:mid},
         dataType:"json",
         success:function(data) {
-            var image = (data.profileinfo.image)?data.profileinfo.image :"img/user_image.png"
+            var image = (data.profileinfo.image)?data.profileinfo.image :"img/profilemiffy1.jpg"
             $('#profile-modal-img').attr("src",image);
             $('#profile-modal-mname').text(data.profileinfo.mname)
             $('#profile-modal-mid').text(data.profileinfo.mid);
             $('#profile-modal-pnum').text(data.profileinfo.pnum);
             $('#profile-modal-deptname').text(data.profileinfo.deptname);
             $('#profile-modal-position').text(data.profileinfo.position);
-            $("#profile-modal-dialog").modal("show");
             
-
-        }
+            //선택사항을 입력하지 않은 null이 뜨지 않도록 빈 문자열로 대체
+            if($('#profile-modal-pnum').text() == "null") {
+            	$('#profile-modal-pnum').text(" ");
+            }
+            if($('#profile-modal-deptname').text() == "null") {
+            	$('#profile-modal-deptname').text(" ");
+            }
+            if($('#profile-modal-position').text() == "null") {
+            	$('#profile-modal-position').text(" ");
+            }
+        } // end - success
 	}); // end - ajax
-}); // end - profile modal
+} // end - function
+
+
+//사원목록에서 table 사원정보 클릭시
+$(document).on("click",".header-memberinfo-table",function(){
+	// mid 가져오기
+	var mid = $($(this).children("td")[3]).text();
+	
+	profileinfo(mid);
+	
+});
+
+$(document).on("click","#header-memberlist",function(){
+});
+
+
+

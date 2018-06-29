@@ -1,13 +1,24 @@
 #header-member-table {
-	width:95%;
+	width:70%;
 }
 
 #header-member-table thead>tr>th {
-	text-align: center;
-	padding-bottom: 16px;
-	background-color: rgba(224, 224, 224, 0.66);
+	text-align:center;
+	padding-bottom:16px;
+	background-color:#f5f8fc;
+	color:#6b99c7;
 }
 
 #header-member-table tbody>tr>td {
-	text-align: center;
+	text-align:center;
+	color:#5285b8;
+}
+
+#header-member-table tbody :hover {
+	cursor: pointer;
+	background-color: #e0e0e0;
+}
+#header-member-table thead, tbody {
+	border-left-color: white;
+	border-right-color: white;
 }

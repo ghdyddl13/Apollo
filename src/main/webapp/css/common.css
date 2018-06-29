@@ -222,7 +222,10 @@ width:40px;
 }
 
 #loginimg { /* 로그인 이미지 색상  */
-   color: white;
+   width:30px;
+   height:30px;
+   border-radius:50%;
+   background-color: white
 }
 
 .navbar-header {
@@ -230,6 +233,15 @@ width:40px;
    height: 100%
 }
 
+#header-right-wrapper > li {
+	justify-content:center;
+	display: flex;
+	align-items: center;
+}
+
+#header-user-name{
+	padding-left: 5px
+}
 .side-nav {
    height: 100%;
    width: 250px;
@@ -592,7 +604,7 @@ background-color: 999999;
   float:left;
   box-shadow: 1 1px 1px 1 rgba(0, 0, 0, 0.3);
   border: 1px solid rgb(230, 230, 230);
-  margin-right: 3px
+  margin-right: 3px;
 }
 
 .profile-img{
@@ -619,38 +631,37 @@ background-color: 999999;
 	width:20px;
 	height:10px;
 }
-
+.profile-modal-left {
+	height: 150px;
+}
 #profile-modal-content{
-	height:220px;
-	width:400px;
+	height:100%;
+	width:100%;
 }
 #profile-modal-img {
-	margin-top:20px;
-	width:50px;
-	height:50px;
+	margin-top: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid #9E9E9E;
 }
 .profile-modal-dialog {
-	width:500px;
-	
+	width: 500px;
+    height: 250px;
 }
-.profile-modal-info-table {
-	width: 200px;
-	border-left-color:white;
-	border-right-color:white;
-}
-.profile-modal-info-table > tr, th, tbody: {
+.profile-modal-info-table tbody,tr,th,td{
+	width:300px;
 	border-right:white;
 	border-left:white;
 	border-top:white;
 	border-bottom:white;
-
+	padding:5px;
 }
 .update-step-name {
    width: 100%;
    padding-left: 15px;
    padding-right: 15px;
 }
-
 /* task 수정,삭제 모달_정권 ---------------------- 시작 */
 #star_trash{
   text-align: right;
@@ -665,7 +676,20 @@ background-color: 999999;
      text-align: left;
      vertical-align: right;
 }
+#hedaer-logout-dialog {
+	width:55%;
+	position:absolute;
+	left: 30%;
+}
 
+.modal-header-logout-content {
+	width:55%;
+}
+#side-new-project-btn {
+	color:rgb(178, 28, 74);
+	margin-left: 5px;
+	font-size: 20px;
+}
 /* task 수정,삭제 모달_정권 ---------------------- 종료 */
 
 .assignee-left-div{

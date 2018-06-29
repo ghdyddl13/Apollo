@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <h4>사원 목록</h4>
+<br><br>
 <div class="container-fluid">
 	<div align="center">
 		<table class="table" id="header-member-table">
@@ -17,8 +18,8 @@
 			</thead>
 			<tbody>
 				<c:forEach var="member" items="${memberlist}">
-					<tr>
-						<td></td>
+					<tr class="header-memberinfo-table" data-toggle="modal" data-target="#profile-modal-dialog">
+						<td id="header-member-table-td1"></td>
 						<td>${member.mname}</td>
 						<td>${member.position}</td>
 						<td>${member.mid}</td>

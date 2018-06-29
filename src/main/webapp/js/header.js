@@ -625,3 +625,7 @@ function resultSearchProject(projectlist){
 		}) // end ajax
  }) //end func
 
+/* $('#logout-btn').click(function() {
+	 location.href="logout.htm";
+ });
+*/

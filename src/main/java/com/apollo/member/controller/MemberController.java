@@ -179,7 +179,9 @@ public class MemberController {
 		}else {
 			if(bCryptPasswordEncoder.matches(pwd, securitypwd)) {
 			    System.out.println("비밀번호 일치");
+			    MemberDTO memberdto = service.getProfileInfoMember(mid);
 			    session.setAttribute("mid", mid);
+			    model.addAttribute("memberdto", memberdto);
 			    result = "main";
 			}else { 
 			    System.out.println("비밀번호 불일치");
@@ -188,6 +190,7 @@ public class MemberController {
 			}
 		}
 		model.addAttribute("msg", msg);
+		
 		  
 		return result;
 	}

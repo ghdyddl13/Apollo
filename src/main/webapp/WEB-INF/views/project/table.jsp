@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 
 <div class="container-fluid">
-	<jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 	<h4 id="project-table-page-pname">해당 프로젝트명 들어가는 곳</h4>
+	<jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 	<div>
 		<input type="hidden" name="pid" id="proejct-table-pid">
 		<table class="table project-page-table">
@@ -38,7 +38,7 @@
 									<td style="padding-left: 30px">┗ ${task.tname}</td>
 									<td class="project-table-day">${fn:substring(task.sday,0,10)}</td>
 									<td class="project-table-day">${fn:substring(task.eday,0,10)}</td>
-									<td>${task.eday  - task.sday}</td>
+									<td></td>
 									
 									<td id="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
 								</tr>
@@ -73,7 +73,7 @@
 										<td style="padding-left: 60px">┗ ${task.tname}</td>
 										<td class="project-table-day">${fn:substring(task.sday,0,10)}</td>
 										<td class="project-table-day">${fn:substring(task.eday,0,10)}</td>
-										<td class="project-table-day">${task.eday - task.sday}</td>
+										<td class="project-table-day"></td>
 										<td id="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
 									</tr>
 								</c:if>
