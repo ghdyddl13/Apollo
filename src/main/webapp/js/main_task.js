@@ -1263,3 +1263,63 @@ $(document).on("click","#receivermid",function(){
 	
 });
 
+
+/**
+ * 
+ 날      짜 : 2018. 6. 29.
+ 기      능 : tname 변경을 위해 인풋태그 활성화 함수
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#Task_Modal_tname",function(){
+	
+	$('#Task_Modal_tname').css("display", "none");
+	
+	var tname = $('#Task_Modal_tname').text();
+	$('#Task_Modal_tname_input').val(tname);
+	$('#Task_Modal_tname_input').css("display","block");
+	
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 29.
+ 기      능 : tname 변경을 쿼리를 통해 update로 실행하는 함수
+ 작성자명 : 김 정 권
+ */
+$(document).on("keyup","#Task_Modal_tname_input",function(){
+	
+	var tid = $('#tidhidden').attr('value');
+	var tname = '';
+	
+	  if (event.keyCode === 13) {
+		  	
+		    tname = $('#Task_Modal_tname_input').val();
+		    
+		    $.ajax(
+				       {
+				           type : "post",
+				           url  : "changetname.htm",
+				           data : {
+				        	   'tid': tid,
+				        	   'tname' : tname
+				           },
+				           success : function(rdata){
+				        	   console.log('success 성공 테스트 출력 : ' + rdata.result);
+				        	   
+				   			$('#Task_Modal_tname_input').css("display","none");
+				   			$('#Task_Modal_tname_input').val('');
+				   			
+				   			$('#Task_Modal_tname').empty();
+				   			$('#Task_Modal_tname').append(tname);
+							$('#Task_Modal_tname').css("display", "block");
+							
+		                	 $("#main-box").empty();
+							 $("#main-box").append(rdata);
+				        	   
+				           } // end-success
+				        }); // end-ajax
+	  		} // end - keyCode==13
+	
+});
+
