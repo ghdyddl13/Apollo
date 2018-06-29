@@ -307,7 +307,6 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 		        		   step_delete_popup_div_str +='<div>해당 Task가 속한 마지막 Step 입니다</div>';
 		        		   step_delete_popup_div_str +='<div>Step 삭제시 Task가 삭제됩니다</div>';
 		        		   step_delete_popup_div_str +='<div><input type="button" value="삭제하기" id="step_delete_button"></div>';
-		        		   step_delete_popup_div_str +='<div><input type="hidden" value="' + sid + '" id="hidden_sid"></div>';
 		        		   step_delete_popup_div_str +='</div>';
 		        		   
 		        		   $('#step_delete_popup_div').empty();
@@ -362,31 +361,23 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 $(document).on("click","#step_delete_button",function(){
 
 	var tid = $('#tidhidden').attr('value');
-	var sid = $('#hidden_sid').attr('value');
 	
-	 $.ajax(
+	$.ajax(
 		       {
 		           type : "post",
-		           url  : "deletestepintaskmodal.htm",
+		           url  : "deletetask.htm",
 		           data : {
 		        	   'tid': tid,
-		        	   'sid': sid
 		           },
 		           success : function(rdata){
 		        	   
-		        	   console.log(rdata);
-		        	   
-					// step name
-					   $('#Task_Modal_snames').empty();
-					   
-					   var snames = '<br>'
-					   $(rdata.steplist_after_delete_step).each(function(){
-						   var sname = this.sname;
-						       snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + sname + '&nbsp&nbsp' + '<i class="far fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
-					   });
-					   snames += '<i id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
-					   $('#Task_Modal_snames').append(snames);
-		        	   
+	        		     $('#taskinstep_delete_dismiss_btn').click();
+		        	     $('#task_delete_dismiss_btn').click();
+		        	     $('#task_dismiss_btn').click();
+		        	     
+	                	 $("#main-box").empty();
+						 $("#main-box").append(rdata);
+	                	 
 		           } // end-success
 		        }); // end-ajax
 	

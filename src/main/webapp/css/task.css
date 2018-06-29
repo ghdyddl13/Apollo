@@ -239,6 +239,6 @@ assignee_in_taskmodal td{
   top : -20000px;
   float: left;
   z-index: 3;
-  width: 200px;
+  width: 300px;
   height: 100px;
 }
