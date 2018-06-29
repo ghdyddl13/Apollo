@@ -313,8 +313,8 @@
 					</div>
 					
 					<div class="col-sm-12" id="Task_Modal_snames">
-					<br><i class="fas fa-plus-circle" id="task_modal_add_step"></i>
 					</div>
+					<div id="step_names_popup_div"></div>
 					
 				</div>
 				<!-- end row 1 -->

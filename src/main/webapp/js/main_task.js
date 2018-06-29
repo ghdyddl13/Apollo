@@ -62,7 +62,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   $(rdata.steps).each(function(){
 			        		   snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + this.sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
 			        	   });
-			        	   snames += '<i data-toggle="modal" data-target="#step_add_modal_in_taskmodal" id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+			        	   snames += '<i id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 			        	   $('#Task_Modal_snames').append(snames);
 
 			        	   
@@ -361,36 +361,26 @@ $(document).on("click","#task_modal_add_step",function(){
 		           success : function(rdata){
 		        	   
 		        	   console.log(rdata.steplist);
-		        	   $('#steplist_in_taskmodal').empty();
-		        	   
-		        	   var tablestr = '';
-		        	   tablestr += '<tr><th>스텝이름</th><th>시작일</th><th>종료일</th><th>추가</th></tr>';
-		        	   $(rdata.steplist).each(function(){
-		        		   
-		        		  var sday = '';
-		        		  var eday = '';
-		        		   
-		        		  if(this.sday == null){
-		        			  sday = '';
-		        		  }
 
-		        		  if(this.eday == null){
-		        			  eday = '';
-		        		  }
-		        		  
-		        		  if(this.sday != null){
-		        			  sday = this.sday.substring(0, 10);
-		        		  }
-		        		  
-		        		  if(this.eday != null){
-		        			  eday = this.eday.substring(0, 10);
-		        		  }
-		        		  
-		        		  
-		        		   
-		        		  tablestr += '<tr><th>' + this.sname + '</th><th>' + sday + '</th><th>' + eday + '</th><th><i class="fas fa-plus-circle addbtn_taskinstep" id="' + this.sid + '" style="cursor:pointer"></i></th></tr>';
+		        	   var step_names_popup_div_str = '';
+		        	   $(rdata.steplist).each(function(){
+		        				        		   
+		        		  step_names_popup_div_str += '<div class="wrapper_comment popup_sid" id="' + this.sid + '">';	 
+		        		  step_names_popup_div_str += '<div class="each_comment">';	
+		        		  step_names_popup_div_str += '<div class="first_row">' + this.sname + '</div>';	
+		        		  step_names_popup_div_str += '<div class="second_row">' + this.pid + ' > ' + this.sid + '</div>';	
+		        		  step_names_popup_div_str += '</div></div>';
+		                  
 		        	   });
-		        	   $('#steplist_in_taskmodal').append(tablestr);
+		        	      $('#step_names_popup_div').empty();
+		        	      $('#step_names_popup_div').append(step_names_popup_div_str);
+		        	      let popupdiv_width = $('#step_names_popup_div').width();
+		                  let popupdiv_height = $('#step_names_popup_div').height();
+		                  
+		                  let position = $('#task_modal_add_step').position();
+		                  $('#step_names_popup_div').css("left",position.left + 14);
+		                  $('#step_names_popup_div').css("top",position.top + 30);
+		                  $('#step_names_popup_div').css("display","block");
 		        	   
 		           } // end-success
 		        }); // end-ajax
@@ -400,11 +390,27 @@ $(document).on("click","#task_modal_add_step",function(){
 
 /**
  * 
+ 날      짜 : 2018. 6. 29.
+ 기      능 : 스텝 추가 pop up div 외 영역을 클릭시 없애버리는 기능 
+ 작성자명 : 김 정 권
+ */
+$(document).bind("mousedown", function(e) {
+    // If the clicked element is not the #step_names_popup_div
+    if (!$(e.target).parents("#step_names_popup_div").length > 0) {
+    // Hide it
+      $("#step_names_popup_div").css("background-color","#FFFFFF");
+      $("#step_names_popup_div").css({"display":"none","left":"-20000px","top":"-20000px"});
+  }
+});
+
+
+/**
+ * 
  날      짜 : 2018. 6. 23.
  기      능 : 테스크 모달 내에서 스텝 추가 버튼을 클릭시에 뜬 이중모달 내에서 추가 버튼을 누르면 작동
  작성자명 : 김 정 권
  */
-$(document).on("click",".addbtn_taskinstep",function(){
+$(document).on("click",".popup_sid",function(){
 	
 	var sid = $(this).attr('id');
 	var tid = $('#tidhidden').attr('value');
@@ -420,9 +426,9 @@ $(document).on("click",".addbtn_taskinstep",function(){
 		           success : function(rdata){
 		        	   
 		        	   console.log(rdata.result);
-		        	  $('#step_add_modal_in_taskmodal_dismiss').click();
-		        	  //$('#step_add_modal_in_taskmodal').css('visibility','hidden');
-		        	  
+		        	   $("#step_names_popup_div").css("background-color","#FFFFFF");
+		        	   $("#step_names_popup_div").css({"display":"none","left":"-20000px","top":"-20000px"});
+		        	 
 		        	   $.ajax(
 		        		       {
 		        		           type : "post",
@@ -442,7 +448,7 @@ $(document).on("click",".addbtn_taskinstep",function(){
 		        		        	$(rdata.steplist).each(function(){
 		        		        	snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + this.sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
 		        		        	});
-		        		        	snames += '<i data-toggle="modal" data-target="#step_add_modal_in_taskmodal" id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+		        		        	snames += '<i id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 		        		        	$('#Task_Modal_snames').append(snames);
 		        		        	
 		        		           } // end-success
@@ -952,7 +958,8 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
   // @ 쳤을 시
   if (event.keyCode === 50) {
 
-	  var pid = $('#pidhidden').attr('value');
+	var pid = $('#pidhidden').attr('value');
+	  
     $.ajax(
            {
                type : "post",
