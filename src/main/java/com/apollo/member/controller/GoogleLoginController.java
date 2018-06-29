@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.apollo.member.service.MemberService;
 import com.apollo.vo.GoogleDTO;
+import com.apollo.vo.MemberDTO;
 	
 
 @Controller
@@ -64,7 +65,7 @@ public class GoogleLoginController {
     작성자명 : 이 창 훈
     */
    @RequestMapping(value = "/googlelogin.htm", method = RequestMethod.GET)
-   public String doSessionAssignActionPage(HttpServletRequest request, HttpSession session, GoogleDTO googledto){
+   public String doSessionAssignActionPage(HttpServletRequest request, HttpSession session, GoogleDTO googledto, Model model){
      String code = request.getParameter("code");
      OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
      
@@ -90,10 +91,13 @@ public class GoogleLoginController {
      googledto.setGname(name);
      
      
+     
      int result = memberservice.googleLogin(email);
      if(result == 1) {
     	 System.out.println("로그인 성공");
+    	 MemberDTO memberdto = memberservice.getProfileInfoMember(email);
     	 session.setAttribute("mid", email);
+    	 model.addAttribute("memberdto", memberdto);
     	 viewpage = "main";
     	 
      }else {

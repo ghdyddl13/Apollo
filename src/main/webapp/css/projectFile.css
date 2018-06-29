@@ -1,41 +1,39 @@
-@charset "UTF-8";
-
-.modal-update-project-dialog {
-   position:absolute; 
-    top:50%; 
-    left:50%; 
-   width: 850px;
-   height: 515px;
-   overflow: hidden;
-   vertical-align: middle;
-   margin-top:-370px; 
-    margin-left:-25%;
-}
-.modal-update-project-content {
-  height: auto;
-  min-height: 100%;
-  border-radius: 0; 
-}
-
-.modal-delete-dialog {
-	position:absolute; 
-	top:50%; 
-	left:50%; 
-	width: 330px;
-	height: 70%;
-	vertical-align: middle;
-	margin-top:-125px; 
-	margin-left:-230px;
-}
-
-.delete-btn {
-   background-color: rgb(178, 28, 74);
-   color: white;
-   width: 80px;	
-}
-
-.cancel-btn {
-   background-color: rgb(0, 0, 50);
-   color: white;
-   width: 80px;	
-}
+.file-table{
+		width: 100%;
+		margin: auto;
+		border: 3px solid #d9d9d9;
+	}
+	.file-table-tr-th{
+		background-color: #e6e6e6;
+		height: 45px;
+		text-align: center;
+		font-size: 18px;
+	
+	}
+	.file-table-tr-td{
+		height: 40px;
+		text-align: center;
+		font-size:14px;
+		
+	}
+	 .file-table-tr-td:hover{
+		background-color:#f5f5f5;
+	} 
+	
+	.file-table-tr-th-num{
+		text-align: center;
+	}
+	.file-table-tr-th-fname{
+		text-align: center;
+	}
+	.file-table-tr-th-tname{
+		text-align: center;
+	}
+	.file-table-tr-td-sname{
+		color: lightgray;"
+	}
+	.file-table-tr-td-delete{
+		float: right;
+		margin-right: 20px;
+    	 visibility: hidden; 
+	}
