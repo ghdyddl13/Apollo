@@ -1,26 +1,72 @@
+
+$(function(){
+	
+	$(document).on("keyup",function(event){
+		if(event.keyCode ===27){
+			$('.close').click();
+		}
+	});
+});
+
+
 /**
  * 
  날   짜 : 2018. 6. 14.
  기   능 : 태스크 담당자 프로필 만들어주는 함수
  작성자명 : 박 민 식
+
  */
-function getTaskAssignees(tid){
-	console.log("getTaskAssignees실행")
-	var div = jQuery("<div>",{"class":"container-fluid"});
+
+
+
+function getTaskAssignees(tid,imgsize){
+	var div = jQuery("<div>",{"class":""});
+
+	var left_member = [];
+	var left_count = 0;
 	$.ajax({
 		url:"getTaskAssignees.htm",
 		data:{tid:tid},
 		dataType:"json",
 		async:false,
 		success:function(data){
-			if(data!=null){
+			if(data.taskassignees.length!=0){
 				$(data.taskassignees).each(function(index,el){
-					var profile_container = makeProfileIcon(el);
-					if(index <=1){
+					var profile_container = makeProfileIcon(el,imgsize);
+					if(index <1){
 						$(div).append(profile_container);
-					}
-				})
-			}
+					}else{
+						left_member.push(el);
+						left_count++;
+					};
+				});
+
+				if(left_count>0){
+					var a = jQuery("<a>",{"class":"left-assignees",
+										  "text":"외 " +left_count+"명",
+										  "rel":"popover",
+										  "data-popover-content":"#left-assignee-"+tid});
+					var left_div =jQuery("<div>",{"class":"hide assignee-left-div",
+												  "id":"left-assignee-"+tid,
+												  "css":{"position":"absolute",
+													  	 "width":"100px"
+													  	 }});
+					
+					$(left_member).each(function(index,left){
+						var left_assigee_container = makeProfileIcon(left,imgsize);
+						$(left_div).append(left_assigee_container);
+					});
+					$(a).append(left_div).appendTo(div);
+				};
+
+				
+			}else{
+				var noassigned_container = jQuery("<div>",{"class":"noassignee-icon-container"});
+				noassigned_container.css({"width":imgsize,"height":imgsize});
+				var i = jQuery("<i>",{"class":"fas fa-user-plus no-assignee-task-icon",
+										  "src" :"noassignee."});
+				$(noassigned_container).append(i).appendTo(div);
+			};
 		}
 	})
 	return div;
@@ -33,9 +79,9 @@ function getTaskAssignees(tid){
  작성자명 : 박 민 식
  */
 function makeProfileIcon(memberdata, imgsize){
-	var profile_container = jQuery("<div>",{"class":"profile-img-container"});
+	var profile_container = jQuery("<div>",{"class":"profile-img-container","id":"profile"+memberdata.mid,"data-toggle":"modal", "data-target":"#profile-modal-dialog"});
 	profile_container.css({"width":imgsize,"height":imgsize});
-	var img = jQuery("<img>",{"class":"profile-img","id":memberdata.mid});
+	var img = jQuery("<img>",{"class":"profile-img"});
 	var src = (memberdata.image ==null)?"img/user_image.png" :"profileImg/"+memberdata.image;
 	img.attr("src",src);
 	$(profile_container).append(img);
@@ -45,205 +91,63 @@ function makeProfileIcon(memberdata, imgsize){
 
 /**
  * 
- 날   짜 : 2018. 6. 14.
- 기   능 : 프로필사진 클릭시, 프로필창 띄워주기
- 작성자명 : 박 민 식
+ 날   짜 : 2018. 6. 19.
+ 기   능 : 프로필사진 클릭시 프로필 Modal 생성
+ 작성자명 : 김 래 영
  */
 $(document).on("click",".profile-img-container",function(evt){
-	console.log("프로필 띄워주기 - targetId : " + evt.target.id);
-})
+    var mid = this.id.substr(7); // mid 만 가져오기
 
-
-
-
-/**
- * 
- 날      짜 : 2018. 6. 18.
- 기      능 : Task 수정/ 삭제 페이지에 날짜 클릭으로 넣는 datepicker 넣는 코드
- 작성자명 : 김 정 권
- */
-$( ".date-im" ).datepicker({
-    showOn: "button",
-    buttonImage: "img/calendar.png",
-    buttonImageOnly: true,
-    dateFormat: 'yy-mm-dd'
-
-});
-
+    profileinfo(mid);
+    
+}); // end - profile modal
 
 /**
  * 
- 날   짜 : 2018. 6. 19.
- 기   능 : task 수정/삭제 모달에 데이터 띄우기
- 작성자명 : 김 정 권
+ 날      짜 : 2018. 6. 28.
+ 기      능 : 프로필 사진 클릭시 프로필 Modal 이 뜨는 함수
+ 작성자명 : 김 래 영
  */
-$(document).on("click",".Task_RUD_Modal",function(){
+function profileinfo(mid) {
+	$.ajax({
+        url:"profilemember.htm",
+        data:{mid:mid},
+        dataType:"json",
+        success:function(data) {
+            var image = (data.profileinfo.image)?data.profileinfo.image :"img/profilemiffy1.jpg"
+            $('#profile-modal-img').attr("src",image);
+            $('#profile-modal-mname').text(data.profileinfo.mname)
+            $('#profile-modal-mid').text(data.profileinfo.mid);
+            $('#profile-modal-pnum').text(data.profileinfo.pnum);
+            $('#profile-modal-deptname').text(data.profileinfo.deptname);
+            $('#profile-modal-position').text(data.profileinfo.position);
+            
+            //선택사항을 입력하지 않은 null이 뜨지 않도록 빈 문자열로 대체
+            if($('#profile-modal-pnum').text() == "null") {
+            	$('#profile-modal-pnum').text(" ");
+            }
+            if($('#profile-modal-deptname').text() == "null") {
+            	$('#profile-modal-deptname').text(" ");
+            }
+            if($('#profile-modal-position').text() == "null") {
+            	$('#profile-modal-position').text(" ");
+            }
+        } // end - success
+	}); // end - ajax
+} // end - function
 
+
+//사원목록에서 table 사원정보 클릭시
+$(document).on("click",".header-memberinfo-table",function(){
+	// mid 가져오기
+	var mid = $($(this).children("td")[3]).text();
 	
-		var tid = $(this).attr('id'); 
-	    tid = tid.substring(1);   
-		
-		$.ajax(
-			       {
-			           type : "post",
-			           url  : "getTask.htm",
-			           data : {
-			        	   'tid': tid
-			           },
-			           success : function(rdata){
-
-			        	   console.log(rdata);
-
-			        	   //tid
-			        	   var tid = rdata.task.tid;
-			        	   $('#tidhidden').attr('value', tid);
-			        	   
-			        	   // tname
-			        	   $('#Task_Modal_tname').empty();
-			        	   $('#Task_Modal_tname').append(rdata.task.tname);
-
-			        	   
-			        	   // star
-			        	   $('#span_task_star').empty();
-
-			        	   var star_tag_class = 'far fa-star';
-			        	   $(rdata.starredtasklist).each(function (){
-			        		   
-			        		   if(this.tid == tid){
-			        			   star_tag_class = 'fas fa-star';
-			        			   return false;
-			        		   }
-			        	   });
-			        	   			        	   
-			        	   $('#span_task_star').append('<i class="' + star_tag_class + '" id="task_star"></i>');
-			        	   
-			        	   
-			        	   // step name
-			        	   $('#Task_Modal_snames').empty();
-			        	   
-			        	   var snames = '<br>'
-			        	   $(rdata.steps).each(function(){
-			        		   var sname = this.sname;
-			        		       snames += '<span>' + sname + '</span>';
-			        	   });
-			        	   snames += '<i class="fas fa-plus-circle"></i>'
-			        	   $('#Task_Modal_snames').append(snames);
-			        	   
-			        	   
-			        	   // tstatus
-			        	   $('#Task_Modal_tstatus').empty();
-			        	   
-			        	   var tstatusoptions = '<select>'
-			        	   $(rdata.tstatuslist).each(function(){
-			        		   tstatusoptions += '<option style='
-			        		   tstatusoptions += '"color: ' + this.color + '">'
-			        		   tstatusoptions += this.tstatus
-			        		   tstatusoptions += '</option>'
-				           });
-			        	   tstatusoptions += '</select>'
-			        	   $('#Task_Modal_tstatus').append(tstatusoptions);
-			        	   
-			        	   
-			        	   // assignee
-//			        	   $('#Task_Modal_assignee').empty();
-//			        	   $('#Task_Modal_assignee').append(rdata.task.tname);
-//			        	   
-//			        	   
-//			        	   
-//			        	   $('#').empty();
-//			        	   $('#').append(rdata.task.tname);
-//			        	   
-//			        	   $('#').empty();
-//			        	   $('#').append(rdata.task.tname);
-			        	   
-			        	   
-			           } // end-success
-			        } 
-			      ); // end-ajax
-});
-
-/**
- * 
- 날   짜 : 2018. 6. 20.
- 기   능 : task 즐겨찾기
- 작성자명 : 김 정 권
- */
-$(document).on("click","#task_star",function(){
-	
-	var tid = $('#tidhidden').attr('value');
-	var starAddOrDel = 0;
-	var star_class = $('#task_star').attr('class');
-	
-	// if 빈 별(현재는 즐겨찾기가 되어있지 않음)
-	if(star_class == 'far fa-star'){
-		starAddOrDel = 1;
-	}
-	
-	// if 차있는 별(이미 즐겨찾기 한 일)
-	else {
-		starAddOrDel = 0;
-	}
-	
-	$.ajax(
-		       {
-		           type : "post",
-		           url  : "addordeletestar.htm",
-		           data : {
-		        	   'tid': tid,
-		        	   'starAddOrDel': starAddOrDel
-		           },
-		           success : function(rdata){
-
-		        	   console.log(rdata);
-		        	   
-		        	   if(rdata.result == 'added'){
-		        		  
-		        		   // 클릭시 별을 채워준다
-		        		   $('#task_star').attr('class','fas fa-star');
-		        		   
-		        	   }else {
-		        		 
-		        			// 클릭시 별을 비워준다
-		        			$('#task_star').attr('class','far fa-star');
-		        	   }
-		        	   
-		           } // end-success
-		        }); // end-ajax
+	profileinfo(mid);
 	
 });
 
-
-/**
- * 
- 날      짜 : 2018. 6. 20.
- 기      능 : Task 삭제 버튼
- 작성자명 : 김 정 권
- */
-$(document).on("click","#task_trash_btn",function(){
-	
-	var tid = $('#tidhidden').attr('value');
-	
-	$.ajax(
-		       {
-		           type : "post",
-		           url  : "deletetask.htm",
-		           data : {
-		        	   'tid': tid,
-		           },
-		           success : function(rdata){
-		        	   
-		        	     $('#task_delete_dismiss_btn').click();
-		        	     $('#task_dismiss_btn').click();
-		        	     
-	                	 $("#main-box").empty();
-						 $("#main-box").append(rdata);
-	                	 
-		           } // end-success
-		        }); // end-ajax
-	
-	
+$(document).on("click","#header-memberlist",function(){
 });
-
 
 
 

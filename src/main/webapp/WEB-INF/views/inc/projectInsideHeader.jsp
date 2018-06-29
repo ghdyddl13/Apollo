@@ -8,6 +8,7 @@
          <li class="nav-item"><a id="information-page" class="nav-link header-menu">Information</a></li>
          <li class="nav-item"><a id="table-page"  class="nav-link header-menu">Table</a></li>
          <li class="nav-item"><a id="files-page" class="nav-link header-menu">Files</a></li>
+         <input type="hidden" id="pidhidden" value="">
       </ul>
    </div>
 </nav>

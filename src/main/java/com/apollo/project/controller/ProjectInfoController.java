@@ -38,8 +38,7 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
-	public String projectInfoShow(String pid, HttpSession session, Model map) {
-		System.out.println("information이 실행되었다");
+	public String projectInfoShow(int pid, HttpSession session, Model map) {
 		session.setAttribute("location", "/information.htm");
 		session.setAttribute("pid", pid);
 		
@@ -96,7 +95,7 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/getSteps.htm")
-	public View getSteps(String pid, ModelMap map) {
+	public View getSteps(int pid, ModelMap map) {
 
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
@@ -150,7 +149,7 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/getProgressData.htm")
-	public View getProgressData(String pid, ModelMap map) {
+	public View getProgressData(int pid, ModelMap map) {
 
 		ArrayList<ArrayList<TaskDTO>> tasklistbysteps = new ArrayList<ArrayList<TaskDTO>>();
 		
@@ -187,10 +186,12 @@ public class ProjectInfoController {
 		
 		String pid = data_arr[0];
 		String mid = data_arr[1];
+		
+		int int_pid = Integer.parseInt(pid);
 
         MidpidDTO midpiddto = new MidpidDTO();
         midpiddto.setMid(mid);
-        midpiddto.setPid(pid);
+        midpiddto.setPid(int_pid);
 		
 		int result = 0;
 		result = projectinfoservice.insertPmember(midpiddto);

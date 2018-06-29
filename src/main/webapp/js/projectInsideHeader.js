@@ -4,14 +4,17 @@ $(function() {
 	
 	/// 프로젝트 information 페이지
 	$("#information-page").click(function(evt){
+		
+		var pid = $('#pidhidden').attr('value');
+		
 		$.ajax({
 			url:"information.htm",
+			data: "pid=" + pid,
 			dataType:"html",
 			success:function(data){
-				console.log(data)
-				$("#main-box").empty();
-				$("#main-box").append(data);
-				
+				 $("#main-box").empty();
+				 $("#main-box").append(data);	 		
+				 
 			}
 		})
 		
@@ -24,9 +27,10 @@ $(function() {
 			url:"table.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
+				//console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
+				
 				
 			}
 		})
@@ -35,6 +39,7 @@ $(function() {
 	
 	// 프로젝트 files 페이지
 	$("#files-page").click(function(evt){
+
 		$.ajax({
 			url:"files.htm",
 			dataType:"html",

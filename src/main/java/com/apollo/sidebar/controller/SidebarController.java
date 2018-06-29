@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import javax.xml.ws.RequestWrapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,7 @@ import com.apollo.vo.FolderDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.TaskDTO;
 
 
 @Controller
@@ -69,10 +73,10 @@ public class SidebarController {
 	@RequestMapping(value="/insertstep.htm", method=RequestMethod.POST)
 	public View insertStep(StepDTO stepdto, Model model) {
 		System.out.println("insert step");
+		System.out.println(stepdto.toString());
 		try {
+			System.out.println("here");
 			int stepresult = sidebarservice.insertStep(stepdto);
-			System.out.println(stepdto.toString());
-			
 			model.addAttribute("stepresult", stepresult);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,14 +84,7 @@ public class SidebarController {
 		return jsonview; 
 	}
 	
-	public String changeStep(StepDTO stepdto, Model model) {
-		return null;
-	}
-	
-	public String deleteStep(String s1) {
-		return null;
-	}
-	
+
 	/**
 	 * 
 	 날      짜 : 2018. 6. 18.
@@ -286,8 +283,9 @@ public class SidebarController {
 		}
 		return jsonview;
 	}
+	
+	
 	/**
-	 * 
 	 날      짜 : 2018. 6. 21.
 	 기      능 : step 수정
 	 작성자명 : 김 래 영
@@ -305,8 +303,57 @@ public class SidebarController {
 		}
 		
 		return jsonview;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : 스텝 폴더이동
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping(value="/moveStep.htm", method=RequestMethod.POST)
+	public View moveStep(StepDTO stepdto, Model model) {
+		
+		int result = 0;
+		try {
+			result = sidebarservice.moveStep(stepdto);
+			model.addAttribute("result", result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 21.
+	 기      능 : sid 에 속한 task 삭제 및 step 삭제 (선행)
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping(value="/deletestep.htm", method=RequestMethod.POST)
+	public View deleteTaskInStep(int sid, Model model) {
+		System.out.println("deleteTaskInStep controller");
+		
+		int deletetaskinstep = 0;
+		int deletestep = 0;
+		
+		try {
+			deletetaskinstep = sidebarservice.deleteTaskInStep(sid);
+			model.addAttribute("deletetaskinstep", deletetaskinstep);
+			System.out.println("task delete : " + deletetaskinstep);
+			
+			deletestep = sidebarservice.deleteStep(sid);
+			model.addAttribute("deletestep", deletestep);
+			System.out.println("step : " + deletestep);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonview;
 		
 	}
+
+	
 }
 
 

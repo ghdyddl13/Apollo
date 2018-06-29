@@ -1,28 +1,13 @@
 package com.apollo.inbox.controller;
 
-import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.apollo.step.service.StepListService;
 
 @Controller
 public class TestController {
-	
 
-	@RequestMapping("/file.htm")
-	public String projectFilelist() {
-		return "project/files";
-	}
-	
-
-	@RequestMapping("/table.htm")
-	public String projectTable() {
-		return "project/table";
-	}
-	
 
 	@RequestMapping("/report.htm")
 	public String report() {
@@ -35,7 +20,6 @@ public class TestController {
 	}
     
 
-    
     
     @RequestMapping("/workload.htm")
     public String workLoad() {

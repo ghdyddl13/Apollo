@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
 <script>
 	
 </script>
@@ -32,19 +33,19 @@
 									<div class="modal-title">
 										<p>방법론</p>
 									</div>
-										<input type="radio" id="method" name="methodologyid" value="3"
+										<input type="radio" id="method1" name="methodologyid" value="3"
 										checked><span class="method"> Customizing</span> <br>
 									<div>
 										<!-- Customizing 설명 작성  -->
 										가나다라마바사아자차카타파하 커스텀마이징 설명작성 필요
 									</div>
-									<br> <input type="radio" id="method" name="methodologyid" value="2"><span
+									<br> <input type="radio" id="method2" name="methodologyid" value="2"><span
 										class="method"> Agile</span><br>
 									<div>
 										<!-- Agile 설명 작성  -->
 										가나다라마바사아자차카타파하 애자일 설명작성 필요
 									</div>
-									<br> <input type="radio" id="method" name="methodologyid" value="1"><span
+									<br> <input type="radio" id="method3" name="methodologyid" value="1"><span
 										class="method"> Waterfall</span><br>
 									<div>
 										<!-- Waterfall 설명 작성  -->
@@ -52,7 +53,6 @@
 									</div>
 									<br> <br>
 								</div>
-								<!-- Allow form submission with keyboard without duplicating the dialog button -->
 								<div class="col-sm-6 project-setting-right">
 									<div class="modal-title">
 										<p>기간 설정</p>
@@ -77,9 +77,7 @@
 									<textarea rows="7%" cols="49%" id="project-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
 								</div>
 							</div>
-							<!-- 아래는 임시로 작성해둔 것임 -->
 							<input type="hidden" name="mid" value="${mid}">
-		
 						<br>
 						<div align="center">	
 							<input type="button" class="btn add-btn" id="insert-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
@@ -303,6 +301,7 @@
 				<div class="row">
 					<div class="col-sm-10">
 						<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
+						<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">
 					</div>
 
 					<div class="col-sm-2" id="star_trash">
@@ -312,8 +311,9 @@
 					</div>
 					
 					<div class="col-sm-12" id="Task_Modal_snames">
-					<br>여기는 소속된 스텝들이 뜨는 공간입니다&nbsp<i class="fas fa-plus-circle"></i>
 					</div>
+					<div id="step_names_popup_div"></div>
+					<div id="step_delete_popup_div"></div>
 					
 				</div>
 				<!-- end row 1 -->
@@ -322,49 +322,33 @@
 							
 				<!-- row 2 -->
 				<div class="row">
-					<div class="col-sm-3" id="Task_Modal_tstatus">
-							<select>
-							<option>New</option>
-							<option>Development</option>
-							<option>Testing</option>
-							<option>Reopened</option>
-							<option>Ready</option>
-							<option>Completed</option>
-							<option>On hold</option>
-							<option>Cancelled</option>
+					<div class="col-sm-2">
+							<select id="Task_Modal_tstatus_selectbox">
 							</select>
 					</div>
-	
-		
-					<div class="col-sm-9" id="Task_Modal_assignee"">여기는 담당자들이 뜨는 공간입니다&nbsp<i class="fas fa-plus-circle"></i></div>
+							
+					<div class="col-sm-5">
+	                    <span>시작일&nbsp:&nbsp</span>
+                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date_sday">
+					</div>
+
+					<div class="col-sm-5">
+						<span>종료일&nbsp:&nbsp</span>
+	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date_eday">
+					</div>
 				</div>
 				<!-- end row 2 -->
 				<hr>
+				
 				<!-- end modal-header -->
 
 				<div class="modal-body">
 
-					<!-- row 1 -->
-					<div class="row">
-                	<div class="col-sm-12 modal-title">기간 설정</div><br /><br />
+					<div class="modal-title">업무 담당자</div><br />
+					<div id="Task_Modal_assignee"></div>
+					<div id="assignee_popup_div"></div>
 
-					<div class="col-sm-6">
-	                    <div class="modal-title">
-	                    <p>시작일</p>
-	                    </div>
-                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date-im">
-					</div>
-
-					<div class="col-sm-6">
-	                    <div class="modal-title">
-	                      <p>종료일</p>
-	                    </div>
-	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date-im">
-	                    <br><br>
-					</div>
-					</div>
-					<!-- end row 1 -->
-
+								
                 <hr />
 					<div class="modal-title">파일 업로드</div><br />
 	                <div id="Task_Modal_files">파일들이 여기 잡히게 된다</div>
@@ -373,29 +357,41 @@
                 <hr>
 
 				<div class="modal-title">Sub Task</div><br />
-				 <div id="Task_Modal_subtasks">subtask들이 들어가게 된다</div><br>
-					<input type="text" name="pname" id="add_sub_task"
-							placeholder="Sub Task 입력"
-							class="text ui-widget-content ui-corner-all">
-					<input type="button" value="Sub Task 추가">
+				
+				 <input type="text" name="pname" id="add_sub_task"
+							placeholder="Sub Task의 제목을 입력 후 Enter..."
+							class="text ui-widget-content ui-corner-all"><br><br>
+				 <div id="Task_Modal_subtasks"></div><br>
+
                 <hr />
                 
 				<div class="modal-title">
-					<p>상세설명</p>
-					<textarea id="Task_Modal_detail" rows="7%" cols="49%" name="detail" placeholder="내용을 입력하세요"></textarea>
+					<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
+					<div style="text-align:center">
+					<textarea id="Task_Modal_detail" rows="7%" cols="65%" name="detail" placeholder="내용을 입력하세요"></textarea>
+					</div>
 				</div>
                 <hr />
                 
 					<div class="modal-title">Comment</div><br />
-					<div id="Task_Modal_comments">여기는 코멘트 들이 추가되는 공간입니다
-					<br>
-					<br>
-					<br>
+					<div id="Task_Modal_comments">
 					</div>
-					<input type="text" placeholder="코멘트 입력.." class="">
-					<input id="Task_Modal_enter_comments" type="button" value="전송">
-					<input type="hidden" id="tidhidden" value="">
+					<hr>
+					<div id="project_member_popup_div"></div>
 					
+					<div id="div_for_comment_input_box">
+					<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">
+					</div>
+							
+					<input type="hidden" id="pidhidden" value="">					
+					<input type="hidden" id="usermidhidden" value="">					
+					<input type="hidden" id="tidhidden" value="">
+					<input type="hidden" id="receiverhidden" value="">
+					<input type="hidden" id="receivernamehidden" value="">
+					<input type="hidden" id="tnamehidden" value="">
+					<input type="hidden" id="origin_sday" value="">
+					<input type="hidden" id="origin_eday" value="">
+					<input type="hidden" id="stepdeletehidden" data-toggle="modal" data-target="#step_delete_Modal">
 					
 			 	</div>
 			 	<!-- end modal-body -->
@@ -403,55 +399,57 @@
 			</div>
 		</div>
 	</div>
-</div>	
+</div>
 
-	<!-- 프로필 모달 -->
-	<div class="modal fade" id="profile-modal-dialog" role="dialog">
-		<div class="modal-dialog profile-modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content" id="profile-modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Profile</h4>
-				</div>
-				<div class="modal-body">
-					<div class="col-sm-5">
-						<div id="profile-modal-img-content">
-							<img id="profile-modal-img" src="">
-						</div>
+<!-- 프로필 모달 -->
+<div class="modal fade" id="profile-modal-dialog" role="dialog">
+	<div class="modal-dialog profile-modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content" id="profile-modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">PROFILE</h4>
+			</div>
+			<div class="modal-body">
+				<div class="col-sm-4 profile-modal-left">
+					<div id="profile-modal-img-content">
+						<img id="profile-modal-img" src="">
 					</div>
-					<div class="col-sm-7" id="profile-modal-info">
-						<table class="profile-modal-info-table">
+				</div>
+				<div class="col-sm-8" id="profile-modal-info">
+					<table class="profile-modal-info-table">
+						<tbody>
 							<tr>
-								<td>이름</td>
+								<td>NAME</td>
 								<th id="profile-modal-mname"></th>
 							</tr>
 							<tr>
-								<td>이메일</td>
+								<td>E-MAIL</td>
 								<th id="profile-modal-mid"></th>
 							</tr>
 							<tr>
-								<td>휴대폰번호</td>
+								<td>PHONE</td>
 								<th id="profile-modal-pnum"></th>
 							</tr>
 							<tr>
-								<td>부서명</td>
+								<td>DEPT</td>
 								<th id="profile-modal-deptname"></th>
 							</tr>
 							<tr>
-								<td>직위</td>
+								<td>POSITION</td>
 								<th id="profile-modal-position"></th>
 							</tr>
-						</table>
-					</div>
+						</tbody>
+					</table>
 				</div>
-				<br>
 			</div>
+			<br>
 		</div>
 	</div>
-	
-	
-	<!-- Folder 수정 Modal 창 -->
+</div>
+
+
+<!-- Folder 수정 Modal 창 -->
 	<div class="modal fade" id="update-folder" role="dialog">
 		<div class="modal-dialog modal-folder-dialog">
 			<!-- Modal content-->
@@ -491,7 +489,7 @@
 				<div class="modal-body" style="text-align:center">
 				<form id="delete-folder-form" method="post">
 					<p>해당  폴더를 삭제하시겠습니까?</p>
-					<p>(삭제 후 복구 불가능합니다)</p>
+					<p>(삭제시 해당 폴더는 복구 불가능하며, 폴더에 속한 스텝도 삭제됩니다.)</p>
 					<input type="hidden" name="fid" id="delete-folder-fid">
 				</form>
 				</div>
@@ -530,7 +528,6 @@
 			</div>
 		</div>
 	</div>
-	
 	
 
 	<!-- 스텝 수정 Modal 창 -->
@@ -593,7 +590,7 @@
 							id="update-step-fid" name="fid">
 						<div align="center">
 							<input type="button" class="btn add-btn" id="update-step-btn"
-								value="생성">&nbsp;&nbsp;&nbsp; <input type="button"
+								value="수정">&nbsp;&nbsp;&nbsp; <input type="button"
 								class="btn cancel-btn" data-dismiss="modal" value="취소">
 						</div>
 					</fieldset>
@@ -613,15 +610,276 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 id="move-step-header" class="modal-title">Step 이동</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body"align="center">
+				<br>
+				<form id="move-step-form">
 					<select id="move-step-select" name="fid">
 					
 					</select>
+					<input type="hidden" name="sid" id="move-step-sid">
+				</form>
+				<br>
 				</div>
 				<div align="center">
 					<input id="move-step-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
 					<input type="button" class="btn cancel-btn"
 						data-dismiss="modal" value="취소">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- TaskInStep 돌고 1:1 매핑일때 스텝 삭제 모달창 -->
+	<div class="modal fade" id="step_delete_Modal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" id="taskinstep_delete_dismiss_btn">&times;</button>
+					<h4 class="modal-title">Step 삭제</h4>
+				</div>
+				
+				<div class="modal-body" style="text-align:center">
+				<h4>해당 Task가 속한 마지막 Step을 삭제하면 Task도 같이 삭제됩니다.<br>
+				진행하시겠습니까?<br><h5 style="color:red">(삭제 후 복구 불가능합니다)</h5></h4>					
+
+					<div align="center">
+						<input type="button" class="btn add-btn" id="task_trash_btn" value="삭제">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- 스텝 추가 Modal -->
+	<div class="modal fade" id="step_add_modal_in_taskmodal">
+		<div class="modal-dialog modal-add-project-dialog">
+			<!-- Modal content-->
+			
+			
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" id="step_add_modal_in_taskmodal_dismiss">&times;</button>
+						<h4 class="modal-title">New Step</h4>
+					</div>
+				
+				
+				<div class="modal-body ">
+
+		<table id="steplist_in_taskmodal" class="table">
+		
+		</table>
+		
+				</div>
+				
+				<div align="center">
+					<input type="button" class="btn" id="cancel-btn"
+						data-dismiss="modal" value="돌아가기">
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	
+	
+
+
+	<!-- Step 삭제 Modal 창 -->
+	<div class="modal fade" id="delete-step" role="dialog">
+		<div class="modal-dialog modal-delete-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Step 삭제</h4>
+				</div>
+				<div class="modal-body" style="text-align:center">
+				<form id="delete-step-form" method="post">
+					<p>해당 스텝을 삭제하시겠습니까?</p>
+					<p>(삭제시 해당 스텝은 영구삭제되며, 해당 스텝에 속한 task도 삭제됩니다)</p>
+					<input type="hidden" name="sid" id="delete-step-sid">
+				</form>
+				<div align="center">
+					<input type="button" class="btn delete-btn" id="delete-step-btn" value="삭제">&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn cancel-btn"
+						data-dismiss="modal" value="취소">
+				</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+
+<!-- 개인정보수정 Modal -->
+<div class="modal fade" id="edit-profile" role="dialog">
+	<div class="modal-dialog modal-edit-profile-dialog">
+		<div class="modal-content modal-edit-profile-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">개인정보수정</h4>
+			</div>
+			<div class="modal-body">
+				<form id="edit-profile-form">
+					<fieldset>
+						<div class="edit-profile-part1">
+							<br>
+							<div>
+								<div id="edit-profile-img-content">
+									<!-- <img name="image" id="edit-profile-modal-img" src=""> -->
+									<input type="file" name="image" id="edit-profile-image">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">이름</div>
+									<input type="text" name="mname" id="edit-profile-mname">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">이메일</div>
+									<input type="text" name="mid" id="edit-profile-mid"
+										readonly="readonly">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">인증키</div>
+									<input type="text" name="apollokey" id="edit-profile-apollokey">
+									<input class="btn" id="profile-apollokey-check" type="button" value="인증확인">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">휴대폰 번호</div>
+									<input type="text" name="pnum" id="edit-profile-pnum">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">부서명</div>
+									<input type="text" name="deptname" id="edit-profile-deptname">
+								</div>
+								<br>
+								<div class="edit-profile-all-title">
+									<div class="edit-profile-title">직위</div>
+									<input type="text" name="position" id="edit-profile-position">
+								</div>
+								<br>
+							</div>
+						</div>
+						<div align="center">
+							<input type="button" class="btn add-btn"
+								id="update-edit-profile-btn" value="수정">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn cancel-btn" data-dismiss="modal"
+								value="취소">
+						</div>
+					</fieldset>
+				</form>
+				<hr id="edit-memberinfo-hr">
+				<form id="edit-pwd-form" method="post">
+					<fieldset>
+						<div class="edit-profile-part2">
+							<h4>비밀번호 변경</h4>
+							<br>
+							<div class="edit-profile-title">현재 비밀번호</div>
+							<input type="password" name="pwd" id="edit-profile-cpwd">
+							<br>
+							<div class="edit-profile-title">변경 비밀번호</div>
+							<input type="password" name="pwd" id="edit-profile-upwd">
+							<br>
+							<div class="edit-profile-title">변경 비밀번호 확인</div>
+							<input type="password" name="pwd2" id="edit-profile-upwd2">
+							<br>
+						</div>
+						<div align="center">
+							<input type="button" class="btn add-btn" id="update-pwd-btn"
+								value="수정">&nbsp;&nbsp;&nbsp; <input type="button"
+								class="btn cancel-btn" data-dismiss="modal" value="취소">
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	<!-- Assignee 추가 Modal -->
+	<div class="modal fade" id="assignee_add_modal_in_taskmodal">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			
+			
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" id="assignee_add_modal_in_taskmodal_dismiss">&times;</button>
+						<h4 class="modal-title">New Assignee</h4>
+					</div>
+				
+				
+				<div class="modal-body ">
+
+				<table id="assignee_in_taskmodal" class="table">
+		
+				</table>
+		
+				</div>
+				
+				<div align="center">
+					<input type="button" class="btn" id="cancel-btn"
+						data-dismiss="modal" value="돌아가기">
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- File 삭제 창 -->
+	<div class="modal fade" id="file_delete_modal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" id="file_delete_dismiss_btn">&times;</button>
+					<h4 class="modal-title">File 삭제</h4>
+				</div>
+				
+				<div class="modal-body" style="text-align:center">
+				<h4>해당 File를 삭제하시겠습니까?<br><h5 style="color:red">(삭제 후 복구 불가능합니다)</h5></h4>					
+
+					<div align="center">
+						<input type="button" class="btn add-btn" id="file_delete_btn" value="삭제">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+						<input type="hidden" id="starbucks" value="">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 로그아웃 -->
+	<div class="modal fade" id="hedaer-logout-dialog" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-header-logout-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">로그아웃</h4>
+				</div>
+	
+				<div class="modal-body" style="text-align: center">
+					<div>정말 로그아웃하시겠습니까?</div>
+					<br>
+					<div align="center">
+						<input type="button" class="btn add-btn" id="logout-btn" value="확인" onclick="location.href='logout.htm'">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
+					</div>
 				</div>
 				<br>
 			</div>

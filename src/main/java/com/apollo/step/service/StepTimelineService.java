@@ -1,13 +1,16 @@
 package com.apollo.step.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apollo.member.dao.MemberDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.TaskDAO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.TaskDTO;
 /**
  * 
@@ -50,5 +53,39 @@ public class StepTimelineService {
 		System.out.println("result : " + result);
 		return result;
 	
+	}
+	
+	public ArrayList<MemberDTO> selectAssigneesBySid(int sid){
+		
+		ArrayList<MemberDTO> result = null;
+		try {
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			result =dao.selectAssigneesBySid(sid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public ArrayList<TaskDTO> selectTasksByMidAndSid(HashMap<String, Object> map){
+		ArrayList<TaskDTO> result = null;
+		try {
+			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
+			result= dao.selectTasksByMidAndSid(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public ArrayList<TaskDTO> selectNotAssignedTasksBySid(int sid){
+		ArrayList<TaskDTO> result = null;
+		try {
+			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
+			result= dao.selectNotAssignedTasksBySid(sid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

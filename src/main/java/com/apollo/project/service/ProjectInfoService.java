@@ -68,7 +68,7 @@ public class ProjectInfoService {
 	 기      능 : pid를 이용해서 해당 프로젝트 소속 스텝을 가져옴
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<StepDTO> getSteps(String pid){
+	public ArrayList<StepDTO> getSteps(int pid){
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		StepDAO dao = sqlsession.getMapper(StepDAO.class);
 		steplist = dao.getSteps(pid);
@@ -94,7 +94,10 @@ public class ProjectInfoService {
 	 기      능 : pid를 이용해 같은 프로젝트 소속 멤버들을 가져옴
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<MemberDTO> getProjectMembers(String pid){
+	public ArrayList<MemberDTO> getProjectMembers(int pid){
+		
+		System.out.println("테스트 출력 pid : " + pid);
+		System.out.println("getProjectMembers 서비스 실행됨");
 		
 		ArrayList<MemberDTO> getProjectMemberlist = new ArrayList<MemberDTO>();
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);

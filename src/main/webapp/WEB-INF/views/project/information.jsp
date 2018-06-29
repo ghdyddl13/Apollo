@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="js/task.js"></script>
 <script type="text/javascript" src="js/projectInfo.js"></script>
 <link href="css/projectinfo.css" type="text/css" rel="stylesheet">
 
 <h3>인포메이션</h3>
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 
-<div class="Task_RUD_Modal" id="t11" data-toggle="modal" data-target="#Task_RUD_Modal">테스트 tid 10</div>
+<div class="Task_RUD_Modal" id="t17" data-toggle="modal" data-target="#Task_RUD_Modal">테스트 tid</div>
 
 <div id=projectinfo_outerbox>
   <div class="row" id="projectinfo_first_row"> <!-- row_1 -->

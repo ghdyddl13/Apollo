@@ -1,21 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+    
+<script type="text/javascript" src="js/task.js"></script>
 
+<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <div class="main-container container">
 	<div class="main-section-left" id="left">
 		<div class="week-wrapper" id="today">
 			<div class="main-section-header" id="today">
 				<div class="week-section">TODAY</div>
-				<div class="date-section">Jun 12</div>
-				<div class="week-count-section" id="todaycount" style="float: right">3</div>
+				<div class="date-section">${today}</div>
+				<div class="week-count-section" id="todaycount" style="float: right">${counttodaylist}</div>
 			</div>
 			<c:forEach var="todaytask" items="${todaylist}">
-				<div class="main-section-task" id="t+${todaytask.tid}">
+				<div class="main-section-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${todaytask.tid}">
 					<div class="task-image-section"></div>
-					<div class="task-date-section"
-						style="float: right">${todaytask.date}</div>
+					<c:choose>
+						<c:when test="${todaytask.overdue=='overdue'}">
+							<div class="task-date-section task-date-overdue"style="float: right">${todaytask.date}</div>	
+						</c:when>
+						<c:otherwise>
+							<div class="task-date-section"style="float: right">${todaytask.date}</div>						
+						</c:otherwise>
+					</c:choose>
 					<div class="task-description-section">
 						<div class="task-status" style="background-color:${todaytask.color}">${todaytask.tstatus}</div>
 						<div class="task-name-section">${todaytask.tname}</div>
@@ -24,7 +32,7 @@
 					<div class="task-step-section">
 						<div class="div-step-section">
 							<c:forEach var="step" items="${todaytask.steps}">
-								<span class="span-step-section" id="s+${step.sid}">${step.sname}</span>
+								<span class="span-step-section" id="s${step.sid}">${step.sname}</span>
 							</c:forEach>
 						</div>
 					</div>
@@ -37,8 +45,8 @@
 		<div class="week-wrapper" id="thisweek">
 			<div class="main-section-header">
 				<div class="week-section">THIS WEEK</div>
-				<div class="date-section">Jun 10 - Jun 16</div>
-				<div class="week-count-section" id="todaycount" style="float: right">2</div>
+				<div class="date-section">${thisweek}</div>
+				<div class="week-count-section" id="todaycount" style="float: right">${countthisweeklist}</div>
 			</div>
 			<c:forEach var="thisweektask" items="${thisweeklist}">
 				<div class="main-section-task" id="t+${thisweektask.tid}">
@@ -63,8 +71,8 @@
 		<div class="week-wrapper" id="nextweek">
 			<div class="main-section-header">
 				<div class="week-section">NEXT WEEK</div>
-				<div class="date-section">Jun 17 - Jun 23</div>
-				<div class="week-count-section" id="todaycount" style="float: right">1</div>
+				<div class="date-section">${nextweek}</div>
+				<div class="week-count-section" id="todaycount" style="float: right">${countnextweeklist}</div>
 			</div>
 			<c:forEach var="nextweektask" items="${nextweeklist}">
 				<div class="main-section-task" id="t+${nextweektask.tid}">
@@ -89,8 +97,8 @@
 		<div class="week-wrapper" id="later">
 			<div class="main-section-header">
 				<div class="week-section">LATER</div>
-				<div class="date-section">After Jun 23</div>
-				<div class="week-count-section" id="todaycount" style="float: right">0</div>
+				<div class="date-section">${later}</div>
+				<div class="week-count-section" id="todaycount" style="float: right">${countlaterlist}</div>
 			</div>
 			<c:forEach var="latertask" items="${laterlist}">
 				<div class="main-section-task" id="t+${latertask.tid}">

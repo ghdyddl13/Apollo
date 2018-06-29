@@ -2,6 +2,7 @@ package com.apollo.inbox.dao;
 
 import java.util.ArrayList;
 
+import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
 
 public interface InboxDAO {
@@ -16,5 +17,6 @@ public interface InboxDAO {
 	
 	public int updateArchive2(CommentDTO comment);
 	
-	public ArrayList<CommentDTO> getStreamlist(String mid);
+	public ArrayList<CommentAndMemberDTO> getCommentsAndMember(int tid);
+	
 }

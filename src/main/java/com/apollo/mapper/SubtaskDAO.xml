@@ -4,4 +4,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.task.dao.SubtaskDAO">
 
+	<insert id="addSubTask" parameterType="com.apollo.vo.SubtaskDTO">
+    	insert into subtask values(seq_subtaskid.nextval, #{tid}, #{subtask}, #{ischecked})
+    </insert>
+    
+    <select id="getSubTasks" resultType="com.apollo.vo.SubtaskDTO">
+    	select * from subtask where tid = #{tid} order by subtaskid asc
+    </select>
+
+	<update id="changeSubtask" parameterType="com.apollo.vo.SubtaskDTO">
+		update subtask set ischecked = #{ischecked} where subtaskid = #{subtaskid}
+	</update>
+	
+	<delete id="deleteSubtask">
+		delete from subtask where subtaskid = #{subtaskid}
+	</delete>
+
 </mapper>

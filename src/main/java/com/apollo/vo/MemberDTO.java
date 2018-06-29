@@ -1,6 +1,10 @@
 package com.apollo.vo;
 
 import java.sql.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class MemberDTO {
 
@@ -13,9 +17,6 @@ public class MemberDTO {
 	private String deptname;
 	private String apollokey;
 	private String position;
-	
-	
-	
 	
 	public String getMid() {
 		return mid;
@@ -47,6 +48,7 @@ public class MemberDTO {
 	public void setPnum(String pnum) {
 		this.pnum = pnum;
 	}
+
 	public String getImage() {
 		return image;
 	}
@@ -71,6 +73,7 @@ public class MemberDTO {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+	
 	@Override
 	public String toString() {
 		return "MemberDTO [mid=" + mid + ", mname=" + mname + ", pwd=" + pwd + ", rday=" + rday + ", pnum=" + pnum
