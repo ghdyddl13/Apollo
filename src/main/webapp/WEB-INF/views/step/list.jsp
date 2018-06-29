@@ -35,7 +35,7 @@
                 <span class="list-header-filter-status-tag" id="status-button">STATUS:ALL</span>
               </span>
               <span class="list-header-filter-people" id="people-button">
-                <span class="list-header-filter-people-tag">TO:ALL</span>
+                <span class="list-header-filter-people-tag" id="people-button-tag">TO:ALL</span>
               </span>
             </div>
             <div class="list-header-sorting">
@@ -70,7 +70,11 @@
         </div>
         <!-- PEOPLE FILTER -->
         <div class="list-header-filter-people-selecting">
-
+          <div class="list-header-filter-people-container">
+            <input type="text" id="filter-people-input" class="list-header-filter-people-input" placeholder="Search user">
+            <div class="list-header-filter-people-tagscontainer">
+            </div>
+          </div>
         </div>
         <!-- SORTING FILTER  -->
         <div class="list-header-sorting-selecting">
@@ -136,30 +140,187 @@
   <!-- THIRD PANNEL DEFAULT -->
   <div class="list-section-third-default">
     <div class="list-section-third-cover">
-      <div class="list-section-third-complpercent">
+            <div class="list-section-third-complpercent">
         <div class="list-section-third-title">
           <span class="list-section-third-title-text">Percent of Task Completion</span>
         </div>
-        <div class="list-section-third-complpercent-graph">
-
-        </div>
+        <div class="list-section-third-complpercent-graph"id="uppergraph"></div>
       </div>
       <div class="list-section-third-deadline">
         <div class="list-section-third-title">
           <span class="list-section-third-title-text">Deadline of This Step</span>
         </div>
-        <div class="list-section-third-deadline-graph">
-
-        </div>
+        <div class="list-section-third-deadline-graph" id="middlegraph"></div>
       </div>
       <div class="list-section-third-completion">
         <div class="list-section-third-title">
           <span class="list-section-third-title-text">Status of Task</span>
         </div>
-        <div class="list-section-third-completion-graph">
-            <canvas id="Step-list-DonutChart"></canvas>
-        </div>
+        <div class="list-section-third-completion-graph" id="bottomgraph"></div>
       </div>
+      <script type="text/javascript">
+	      var dom = document.getElementById("uppergraph");
+	      var myChart = echarts.init(dom);
+	      var app = {};
+	      option = null;
+	      app.title = '상단그래프';
+	      option = {
+	          tooltip : {
+	              trigger: 'axis',
+	              axisPointer : {
+	                  type : 'shadow'
+	              }
+	          },
+	          grid: {
+	              left: '3%',
+	              right: '4%',
+	              bottom: '3%',
+	              containLabel: true
+	          },
+	          xAxis:  {
+	              type: 'value'
+	          },
+	          yAxis: {
+	              type: 'category',
+	              data: ' '
+	          },
+	          series: [
+	              {
+	                  name: '미완료 작업',
+	                  type: 'bar',
+	                  stack: '일',
+	                  label: {
+	                      normal: {
+	                          show: true
+	                      }
+	                  },
+	                  data: [<%=(Integer)request.getAttribute("unfinishedtask")%>]
+	              },
+	              {
+	                  name: '완료된 작업',
+	                  type: 'bar',
+	                  stack: '일',
+	                  label: {
+	                      normal: {
+	                          show: true
+	                      }
+	                  },
+	                  data: [<%=(Integer)request.getAttribute("completedtask")%>]
+	              }
+	          ],
+	          color:['#96add6','#c4d97f'],
+	          textStyle:{
+	              color:'#ffffff',
+	              fontSize:20,
+	          }
+	      };;
+	      if (option && typeof option === "object") {
+	          myChart.setOption(option, true);
+	      }
+	
+	      
+	      var dom = document.getElementById("middlegraph");
+	      var myChart = echarts.init(dom);
+	      var app = {};
+	      option = null;
+	      app.title = '상단그래프';
+	      option = {
+	          tooltip : {
+	              trigger: 'axis',
+	              axisPointer : {
+	                  type : 'shadow'
+	              }
+	          },
+	          grid: {
+	              left: '3%',
+	              right: '4%',
+	              bottom: '3%',
+	              containLabel: true
+	          },
+	          xAxis:  {
+	              type: 'value'
+	          },
+	          yAxis: {
+	              type: 'category',
+	              data: ' '
+	          },
+	          series: [
+	              {
+	                  name: '지난 일',
+	                  type: 'bar',
+	                  stack: '일',
+	                  label: {
+	                      normal: {
+	                          show: true
+	                      }
+	                  },
+	                  data: [<%=(Integer)request.getAttribute("thepast")%>]
+	              },
+	              {
+	                  name: '남은 일',
+	                  type: 'bar',
+	                  stack: '일',
+	                  label: {
+	                      normal: {
+	                          show: true
+	                      }
+	                  },
+	                  data: [<%=(Integer)request.getAttribute("therest")%>]
+	              }
+	          ],
+	          color:['#96add6','#c4d97f'],
+	          textStyle:{
+	              color:'#ffffff',
+	              fontSize:20,
+	          }
+	      };;
+	      if (option && typeof option === "object") {
+	          myChart.setOption(option, true);
+	      }
+	      
+	      
+	      var dom = document.getElementById("bottomgraph");
+	      var myChart = echarts.init(dom);
+	      var app = {};
+	      option = null;
+	      option = {
+	
+	          tooltip : {
+	              trigger: 'item',
+	              formatter: "{a} <br/>{b} : {c} ({d}%)"
+	          },
+	          series : [
+	              {
+	                  name: 'Task마감',
+	                  type: 'pie',
+	                  radius : '60%',
+	                  center: ['45%', '50%'],
+	                  data:[
+	                      {value:<%=(Integer)request.getAttribute("noday")%>, name:'미지정'},
+	                      {value:<%=(Integer)request.getAttribute("afternextweek")%>, name:'다음주 이후'},
+	                      {value:<%=(Integer)request.getAttribute("untilthisweek")%>, name:'이번주까지'},
+	                      {value:<%=(Integer)request.getAttribute("completedtask")%>, name:'완료'},
+	                      {value:<%=(Integer)request.getAttribute("overduetask")%>, name:'기한만료'}
+	                  ],
+	                  itemStyle: {
+	                      emphasis: {
+	                          shadowBlur: 10,
+	                          shadowOffsetX: 0,
+	                          shadowColor: 'rgba(0, 0, 0, 0.5)'
+	                      }
+	                  }
+	              }
+	          ],
+	          color:['rgb(235, 188, 87)',
+	                'rgb(196, 217, 127)',
+	                'rgb(255, 255, 255)',
+	                'rgb(150, 173, 214)',
+	                'rgb(255, 117, 117)']
+	      };
+	      if (option && typeof option === "object") {
+	          myChart.setOption(option, true);
+	      };
+      </script>
     </div>
   </div>
    <!--THIRD PANNEL SELECTED   -->

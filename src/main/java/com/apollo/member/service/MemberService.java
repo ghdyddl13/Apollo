@@ -13,6 +13,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.apollo.member.dao.AuthkeyDAO;
 import com.apollo.member.dao.MemberDAO;
 import com.apollo.vo.AuthkeyDTO;
+import com.apollo.vo.GoogleDTO;
 import com.apollo.vo.MemberDTO;
 
 
@@ -213,6 +214,22 @@ public class MemberService {
 		}
 		return result;
 	}
+	/**
+	 날      짜 : 2018. 6. 28.
+	 기      능 : 구글 아이디가 가입되어 있다면 구글 아이디로 로그인하기 
+	 작성자명 : 이 창 훈
+	 */
+	public int googleLogin(String email) {
+		int result = 0;
+		try {
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			result = dao.googleLogin(email);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}
+		return result;
+	}
 	
 	/**
 	 * 
@@ -230,6 +247,32 @@ public class MemberService {
 		}
 		return result;
 	}
-	
-	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 28.
+	 기      능 : 시험판 기간 제한
+	 작성자명 : 신 호 용
+	 */
+	public int freeTrialCheck(String mid){
+		System.out.println("service freeTrialCheck");
+		int result = 0;
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		result = dao.freeTrialCheck(mid);
+		return result;
+	}
+	/**
+	 날      짜 : 2018. 6. 29.
+	 기      능 : 구글아이디로 가입된 아이디가 없으면 해당아이디로 회원가입하기 
+	 작성자명 : 이 창 훈
+	 */
+	public int googleIdInsert(GoogleDTO googledto) {
+		int result = 0;
+			try {
+				MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+				result = dao.googleIdInsert(googledto);
+			}catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		return result;
+	}
 }

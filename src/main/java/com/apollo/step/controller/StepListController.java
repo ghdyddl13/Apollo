@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,19 +14,20 @@ import org.springframework.web.servlet.View;
 
 import com.apollo.step.service.StepBoardService;
 import com.apollo.step.service.StepListService;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.StepListTaskDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TstatusDTO;
 @Controller
 public class StepListController {
-	@Autowired
-	private View jsonview;
+
 	@Autowired
 	private StepListService service;
 	@Autowired
 	private StepBoardService boardservice;
-	
+	@Autowired
+	private View jsonview;
 	
 	/**
 	 * 
@@ -45,14 +45,37 @@ public class StepListController {
         int pid = service.getProjectIdByStepId(sid);
         request.getSession().setAttribute("sid", sid);
         request.getSession().setAttribute("pid", pid);
+        //스텝이 소속된 프로젝트의 방법론 정보
         ArrayList<TstatusDTO> tstatuslist = service.getListTstatusList(sid);
+        //스텝 정보
         StepDTO stepinfo =service.getListStepName(sid);
-		int tstatusid =0;
-        ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid);
+		//테스크 리스트
+        String tstatusid =null;
+        String mid=null;
+        ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid,mid);
+        //그래프 관련 데이터
+  	  	int completedtask = service.listCountCompletedTask(sid);
+  		int unfinishedtask = service.listCountUnfinishedTask(sid);
+  		int thepast = service.listCountThePast(sid);
+  		int therest = service.listCountTheRest(sid);
+  		int noday = service.listCountNoDay(sid);
+  		int afternextweek = service.listCountAfterNextWeek(sid);
+  		int untilthisweek = service.listCountUntilThisWeek(sid);
+  		int overduetask = service.listCountOverdueTask(sid);
         
+       
+        System.out.println("미지정: "+noday+"/다음주 이후: "+afternextweek+"/이번주까지: "+untilthisweek+"/완료: "+completedtask+"/기간만료: "+overduetask);
         map.addAttribute("stepinfo", stepinfo);
         map.addAttribute("tstatuslist", tstatuslist);
         map.addAttribute("tasklist",tasklist);
+        map.addAttribute("completedtask",completedtask);
+        map.addAttribute("unfinishedtask",unfinishedtask);
+        map.addAttribute("thepast",thepast);
+        map.addAttribute("therest",therest);
+        map.addAttribute("noday",noday);
+        map.addAttribute("afternextweek",afternextweek);
+        map.addAttribute("untilthisweek",untilthisweek);
+        map.addAttribute("overduetask",overduetask);
         
         return "step/list";
     }
@@ -83,27 +106,34 @@ public class StepListController {
 	 작성자명 : 이 진 우
 	 */
 	@RequestMapping(value="/liststatusfilter.htm",method=RequestMethod.POST)
-	public String statusFilter(int tstatusid, String stepid, ModelMap map) {
-		int sid = Integer.parseInt(stepid);
+	public String statusFilter(int sid,String tstatusid,ModelMap map) {
+		String mid=null;
 		System.out.println("값이 넘어오나요"+tstatusid+"/"+sid);
-        ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid);
+        ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid,mid);
         map.addAttribute("tasklist",tasklist);
 		return "step/listtask";
 	}
-	
-	
-	public String showTaskList(String s1, Model model) {
-		return null;
+	/**
+	 * 
+	 날      짜 : 2018. 6. 29.
+	 기      능 : 첫 페이지가 로드 되었을때 Memberlist 뜨게 하기
+	 작성자명 : 이 진 우
+	 */
+	@RequestMapping(value="/memberlist.htm",method=RequestMethod.POST)
+	public View memberlist(int sid, ModelMap map) {
+		ArrayList<MemberDTO> memberlist = service.listProjectMemberList(sid);
+        map.addAttribute("memberlist",memberlist);
+        System.out.println(memberlist.toString());
+		return jsonview;
 	}
-
-	public String changeTasks(String[] s1, String s2, String s3, Model model) {
-		return null;
+	@RequestMapping(value="/listpeoplefilter.htm",method=RequestMethod.POST)
+	public String peopleFilter(int sid, String mid, ModelMap map) {
+		System.out.println("값이 넘어오나요"+mid+"/"+sid);
+		String tstatusid =null;
+        ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid,mid);
+        map.addAttribute("tasklist",tasklist);
+		return "step/listtask";
 	}
-
-	public String deleteTasks(String[] s1, Model model) {
-		return null;
-	}
-	
 	
 	
 }

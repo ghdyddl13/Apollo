@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apollo.step.dao.StepDAO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.StepListMemberDTO;
 import com.apollo.vo.StepListStepDTO;
@@ -34,8 +35,6 @@ public class StepListService {
 		
 		int pid = 0;
 		try {
-			System.out.println("sess "+sqlsession); 
-			
 			StepDAO dao= sqlsession.getMapper(StepDAO.class);
 			pid =dao.getProjectIdByStepId(sid);
 		} catch (Exception e) {
@@ -72,12 +71,14 @@ public class StepListService {
 	 기      능 : Step List 첫 페이지 로드
 	 작성자명 : 이 진 우
 	 */
-	public ArrayList<StepListTaskDTO> getListTask(int sid, int tstatusid){
+	public ArrayList<StepListTaskDTO> getListTask(int sid, String tstatusid,String mid){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd") ;
 		StepDAO dao= sqlsession.getMapper(StepDAO.class);
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("sid", sid);
+		HashMap<String, String> map = new HashMap<String, String>();
+		String sids = ""+sid;
+		map.put("sid", sids);
 		map.put("tstatusid" , tstatusid);
+		map.put("mid", mid);
 		ArrayList<StepListTaskDTO> tasklist = dao.getStepListTask(map);
 		ArrayList<StepListMemberDTO> memberlist = dao.getStepListMember(map);
 		ArrayList<StepListStepDTO> steplist = dao.getStepListStep(map);
@@ -193,8 +194,84 @@ public class StepListService {
 		date += " "+day;
 		return date;
 	}
-	
-	public void createTask(String tname) {
-		
+	/**
+	 * 
+	 날      짜 : 2018. 6. 28.
+	 기      능 :  LIST PAGE 우측 상단의 TASK 완료/미완료 Service 
+	 작성자명 : 이 진 우
+	 */
+	public int listCountCompletedTask(int sid) {
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		int completedtask =dao.listCountCompletedTask(sid);
+		return completedtask;
 	}
+	public int listCountUnfinishedTask(int sid) {
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		int unfinishedtask =dao.listCountUnfinishedTask(sid);
+		return unfinishedtask;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 28.
+	 기      능 : LIST PAGE 우측 중간의 STEP 기한 
+	 작성자명 : 이 진 우
+	 */
+	public int listCountThePast(int sid) {
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		Integer thepast =dao.listCountThePast(sid);
+		if(thepast==null) {
+			thepast=0;
+		}
+		return thepast;
+	}
+	public int listCountTheRest(int sid) {
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		Integer therest =dao.listCountTheRest(sid);
+		if(therest==null) {
+			therest=0;
+		}
+		return therest;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 28.
+	 기      능 : LIST PAGE 우측 하단의 TASK 상태
+	 작성자명 : 이 진 우
+	 */
+	public int listCountNoDay(int sid) {
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		int noday =dao.listCountNoDay(sid);
+		System.out.println("noday:"+noday);
+		return noday;
+	}	
+	public int listCountAfterNextWeek(int sid) {
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		int afternextweek =dao.listCountAfterNextWeek(sid);
+		System.out.println("afternextweek"+afternextweek);
+		return afternextweek;
+	}
+	public int listCountUntilThisWeek(int sid) {
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		int untilthisweek =dao.listCountUntilThisWeek(sid);
+		System.out.println("untilthisweek:" +untilthisweek);
+		return untilthisweek;
+	}
+	public int listCountOverdueTask(int sid) {
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		int overduetask =dao.listCountOverdueTask(sid);
+		System.out.println("overdue:"+overduetask);
+		return overduetask;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 6. 28.
+	 기      능 : LIST PAGE 맴퍼 필터용 맴버 리스트
+	 작성자명 : 이 진 우
+	 */
+	public ArrayList<MemberDTO> listProjectMemberList(int sid){
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		ArrayList<MemberDTO> projectmemberlist = dao.listProjectMemberList(sid);
+		return projectmemberlist;
+	}
+
 }

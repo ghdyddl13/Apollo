@@ -53,7 +53,6 @@
 									</div>
 									<br> <br>
 								</div>
-								<!-- Allow form submission with keyboard without duplicating the dialog button -->
 								<div class="col-sm-6 project-setting-right">
 									<div class="modal-title">
 										<p>기간 설정</p>
@@ -78,9 +77,7 @@
 									<textarea rows="7%" cols="49%" id="project-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
 								</div>
 							</div>
-							<!-- 아래는 임시로 작성해둔 것임 -->
 							<input type="hidden" name="mid" value="${mid}">
-		
 						<br>
 						<div align="center">	
 							<input type="button" class="btn add-btn" id="insert-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
@@ -399,55 +396,57 @@
 			</div>
 		</div>
 	</div>
-</div>	
+</div>
 
-	<!-- 프로필 모달 -->
-	<div class="modal fade" id="profile-modal-dialog" role="dialog">
-		<div class="modal-dialog profile-modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content" id="profile-modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Profile</h4>
-				</div>
-				<div class="modal-body">
-					<div class="col-sm-5">
-						<div id="profile-modal-img-content">
-							<img id="profile-modal-img" src="">
-						</div>
+<!-- 프로필 모달 -->
+<div class="modal fade" id="profile-modal-dialog" role="dialog">
+	<div class="modal-dialog profile-modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content" id="profile-modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">PROFILE</h4>
+			</div>
+			<div class="modal-body">
+				<div class="col-sm-4 profile-modal-left">
+					<div id="profile-modal-img-content">
+						<img id="profile-modal-img" src="">
 					</div>
-					<div class="col-sm-7" id="profile-modal-info">
-						<table class="profile-modal-info-table">
+				</div>
+				<div class="col-sm-8" id="profile-modal-info">
+					<table class="profile-modal-info-table">
+						<tbody>
 							<tr>
-								<td>이름</td>
+								<td>NAME</td>
 								<th id="profile-modal-mname"></th>
 							</tr>
 							<tr>
-								<td>이메일</td>
+								<td>E-MAIL</td>
 								<th id="profile-modal-mid"></th>
 							</tr>
 							<tr>
-								<td>휴대폰번호</td>
+								<td>PHONE</td>
 								<th id="profile-modal-pnum"></th>
 							</tr>
 							<tr>
-								<td>부서명</td>
+								<td>DEPT</td>
 								<th id="profile-modal-deptname"></th>
 							</tr>
 							<tr>
-								<td>직위</td>
+								<td>POSITION</td>
 								<th id="profile-modal-position"></th>
 							</tr>
-						</table>
-					</div>
+						</tbody>
+					</table>
 				</div>
-				<br>
 			</div>
+			<br>
 		</div>
 	</div>
-	
-	
-	<!-- Folder 수정 Modal 창 -->
+</div>
+
+
+<!-- Folder 수정 Modal 창 -->
 	<div class="modal fade" id="update-folder" role="dialog">
 		<div class="modal-dialog modal-folder-dialog">
 			<!-- Modal content-->
@@ -859,3 +858,28 @@
 			</div>
 		</div>
 	</div>
+
+
+	<!-- 로그아웃 -->
+	<div class="modal fade" id="hedaer-logout-dialog" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-header-logout-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">로그아웃</h4>
+				</div>
+	
+				<div class="modal-body" style="text-align: center">
+					<div>정말 로그아웃하시겠습니까?</div>
+					<br>
+					<div align="center">
+						<input type="button" class="btn add-btn" id="logout-btn" value="확인" onclick="location.href='logout.htm'">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+
