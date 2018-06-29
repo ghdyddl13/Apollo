@@ -462,7 +462,7 @@ $(document).on("click","#task_modal_add_step",function(){
 		                  
 		                  let position = $('#task_modal_add_step').position();
 		                  $('#step_names_popup_div').css("left",position.left + 14);
-		                  $('#step_names_popup_div').css("top",position.top + 30);
+		                  $('#step_names_popup_div').css("top",position.top + 50);
 		                  $('#step_names_popup_div').css("display","block");
 		        	   
 		           } // end-success
