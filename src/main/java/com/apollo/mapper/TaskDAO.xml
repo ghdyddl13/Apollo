@@ -67,10 +67,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>    
 
     
-    <select id="getTasksAndTstatusInStep"  parameterType="java.util.List" resultType="com.apollo.vo.TaskDTO">
-		select * from taskinstep tis join task t on tis.tid = t.tid join TSTATUS tt
-		on tt.TSTATUSID  = t.TSTATUSID where 
-		tis.sid in
+    <select id="getTasksAndTstatusInStep"  parameterType="java.util.List" resultType="com.apollo.vo.TaskDTO">	
+		select tis.sid, t.tid, t.tname, to_char(t.sday,'YYYY-mm-dd') as sday, to_char(t.eday,'YYYY-mm-dd') as eday, t.detail, t.pid, t.tstatusid, tt.tstatus, tt.color, tt.ordering, tt.methodologyid 
+		from taskinstep tis join task t
+		on tis.tid = t.tid join TSTATUS tt
+		on tt.TSTATUSID  = t.TSTATUSID
+		where tis.sid in
 		<foreach collection="list" item="step"  open="(" close=")" separator=",">
 			#{step.sid}
 		</foreach>

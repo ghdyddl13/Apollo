@@ -107,7 +107,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="getStepInProject" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
-    	select * from step where pid = #{pid}
+    	select s.sid, s.sname, to_char(s.sday,'YYYY-mm-dd') as sday, to_char(s.eday,'YYYY-mm-dd') as eday, s.detail, s.pid, s.fid, s.methodologyid, s.mid, m.mname
+		from step s join member m
+		on s.mid = m.mid
+		where pid = #{pid}
     </select>
 	
 	<select id="getStepNamesbytid" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
