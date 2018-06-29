@@ -2,6 +2,7 @@ package com.apollo.member.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.apollo.vo.GoogleDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidpidDTO;
 import com.apollo.vo.TidpidDTO;
@@ -61,4 +62,20 @@ public interface MemberDAO {
 	 작성자명 : 박 민 식
 	 */
 	public ArrayList<MemberDTO> getSearchMembers(HashMap<String, String> map);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 28.
+	 기      능 : 구글아디로 로그인 
+	 작성자명 : 이 창 훈
+	 */
+	public int googleLogin(String email);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 28.
+	 기      능 : 구글아이디가 member 테이블에 존재하지 않을경우 insert 해주기 
+	 작성자명 : 이 창 훈
+	 */
+	public int googleIdInsert(GoogleDTO googledto);
 }

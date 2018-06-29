@@ -92,8 +92,8 @@ margin-bottom:1em;
 
 /* 버튼 맞추는 부분 */
 .login-btn{
-   margin-right: 40px; 
-   padding-top: 12px;
+    margin-right: 40px; 
+  	padding-top: 12px;
     padding-bottom: 12px;
     padding-right: 30px;
     padding-left: 30px;
@@ -112,7 +112,25 @@ margin-bottom:1em;
     color:white;
 }
 
+.googlelogin-btn{
+	margin-top : 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-right: 30px;
+    padding-left:30px;
+    background-color: #eeeeee;
+}
 
+.google_img{
+	width: 40px;
+	height: 40px; 
+	margin-left: -12px;
+}
+
+.google_login{
+	color: #507CAB;	
+	font-size: 14px;
+}
 
 
 /* 버튼 맞추는 부분 */

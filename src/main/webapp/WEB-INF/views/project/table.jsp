@@ -37,7 +37,7 @@
 									<td style="padding-left: 30px">┗ ${task.tname}</td>
 									<td class="project-table-day">${fn:substring(task.sday,0,10)}</td>
 									<td class="project-table-day">${fn:substring(task.eday,0,10)}</td>
-									<td class="project-table-day">${task.eday - task.sday}</td>
+									<td class="project-table-day"></td>
 									<td id="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
 								</tr>
 							</c:if>
@@ -71,7 +71,7 @@
 										<td style="padding-left: 60px">┗ ${task.tname}</td>
 										<td class="project-table-day">${fn:substring(task.sday,0,10)}</td>
 										<td class="project-table-day">${fn:substring(task.eday,0,10)}</td>
-										<td class="project-table-day">${task.eday - task.sday}</td>
+										<td class="project-table-day"></td>
 										<td id="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
 									</tr>
 								</c:if>
