@@ -28,6 +28,10 @@
 		if (msg != "") {
 			alert(msg);
 		}
+		
+		$("#google-login-btn").click(function(){
+			$()
+		});
 
 		$("#pwdreset").click(function() {
 			$("#findpwd")[0].reset();
@@ -91,6 +95,8 @@
 		$("#mid").val("");
 		$("#pwd").val("");
 	}
+	
+      
 </script>
 </head>
 <body>
@@ -114,10 +120,21 @@
 					<span class="input-group-addon"><i class="	fa fa-key i-width"></i></span> 
 						<input type="password" class="form-control" placeholder="****" name="pwd" id="pwd">
 				</div>
-
+			
+				
 				<!-- 구매 취소 부분  -->
 				<input id="login_btn" type="button" onclick="login()" class="btn btn-block login-btn" value="로그인"> 
-				<input type="button" class="btn btn-block buy-license-btn" value="구매하기" data-toggle="modal" data-target="#myModal"><br>
+				<input type="button" class="btn btn-block buy-license-btn" value="구매하기" data-toggle="modal" data-target="#myModal">
+				
+				
+				<div class="btn btn-block googlelogin-btn" id="google-login-btn"  onclick="location.href='<%=request.getContextPath()%>/google.htm'">
+					<img class="google_img" alt="구글 로그인" src="<%=request.getContextPath()%>/img/googlelogin.png" >
+					<span class="btn google_login">GOOGLE 로그인</span>
+				</div>	
+			
+				
+				
+				<br> 
 				<!-- 비밀번호 ,회원가입 페이지 링크 -->
 				<p class="p-color">
 					<a href="join.htm">회원가입이 필요하신가요?</a>
