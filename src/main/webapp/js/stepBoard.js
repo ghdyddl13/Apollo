@@ -1,4 +1,10 @@
-//task 생성하기 위해 이름 입력하는 text 창 생성
+
+/**
+ * 
+ 날      짜 : 2018. 6. 22.
+ 기      능 : task 생성하기 위해 이름 입력하는 text 창 생성
+ 작 성 자 명 : 이 창 훈
+ */
 function addTaskView(tstatusid){
    $("#task-adder"+tstatusid).remove();
    let inputtag="<div class='board-task-adder-addmode'><input class='form-control' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
@@ -6,7 +12,12 @@ function addTaskView(tstatusid){
     $("#insert-task"+tstatusid).focus();
 }
 
-//keyup(엔터)으로 task 생성 성공
+/**
+ * 
+ 날      짜 : 2018. 6. 22
+ 기      능 : keyup이벤트로 task 생성하기
+ 작 성 자 명 : 이 창 훈
+ */
 function addTask_keyup(tstatusid){
    let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
       if(event.which==13){
@@ -34,7 +45,12 @@ function addTask_keyup(tstatusid){
       } 
 }
 
-//focusout으로 task 생성 성공
+/**
+ * 
+ 날      짜 : 2018. 6. 22
+ 기      능 : focusout으로 task 생성 하기
+ 작 성 자 명 : 이 창 훈
+ */
 function addTask_focusout(tstatusid){
    let newtask=$.trim($('#insert-task'+tstatusid).val());
    let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
@@ -65,7 +81,12 @@ function addTask_focusout(tstatusid){
       $('#board-content-md').css("width", width)
    }
    
-   //board에서 각 tast 위치 옮기는 함수
+   /**
+    * 
+    날      짜 : 2018. 6. 18
+    기      능 : sortable이용하여 task 위치 옮기기
+    작 성 자 명 : 이 창 훈
+    */
    function sortable(){
       var i = 1;
       var tstatus;
@@ -95,7 +116,12 @@ function addTask_focusout(tstatusid){
       });
    }
 
-   //board 좌우로 움직이는 함수
+   /**
+    * 
+    날      짜 : 2018. 6. 20.
+    기      능 : board page 좌우(x축)으로 이동하게 하는 dragable 함수
+    작 성 자 명 : 이 창 훈
+    */
    function doDraggable(){
 	   autoWidth();
 	     sortable();
