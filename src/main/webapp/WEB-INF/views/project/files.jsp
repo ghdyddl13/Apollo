@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html> 
-<div class="container-fluid">
+
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include> 
 <div class="files_Table">
 	<table class="file-table">
@@ -27,4 +27,3 @@
 		</tbody>
 	</table>
 </div>
-</div>  

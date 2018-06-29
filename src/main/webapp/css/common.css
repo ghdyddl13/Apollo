@@ -733,14 +733,14 @@ background-color: 999999;
 	width: 500px;
     height: 250px;
 }
-.profile-modal-info-table tbody,tr,th,td{
+/* .profile-modal-info-table tbody> tr th td{
 	width:300px;
 	border-right:white;
 	border-left:white;
 	border-top:white;
 	border-bottom:white;
 	padding:5px;
-}
+} */
 .update-step-name {
    width: 100%;
    padding-left: 15px;
