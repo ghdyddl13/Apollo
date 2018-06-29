@@ -120,7 +120,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 				        	   });
 		        		   } // end - else
 			        	   
-			        	   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+			        	   assigneestr += '<i id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 			        	   
 			        	   $('#Task_Modal_assignee').append(assigneestr);
 			        	   
@@ -364,7 +364,6 @@ $(document).on("click","#task_modal_add_step",function(){
 
 		        	   var step_names_popup_div_str = '';
 		        	   
-			        	
 	        		   var countlength = Object.keys(rdata.steplist).length;
 	        		   if(countlength == 0){
 	        			   step_names_popup_div_str += '<div class="wrapper_comment popup_nothing">';
@@ -436,19 +435,27 @@ $(document).on("click","#task_modal_add_step",function(){
  작성자명 : 김 정 권
  */
 $(document).bind("mousedown", function(e) {
-    // If the clicked element is not the #step_names_popup_div
-    if (!$(e.target).parents("#step_names_popup_div").length > 0) {
+    // If the clicked element is not the #step_names_popup_div or #assignee_popup_div
+    if (!$(e.target).parents("#step_names_popup_div").length > 0){
     // Hide it
       $("#step_names_popup_div").css("background-color","#FFFFFF");
       $("#step_names_popup_div").css({"display":"none","left":"-20000px","top":"-20000px"});
+    
   }
+
+    if (!$(e.target).parents("#assignee_popup_div").length > 0){
+    	
+    	$("#assignee_popup_div").css("background-color","#FFFFFF");
+    	$("#assignee_popup_div").css({"display":"none","left":"-20000px","top":"-20000px"});
+    }
+    
 });
 
 
 /**
  * 
  날      짜 : 2018. 6. 23.
- 기      능 : 테스크 모달 내에서 스텝 추가 버튼을 클릭시에 뜬 이중모달 내에서 추가 버튼을 누르면 작동
+ 기      능 : popup div 에서 스텝 누르면 추가됨
  작성자명 : 김 정 권
  */
 $(document).on("click",".popup_sid",function(){
@@ -548,7 +555,7 @@ $(document).on("click",".task_page_delete_assignee_btn",function(){
 		        	       assigneestr += '&nbsp&nbsp&nbsp'
 		        	       profile_count ++;
 		        	   });
-		        	   	   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+		        	   	   assigneestr += '<i id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 		        	   
 		        	   $('#Task_Modal_assignee').append(assigneestr);
 		        	   
@@ -562,7 +569,7 @@ $(document).on("click",".task_page_delete_assignee_btn",function(){
 /**
  * 
  날      짜 : 2018. 6. 24.
- 기      능 : 테스크 모달 내에서 담당자를 추가하는 플러스 버튼으로 이걸 누르면 데이터를 가져와서 이중 모달에 채워준다
+ 기      능 : 테스크 모달 내에서 담당자를 추가하는 플러스 버튼으로 이걸 누르면 데이터를 가져와서 팝업디브 형성
  작성자명 : 김 정 권
  */
 $(document).on("click","#task_modal_add_assignee",function(){
@@ -578,25 +585,38 @@ $(document).on("click","#task_modal_add_assignee",function(){
 		           },
 		           success : function(rdata){
 		        	   
-		        	   $('#assignee_in_taskmodal').empty();
+		        	   var assignee_popup_div_str = '';
+		        	   var countlength = Object.keys(rdata.getSameProjectButNotSameTaskMemberList).length;
+	        		   if(countlength == 0){
+	        			   assignee_popup_div_str += '<div class="wrapper_comment popup_nothing">';
+	        			   assignee_popup_div_str += '<div class="each_comment">';	
+	        			   assignee_popup_div_str += '<div class="first_row">잔여 프로젝트 인원이 없습니다</div>';
+	        			   assignee_popup_div_str += '</div></div>';
+	        				   
+	        		   } else {
+	        			   
+	        			   $(rdata.getSameProjectButNotSameTaskMemberList).each(function(){
+	        					 
+	        			  assignee_popup_div_str += '<div class="wrapper_comment popup_member" id="' + this.mid + '">';	 
+//	                      assignee_popup_div_str += '<img class ="taskmodal_memberprofile2" src="img/' + this.image + '"/>';	
+	        			  assignee_popup_div_str += '<img class ="taskmodal_memberprofile2" src="img/프로필사진테스트.jpg"/>';	
+	        			  assignee_popup_div_str += '<div class="each_comment">';	
+	        			  assignee_popup_div_str += '<div class="first_row">' + this.mname + '</div>';	
+	        			  assignee_popup_div_str += '<div class="second_row">' + this.mid + '</div>';	
+	        			  assignee_popup_div_str += '</div></div>';
+	        				   
+			        	   });
+			        	   
+	        		   }
+
+	        	   	   $('#assignee_popup_div').empty();
+		        	   $('#assignee_popup_div').append(assignee_popup_div_str);
 		        	   
-		        	   var tablestr = '';
-		        	   tablestr += '<tr><th>이름</th><th>직위</th><th>부서명</th><th>이메일</th><th>핸드폰 번호</th><th>초대</th></tr>';
-		        	   $(rdata.getSameProjectButNotSameTaskMemberList).each(function(){
-		        		   
-		        		   if(this.position == null){
-		        			   this.position = '';
-		        		   } 
-		        		   if(this.deptname == null){
-		        			   this.deptname = '';
-		        		   } 
-		        		   if(this.pnum == null){
-		        			   this.pnum = '';
-		        		   } 
-		        		  tablestr += '<tr><th>' + this.mname + '</th><th>' + this.position + '</th><th>' + this.deptname + '</th><th>' + this.mid + '</th><th>' + this.pnum + '</th><th><i class="fas fa-plus-circle addbtn_assingeebtninmodal" id="' + this.mid + '" style="cursor:pointer"></i></th></tr>';
-		        	   });
-		        	   
-		        	   $('#assignee_in_taskmodal').append(tablestr);
+		               let position = $('#task_modal_add_assignee').position();
+		               $('#assignee_popup_div').css("left",position.left + 14);
+		               $('#assignee_popup_div').css("top",position.top + 10);
+		               $('#assignee_popup_div').css("display","block");
+		     
 		        	   
 		           } // end-success
 		        }); // end-ajax
@@ -607,12 +627,11 @@ $(document).on("click","#task_modal_add_assignee",function(){
 /**
  * 
  날      짜 : 2018. 6. 24.
- 기      능 : 업무 담당자 추가 이중 모달 내에서 추가 버튼을 누르면 실행되는 것으로 DB 변화를 하고 이중 모달을 닫은 뒤
+ 기      능 : 업무 담당자 추가 팝업디브 내에서 사람을 누르면 실행되는 것으로 DB 변화를 하고 팝업디브를 닫은 뒤
   			  업무 담당자를 다시 empty-> append 해준다 (이중 ajax 필요한 로직이다)
-  			  업무 담당자가 추가되면 그 후 incoming과 stream에 insert가 발생하여야 한다
  작성자명 : 김 정 권
  */
-$(document).on("click",".addbtn_assingeebtninmodal",function(){
+$(document).on("click",".popup_member",function(){
 
 	var mid = $(this).attr('id'); // 추가할 대상자
 	var tid = $('#tidhidden').attr('value');
@@ -630,7 +649,8 @@ $.ajax(
 	           success : function(rdata){
 	        	   
 	        	   console.log(rdata.result);
-	        	   $('#assignee_add_modal_in_taskmodal_dismiss').click();
+	        	   $("#assignee_popup_div").css("background-color","#FFFFFF");
+	        	   $("#assignee_popup_div").css({"display":"none","left":"-20000px","top":"-20000px"});
 	        	   
 	        	   // 갱신된 assignee들 append
 	        	   $.ajax(
@@ -651,7 +671,7 @@ $.ajax(
 	     		        		   
 	     		        		   if(this == null){
 	     		        			   assigneestr += '<span>해당 Task의 담당자가 존재하지 않습니다</span>&nbsp&nbsp&nbsp';
-	     		        			   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+	     		        			   assigneestr += '<i id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 	     		        			   return false;
 	     		        		   }
 	     		        		   
@@ -668,7 +688,7 @@ $.ajax(
 	     		        	       assigneestr += '&nbsp&nbsp&nbsp'
 	     		        	       profile_count ++;
 	     		        	   });
-	     		        	   	   assigneestr += '<i data-toggle="modal" data-target="#assignee_add_modal_in_taskmodal" id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+	     		        	   	   assigneestr += '<i id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 	     		        	   
 	     		        	   $('#Task_Modal_assignee').append(assigneestr);
 	    			        	   

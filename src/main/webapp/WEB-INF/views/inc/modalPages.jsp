@@ -347,6 +347,7 @@
 
 					<div class="modal-title">업무 담당자</div><br />
 					<div id="Task_Modal_assignee"></div>
+					<div id="assignee_popup_div"></div>
 
 								
                 <hr />

@@ -198,7 +198,6 @@ assignee_in_taskmodal td{
   top : -20000px;
   float: left;
   z-index: 3;
-  padding: 10px
 }
 
 .popup_sid{
@@ -207,6 +206,26 @@ assignee_in_taskmodal td{
 }
 
 .popup_sid:hover{
+	cursor: pointer;
+	background-color: rgba(163, 172, 182, 0.2);
+}
+
+#assignee_popup_div{
+  display: none;
+  position: absolute;
+  background-color : #FFFFFF; 
+  left : -20000px;
+  top : -20000px;
+  float: left;
+  z-index: 3;
+}
+
+.popup_member{
+	cursor: pointer;
+	padding : 10px;
+}
+
+.popup_member:hover{
 	cursor: pointer;
 	background-color: rgba(163, 172, 182, 0.2);
 }
