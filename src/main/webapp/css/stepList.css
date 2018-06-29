@@ -231,7 +231,8 @@
   display: block;
 }
 /* PEOPLE FILTER & TAG*/
-.list-header-filter-people{
+.list-header-filter-people,.list-header-filter-people-selected{
+  position:relative;
   width: auto;
   cursor: pointer;
   border-radius: 9px;
@@ -244,9 +245,139 @@
   user-select: none;
   white-space: nowrap;
 }
+.list-header-filter-people-selected{
+  background-color: #dfe6f0;
+}
 .list-header-filter-people:hover{
   background-color: #dfe6f0;
 }
+.list-header-filter-people-tag-selected{
+  margin-right: 7px;
+}
+.list-header-filter-people-remove{
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  top: 1px;
+  right: 0;
+  cursor: pointer;
+  display: block;
+  background: url(../img/index.env=web.locale=.stage=release.sprite-0.png?=jiuviuu4) 0px -3804px no-repeat;
+  box-sizing: border-box;
+}
+.list-header-filter-people-selecting{
+  display: block;
+  position: absolute;
+  z-index: 15000;
+  left:-2000px;
+  top: -2000px;
+  visibility: hidden;
+  box-shadow: 0 0 6px #6f6f6f;
+  box-sizing: border-box;
+}
+.list-header-filter-people-container{
+  display: block;
+  width: 300px;
+  position: relative;
+  background: #fff;
+  box-sizing: border-box;
+}
+.list-header-filter-people-input{
+  height: 27px;
+  line-height: normal;
+  background: #fff;
+  padding: 0 10px;
+  box-sizing: border-box;
+  width: 100%;
+  border-color: #d1d1d3;
+  border-radius: 2px;
+  font-size: 13px;
+  color:#111111;
+  vertical-align: middle;
+  border: 1px solid;
+  margin: 0;
+  overflow: visible;
+  -webkit-rtl-ordering: logical;
+  cursor: text;
+  text-rendering: auto;
+  color: initial;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+}
+.list-header-filter-people-tagscontainer{
+  display: block;
+  overflow: auto;
+  width: 300px;
+  height: auto;
+  white-space: normal;
+  box-sizing: border-box;
+}
+.list-header-filter-people-tagwrap{
+  background-color: #ffffff;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative!important;
+  box-sizing: border-box;
+  padding: 9px;
+  line-height: 18px;
+  white-space: nowrap;
+}
+.list-header-filter-people-tagwrap:hover{
+  background-color: #f5f5f5;
+}
+.list-header-filter-people-tag{
+  box-sizing: border-box;
+  display: block;
+}
+.list-header-filter-people-image{
+  float: left;
+  width: 27px;
+  height: 27px;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: block;
+}
+.list-people-image{
+  border: 0;
+  box-sizing: border-box;
+  width: 27px;
+  height: 27px;
+}
+.list-header-filter-people-info{
+  margin-left: 36px;
+  height: 27px;
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+}
+.list-people-name{
+  display: block;
+  color: #000000;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  position: relative;
+  top: -3px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.list-people-email{
+  display: block;
+  color: #a5a5a5;
+  font-size: 11px;
+  line-height: 25px;
+  height: 17px;
+  position: absolute;
+  bottom: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 /* SORTING BUTTON & TAG*/
 .list-header-sorting{
   margin-left: -11px;
@@ -626,29 +757,24 @@
   color: #ffffff;
 }
 .list-section-third-complpercent-graph{
-  background-color: white;
   display: block;
   overflow: visible;
-  padding-right: 20px;
-  padding-left: 8px;
   height: 200px;
-  width: 200px;
+  width: 270px;
+  margin-top: -40px
 }
 .list-section-third-deadline-graph{
-  background-color: white;
   display: block;
   overflow: visible;
-  padding-right: 20px;
-  padding-left: 8px;
   height: 200px;
-  width: 200px;
+  width: 270px;
+  margin-top: -40px
 }
 .list-section-third-completion-graph{
   display: block;
   overflow: visible;
-  padding-left: 8px;
   height: 250px;
-  width: 250px;
+  width: 300px;
 }
 
 

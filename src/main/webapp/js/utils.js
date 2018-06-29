@@ -1,5 +1,12 @@
 
-
+$(function(){
+	
+	$(document).on("keyup",function(event){
+		if(event.keyCode ===27){
+			$('.close').click();
+		}
+	});
+});
 
 
 /**

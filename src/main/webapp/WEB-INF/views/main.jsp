@@ -14,6 +14,9 @@
 
 <!-- chart js 를 위한 cdn-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<!-- ECHART.JS CDN-->
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+
 <!-- SIDEBAR JAVASCRIPT -->
 <script type="text/javascript" src="js/sidebar.js"></script>
 <!-- AWESOMEFONT를 위한 cdn -->
@@ -65,15 +68,36 @@
 <!-- Board관련 css -->
 <link rel="stylesheet" href="css/stepBoard.css" /> 
 
+<!-- main에 있어야 할 Task js -->
+<script type="text/javascript" src="js/main_task.js"></script>
+
+
 <title>Project Apollo</title>
+
+
+<style>
+
+
+
+</style>
+
 </head>
 <body>
-
-	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/inc/sidebar.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
+<div class="Apollo-main">
+	<div class="main-header-panel" >
+		<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
+	</div>
+	<div class="main-body-panel">
+		<div class="main-side-panel" >
+			<jsp:include page="/WEB-INF/views/inc/sidebar.jsp"></jsp:include>
+		</div >
+		<div  class="main-box-panel">
+			<div  id="main-box"></div>
+		</div>	
+	</div>
+</div>
 	
-	<div id="main-box"></div>
 	
 </body>
 </html>

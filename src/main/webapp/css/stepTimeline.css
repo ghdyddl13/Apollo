@@ -3,28 +3,48 @@
 	height: 100%;
 }
 
+.timeline-wrapper{
+	overflow: auto;
+	height: 100%;
+	display: flex
+}
+
 .step-timeline-div-table{
 	padding:0px
 }
 
 .step-timeline-div thead, thead>tr {
 	height: 60px;
+	max-height:60px;
 	padding: 5px;
+	white-space: nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
 }
 
 .table-responsive.step-timeline-table thead>tr>th {
 	text-align: center;
 	font-size: 15px;
-	padding-bottom: 14px
+	padding-bottom: 14px;
+	white-space: nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
 }
 
 .table-responsive.step-timeline-table tbody>tr {
 	height: 38px;
 	max-height: 38px;
+	white-space: nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
 }
 
 .table-responsive.step-timeline-table tbody>tr,td {
 	vertical-align: middle !important;
+	white-space: nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	max-width: 150px
 }
 
 
@@ -168,6 +188,5 @@
 
 .timeline-task-edit:hover{
   border: 1px solid #a0a0a0;
-  border-collapse:separate;
   cursor: pointer;
 }

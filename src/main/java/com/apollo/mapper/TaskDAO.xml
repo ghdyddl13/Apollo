@@ -37,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      	ctime= sysdate 
     	where tid= #{tid}
     </update>
+    
     <insert id="insertBoardTask" parameterType="com.apollo.vo.TaskDTO">
     	 <selectKey keyProperty="tid" resultType="int" order="BEFORE">
         	  select seq_tid.nextval FROM DUAL
@@ -111,5 +112,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteAssignee" parameterType="com.apollo.vo.MidtidDTO">
     	delete from assignee where mid = #{mid} and tid = #{tid}
     </delete>
+    
+    <select id ="selectNotAssignedTasksBySid" resultType="com.apollo.vo.TaskDTO">
+   	 select * from 
+   	 task t join tstatus s 
+	 on t.tstatusid = s.tstatusid 
+   	 where tid in (select tid from taskinstep where sid=#{sid}) 
+   	 and tid not in (select tid from assignee)
+    </select>
 
+    <update id="changeSdayOfTask" parameterType="com.apollo.vo.TaskDTO">
+    	update task set sday= #{sday} where tid = #{tid}
+    </update>
+    
+     <update id="changeEdayOfTask" parameterType="com.apollo.vo.TaskDTO">
+    	update task set eday= #{eday} where tid = #{tid}
+    </update>
+    
+    <select id="getTname" resultType="String">
+    	select tname from task where tid = #{tid}
+    </select>
+    
 </mapper>

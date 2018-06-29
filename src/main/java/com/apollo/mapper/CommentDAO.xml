@@ -29,6 +29,9 @@ UPDATE RECEIVER SET ISARCHIVE = 1 where mid=#{mid} and cmtid=#{cmtid}
 UPDATE RECEIVER SET ISARCHIVE = 0 where mid=#{mid} and cmtid=#{cmtid}
 </update>
 
+<select id="getCommentsAndMember" parameterType="Integer" resultType="com.apollo.vo.CommentAndMemberDTO">
+	select * from comments, member where comments.mid = member.mid and tid = #{tid} order by comments.cmtmtime asc
+</select>
 
 
 

@@ -310,7 +310,7 @@
 					</div>
 					
 					<div class="col-sm-12" id="Task_Modal_snames">
-					<br>여기는 소속된 스텝들이 뜨는 공간입니다&nbsp<i class="fas fa-plus-circle" id="task_modal_add_step"></i>
+					<br><i class="fas fa-plus-circle" id="task_modal_add_step"></i>
 					</div>
 					
 				</div>
@@ -327,12 +327,12 @@
 							
 					<div class="col-sm-5">
 	                    <span>시작일&nbsp:&nbsp</span>
-                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date-im">
+                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date_sday">
 					</div>
 
 					<div class="col-sm-5">
 						<span>종료일&nbsp:&nbsp</span>
-	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date-im">
+	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date_eday">
 					</div>
 				</div>
 				<!-- end row 2 -->
@@ -343,7 +343,7 @@
 				<div class="modal-body">
 
 					<div class="modal-title">업무 담당자</div><br />
-					<div id="Task_Modal_assignee">여기는 담당자들이 뜨는 공간입니다</div>
+					<div id="Task_Modal_assignee"></div>
 
 								
                 <hr />
@@ -354,31 +354,41 @@
                 <hr>
 
 				<div class="modal-title">Sub Task</div><br />
-				 <div id="Task_Modal_subtasks">subtask들이 들어가게 된다</div><br>
-					<input type="text" name="pname" id="add_sub_task"
-							placeholder="Sub Task 입력"
-							class="text ui-widget-content ui-corner-all">
-					<input type="button" value="Sub Task 추가">
+				
+				 <input type="text" name="pname" id="add_sub_task"
+							placeholder="Sub Task의 제목을 입력 후 Enter..."
+							class="text ui-widget-content ui-corner-all"><br><br>
+				 <div id="Task_Modal_subtasks"></div><br>
+
                 <hr />
                 
 				<div class="modal-title">
-					<p>상세설명</p>
-					<textarea id="Task_Modal_detail" rows="7%" cols="49%" name="detail" placeholder="내용을 입력하세요"></textarea>
+					<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
+					<div style="text-align:center">
+					<textarea id="Task_Modal_detail" rows="7%" cols="65%" name="detail" placeholder="내용을 입력하세요"></textarea>
+					</div>
 				</div>
                 <hr />
                 
 					<div class="modal-title">Comment</div><br />
-					<div id="Task_Modal_comments">여기는 코멘트 들이 추가되는 공간입니다
-					<br>
-					<br>
-					<br>
+					<div id="Task_Modal_comments">
 					</div>
-					<input type="text" placeholder="코멘트 입력.." class="">
-					<input id="Task_Modal_enter_comments" type="button" value="전송">
-					<input type="hidden" id="tidhidden" value="">
-					<input type="hidden" id="tnamehidden" value="">
-					<input type="hidden" id="stepdeletehidden" data-toggle="modal" data-target="#step_delete_Modal">
+					<hr>
+					<div id="project_member_popup_div"></div>
 					
+					<div id="div_for_comment_input_box">
+					<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">
+					</div>
+							
+					<input type="hidden" id="pidhidden" value="">					
+					<input type="hidden" id="usermidhidden" value="">					
+					<input type="hidden" id="tidhidden" value="">
+					<input type="hidden" id="receiverhidden" value="">
+					<input type="hidden" id="receivernamehidden" value="">
+					<input type="hidden" id="tnamehidden" value="">
+					<input type="hidden" id="origin_sday" value="">
+					<input type="hidden" id="origin_eday" value="">
+					<input type="hidden" id="stepdeletehidden" data-toggle="modal" data-target="#step_delete_Modal">
 					
 			 	</div>
 			 	<!-- end modal-body -->

@@ -179,10 +179,25 @@ public class MemberController {
 		}else {
 			if(bCryptPasswordEncoder.matches(pwd, securitypwd)) {
 			    System.out.println("비밀번호 일치");
+
 			    MemberDTO memberdto = service.getProfileInfoMember(mid);
 			    session.setAttribute("mid", mid);
 			    model.addAttribute("memberdto", memberdto);
 			    result = "main";
+
+			    
+			    int check = service.freeTrialCheck(mid);	
+			    if(check == 1) {
+			    	result = "login";
+			    	msg="2주의 무료체험기간이 만료되었습니다.";
+			    	
+			    }else{
+			    	session.setAttribute("mid", mid);
+			    	result = "main";
+			    	
+			    	
+			    }
+
 			}else { 
 			    System.out.println("비밀번호 불일치");
 			    msg="비밀번호가 일치하지 않습니다.";

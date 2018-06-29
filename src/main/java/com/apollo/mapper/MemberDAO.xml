@@ -8,7 +8,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from member where mid in (select mid from pmember where pid =
 		#{pid})
 	</select>
-
+	
+	<select id="freeTrialCheck" resultType="Integer">
+		select count(*) from member where mid = #{mid} and RDAY <![CDATA[<]]> (SYSDATE -13) and APOLLOKEY is null
+	</select>
+	
 	<insert id="insertMember"
 		parameterType="com.apollo.vo.MemberDTO">
 		insert into member(mid, mname, pwd, rday, pnum,

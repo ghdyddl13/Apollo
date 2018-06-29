@@ -17,7 +17,6 @@ public class TaskDTO {
 	private int sid;
 
 	
-	
 	public int getTid() {
 		return tid;
 	}
