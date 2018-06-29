@@ -328,7 +328,7 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 										   var sname = this.sname;
 										       snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + sname + '&nbsp&nbsp' + '<i class="far fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
 									   });
-									   snames += '<i data-toggle="modal" data-target="#step_add_modal_in_taskmodal" id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+									   snames += '<i id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 									   $('#Task_Modal_snames').append(snames);
 		        		        	   
 		        		           } // end-success
@@ -363,15 +363,56 @@ $(document).on("click","#task_modal_add_step",function(){
 		        	   console.log(rdata.steplist);
 
 		        	   var step_names_popup_div_str = '';
+		        	   
+			        	
+	        		   var countlength = Object.keys(rdata.steplist).length;
+	        		   if(countlength == 0){
+	        			   step_names_popup_div_str += '<div class="wrapper_comment popup_nothing">';
+	        			   step_names_popup_div_str += '<div class="each_comment">';	
+	        			   step_names_popup_div_str += '<div class="first_row">추가할 스텝이 없습니다</div>';
+	        			   step_names_popup_div_str += '</div></div>';
+	        				   
+	        		   } else {
 		        	   $(rdata.steplist).each(function(){
-		        				        		   
-		        		  step_names_popup_div_str += '<div class="wrapper_comment popup_sid" id="' + this.sid + '">';	 
-		        		  step_names_popup_div_str += '<div class="each_comment">';	
-		        		  step_names_popup_div_str += '<div class="first_row">' + this.sname + '</div>';	
-		        		  step_names_popup_div_str += '<div class="second_row">' + this.pid + ' > ' + this.sid + '</div>';	
-		        		  step_names_popup_div_str += '</div></div>';
-		                  
-		        	   });
+		        			   var sday = '';
+				        	   var eday = '';
+				        	   var emptyday = '';
+				        		   
+				        		  if(this.sday == null){
+				        			  sday = emptyday;
+				        		  }
+
+				        		  if(this.eday == null){
+				        			  eday = emptyday;
+				        		  }
+				        		  
+				        		  if(this.sday != null){
+				        			  sday = this.sday.substring(0, 10);
+				        		  }
+				        		  
+				        		  if(this.eday != null){
+				        			  eday = this.eday.substring(0, 10);
+				        		  }
+			        		   
+			        		  step_names_popup_div_str += '<div class="wrapper_comment popup_sid" id="' + this.sid + '">';	 
+			        		  step_names_popup_div_str += '<div class="each_comment">';	
+			        		  step_names_popup_div_str += '<div class="first_row">' + this.sname + '</div>';
+			        		  
+			        		  if((sday == emptyday) && (eday == emptyday)){
+			        			  step_names_popup_div_str += '<div class="second_row">(시작일과 종료일 모두 미정)</div>'
+			        		  } else if((sday != emptyday) && (eday == emptyday)){
+			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~' + '</div>'
+			        		  }  else if((sday == emptyday) && (eday != emptyday)){
+			        			  step_names_popup_div_str += '<div class="second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
+			        		  } else{
+			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
+			        		  }
+			        		  
+			        		  step_names_popup_div_str += '</div></div>';
+		        		 
+		        	   		});
+	        		   }// end - else
+		        	   
 		        	      $('#step_names_popup_div').empty();
 		        	      $('#step_names_popup_div').append(step_names_popup_div_str);
 		        	      let popupdiv_width = $('#step_names_popup_div').width();
