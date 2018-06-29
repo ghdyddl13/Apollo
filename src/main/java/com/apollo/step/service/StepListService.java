@@ -71,12 +71,14 @@ public class StepListService {
 	 기      능 : Step List 첫 페이지 로드
 	 작성자명 : 이 진 우
 	 */
-	public ArrayList<StepListTaskDTO> getListTask(int sid, int tstatusid){
+	public ArrayList<StepListTaskDTO> getListTask(int sid, String tstatusid,String mid){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd") ;
 		StepDAO dao= sqlsession.getMapper(StepDAO.class);
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("sid", sid);
+		HashMap<String, String> map = new HashMap<String, String>();
+		String sids = ""+sid;
+		map.put("sid", sids);
 		map.put("tstatusid" , tstatusid);
+		map.put("mid", mid);
 		ArrayList<StepListTaskDTO> tasklist = dao.getStepListTask(map);
 		ArrayList<StepListMemberDTO> memberlist = dao.getStepListMember(map);
 		ArrayList<StepListStepDTO> steplist = dao.getStepListStep(map);
@@ -271,15 +273,5 @@ public class StepListService {
 		ArrayList<MemberDTO> projectmemberlist = dao.listProjectMemberList(sid);
 		return projectmemberlist;
 	}
-	/*
-	  listCountCompletedTask
-	  listCountUnfinishedTask
-	  listCountThePast
-	  listCountTheRest
-	  listCountNoDay
-	  listCountAfterNextWeek
-	  listCountUntilThisWeek
-	  listCountOverdueTask
-	  listProjectMemberList
-	  */
+
 }

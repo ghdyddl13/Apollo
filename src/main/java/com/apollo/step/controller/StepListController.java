@@ -7,13 +7,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.View;
 
 import com.apollo.step.service.StepBoardService;
 import com.apollo.step.service.StepListService;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.StepListTaskDTO;
 import com.apollo.vo.TaskDTO;
@@ -25,7 +26,8 @@ public class StepListController {
 	private StepListService service;
 	@Autowired
 	private StepBoardService boardservice;
-	
+	@Autowired
+	private View jsonview;
 	
 	/**
 	 * 
@@ -48,8 +50,9 @@ public class StepListController {
         //스텝 정보
         StepDTO stepinfo =service.getListStepName(sid);
 		//테스크 리스트
-        int tstatusid =0;
-        ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid);
+        String tstatusid =null;
+        String mid=null;
+        ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid,mid);
         //그래프 관련 데이터
   	  	int completedtask = service.listCountCompletedTask(sid);
   		int unfinishedtask = service.listCountUnfinishedTask(sid);
@@ -103,27 +106,34 @@ public class StepListController {
 	 작성자명 : 이 진 우
 	 */
 	@RequestMapping(value="/liststatusfilter.htm",method=RequestMethod.POST)
-	public String statusFilter(int tstatusid, String stepid, ModelMap map) {
-		int sid = Integer.parseInt(stepid);
+	public String statusFilter(int sid,String tstatusid,ModelMap map) {
+		String mid=null;
 		System.out.println("값이 넘어오나요"+tstatusid+"/"+sid);
-        ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid);
+        ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid,mid);
         map.addAttribute("tasklist",tasklist);
 		return "step/listtask";
 	}
-	
-	
-	public String showTaskList(String s1, Model model) {
-		return null;
+	/**
+	 * 
+	 날      짜 : 2018. 6. 29.
+	 기      능 : 첫 페이지가 로드 되었을때 Memberlist 뜨게 하기
+	 작성자명 : 이 진 우
+	 */
+	@RequestMapping(value="/memberlist.htm",method=RequestMethod.POST)
+	public View memberlist(int sid, ModelMap map) {
+		ArrayList<MemberDTO> memberlist = service.listProjectMemberList(sid);
+        map.addAttribute("memberlist",memberlist);
+        System.out.println(memberlist.toString());
+		return jsonview;
 	}
-
-	public String changeTasks(String[] s1, String s2, String s3, Model model) {
-		return null;
+	@RequestMapping(value="/listpeoplefilter.htm",method=RequestMethod.POST)
+	public String peopleFilter(int sid, String mid, ModelMap map) {
+		System.out.println("값이 넘어오나요"+mid+"/"+sid);
+		String tstatusid =null;
+        ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid,mid);
+        map.addAttribute("tasklist",tasklist);
+		return "step/listtask";
 	}
-
-	public String deleteTasks(String[] s1, Model model) {
-		return null;
-	}
-	
 	
 	
 }
