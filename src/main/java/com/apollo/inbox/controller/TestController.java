@@ -14,11 +14,6 @@ public class TestController {
 		return "header/report";
 	}
 	
-	@RequestMapping("/starredTask.htm")
-	public String starredTask() {
-		return "header/starredTask";
-	}
-    
 
     
     @RequestMapping("/workload.htm")
