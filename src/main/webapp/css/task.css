@@ -229,3 +229,16 @@ assignee_in_taskmodal td{
 	cursor: pointer;
 	background-color: rgba(163, 172, 182, 0.2);
 }
+
+#step_delete_popup_div{
+  text-align : center;
+  display: none;
+  position: absolute;
+  background-color : #FFFFFF; 
+  left : -20000px;
+  top : -20000px;
+  float: left;
+  z-index: 3;
+  width: 200px;
+  height: 100px;
+}

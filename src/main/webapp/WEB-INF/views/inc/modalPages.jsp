@@ -315,6 +315,7 @@
 					<div class="col-sm-12" id="Task_Modal_snames">
 					</div>
 					<div id="step_names_popup_div"></div>
+					<div id="step_delete_popup_div"></div>
 					
 				</div>
 				<!-- end row 1 -->

@@ -300,12 +300,25 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 		           success : function(rdata){
 		        	   
 		        	   var count = rdata.countresult;
-		        	   console.log('count는 : ' + count);
-		        	   
 		        	   if(count == 1) {
-		        		   $('#stepdeletehidden').click();
-		        		   return;
 		        		   
+		        		   var step_delete_popup_div_str = '';
+		        		   step_delete_popup_div_str += '<div>';
+		        		   step_delete_popup_div_str +='<div>해당 Task가 속한 마지막 Step 입니다</div>';
+		        		   step_delete_popup_div_str +='<div>Step 삭제시 Task가 삭제됩니다</div>';
+		        		   step_delete_popup_div_str +='<div><input type="button" value="삭제하기" id="step_delete_button"></div>';
+		        		   step_delete_popup_div_str +='<div><input type="hidden" value="' + sid + '" id="hidden_sid"></div>';
+		        		   step_delete_popup_div_str +='</div>';
+		        		   
+		        		   $('#step_delete_popup_div').empty();
+		        		   $('#step_delete_popup_div').append(step_delete_popup_div_str);
+		        		   
+			               let position = $('.task_page_delete_step_btn').position();
+			               $('#step_delete_popup_div').css("left",position.left + 14);
+			               $('#step_delete_popup_div').css("top",position.top + 10);
+			               $('#step_delete_popup_div').css("display","block");
+		        		   
+		        		   return;
 		        	   } 
 		        	   
 		        	   $.ajax(
@@ -339,6 +352,45 @@ $(document).on("click",".task_page_delete_step_btn",function(){
 	
 });
 
+
+/**
+ * 
+ 날      짜 : 2018. 6. 29.
+ 기      능 : 마지막으로 step이 하나 남은 것을 삭제할 때 실행 함수
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#step_delete_button",function(){
+
+	var tid = $('#tidhidden').attr('value');
+	var sid = $('#hidden_sid').attr('value');
+	
+	 $.ajax(
+		       {
+		           type : "post",
+		           url  : "deletestepintaskmodal.htm",
+		           data : {
+		        	   'tid': tid,
+		        	   'sid': sid
+		           },
+		           success : function(rdata){
+		        	   
+		        	   console.log(rdata);
+		        	   
+					// step name
+					   $('#Task_Modal_snames').empty();
+					   
+					   var snames = '<br>'
+					   $(rdata.steplist_after_delete_step).each(function(){
+						   var sname = this.sname;
+						       snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + sname + '&nbsp&nbsp' + '<i class="far fas fa-times task_page_delete_step_btn" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
+					   });
+					   snames += '<i id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+					   $('#Task_Modal_snames').append(snames);
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+});
 
 
 /**
@@ -448,6 +500,13 @@ $(document).bind("mousedown", function(e) {
     	$("#assignee_popup_div").css("background-color","#FFFFFF");
     	$("#assignee_popup_div").css({"display":"none","left":"-20000px","top":"-20000px"});
     }
+    
+    if (!$(e.target).parents("#step_delete_popup_div").length > 0){
+    	
+    	$("#step_delete_popup_div").css("background-color","#FFFFFF");
+    	$("#step_delete_popup_div").css({"display":"none","left":"-20000px","top":"-20000px"});
+    }
+    
     
 });
 
