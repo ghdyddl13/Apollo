@@ -14,12 +14,12 @@ $(function(){
  날   짜 : 2018. 6. 14.
  기   능 : 태스크 담당자 프로필 만들어주는 함수
  작성자명 : 박 민 식
+
  */
 
 
-function getTaskAssignees(tid){
-	console.log("getTaskAssignees실행")
-	var div = jQuery("<div>",{"class":"container-fluid"});
+function getTaskAssignees(tid,imgsize){
+	var div = jQuery("<div>",{"class":""});
 	var left_member = [];
 	var left_count = 0;
 	$.ajax({
@@ -28,9 +28,9 @@ function getTaskAssignees(tid){
 		dataType:"json",
 		async:false,
 		success:function(data){
-			if(data!=null){
+			if(data.taskassignees.length!=0){
 				$(data.taskassignees).each(function(index,el){
-					var profile_container = makeProfileIcon(el);
+					var profile_container = makeProfileIcon(el,imgsize);
 					if(index <1){
 						$(div).append(profile_container);
 					}else{
@@ -38,25 +38,30 @@ function getTaskAssignees(tid){
 						left_count++;
 					};
 				});
-			if(left_count>0){
-				var a = jQuery("<a>",{"class":"left-assignees",
-									  "text":"외 " +left_count+"명",
-									  "rel":"popover",
-									  "data-popover-content":"#left-assignee-"+tid});
-				var left_div =jQuery("<div>",{"class":"hide assignee-left-div",
-											  "id":"left-assignee-"+tid,
-											  "css":{"position":"absolute",
-												  	 "width":"100px"
-												  	 }});
+				if(left_count>0){
+					var a = jQuery("<a>",{"class":"left-assignees",
+										  "text":"외 " +left_count+"명",
+										  "rel":"popover",
+										  "data-popover-content":"#left-assignee-"+tid});
+					var left_div =jQuery("<div>",{"class":"hide assignee-left-div",
+												  "id":"left-assignee-"+tid,
+												  "css":{"position":"absolute",
+													  	 "width":"100px"
+													  	 }});
+					
+					$(left_member).each(function(index,left){
+						var left_assigee_container = makeProfileIcon(left,imgsize);
+						$(left_div).append(left_assigee_container);
+					});
+					$(a).append(left_div).appendTo(div);
+				};
 				
-				$(left_member).each(function(index,left){
-					console.log("left " + left);
-					var left_assigee_container = makeProfileIcon(left);
-					$(left_div).append(left_assigee_container);
-				});
-				$(a).append(left_div).appendTo(div);
-			};
-				
+			}else{
+				var noassigned_container = jQuery("<div>",{"class":"noassignee-icon-container"});
+				noassigned_container.css({"width":imgsize,"height":imgsize});
+				var i = jQuery("<i>",{"class":"fas fa-user-plus no-assignee-task-icon",
+										  "src" :"noassignee."});
+				$(noassigned_container).append(i).appendTo(div);
 			};
 		}
 	})

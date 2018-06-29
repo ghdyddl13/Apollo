@@ -516,17 +516,16 @@ function resultSearchProject(projectlist){
  function makeSearchTaskDiv(task){
 		 var div =jQuery("<div>",{"class":"search-item-box search-item-task row" ,"id":"srch-t"+task.tid});  
 		 var assignee_div= jQuery("<div>",{"class":"search-item-left col-sm-2"});
-		 makeProfileIcon(task,'35').appendTo(assignee_div);
+		 getTaskAssignees(task.tid,'35').appendTo(assignee_div);
 		 var task_info_div= jQuery("<div>",{"class":"search-item-right col-sm-10 container-fluid"});
 		 var task_name_div= jQuery("<div>",{"class":"search-info-div ","text":task.tname});
 		 var task_status_div= jQuery("<div>",{"class":"search-info-div","text":task.tstatus,"css":{"color":task.color}});
-		 var pname= jQuery("<span>",{"class":"search-item-pname","text":$($("#p"+task.pid).find("a")[0]).text(),"css":{"margin-left":"5px"}})
+		 var pname= jQuery("<span>",{"class":"search-item-pname","text":$($("#p"+task.pid).find(".side-content-name")[0]).text(),"css":{"margin-left":"5px"}})
 		 $( task_status_div).append(pname);
 		 $(task_info_div).append( task_name_div,task_status_div);
 		 $(div).append(assignee_div,task_info_div);
 		return div;
 	} //end
-
  /**
   * 
   날   짜 : 2018. 6. 26.
