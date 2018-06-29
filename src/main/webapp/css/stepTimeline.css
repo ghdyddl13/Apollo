@@ -3,6 +3,12 @@
 	height: 100%;
 }
 
+.timeline-wrapper{
+	overflow: auto;
+	height: 100%;
+	display: flex
+}
+
 .step-timeline-div-table{
 	padding:0px
 }

@@ -9,10 +9,47 @@ html, body{
   height:100%;
 }
 
+/*///////////////////////////////main.jsp 구성 요소 css*/
+.Apollo-main{
+	display:flex;
+	height:100%;
+	width:100%;
+	white-space: nowrap;
+	flex-direction: column;
+}
+.main-header-panel{
+	display:block;
+	flex:0 0 auto;
+	height: 50px;
+	width: 100%;
+}
+
+.main-body-panel{
+	flex:1 1 auto;
+	display: flex;
+	white-space:nowrap;
+	flex-direction: row;
+}
+
+.main-side-panel{
+	display:block;
+	flex:0 0 auto;
+	position: relative;
+}
+
+.main-box-panel{
+	flex:1 1 auto;
+	display:block;
+	position: relative;
+	overflow: hidden
+}
+
+#header{
+	margin-bottom: 0 !important
+}
+
 #main-box{
-    padding-left: 250px;
     height:100%;
-    padding-top: 50px;
     margin-left: 0;
 }
 
@@ -201,8 +238,12 @@ width:40px;
  
  /* /////////////////////////// 로그인 css끝 /////////////////////////////////////////////////////  */
 
+
+
  
   /* ///////////////////////////헤더와 사이드바/////////////////////////////////////////////////////  */
+
+
 
 #header {
    background-color: rgb(0, 0, 50);
@@ -211,8 +252,9 @@ width:40px;
 }
 
 #my-side-nav {
+   height:100%;
    background-color: rgba(180, 197, 209, 0.15);
-   overflow: auto;
+   overflow-y: auto;
    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
    display: flex;
    white-space: nowrap;
@@ -220,6 +262,9 @@ width:40px;
    padding-right:5px;
    padding-left:5px;
 }
+
+
+
 
 #loginimg { /* 로그인 이미지 색상  */
    color: white;
@@ -233,30 +278,29 @@ width:40px;
 .side-nav {
    height: 100%;
    width: 250px;
-   position: fixed;
+   position: relative;
    z-index: 1;
    top: 0;
    left: 0;
    overflow-x: hidden;
    transition: 0.5s;
-   padding-top: 60px;
+ 
 }
 
-.side-nav a {
-    padding: 4px 8px 4px 18px;
+
+
+ .side-nav a {
     text-decoration: none;
-    font-size: 13px;
-    display: flex;
     transition: 0.3s;
     color:#333;
-    overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
 	text-align: center;
 	align-items: center;
-	max-width: 
-}
+} 
 
+#side-bar-add-project:hover{
+	cursor:pointer;
+	
+}
 
 
 .side-dir-arrow{
@@ -264,18 +308,20 @@ width:40px;
    font-size: 13px;
    padding-left: 3px;
    padding-right: 3px; 
+   width: 14px;
+   min-width:14px;
+   max-width: 14px;
+   box-sizing: border-box;
 }
 
 .side-dir-folder-icon{
    margin-right:3px;
    font-size: 13px;
-   padding-left: 3px;
    padding-right: 3px;
    color:#f1c40f;
 }
 
 .side-dir-step-icon{
-
    margin-right:3px;
    font-size: 13px;
    padding-left: 3px;
@@ -291,7 +337,6 @@ width:40px;
   	white-space: nowrap;
   	text-align: center;
   	border-radius: 40%;
-  	background-color: rgb(0, 0, 50);
   	justify-content: center;
   	margin-right: 4px;
  
@@ -307,35 +352,62 @@ width:40px;
 }
 
 
-.side-nav a:hover {
+/* .side-nav a:hover {
    background-color: #e0e0e0 !important;
-}
+} */
 
 .side-pstatus{
+	padding-left:16px;
 	padding-bottom:6px !important;
 	padding-top:6px !important;
 }
 
-
-.side-project{
-	padding-left:40px !important;
+.side-content{
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-right:1px;
 	color:#2c2d31 !important;
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	align-items: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis !important;
+	width: 100%;
+
+}
+
+.side-content > .side-content-name{
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	
+}
+.side-content:hover{
+	 background-color: #e0e0e0 !important;
+	 cursor: pointer;
+}
+
+
+.side-content.side-project{
+	padding-left:40px !important;
 }
 
 .side-folder{
 	padding-left:60px !important;
-	color:#2c2d31 !important;
+	
 }
-
 .side-step{
 	padding-left:60px !important;
-	color:#2c2d31 !important;
 }
 
 .side-step.side-step-in-folder{
 	padding-left:80px !important;
-	color:#555e71 !important;
 }
+
 
 
 .side-dir a {
