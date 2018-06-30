@@ -278,16 +278,16 @@ $(function() {
                      // 위 로직에 의해 두 배열의 길이가 같아졌으므로
                      // 아무 배열이나 잡아서 length 만큼 돌려도 상관없음
                      var tablestr = '<tr><th>완료 task</th><th>미완료 task</th></tr>';
-//                     for(var i = 0; i < completedtasks.length; i++){
-//                    	 tablestr += '<tr><td class="Task_RUD_Modal" id="' 
-//                    		 + completedtasks_tid[i] + '">' + completedtasks[i] 
-//                    	 + '</td><td  class="Task_RUD_Modal" id="' 
-//                    	 + uncompletedtasks_tid[i] + '">' + uncompletedtasks[i] + '</td></tr>'
-//                     }
-                     
                      for(var i = 0; i < completedtasks.length; i++){
-                         tablestr += '<tr><td>' + completedtasks[i] + '</td><td>' + uncompletedtasks[i] + '</td></tr>'
-                      }
+                    	 tablestr += '<tr><td class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
+                    		 + completedtasks_tid[i] + '">' + completedtasks[i] 
+                    	 + '</td><td  class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
+                    	 + uncompletedtasks_tid[i] + '">' + uncompletedtasks[i] + '</td></tr>'
+                     }
+                     
+//                     for(var i = 0; i < completedtasks.length; i++){
+//                         tablestr += '<tr><td>' + completedtasks[i] + '</td><td>' + uncompletedtasks[i] + '</td></tr>'
+//                      }
                      
                      
 
