@@ -1,14 +1,15 @@
 package com.apollo.report.service;
 
 import java.io.File;
-import org.apache.ibatis.session.SqlSession;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.io.File;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.SqlSession;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -19,7 +20,13 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.util.CellRangeAddress;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.apollo.member.dao.MemberDAO;
+import com.apollo.task.dao.TaskDAO;
+import com.apollo.vo.ProjectDTO;
+import com.apollo.vo.TaskDTO;
 
 
 @Service
@@ -27,15 +34,28 @@ public class ReportService {
 
 	@Autowired
 	private SqlSession session;
+	
+		public ArrayList<ProjectDTO> gerUserProjects(String mid){
 
-		public void writeData() throws Exception {
+			System.out.println("gerUserProjects 서비스 실행");
+			System.out.println("mid 테스트 : " + mid);
+			
+			MemberDAO dao = session.getMapper(MemberDAO.class);
+			ArrayList<ProjectDTO> list = new ArrayList();
+			list = dao.gerUserProjects(mid);
+			
+			return list;
+		}
+	
+	
+		public void writeData(int pid, String report_kind, String report_title) throws Exception {
 
 			try {
 
 				String filePath = "C:\\Apollo_Reports\\"; // file 생성 위치 
-				String filename = "aaaaa.xls"; // 생성될 파일 이름
+				String filename = report_title + ".xls"; // 생성될 파일 이름
 				FileOutputStream fout = setFile(filePath, filename);
-				HSSFWorkbook wb = setExcel(filename);
+				HSSFWorkbook wb = setExcel(pid, report_kind, filename);
 				
 				// write the workbook to the output stream
 				wb.write(fout);
@@ -60,13 +80,13 @@ public class ReportService {
 			return fout;
 		}
 
-		private HSSFWorkbook setExcel(String filename) throws IOException {
+		private HSSFWorkbook setExcel(int pid, String report_kind, String report_title) throws IOException {
 
 			// 엑셀 파일 생성
 			HSSFWorkbook wb = new HSSFWorkbook();
 
 			// 쉬트 및 폰트 지정
-			HSSFSheet sht = wb.createSheet(filename);
+			HSSFSheet sht = wb.createSheet(report_title);
 			sht.setGridsPrinted(true);
 			sht.setFitToPage(true);
 			sht.setDisplayGuts(true);
@@ -74,70 +94,150 @@ public class ReportService {
 			HSSFRow row = null;
 			HSSFCell cell = null;
 
-
 			// 쉬트 이름 주기
-			wb.setSheetName(0, filename);
+			wb.setSheetName(0, report_title);
 
+			// 데이터 생성
+			////////////////////////////////////////////////////
+			
+			System.out.println(pid);
+			System.out.println(report_kind);
+			
+			TaskDAO taskdao = session.getMapper(TaskDAO.class);
+			ArrayList<TaskDTO> tasklist = new ArrayList();
+			
+			if(report_kind.equals("report_progress")) {
+				tasklist = taskdao.getOnProgressTasklist(pid);
+			}
+			else if(report_kind.equals("report_status")) {
+				tasklist = taskdao.getTasklistByPidOrderByStatus(pid);
+			}
+			else if(report_kind.equals("report_expired")) {
+				tasklist = taskdao.getExpiredTasklist(pid);
+			}
+			else if(report_kind.equals("report_drawnear")) {
+				tasklist = taskdao.getDrawnearTasklist(pid);
+			}
+			else if(report_kind.equals("report_unassigned")) {
+				tasklist = taskdao.getUnassingedTasklist(pid);
+			}
+			System.out.println("DB에서 데이터 가져옴(성공)");
+			////////////////////////////////////////////////////
+			
 			// 제목 줄 생성
-			String[] title1 = { "NO.", "제목", "작성자" };
-			String[] title2 = { "NO.", "공지합니다!!", "엄지용" };
-			String[] contents = { "1", "공지합니다!!", "엄지용" };
-			int[] cellwidth = { 6, 20, 20 };
-
-
+			ArrayList<String> title = new ArrayList();
+			if(report_kind.equals("report_status")) {
+				
+				title.add("Task이름");
+				title.add("시작일");
+				title.add("종료일");
+				title.add("상세정보");
+				title.add("상태");
+				
+			} else {
+				
+				title.add("Task이름");
+				title.add("시작일");
+				title.add("종료일");
+				title.add("상세정보");
+				
+			}
+			
 			// row 1 table start
 			row = sht.createRow((short) 1);
-			row.setHeight((short) 500); // 칼럼 높이
-			short width = 265;
+			row.setHeight((short) 1000); // 칼럼 높이
 
-
-
-			// ========== title1 - first row ========================
-			for (int i = 0; i < title1.length; i++) {
-				sht.setColumnWidth(i, (cellwidth[i] * width)); // Column 넓이 설정
-				cell = row.createCell(i);
-				cell.setCellValue(new HSSFRichTextString(title1[i]));
-
-				if (i == 1) {
-
-					// ====== Cell 합병 ==================
-					sht.addMergedRegion(new CellRangeAddress(1, 1, i, i + 1));
-
-					// ==================================
+			// ========== title - first row ========================
+			for (int i = 0; i < title.size(); i++) {
+				if((i == 1) || (i ==2 )) {
+					sht.setColumnWidth(i, 10 * 500); // Column 넓이 설정
 				}
+				else if(i==3) {
+					sht.setColumnWidth(i, 10 * 1500); // Column 넓이 설정
+				}
+				else {
+					sht.setColumnWidth(i, 10 * 800); // Column 넓이 설정
+				}
+				cell = row.createCell(i);
+				cell.setCellValue(new HSSFRichTextString(title.get(i)));
 
 				cell.setCellStyle(getTitleStyle(wb));
-			}
-
-
-			// ===========title2 - Second row ====================
-			row = sht.createRow(2);
-			row.setHeight((short) 500); // 칼럼 높이
-
-			for (int i = 0; i < title2.length; i++) {
-				sht.setColumnWidth(i, (cellwidth[i] * width));
-				cell = row.createCell((i));
-				cell.setCellValue(new HSSFRichTextString(title2[i]));
-				cell.setCellStyle(getTitleStyle(wb));
-
 			}
 
 			// =========== Table Contents ===================
-			row = sht.createRow(3);
-			row.setHeight((short) 500); // 칼럼 높이
+			
+			if(report_kind.equals("report_status")) {
+				
+				for(int k = 0; k < tasklist.size(); k++) {
+					
+					TaskDTO dto = tasklist.get(k);
+					
+					String tname = dto.getTname();
+					String sday = dto.getSday();
+					String eday = dto.getEday();
+					String detail = dto.getDetail();
+					String tstatus = dto.getTstatus();
+					
+					String[] contents = {tname, sday, eday, detail, tstatus};
+					
+					row = sht.createRow(k + 2);
+					row.setHeight((short) 500); // 칼럼 높이
 
-			for (int i = 0; i < contents.length; i++) {
-				sht.setColumnWidth(i, (cellwidth[i] * width));
-				cell = row.createCell((i));
+					for (int i = 0; i < contents.length; i++) {
+						
+						if((i == 1) || (i ==2 )) {
+							sht.setColumnWidth(i, 10 * 500);
+						}
+						else if(i==3) {
+							sht.setColumnWidth(i, 10 * 1500);
+						}
+						else {
+							sht.setColumnWidth(i, 10 * 800);
+						}
+						cell = row.createCell((i));
 
-				if (i == 0)
-					cell.setCellValue(new HSSFRichTextString(String.valueOf(i)));
-				else
-					cell.setCellValue(new HSSFRichTextString(contents[i]));
-				cell.setCellStyle(getTextStyle(wb));
+						cell.setCellValue(new HSSFRichTextString(contents[i]));
+						cell.setCellStyle(getTextStyle(wb));
+					} // end for - 이번 row td setting
+					
+				} // end for - 전체 테이블 data setting (1 회전당 1 row)
+				
+			} else {
+				
+				for(int k = 0; k < tasklist.size(); k++) {
+					
+					TaskDTO dto = tasklist.get(k);
+					
+					String tname = dto.getTname();
+					String sday = dto.getSday();
+					String eday = dto.getEday();
+					String detail = dto.getDetail();
+					
+					String[] contents = {tname, sday, eday, detail};
+					
+					row = sht.createRow(k + 2);
+					row.setHeight((short) 500); // 칼럼 높이
+
+					for (int i = 0; i < contents.length; i++) {
+						
+						if((i == 1) || (i ==2 )) {
+							sht.setColumnWidth(i, 10 * 500);
+						}
+						else if(i==3) {
+							sht.setColumnWidth(i, 10 * 1500);
+						}
+						else {
+							sht.setColumnWidth(i, 10 * 800);
+						}
+						cell = row.createCell((i));
+
+						cell.setCellValue(new HSSFRichTextString(contents[i]));
+						cell.setCellStyle(getTextStyle(wb));
+					} // end for - 이번 row td setting
+					
+				} // end for - 전체 테이블 data setting (1 회전당 1 row)
 			}
-
-
+			
 			// 출력설정
 			HSSFPrintSetup hps = sht.getPrintSetup();
 
@@ -190,7 +290,7 @@ public class ReportService {
 
 			// set color
 			hcs.setFillBackgroundColor((short) HSSFColor.WHITE.index);
-			hcs.setFillForegroundColor((short) HSSFColor.VIOLET.index);
+			hcs.setFillForegroundColor((short) HSSFColor.PALE_BLUE.index);
 			hcs.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 			hcs.setLocked(true);
 			hcs.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
