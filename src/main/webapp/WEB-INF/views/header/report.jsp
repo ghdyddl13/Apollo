@@ -9,7 +9,7 @@
 </head>
 <body>
 <br>
-<h4>Report</h4>
+<h4>&nbspReport</h4>
 <br>
 
 <div id="background_div">
@@ -35,29 +35,29 @@
 		<!-- Task 상태별 현황 -->
 		<div class="col-lg-2 btn_div report_status" >
 			<br>Task 상태별 현황<br>
-			<img style="margin-right: 10px" class="jpg_images" src="img/report/report_progress_stop.jpg">
-			<img class="gif_images" src="img/report/report_progress.gif">
+			<img style="margin-right: 10px" class="jpg_images" src="img/report/report_status_stop.jpg">
+			<img class="gif_images" src="img/report/report_status.gif">
 		</div>
 		
 		<!-- 마감기한 지난 Task -->
 		<div class="col-lg-2 btn_div report_expired">
 			<br>마감기한이 지난 Task<br>
-			<img style="margin-right: 10px" class="jpg_images" src="img/report/report_progress_stop.jpg">
-			<img class="gif_images" src="img/report/report_progress.gif">
+			<img style="margin-right: 10px" class="jpg_images" src="img/report/report_expired_stop.jpg">
+			<img class="gif_images" src="img/report/report_expired.gif">
 		</div>
 		
 		<!-- 마감기한이 임박한 Task -->
 		<div class="col-lg-2 btn_div report_drawnear">
 			<br>마감기한이 임박한 Task<br>
-			<img style="margin-right: 10px" class="jpg_images" src="img/report/report_progress_stop.jpg">
-			<img class="gif_images" src="img/report/report_progress.gif">
+			<img style="margin-right: 10px" class="jpg_images" src="img/report/report_drawnear_stop.jpg">
+			<img class="gif_images" src="img/report/report_drawnear.gif">
 		</div>
 		
 		<!-- 담당자 미정 Task -->
 		<div class="col-lg-2 btn_div report_unassigned">
 			<br>담당자 미정 Task<br>
-			<img style="margin-right: 10px" class="jpg_images" src="img/report/report_progress_stop.jpg">
-			<img class="gif_images" src="img/report/report_progress.gif">
+			<img style="margin-right: 10px" class="jpg_images" src="img/report/report_unassigned_stop.jpg">
+			<img class="gif_images" src="img/report/report_unassigned.gif">
 		</div>
 		
 		<div class="col-lg-1" >
