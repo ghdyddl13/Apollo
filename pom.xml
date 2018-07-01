@@ -295,6 +295,20 @@
 			<artifactId>cos</artifactId>
 			<version>05Nov2002</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<!-- 엑셀 추출 -->
+		<dependency>
+		 <groupId>org.apache.poi</groupId>
+		 <artifactId>poi</artifactId>
+		 <version>3.7</version>
+		</dependency>    
+		
+		<dependency>
+		 <groupId>org.apache.poi</groupId>
+		 <artifactId>poi-ooxml</artifactId>
+		 <version>3.7</version>
+		</dependency>
 		       
 	</dependencies>
 
