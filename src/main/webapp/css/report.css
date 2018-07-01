@@ -27,3 +27,23 @@
 .gif_images{
 	display: none
 }
+
+.report_info_modal{
+	width: 350px;
+	margin: 0;
+	padding: 0;
+}
+
+.report_info_modal_content {
+  height: auto;
+  min-height: 50%;
+  border-radius: 0;
+}
+
+#download_report_btn{
+	width: 100px
+}
+
+#report_file_name{
+	width: 100%
+}

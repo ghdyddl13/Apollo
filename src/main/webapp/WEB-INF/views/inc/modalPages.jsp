@@ -886,3 +886,38 @@
 		</div>
 	</div>
 
+
+
+	<!-- Report -->
+	<div class="modal fade" id="report_info_modal" role="dialog">
+		<div class="modal-dialog report_info_modal">
+			<!-- Modal content-->
+			<div class="modal-content report_info_modal_content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Report 정보 입력</h4>
+				</div>
+	
+				<div class="modal-body" style="text-align: left">
+				
+				<div>Report 대상 프로젝트 선택 :&nbsp&nbsp
+					<select>
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+					</select>
+				</div>
+				
+				<br>Report 명을 입력해주세요<br>
+				<input type="text" id="report_file_name">
+					<br>
+					<br>
+					<div align="center">
+						<input type="button" class="btn add-btn" id="download_report_btn" value="다운로드">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
