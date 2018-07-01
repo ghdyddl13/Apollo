@@ -1,14 +1,12 @@
 package com.apollo.report.service;
 
 import java.io.File;
-import org.apache.ibatis.session.SqlSession;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.io.File;
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.SqlSession;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -20,6 +18,11 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.apollo.member.dao.MemberDAO;
+import com.apollo.vo.ProjectDTO;
 
 
 @Service
@@ -28,6 +31,22 @@ public class ReportService {
 	@Autowired
 	private SqlSession session;
 
+	
+	
+		public ArrayList<ProjectDTO> gerUserProjects(String mid){
+
+			System.out.println("gerUserProjects 서비스 실행");
+			System.out.println("mid 테스트 : " + mid);
+			
+			MemberDAO dao = session.getMapper(MemberDAO.class);
+			ArrayList<ProjectDTO> list = new ArrayList();
+			list = dao.gerUserProjects(mid);
+			
+			return list;
+		}
+	
+	
+	
 		public void writeData() throws Exception {
 
 			try {
