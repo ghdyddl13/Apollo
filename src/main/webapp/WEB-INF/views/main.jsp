@@ -76,6 +76,9 @@
 <!-- main에 있어야 할 Task js -->
 <script type="text/javascript" src="js/main_task.js"></script>
 
+<!-- Report -->
+<script type="text/javascript" src="js/report.js"></script>
+
 
 <title>Project Apollo</title>
 

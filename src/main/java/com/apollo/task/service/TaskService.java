@@ -607,6 +607,21 @@ public class TaskService {
 	
 	}
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 6. 29.
+	 기      능 : tname을 변경 
+	 작성자명 : 김 정 권
+	 */
+	public int changeTname(TaskDTO dto) {
+		
+		System.out.println("changeTname 서비스 실행");
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		int result = taskdao.changeTname(dto);
+		return result;
+	}
+	
 }
 
 
