@@ -63,16 +63,14 @@ public class ReportController {
 		
 		String mid = (String) session.getAttribute("mid");
 		
-		System.out.println(pid);
-		System.out.println(report_kind);
-		System.out.println(report_title);
+		try {
+			reportservice.writeData(pid, report_kind, report_title);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-//		ArrayList<ProjectDTO> list = new ArrayList();
-//		list = reportservice.gerUserProjects(mid);
-//		map.addAttribute("projectlist", list);
-//
-//		System.out.println("Report 생성 후 추출 성공");
-		
+		System.out.println("report 추출 성공!");
 		return jsonview;
 	}
 	

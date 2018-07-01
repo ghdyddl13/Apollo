@@ -126,8 +126,7 @@ $(document).on("click","#download_report_btn",function(){
 	
 	var pid = $('#user_projectlist_selectbox').val();
 	var report_kind = $('#report_kind').attr('value');
-	var report_title = $('#report_file_name').val();
-	alert('여긴 온다')
+	var report_title = $('#report_file_name').val().replace(/(\s*)/g,"");
 	
 	  $.ajax(
 		       {
@@ -142,7 +141,8 @@ $(document).on("click","#download_report_btn",function(){
 		        	   		
 		        	   console.log(rdata);
 		        	   alert('Report를 다운로드 하였습니다.\nC:\\Apollo_Reports\\를 확인해주십시오.');
-		        	   
+		        	   $('#download_report_cancel_btn').click();
+		        	   $('#report_file_name').val('');
 		           } // end-success
 		        }); // end-ajax
 	
@@ -163,5 +163,3 @@ $(document).on("keyup","#report_file_name",function(){
 		  
 	  }
 });
-
-
