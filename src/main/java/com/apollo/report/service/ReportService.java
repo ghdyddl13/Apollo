@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,7 +20,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -119,7 +121,7 @@ public class ReportService {
 			else if(report_kind.equals("report_unassigned")) {
 				tasklist = taskdao.getUnassingedTasklist(pid);
 			}
-			
+			System.out.println("DB에서 데이터 가져옴(성공)");
 			////////////////////////////////////////////////////
 			
 			// 제목 줄 생성
@@ -130,7 +132,6 @@ public class ReportService {
 				title.add("시작일");
 				title.add("종료일");
 				title.add("상세정보");
-				title.add("생성시각");
 				title.add("상태");
 				
 			} else {
@@ -139,23 +140,14 @@ public class ReportService {
 				title.add("시작일");
 				title.add("종료일");
 				title.add("상세정보");
-				title.add("생성시각");
 				
 			}
 			
-			if(report_kind.equals("report_status")) {
-				
-			} else {
-				
-			}
-			
-			String[] contents = { "1", "공지합니다!!", "엄지용", "ddd", "dddd" };
-
 			// row 1 table start
 			row = sht.createRow((short) 1);
 			row.setHeight((short) 1000); // 칼럼 높이
 
-			// ========== title1 - first row ========================
+			// ========== title - first row ========================
 			for (int i = 0; i < title.size(); i++) {
 				if((i == 1) || (i ==2 )) {
 					sht.setColumnWidth(i, 10 * 500); // Column 넓이 설정
@@ -164,7 +156,7 @@ public class ReportService {
 					sht.setColumnWidth(i, 10 * 1500); // Column 넓이 설정
 				}
 				else {
-					sht.setColumnWidth(i, 10 * 600); // Column 넓이 설정
+					sht.setColumnWidth(i, 10 * 800); // Column 넓이 설정
 				}
 				cell = row.createCell(i);
 				cell.setCellValue(new HSSFRichTextString(title.get(i)));
@@ -173,30 +165,79 @@ public class ReportService {
 			}
 
 			// =========== Table Contents ===================
-			row = sht.createRow(2);
-			row.setHeight((short) 500); // 칼럼 높이
-
-			for (int i = 0; i < contents.length; i++) {
+			
+			if(report_kind.equals("report_status")) {
 				
-				if((i == 1) || (i ==2 )) {
-					sht.setColumnWidth(i, 10 * 500);
-				}
-				else if(i==3) {
-					sht.setColumnWidth(i, 10 * 1500);
-				}
-				else {
-					sht.setColumnWidth(i, 10 * 600);
-				}
-				cell = row.createCell((i));
+				for(int k = 0; k < tasklist.size(); k++) {
+					
+					TaskDTO dto = tasklist.get(k);
+					
+					String tname = dto.getTname();
+					String sday = dto.getSday();
+					String eday = dto.getEday();
+					String detail = dto.getDetail();
+					String tstatus = dto.getTstatus();
+					
+					String[] contents = {tname, sday, eday, detail, tstatus};
+					
+					row = sht.createRow(k + 2);
+					row.setHeight((short) 500); // 칼럼 높이
 
-				if (i == 0)
-					cell.setCellValue(new HSSFRichTextString(String.valueOf(i)));
-				else
-					cell.setCellValue(new HSSFRichTextString(contents[i]));
-				cell.setCellStyle(getTextStyle(wb));
+					for (int i = 0; i < contents.length; i++) {
+						
+						if((i == 1) || (i ==2 )) {
+							sht.setColumnWidth(i, 10 * 500);
+						}
+						else if(i==3) {
+							sht.setColumnWidth(i, 10 * 1500);
+						}
+						else {
+							sht.setColumnWidth(i, 10 * 800);
+						}
+						cell = row.createCell((i));
+
+						cell.setCellValue(new HSSFRichTextString(contents[i]));
+						cell.setCellStyle(getTextStyle(wb));
+					} // end for - 이번 row td setting
+					
+				} // end for - 전체 테이블 data setting (1 회전당 1 row)
+				
+			} else {
+				
+				for(int k = 0; k < tasklist.size(); k++) {
+					
+					TaskDTO dto = tasklist.get(k);
+					
+					String tname = dto.getTname();
+					String sday = dto.getSday();
+					String eday = dto.getEday();
+					String detail = dto.getDetail();
+					
+					String[] contents = {tname, sday, eday, detail};
+					
+					row = sht.createRow(k + 2);
+					row.setHeight((short) 500); // 칼럼 높이
+
+					for (int i = 0; i < contents.length; i++) {
+						
+						if((i == 1) || (i ==2 )) {
+							sht.setColumnWidth(i, 10 * 500);
+						}
+						else if(i==3) {
+							sht.setColumnWidth(i, 10 * 1500);
+						}
+						else {
+							sht.setColumnWidth(i, 10 * 800);
+						}
+						cell = row.createCell((i));
+
+						cell.setCellValue(new HSSFRichTextString(contents[i]));
+						cell.setCellStyle(getTextStyle(wb));
+					} // end for - 이번 row td setting
+					
+				} // end for - 전체 테이블 data setting (1 회전당 1 row)
 			}
-
-
+			
 			// 출력설정
 			HSSFPrintSetup hps = sht.getPrintSetup();
 
