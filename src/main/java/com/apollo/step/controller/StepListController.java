@@ -37,7 +37,6 @@ public class StepListController {
 	 */
     @RequestMapping(value="/list.htm",method=RequestMethod.GET)
     public String list(int sid, HttpSession session, HttpServletRequest request, ModelMap map) {
-       
     	session.setAttribute("location", "/list.htm");
     	System.out.println(sid);
     	
