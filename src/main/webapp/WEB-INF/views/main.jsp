@@ -81,8 +81,10 @@
 <!-- Report -->
 <script type="text/javascript" src="js/report.js"></script>
 
-
-
+<!--projectInsideHeader  -->
+<script type="text/javascript" src="js/projectInsideHeader.js"></script>
+<!--stepInsideHeader  -->
+<script type="text/javascript" src="js/stepInsideHeader.js"></script>    s
 <title>Project Apollo</title>
 
 
