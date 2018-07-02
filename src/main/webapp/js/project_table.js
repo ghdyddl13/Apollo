@@ -1,5 +1,5 @@
 // project table page js
-$(document).on('click','#table-page', function(){
+/*$(document).on('click','#table-page', function(){
 
 	var pid = $('#project-table-pid').attr('value');
 	console.log(pid);
@@ -14,4 +14,4 @@ $(document).on('click','#table-page', function(){
 	})
 	
 });
-
+*/

@@ -8,8 +8,7 @@
 	<h4 id="project-table-page-pname">해당 프로젝트명 들어가는 곳</h4>
 	<jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 	<div>
-		<input type="hidden" id="project-table-pid" value="${pid}">
-	
+		<!-- <input type="hidden" id="project-table-pid" value="${pid}"> -->
 		<table class="table project-page-table">
 			<thead>
 				<tr>
@@ -38,7 +37,7 @@
 							<td><i class="side-dir-step-icon far fa-file-alt"></i>&nbsp;${step.sname}</td>
 							<td class="project-table-day">${step.sday}</td>
 							<td class="project-table-day">${step.eday}</td>
-							<td>${step_endeday - step_startsday}일</td>
+							<td class="project-table-duration">${step_endeday - step_startsday}일</td>
 							<td></td>
 							<td></td>
 						<!-- 스텝에 속한 task 뿌려주기 -->
@@ -56,7 +55,7 @@
 									<td style="padding-left: 30px">┗ ${task.tname}</td>
 									<td class="project-table-day">${task.sday}</td>
 									<td class="project-table-day">${task.eday}</td>
-									<td>${task_endeday - task_startsday}일</td>
+									<td class="project-table-duration">${task_endeday - task_startsday}일</td>
 									<td id="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
 									<td></td>
 								</tr>
@@ -81,7 +80,7 @@
 								<td style="padding-left: 30px"><i class="side-dir-step-icon far fa-file-alt"></i>&nbsp;${step.sname}</td>
 								<td class="project-table-day">${step.sday}</td>
 								<td class="project-table-day">${step.eday}</td>
-								<td>${step_endeday - step_startsday}일</td>
+								<td class="project-table-duration">${step_endeday - step_startsday}일</td>
 								<td></td>
 								<td></td>
 							</tr>
@@ -92,7 +91,7 @@
 										<td style="padding-left: 60px">┗ ${task.tname}</td>
 										<td class="project-table-day">${task.sday}</td>
 										<td class="project-table-day">${task.eday}</td>
-										<td class="project-table-day">${task_endeday - task_startsday}일</td>
+										<td class="project-table-duration">${task_endeday - task_startsday}일</td>
 										<td class="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
 										<td></td>
 									</tr>
