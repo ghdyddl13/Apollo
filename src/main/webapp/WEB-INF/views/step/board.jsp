@@ -15,7 +15,7 @@
    </div>
 </nav>
 
-<div class="container-fluid" id="board-main-div">
+<div id="board-main-div">
    <div class="container-fluid"  id="board-content-md">
       <div  class="container-fluid" id="board-status-div">
          <c:forEach var="b" items="${b}">            
