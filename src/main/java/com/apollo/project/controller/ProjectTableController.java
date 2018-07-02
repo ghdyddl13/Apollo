@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 import com.apollo.project.service.ProjectTableService;
+import com.apollo.step.service.StepListService;
 import com.apollo.vo.FolderDTO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 /**
@@ -27,6 +29,8 @@ public class ProjectTableController {
 	@Autowired 
 	private ProjectTableService tableservice;
 	
+	@Autowired
+	private StepListService steplistservice;
 	
 	
 	/**
@@ -38,7 +42,6 @@ public class ProjectTableController {
 	@RequestMapping("/table.htm")
 	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {		
 		int pid = (Integer) request.getSession().getAttribute("pid");
-		//System.out.println("pid : " + pid);
 		
 		ArrayList<Integer> pids = new ArrayList<Integer>();
 		pids.add(pid);
@@ -49,7 +52,7 @@ public class ProjectTableController {
 			ArrayList<StepDTO> steplist = null; // pid 에 속한 step 가져오기
 			steplist = tableservice.getStepInProject(pid);
 			model.addAttribute("steplist", steplist);
-			
+
 			ArrayList<FolderDTO> folderlist = null; // pid 에 속한 folder 가져오기
 			folderlist = tableservice.selectFolderList(pids);
 			model.addAttribute("folderlist", folderlist);

@@ -27,11 +27,8 @@ $(function() {
 			url:"table.htm",
 			dataType:"html",
 			success:function(data){
-				//console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
-				
-				
 			}
 		})
 	})
@@ -49,8 +46,8 @@ $(function() {
 				$("#main-box").append(data);
 				
 			}
-		})
-	})
+		});
+	});
 	
 	// 스텝 list 페이지
 	
