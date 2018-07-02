@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html >
-<script type="text/javascript" src="js/projectInsideHeader.js"></script>
 <nav class="navbar inside-header">
    <div class="container-fluid ">
       <ul class="nav navbar-nav">

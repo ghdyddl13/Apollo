@@ -4,8 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html >
 <script type="text/javascript" src="js/task.js"></script>
-<script type="text/javascript" src="js/stepInsideHeader.js"></script>    
-
 <div class="main-body">
   <div class="main-section-left" id="left">
     <div class="main-section-left-container">
@@ -23,9 +21,6 @@
               </span>
               <span class="list-header-selector-container">
                 <span class="list-header-selector-item" id ="timeline-page">TIMELINE</span>
-              </span>
-              <span class="list-header-selector-container">
-                <span class="list-header-selector-item" id ="workload-page">WORKLOAD</span>
               </span>
             </div>
           </div>
