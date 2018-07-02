@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html> 
 
+
+<h4>파일페이지</h4>
 <jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include> 
 <div class="files_Table">
 	<table class="file-table">
