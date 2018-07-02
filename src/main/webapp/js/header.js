@@ -85,7 +85,7 @@ $(function() {
 	});
 
 	//////////////////////////// 래영 /////////////////////////////////
-	
+
 	// 헤더에서 우상단 개인정보수정 클릭시 실행되는 함수
 	// 헤더 개인정보수정 Modal
 	$('#header-profile-edit').click(function(evt) {
@@ -622,9 +622,5 @@ function resultSearchProject(projectlist){
 				 
 			}
 		}) // end ajax
- }) //end func
+ }) //end function
 
-/* $('#logout-btn').click(function() {
-	 location.href="logout.htm";
- });
-*/
