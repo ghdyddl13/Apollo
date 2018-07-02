@@ -84,7 +84,7 @@
 <!--projectInsideHeader  -->
 <script type="text/javascript" src="js/projectInsideHeader.js"></script>
 <!--stepInsideHeader  -->
-<script type="text/javascript" src="js/stepInsideHeader.js"></script>    s
+<script type="text/javascript" src="js/stepInsideHeader.js"></script>
 <title>Project Apollo</title>
 
 
