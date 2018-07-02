@@ -68,7 +68,6 @@ public class MemberController {
 	 */
 	@RequestMapping("/index.htm")
 	public String intro() {
-		System.out.println("intro");
 		return "intro";
 	}
 	
