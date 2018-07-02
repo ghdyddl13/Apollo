@@ -60,8 +60,7 @@
 	.file-table-tr-td{
 		height: 40px;
 		text-align: center;
-		font-size:14px;
-		
+		font-size:14px;	
 	}
 	 .file-table-tr-td:hover{
 		background-color:#f5f5f5;
