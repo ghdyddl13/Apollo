@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <h4>사원 목록</h4>
 <br><br>
-<div class="container-fluid">
+<div class="container">
 	<div align="center">
 		<table class="table" id="header-member-table">
 			<thead>

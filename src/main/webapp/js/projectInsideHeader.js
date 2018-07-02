@@ -29,10 +29,6 @@ $(function() {
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
-				console.log($('.project-table-duration').val());
-				if($('.project-table-duration').val()) {
-					$('.project-table-duration').val(" ");
-				}
 			}
 		})
 	})

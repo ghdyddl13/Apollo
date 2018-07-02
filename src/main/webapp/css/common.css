@@ -810,3 +810,107 @@ background-color: 999999;
 	background-color: white;
 	border-radius: 3px
 }
+
+/* MAIN BODY PANNEL*/
+.main-body-container{
+  display: flex;
+  background: rgb(0, 0, 50);
+  width: 100%;
+  height: 100%;
+  flex-wrap: nowrap;
+}
+
+.main-body-twopannel{
+  display: flex;
+  background: rgb(0, 0, 50);
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: visible;
+  position: relative;
+}
+.main-body-twopannel-left{
+  margin-left: 10px;
+  margin-right: 10px;
+  flex: 1 1 auto;
+  border-radius: 3px;
+  overflow: hidden!important;
+  box-sizing: border-box;
+  display: block;
+  background: #fff;
+}
+.main-body-twopannel-right{
+  background: #fff;
+  margin-right: 10px;
+  flex: 0 0 auto;
+  width: 49%;
+  height: 100%;
+  border-radius: 3px;
+  overflow: hidden!important;
+}    
+.main-body-twopannel-left-wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+.main-body-twopannel-left-header{
+  flex-shrink: 0;
+  height: 49px;
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  box-sizing: border-box;
+  display: block;
+}
+.main-body-twopannel-left-header-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 24px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.main-body-twopannel-left-header-title-textwrapper{
+  display: flex;
+  height: 100%;
+  box-sizing: border-box;
+}
+.main-body-twopannel-left-header-title{
+  color: rgba(0, 0, 0, 0.56);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  transition: 0.1s ease-out color;
+  text-decoration: none;
+  outline: none;
+  box-sizing: border-box;
+}
+.main-body-twopannel-left-header-title-text{
+  font-size: 14px;
+  line-height: 1.42857143;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.main-body-twopannel-left-body{
+  flex-grow: 1;
+  position: relative;
+  display: block;
+}
+.main-body-twopannel-left-body-wrapper{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  overflow: auto;
+  background-color: white;
+  display: block;
+}

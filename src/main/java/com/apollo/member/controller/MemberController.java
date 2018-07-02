@@ -59,6 +59,18 @@ public class MemberController {
 	private VelocityEngine velocityEngine;
 	
 	HttpSession session;
+
+	/**
+	 * 
+	 날      짜 : 2018. 7. 2.
+	 기      능 : 소개페이지
+	 작성자명 : 김 래 영
+	 */
+	@RequestMapping("/index.htm")
+	public String intro() {
+		System.out.println("intro");
+		return "intro";
+	}
 	
 	/**
 	 * 
@@ -66,12 +78,12 @@ public class MemberController {
 	 기      능 : 로그인 페이지로가는 index컨트롤러 
 	 작성자명 : 신 호 용
 	 */
-	@RequestMapping("/index.htm")
+/*	@RequestMapping("/index.htm")
 	public String index() {
 		System.out.println("login");
 		return "login";
 	}
-	
+	*/
 	/**
 	 * 
 	 날      짜 : 2018. 6. 14.
@@ -530,5 +542,5 @@ public class MemberController {
 		return "memberlist";
 		
 	}
-	
+
 }

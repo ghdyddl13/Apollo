@@ -293,7 +293,7 @@
 	              {
 	                  name: 'Task마감',
 	                  type: 'pie',
-	                  radius : '60%',
+	                  radius : '50%',
 	                  center: ['45%', '50%'],
 	                  data:[
 	                      {value:<%=(Integer)request.getAttribute("noday")%>, name:'미지정'},
