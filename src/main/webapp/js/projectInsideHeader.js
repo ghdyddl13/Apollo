@@ -27,11 +27,12 @@ $(function() {
 			url:"table.htm",
 			dataType:"html",
 			success:function(data){
-				//console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
-				
-				
+				console.log($('.project-table-duration').val());
+				if($('.project-table-duration').val()) {
+					$('.project-table-duration').val(" ");
+				}
 			}
 		})
 	})
@@ -49,8 +50,8 @@ $(function() {
 				$("#main-box").append(data);
 				
 			}
-		})
-	})
+		});
+	});
 	
 	// 스텝 list 페이지
 	

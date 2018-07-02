@@ -1,18 +1,17 @@
 // project table page js
+/*$(document).on('click','#table-page', function(){
 
-function getpname(pid){
-
-	var custom_menu =  $(this).parents("ul.custom-menu")[0];
-    var pid = $(custom_menu).find("input[name=pid]").val();
-    console.log(pid);
-    
-    var pname =     
-    $('#project-table-page-pname').val(pid);
-    
-    $.ajax({
-    	url:"table.htm",
-    	type:"post",
+	var pid = $('#project-table-pid').attr('value');
+	console.log(pid);
+	
+	$.ajax({
+		url:"table.htm",
+		type:"post",
     	data:{pid:pid},
-    });
-}
-
+    	success:function(data){
+    	
+    	}
+	})
+	
+});
+*/

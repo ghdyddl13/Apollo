@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.apollo.vo.GoogleDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidpidDTO;
+import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.TidpidDTO;
 
 public interface MemberDAO {
@@ -116,5 +117,12 @@ public interface MemberDAO {
 	 작성자명 : 이 창 훈
 	 */
 	public int googleIdInsert(GoogleDTO googledto);
-
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 1.
+	 기      능 : mid로 해당 멤버가 속한 프로젝트들 가져오기
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<ProjectDTO> gerUserProjects(String mid);
 }

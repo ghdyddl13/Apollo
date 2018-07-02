@@ -301,6 +301,7 @@
 				<div class="row">
 					<div class="col-sm-10">
 						<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
+						<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">
 					</div>
 
 					<div class="col-sm-2" id="star_trash">
@@ -310,8 +311,9 @@
 					</div>
 					
 					<div class="col-sm-12" id="Task_Modal_snames">
-					<br><i class="fas fa-plus-circle" id="task_modal_add_step"></i>
 					</div>
+					<div id="step_names_popup_div"></div>
+					<div id="step_delete_popup_div"></div>
 					
 				</div>
 				<!-- end row 1 -->
@@ -344,6 +346,7 @@
 
 					<div class="modal-title">업무 담당자</div><br />
 					<div id="Task_Modal_assignee"></div>
+					<div id="assignee_popup_div"></div>
 
 								
                 <hr />
@@ -883,3 +886,36 @@
 		</div>
 	</div>
 
+
+
+	<!-- Report -->
+	<div class="modal fade" id="report_info_modal" role="dialog">
+		<div class="modal-dialog report_info_modal">
+			<!-- Modal content-->
+			<div class="modal-content report_info_modal_content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Report 정보 입력</h4>
+				</div>
+	
+				<div class="modal-body" style="text-align: left">
+				
+				<div>Report 대상 프로젝트 선택</div>
+					<select id="user_projectlist_selectbox">
+					</select>
+				<br>
+				
+				<br>Report 명을 입력해주세요(공백, 특수문자 사용 불가)<br>
+				<input type="text" id="report_file_name">
+					<br>
+					<br>
+					<div align="center">
+						<input type="button" class="btn add-btn" id="download_report_btn" value="다운로드">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn" id="download_report_cancel_btn" data-dismiss="modal" value="취소">
+						<input type="hidden" id="report_kind" value="">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
