@@ -16,8 +16,10 @@
    width: 220px;
    text-align: center;
    background: white;
-   
    border-style: outset;
+   overflow:hidden;
+   white-space:nowrap;
+   text-overflow:ellipsis; 
    
    
 }

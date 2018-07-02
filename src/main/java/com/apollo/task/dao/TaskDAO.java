@@ -47,5 +47,12 @@ public interface TaskDAO {
 	public int changeSdayOfTask(TaskDTO dto);
 	public int changeEdayOfTask(TaskDTO dto);
 	public String getTname(int tid);
+	public int changeTname(TaskDTO dto);
+	
+	public ArrayList<TaskDTO> getOnProgressTasklist(int pid);
+	public ArrayList<TaskDTO> getTasklistByPidOrderByStatus(int pid);
+	public ArrayList<TaskDTO> getExpiredTasklist(int pid);
+	public ArrayList<TaskDTO> getDrawnearTasklist(int pid);
+	public ArrayList<TaskDTO> getUnassingedTasklist(int pid);
 	
 }

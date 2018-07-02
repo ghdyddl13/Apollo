@@ -135,4 +135,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select tname from task where tid = #{tid}
     </select>
     
+    <update id="changeTname" parameterType="com.apollo.vo.TaskDTO">
+		update task set tname = #{tname} where tid = #{tid}
+	</update>
+	
+    <select id ="getOnProgressTasklist" resultType="com.apollo.vo.TaskDTO">
+	    select tname, sday, eday, detail, ctime from task where pid = #{pid} and tstatusid !=3 and tstatusid !=11 and tstatusid !=15 order by tid asc
+    </select>
+    
+    <select id ="getTasklistByPidOrderByStatus" resultType="com.apollo.vo.TaskDTO">
+	    select task.tname, task.sday, task.eday, task.detail, task.ctime, tstatus.tstatus from task, tstatus where pid=#{pid} order by tstatus.tstatusid asc
+    </select>
+    
+    <select id ="getExpiredTasklist" resultType="com.apollo.vo.TaskDTO">
+	    select tname, sday, eday, detail, ctime from task where pid = #{pid} and eday <![CDATA[<]]> sysdate
+    </select>
+    
+    <select id ="getDrawnearTasklist" resultType="com.apollo.vo.TaskDTO">
+	    select tname, sday, eday, detail, ctime from task where pid=1 and eday BETWEEN TO_DATE(sysdate-7) AND TO_DATE(sysdate+7)
+    </select>
+    
+    <select id ="getUnassingedTasklist" resultType="com.apollo.vo.TaskDTO">
+	    select tname, sday, eday, detail, ctime from task where tid not in (select tid from assignee) and pid = #{pid} order by tid asc
+    </select>
+    
 </mapper>

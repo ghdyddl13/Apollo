@@ -73,39 +73,6 @@
           <div class="list-header-filter-people-container">
             <input type="text" id="filter-people-input" class="list-header-filter-people-input" placeholder="Search user">
             <div class="list-header-filter-people-tagscontainer">
-              <div class="list-header-filter-people-tagwrap">
-                <div class="list-header-filter-people-tag">
-                  <div class="list-header-filter-people-image">
-                    <img class="list-people-image"src="img/frog.png" alt="">
-                  </div>
-                  <div class="list-header-filter-people-info">
-                    <div class="list-people-name">Jinwoo Lee</div>
-                    <div class="list-people-email">sangsang0607@naver.com</div>
-                  </div>
-                </div>
-              </div>
-              <div class="list-header-filter-people-tagwrap">
-                <div class="list-header-filter-people-tag">
-                  <div class="list-header-filter-people-image">
-                    <img class="list-people-image"src="img/frog.png" alt="">
-                  </div>
-                  <div class="list-header-filter-people-info">
-                    <div class="list-people-name">Minsick Park</div>
-                    <div class="list-people-email">pms123@naver.com</div>
-                  </div>
-                </div>
-              </div>
-              <div class="list-header-filter-people-tagwrap">
-                <div class="list-header-filter-people-tag">
-                  <div class="list-header-filter-people-image">
-                    <img class="list-people-image"src="img/frog.png" alt="">
-                  </div>
-                  <div class="list-header-filter-people-info">
-                    <div class="list-people-name">Jungkwon Kim</div>
-                    <div class="list-people-email">sirhomme@naver.com</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

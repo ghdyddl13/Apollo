@@ -108,4 +108,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where (mid like '%'||#{input}||'%' or mname like '%'||#{input}||'%') 
 		and apollokey = (select apollokey from member where mid = #{mid})
 	</select>
+	
+	<select id="googleLogin" parameterType="String" resultType="Integer">
+		select count(*) from member where
+		mid=#{email}
+	</select>
+	
+	<insert id="googleIdInsert" parameterType="com.apollo.vo.GoogleDTO">
+		insert into member(mid, mname, pwd, rday) values(#{gemail}, #{gname}, #{gid}, sysdate)
+	</insert>
+	
+	
+	<select id="gerUserProjects" parameterType="String" resultType="com.apollo.vo.ProjectDTO">
+		select * from project where pid in (select pid from pmember where mid = #{mid}) order by pid asc
+	</select>
+	
 </mapper>

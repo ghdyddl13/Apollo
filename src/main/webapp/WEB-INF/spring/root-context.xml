@@ -14,7 +14,7 @@
     </bean> -->
     <bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-        <property name="url" value="jdbc:oracle:thin:@192.168.0.27:1521:XE" />
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
         <property name="username" value="PROJECT_APOLLO" />
         <property name="password" value="1004" />
     </bean>
@@ -52,6 +52,22 @@
 	</bean>
 	
 	<bean name="jsonview" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+
+	<!-- google Class Bean설정 추가 -->
+	<!-- 클라이언트ID와 보안비밀 세팅 -->
+	<bean id="googleConnectionFactory"
+		class="org.springframework.social.google.connect.GoogleConnectionFactory">
+		<constructor-arg value="494812049975-fuja6bh2piv0mb5svuil2rq5midfq4a6.apps.googleusercontent.com" />
+		<constructor-arg value="rx5MSCc_xPnjaElzD0AgUpZ-" />
+	</bean>
+	<!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
+	<bean id="googleOAuth2Parameters"
+		class="org.springframework.social.oauth2.OAuth2Parameters">
+		<property name="scope"
+			value="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email" />
+		<property name="redirectUri"
+			value="http://localhost:8090/bit/googlelogin.htm" />
+	</bean>
 	
 	 <!-- 파일 업로드 지원 LIB -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >

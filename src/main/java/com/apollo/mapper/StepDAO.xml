@@ -77,7 +77,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		join TASKINSTEP ts on t.TID = ts.TID
 		join TSTATUS s on t.TSTATUSID = s.TSTATUSID
 		where ts.SID =#{sid}
-		<if test="tstatusid != 0">and t.TSTATUSID=#{tstatusid}</if> 
+		<if test="tstatusid != null">and t.TSTATUSID=#{tstatusid}</if> 
+		<if test="mid !=null">and t.TID in (select tid from ASSIGNEE where MID = #{mid})</if>
+
 		order by CTIME
 	</select>
 	<!-- List 페이지의 Task에 뿌려줄 Step을 위한 Step 리스트  -->
@@ -89,8 +91,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select tis.tid 
 		from TASKINSTEP tis 
 		join task t on tis.TID = t.TID 
-		where tis.SID=77 
-		<if test="tstatusid != 0">and t.TSTATUSID=#{tstatusid}</if>
+		where tis.SID=#{sid} 
+		<if test="tstatusid != null">and t.TSTATUSID=#{tstatusid}</if>
+		<if test="mid !=null">and tis.TID in (select tid from ASSIGNEE where MID = #{mid})</if>
 		)and s.SID !=#{sid}
 	</select>
 	<!-- List페이지의 Task에 뿌려줄 Member을 위한 Member리스트 -->
@@ -102,7 +105,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select tis.tid 
 		from TASKINSTEP tis join task t on tis.TID = t.TID 
 		where tis.SID=#{sid} 
-		<if test="tstatusid != 0">and t.TSTATUSID=#{tstatusid}</if>
+		<if test="tstatusid != null">and t.TSTATUSID=#{tstatusid}</if>
+		<if test="mid !=null">and tis.TID in (select tid from ASSIGNEE where MID = #{mid})</if>
 		)
 	</select>
 

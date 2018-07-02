@@ -31,6 +31,8 @@
 <link rel="stylesheet" href="dist/frappe-gantt.css" />
 <script src="dist/frappe-gantt.js"></script>
 
+<!-- File 관련 script -->
+<script type="text/javascript" src="js/projectFile.js"></script>
 
 <!-- Board관련 script-->
 <script type="text/javascript" src="js/stepBoard.js"></script>
@@ -66,10 +68,16 @@
 <!-- STEP LIST JAVASCRIPT_ JW-->
 <script type="text/javascript" src="js/steplist.js?q=123"></script>
 <!-- Board관련 css -->
-<link rel="stylesheet" href="css/stepBoard.css" /> 
+<link rel="stylesheet" href="css/stepBoard.css" />
+
+<!-- File관련 css -->
+<link rel="stylesheet" href="css/projectFile.css" />  
 
 <!-- main에 있어야 할 Task js -->
 <script type="text/javascript" src="js/main_task.js"></script>
+
+<!-- Report -->
+<script type="text/javascript" src="js/report.js"></script>
 
 
 <title>Project Apollo</title>
