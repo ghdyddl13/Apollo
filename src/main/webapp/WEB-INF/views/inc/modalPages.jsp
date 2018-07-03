@@ -324,9 +324,9 @@
 	
 
 
-<!-- Project 완료 Modal 창 -->
+<!-- Project 완료/ 삭제 Modal 창 -->
 	<div class="modal fade" id="move-project" role="dialog">
-		<div class="modal-dialog modal-delete-project-dialog">
+		<div class="modal-dialog modal-small-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
@@ -337,6 +337,7 @@
 					<input type="hidden" id="move-project-pid">
 					<input type="hidden" id="move-project-pstatuscode">
 					<p id="move-project-message"></p>
+					<p id="move-project-submessage"></p>
 				</div>
 				<div align="center">
 					<input id="move-project-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
@@ -668,7 +669,7 @@
 <!-- 스텝 이동 모달창  -->
 	
 	<div class="modal fade" id="move-step" role="dialog">
-		<div class="modal-dialog modal-delete-project-dialog">
+		<div class="modal-dialog modal-small-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
@@ -676,19 +677,29 @@
 					<h4 id="move-step-header" class="modal-title">Step 이동</h4>
 				</div>
 				<div class="modal-body"align="center">
-				<br>
-				<form id="move-step-form">
-					<select id="move-step-select" name="fid">
-					
-					</select>
-					<input type="hidden" name="sid" id="move-step-sid">
-				</form>
-				<br>
-				</div>
-				<div align="center">
-					<input id="move-step-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
-					<input type="button" class="btn cancel-btn"
-						data-dismiss="modal" value="취소">
+					<br>
+					<form id="move-step-form">
+						<input id="move-step-sid" type="hidden" name="sid" value="">
+						<input id="move-step-selected-fid" type="hidden" name="fid" value="no-folder">
+						<div class="dropdown move-step-dropdown">
+							<div id="move-step-folder-list" data-toggle="dropdown" class="dropdown-toggle move-step-folder-list-wrapper">
+								<div id="move-step-folder-name" >
+									
+								</div>
+								<span class="caret"></span>
+							
+							</div>
+							<ul id="move-step-folder-options" class="dropdown-menu "
+								role="menu" aria-labelledby="move-step-folder-list">
+							</ul>
+						</div>
+					</form>
+					<br>
+					<div align="center">
+						<input id="move-step-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
 				</div>
 			</div>
 		</div>

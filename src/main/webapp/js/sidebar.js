@@ -201,6 +201,7 @@ $(function() {
 			$("#move-project-pid").val(pid);
 			$("#move-project-pstatuscode").val("2");
 			$("#move-project-message").text("해당 프로젝트를 완료 프로젝트로 이동하시겠습니까?");
+			$("#move-project-submessage").text("");
 		});
 		
 		//사이드 드롭다운에서 프로젝트 삭제 버튼 클릭시 모달창 생성
@@ -211,7 +212,8 @@ $(function() {
 			$("#move-project-header").text("Project 삭제");
 			$("#move-project-pid").val(pid);
 			$("#move-project-pstatuscode").val("3");
-			$("#move-project-message").text("해당 프로젝트를 삭제하시겠습니까? \n 삭제시 해당 프로젝트는 14일 후 휴지통에서 영구 삭제됩니다.");
+			$("#move-project-message").text("해당 프로젝트를 삭제하시겠습니까?");
+			$("#move-project-submessage").text("(삭제시 해당 프로젝트는 14일 동안 휴지통에 보관되며 이후 영구 삭제됩니다.)");
 		});
 		
 		//사이드 드롭다운에서 프로젝트 재진행 버튼 클릭시 모달창 생성
@@ -222,6 +224,7 @@ $(function() {
 			$("#move-project-pid").val(pid);
 			$("#move-project-pstatuscode").val("1");
 			$("#move-project-message").text("해당 프로젝트를 재진행 하시겠습니까?");
+			$("#move-project-submessage").text("");
 		});
 		
 		////사이드 드롭다운에서 프로젝트 수정 버튼 클릭시 모달창 생성
@@ -360,14 +363,9 @@ $(function() {
 		
 		// 사이드바 스텝 이동 버튼 클릭시
 		$(document).on("click","#side-step-move",function(){
-			$("#move-step-select").selectmenu({
-											width:"70%",
-											open: function(event, ui){	
-												console.log("here"),
-												$(".ui-front").css("zIndex","1200")}
-											
-											});
-												
+			$("#move-step-folder-options").empty();
+			$("#move-step-selected-fid").val("no-folder");
+			$("#move-step-folder-name").empty().text("이동할 위치를 선택하세요");
 			var custom_menu =  $(this).parents("ul.custom-menu")[0];
 			var pid =  $(custom_menu).find("input[name=pid]").val();
 			var pids = [pid];
@@ -375,25 +373,64 @@ $(function() {
 			var fid =  $(custom_menu).find("input[name=fid]").val();
 			
 			$("#move-step-sid").val(sid);
+			
 			$.when(selectFolderList(pids)).done(function(data){
 				console.log(data.folderlist);
-				var optiondefault = jQuery("<option>",{"text":"폴더 밖으로 이동","value":""})
-				$("#move-step-select").empty();
-				$(optiondefault).appendTo($("#move-step-select"));	
+				
+				if(data.folderlist.length ==0){
+					var li = jQuery("<li>",{
+						"class":"move-step-folder-nofolder",
+						"role":"presentation",
+						"text":"폴더가 없습니다",
+					
+					})
+					$(li).appendTo("#move-step-folder-options");
+					return false;
+				}
+				
+				var li = jQuery("<li>",{
+					"class":"move-step-folder-option",
+					"role":"presentation",
+					"value":""
+				})
+				var def = $("<div>",{"class":"move-step-folder-name", 
+					"text":"폴더 밖으로 이동"});
+				$(li).append(def).appendTo("#move-step-folder-options");
+				
 				$(data.folderlist).each(function(index,folder){
-					var option = jQuery("<option>",{"text":folder.fname,
-													"value":folder.fid});
-					if(folder.fid==fid){
-						option.attr("selected",true);
-
+					if(folder.fid!=fid){
+						var li = jQuery("<li>",{
+							"class":"move-step-folder-option",
+							"role":"presentation",
+							"value":folder.fid
+						})
+						//	var folderwrapper= $("<div>",{"class":"move-step-folder-item"});
+						var foldername = $("<div>",{"class":"move-step-folder-name", 
+							"text":folder.fname});
+						var foldericon = $("<i>",{"class":"side-dir-folder-icon fas fa-folder"});					
+						$(li).append(foldericon,foldername).appendTo("#move-step-folder-options");
 					}
-					$(option).appendTo($("#move-step-select"));								
+										
 				});
 			});
 		});
 		
+		
+		$(document).on("click",".move-step-folder-option",function(){
+			var fid = ($(this).val() ==0)? "":$(this).val();
+			console.log(fid);
+			$("#move-step-selected-fid").val(fid);
+			$("#move-step-folder-name").text($($(this).find(".move-step-folder-name")).text());
+		})
+		
+		
 		///// 스텝이동 모달창에서 확인버튼 클릭 시 
 		$(document).on("click","#move-step-btn",function(){
+			if($("#move-step-selected-fid").val()=="no-folder"){
+				alert("이동할 위치를 선택해 주세요");
+				return false;
+			}
+			
 			var movestep = $("#move-step-form").serialize();
 			console.log(movestep);
 			$.ajax({
