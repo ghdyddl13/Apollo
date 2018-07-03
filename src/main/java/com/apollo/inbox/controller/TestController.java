@@ -8,11 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TestController {
 
-	@RequestMapping("/starredTask.htm")
-	public String starredTask() {
-		return "header/starredTask";
-	}
-    
 
     
     @RequestMapping("/workload.htm")

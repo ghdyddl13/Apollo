@@ -1,4 +1,12 @@
 $(function() {
+	
+	$(".main-header-menu").click(function(){
+		$(".main-header-menu").css("border-top","none");
+		$(".side-project").css("background-color","transparent");
+		$(".side-step").css("background-color","transparent");
+		$(this).css("border-top","3px solid #ffc30d");
+	})
+	
 	// 헤더 inbox 페이지
 	$("#inbox-page").click(function(evt){
 		$.ajax({
@@ -35,7 +43,6 @@ $(function() {
 			url:"starredTask.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				

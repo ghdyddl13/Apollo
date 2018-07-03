@@ -37,14 +37,11 @@ public class StepListController {
 	 */
     @RequestMapping(value="/list.htm",method=RequestMethod.GET)
     public String list(int sid, HttpSession session, HttpServletRequest request, ModelMap map) {
-       
     	session.setAttribute("location", "/list.htm");
-    	System.out.println(sid);
-    	
-      // 스텝 id 와 프로젝트 id 세션값 갱신
+    	// 스텝 id 와 프로젝트 id 세션값 갱신
         int pid = service.getProjectIdByStepId(sid);
-        request.getSession().setAttribute("sid", sid);
-        request.getSession().setAttribute("pid", pid);
+        session.setAttribute("sid", sid);
+        session.setAttribute("pid", pid);
         //스텝이 소속된 프로젝트의 방법론 정보
         ArrayList<TstatusDTO> tstatuslist = service.getListTstatusList(sid);
         //스텝 정보

@@ -49,14 +49,14 @@ function makeTimelineGantt(tasks) {
 	$(tasks).each(function(index,item){
 		var start = (item.sday==null)?new Date().toISOString().substr(0,10):item.sday;
 		var end = (item.eday==null)?new Date().toISOString().substr(0,10):item.eday;
-		var custom_class= "timeline-tstatus-"+item.tstatusid;
+		//var custom_class= "timeline-tstatus-"+item.tstatusid;
 		
 		var ganttdata={
 				start:start,	
 				end:end,
 				name:item.tname,
 				id: 'Task '+item.tid,
-				custom_class: custom_class
+				custom_class: "timeline-bar-color"
 		 };
 		ganttdatabundle.push(ganttdata);
 	})

@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
 import com.apollo.step.service.StepBoardService;
+import com.apollo.step.service.StepListService;
+import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TstatusDTO;
 
 @Controller
 public class StepBoardController {
-
+	
+	@Autowired
+	private StepListService listservice;
 	@Autowired
 	private StepBoardService boardservice;
 	
@@ -87,8 +91,11 @@ public class StepBoardController {
 		session.setAttribute("location", "/board.htm");
 
         int sid = (Integer) request.getSession().getAttribute("sid");
-        System.out.println("보드컨트롤러에요");
+        
         try {
+        	  
+        	  StepDTO stepinfo = listservice.getListStepName(sid);
+        	  model.addAttribute("stepinfo", stepinfo);
         	  ArrayList<TstatusDTO> tstatusdto = boardservice.selectTstatusBySid(sid);
               model.addAttribute("b", tstatusdto);
               

@@ -1,5 +1,5 @@
 .file-table{
-		width: 100%;
+		width: 90%;
 		margin: auto;
 		border: 3px solid #d9d9d9;
 	}
@@ -14,6 +14,7 @@
 		height: 40px;
 		text-align: center;
 		font-size:14px;
+
 		
 	}
 	 .file-table-tr-td:hover{
@@ -22,18 +23,30 @@
 	
 	.file-table-tr-th-num{
 		text-align: center;
+				border : 1px solid #d9d9d9;
 	}
 	.file-table-tr-th-fname{
 		text-align: center;
+				border : 1px solid #d9d9d9;
 	}
 	.file-table-tr-th-tname{
 		text-align: center;
+				border : 1px solid #d9d9d9;
+	}
+	.file-table-tr-td-count{
+		border : 1px solid #d9d9d9;
+	}
+	.file-table-tr-td-fname{
+		border : 1px solid #d9d9d9;
+	}
+	.file-table-tr-td-tname{
+		border : 1px solid #d9d9d9;
 	}
 	.file-table-tr-td-sname{
 		color: lightgray;"
 	}
 	.file-table-tr-td-delete{
 		float: right;
-		margin-right: 20px;
+		margin-right: 5px;
     	 visibility: hidden; 
 	}
