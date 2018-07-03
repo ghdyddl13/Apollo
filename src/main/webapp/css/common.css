@@ -714,6 +714,79 @@ label {
    border-radius: 10px;
 }
 
+#move-project-message{
+	text-align: center;
+}
+#move-project-submessage{
+	text-align: center;
+	font-size: 13px;
+}
+
+#move-step-select{
+	text-align: center
+}
+
+.move-step-folder-list-wrapper{
+	display: flex;
+	border-radius: 3px ;
+	border: 1px solid #dddddd;
+	cursor: pointer;
+	height: 35px;
+	width: 100%; 
+	align-items: center;
+	padding-right: 5px
+}
+
+.move-step-folder-option{
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	height: 35px;
+	padding: 0.3em;
+}
+
+.move-step-folder-nofolder{
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	height: 35px;
+	padding: 0.3em;
+}
+
+.move-step-folder-option:hover{
+	background-color: #e8e8e8;
+}
+
+.move-step-dropdown{
+	width: 70%
+}
+#move-step-folder-options{
+	width: 100%
+}
+
+#move-step-folder-name{
+	display:block;
+	flex:1 1 auto;
+	width: 70%;
+	height: 35px;
+	text-align: center;
+	padding: 0.5em;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.modal-small-dialog {
+   position:absolute; 
+   top:50%; 
+   left:50%; 
+   width: 330px;
+   vertical-align: middle;
+   margin-top:-115px; 
+   margin-left:-230px;
+   border-radius: 10px;
+}
+
 .modal-folder-body{
 	padding: 20px 20px 0 20px !important;
 }

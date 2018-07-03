@@ -6,17 +6,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apollo.step.dao.StepDAO;
+import com.apollo.vo.AssigneeDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.StepListMemberDTO;
 import com.apollo.vo.StepListStepDTO;
 import com.apollo.vo.StepListTaskDTO;
+import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TstatusDTO;
 
 @Service
@@ -273,5 +276,82 @@ public class StepListService {
 		ArrayList<MemberDTO> projectmemberlist = dao.listProjectMemberList(sid);
 		return projectmemberlist;
 	}
-
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : LIST PAGE MASS EDIT에서 특정인에게 여러 Task 할당
+	 작성자명 : 이 진 우
+	 */
+	public int listAssignTasks(String[] tasks, String mid) {
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		List<AssigneeDTO> list = new ArrayList<AssigneeDTO>();
+		List<AssigneeDTO> existassignee = dao.listBeforeAssignTasks(mid);
+		for(String tid:tasks) {
+			int count =0;
+			int taskid = Integer.parseInt(tid.substring(1));
+			for(AssigneeDTO assignee:existassignee) {
+				if(taskid==assignee.getTid()) {//현재 넣어줄 tid와 이미 존재하는 tid가 같다면 카운트 증가
+					count++;
+				}
+			}
+			if(count==0) {//한번도 같은 적이 없어야 그 것을 리스트에 넣는다
+				AssigneeDTO dto = new AssigneeDTO();
+				dto.setMid(mid);
+				dto.setTid(taskid);
+				list.add(dto);
+			}
+		}
+		int result=0;
+		if(list.size()!=0) {//아무것도 들어있지않으면 insert를 못하니 그 경우를 막는다
+			result = dao.listAssignTasks(list);
+		}
+		return result;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : LIST PAGE MASS EDIT에서 특정스텝에 여러 Task 추가
+	 작성자명 : 이 진 우
+	 */
+	public int listAddStepTasks(String[] tasks, int sid) {
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		List<TaskInStepDTO> list = new ArrayList<TaskInStepDTO>();
+		List<TaskInStepDTO> existstep = dao.listBeforeAddStepTasks(sid);
+		for(String tid:tasks) {
+			int count=0;
+			int taskid = Integer.parseInt(tid.substring(1));
+			for(TaskInStepDTO taskinstep:existstep) {
+				if(taskinstep.getTid()==taskid) {//현재 넣어줄 tid와 이미 존재하는 tid가 같다면 카운트 증가
+					count++;
+				}
+			}
+			if(count==0) {//한번도 같은 적이 없어야 그 것을 리스트에 넣는다
+				TaskInStepDTO dto = new TaskInStepDTO();
+				dto.setSid(sid);
+				dto.setTid(taskid);
+				list.add(dto);				
+			}
+		}
+		int result=0;
+		if(list.size()!=0) {//아무것도 들어있지않으면 insert를 못하니 그 경우를 막는다
+			result = dao.listAddStepTasks(list);
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : LIST PAGE MASS EDIT에서 삭제 
+	 작성자명 : 이 진 우
+	 */
+	public int listDeleteTasks(String[] tasks) {
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		List<Integer> list = new ArrayList<Integer>();
+		for(String tid:tasks) {
+			list.add(Integer.parseInt(tid.substring(1)));
+		}
+		int result= dao.listDeleteTasks(list);
+		return result;
+	}
 }

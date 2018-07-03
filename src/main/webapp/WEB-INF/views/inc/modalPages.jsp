@@ -324,9 +324,9 @@
 	
 
 
-<!-- Project 완료 Modal 창 -->
+<!-- Project 완료/ 삭제 Modal 창 -->
 	<div class="modal fade" id="move-project" role="dialog">
-		<div class="modal-dialog modal-delete-project-dialog">
+		<div class="modal-dialog modal-small-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
@@ -337,6 +337,7 @@
 					<input type="hidden" id="move-project-pid">
 					<input type="hidden" id="move-project-pstatuscode">
 					<p id="move-project-message"></p>
+					<p id="move-project-submessage"></p>
 				</div>
 				<div align="center">
 					<input id="move-project-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
@@ -668,7 +669,7 @@
 <!-- 스텝 이동 모달창  -->
 	
 	<div class="modal fade" id="move-step" role="dialog">
-		<div class="modal-dialog modal-delete-project-dialog">
+		<div class="modal-dialog modal-small-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
@@ -676,19 +677,29 @@
 					<h4 id="move-step-header" class="modal-title">Step 이동</h4>
 				</div>
 				<div class="modal-body"align="center">
-				<br>
-				<form id="move-step-form">
-					<select id="move-step-select" name="fid">
-					
-					</select>
-					<input type="hidden" name="sid" id="move-step-sid">
-				</form>
-				<br>
-				</div>
-				<div align="center">
-					<input id="move-step-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
-					<input type="button" class="btn cancel-btn"
-						data-dismiss="modal" value="취소">
+					<br>
+					<form id="move-step-form">
+						<input id="move-step-sid" type="hidden" name="sid" value="">
+						<input id="move-step-selected-fid" type="hidden" name="fid" value="no-folder">
+						<div class="dropdown move-step-dropdown">
+							<div id="move-step-folder-list" data-toggle="dropdown" class="dropdown-toggle move-step-folder-list-wrapper">
+								<div id="move-step-folder-name" >
+									
+								</div>
+								<span class="caret"></span>
+							
+							</div>
+							<ul id="move-step-folder-options" class="dropdown-menu "
+								role="menu" aria-labelledby="move-step-folder-list">
+							</ul>
+						</div>
+					</form>
+					<br>
+					<div align="center">
+						<input id="move-step-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -978,6 +989,69 @@
 						<input type="button" class="btn add-btn" id="download_report_btn" value="다운로드">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn" id="download_report_cancel_btn" data-dismiss="modal" value="취소">
 						<input type="hidden" id="report_kind" value="">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+<!-- LIST PAGE TASK 단체 ASSIGN 창 -->
+	<div class="modal fade list-delete-tasks-modal" id="list_Assign_Tasks" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" id="list_assign_tasks_dismiss_btn">&times;</button>
+					<h4 class="modal-title">Task 할당</h4>
+				</div>
+				<div class="modal-body" style="text-align:center">
+				<h4 id="list-task-assign-ment">선택한 Task들을 해당 Step에 할당하시겠습니까?<br></h4>					
+					<div align="center">
+						<input type="button" class="btn add-btn" id="list_Assign_Tasks_btn" value="할당">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+<!-- LIST PAGE TASK 단체 ADDSTEP 창 -->
+	<div class="modal fade list-delete-tasks-modal" id="list_AddStep_Tasks" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" id="list_addstep_tasks_dismiss_btn">&times;</button>
+					<h4 class="modal-title">Step 추가</h4>
+				</div>
+				<div class="modal-body" style="text-align:center">
+				<h4 id="list-addstep-tasks-ment"></h4>					
+					<div align="center">
+						<input type="button" class="btn add-btn" id="list_AddStep_Tasks_btn" value="추가">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>	
+<!-- LIST PAGE TASK 단체 삭제 창 -->
+	<div class="modal fade list-delete-tasks-modal" id="list_Delete_Tasks" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" id="list_delete_tasks_dismiss_btn">&times;</button>
+					<h4 class="modal-title">Task 삭제</h4>
+				</div>
+				<div class="modal-body" style="text-align:center">
+				<h4 id="list-delete-tasks-ment"></h4>					
+					<div align="center">
+						<input type="button" class="btn add-btn" id="list_Delete_Tasks_btn" value="삭제">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
 					</div>
 				</div>
 				<br>

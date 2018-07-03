@@ -183,5 +183,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from MEMBER m join PMEMBER p on m.MID=p.MID 
 		where p.PID = (select pid from step where sid=#{sid})	
 	</select>
+	<!--LIST PAGE 에서 TASK 단체로 특정인에게 할당하기전에 중복값을 제거하기 위해 가지고 오는 데이터  -->
+	<select id="listBeforeAssignTasks" resultType="com.apollo.vo.AssigneeDTO">
+		select tid, mid from assignee where mid =#{mid} 
+	</select>
+	<!--LIST PAGE 에서 TASK 단체로 특정인에게 할당하기  -->
+	<insert id="listAssignTasks" parameterType="List">
+	    <foreach collection="list" item="assignee" open="INSERT ALL " separator=" " close="SELECT * FROM DUAL" > 
+         	into ASSIGNEE(tid,mid) values (#{assignee.tid},#{assignee.mid})
+        </foreach>
+	</insert>
+	<!--LIST PAGE 에서 TASK 단체로 특정 Step에 추가 하기전에 중복값을 제거하기 위해 가지고 오는 데이터  -->
+	<select id="listBeforeAddStepTasks" resultType="com.apollo.vo.TaskInStepDTO">
+		select sid, tid from TASKINSTEP where sid=#{sid}
+	</select>
+	<!-- LIST PAGE 에서 TASK 단체로 특정 Step에 추가 -->
+	<insert id="listAddStepTasks" parameterType="List">
+		<foreach collection="list" item="taskinstep" open="INSERT ALL " separator=" " close="SELECT * FROM DUAL" > 
+            into taskinstep(sid,tid) values (#{taskinstep.sid},#{taskinstep.tid})
+        </foreach>
+	</insert>
+	<!-- LIST PAGE 에서 TASK 단체로 삭제  -->
+	<delete id="listDeleteTasks" parameterType="List">
+		delete from task where tid in
+		<foreach collection="list" item="tid"  open="(" close=")" separator=",">
+            #{tid}
+        </foreach>
+	</delete>
 
 </mapper>
