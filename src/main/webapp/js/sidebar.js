@@ -14,12 +14,14 @@ $(function() {
 	});
 	
 	$(document).on("click",".side-project",function(){
+		$(".main-header-menu").css("border-top","none");
 		$(".side-project").css("background-color","transparent");
 		$(".side-step").css("background-color","transparent");
 		$(this).css("background-color","#e0e0e0");
 	});
 	
 	$(document).on("click",".side-step",function(){
+		$(".main-header-menu").css("border-top","none");
 		$(".side-project").css("background-color","transparent");
 		$(".side-step").css("background-color","transparent");
 		$(this).css("background-color","#e0e0e0");
@@ -28,6 +30,9 @@ $(function() {
 	
 	//스텝 추가 클릭시 프로젝트 멤버 리스트 가져오기
 	$(document).on("click","#side-insert-step",function(){ 
+		$("#add-step-mgr-assignee-btn").show();
+		$(".step-assigned-member-wrapper").remove();
+		$("#add-step-mgr-assignee").val("");
 		var custom_menu =  $(this).parents("ul.custom-menu")[0];
 		var pid =  $(custom_menu).find("input[name=pid]").val();
 		var methodologyid =  $(custom_menu).find("input[name=methodologyid]").val();
@@ -42,23 +47,57 @@ $(function() {
 		        	   $("#insert-step-methodologyid").val(methodologyid);
 		        	   $("#insert-step-pid").val(pid);
 		        	   $("#insert-step-fid").val(fid);
-	            	   var optiondefault = jQuery("<option>",{
-	            		   "text":"책임자를 선택하세요", //default 값 
-	            		   "value":""
-	            	   })
-	            	   //해당 pid 에 참여한 멤버 불러오기
-		               $('#add-step-mgr-assignee').empty().append(optiondefault);
+		        	   $('#add-step-mgr-assignee-options').empty();
 		               $(data.memberlist).each(function (){
-		            	   var option = jQuery("<option>",{
-		            		   "value":this.mid,
-		            		   "text":this.mname
+		            	   var li = jQuery("<li>",{
+		            		   "class":"select-step-assignee-option",
+		            		   "role":"presentation"
 		            	   })
-		            	   $('#add-step-mgr-assignee').append(option);
+		            	   var member_div = jQuery("<div>",{"class":"step-assignee-wrapper"});
+		            	   var member_img_wrapper = jQuery("<div>",{"class":"step-assignee-img"});
+		            	   var memeber_img = makeProfileIcon(this,"30");
+		            	   var member_info = jQuery("<div>",{"class":"step-assignee-info-wrapper"});
+		            	   var member_name = jQuery("<div>",{"class":"step-assignee-info-name",
+ 								 							"text":this.mname});
+		            	   var member_email = jQuery("<div>",{"class":"step-assignee-info-email",
+	 													      "text":this.mid});
+		            	   $(member_img_wrapper).append(memeber_img);
+		            	   $(member_info).append(member_name,member_email);
+		            	   $(member_div).append(member_img_wrapper,member_info).appendTo(li);
+		            	   $('#add-step-mgr-assignee-options').append(li);
 		               });
 		              
 		           } // end-success
 		        }); // end-ajax
 	});
+	
+	//스텝 담당자 선택시 dropdown hide시킨 후, 선택된 담당자 아이콘 뿌리기
+	$(document).on("click",".select-step-assignee-option",function(){
+		$("#add-step-mgr-assignee-btn").hide();
+		$("#add-step-mgr-assignee").val($($(this).find(".step-assignee-info-email")[0]).text());
+		var stepassignee_wrapper= jQuery("<div>",{"class":"step-assigned-member-wrapper"});
+		var stepassignee = $($(this).find(".step-assignee-wrapper")[0]).clone(); //드롭다운에서 선택된 멤버의 div태그를 복사
+		var i= jQuery("<i>",{"class":"fas fa-times cancel-step-assignee"});
+		$(stepassignee_wrapper).append(stepassignee,i);
+		$("#add-step-assignee").append(stepassignee_wrapper);
+		
+	})
+	
+	/// step 담당자 호버 시 취소버튼 생성
+	$(document).on("mouseenter",".step-assigned-member-wrapper",function(){
+		$(".cancel-step-assignee").css("visibility","visible")
+	}).on("mouseleave",".step-assigned-member-wrapper",function(){
+		$(".cancel-step-assignee").css("visibility","hidden")
+	});
+	
+	//// 스텝 담당자 취소시 초기화
+	$(document).on('click',".cancel-step-assignee",function(){
+		$(".step-assigned-member-wrapper").remove();
+		$("#add-step-mgr-assignee").val("");
+		$("#add-step-mgr-assignee-btn").show();
+	})
+	
+	
 	
 	// 스텝 생성 버튼 클릭시  alert 창 화면
 	$("#insert-step-btn").click(function(){	 
@@ -555,7 +594,7 @@ $(function() {
 	               
 	               if(data.updatefolder > 0){
 	                   alert('폴더 수정이 완료되었습니다!');
-	                   $("#f"+data.folderDTO.fid).text(data.folderDTO.fname);
+	                   $($("#f"+data.folderDTO.fid).find(".side-content-name")).text(data.folderDTO.fname);
 	                   $(".close").click();
 	               }else {
 	                   alert('폴더 수정이 실패되었습니다');
@@ -849,8 +888,10 @@ function makeSideSubDir(pids){
  작성자명 : 김 래 영
  */
 function makeSideFolder(folder) {
-	var wrapper_div = jQuery("<div>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
-    var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
+
+    var wrapper_div = jQuery("<div>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
+    var a =jQuery("<div>",{"class":"side-content side-folder","id":"f"+folder.fid});
+    var foldername = jQuery("<div>",{"class":"side-content-name","text":folder.fname});
     var i = jQuery("<i>",{"class":"side-dir-arrow fas fa-angle-right", 
                          "data-toggle":"collapse",
                          "data-target":"#f-dir"+folder.fid});
@@ -858,7 +899,7 @@ function makeSideFolder(folder) {
     var div = jQuery("<div>",{"class":"side-dir collapse",
                         "id": "f-dir"+folder.fid});
     
-    $(a).prepend(i,foldericon).appendTo(wrapper_div);
+    $(a).prepend(i,foldericon,foldername).appendTo(wrapper_div);
     $(div).appendTo(wrapper_div);
     $(wrapper_div).appendTo($('#p-dir'+folder.pid));
 }
@@ -870,17 +911,12 @@ function makeSideFolder(folder) {
  작성자명 : 김 래 영
  */
 function makeSideStep(step) {
-    var a =jQuery("<a>",{
-        "class":"side-step",
-        "id":"s"+step.sid,
-        "text":step.sname
-        });
-    var i = jQuery("<i>",{"class":"side-dir-step-icon far fa-file-alt"})
-
-    $(a).prepend(i);
-
-	 
-	 return a;
+    var a =jQuery("<div>",{"class":"side-content side-step",
+    					   "id":"s"+step.sid });
+    var stepname = jQuery("<div>",{"class":"side-content-name","text":step.sname});
+    var i = jQuery("<i>",{"class":"side-dir-step-icon far fa-file-alt"});
+    $(a).append(i,stepname);
+	return a;
 }
 
 
