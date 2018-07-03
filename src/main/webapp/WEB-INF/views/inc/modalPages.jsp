@@ -17,7 +17,8 @@
 			<div class="modal-content modal-add-project-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Project 생성</h4>
+					<h4 class="modal-title">Project 생성 &nbsp;&nbsp; <i data-toggle="tooltip" class="question-project far fa-question-circle modal-question"></i>
+					</h4>
 				</div>
 				<div class="modal-body project-modal-body">
 					<div>
@@ -33,7 +34,7 @@
 									<br>
 									<div class="modal-flex-col">
 										<div class="modal-title">
-											<p>방법론</p>
+											<p>방법론&nbsp;&nbsp; <i class="question-methodology far fa-question-circle modal-question"></i></p>
 										</div>
 										<br>
 										<div>
@@ -122,7 +123,7 @@
 			<div class="modal-content modal-folder-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Folder 생성</h4>
+					<h4 class="modal-title">Folder 생성&nbsp;&nbsp; <i data-toggle="tooltip" class="question-folder far fa-question-circle modal-question"></i></h4></h4>
 				</div>
 				<div class="modal-body modal-folder-body">
 					<form id="insert-folder-form" method="post" onsubmit="return false;">
@@ -149,7 +150,7 @@
 			<div class="modal-content modal-step-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Step 생성</h4>
+					<h4 class="modal-title">Step 생성&nbsp;&nbsp; <i data-toggle="tooltip" class="question-step far fa-question-circle modal-question"></i></h4>
 				</div>
 				<div class="modal-body modal-step-body modal-flexbox-col">
 					<form id="step-add-form" method="post" onsubmit="return false;">

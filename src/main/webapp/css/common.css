@@ -760,6 +760,25 @@ label {
 .move-step-dropdown{
 	width: 70%
 }
+
+ .apollo-tooltip {
+    padding: 10px;
+    color: #6b99c7 !important; 
+    background-color:rgb(245, 248, 252) !important;
+    border: none !important; 
+    border-radius: 5px;
+    font-size: 11px !important;
+    font-stretch:expanded !important ;
+    width: 300px;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.3) !important
+
+  }
+
+.modal-question{
+	color:rgba(0, 0, 0, 0.56);
+	font-size: 13px;
+	cursor: pointer
+}
 #move-step-folder-options{
 	width: 100%
 }
