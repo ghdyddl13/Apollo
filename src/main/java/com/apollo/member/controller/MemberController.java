@@ -286,7 +286,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/index.htm";
+		return "redirect:/login.htm";
 	}
 	
 	public String changeProfile(MemberDTO memberdto, Model model) {

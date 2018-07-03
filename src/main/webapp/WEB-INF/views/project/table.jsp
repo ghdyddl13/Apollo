@@ -4,11 +4,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<div>
+<c:set var="member" value="${profileinfo}"></c:set>
 	<h4 id="project-table-page-pname">해당 프로젝트명 들어가는 곳</h4>
 	<jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
-	<div>
-		<!-- <input type="hidden" id="project-table-pid" value="${pid}"> -->
+	<div class="project-table-content">
 		<table class="table project-page-table">
 			<thead>
 				<tr>
@@ -46,7 +45,9 @@
 								</c:otherwise>
 							</c:choose>
 							<td></td>
-							<td></td>
+							
+							<td class="project-page-table-td-assignee" id="${step.mid}"></td>
+							
 						<!-- 스텝에 속한 task 뿌려주기 -->
 						<c:forEach var="task" items="${tasklist}">
 						
@@ -58,7 +59,7 @@
 						<fmt:parseNumber value="${taskend.time/(1000*60*60*24)}" var="task_endeday" integerOnly="true"/>
 						
 							<c:if test="${task.sid eq step.sid}">
-								<tr class="project-table-tr-tasks">
+								<tr class="project-table-tr-tasks Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}">
 									<td style="padding-left: 30px">┗ ${task.tname}</td>
 									<td class="project-table-day">${task.sday}</td>
 									<td class="project-table-day">${task.eday}</td>
@@ -70,7 +71,7 @@
 											<td class="project-table-duration">${task_endeday - task_startsday}일</td>
 										</c:otherwise>
 									</c:choose>
-									<td id="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
+									<td class="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
 									<td></td>
 								</tr>
 							</c:if>
@@ -90,7 +91,7 @@
 					<!-- 폴더에 속한 스텝 뿌려주기 -->
 					<c:forEach var="step" items="${steplist}">
 						<c:if test="${step.fid eq folder.fid}">
-							<tr class="project-table-tr-steps">
+							<tr class="project-table-tr-steps" data-toggle="modal" data-target="#update-step" id="${step.sid}">
 								<td style="padding-left: 30px"><i class="side-dir-step-icon far fa-file-alt"></i>&nbsp;${step.sname}</td>
 								<td class="project-table-day">${step.sday}</td>
 								<td class="project-table-day">${step.eday}</td>
@@ -108,7 +109,7 @@
 							<!-- 스텝에 속한 task 뿌려주기 -->
 							<c:forEach var="task" items="${tasklist}">
 								<c:if test="${task.sid eq step.sid}">
-									<tr class="project-table-tr-tasks"> 
+									<tr class="project-table-tr-tasks Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}"> 
 										<td style="padding-left: 60px">┗ ${task.tname}</td>
 										<td class="project-table-day">${task.sday}</td>
 										<td class="project-table-day">${task.eday}</td>
@@ -131,4 +132,4 @@
 			</tbody>
 		</table>
 	</div>
-</div>
+

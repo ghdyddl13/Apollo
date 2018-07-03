@@ -1,8 +1,9 @@
 .project-page-table>thead>tr>th {
 	text-align: center;
-	padding-bottom: 17px;
+	padding-bottom: 10px;
 	background-color: #e6e7e8;
 	color:#978d8b;
+	overflow: hidden;
 }
 .project-table-tr-steps {
 	/* background-color: #f4faff */
@@ -11,6 +12,7 @@
 .project-table-td-tstatus {
 	color:#2d2d2d;
 	text-align:center;
+	font-size: 12px;
 }
 .project-table-tr-folders {
 	/* background-color: #f4faff */
@@ -30,4 +32,13 @@
 }
 .project-table-duration {
 	text-align:center;
+}
+.project-page-table>tbody {
+	font-size: 12px;
+}
+.project-table-content {
+	overflow-y:auto; 
+}
+.project-page-table-td-assignee {
+	text-align: center;
 }

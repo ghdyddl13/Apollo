@@ -183,4 +183,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from MEMBER m join PMEMBER p on m.MID=p.MID 
 		where p.PID = (select pid from step where sid=#{sid})	
 	</select>
+
 </mapper>

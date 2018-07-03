@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+
 <h4>사원 목록</h4>
 <br><br>
-<div class="container">
 	<div align="center">
 		<table class="table" id="header-member-table">
 			<thead>
@@ -18,8 +18,9 @@
 			</thead>
 			<tbody>
 				<c:forEach var="member" items="${memberlist}">
+				<c:set var="count" value='${count + 1}'></c:set>
 					<tr class="header-memberinfo-table" data-toggle="modal" data-target="#profile-modal-dialog">
-						<td id="header-member-table-td1"></td>
+						<td class="header-member-table-no">${count}</td>
 						<td>${member.mname}</td>
 						<td>${member.position}</td>
 						<td>${member.mid}</td>
@@ -29,4 +30,3 @@
 			</tbody>
 		</table>
 	</div>
-</div>

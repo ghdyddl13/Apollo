@@ -11,10 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
+
+import com.apollo.member.service.MemberService;
 import com.apollo.project.service.ProjectTableService;
+import com.apollo.sidebar.service.SidebarService;
 import com.apollo.step.service.StepListService;
 import com.apollo.vo.FolderDTO;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 /**
@@ -30,8 +34,7 @@ public class ProjectTableController {
 	private ProjectTableService tableservice;
 	
 	@Autowired
-	private StepListService steplistservice;
-	
+	private MemberService service;
 	
 	/**
 	 * 
@@ -42,6 +45,7 @@ public class ProjectTableController {
 	@RequestMapping("/table.htm")
 	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {		
 		int pid = (Integer) request.getSession().getAttribute("pid");
+		String mid = (String) request.getSession().getAttribute("mid");
 		
 		ArrayList<Integer> pids = new ArrayList<Integer>();
 		pids.add(pid);
@@ -60,7 +64,11 @@ public class ProjectTableController {
 			ArrayList<TaskDTO> tasklist = null; //sid 에 속한 task 및 tstatus 가져오기
 			tasklist = tableservice.getTasksInStep(steplist);
 			model.addAttribute("tasklist", tasklist);
-		
+			
+			MemberDTO profileinfo = null;
+			profileinfo = service.getProfileInfoMember(mid);
+			model.addAttribute("profileinfo", profileinfo);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
