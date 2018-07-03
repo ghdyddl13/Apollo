@@ -113,6 +113,11 @@ margin-bottom:1em;
 .modal {
         text-align: center;
 }
+/* .apollo-modal{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+} */
  
 @media screen and (min-width: 768px) { 
         .modal:before {
@@ -170,7 +175,10 @@ margin-bottom:1em;
 	color: #507CAB;	
 	font-size: 14px;
 }
-
+.btn:hover{
+	color:white !important;
+	
+}
 
 /* 버튼 맞추는 부분 */
 .btn2{
@@ -281,6 +289,7 @@ width:40px;
    flex-direction: column;
    padding-right:5px;
    padding-left:5px;
+   padding-top: 20px
 }
 
 
@@ -293,15 +302,41 @@ width:40px;
    background-color: white
 }
 
+.navbar-inside-div{
+	display: flex;
+	padding-right: 20px;
+   align-items: center;
+
+	
+}
+
 .navbar-header {
    width: 250px;
-   height: 100%
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 #header-right-wrapper > li {
 	justify-content:center;
 	display: flex;
 	align-items: center;
+}
+
+.header-menu-ul{
+	flex: 1 1 auto;
+}
+
+.main-header-menu {
+   font-size: 15px;
+   box-sizing: border-box;
+   max-height: 50px
+
+}
+
+.main-header-menu:hover{
+	border-top: 3px solid #ffc30d !important;
 }
 
 #header-user-name{
@@ -328,6 +363,21 @@ width:40px;
 	text-align: center;
 	align-items: center;
 } 
+
+
+
+#side-bar-add-project{
+	color: #333;
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #e0e0e0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 10px
+}
+
 
 #side-bar-add-project:hover{
 	cursor:pointer;
@@ -374,6 +424,10 @@ width:40px;
  
 }
 
+.side-pstatus > b{
+	flex : 1 1 auto
+}
+
 .side-pstatus > .side-dir-arrow{
    font-size: 15px !important;
  
@@ -392,6 +446,9 @@ width:40px;
 	padding-left:16px;
 	padding-bottom:6px !important;
 	padding-top:6px !important;
+	display:flex;
+	align-items: center;
+
 }
 
 .side-content{
@@ -457,9 +514,7 @@ width:40px;
    margin: 0px
 }
 
-.header-menu {
-   font-size: 18px;
-}
+
 
 a {
    cursor: pointer;
@@ -507,6 +562,37 @@ a {
 }
 
 /* Modal */
+.modal-flexbox-row{
+	display: flex;
+	white-space: normal;
+}
+.modal-flexbox-row >p{
+	font-size: 13.5px
+}
+.modal-flexbox-col{
+	display: flex;
+	flex-direction: column;
+	white-space: normal;
+	flex: 1 1 auto
+}
+
+.modal-flexbox-row >img{
+	padding: 4px !important
+}
+.modal-flexbox-col>p{
+	font-size: 13.5px
+}
+
+.modal-project-method-detail{
+	padding-left: 20px;
+	font-size: 13px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color:rgba(0, 0, 0, 0.56);
+	line-height: 180%;
+	resize: none
+}
+
 label {
    display: block;
 }
@@ -517,30 +603,53 @@ label {
    padding: .4em;
 }
 
-.method { /* 프로젝트 생성 모달창 방법론 */
-   font-weight: bold;
+#update-project-pname{
+   margin-bottom: 12px;
+   width: 100%;
+   padding: .4em;
 }
+
 
 .modal-title {
    font-weight: bold;
-   padding-top: 5px;
+   font-size: 15px
+}
+
+.project-modal-body{
+	padding-top:0;
+	display:flex;
+	padding-bottom: 20px
 }
 
 .project-setting-left { /* 프로젝트 생성 모달창 vertical line  */
+   margin-top: 20px;
    padding-left: 25px;
    padding-right: 25px;
+   padding-bottom:20px;
+   display: flex;
+   flex-direction: column;
+   
 }
 
 .project-setting-right { /* 프로젝트 생성 모달창 vertical line  */
+   margin-top: 20px;
    border-left: 1px solid rgb(230, 230, 230);
    padding-left: 25px;
    padding-right: 25px;
+   padding-bottom:20px;
+   display: flex;
+   flex-direction: column;
+   
 }
+
+
 
 .date {
    margin-right: 3px;
    width: 80%;
 }
+
+
 
 .add-btn {
    background-color: rgb(178, 28, 74);
@@ -555,22 +664,45 @@ label {
    width: 80px;
 }
 
-.modal-add-project-dialog {
+.modal-project-dialog {
    position:absolute; 
-    top:50%; 
-    left:50%; 
+   top:50%; 
+   left:50%; 
    width: 850px;
-   height: 515px;
    overflow: hidden;
    vertical-align: middle;
    margin-top:-370px; 
-    margin-left:-25%;
+   margin-left:-25%;
+   border-radius: 10px; 
 }
 .modal-add-project-content {
   height: auto;
   min-height: 100%;
-  border-radius: 0; 
+  border-radius: 10px; 
 }
+.sdate-img{
+	border-radius: 3px;
+	border: 1px solid #dddddd;
+	padding:.3em
+}
+.edate-img{
+	border-radius: 3px ;
+	border: 1px solid #dddddd;
+	padding:.3em
+}
+
+#project-detail{
+	border-radius: 3px ;
+	border: 1px solid #dddddd;
+	resize: none
+}
+
+#update-project-detail{
+	border-radius: 3px ;
+	border: 1px solid #dddddd;
+	resize: none
+}
+
 .modal-folder-dialog {
    position:absolute; 
    top:50%; 
@@ -579,15 +711,99 @@ label {
    vertical-align: middle;
    margin-top:-115px; 
    margin-left:-230px;
+   border-radius: 10px;
+}
+
+#move-project-message{
+	text-align: center;
+}
+#move-project-submessage{
+	text-align: center;
+	font-size: 13px;
+}
+
+#move-step-select{
+	text-align: center
+}
+
+.move-step-folder-list-wrapper{
+	display: flex;
+	border-radius: 3px ;
+	border: 1px solid #dddddd;
+	cursor: pointer;
+	height: 35px;
+	width: 100%; 
+	align-items: center;
+	padding-right: 5px
+}
+
+.move-step-folder-option{
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	height: 35px;
+	padding: 0.3em;
+}
+
+.move-step-folder-nofolder{
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	height: 35px;
+	padding: 0.3em;
+}
+
+.move-step-folder-option:hover{
+	background-color: #e8e8e8;
+}
+
+.move-step-dropdown{
+	width: 70%
+}
+#move-step-folder-options{
+	width: 100%
+}
+
+#move-step-folder-name{
+	display:block;
+	flex:1 1 auto;
+	width: 70%;
+	height: 35px;
+	text-align: center;
+	padding: 0.5em;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.modal-small-dialog {
+   position:absolute; 
+   top:50%; 
+   left:50%; 
+   width: 330px;
+   vertical-align: middle;
+   margin-top:-115px; 
+   margin-left:-230px;
+   border-radius: 10px;
+}
+
+.modal-folder-body{
+	padding: 20px 20px 0 20px !important;
 }
 .modal-folder-text {
-   width: 100%;
+	padding:.4em;
+    width: 100%;
+	border-radius: 3px ;
+
+	border: 1px solid #dddddd;
+	
 }
+
 
 .modal-folder-content {
   height: auto;
   min-height: 100%;
-  border-radius: 0; 
+  border-radius: 10px;
 }
 
 .modal-step-dialog {
@@ -599,23 +815,125 @@ label {
    vertical-align: middle;
    margin-top:-350px; 
    margin-left:-250px;
+   border-radius: 10px
+}
+.modal-step-body{
+	padding: 15px 25px 15px 25px	
+	
 }
 
 .modal-step-content {
   height: auto;
   min-height: 100%;
-  border-radius: 0; 
+  border-radius: 10px
+
 }
 
-#add-step-description {
+.select-step-assignee{
+	font-size: 13px;
+	padding:.5em;
+	width: 200px
+}
+.select-step-assignee-option{
+	padding:5px;
+}
+.select-step-assignee-option:hover{
+	background-color: #e8e8e8;
+	cursor:pointer;
+}
+
+.update-step-assignee-option{
+	padding:5px;
+}
+
+.update-step-assignee-option:hover{
+	background-color: #e8e8e8;
+	cursor:pointer;
+}
+.step-assignee-wrapper{
+	display: flex;
+}
+.step-assignee-img{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.step-assignee-info-wrapper{
+	display: flex;
+	flex-direction: column;
+	padding-left: 5px
+}
+
+.step-assigned-member-wrapper{
+	display: flex;
+	cursor: pointer;
+	width: 200px
+}
+
+.step-update-assigned-member-wrapper{
+	display: flex;
+	cursor: pointer;
+	width: 200px
+}
+
+.step-assignee-info-name{
+	display: block;
+	flex: 1 1 auto;
+	font-size: 12px;
+}
+.step-assignee-info-email{
+	display: block;
+	flex: 1 1 auto;
+	font-size: 8.5px;
+}
+
+
+
+.cancel-step-assignee{
+	visibility: hidden;
+	color:#cccccc;
+	margin-left: 5px
+}
+
+.cancel-update-step-assignee{
+	visibility: hidden;
+	color:#cccccc;
+	margin-left: 5px
+}
+
+#step-detail {
    width: 100%;
    height: 30%;
+   	border-radius: 3px ;
+	border: 1px solid #dddddd;
+	resize: none;
+	padding:.5em
 }
+
+#update-step-detail{
+	width: 100%;
+    height: 30%;
+   	border-radius: 3px ;
+	border: 1px solid #dddddd;
+	resize: none;
+	padding:.5em
+}
+
 .add-step-name {
    width: 100%;
-   padding-left: 15px;
-   padding-right: 15px;
+   padding:.4em;
+   border-radius: 3px ;
+   border: 1px solid #dddddd;
 }
+
+.update-step-name{
+   width: 100%;
+   padding:.4em;
+   border-radius: 3px ;
+   border: 1px solid #dddddd;
+}
+
+
 #add-step-modal-hr {
    padding-top: 0.1px;
    padding-bottom: 0.1px;

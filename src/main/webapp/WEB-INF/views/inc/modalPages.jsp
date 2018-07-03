@@ -11,81 +11,105 @@
 <script>
 	
 </script>
-	<!-- 프로젝트 생성 Modal 창 -->
+	<!-- 프로젝트 생성 Mo dal 창 -->
 	<div class="modal fade" id="project-insert" role="dialog">
-		<div class="modal-dialog modal-add-project-dialog">
+		<div class="modal-dialog modal-project-dialog">
 			<div class="modal-content modal-add-project-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Project 생성</h4>
 				</div>
-				<div class="modal-body">
-				
+				<div class="modal-body project-modal-body">
+					<div>
+					
 					 <form id="project-add-form" method="post" onsubmit="return false;">
 						<fieldset>
-							<div class="row">
+							<div class="modal-flexbox-row">
 								<br>
-								<div class="col-sm-6 project-setting-left">
+								<div class="project-setting-left">
 									<input type="text" name="pname"  id="add-project-name"
 										placeholder="프로젝트명을 입력하세요"
-										class="text ui-widget-content ui-corner-all"><br>
-									<br> 
-									<div class="modal-title">
-										<p>방법론</p>
-									</div>
-										<input type="radio" id="method1" name="methodologyid" value="3"
-										checked><span class="method"> Customizing</span> <br>
-									<div>
-										<!-- Customizing 설명 작성  -->
-										가나다라마바사아자차카타파하 커스텀마이징 설명작성 필요
-									</div>
-									<br> <input type="radio" id="method2" name="methodologyid" value="2"><span
-										class="method"> Agile</span><br>
-									<div>
-										<!-- Agile 설명 작성  -->
-										가나다라마바사아자차카타파하 애자일 설명작성 필요
-									</div>
-									<br> <input type="radio" id="method3" name="methodologyid" value="1"><span
-										class="method"> Waterfall</span><br>
-									<div>
-										<!-- Waterfall 설명 작성  -->
-										가나다라마바사아자차카타파하 폭포수 설명작성 필요
+										class="text ui-widget-content ui-corner-all">
+									<br>
+									<div class="modal-flex-col">
+										<div class="modal-title">
+											<p>방법론</p>
+										</div>
+										<br>
+										<div>
+											<div class="modal-flex-col">
+												<input type="radio" id="method1" name="methodologyid" value="3" checked>
+												<span class="method"> Customizing</span> <br>
+											</div>
+											<div class="modal-project-method-detail">
+												<!-- Customizing 설명 작성  -->
+												사용자가 직접 템플릿을 구성합니다. Step과 Folder를 자유롭게 활용하여 프로젝트에 알맞게 활용할 수 있습니다.   
+											</div>
+										</div>
+										<div>
+											<div class="modal-flex-col">
+												<input type="radio" id="method2" name="methodologyid" value="2">
+												<span class="method"> Agile</span>
+											</div>
+											<div class="modal-project-method-detail">
+												<!-- Agile 설명 작성  -->
+												애자일 방법론에 적합한 템플릿을 제공합니다. Step을 하나의 Sprint 단위로 활용하여 백로그에 등록된 Task들을 체계적으로 관리할 수 있습니다.
+											</div>
+										</div>
+										<div>
+											<div class="modal-flex-col">
+												<input type="radio" id="method3" name="methodologyid" value="1">
+												<span class="method"> Waterfall</span><br>
+											</div>
+											<div class="modal-project-method-detail">
+												<!-- Waterfall 설명 작성  -->
+												폭포수 방법론에 적합한 템플릿을 제공합니다.
+												계획, 요구분석, 설계, 구현, 테스트, 유지보수로 이루어진 Step들을 각 단계별로 진행되는 Task들을 단계별로 관리할 수 있습니다. 
+											</div>
+										</div>
 									</div>
 									<br> <br>
 								</div>
-								<div class="col-sm-6 project-setting-right">
+								<div class="project-setting-right">
 									<div class="modal-title">
 										<p>기간 설정</p>
 									</div>
 									<br>
-									<div class="col-sm-6">
-										<div class="modal-title">
+									<div class="modal-flexbox-row">
+										<div class="modal-flexbox-col">
 											<p>시작일</p>
+											<div class="modal-flexbox-row">
+												<input type="text" id="insert-project-sday-id" name="sday" placeholder="Start Date" class="date  sdate-img">
+											</div>
 										</div>
-										<input type="text" id="insert-project-sday-id" name="sday" placeholder="Start Date" class="date sdate-img">
-									</div>
-									<div class="col-sm-6">
-										<div class="modal-title">
+										<div class="modal-flexbox-col">
 											<p>종료일</p>
+											<div class= "modal-flexbox-row">
+												<input type="text" id="insert-proejct-eday-id" name="eday" placeholder="End Date" class="date  edate-img">
+											</div>	
 										</div>
-										<input type="text" id="insert-proejct-eday-id" name="eday" placeholder="End Date" class="date edate-img">
-										<br><br>
 									</div>
-									<div class="modal-title">
-										<p>상세설명</p>
+									<br><br>
+									<div class="modal-flexbox-col">
+										<div class="modal-title">
+											<p>상세설명</p>
+											<br>
+										</div>
+										<textarea rows="11%" cols="49%" onresize="false" id="project-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
 									</div>
-									<textarea rows="7%" cols="49%" id="project-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
+									<br>
+									<br>
+									<div align="right">	
+										<input type="button" class="btn add-btn" id="insert-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
+										<input type="button" class="btn cancel-btn"
+											data-dismiss="modal" value="취소">
+									</div>
 								</div>
+								<input type="hidden" name="mid" value="${mid}">
 							</div>
-							<input type="hidden" name="mid" value="${mid}">
-						<br>
-						<div align="center">	
-							<input type="button" class="btn add-btn" id="insert-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
-							<input type="button" class="btn cancel-btn"
-								data-dismiss="modal" value="취소">
-						</div>
 						</fieldset>
 					</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -100,10 +124,10 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Folder 생성</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body modal-folder-body">
 					<form id="insert-folder-form" method="post" onsubmit="return false;">
 						<fieldset>
-							<input type="text" id="add-folder-name" name="fname" class="add-folder-text" placeholder="folder명을 입력하세요">
+							<input type="text" id="add-folder-name" name="fname" class="add-folder-text modal-folder-text" placeholder="folder명을 입력하세요">
 							<input type="hidden" id="add-folder-pid" name="pid">
 							<br><br>
 							<div align="center">
@@ -127,45 +151,54 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Step 생성</h4>
 				</div>
-				<div class="modal-body">
-				
+				<div class="modal-body modal-step-body modal-flexbox-col">
 					<form id="step-add-form" method="post" onsubmit="return false;">
 						<fieldset>
-							<div class="modal-title">
-								<p>Step명</p>
+							<div>
+								<div class="modal-title">
+									<p>Step명</p>
+								</div>
+								<input type="text" name="sname" class="add-step-name" placeholder="step명을 입력하세요">
 							</div>
-							<input type="text" name="sname" class="add-step-name" placeholder="step명을 입력하세요">
-							<br><br>
+							<br>
 							<div class="modal-title">
 								<p>책임자</p>
 							</div>
-							<div >
-								<select name="mid" id="add-step-mgr-assignee">
-									
-								</select> 
+							<div id="add-step-assignee" >
+								<input id="add-step-mgr-assignee" type="hidden" name="mid" value="">
+								<div class="dropdown">
+								    <a class="dropdown-toggle select-step-assignee" type="button" id="add-step-mgr-assignee-btn" data-toggle="dropdown">책임자를 선택하세요
+								    </a>
+								    <ul id="add-step-mgr-assignee-options" class="dropdown-menu " role="menu" aria-labelledby="add-step-mgr-assignee-btn">
+								    </ul>
+							  </div>
 							</div>
 							<br>
 							<div class="modal-title">
 								<p>기간 설정</p>
 							</div>
-							<div class="col-sm-6">
-								<div class="modal-title">
-									<p>시작일</p>
+							<div class="modal-flexbox-row">
+								<div class="modal-flexbox-col">
+										<p>시작일</p>
+									<div class="modal-flexbox-row">	
+										<input type="text" id="insert-step-sday-id" name="sday" placeholder="Start Date"
+										class="date sdate-img">
+									</div>
 								</div>
-								<input type="text" id="insert-step-sday-id" name="sday" placeholder="Start Date"
-									class="date sdate-img"><br>
-							</div>
-							<div class="col-sm-6">
-								<div class="modal-title">
-									<p>종료일</p>
+								<div class="modal-flexbox-col">
+										<p>종료일</p>
+									<div class="modal-flexbox-row">	
+									<input type="text" id="insert-step-eday-id" name="eday" placeholder="End Date"
+										class="date edate-img">
+									</div>
 								</div>
-								<input type="text" id="insert-step-eday-id" name="eday" placeholder="End Date"
-									class="date edate-img"><br><br><br>
 							</div>
+							<br>
 							<div class="modal-title">
 								<p>상세설명</p>
 							</div>
-							<textarea rows="7%" cols="68%" id="step-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
+							<br>
+							<textarea rows="9%" cols="60%" id="step-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
 								<br><br>
 							<!-- 아래는 임시로 작성해둔 것임 -->
 							<input type="hidden" id="insert-step-methodologyid" name="methodologyid" >
@@ -186,88 +219,114 @@
 
 	<!-- 프로젝트 수정 Modal 창 -->
 	<div class="modal fade" id="update-project" role="dialog">
-		<div class="modal-dialog modal-update-project-dialog">
+		<div class="modal-dialog modal-project-dialog">
 			<div class="modal-content modal-update-project-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Project 수정</h4>
 				</div>
-				<div class="modal-body">
-					<form id="update-project-form">
+				<div class="modal-body project-modal-body">
+					<div>
+					
+					 <form id="update-project-form" method="post" onsubmit="return false;">
 						<fieldset>
-							<div class="row">
-								<input type="hidden" id="update-project-pid" name ="pid">
+							<div class="modal-flexbox-row">
 								<br>
-								<div class="col-sm-6 project-setting-left">
-									<input type="text" name="pname" id="update-project-pname"
-										class="text ui-widget-content ui-corner-all"><br>
-									<br> 
-									<div class="modal-title">
-										<p>방법론</p>
-									</div>
-										<input type="radio" id="udpate-project-methodologyid-3" name="methodologyid" value="3"
-										checked><span class="method"  disabled="true"> Customizing</span> <br>
-									<div>
-										<!-- Customizing 설명 작성  -->
-										가나다라마바사아자차카타파하 커스텀마이징 설명작성 필요
-									</div>
-									<br> <input type="radio" id="udpate-project-methodologyid-1" name="methodologyid" value="1"  disabled="true"><span
-										class="method"> Agile</span><br>
-									<div>
-										<!-- Agile 설명 작성  -->
-										가나다라마바사아자차카타파하 애자일 설명작성 필요
-									</div>
-									<br> <input type="radio" id="udpate-project-methodologyid-2" name="methodologyid" value="2"  disabled="true"><span
-										class="method"> Waterfall</span><br>
-									<div>
-										<!-- Waterfall 설명 작성  -->
-										가나다라마바사아자차카타파하 폭포수 설명작성 필요
+								<div class="project-setting-left">
+									<input type="text" name="pname"  id="update-project-pname"
+										placeholder="프로젝트명을 입력하세요"
+										class="text ui-widget-content ui-corner-all">
+									<br>
+									<div class="modal-flex-col">
+										<div class="modal-title">
+											<p>방법론</p>
+								
+										</div>
+										<br>
+										<div>
+											<div class="modal-flex-col">
+												<input type="radio" id="update-project-methodologyid-3" name="methodologyid" value="3" disabled="disabled">
+												<span class="method"> Customizing</span> <br>
+											</div>
+											<div class="modal-project-method-detail">
+												<!-- Customizing 설명 작성  -->
+												사용자가 직접 템플릿을 구성합니다. Step과 Folder를 자유롭게 활용하여 프로젝트에 알맞게 활용할 수 있습니다.   
+											</div>
+										</div>
+										<div>
+											<div class="modal-flex-col">
+												<input type="radio" id="update-project-methodologyid-2" name="methodologyid" value="2" disabled="disabled">
+												<span class="method"> Agile</span>
+											</div>
+											<div class="modal-project-method-detail">
+												<!-- Agile 설명 작성  -->
+												애자일 방법론에 적합한 템플릿을 제공합니다. Step을 하나의 Sprint 단위로 활용하여 백로그에 등록된 Task들을 체계적으로 관리할 수 있습니다.
+											</div>
+										</div>
+										<div>
+											<div class="modal-flex-col">
+												<input type="radio" id="update-project-methodologyid-1" name="methodologyid" value="1" disabled="disabled">
+												<span class="method"> Waterfall</span><br>
+											</div>
+											<div class="modal-project-method-detail">
+												<!-- Waterfall 설명 작성  -->
+												폭포수 방법론에 적합한 템플릿을 제공합니다.
+												계획, 요구분석, 설계, 구현, 테스트, 유지보수로 이루어진 Step들을 각 단계별로 진행되는 Task들을 단계별로 관리할 수 있습니다. 
+											</div>
+										</div>
 									</div>
 									<br> <br>
 								</div>
-								<!-- Allow form submission with keyboard without duplicating the dialog button -->
-								<div class="col-sm-6 project-setting-right">
+								<div class="project-setting-right">
 									<div class="modal-title">
 										<p>기간 설정</p>
 									</div>
 									<br>
-									<div class="col-sm-6">
-										<div class="modal-title">
+									<div class="modal-flexbox-row">
+										<div class="modal-flexbox-col">
 											<p>시작일</p>
+											<div class="modal-flexbox-row">
+												<input type="text" id="update-project-sday" name="sday" placeholder="Start Date" class="date  sdate-img">
+											</div>
 										</div>
-										<input type="text" name="sday" readonly id="update-project-sday" placeholder="Start Date" class="date sdate-img">
-									</div>
-									<div class="col-sm-6">
-										<div class="modal-title">
+										<div class="modal-flexbox-col">
 											<p>종료일</p>
+											<div class= "modal-flexbox-row">
+												<input type="text" id="update-project-eday" name="eday" placeholder="End Date" class="date  edate-img">
+											</div>	
 										</div>
-										<input type="text" name="eday" readonly id ="update-project-eday" placeholder="End Date" class="date edate-img">
-										<br><br>
 									</div>
-									<div class="modal-title">
-										<p>상세설명</p>
+									<br><br>
+									<div class="modal-flexbox-col">
+										<div class="modal-title">
+											<p>상세설명</p>
+											<br>
+										</div>
+										<textarea rows="11%" cols="49%" onresize="false" id="update-project-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
 									</div>
-									<textarea rows="7%" cols="49%" name="detail" id ="update-project-detail" placeholder="내용을 입력하세요"></textarea>
+								
+									<br>
+									<div align="right">	
+										<input type="button" class="btn add-btn" id="update-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
+										<input type="button" class="btn cancel-btn"
+											data-dismiss="modal" value="취소">
+									</div>
 								</div>
+								<input type="hidden" name="mid" value="${mid}">
 							</div>
-							<br><br>
-						<div align="center">
-							<input type="button" id ="update-project-btn" class="btn add-btn" value="수정">&nbsp;&nbsp;&nbsp;
-							<input type="button" class="btn cancel-btn"
-								data-dismiss="modal" value="취소">
-						</div>
 						</fieldset>
 					</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 	
 
 
-<!-- Project 완료 Modal 창 -->
+<!-- Project 완료/ 삭제 Modal 창 -->
 	<div class="modal fade" id="move-project" role="dialog">
-		<div class="modal-dialog modal-delete-project-dialog">
+		<div class="modal-dialog modal-small-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
@@ -278,6 +337,7 @@
 					<input type="hidden" id="move-project-pid">
 					<input type="hidden" id="move-project-pstatuscode">
 					<p id="move-project-message"></p>
+					<p id="move-project-submessage"></p>
 				</div>
 				<div align="center">
 					<input id="move-project-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
@@ -458,7 +518,7 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Folder 수정</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body modal-folder-body">
 					<form id="update-folder-form" method="post">
 						<fieldset>
 							<input type="text" id="update-folder-name" name="fname" class="modal-folder-text">
@@ -476,7 +536,8 @@
 			</div>
 		</div>
 	</div>	
-
+	
+	
 	<!-- Folder 삭제 Modal 창 -->
 	<div class="modal fade" id="delete-folder" role="dialog">
 		<div class="modal-dialog modal-delete-dialog">
@@ -531,79 +592,84 @@
 	
 
 	<!-- 스텝 수정 Modal 창 -->
+	
 <div class="modal fade" id="update-step" role="dialog">
 	<div class="modal-dialog modal-step-dialog">
 		<!-- Modal content-->
 		<div class="modal-content modal-step-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Step 수정</h4>
+				<h4 class="modal-title">Step 생성</h4>
 			</div>
-			<div class="modal-body">
-
+			<div class="modal-body modal-step-body modal-flexbox-col">
 				<form id="update-step-form" method="post" onsubmit="return false;">
 					<fieldset>
-						<div class="modal-title">
-							<p>Step명</p>
+						<div>
+							<div class="modal-title">
+								<p>Step명</p>
+							</div>
+							<input type="text" name="sname" class="update-step-name">
 						</div>
-						<input type="text" name="sname" class="update-step-name"
-							placeholder="step명을 입력하세요"> <br>
 						<br>
 						<div class="modal-title">
 							<p>책임자</p>
 						</div>
-						<div>
-							<select name="mid" id="update-step-mgr-assignee">
-
-							</select>
+						<div id="update-step-assignee" >
+							<input id="update-step-mgr-assignee" type="hidden" name="mid" value="">
+							<div class="dropdown">
+							    <a class="dropdown-toggle select-step-assignee" type="button" id="update-step-mgr-assignee-btn" data-toggle="dropdown" >책임자를 선택하세요
+							    </a>
+							    <ul id="update-step-mgr-assignee-options" class="dropdown-menu " role="menu" aria-labelledby="update-step-mgr-assignee-btn">
+							    </ul>
+						  </div>
 						</div>
 						<br>
 						<div class="modal-title">
 							<p>기간 설정</p>
 						</div>
-						<div class="col-sm-6">
-							<div class="modal-title">
-								<p>시작일</p>
+						<div class="modal-flexbox-row">
+							<div class="modal-flexbox-col">
+									<p>시작일</p>
+								<div class="modal-flexbox-row">	
+									<input type="text" id="update-step-sday-id" name="sday" placeholder="Start Date"
+									class="date sdate-img">
+								</div>
 							</div>
-							<input type="text" id="update-step-sday-id" name="sday"
-								placeholder="Start Date" class="date sdate-img"><br>
-						</div>
-						<div class="col-sm-6">
-							<div class="modal-title">
-								<p>종료일</p>
+							<div class="modal-flexbox-col">
+									<p>종료일</p>
+								<div class="modal-flexbox-row">	
+								<input type="text" id="update-step-eday-id" name="eday" placeholder="End Date"
+									class="date edate-img">
+								</div>
 							</div>
-							<input type="text" id="update-step-eday-id" name="eday"
-								placeholder="End Date" class="date edate-img"><br>
-							<br>
-							<br>
 						</div>
+						<br>
 						<div class="modal-title">
 							<p>상세설명</p>
 						</div>
-						<textarea rows="7%" cols="68%" id="update-step-detail"
-							name="detail" placeholder="내용을 입력하세요"></textarea>
 						<br>
-						<br> <input type="hidden" id="update-step-methodologyid"
-							name="methodologyid"> <input type="hidden"
-							id="update-step-sid" name="sid"> <input type="hidden"
-							id="update-step-pid" name="pid"> <input type="hidden"
-							id="update-step-fid" name="fid">
+						<textarea rows="9%" cols="60%" id="update-step-detail" name="detail" placeholder="내용을 입력하세요"></textarea>
+							<br><br>
+						<!-- 아래는 임시로 작성해둔 것임 -->
+						<input type="hidden" id="update-step-methodologyid" name="methodologyid" >
+						<input type="hidden" id="update-step-pid" name="pid" >
+						<input type="hidden" id="update-step-sid" name="sid">
+						<input type="hidden" id= "update-step-fid" name="fid">
 						<div align="center">
-							<input type="button" class="btn add-btn" id="update-step-btn"
-								value="수정">&nbsp;&nbsp;&nbsp; <input type="button"
-								class="btn cancel-btn" data-dismiss="modal" value="취소">
+							<input type="button" class="btn add-btn" id="update-step-btn" value="생성">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
 						</div>
 					</fieldset>
 				</form>
 			</div>
+			<br>
 		</div>
 	</div>
 </div>
-
 <!-- 스텝 이동 모달창  -->
 	
 	<div class="modal fade" id="move-step" role="dialog">
-		<div class="modal-dialog modal-delete-project-dialog">
+		<div class="modal-dialog modal-small-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
@@ -611,19 +677,29 @@
 					<h4 id="move-step-header" class="modal-title">Step 이동</h4>
 				</div>
 				<div class="modal-body"align="center">
-				<br>
-				<form id="move-step-form">
-					<select id="move-step-select" name="fid">
-					
-					</select>
-					<input type="hidden" name="sid" id="move-step-sid">
-				</form>
-				<br>
-				</div>
-				<div align="center">
-					<input id="move-step-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
-					<input type="button" class="btn cancel-btn"
-						data-dismiss="modal" value="취소">
+					<br>
+					<form id="move-step-form">
+						<input id="move-step-sid" type="hidden" name="sid" value="">
+						<input id="move-step-selected-fid" type="hidden" name="fid" value="no-folder">
+						<div class="dropdown move-step-dropdown">
+							<div id="move-step-folder-list" data-toggle="dropdown" class="dropdown-toggle move-step-folder-list-wrapper">
+								<div id="move-step-folder-name" >
+									
+								</div>
+								<span class="caret"></span>
+							
+							</div>
+							<ul id="move-step-folder-options" class="dropdown-menu "
+								role="menu" aria-labelledby="move-step-folder-list">
+							</ul>
+						</div>
+					</form>
+					<br>
+					<div align="center">
+						<input id="move-step-btn" type="button" class="btn delete-btn" value="확인">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
 				</div>
 			</div>
 		</div>
