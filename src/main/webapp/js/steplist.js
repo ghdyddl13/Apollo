@@ -185,75 +185,76 @@ $(function() {
 	  checkbox=[];
 	  console.log(checkbox);
 	})
+	
 	$(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
 		let checkboxcount= checkbox.length;
 		let mid ="jinwoo@naver.com" ;
 		$("#list-task-assign-ment").html("에게 "+checkboxcount+"개 Task를 할당하시겠습니까?")
-		$("#list_Assign_Tasks_btn").click(function() {// 삭제 버튼을 눌렀을 시에
-			if(checkbox.length==0){
-				alert("왜 테스크가 없지..?")
-			}else{
-				$.ajax({
-					type : "POST",
-					url : "listassigntasks.htm",
-					data :{mid:mid,tasks:checkbox},
-					success : function(data) {
-						$("#main-box").empty();
-						$("#main-box").append(data);
-						$('#list_assign_tasks_dismiss_btn').click();
-						checkbox = [];
-					}
-				})
-			}
-		})
+	});
+	$(document).on("click","#list_Assign_Tasks_btn",function(){
+		if(checkbox.length==0){
+			alert("왜 테스크가 없지..?")
+		}else{
+			$.ajax({
+				type : "POST",
+				url : "listassigntasks.htm",
+				data :{mid:mid,tasks:checkbox},
+				success : function(data) {
+					$("#main-box").empty();
+					$("#main-box").append(data);
+					$('#list_assign_tasks_dismiss_btn').click();
+					checkbox = [];
+				}
+			})
+		}
 	})
+	
 	$(document).on("click","#selectpage-addsteps-button",function() {// 추가 스텝 버튼을 눌렀을 시에
 		let checkboxcount= checkbox.length;
-		let stepid=8;
 		$("#list-addstep-tasks-ment").html("에 "+checkboxcount+"개 Task를 추가하시겠습니까?")
-		$("#list_AddStep_Tasks_btn").click(function() {// 삭제 버튼을 눌렀을 시에
-			if(checkbox.length==0){
-				alert("왜 테스크가 없지..?")
-			}else{
-				$.ajax({
-					type : "POST",
-					url : "listaddsteptasks.htm",
-					data :{stepid:stepid,tasks:checkbox},
-					success : function(data) {
-						$("#main-box").empty();
-						$("#main-box").append(data);
-						$('#list_addstep_tasks_dismiss_btn').click();
-						checkbox = [];
-					}
-				})
-			}
-		})
+	});
+	$(document).on("click","#list_AddStep_Tasks_btn",function(){
+		let stepid=8;
+		if(checkbox.length==0){
+			alert("왜 테스크가 없지..?")
+		}else{
+			$.ajax({
+				type : "POST",
+				url : "listaddsteptasks.htm",
+				data :{stepid:stepid,tasks:checkbox},
+				success : function(data) {
+					$("#main-box").empty();
+					$("#main-box").append(data);
+					$('#list_addstep_tasks_dismiss_btn').click();
+					checkbox = [];
+				}
+			})
+		}
 	})
 	
 	$(document).on("click", "#selectpage-deletetask-button", function(){// 삭제 버튼을 눌렀을 시에
 		let checkboxcount= checkbox.length;
 		$("#list-delete-tasks-ment").html(checkboxcount+"개 Task를 삭제하시겠습니까?<br><h5 style='color:red'>(삭제 후 복구 불가능합니다)</h5>")
-		$("#list_Delete_Tasks_btn").click(function() {// 삭제 버튼을 눌렀을 시에
-			if(checkbox.length==0){
-				alert("왜 테스크가 없지..?")
-			}else{
-				$.ajax({
-					type : "POST",
-					url : "listdeletetasks.htm",
-					data :{tasks:checkbox},
-					success : function(data) {
-						$("#main-box").empty();
-						$("#main-box").append(data);
-						$('#list_delete_tasks_dismiss_btn').click();
-						checkbox = [];
-					}
-				})
-			}
-		})
+
 	})
-	
-	
-	
+	$(document).on("click","#list_Delete_Tasks_btn",function(){
+		if(checkbox.length==0){
+			alert("왜 테스크가 없지..?")
+		}else{
+			$.ajax({
+				type : "POST",
+				url : "listdeletetasks.htm",
+				data :{tasks:checkbox},
+				success : function(data) {
+					$("#main-box").empty();
+					$("#main-box").append(data);
+					$('#list_delete_tasks_dismiss_btn').click();
+					checkbox = [];
+				}
+			})
+		}
+	})
+
 	
 	
 	
