@@ -276,7 +276,14 @@
 		<artifactId>httpclient</artifactId>
 		<version>4.5.3</version>
 	</dependency>
-
+	
+	<!--AWS  -->
+	<dependency>
+	    <groupId>com.amazonaws</groupId>
+	    <artifactId>aws-java-sdk</artifactId>
+	    <version>1.11.358</version>
+	</dependency>
+		
 
 		
 		<!-- File Upload 작업 -->
