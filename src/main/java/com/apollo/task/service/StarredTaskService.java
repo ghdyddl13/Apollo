@@ -15,6 +15,7 @@ import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.vo.MyWorkMemberDTO;
 import com.apollo.vo.MyWorkStepDTO;
 import com.apollo.vo.MyWorkTaskDTO;
+import com.apollo.vo.StarredTaskDTO;
 
 
 /**
@@ -150,6 +151,17 @@ public class StarredTaskService {
 		}
 		date += " "+day;
 		return date;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : 즐겨찾기 삭제 기능
+	 작성자명 : 이 진 우
+	 */
+	public int deleteStarredTask(StarredTaskDTO dto) {
+		StarredTaskDAO dao= sqlsession.getMapper(StarredTaskDAO.class);
+		int result = dao.deleteStarredTask(dto);//즐겨찾기 삭제한다
+		return result;
 	}
 	
 }

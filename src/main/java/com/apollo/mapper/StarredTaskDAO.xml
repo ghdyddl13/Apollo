@@ -37,6 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		join ASSIGNEE a on m.MID = a.MID 
 		where a.TID in (select tid from starredtask where mid=#{mid})
 	</select>
-	
+	<delete id="deleteStarredTask" parameterType="com.apollo.vo.StarredTaskDTO">
+    	delete from starredtask where mid = #{mid} and tid = #{tid}
+    </delete>
 	
 </mapper>

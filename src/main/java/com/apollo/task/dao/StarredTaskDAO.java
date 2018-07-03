@@ -1,6 +1,7 @@
 package com.apollo.task.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.apollo.vo.MyWorkMemberDTO;
 import com.apollo.vo.MyWorkStepDTO;
@@ -35,4 +36,12 @@ public interface StarredTaskDAO {
 	 작성자명 : 이 진 우
 	 */
 	public ArrayList<MyWorkMemberDTO> getStarredMembers(String mid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : Starred Task 페에지에 뿌려진 Task에 별을 클릭할시 즐겨찾기가 삭제되는 함수
+	 작성자명 : 이 진 우
+	 */
+	public int deleteStarredTask(StarredTaskDTO dto);
 }

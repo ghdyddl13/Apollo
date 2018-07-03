@@ -22,13 +22,13 @@
               <div class="starred-body-tasks">
 				<c:forEach var="task" items="${tasklist}">
 	                <div class="starred-body-task">
-	                  <div class="starred-body-task-wrapper Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}">
+	                  <div class="starred-body-task-wrapper" >
 	                    <div class="starred-body-task-image-wrapper">
 	                      <div class="starred-body-task-image"><img class="starred-body-task-imagetag" src="img/frog.png" alt=""></div>
 	                    </div>
 	                    <div class="starred-body-task-container">
 	                      <div class="starred-body-task-container-top">
-	                        <div class="starred-body-task-container-top-title">${task.tname}</div>
+	                        <div class="starred-body-task-container-top-title Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}">${task.tname}</div>
 	                        <c:choose>
 								<c:when test="${task.overdue=='overdue'}">
 			                        <div class="starred-body-task-container-top-date date-overdue">${task.date}</div>
