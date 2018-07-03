@@ -7,7 +7,7 @@
 <c:set var="member" value="${profileinfo}"></c:set>
 	<h4 id="project-table-page-pname">해당 프로젝트명 들어가는 곳</h4>
 	<jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
-	<div class="project-table-content">
+	<div class="project-table-content" align="center">
 		<table class="table project-page-table">
 			<thead>
 				<tr>

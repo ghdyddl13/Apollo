@@ -51,12 +51,10 @@
 	background-color:#B9062F;
 	color:white;
 }
-#intro-page-simple-content {
-	background-color:#f5f8fc;
-}
 #intro-check-img {
 	width: 40%;
 	height: 40%;
+	float: left;
 }
 .intro-page-content {
 	font-size: 15px;
@@ -64,4 +62,42 @@
 #intro-footer {
     background-color: #f2f2f2;
     padding: 25px;	
+}
+.intro-page-slide-img1 {
+	background-color:rgb(52, 152, 219);
+	height: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.intro-page-slide-img1 > img {
+    width:40%;
+   	height: 75%;
+    margin-top: 5%;
+}
+.intro-page-slide-img2 {
+	background-color:rgba(211, 84, 0, 0.74);
+	height: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+}
+.intro-page-slide-img2 > img {
+    width:40%;
+    height: 75%;
+    margin-top: 5%;
+}
+.carousel-caption {
+	top: 0;
+    bottom: auto;
+}
+.carousel-control.left{
+	background-image: none !important;  
+}
+.carousel-control.right{
+	background-image: none !important;
+}
+.intro-page-titleandcontent {
+	float: right;
+	
 }
