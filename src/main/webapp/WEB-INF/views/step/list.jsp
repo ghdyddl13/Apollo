@@ -336,16 +336,16 @@
         <span class="list-section-third-selectpage-text" id="different-status">Choose Different status</span>
       </div>
       <div class="list-section-third-selectpage-addasignee">
-        <span class="list-section-third-selectpage-text">Add Asignees</span>
-        <span class="selectpage-body-button" id="selectpage-addasignee-button">Add</span>
+        <span class="list-section-third-selectpage-text">Add Asignee</span>
+        <span class="selectpage-body-button" id="selectpage-addasignee-button"data-toggle="modal" data-target="#list_Assign_Tasks">Add Asignee</span>
       </div>
       <div class="list-section-third-selectpage-addstep">
-        <span class="list-section-third-selectpage-text">Add Steps</span>
-        <span class="selectpage-body-button" id="selectpage-addsteps-button">Add</span>
+        <span class="list-section-third-selectpage-text">Add Step</span>
+        <span class="selectpage-body-button" id="selectpage-addsteps-button" data-toggle="modal" data-target="#list_AddStep_Tasks">Add Step</span>
       </div>
       <div class="list-section-third-selectpage-deletetask">
         <span class="list-section-third-selectpage-text">Delete tasks</span>
-        <span class="selectpage-body-button" id="selectpage-deletetask-button">Delete</span>
+        <span class="selectpage-body-button" id="selectpage-deletetask-button" data-toggle="modal" data-target="#list_Delete_Tasks">Delete Tasks</span>
       </div>
     </div>
   </div>

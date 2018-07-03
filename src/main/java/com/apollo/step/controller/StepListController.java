@@ -123,14 +123,60 @@ public class StepListController {
         System.out.println(memberlist.toString());
 		return jsonview;
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : 사람 필터를 이용해서 값을 분류한다
+	 작성자명 : 이 진 우
+	 */
 	@RequestMapping(value="/listpeoplefilter.htm",method=RequestMethod.POST)
 	public String peopleFilter(int sid, String mid, ModelMap map) {
-		System.out.println("값이 넘어오나요"+mid+"/"+sid);
 		String tstatusid =null;
         ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid,mid);
         map.addAttribute("tasklist",tasklist);
 		return "step/listtask";
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : TASK MASS EDIT(여러 테스크를 특정인에게 할당하는 컨트롤러)
+	 작성자명 : 이 진 우
+	 */
+	@RequestMapping(value="/listassigntasks.htm", method=RequestMethod.POST)
+	public String assignListTasks(String mid, String[] tasks,HttpSession session, ModelMap map) {
+		service.listAssignTasks(tasks, mid);
+		int sid = (Integer)session.getAttribute("sid");
+		
+		return "redirect:/list.htm?sid="+sid;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : TASK MASS EDIT(여러 테스크를 특정스텝에 추가하는 컨트롤러)
+	 작성자명 : 이 진 우
+	 */
+	@RequestMapping(value="/listaddsteptasks.htm", method=RequestMethod.POST)
+	public String addstepListTasks(int stepid,String[] tasks,HttpSession session, ModelMap map) {
+		service.listAddStepTasks(tasks, stepid);
+		int sid = (Integer)session.getAttribute("sid");
+		
+		return "redirect:/list.htm?sid="+sid;
+	}
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : TASK MASS EDIT(삭제 버튼 클릭시 삭제하는 컨트롤러)
+	 작성자명 : 이 진 우
+	 */
+	@RequestMapping(value="/listdeletetasks.htm", method=RequestMethod.POST)
+	public String deleteListTasks(String[] tasks,HttpSession session, ModelMap map) {
+		int sid = (Integer)session.getAttribute("sid");
+		service.listDeleteTasks(tasks);//삭제한다
+
+		return "redirect:/list.htm?sid="+sid;
+	}
+	
+
 }
