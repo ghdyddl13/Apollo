@@ -11,10 +11,11 @@
 			<a href="main.htm"><img id="gohome" class="header_logo"
 				src="img/apollo_logo.png" /></a>
 		</div>
-		<ul class="nav navbar-nav header-menu-ul">
-			<li class="nav-item"><a class="nav-link main-header-menu"
-				id="inbox-page" style="color: white">Inbox</a></li>
-			<li class="nav-item"><a class="nav-link main-header-menu"
+
+		<ul class="nav navbar-nav ">
+			<li class="nav-item"><a class="nav-link header-menu"
+				id="inbox-page" style="color: white">Inbox<span id="inbox_count" style="color: red"></span></a></li>
+			<li class="nav-item"><a class="nav-link header-menu"
 				id="myWork-page" style="color: white">My work</a></li>
 			<li class="nav-item"><a class="nav-link main-header-menu"
 				id="starredTask-page" style="color: white">Starred Task</a></li>

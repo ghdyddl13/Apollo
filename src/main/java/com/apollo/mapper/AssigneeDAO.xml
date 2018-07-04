@@ -8,4 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	insert into assignee values(#{tid}, #{mid})
     </insert>
     
+    <select id="getMidinAssingnee" resultType="String">
+    select mid from assignee where tid = #{tid}
+    </select>
 </mapper>

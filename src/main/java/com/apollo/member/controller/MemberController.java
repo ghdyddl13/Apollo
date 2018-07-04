@@ -261,7 +261,6 @@ public class MemberController {
 				result = "login";
 			}
 		}
-	
 		model.addAttribute("msg", msg);
 		
 		  

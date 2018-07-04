@@ -7,6 +7,7 @@ public class CommentDTO {
 	private String comments;
 	private int tid;
 	private String mid;
+	private String mid2;
 	private String mname;
 	private int cmtkind;
 	private String cmtmtime;
@@ -14,7 +15,28 @@ public class CommentDTO {
 	private String tname;
 	private String pname;
 	private String image;
+	private int newcheck;
+	private int newcount;
 	
+	
+	public int getNewcount() {
+		return newcount;
+	}
+	public void setNewcount(int newcount) {
+		this.newcount = newcount;
+	}
+	public String getMid2() {
+		return mid2;
+	}
+	public void setMid2(String mid2) {
+		this.mid2 = mid2;
+	}
+	public int getNewcheck() {
+		return newcheck;
+	}
+	public void setNewcheck(int newcheck) {
+		this.newcheck = newcheck;
+	}
 	public int getCmtid() {
 		return cmtid;
 	}
