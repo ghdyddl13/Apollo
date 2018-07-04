@@ -171,6 +171,8 @@ public class TaskController {
 	    	return "redirect:/list.htm?sid=" + sid;
 	    }else if(location.equals("step/timeline.htm")) {
 	    	return "redirect:step/timeline.htm";
+	    }else if(location.equals("/table.htm")) {
+	    	return "redirect:/table.htm";
 	    }else {
 	    	return null;
 	    }
@@ -287,6 +289,8 @@ public class TaskController {
 	    }else if(location.equals("step/timeline.htm")) {
 	    	System.out.println("timeline반환");
 	    	return "redirect:step/timeline.htm";
+	    }else if(location.equals("/table.htm")) {
+	    	return "redirect:/table.htm";
 	    }else {
 	    	System.out.println("null반환");
 	    	return null;
@@ -842,6 +846,8 @@ public class TaskController {
 	    	return "redirect:/list.htm?sid=" + sid;
 	    }else if(location.equals("step/timeline.htm")) {
 	    	return "redirect:step/timeline.htm";
+	    }else if(location.equals("/table.htm")) {
+	    	return "redirect:/table.htm";
 	    }else {
 	    	return null;
 	    }
