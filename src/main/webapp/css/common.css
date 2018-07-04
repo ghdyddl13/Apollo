@@ -163,6 +163,9 @@ margin-bottom:1em;
     padding-right: 30px;
     padding-left:30px;
     background-color: #eeeeee;
+	border-radius: 4px;
+	cursor: pointer;
+	border: 1px solid #ccc
 }
 
 .google_img{
@@ -172,41 +175,14 @@ margin-bottom:1em;
 }
 
 .google_login{
-	color: #507CAB;	
+	color: #337ab7;	
 	font-size: 14px;
 }
-.btn:hover{
+.btn{
 	color:white !important;
-	
 }
 
-/* 버튼 맞추는 부분 */
-.btn2{
-   margin-right: 180px;
-   padding-top: 12px;
-    padding-bottom: 12px;
-    padding-right: 30px;
-    padding-left: 30px;
-    background-color: #000069;
-    color:white;
-}
 
-.btn3{
-   margin-right: 40px; 
-   padding-top: 12px;
-    padding-bottom: 12px;
-    padding-right: 30px;
-    padding-left: 30px;
-    background-color: #B9062F;
-    color:white;
-    margin-left:160px;
-    
-}
-
-/* 모달 색깔 바꾸는 부분 */
-#modal,#modal2,#modal3{
-   background-color: white;
-}
 
 .footer{ /* 꼬리말 부분 */
 text-align: center;
@@ -225,11 +201,6 @@ font-size: 40px;
 }
 
 
-.login-container{
-width: 350px;
-margin-top: 10%
-}
-
 
 .p-color{
 font-size: 15px;
@@ -247,9 +218,8 @@ width:40px;
 .login-head{
 
     margin-bottom: 25px;
- 
-     font-size:40px;
-     text-align:center;    
+    font-size:40px;
+    text-align:center;    
 }
 .div-font-size{
    font-size: 21px; 
@@ -455,7 +425,7 @@ width:40px;
 	padding-top:4px;
 	padding-bottom:4px;
 	padding-right:1px;
-	color:#2c2d31 !important;
+	color:rgba(0, 0, 0, 0.72) !important;
 	display: flex;
 	flex-direction: row;
 	text-align: center;

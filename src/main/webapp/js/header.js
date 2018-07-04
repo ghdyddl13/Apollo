@@ -1,5 +1,6 @@
 $(function() {
 	
+	/// 헤더 메뉴 클릭 시 상단 border 색 바꿔주기
 	$(".main-header-menu").click(function(){
 		$(".main-header-menu").css("border-top","none");
 		$(".side-project").css("background-color","transparent");
@@ -235,7 +236,6 @@ $(function() {
 		}); // end - ajax
 	});
 	////////////////////////////래영  end/////////////////////////////////
-	
 	
 });
 
@@ -520,7 +520,8 @@ function resultSearchProject(projectlist){
  작성자명 : 박 민 식
  */
  function makeSearchTaskDiv(task){
-		 var div =jQuery("<div>",{"class":"search-item-box search-item-task row" ,"id":"srch-t"+task.tid});  
+		 var div =jQuery("<div>",{"class":"search-item-box search-item-task row " ,"id":"srch-t"+task.tid});
+		 var pid = $("<input>", {"type":"hidden", "value": "p"+task.pid});
 		 var assignee_div= jQuery("<div>",{"class":"search-item-left col-sm-2"});
 		 getTaskAssignees(task.tid,'35').appendTo(assignee_div);
 		 var task_info_div= jQuery("<div>",{"class":"search-item-right col-sm-10 container-fluid"});
@@ -529,7 +530,7 @@ function resultSearchProject(projectlist){
 		 var pname= jQuery("<span>",{"class":"search-item-pname","text":$($("#p"+task.pid).find(".side-content-name")[0]).text(),"css":{"margin-left":"5px"}})
 		 $( task_status_div).append(pname);
 		 $(task_info_div).append( task_name_div,task_status_div);
-		 $(div).append(assignee_div,task_info_div);
+		 $(div).append(assignee_div,task_info_div,pid);
 		return div;
 	} //end
  /**
@@ -554,7 +555,8 @@ function resultSearchProject(projectlist){
  
  ///검색 결과에서 스텝항목 클릭 시 해당 스텝으로 이동
  $(document).on("click",".search-item-step",function(){
-	 
+	checkbox=[];
+	list_memberlist=[]; 
 	var sid = this.id.substr(6);
 	console.log(sid);
 	$.ajax({
@@ -564,52 +566,17 @@ function resultSearchProject(projectlist){
 		success:function(data){
 			 $("#main-box").empty();
 			 $("#main-box").append(data);
-			 	
-				/////////////////////////////////STATUS OF TASK GRAPH/////////////////////////////////////////
-				let ctx = document.getElementById('Step-list-DonutChart').getContext('2d');
-				let myDoughnutChart = new Chart(ctx, {
-				
-				      type: 'doughnut',
-				      data: {
-				              datasets: [{
-				                  data: [3, 4, 5, 6, 7],
-				                  backgroundColor: [
-				                                    'rgba(190, 190, 190, 1)',
-				                                    'rgba(241, 196, 15, 1)',
-				                                    'rgba(244, 7, 7, 1)',
-				                                    'rgba(52, 152, 219, 1)',
-				                                    'rgba(46, 204, 113, 1)'
-				                  ],
-				                  borderColor:[
-				                                'rgba(190, 190, 190, 1)',
-				                                'rgba(241, 196, 15, 1)',
-				                                'rgba(244, 7, 7, 1)',
-				                                'rgba(52, 152, 219, 1)',
-				                                'rgba(46, 204, 113, 1)'
-				                  ],
-				                  borderWidth: 1
-				              }],
-				              labels:
-				        ['미지정','다음주 이후','이번주 까지','완료','기한 만료']
-				      },
-				      options: {
-				                maintainAspectRatio: false,
-				                cutoutPercentage: 50,
-				                legend: {
-				                          display: true,
-				                          position: 'right',
-				                          labels: {
-				                                    fontSize: 12,
-				                                    fontFamily: 'sans-serif',
-				                                    fontColor: '#ffffff',
-				                                    fontStyle: 'bold'
-				                }
-				      }
-				      }
-				});
-
-		} //end success
-	}) //end ajax
+			 $.ajax({
+				 url:"memberlist.htm",
+				 data:{sid:sid},
+				 type:"POST",
+				 dataType:"JSON",
+				 success:function(memberlist){
+					 list_memberlist = memberlist.memberlist;
+				 }
+			 })
+		}
+	})
  }) //end Func
 	
  
@@ -629,4 +596,16 @@ function resultSearchProject(projectlist){
 			}
 		}) // end ajax
  }) //end function
+ 
+ 
+ /// Seacrch 바에서 Task 클릭시 소속  Step의  list에서 모달띄워주기
+$(document).on("click",".search-item-task",function(){
+	
+	var pid = $(this).find("[type=hidden]")[0].value.substring(1);
+	var tid = $(this)[0].id.substring(6);
+	console.log(pid, tid);
+	
+	
+	
+})
 

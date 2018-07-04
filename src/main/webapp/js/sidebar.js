@@ -1,7 +1,7 @@
 $(function() {
-	
-	
-	 $(document).tooltip({
+	checkIsHereTimeline();
+	/////////////  프로젝트, 폴더, 스텝 생성 모달창 도움말 설정////////////////////
+	 $(".modal-question").tooltip({
 		 classes: {
 			    "ui-tooltip": "apollo-tooltip"
 		 },
@@ -40,7 +40,9 @@ $(function() {
 				 "폴더를 삭제할 경우 폴더에 속한 Step도 모두 삭제되어 복구할 수 없으니 주의하시기 바랍니다." 
 				
 	  );
+/////////////  프로젝트, 폴더, 스텝 생성 모달창 도움말 설정 끝////////////////////
 		
+	// 사이드바 구조 생성  
 	makeSideProjectDir();
 	
 	// 사이드바 디렉토리 화살표 변경
@@ -1049,5 +1051,14 @@ function loadCurrentPage(){
 	}
 }
 */
-   
+function checkIsHereTimeline(){
+	  if (window.sessionStorage) {
+
+        sessionStorage.setItem('저장할 이름 - 문자열', '저장할 객체');
+        var position = sessionStorage.getItem('location');
+        console.log(sessionStorage);
+    }
+
+}
+
    

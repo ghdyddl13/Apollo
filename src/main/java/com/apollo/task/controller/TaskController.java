@@ -77,7 +77,6 @@ public class TaskController {
 	public View getTask(int tid, HttpSession session, Model model) {
 
 	System.out.println("getTask 작동");
-		
 	int pid = (Integer) session.getAttribute("pid");
 	
     String mid = (String) session.getAttribute("mid");
