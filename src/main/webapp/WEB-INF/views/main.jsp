@@ -54,6 +54,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!-- ECHART.JS CDN-->
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<!--JQUERY FORM CDN  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
 <!-- SIDEBAR JAVASCRIPT -->
 <script type="text/javascript" src="js/sidebar.js"></script>
 <!-- 공통 JavaScript 함수 모음(Utils) -->

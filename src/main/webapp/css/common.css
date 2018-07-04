@@ -1201,7 +1201,7 @@ background-color: 999999;
   box-sizing: border-box;
   font-size: 11px;
   position: relative;
-  z-index: 120;
+  z-index: 1;
 }
 .main-body-onepannel-header-top-title{
   margin-right: 24px;

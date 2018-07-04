@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -422,6 +423,13 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return jsonview;
+	}
+	@RequestMapping(value="/updatememberimage.htm",method=RequestMethod.POST)
+	public View updateMemberImage(MultipartHttpServletRequest request,ModelMap map) {
+		MultipartFile multifile = request.getFile("member_image");
+		System.out.println("파일 이름: "+multifile.getOriginalFilename());
+		
 		return jsonview;
 	}
 	

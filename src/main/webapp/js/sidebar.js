@@ -536,7 +536,7 @@ $(function() {
 				success:function(data){
 					$("#main-box").empty();
 					$("#main-box").append(data);	 		
-					 
+					$("#information-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected"); 
 				}
 			})
 	    });

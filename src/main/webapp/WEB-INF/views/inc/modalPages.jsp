@@ -802,15 +802,39 @@
 				<h4 class="modal-title">개인정보수정</h4>
 			</div>
 			<div class="modal-body">
+				<div id="edit-profile-img-content">
+									<!-- <img name="image" id="edit-profile-modal-img" src=""> -->
+					<form name="form" id="member_image_form" method="post" >
+						<input type="file" name="member_image" id="edit-profile-image">
+						<input type="button" id="member_imageupload" value="가즈앙~">
+					</form>
+					<script type="text/javascript">
+						$(function(){
+						     $("#member_imageupload").click(function(){
+						    	 
+						    	 console.log('여긴 탔지?')
+						         var form = $('member_image_form');
+						         var formData = new FormData(form);
+						             $.ajax({
+						                url: 'updatememberimage.htm',
+						                processData: false,
+						                   contentType: false,
+						                data: formData,
+						                type: 'POST',
+						                success: function(result){
+						                    alert("업로드 성공!!");
+						                }
+						            });
+						         });
+						})
+					</script>
+				</div>
 				<form id="edit-profile-form">
 					<fieldset>
 						<div class="edit-profile-part1">
 							<br>
 							<div>
-								<div id="edit-profile-img-content">
-									<!-- <img name="image" id="edit-profile-modal-img" src=""> -->
-									<input type="file" name="image" id="edit-profile-image">
-								</div>
+
 								<br>
 								<div class="edit-profile-all-title">
 									<div class="edit-profile-title">이름</div>
