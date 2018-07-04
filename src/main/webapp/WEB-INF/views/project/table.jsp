@@ -22,7 +22,6 @@
 	               <th>Due</th>
 	               <th>Duration</th>
 	               <th>Status</th>
-	               <th>Assigned to</th>
 	            </tr>
 	         </thead>
 	         <tbody>
@@ -52,8 +51,6 @@
 	                     </c:choose>
 	                     <td></td>
 	                     
-	                     <td class="project-page-table-td-assignee" id="${step.mid}"></td>
-	                     
 	                  <!-- 스텝에 속한 task 뿌려주기 -->
 	                  <c:forEach var="task" items="${tasklist}">
 	                  
@@ -78,7 +75,7 @@
 	                              </c:otherwise>
 	                           </c:choose>
 	                           <td class="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
-	                           <td></td>
+
 	                        </tr>
 	                     </c:if>
 	                  </c:forEach>
@@ -110,7 +107,6 @@
 	                        </c:otherwise>
 	                        </c:choose>
 	                        <td></td>
-	                        <td></td>
 	                     </tr>
 	                     <!-- 스텝에 속한 task 뿌려주기 -->
 	                     <c:forEach var="task" items="${tasklist}">
@@ -128,7 +124,6 @@
 	                              </c:otherwise>
 	                              </c:choose>
 	                              <td class="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
-	                              <td></td>
 	                           </tr>
 	                        </c:if>
 	                     </c:forEach>

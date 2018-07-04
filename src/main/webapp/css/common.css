@@ -1112,6 +1112,15 @@ background-color: 999999;
    padding-left: 15px;
    padding-right: 15px;
 }
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+	background-color: #000032 !important;
+}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+	background-color: #000032 !important;
+}
+.navbar-default .navbar-nav>li>a {
+	background-color: #000032 !important;
+}
 /* task 수정,삭제 모달_정권 ---------------------- 시작 */
 #star_trash{
   text-align: right;
@@ -1201,7 +1210,6 @@ background-color: 999999;
   box-sizing: border-box;
   font-size: 11px;
   position: relative;
-  z-index: 120;
 }
 .main-body-onepannel-header-top-title{
   margin-right: 24px;
