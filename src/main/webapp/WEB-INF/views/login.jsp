@@ -26,13 +26,9 @@
 	$(function() {
 		var msg = "${msg}";
 		if (msg != "") {
+			console.log("msg : " + msg)
 			alert(msg);
 		}
-		
-		$("#google-login-btn").click(function(){
-			$()
-		});
-
 		$("#pwdreset").click(function() {
 			$("#findpwd")[0].reset();
 		});
@@ -69,6 +65,26 @@
 
 		})
 		
+		$('#keybtn').click(function(){
+			var data = {
+					cname : $('input[name=cname]').val(),
+					email : $('input[name=email]').val()
+			}
+			$.ajax({
+				type : 'post',
+				url : 'apollokey.htm',
+				data : data,
+				success : function(data) {
+					$('input[name=cname]').val('')
+					$('input[name=email]').val('')
+					if (data.result == '성공') {
+						alert('입력하신 Email로 인증키를 발송했습니다.')
+					}else {
+						alert('인증키 발송이 실패했습니다. 다시한번 시도해주세요.')
+					}
+				}
+			})
+		})
 	     var input = document.getElementById("pwd");
 	     input.addEventListener("keyup", function(event) {
 	         event.preventDefault();
@@ -122,7 +138,7 @@
 				</div>
 			
 				
-				<!-- 구매 취소 부분  -->
+			
 				<input id="login_btn" type="button" onclick="login()" class="btn btn-block login-btn" value="로그인"> 
 				<input type="button" class="btn btn-block buy-license-btn" value="구매하기" data-toggle="modal" data-target="#apollokey-modal-dialog">
 				
@@ -156,7 +172,6 @@
 
 		<div class="modal fade" id="apollokey-modal-dialog" role="dialog">
 			<div class="modal-dialog">
-				<form action="apollokey.htm" id="apollokey" method="post">
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header" id="modal">
@@ -194,7 +209,6 @@
 					
 
 				</div>
-				</form>
 			</div>
 		</div>
 	
