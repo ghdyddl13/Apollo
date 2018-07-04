@@ -124,7 +124,7 @@
 				
 				<!-- 구매 취소 부분  -->
 				<input id="login_btn" type="button" onclick="login()" class="btn btn-block login-btn" value="로그인"> 
-				<input type="button" class="btn btn-block buy-license-btn" value="구매하기" data-toggle="modal" data-target="#myModal">
+				<input type="button" class="btn btn-block buy-license-btn" value="구매하기" data-toggle="modal" data-target="#apollokey-modal-dialog">
 				
 				
 				<div class="btn btn-block googlelogin-btn" id="google-login-btn"  onclick="location.href='<%=request.getContextPath()%>/google.htm'">
@@ -153,20 +153,16 @@
 
 
 	<!-- Modal창 구매하기 창 -->
-<form action="apollokey.htm" id="apollokey" method="post">
-	<div class="container">
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
 
+		<div class="modal fade" id="apollokey-modal-dialog" role="dialog">
+			<div class="modal-dialog">
+				<form action="apollokey.htm" id="apollokey" method="post">
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header" id="modal">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">인증키 구매</h4>
 					</div>
-
-
-
 					<!--이메일 회사명  -->
 					<div class="modal-body" id="modal2">
 						<!-- 회사명 input -->
@@ -198,11 +194,10 @@
 					
 
 				</div>
-
+				</form>
 			</div>
 		</div>
-	</div>
-	</form>
+	
 	<!-- Modal창 비밀번호 찾기 창 -->
 	<form action="findpwd.htm" id="findpwd" method="post">
 	<div class="container">

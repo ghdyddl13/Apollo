@@ -30,7 +30,7 @@ public class ProjectTableController {
 	
 	@Autowired 
 	private ProjectInfoService projectinfoservice;
-	
+
 	
 	/**
 	 * 
@@ -41,6 +41,7 @@ public class ProjectTableController {
 	@RequestMapping("/table.htm")
 	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {		
 		int pid = (Integer) request.getSession().getAttribute("pid");
+		//String mid = (String) request.getSession().getAttribute("mid");
 		
 		ArrayList<Integer> pids = new ArrayList<Integer>();
 		pids.add(pid);
@@ -60,9 +61,11 @@ public class ProjectTableController {
 			tasklist = tableservice.getTasksInStep(steplist);
 			model.addAttribute("tasklist", tasklist);
 			
+
 			ProjectDTO projectinfo = projectinfoservice.getProjectInfo(pid);
 			model.addAttribute("projectinfo", projectinfo);
 			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
