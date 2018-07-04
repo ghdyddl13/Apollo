@@ -1,7 +1,6 @@
 package com.apollo.project.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.View;
+
+import com.apollo.project.service.ProjectInfoService;
 import com.apollo.project.service.ProjectTableService;
-import com.apollo.step.service.StepListService;
 import com.apollo.vo.FolderDTO;
-import com.apollo.vo.MemberDTO;
+import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 /**
@@ -29,8 +28,8 @@ public class ProjectTableController {
 	@Autowired 
 	private ProjectTableService tableservice;
 	
-	@Autowired
-	private StepListService steplistservice;
+	@Autowired 
+	private ProjectInfoService projectinfoservice;
 	
 	
 	/**
@@ -60,7 +59,10 @@ public class ProjectTableController {
 			ArrayList<TaskDTO> tasklist = null; //sid 에 속한 task 및 tstatus 가져오기
 			tasklist = tableservice.getTasksInStep(steplist);
 			model.addAttribute("tasklist", tasklist);
-		
+			
+			ProjectDTO projectinfo = projectinfoservice.getProjectInfo(pid);
+			model.addAttribute("projectinfo", projectinfo);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

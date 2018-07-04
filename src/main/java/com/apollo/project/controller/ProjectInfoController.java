@@ -13,6 +13,7 @@ import org.springframework.web.servlet.View;
 import com.apollo.project.service.ProjectInfoService;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidpidDTO;
+import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 
@@ -35,6 +36,7 @@ public class ProjectInfoController {
 	 			  2. 프로젝트에 참여한 멤버 명단
 	 			  3. 모달 페이지에 띄워 줄 회원 명단
 	 			  	 (같은 회사키를 공유하는 회원들을 찾아서 뿌려준다)
+	 			  4. 프로젝트 이름과 아이디
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/information.htm")
@@ -43,7 +45,9 @@ public class ProjectInfoController {
 		session.setAttribute("pid", pid);
 		
 		String mid = (String) session.getAttribute("mid");
-		map.addAttribute("pid", pid);
+		//map.addAttribute("pid", pid);
+		ProjectDTO projectinfo = projectinfoservice.getProjectInfo(pid);
+		map.addAttribute("projectinfo", projectinfo);
 		
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
@@ -64,7 +68,6 @@ public class ProjectInfoController {
         invitememberlist = projectinfoservice.getInviteMemberList(midpiddto);
         map.addAttribute("invitememberlist", invitememberlist);
 
-        System.out.println("여기까지 오나?");
         return "project/information";
 	}
 	

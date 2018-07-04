@@ -1,7 +1,4 @@
-$(function() {
-
-	
-	
+$(function() {	
 	/// 프로젝트 information 페이지
 	$(document).on("click","#information-page",function(){
 		var pid = $('#pidhidden').attr('value');
@@ -13,7 +10,7 @@ $(function() {
 			success:function(data){
 				 $("#main-box").empty();
 				 $("#main-box").append(data);	 		
-				 
+				 $("#information-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected");
 			}
 		})
 		
@@ -28,6 +25,7 @@ $(function() {
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
+				$("#table-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected");
 			}
 		})
 	})
@@ -39,17 +37,10 @@ $(function() {
 			url:"files.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
-				
+				$("#files-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected");
 			}
 		});
 	});
-	
-	// 스텝 list 페이지
-	
-	
-	
-	
 });
