@@ -75,9 +75,9 @@
 	<mvc:annotation-driven/>
 	 	<!--Socket -->
  	
-	<bean id="main" class="socket.ChatWebSocketHandler" />
+	<bean id="socket" class="socket.ChatWebSocketHandler" />
 	<websocket:handlers>
-		<websocket:mapping handler="main" path="/main.htm" />
+		<websocket:mapping handler="socket" path="/socket.htm" />
 		<websocket:handshake-interceptors>
 			 <bean class="socket.HandShakeInterceptor"/>
 			 <!-- <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean> -->
