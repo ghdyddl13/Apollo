@@ -5,7 +5,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.apollo.task.dao.TstatusDAO">
 	
 	<select id="getTstatuslist" parameterType="String" resultType="com.apollo.vo.TstatusDTO">
-		select * from tstatus where methodologyid = (select methodologyid from project where pid = #{pid}) order by ordering asc
+		select * from tstatus
+		where methodologyid
+		= (select methodologyid from project where pid=(select pid from task where tid = #{tid}))
+		order by tstatusid asc
 	</select>
 	
 </mapper>

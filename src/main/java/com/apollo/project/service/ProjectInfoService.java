@@ -153,12 +153,11 @@ public class ProjectInfoService {
 	 */
 	public int insertPmember(MidpidDTO midpiddto){
 		
-		System.out.println("서비스 탔음");
+		System.out.println("insertPmember 서비스 실행");
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		int result = dao.insertPmember(midpiddto);
 		
-		System.out.println("테스트 출력");
-		System.out.println("result : " + result);
+		System.out.println("맴버 추가 결과 : " + result);
 		
 		return result;
 	}

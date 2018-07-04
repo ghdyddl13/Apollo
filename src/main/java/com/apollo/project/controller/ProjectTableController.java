@@ -39,7 +39,10 @@ public class ProjectTableController {
 	 작성자명 : 김 래 영
 	 */
 	@RequestMapping("/table.htm")
-	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {		
+	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {	
+		
+		session.setAttribute("location", "/table.htm");
+		
 		int pid = (Integer) request.getSession().getAttribute("pid");
 		//String mid = (String) request.getSession().getAttribute("mid");
 		

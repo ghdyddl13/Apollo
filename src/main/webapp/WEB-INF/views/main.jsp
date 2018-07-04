@@ -68,6 +68,8 @@
 <script type="text/javascript" src="js/stepBoard.js"></script>
 <!-- SIDEBAR JAVASCRIPT-->
 <script type="text/javascript" src="js/sidebar_raeyoung.js"></script>
+<!-- PROJECT INFORMATION JAVASCRIPT-->
+<script type="text/javascript" src="js/main_projectInfo.js"></script>
 
 <link rel="stylesheet" href="css/project_table.css" />
 

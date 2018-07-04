@@ -9,8 +9,7 @@
 $(document).on("click",".Task_RUD_Modal",function(){
 		
 		var temptid = $(this).attr('id'); 
-	    var tid = parseInt(temptid.substring(1));
-		
+		var tid =parseInt(temptid.substring(1));
 		$.ajax(
 			       {
 			           type : "post",
@@ -766,6 +765,8 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 	var tid = $('#tidhidden').attr('value');
 	var value = $('#Task_Modal_tstatus_selectbox').val();
 	var tname = $('#tnamehidden').attr('value');
+	
+	console.log('/'+ tid +'/' + value +'/' + tname + '/')
 	
 	  $.ajax(
 		       {

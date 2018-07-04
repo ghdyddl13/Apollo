@@ -14,7 +14,6 @@
         </div>
       </div>
       <div class="main-body-onepannel-body">
-        <div class="Task_RUD_Modal" id="t17" data-toggle="modal" data-target="#Task_RUD_Modal">테스트 tid</div>
 
 		<div id=projectinfo_outerbox>
 		  <div class="row" id="projectinfo_first_row"> <!-- row_1 -->

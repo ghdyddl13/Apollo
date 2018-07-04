@@ -99,11 +99,11 @@ public class TaskService {
 	 기      능 : pid로 tstatus 가져오기
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<TstatusDTO> gettstatuslist(int pid) {
+	public ArrayList<TstatusDTO> gettstatuslist(int tid) {
 		
 		ArrayList<TstatusDTO> tstatuslist = new ArrayList();
 		TstatusDAO tstatusdao = session.getMapper(TstatusDAO.class);
-		tstatuslist = tstatusdao.getTstatuslist(pid);
+		tstatuslist = tstatusdao.getTstatuslist(tid);
 		return tstatuslist;
 	}
 	/**
@@ -219,10 +219,19 @@ public class TaskService {
 	 기      능 : 코멘트 입력
 	 작성자명 : 김 정 권
 	 */
-	public int insertComment(CommentDTO commentdto) {
+	public int insertComment(CommentDTO dto) {
 		System.out.println("insertComment 서비스 메소드 실행");
+		
+		System.out.println("서비스에서 검증");
+		System.out.println(dto.getCmtid());
+		System.out.println(dto.getComments());
+		System.out.println(dto.getTid());
+		System.out.println(dto.getMid());
+		System.out.println(dto.getCmtkind());
+		System.out.println("=================");
+		
 		CommentDAO commentdao = session.getMapper(CommentDAO.class);
-		int result = commentdao.insertComment2(commentdto);
+		int result = commentdao.insertComment2(dto);
 		return result;
 	}
 	
