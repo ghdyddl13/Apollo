@@ -1,24 +1,24 @@
 #header-member-table {
-	width:90%;
+	width:95%;
 }
 
 #header-member-table>thead>tr>th {
 	text-align:center;
-	padding-bottom:14px;
-	background-color:#504f4f;
-	color:#8b9197;
+	padding-bottom:10px;
+	background-color: #e6e7e8;
+	color:#978d8b;
 }
 
 #header-member-table>tbody>tr>td {
 	text-align:center;
-	color:#5285b8;
+	color:#000000c7;
 }
 
 #header-member-table>tbody :hover {
 	cursor: pointer;
 	background-color: #e0e0e0;
 }
-/* #header-member-table>thead, tbody {
+#header-member-table>thead>tbody {
 	border-left-color: white;
 	border-right-color: white;
-} */
+}

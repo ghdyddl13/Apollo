@@ -7,10 +7,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apollo.member.dao.MemberDAO;
 import com.apollo.sidebar.dao.FolderDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.vo.FolderDTO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 
@@ -77,7 +79,7 @@ public class ProjectTableService {
 		return tasklist;
 		
 	}
-	
+
 	
 }
 

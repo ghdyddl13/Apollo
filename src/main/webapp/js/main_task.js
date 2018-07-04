@@ -1322,4 +1322,26 @@ $(document).on("keyup","#Task_Modal_tname_input",function(){
 	  		} // end - keyCode==13
 	
 });
+/**
+ * 
+ 날      짜 : 2018. 7. 3.
+ 기      능 : Starred Task 페이지에서 별버튼을 누를시 즐겨찾기가 지워지는 함수
+ 작성자명 : 이 진 우
+ */
+
+$(document).on("click",".starred-body-task-container-top-star",function(){
+	let tid = parseInt($(this).parents(".starred-body-task-container-top").children(".starred-body-task-container-top-title").attr("id").substring(1));
+	$.ajax({
+
+            type:"POST",
+            url:"deleteStarredTask.htm",
+            data:{tid:tid},
+            success:function(data) {
+					 $("#main-box").empty();
+					 $("#main-box").append(data);				
+            }
+	});
+})
+
+
 

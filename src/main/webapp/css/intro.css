@@ -1,0 +1,103 @@
+#intro-page-top {
+	height:80vh; /* vh는 view height의 약자이며, 100vh가 현재창의 100% 높이 */
+	background-color:#f5f8fc;
+}
+.intro-img {
+	display:flex;
+	position: relative;
+	background-image: url(../img/intro-coll-img.jpg);
+	width:100vw;
+	height:80vh; 
+	background-size: cover;
+	/* filter: grayscale(50%); */
+}
+.intro-img-content {
+	position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);                                                                   
+    font-size:5rem;
+    color: white;
+    z-index:1;
+    text-align: center;
+}
+#intro-img-content-logo {
+	font-size: 70px;
+}
+#intro-img-content-sub {
+	font-size: 50px;
+}
+.intro-img-cover {
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   background-color: rgba(244, 246, 248, 0.18);                                                           
+   z-index:1;
+   margin-top: 50px;
+}
+#intro-navber-btns {
+	align-items:center;
+	margin-top: 7px;
+    margin-right: 25px;
+}
+
+#intro-login-btn {
+	width: 80px;
+	background-color: #008500;
+	color:white;
+}
+#intro-buying-btn {
+	width: 80px;
+	background-color:#B9062F;
+	color:white;
+}
+#intro-check-img {
+	width: 40%;
+	height: 40%;
+	float: left;
+}
+.intro-page-content {
+	font-size: 15px;
+}
+#intro-footer {
+    background-color: #f2f2f2;
+    padding: 25px;	
+}
+.intro-page-slide-img1 {
+	background-color:rgb(52, 152, 219);
+	height: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.intro-page-slide-img1 > img {
+    width:40%;
+   	height: 75%;
+    margin-top: 5%;
+}
+.intro-page-slide-img2 {
+	background-color:rgba(211, 84, 0, 0.74);
+	height: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+}
+.intro-page-slide-img2 > img {
+    width:40%;
+    height: 75%;
+    margin-top: 5%;
+}
+.carousel-caption {
+	top: 0;
+    bottom: auto;
+}
+.carousel-control.left{
+	background-image: none !important;  
+}
+.carousel-control.right{
+	background-image: none !important;
+}
+.intro-page-titleandcontent {
+	float: right;
+	
+}

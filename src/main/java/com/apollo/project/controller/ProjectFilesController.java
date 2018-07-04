@@ -12,23 +12,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.apollo.project.service.ProjectFilesService;
+import com.apollo.project.service.ProjectInfoService;
 import com.apollo.vo.FileDTO;
+import com.apollo.vo.ProjectDTO;
 
 @Controller
 public class ProjectFilesController {
 
 	@Autowired
 	private ProjectFilesService fileservice;
+	@Autowired 
+	private ProjectInfoService projectinfoservice;
+	
 	
 	@RequestMapping("/files.htm")
 	public String projectFilelist(Model model, HttpServletRequest request, HttpSession session) {
 		session.setAttribute("location", "/files.htm");
 		int pid = (Integer) request.getSession().getAttribute("pid");
-		System.out.println("pid : " + pid);
 		try {
 			ArrayList<FileDTO> filedto = fileservice.selectFileListByProjectId(pid);
-			System.out.println("filedto : " + filedto);
 			model.addAttribute("f", filedto);
+			
+			ProjectDTO projectinfo = projectinfoservice.getProjectInfo(pid);
+			model.addAttribute("projectinfo", projectinfo);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

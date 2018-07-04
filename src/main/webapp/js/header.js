@@ -1,4 +1,12 @@
 $(function() {
+	
+	$(".main-header-menu").click(function(){
+		$(".main-header-menu").css("border-top","none");
+		$(".side-project").css("background-color","transparent");
+		$(".side-step").css("background-color","transparent");
+		$(this).css("border-top","3px solid #ffc30d");
+	})
+	
 	// 헤더 inbox 페이지
 	$("#inbox-page").click(function(evt){
 		$.ajax({
@@ -35,7 +43,6 @@ $(function() {
 			url:"starredTask.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				
@@ -262,10 +269,9 @@ function getRecentTasks(){
  작성자명 : 박 민 식
  */
 $(document).on("focus","#open-right-nav",function(){
-    document.getElementById("search-nav").style.width = $("#header-right-wrapper").width()+10+"px";
+   document.getElementById("search-nav").style.width = $("#header-right-wrapper").width()+10+"px";
     $("#search-bar").focus();
    $.when(getRecentTasks()).done(function(data){ //Default로 최근 생성 혹은 변경된 태스크 10건을 가져옴
-	   console.log(data.rcttasks);
 	   var p = jQuery("<p>",{"class":"search-result-text","text":"Recent Tasks"});
 	   var div = jQuery("<div>");
 	   $(div).append(p);

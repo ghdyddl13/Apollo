@@ -15,7 +15,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteStar" parameterType="com.apollo.vo.StarredTaskDTO">
     	delete from starredtask where mid = #{mid} and tid = #{tid}
     </delete>
-	
-	
+	<!--Starred  Task 페이지에서 Task를 뿌려주기 위한 함수   -->
+	<select id="getStarredTasks" resultType="com.apollo.vo.MyWorkTaskDTO">
+		select t.TID, t.TNAME, t.SDAY, t.EDAY,t.DETAIL,t.PID, t.CTIME,t.TSTATUSID , s.TSTATUS,s.COLOR  
+		from task t 
+		join TASKINSTEP ts on t.TID = ts.TID
+		join TSTATUS s on t.TSTATUSID = s.TSTATUSID
+		where t.TID in (select tid from starredtask where mid=#{mid})
+	</select>
+	<!--Starred Task 페이지에 뿌려진 Task에 뿌려주는 스텝  -->
+	<select id="getStarredSteps" resultType="com.apollo.vo.MyWorkStepDTO">
+		select  ts.TID, s.SID,s.SNAME 
+		from step s
+		join TASKINSTEP ts on s.SID = ts.SID
+		where ts.TID in (select tid from starredtask where mid=#{mid})
+	</select>
+	<!-- Starred Task 페이지에 뿌려진 Task에 뿌려주는 멤버들 -->
+	<select id="getStarredMembers" resultType="com.apollo.vo.MyWorkMemberDTO">
+		select a.TID, m.MID, m.MNAME, m.IMAGE
+		from member m 
+		join ASSIGNEE a on m.MID = a.MID 
+		where a.TID in (select tid from starredtask where mid=#{mid})
+	</select>
+	<delete id="deleteStarredTask" parameterType="com.apollo.vo.StarredTaskDTO">
+    	delete from starredtask where mid = #{mid} and tid = #{tid}
+    </delete>
 	
 </mapper>

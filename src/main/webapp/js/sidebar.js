@@ -1,5 +1,45 @@
 $(function() {
-
+	
+	
+	 $(document).tooltip({
+		 classes: {
+			    "ui-tooltip": "apollo-tooltip"
+		 },
+		 content: function() {
+		       return $(this).prop('title');
+		      }
+	 });   
+	
+	 $(".question-project").attr(
+			 "title",
+			 "프로젝트를 생성하여 여러명의 동료를 초대해 함께 협업할 수 있습니다. 같은 회사의 Apollo Code를 등록한 " +
+			 "멤버들만 초대할 수 있습니다.<br><br> " +
+			 "프로젝트는 진행 상태에 따라 'Working Project', 'Completed Project','Trash Bin'에" +
+			 "따로 관리할 수 있습니다. 다만, 'Trash Bin'에 보관할 경우 14일 이후 영구 삭제되니 주의하세요."
+	 );
+	 
+	  $(".question-methodology").attr(
+			 "title",
+			 "아폴로는 애자일과 폭포수 개발 방법론에 최적화 되어있는 프로젝트 템플릿을 제공합니다. " +
+			 "각각의 템플릿은 해당 방법론에 적합한 폴더와 스텝의 구조, 그리고 서로 다른 칸반보드를 제공합니다. <br><br>" +
+			 "어떤 구조를 설정하든 스텝과 폴더를 이용자 마음대로 생성/수정/삭제 할 수 있습니다."
+			 
+	 );
+	  
+	  $(".question-step").attr(
+				 "title",
+				 "스텝에서 Task(업무)를 생성 및 관리할 수 있습니다. 스텝은 리스트, 칸반보드, 간트차트로 구성되어 있어 " +
+				 "Task들을 효과적으로 관리할 수 있습니다.<br><br> 또한 스텝간 Task를 공유 혹은 이동함으로써 유동적인 업무관리가 가능합니다.<br><br>" +
+				 "스텝은 해당 프로젝트 내에서 폴더 간 위치를 변경할 수 있습니다. "
+	  );
+	  
+	  $(".question-folder").attr(
+				 "title",
+				 "폴더는 프로젝트에 속한 여러 스텝들을 그룹으로 묶어 관리할 수 있습니다. 스텝을 특징별로 묶어 프로젝트를 좀 더 체계적으로 관리하고 싶을 때 활용해 보세요." +
+				 "<br><br> " +
+				 "폴더를 삭제할 경우 폴더에 속한 Step도 모두 삭제되어 복구할 수 없으니 주의하시기 바랍니다." 
+				
+	  );
 		
 	makeSideProjectDir();
 	
@@ -14,12 +54,14 @@ $(function() {
 	});
 	
 	$(document).on("click",".side-project",function(){
+		$(".main-header-menu").css("border-top","none");
 		$(".side-project").css("background-color","transparent");
 		$(".side-step").css("background-color","transparent");
 		$(this).css("background-color","#e0e0e0");
 	});
 	
 	$(document).on("click",".side-step",function(){
+		$(".main-header-menu").css("border-top","none");
 		$(".side-project").css("background-color","transparent");
 		$(".side-step").css("background-color","transparent");
 		$(this).css("background-color","#e0e0e0");
@@ -27,7 +69,14 @@ $(function() {
 	
 	
 	//스텝 추가 클릭시 프로젝트 멤버 리스트 가져오기
-	$(document).on("click","#side-insert-step",function(){ 
+	$(document).on("click","#side-insert-step",function(){
+		$('.add-step-name').val("");
+		$('#insert-step-sday-id').val("");
+		$('#insert-step-eday-id').val("");
+		$('#step-detail').val("");
+		$("#add-step-mgr-assignee-btn").show();
+		$(".step-assigned-member-wrapper").remove();
+		$("#add-step-mgr-assignee").val("");
 		var custom_menu =  $(this).parents("ul.custom-menu")[0];
 		var pid =  $(custom_menu).find("input[name=pid]").val();
 		var methodologyid =  $(custom_menu).find("input[name=methodologyid]").val();
@@ -42,23 +91,57 @@ $(function() {
 		        	   $("#insert-step-methodologyid").val(methodologyid);
 		        	   $("#insert-step-pid").val(pid);
 		        	   $("#insert-step-fid").val(fid);
-	            	   var optiondefault = jQuery("<option>",{
-	            		   "text":"책임자를 선택하세요", //default 값 
-	            		   "value":""
-	            	   })
-	            	   //해당 pid 에 참여한 멤버 불러오기
-		               $('#add-step-mgr-assignee').empty().append(optiondefault);
+		        	   $('#add-step-mgr-assignee-options').empty();
 		               $(data.memberlist).each(function (){
-		            	   var option = jQuery("<option>",{
-		            		   "value":this.mid,
-		            		   "text":this.mname
+		            	   var li = jQuery("<li>",{
+		            		   "class":"select-step-assignee-option",
+		            		   "role":"presentation"
 		            	   })
-		            	   $('#add-step-mgr-assignee').append(option);
+		            	   var member_div = jQuery("<div>",{"class":"step-assignee-wrapper"});
+		            	   var member_img_wrapper = jQuery("<div>",{"class":"step-assignee-img"});
+		            	   var memeber_img = makeProfileIcon(this,"30");
+		            	   var member_info = jQuery("<div>",{"class":"step-assignee-info-wrapper"});
+		            	   var member_name = jQuery("<div>",{"class":"step-assignee-info-name",
+ 								 							"text":this.mname});
+		            	   var member_email = jQuery("<div>",{"class":"step-assignee-info-email",
+	 													      "text":this.mid});
+		            	   $(member_img_wrapper).append(memeber_img);
+		            	   $(member_info).append(member_name,member_email);
+		            	   $(member_div).append(member_img_wrapper,member_info).appendTo(li);
+		            	   $('#add-step-mgr-assignee-options').append(li);
 		               });
 		              
 		           } // end-success
 		        }); // end-ajax
 	});
+	
+	//스텝 담당자 선택시 dropdown hide시킨 후, 선택된 담당자 아이콘 뿌리기
+	$(document).on("click",".select-step-assignee-option",function(){
+		$("#add-step-mgr-assignee-btn").hide();
+		$("#add-step-mgr-assignee").val($($(this).find(".step-assignee-info-email")[0]).text());
+		var stepassignee_wrapper= jQuery("<div>",{"class":"step-assigned-member-wrapper"});
+		var stepassignee = $($(this).find(".step-assignee-wrapper")[0]).clone(); //드롭다운에서 선택된 멤버의 div태그를 복사
+		var i= jQuery("<i>",{"class":"fas fa-times cancel-step-assignee"});
+		$(stepassignee_wrapper).append(stepassignee,i);
+		$("#add-step-assignee").append(stepassignee_wrapper);
+		
+	})
+	
+	/// step 담당자 호버 시 취소버튼 생성
+	$(document).on("mouseenter",".step-assigned-member-wrapper",function(){
+		$(".cancel-step-assignee").css("visibility","visible")
+	}).on("mouseleave",".step-assigned-member-wrapper",function(){
+		$(".cancel-step-assignee").css("visibility","hidden")
+	});
+	
+	//// 스텝 담당자 취소시 초기화
+	$(document).on('click',".cancel-step-assignee",function(){
+		$(".step-assigned-member-wrapper").remove();
+		$("#add-step-mgr-assignee").val("");
+		$("#add-step-mgr-assignee-btn").show();
+	})
+	
+	
 	
 	// 스텝 생성 버튼 클릭시  alert 창 화면
 	$("#insert-step-btn").click(function(){	 
@@ -162,6 +245,7 @@ $(function() {
 			$("#move-project-pid").val(pid);
 			$("#move-project-pstatuscode").val("2");
 			$("#move-project-message").text("해당 프로젝트를 완료 프로젝트로 이동하시겠습니까?");
+			$("#move-project-submessage").text("");
 		});
 		
 		//사이드 드롭다운에서 프로젝트 삭제 버튼 클릭시 모달창 생성
@@ -172,7 +256,8 @@ $(function() {
 			$("#move-project-header").text("Project 삭제");
 			$("#move-project-pid").val(pid);
 			$("#move-project-pstatuscode").val("3");
-			$("#move-project-message").text("해당 프로젝트를 삭제하시겠습니까? \n 삭제시 해당 프로젝트는 14일 후 휴지통에서 영구 삭제됩니다.");
+			$("#move-project-message").text("해당 프로젝트를 삭제하시겠습니까?");
+			$("#move-project-submessage").text("(삭제시 해당 프로젝트는 14일 동안 휴지통에 보관되며 이후 영구 삭제됩니다.)");
 		});
 		
 		//사이드 드롭다운에서 프로젝트 재진행 버튼 클릭시 모달창 생성
@@ -183,6 +268,7 @@ $(function() {
 			$("#move-project-pid").val(pid);
 			$("#move-project-pstatuscode").val("1");
 			$("#move-project-message").text("해당 프로젝트를 재진행 하시겠습니까?");
+			$("#move-project-submessage").text("");
 		});
 		
 		////사이드 드롭다운에서 프로젝트 수정 버튼 클릭시 모달창 생성
@@ -321,14 +407,9 @@ $(function() {
 		
 		// 사이드바 스텝 이동 버튼 클릭시
 		$(document).on("click","#side-step-move",function(){
-			$("#move-step-select").selectmenu({
-											width:"70%",
-											open: function(event, ui){	
-												console.log("here"),
-												$(".ui-front").css("zIndex","1200")}
-											
-											});
-												
+			$("#move-step-folder-options").empty();
+			$("#move-step-selected-fid").val("no-folder");
+			$("#move-step-folder-name").empty().text("이동할 위치를 선택하세요");
 			var custom_menu =  $(this).parents("ul.custom-menu")[0];
 			var pid =  $(custom_menu).find("input[name=pid]").val();
 			var pids = [pid];
@@ -336,25 +417,64 @@ $(function() {
 			var fid =  $(custom_menu).find("input[name=fid]").val();
 			
 			$("#move-step-sid").val(sid);
+			
 			$.when(selectFolderList(pids)).done(function(data){
 				console.log(data.folderlist);
-				var optiondefault = jQuery("<option>",{"text":"폴더 밖으로 이동","value":""})
-				$("#move-step-select").empty();
-				$(optiondefault).appendTo($("#move-step-select"));	
+				
+				if(data.folderlist.length ==0){
+					var li = jQuery("<li>",{
+						"class":"move-step-folder-nofolder",
+						"role":"presentation",
+						"text":"폴더가 없습니다",
+					
+					})
+					$(li).appendTo("#move-step-folder-options");
+					return false;
+				}
+				
+				var li = jQuery("<li>",{
+					"class":"move-step-folder-option",
+					"role":"presentation",
+					"value":""
+				})
+				var def = $("<div>",{"class":"move-step-folder-name", 
+					"text":"폴더 밖으로 이동"});
+				$(li).append(def).appendTo("#move-step-folder-options");
+				
 				$(data.folderlist).each(function(index,folder){
-					var option = jQuery("<option>",{"text":folder.fname,
-													"value":folder.fid});
-					if(folder.fid==fid){
-						option.attr("selected",true);
-
+					if(folder.fid!=fid){
+						var li = jQuery("<li>",{
+							"class":"move-step-folder-option",
+							"role":"presentation",
+							"value":folder.fid
+						})
+						//	var folderwrapper= $("<div>",{"class":"move-step-folder-item"});
+						var foldername = $("<div>",{"class":"move-step-folder-name", 
+							"text":folder.fname});
+						var foldericon = $("<i>",{"class":"side-dir-folder-icon fas fa-folder"});					
+						$(li).append(foldericon,foldername).appendTo("#move-step-folder-options");
 					}
-					$(option).appendTo($("#move-step-select"));								
+										
 				});
 			});
 		});
 		
+		
+		$(document).on("click",".move-step-folder-option",function(){
+			var fid = ($(this).val() ==0)? "":$(this).val();
+			console.log(fid);
+			$("#move-step-selected-fid").val(fid);
+			$("#move-step-folder-name").text($($(this).find(".move-step-folder-name")).text());
+		})
+		
+		
 		///// 스텝이동 모달창에서 확인버튼 클릭 시 
 		$(document).on("click","#move-step-btn",function(){
+			if($("#move-step-selected-fid").val()=="no-folder"){
+				alert("이동할 위치를 선택해 주세요");
+				return false;
+			}
+			
 			var movestep = $("#move-step-form").serialize();
 			console.log(movestep);
 			$.ajax({
@@ -555,7 +675,7 @@ $(function() {
 	               
 	               if(data.updatefolder > 0){
 	                   alert('폴더 수정이 완료되었습니다!');
-	                   $("#f"+data.folderDTO.fid).text(data.folderDTO.fname);
+	                   $($("#f"+data.folderDTO.fid).find(".side-content-name")).text(data.folderDTO.fname);
 	                   $(".close").click();
 	               }else {
 	                   alert('폴더 수정이 실패되었습니다');
@@ -604,6 +724,13 @@ $(function() {
 	   })
 
 	 //  loadCurrentPage();
+	   
+	   
+	  /////////////툴팁 설정
+	  
+	   
+	   
+	   
 }); // end - doc.on.ready
 
 
@@ -849,8 +976,10 @@ function makeSideSubDir(pids){
  작성자명 : 김 래 영
  */
 function makeSideFolder(folder) {
-	var wrapper_div = jQuery("<div>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
-    var a =jQuery("<a>",{"class":"side-folder","text":folder.fname,"id":"f"+folder.fid});
+
+    var wrapper_div = jQuery("<div>",{"class":"side-folder-wrapper","id":"fwrapper"+folder.fid});
+    var a =jQuery("<div>",{"class":"side-content side-folder","id":"f"+folder.fid});
+    var foldername = jQuery("<div>",{"class":"side-content-name","text":folder.fname});
     var i = jQuery("<i>",{"class":"side-dir-arrow fas fa-angle-right", 
                          "data-toggle":"collapse",
                          "data-target":"#f-dir"+folder.fid});
@@ -858,7 +987,7 @@ function makeSideFolder(folder) {
     var div = jQuery("<div>",{"class":"side-dir collapse",
                         "id": "f-dir"+folder.fid});
     
-    $(a).prepend(i,foldericon).appendTo(wrapper_div);
+    $(a).prepend(i,foldericon,foldername).appendTo(wrapper_div);
     $(div).appendTo(wrapper_div);
     $(wrapper_div).appendTo($('#p-dir'+folder.pid));
 }
@@ -870,17 +999,12 @@ function makeSideFolder(folder) {
  작성자명 : 김 래 영
  */
 function makeSideStep(step) {
-    var a =jQuery("<a>",{
-        "class":"side-step",
-        "id":"s"+step.sid,
-        "text":step.sname
-        });
-    var i = jQuery("<i>",{"class":"side-dir-step-icon far fa-file-alt"})
-
-    $(a).prepend(i);
-
-	 
-	 return a;
+    var a =jQuery("<div>",{"class":"side-content side-step",
+    					   "id":"s"+step.sid });
+    var stepname = jQuery("<div>",{"class":"side-content-name","text":step.sname});
+    var i = jQuery("<i>",{"class":"side-dir-step-icon far fa-file-alt"});
+    $(a).append(i,stepname);
+	return a;
 }
 
 

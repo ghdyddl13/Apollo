@@ -31,9 +31,16 @@
 
 #board-main-div {
    overflow-x: auto;
+   -ms-overflow-style: none;
    max-width: calc(100% -250px);
    height: 100%;
    
+
+}
+
+#board-main-div::-webkit-scrollbar {
+
+display:none;
 
 }
 

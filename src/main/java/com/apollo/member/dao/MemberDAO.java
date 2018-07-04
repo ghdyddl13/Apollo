@@ -125,4 +125,29 @@ public interface MemberDAO {
 	 작성자명 : 김 정 권
 	 */
 	public ArrayList<ProjectDTO> gerUserProjects(String mid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 4.
+	 기      능 : email 인증키가 인증되면 인증확인 컬럼을 n->y로 변경
+	 작성자명 : 이 창 훈
+	 */
+	public int emailcheck(String mid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 4.
+	 기      능 : 입력한 각 이메일에 해당되는 인증키 가져오기
+	 작성자명 : 이 창 훈
+	 */
+	public String emailcheckbymid(String mid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 4.
+	 기      능 : 로그인할때 인증확인 컬럼 값 확인하기 (n이면 인증 안됨, y면 인증됨)
+	 작성자명 : 이 창 훈
+	 */
+	public String ischecked(String mid);
+
 }

@@ -4,7 +4,8 @@
 }
 
 .timeline-wrapper{
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 	height: 95%;
 	display: flex;
 }
@@ -144,7 +145,6 @@
 
 #timeline-tstatus-filter, #timeline-assignee-filter{
 	float:left;
-	margin: 10px;
 	background-color: transparent;
 	border: none;
 	text-align: center
@@ -159,7 +159,12 @@
 	fill: #b8c2cc !important ;
 	
 }
-.gantt .timeline-tstatus-1 .bar{
+.gantt .timeline-bar-color .bar{
+ fill: #5ba0dc
+}
+
+/* task 상태별 bar 색상 클래스 분류  */
+/* .gantt .timeline-tstatus-1 .bar{
 	fill: rgb(241, 196, 15) !important ;
 	
 }
@@ -226,7 +231,7 @@
 .gantt .timeline-tstatus-17 .bar{
 	fill: rgb(127, 127, 127) !important ;
 	
-}
+} */
 
 .gantt .sample-task .bar{
 	fill: none;

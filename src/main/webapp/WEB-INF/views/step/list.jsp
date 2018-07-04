@@ -4,8 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html >
 <script type="text/javascript" src="js/task.js"></script>
-<script type="text/javascript" src="js/stepInsideHeader.js"></script>    
-
 <div class="main-body">
   <div class="main-section-left" id="left">
     <div class="main-section-left-container">
@@ -23,9 +21,6 @@
               </span>
               <span class="list-header-selector-container">
                 <span class="list-header-selector-item" id ="timeline-page">TIMELINE</span>
-              </span>
-              <span class="list-header-selector-container">
-                <span class="list-header-selector-item" id ="workload-page">WORKLOAD</span>
               </span>
             </div>
           </div>
@@ -293,7 +288,7 @@
 	              {
 	                  name: 'Task마감',
 	                  type: 'pie',
-	                  radius : '60%',
+	                  radius : '50%',
 	                  center: ['45%', '50%'],
 	                  data:[
 	                      {value:<%=(Integer)request.getAttribute("noday")%>, name:'미지정'},
@@ -341,16 +336,16 @@
         <span class="list-section-third-selectpage-text" id="different-status">Choose Different status</span>
       </div>
       <div class="list-section-third-selectpage-addasignee">
-        <span class="list-section-third-selectpage-text">Add Asignees</span>
-        <span class="selectpage-body-button" id="selectpage-addasignee-button">Add</span>
+        <span class="list-section-third-selectpage-text">Add Asignee</span>
+        <span class="selectpage-body-button" id="selectpage-addasignee-button"data-toggle="modal" data-target="#list_Assign_Tasks">Add Asignee</span>
       </div>
       <div class="list-section-third-selectpage-addstep">
-        <span class="list-section-third-selectpage-text">Add Steps</span>
-        <span class="selectpage-body-button" id="selectpage-addsteps-button">Add</span>
+        <span class="list-section-third-selectpage-text">Add Step</span>
+        <span class="selectpage-body-button" id="selectpage-addsteps-button" data-toggle="modal" data-target="#list_AddStep_Tasks">Add Step</span>
       </div>
       <div class="list-section-third-selectpage-deletetask">
         <span class="list-section-third-selectpage-text">Delete tasks</span>
-        <span class="selectpage-body-button" id="selectpage-deletetask-button">Delete</span>
+        <span class="selectpage-body-button" id="selectpage-deletetask-button" data-toggle="modal" data-target="#list_Delete_Tasks">Delete Tasks</span>
       </div>
     </div>
   </div>

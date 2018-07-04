@@ -96,11 +96,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="getRecentTasks" resultType="com.apollo.vo.TaskDTO">
-		select * from task t join tstatus s 
+		select * from 
+		(select * from task t join tstatus s 
 		on t.tstatusid = s.tstatusid 
-		where (ctime between sysdate-3 and sysdate) 
-		and pid in (select pid from pmember where mid =#{mid}) 
-		and rownum &lt;= 10 order by tid desc
+		where pid in (select pid from pmember where mid =#{mid}) order by tid desc)
+		where rownum &lt;=10 
 	</select>
     
     <select id ="getSearchTasks" parameterType="hashmap" resultType="com.apollo.vo.TaskDTO">

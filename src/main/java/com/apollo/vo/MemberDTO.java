@@ -1,10 +1,6 @@
 package com.apollo.vo;
 
 import java.sql.Date;
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class MemberDTO {
 
@@ -17,7 +13,21 @@ public class MemberDTO {
 	private String deptname;
 	private String apollokey;
 	private String position;
+	private String emailcheckkey;
+	private String ischecked;
 	
+	public String getIschecked() {
+		return ischecked;
+	}
+	public void setIschecked(String ischecked) {
+		this.ischecked = ischecked;
+	}
+	public String getEmailcheck() {
+		return emailcheckkey;
+	}
+	public void setEmailcheck(String emailcheckkey) {
+		this.emailcheckkey = emailcheckkey;
+	}
 	public String getMid() {
 		return mid;
 	}
