@@ -77,11 +77,7 @@ public class TaskController {
 	public View getTask(int tid, HttpSession session, Model model) {
 
 	System.out.println("getTask 작동");
-		
-	int pid = (Integer) session.getAttribute("pid");
-	
     String mid = (String) session.getAttribute("mid");
-
     
     ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
     starredtasklist = service.getStarredTaskList(mid);
@@ -96,7 +92,7 @@ public class TaskController {
 	model.addAttribute("steps", steplist);
 	
 	ArrayList<TstatusDTO> tstatuslist = new ArrayList();
-	tstatuslist = service.gettstatuslist(pid);
+	tstatuslist = service.gettstatuslist(tid);
 	model.addAttribute("tstatuslist", tstatuslist);
 	
 	// 해당 테스크의 담당자들
@@ -230,7 +226,9 @@ public class TaskController {
 	 */
 	@RequestMapping("/changetstatus.htm")
 	public String changeTstatus(int tid, int value, String tname, Model model, HttpSession session) {
-	
+		
+		System.out.println("changetstatus 컨트롤러 실행됨");
+		
 		TidvalueDTO dto = new TidvalueDTO();
 		dto.setTid(tid);
 		dto.setValue(value);
@@ -243,9 +241,8 @@ public class TaskController {
 			System.out.println("상태변경 성공! 상태변경 코멘트 입력 시작!");
 			String comment = "";
 			String mid = (String) session.getAttribute("mid");
-			int pid = (Integer) session.getAttribute("pid");
 			ArrayList<TstatusDTO> tstatuslist = new ArrayList();
-			tstatuslist = service.gettstatuslist(pid);
+			tstatuslist = service.gettstatuslist(tid);
 
 			for(TstatusDTO tstatusdto : tstatuslist) {
 				int tstatusid = tstatusdto.getTstatusid();
@@ -261,6 +258,14 @@ public class TaskController {
 			commentdto.setTid(tid);
 			commentdto.setMid(mid);
 			commentdto.setCmtkind(1);
+			
+			System.out.println("컨트롤러에서 검증");
+			System.out.println(commentdto.getCmtid());
+			System.out.println(commentdto.getComments());
+			System.out.println(commentdto.getTid());
+			System.out.println(commentdto.getMid());
+			System.out.println(commentdto.getCmtkind());
+			System.out.println("=================");
 			
 			int insert_comment_result = service.insertComment(commentdto);
 			System.out.println("코멘트 입력 여부 : " + insert_comment_result);

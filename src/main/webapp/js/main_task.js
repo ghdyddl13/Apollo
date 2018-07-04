@@ -767,6 +767,8 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 	var value = $('#Task_Modal_tstatus_selectbox').val();
 	var tname = $('#tnamehidden').attr('value');
 	
+	console.log('/'+ tid +'/' + value +'/' + tname + '/')
+	
 	  $.ajax(
 		       {
 		           type : "post",
