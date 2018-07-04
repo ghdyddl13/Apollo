@@ -122,5 +122,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="gerUserProjects" parameterType="String" resultType="com.apollo.vo.ProjectDTO">
 		select * from project where pid in (select pid from pmember where mid = #{mid}) order by pid asc
 	</select>
-	
 </mapper>

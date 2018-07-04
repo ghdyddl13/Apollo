@@ -1,5 +1,45 @@
 $(function() {
-
+	
+	
+	 $(document).tooltip({
+		 classes: {
+			    "ui-tooltip": "apollo-tooltip"
+		 },
+		 content: function() {
+		       return $(this).prop('title');
+		      }
+	 });   
+	
+	 $(".question-project").attr(
+			 "title",
+			 "프로젝트를 생성하여 여러명의 동료를 초대해 함께 협업할 수 있습니다. 같은 회사의 Apollo Code를 등록한 " +
+			 "멤버들만 초대할 수 있습니다.<br><br> " +
+			 "프로젝트는 진행 상태에 따라 'Working Project', 'Completed Project','Trash Bin'에" +
+			 "따로 관리할 수 있습니다. 다만, 'Trash Bin'에 보관할 경우 14일 이후 영구 삭제되니 주의하세요."
+	 );
+	 
+	  $(".question-methodology").attr(
+			 "title",
+			 "아폴로는 애자일과 폭포수 개발 방법론에 최적화 되어있는 프로젝트 템플릿을 제공합니다. " +
+			 "각각의 템플릿은 해당 방법론에 적합한 폴더와 스텝의 구조, 그리고 서로 다른 칸반보드를 제공합니다. <br><br>" +
+			 "어떤 구조를 설정하든 스텝과 폴더를 이용자 마음대로 생성/수정/삭제 할 수 있습니다."
+			 
+	 );
+	  
+	  $(".question-step").attr(
+				 "title",
+				 "스텝에서 Task(업무)를 생성 및 관리할 수 있습니다. 스텝은 리스트, 칸반보드, 간트차트로 구성되어 있어 " +
+				 "Task들을 효과적으로 관리할 수 있습니다.<br><br> 또한 스텝간 Task를 공유 혹은 이동함으로써 유동적인 업무관리가 가능합니다.<br><br>" +
+				 "스텝은 해당 프로젝트 내에서 폴더 간 위치를 변경할 수 있습니다. "
+		 );
+	  
+	  $(".question-folder").attr(
+				 "title",
+				 "폴더는 프로젝트에 속한 여러 스텝들을 그룹으로 묶어 관리할 수 있습니다. 스텝을 특징별로 묶어 프로젝트를 좀 더 체계적으로 관리하고 싶을 때 활용해 보세요." +
+				 "<br><br> " +
+				 "폴더를 삭제할 경우 폴더에 속한 Step도 모두 삭제되어 복구할 수 없으니 주의하시기 바랍니다." 
+				
+		 );
 		
 	makeSideProjectDir();
 	
@@ -680,6 +720,13 @@ $(function() {
 	   })
 
 	 //  loadCurrentPage();
+	   
+	   
+	  /////////////툴팁 설정
+	  
+	   
+	   
+	   
 }); // end - doc.on.ready
 
 

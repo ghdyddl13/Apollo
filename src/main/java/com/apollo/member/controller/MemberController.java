@@ -68,7 +68,6 @@ public class MemberController {
 	 */
 	@RequestMapping("/index.htm")
 	public String intro() {
-		System.out.println("intro");
 		return "intro";
 	}
 	
@@ -287,7 +286,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/index.htm";
+		return "redirect:/login.htm";
 	}
 	
 	public String changeProfile(MemberDTO memberdto, Model model) {

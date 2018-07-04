@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apollo.member.dao.MemberDAO;
+import com.apollo.project.dao.ProjectDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidpidDTO;
+import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 
@@ -159,6 +161,18 @@ public class ProjectInfoService {
 		System.out.println("result : " + result);
 		
 		return result;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 4.
+	 기      능 : 프로젝트 페이지에서 프로젝트 정보를 가지고 오기 위한 함수
+	 작성자명 : 이 진 우
+	 */
+	public ProjectDTO getProjectInfo(int pid) {
+		ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
+		ProjectDTO projectinfo = dao.selectProject(pid);
+		
+		return projectinfo;
 	}
 	
 	
