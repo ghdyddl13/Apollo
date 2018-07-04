@@ -60,14 +60,15 @@ public class ProjectTableController {
 			folderlist = tableservice.selectFolderList(pids);
 			model.addAttribute("folderlist", folderlist);
 			
-			ArrayList<TaskDTO> tasklist = null; //sid 에 속한 task 및 tstatus 가져오기
-			tasklist = tableservice.getTasksInStep(steplist);
-			model.addAttribute("tasklist", tasklist);
-			
+			if(steplist.size() != 0) {
+				System.out.println(steplist.size());
+				ArrayList<TaskDTO> tasklist = null; //sid 에 속한 task 및 tstatus 가져오기
+				tasklist = tableservice.getTasksInStep(steplist);
+				model.addAttribute("tasklist", tasklist);	
+			}
 
 			ProjectDTO projectinfo = projectinfoservice.getProjectInfo(pid);
 			model.addAttribute("projectinfo", projectinfo);
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();

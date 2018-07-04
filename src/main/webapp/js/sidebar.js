@@ -1,7 +1,7 @@
 $(function() {
-	
-	
-	 $(document).tooltip({
+	checkIsHereTimeline();
+	/////////////  프로젝트, 폴더, 스텝 생성 모달창 도움말 설정////////////////////
+	 $(".modal-question").tooltip({
 		 classes: {
 			    "ui-tooltip": "apollo-tooltip"
 		 },
@@ -40,7 +40,9 @@ $(function() {
 				 "폴더를 삭제할 경우 폴더에 속한 Step도 모두 삭제되어 복구할 수 없으니 주의하시기 바랍니다." 
 				
 	  );
+/////////////  프로젝트, 폴더, 스텝 생성 모달창 도움말 설정 끝////////////////////
 		
+	// 사이드바 구조 생성  
 	makeSideProjectDir();
 	
 	// 사이드바 디렉토리 화살표 변경
@@ -153,6 +155,10 @@ $(function() {
 			 alert("책임자를 선택하세요.");
 			 return false;
 		 }
+		 if($('#insert-step-sday-id').val() > $('#insert-step-eday-id').val()) {
+			 alert("시작일이 종료일보다 앞설 수 없습니다.");
+			return false;
+		 }
 		 var newstep = $('#step-add-form').serialize();
 		 $.ajax({
 			 
@@ -244,7 +250,7 @@ $(function() {
 			$("#move-project-header").text("Project 완료");
 			$("#move-project-pid").val(pid);
 			$("#move-project-pstatuscode").val("2");
-			$("#move-project-message").text("해당 프로젝트를 완료 프로젝트로 이동하시겠습니까?");
+			$("#move-project-message").html("해당 프로젝트를 완료 프로젝트로<br> 이동하시겠습니까?");
 			$("#move-project-submessage").text("");
 		});
 		
@@ -304,8 +310,11 @@ $(function() {
 					alert("프로젝트명을 입력해주세요.");
 					$("#update-project-name").focus();	
 					return false;
-				 }
-			 
+			}
+			 if($("#update-project-sday").val() > $("#update-project-eday").val()) {
+				 alert("시작일이 종료일보다 앞설 수 없습니다.");
+				return false;
+			 }
 			var project = $("#update-project-form").serialize();
 			console.log(project);
 			
@@ -572,6 +581,11 @@ $(function() {
 			$("#add-project-name").focus();	
 			return false;
 		 }
+		 if($('#insert-project-sday-id').val() > $('#insert-proejct-eday-id').val()) {
+			 alert("시작일이 종료일보다 앞설 수 없습니다.");
+			return false;
+		 }
+		 
 		 var newproject = $("#project-add-form").serialize(); //serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
 
 		 $.ajax({
@@ -580,6 +594,7 @@ $(function() {
 			 type:"POST",
 			 dataType:"json",
 			 success: function(data){
+
 				 if(data.result > 0){
 					 alert("프로젝트 생성이 완료되었습니다!");
 					 $(".close").click();
@@ -1049,5 +1064,14 @@ function loadCurrentPage(){
 	}
 }
 */
-   
+function checkIsHereTimeline(){
+	  if (window.sessionStorage) {
+
+        sessionStorage.setItem('저장할 이름 - 문자열', '저장할 객체');
+        var position = sessionStorage.getItem('location');
+        console.log(sessionStorage);
+    }
+
+}
+
    

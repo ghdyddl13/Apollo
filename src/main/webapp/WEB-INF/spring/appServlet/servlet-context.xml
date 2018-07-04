@@ -75,13 +75,12 @@
 	<mvc:annotation-driven/>
 	 	<!--Socket -->
  	
-	<bean id="chat" class="com.apollo.socket.ChatWebSocketHandler" />
+	<bean id="socket" class="socket.ChatWebSocketHandler" />
 	<websocket:handlers>
-		<websocket:mapping handler="chat" path="/chat" />
+		<websocket:mapping handler="socket" path="/socket.htm" />
 		<websocket:handshake-interceptors>
-			 <bean class="com.apollo.socket.HandShakeInterceptor"/>
-			<!--  <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean> -->
+			 <bean class="socket.HandShakeInterceptor"/>
+			 <!-- <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean> -->
 		</websocket:handshake-interceptors>
 	</websocket:handlers> 
-
 </beans>

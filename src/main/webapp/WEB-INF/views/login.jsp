@@ -16,123 +16,28 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="css/common.css" type="text/css" rel="stylesheet">
-
-<!--Mywork CSS  -->
-<link href="css/myWork.css" type="text/css" rel="stylesheet">
-
+<script type="text/javascript" src="js/login.js"></script>
 <title>Insert title here</title>
-<script type="text/javascript">
-
-	$(function() {
-		var msg = "${msg}";
-		if (msg != "") {
-			alert(msg);
-		}
-		
-		$("#google-login-btn").click(function(){
-			$()
-		});
-
-		$("#pwdreset").click(function() {
-			$("#findpwd")[0].reset();
-		});
-		$("#keybtn").click(function() {
-			$("#apollokey").submit();
-		});
-		$("#keyreset").click(function() {
-			$("#apollokey")[0].reset();
-		});
-
-		$('#pwdbtn').click(function() {
-
-			var data = {
-				mname : $('input[name=mname2]').val(),
-				mid : $('input[name=mid2]').val()
-			}
-			console.log(data)
-			$.ajax({
-				type : 'post',
-				url : 'findpwd.htm',
-				data : data,
-				success : function(data) {
-					$('input[name=mname2]').val('')
-					$('input[name=mid2]').val('')
-					if (data.result == '성공') {
-						alert('입력하신 Email로 임시비밀번호를 발송했습니다.')
-					} else if (data.result == '실패') {
-						alert('입력하신 이름과 Email이 일치하지 않습니다.\n다시한번 확인 하시기 바랍니다.')
-					} else {
-						alert('입력하신  Email이 존재하지 않습니다.\n다시한번 확인 하시기 바랍니다.')
-					}
-				}
-			})
-
-		})
-		
-	     var input = document.getElementById("pwd");
-	     input.addEventListener("keyup", function(event) {
-	         event.preventDefault();
-	         if (event.keyCode === 13) {
-	             document.getElementById("login_btn").click();
-	         }
-	     });
-		
-	});
-
-	function login() {
-		if ($("#mid").val() == "") {
-			alert("아이디를 입력하지 않았습니다.");
-			$("#mid").focus();
-			return false;
-		}
-
-		if ($("#pwd").val() == "") {
-			alert("비밀번호 입력하지 않았습니다.");
-			$("#pwd").focus();
-			return false;
-		}
-		$("#f").submit();
-		$("#mid").val("");
-		$("#pwd").val("");
-	}
-	
-      
-</script>
 </head>
 <body>
-	<div class="container-fluid" align="center">
+	<div class="login-wrapper" align="center">
 		<div class="login-container">
-
-		<form id="f" action="login.htm" method="post">
+			<input type="hidden" value="${msg}" id="login-msg">
+			<form id="login-form" action="login.htm" method="post">
 				<!-- 제목 -->
 				<h1 class="login-head">
 					<b>Login to Apollo</b>
 				</h1>
 				<br>
-				<!-- <i> 사람모양 열쇠모양 , input 부분 -->
-				
-				
-				<div class="input-group">
-					<span class="input-group-addon"> <i class="fa fa-user fa i-width2"></i></span> 
-						<input type="text" class="form-control" placeholder="Username" name="mid" id="mid">
-				</div>
-				<div class="input-group">
-					<span class="input-group-addon"><i class="	fa fa-key i-width"></i></span> 
-						<input type="password" class="form-control" placeholder="****" name="pwd" id="pwd">
-				</div>
-			
-				
-				<!-- 구매 취소 부분  -->
+				<input type="text" class="login-input" placeholder="E-mail" name="mid" id="mid">
+				<input type="password" class="login-input" placeholder="Password" name="pwd" id="pwd">
+				<br>
 				<input id="login_btn" type="button" onclick="login()" class="btn btn-block login-btn" value="로그인"> 
 				<input type="button" class="btn btn-block buy-license-btn" value="구매하기" data-toggle="modal" data-target="#apollokey-modal-dialog">
-				
-				
-				<div class="btn btn-block googlelogin-btn" id="google-login-btn"  onclick="location.href='<%=request.getContextPath()%>/google.htm'">
+				<div class=" googlelogin-btn btn-block" id="google-login-btn"  onclick="location.href='<%=request.getContextPath()%>/google.htm'">
 					<img class="google_img" alt="구글 로그인" src="<%=request.getContextPath()%>/img/googlelogin.png" >
-					<span class="btn google_login">GOOGLE 로그인</span>
+					<span class="google_login">GOOGLE 로그인</span>
 				</div>	
-			
-				
 				
 				<br> 
 				<!-- 비밀번호 ,회원가입 페이지 링크 -->
@@ -143,12 +48,13 @@
 					<a data-toggle="modal" data-target="#pwdModal">비밀번호를
 						잊어버리셨나요?</a>
 				</p>
-				<br> <br> <br>
-				</form>
+			
+			</form>
 				
-				<p class="footer">@ Copyright 2018.All right reserved</p>
 			
 		</div>
+		<br><br>
+			<p class="footer">@ Copyright 2018.All right reserved</p>
 	</div>
 
 
@@ -156,7 +62,6 @@
 
 		<div class="modal fade" id="apollokey-modal-dialog" role="dialog">
 			<div class="modal-dialog">
-				<form action="apollokey.htm" id="apollokey" method="post">
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header" id="modal">
@@ -194,7 +99,6 @@
 					
 
 				</div>
-				</form>
 			</div>
 		</div>
 	

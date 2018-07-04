@@ -1,4 +1,4 @@
-package com.apollo.socket;
+package socket;
 
 import java.util.Map;
 
@@ -17,22 +17,13 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
     public boolean beforeHandshake(ServerHttpRequest request,
             ServerHttpResponse response, WebSocketHandler wsHandler,
             Map<String, Object> attributes) throws Exception {
-  
+    	
+    	ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
+    	HttpServletRequest req= ssreq.getServletRequest();
         System.out.println("Before Handshake");
-          
-          
-        ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
-        System.out.println("URI:"+request.getURI());
-  
-        HttpServletRequest req =  ssreq.getServletRequest();
- 
-        /*String userId = req.getParameter("userid");
-        System.out.println("param, id:"+userId);
-        attributes.put("userId", userId);*/
-  
-        // HttpSession 에 저장된 이용자의 아이디를 추출하는 경우
-        String nickname = (String)req.getSession().getAttribute("nickname");
-        attributes.put("nickname", nickname);
+        // 파라미터로 입력된 attributes에 put을 하면 
+        // WebSocketSession에 자동으로 저장되어 Chat class에서 활용 가능
+        attributes.put("mid", req.getSession().getAttribute("mid"));
         return super.beforeHandshake(request, response, wsHandler, attributes);
     }
   
@@ -43,6 +34,5 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
         System.out.println("After Handshake");
   
         super.afterHandshake(request, response, wsHandler, ex);
-    }
-  
+    } 
 }

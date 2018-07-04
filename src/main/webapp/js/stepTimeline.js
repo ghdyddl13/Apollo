@@ -323,15 +323,6 @@ function makeFilterdTimeline(tasks){
 	}
 }
 
-$(function(){
-	
-	$("#timeline").on(function(){
-		console.log("만들어짐");
-	})
-})
-
-
-
 
 
 

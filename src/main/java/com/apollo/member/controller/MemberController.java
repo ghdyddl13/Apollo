@@ -159,6 +159,7 @@ public class MemberController {
 		int result = 0;
 		String viewpage="";
 		String emailcheckkey = "";
+		String msg="";
 		for (int i = 0; i < 8; i++) {
 			char lowerStr = (char) (Math.random() * 26 + 97);
 			if (i % 2 == 0) {
@@ -172,7 +173,7 @@ public class MemberController {
 		MimeMessage message = javaMailSender.createMimeMessage();
 		try {
 			MimeMessageHelper messageHelper1 = new MimeMessageHelper(message, true, "utf-8"); // true로 해야 첨부파일 추가 가능
-			messageHelper1.setSubject("인증 메일 보내드립니다.");
+			messageHelper1.setSubject("안녕하세요, Apollo 입니다. 인증 메일 보내드립니다.");
 
 			String templateLocation1 = "emailcheck.vm";
 
@@ -196,11 +197,12 @@ public class MemberController {
 		}
 		result = service.insertMember(memberdto);
 		if(result > 0) {
+			msg="입력하신 E-Mail로 인증메일을 전송했습니다. 메일 인증을 하지 않으면 로그인을 할 수 없습니다.";
 			viewpage = "login";
 		}else {
 			viewpage = "join.htm";
 		}
-		
+		model.addAttribute("msg", msg);
 		return viewpage; //주의 (website/index.htm
 	}	
 	
@@ -259,7 +261,6 @@ public class MemberController {
 				result = "login";
 			}
 		}
-	
 		model.addAttribute("msg", msg);
 		
 		  
@@ -285,12 +286,13 @@ public class MemberController {
 	 작성자명 : 이 창 훈
 	 */
 	@RequestMapping(value = "/apollokey.htm", method = RequestMethod.POST)
-	public String createApollokey(AuthkeyDTO authkeydto) {
+	public View createApollokey(AuthkeyDTO authkeydto, Model model)throws Exception {
+		int result = 0;
 		MimeMessage message = javaMailSender.createMimeMessage();
 
 		try {
 			MimeMessageHelper messageHelper1 = new MimeMessageHelper(message, true, "utf-8"); // true로 해야 첨부파일 추가 가능
-			messageHelper1.setSubject("안녕하세요, Apollo 입니다.");
+			messageHelper1.setSubject("안녕하세요, Apollo 입니다. 인증키 보내드립니다.");
 
 			String templateLocation1 = "officeKey.vm";
 
@@ -327,12 +329,16 @@ public class MemberController {
 			//AuthkeyDTO에 임의의 난수 16자리 apollokey값 저장하기
 			authkeydto.setApollokey(apollokey);
 			
-			service.createApollokey(authkeydto);
+			 result = service.createApollokey(authkeydto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return "redirect:/login.htm";
+		if(result > 0 ) {
+			model.addAttribute("result","성공");
+			return jsonview;
+		}
+		return jsonview;
 	}
 	
 	public String changeProfile(MemberDTO memberdto, Model model) {
@@ -363,7 +369,7 @@ public class MemberController {
 				MimeMessage message = javaMailSender.createMimeMessage();
 				try {
 					MimeMessageHelper messageHelper1 = new MimeMessageHelper(message, true, "utf-8"); // true로 해야 첨부파일 추가 가능
-					messageHelper1.setSubject("안녕하세요, Apollo 입니다.");
+					messageHelper1.setSubject("안녕하세요, Apollo 입니다. 임시 비밀번호 보내드립니다.");
 					String templateLocation = "findPwd.vm";
 
 					String pwd = "";

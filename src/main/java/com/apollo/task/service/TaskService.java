@@ -49,7 +49,6 @@ public class TaskService {
 	 */
 	public int updateTask(TaskDTO taskdto) {
 		int result = 0;
-		
 		try {
 			TaskDAO dao = session.getMapper(TaskDAO.class);
 			result = dao.updateTask(taskdto);
@@ -322,8 +321,19 @@ public class TaskService {
 		 System.out.println("!!리시버 테이블에 인서트 성공??!!");
 		 return result;
 	}
-	
-	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 2.
+	 기      능 : 웹소켓에서 사용
+	 작성자명 : 신 호 용
+	 */
+		public ArrayList<String> getMidinAssingnee(int tid) {
+		
+		System.out.println("changeTname 서비스 실행");
+		AssigneeDAO assigneedao = session.getMapper(AssigneeDAO.class);
+		ArrayList<String> result = assigneedao.getMidinAssingnee(tid);
+		return result;
+	}
 
 	/**
 	 * 
@@ -630,6 +640,8 @@ public class TaskService {
 		int result = taskdao.changeTname(dto);
 		return result;
 	}
+	
+	
 	
 }
 
