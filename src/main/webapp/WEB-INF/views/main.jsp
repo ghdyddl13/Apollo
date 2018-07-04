@@ -86,12 +86,52 @@
 <title>Project Apollo</title>
 
 
-<style>
-
-
-
-</style>
-
+<script type="text/javascript">
+	
+	var nickname;
+	var wsocket;
+	function connect() {
+		console.log("커넥트 했니?????");
+		wsocket = new WebSocket("ws://192.168.0.45:8090/bit/main.htm");
+		wsocket.onopen = onOpen;
+		wsocket.onmessage = onMessage;
+		wsocket.onclose = onClose;
+	}
+	function disconnect() {
+		wsocket.close();
+	}
+	function onOpen(evt) {
+	}
+	function onMessage(evt) {
+		var data = evt.data;
+		appendMessage(data);
+	}
+	function onClose(evt) {
+	}
+	function send() {
+		console.log("send")
+		var msg = $("#comment_input_box_in_taskmodal").val();
+		if(msg.trim()!=""){
+			wsocket.send($("#tidhidden").val()+'|'+nickname + " : " + msg);
+		}
+	}
+	
+	
+	function appendMessage(msg) {
+		$("#inbox_count").empty();
+		$("#inbox_count").append(msg);
+	}
+	
+	$(document).ready(function() {
+		
+		nickname=$("#header-user-name").html();
+		connect();
+		$('#exitBtn').click(function(){
+			disconnect();
+			window.close();
+		});
+	});
+</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
@@ -108,7 +148,5 @@
 		</div>	
 	</div>
 </div>
-	
-	
 </body>
 </html>

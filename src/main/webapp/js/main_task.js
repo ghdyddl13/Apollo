@@ -1024,6 +1024,7 @@ var getCommentAndMemberlist = (function (){
 		           data : {
 		        	   'tid' : tid
 		           },
+		           async: false,
 		           success : function(rdata){
 		        	   
 		        	   console.log('getCommentAndMemberlist get 완료');
@@ -1068,9 +1069,7 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
 	
   // @ 쳤을 시
   if (event.keyCode === 50) {
-
 	var pid = $('#pidhidden').attr('value');
-	  
     $.ajax(
            {
                type : "post",
@@ -1127,33 +1126,42 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
   
   // 엔터키 칠 시
   if (event.keyCode === 13) {
-	  
 	   var tid = $('#tidhidden').attr('value');
-	   var comments = $('#comment_input_box_in_taskmodal').val();
-
-	   $.ajax(
-		       {
-		           type : "post",
-		           url  : "insertcommentandreceiver.htm",
-		           data : {
-		        	   'tid': tid,
-		        	   'comments' : comments
-		           },
-		           success : function(rdata){
-		        	   console.log('success 성공 테스트 출력 : ' + rdata);
-		        	   
-			           // comment
-			           getCommentAndMemberlist();
-			           $('#comment_input_box_in_taskmodal').val('');
-			           
-		        	   
-		           } // end-success
-		        }); // end-ajax
-
+	   var comments = $('#comment_input_box_in_taskmodal').val();	   
+	   $.when(insertCommentReceiver(tid,comments)).done(function(data){
+		   send(); //웹 소켓 send 함수 추가
+		   event.stopPropagation();
+		   $('#comment_input_box_in_taskmodal').val('');
+	   });
   } // end - keyCode=13
-  
 });
 
+/**
+ * 
+ 날      짜 : 2018. 7. 3.
+ 기      능 : ajax 순서를 위해 함수로 뻄
+ 작성자명 : 신 호 용
+ */
+function insertCommentReceiver(tid,comments){
+	var ajax =$.ajax(
+	   {
+		   type : "post",
+		   url  : "insertcommentandreceiver.htm",
+		   data : {
+			   'tid': tid,
+			   'comments' : comments
+		   },
+		   success : function(rdata){
+			   console.log('success 성공 테스트 출력 : ' + rdata);
+			   
+			   // comment
+			   getCommentAndMemberlist();
+
+		   } // end-success
+		   
+	   }); // end-ajax
+	return ajax;
+}
 
 
 /**

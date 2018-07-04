@@ -1,6 +1,7 @@
 $(function() {
 	// 헤더 inbox 페이지
 	$("#inbox-page").click(function(evt){
+		$("#inbox_count").empty();
 		$.ajax({
 			type:"GET",
 			url:"inbox.htm",
