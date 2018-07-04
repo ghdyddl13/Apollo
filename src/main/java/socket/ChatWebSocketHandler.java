@@ -66,12 +66,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 			int tid = Integer.parseInt(strtid);
 			System.out.println("tid : " +tid);
 			ArrayList<String> midlist = service.getMidinAssingnee(tid);
-			
-			int newcount = serviceinbox.newCount(userid);
-			
-			System.out.println("newcount" +newcount);
-			String newcountstr = Integer.toString(newcount);
-			System.out.println("newcountstr "+ newcountstr);
+			for(int i = 0 ;i<midlist.size();i++) {	
+				System.out.println("midlist " + midlist.get(i));
+			}
+			int newcount = 0;
+			String newcountstr = null;
 			
 			Set key = users.keySet();
 			System.out.println("key" + key);
@@ -79,14 +78,17 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 			for (Iterator iterator = key.iterator(); iterator.hasNext();) {
 				String keyName = (String) iterator.next();
 				WebSocketSession  wssession = users.get(keyName);				
-				for(int i = 0 ;i<midlist.size();i++) {					
+				for(int i = 0 ;i<midlist.size();i++) {			
 					if(midlist.get(i).equals(userid)) {
 						System.out.println("나한테는 알람 안보냄~");
-					}else if(midlist.get(i).equals(keyName)) {
+					}else if(midlist.get(i).equals(keyName)){
+						newcount = serviceinbox.newCount(midlist.get(i));
+						newcountstr = Integer.toString(newcount);
 						wssession.sendMessage(new TextMessage(newcountstr));
 						System.out.println(wssession.getId() + "에 메시지 발송: " + newcount);
 					}
 				}
+				
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
