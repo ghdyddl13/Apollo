@@ -57,6 +57,8 @@
 		 	<mvc:exclude-mapping path="/keycheck.htm"/>
 		 	<mvc:exclude-mapping path="/login.htm"/>
 		 	<mvc:exclude-mapping path="/join.htm"/>
+		 	<mvc:exclude-mapping path="/joinform.htm"/>
+		 	<mvc:exclude-mapping path="/emailcheck.htm"/>
 		 	<mvc:exclude-mapping path="/apollokey.htm"/>
 		 	<mvc:exclude-mapping path="/findpwd.htm"/>
 		 	<mvc:exclude-mapping path="/google.htm"/>

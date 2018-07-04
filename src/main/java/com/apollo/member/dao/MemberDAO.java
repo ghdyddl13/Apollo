@@ -125,4 +125,10 @@ public interface MemberDAO {
 	 작성자명 : 김 정 권
 	 */
 	public ArrayList<ProjectDTO> gerUserProjects(String mid);
+	
+	public int emailcheck(String mid);
+	
+	public String emailcheckbymid(String mid);
+	
+	public String ischecked(String mid);
 }

@@ -1,0 +1,19 @@
+<p>안녕하세요, <strong>${mname}님</strong>(${mid})!</p>
+
+<p> Apollo 관리자 입니다.</p>
+
+<p>저희 <strong>Apollo</strong>를 이용해주셔서 감사합니다.</p>
+
+<p> 인증메일 보내드립니다. </p>
+
+<p> 인증키 : <strong>${emailcheckkey}</strong></p>
+
+<p>앞으로도 많은 방문 부탁드립니다.</p>
+
+<p>
+
+<a href="http://localhost:8090/bit/emailcheck.htm?mid=${mid}&emailcheckkey=${emailcheckkey}">이메일 인증 확인<a> 
+
+
+<p>&nbsp;</p>
+
