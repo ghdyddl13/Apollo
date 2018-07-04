@@ -250,7 +250,7 @@ $(function() {
 			$("#move-project-header").text("Project 완료");
 			$("#move-project-pid").val(pid);
 			$("#move-project-pstatuscode").val("2");
-			$("#move-project-message").text("해당 프로젝트를 완료 프로젝트로 이동하시겠습니까?");
+			$("#move-project-message").html("해당 프로젝트를 완료 프로젝트로<br> 이동하시겠습니까?");
 			$("#move-project-submessage").text("");
 		});
 		
