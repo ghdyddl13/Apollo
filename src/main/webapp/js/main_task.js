@@ -9,8 +9,7 @@
 $(document).on("click",".Task_RUD_Modal",function(){
 		
 		var temptid = $(this).attr('id'); 
-	    var tid = parseInt(temptid.substring(1));
-		
+		var tid =parseInt(temptid.substring(1));
 		$.ajax(
 			       {
 			           type : "post",

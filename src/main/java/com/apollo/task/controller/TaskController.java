@@ -77,6 +77,7 @@ public class TaskController {
 	public View getTask(int tid, HttpSession session, Model model) {
 
 	System.out.println("getTask 작동");
+
     String mid = (String) session.getAttribute("mid");
     
     ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
