@@ -4,6 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
+<script>	
+</script>
 <div class="main-body-container">
   <div class="main-body-onepannel">
     <div class="main-body-onepannel-container">
@@ -14,6 +16,7 @@
       </div>
       <div class="main-body-onepannel-body">
 		<div class="project-table-content" align="center">
+		
 	      <table class="table project-page-table">
 	         <thead>
 	            <tr>
@@ -24,8 +27,7 @@
 	               <th>Status</th>
 	            </tr>
 	         </thead>
-	         <tbody>
-	         
+	         <tbody id="project-page-tbody">
 	            <!-- 폴더에 속하지 않은 스텝 뿌려주기 -->
 	            <c:forEach var="step" items="${steplist}">
 	            
@@ -80,6 +82,7 @@
 	                     </c:if>
 	                  </c:forEach>
 	               </c:if>
+	                
 	            </c:forEach>
 	            <!-- 폴더 뿌려주기 -->
 	            <c:forEach var="folder" items="${folderlist}">
@@ -132,6 +135,14 @@
 	            </c:forEach>
 	         </tbody>
 	      </table>
+	      <div id="proejct-page-table-no-data">
+	      	<div id="proejct-page-table-img-content">
+	      		<img src="img/rocket.png" id="proejct-page-table-img">
+	      	</div>
+	      	<div id="proejct-page-table-no-data-content">
+	      		NO DATA!
+	      	</div>
+	      </div>
 		 </div><!--END OF TABLE  -->
       </div>
     </div>

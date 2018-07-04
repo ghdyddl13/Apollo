@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +19,10 @@
 			location.href="login.htm";
 		});
 		
-		$('#intro-join-btn').click(function() {
+		/* $('#intro-join-btn').click(function() {
 			location.href="join.htm";
-		});
+		}); */
+		
 	});
 
   </script>
@@ -41,8 +43,15 @@
 				src="img/apollo_logo.png" /></a>
 		</div>
 		<div class="nav navbar-nav navbar-right" id="intro-navber-btns">
-			<input type="button" class="btn" value="로그인" id="intro-login-btn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" class="btn" value="구매하기" id="intro-buying-btn" data-toggle="modal" data-target="#apollokey-modal-dialog">
+			<c:choose>
+				<c:when test="${sessionScope.mid eq null}">
+					<input type="button" class="btn" value="로그인" id="intro-login-btn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</c:when>
+				<c:otherwise>
+					<input type="button" class="btn" value="로그아웃" id="intro-login-btn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</c:otherwise>
+			</c:choose>
+			<!-- <input type="button" class="btn" value="메인으로" id="intro-buying-btn" data-toggle="modal" data-target="#apollokey-modal-dialog"> -->
 		</div>
 	</div>
 </nav>

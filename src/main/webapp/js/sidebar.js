@@ -149,6 +149,10 @@ $(function() {
 			 alert("책임자를 선택하세요.");
 			 return false;
 		 }
+		 if($('#insert-step-sday-id').val() > $('#insert-step-eday-id').val()) {
+			 alert("시작일이 종료일보다 앞설 수 없습니다.");
+			return false;
+		 }
 		 var newstep = $('#step-add-form').serialize();
 		 $.ajax({
 			 
@@ -300,8 +304,11 @@ $(function() {
 					alert("프로젝트명을 입력해주세요.");
 					$("#update-project-name").focus();	
 					return false;
-				 }
-			 
+			}
+			 if($("#update-project-sday").val() > $("#update-project-eday").val()) {
+				 alert("시작일이 종료일보다 앞설 수 없습니다.");
+				return false;
+			 }
 			var project = $("#update-project-form").serialize();
 			console.log(project);
 			
@@ -568,6 +575,11 @@ $(function() {
 			$("#add-project-name").focus();	
 			return false;
 		 }
+		 if($('#insert-project-sday-id').val() > $('#insert-proejct-eday-id').val()) {
+			 alert("시작일이 종료일보다 앞설 수 없습니다.");
+			return false;
+		 }
+		 
 		 var newproject = $("#project-add-form").serialize(); //serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
 
 		 $.ajax({
@@ -576,6 +588,7 @@ $(function() {
 			 type:"POST",
 			 dataType:"json",
 			 success: function(data){
+
 				 if(data.result > 0){
 					 alert("프로젝트 생성이 완료되었습니다!");
 					 $(".close").click();

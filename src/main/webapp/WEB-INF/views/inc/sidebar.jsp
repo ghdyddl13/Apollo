@@ -6,10 +6,9 @@
 <div id="my-side-nav" class="side-nav">
 		<div id="side-bar-add-project" data-toggle="modal"
 					data-target="#project-insert">
-		 	<b>New Project(보류)&nbsp;&nbsp;</b>
+		 	<b>New Project&nbsp;&nbsp;</b>
 		 	<i  class="fas fa-plus-circle"></i>
 		</div>
-		
 		<div>
 			<div class="side-pstatus">
 				<i data-toggle="collapse" data-target="#working-project" class="side-dir-arrow fas fa-angle-down"></i>

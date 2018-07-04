@@ -42,6 +42,13 @@
 .project-table-content {
 	overflow-y:auto; 
 }
-.project-page-table-td-assignee {
-	text-align: center;
+#proejct-page-table-no-data{
+	float: inherit;
+}
+#proejct-page-table-img {
+	width: 30%;
+}
+#proejct-page-table-no-data-content {
+	font-size: 30px;
+	font-weight: bold;
 }

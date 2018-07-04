@@ -8,7 +8,7 @@
 	<c:set var="m" value="${memberdto}"></c:set>
 	<div class="navbar-inside-div">
 		<div class="navbar-header">
-			<a href="index.htm"><img id="gohome" class="header_logo"
+			<a href="main.htm"><img id="gohome" class="header_logo"
 				src="img/apollo_logo.png" /></a>
 		</div>
 		<ul class="nav navbar-nav header-menu-ul">
