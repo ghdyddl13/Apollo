@@ -1,7 +1,6 @@
 package com.apollo.project.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,14 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.View;
 
-import com.apollo.member.service.MemberService;
+import com.apollo.project.service.ProjectInfoService;
 import com.apollo.project.service.ProjectTableService;
-import com.apollo.sidebar.service.SidebarService;
-import com.apollo.step.service.StepListService;
 import com.apollo.vo.FolderDTO;
-import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
@@ -33,8 +28,9 @@ public class ProjectTableController {
 	@Autowired 
 	private ProjectTableService tableservice;
 	
-	@Autowired
-	private MemberService service;
+	@Autowired 
+	private ProjectInfoService projectinfoservice;
+
 	
 	/**
 	 * 
@@ -45,7 +41,7 @@ public class ProjectTableController {
 	@RequestMapping("/table.htm")
 	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {		
 		int pid = (Integer) request.getSession().getAttribute("pid");
-		String mid = (String) request.getSession().getAttribute("mid");
+		//String mid = (String) request.getSession().getAttribute("mid");
 		
 		ArrayList<Integer> pids = new ArrayList<Integer>();
 		pids.add(pid);
@@ -67,6 +63,10 @@ public class ProjectTableController {
 				tasklist = tableservice.getTasksInStep(steplist);
 				model.addAttribute("tasklist", tasklist);	
 			}
+
+			ProjectDTO projectinfo = projectinfoservice.getProjectInfo(pid);
+			model.addAttribute("projectinfo", projectinfo);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
