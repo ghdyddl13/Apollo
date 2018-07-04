@@ -4,7 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<c:set var="member" value="${profileinfo}"></c:set>
 	<h4 id="project-table-page-pname">해당 프로젝트명 들어가는 곳</h4>
 	<jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
 	<div class="project-table-content" align="center">
