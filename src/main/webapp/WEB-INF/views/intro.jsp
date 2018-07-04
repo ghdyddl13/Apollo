@@ -22,6 +22,9 @@
 		/* $('#intro-join-btn').click(function() {
 			location.href="join.htm";
 		}); */
+		$('#intro-main-btn').click(function() {
+			location.href="main.htm";
+		})
 		
 	});
 
@@ -48,7 +51,8 @@
 					<input type="button" class="btn" value="로그인" id="intro-login-btn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</c:when>
 				<c:otherwise>
-					<input type="button" class="btn" value="로그아웃" id="intro-login-btn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn" value="메인으로" id="intro-main-btn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn" value="로그아웃" id="intro-login-btn">
 				</c:otherwise>
 			</c:choose>
 			<!-- <input type="button" class="btn" value="메인으로" id="intro-buying-btn" data-toggle="modal" data-target="#apollokey-modal-dialog"> -->

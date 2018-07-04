@@ -31,6 +31,7 @@ $(function() {
 					$('#proejct-page-table-no-data').remove();
 				}
 				
+				
 			}
 		})
 	})

@@ -8,7 +8,7 @@
 	background-color: #008500;
 	color:white;
 }
-#intro-buying-btn {
+#intro-main-btn {
 	width: 80px;
 	background-color:#B9062F;
 	color:white;
@@ -65,7 +65,7 @@
     margin-top: 5%;
 }
 .intro-page-slide-img2 {
-	background-color:#2ecc71;
+	background-color:rgb(241, 196, 15);
 	height: 650px;
 	display: flex;
 	justify-content: center;
