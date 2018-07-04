@@ -31,7 +31,7 @@ $(function() {
 				 "스텝에서 Task(업무)를 생성 및 관리할 수 있습니다. 스텝은 리스트, 칸반보드, 간트차트로 구성되어 있어 " +
 				 "Task들을 효과적으로 관리할 수 있습니다.<br><br> 또한 스텝간 Task를 공유 혹은 이동함으로써 유동적인 업무관리가 가능합니다.<br><br>" +
 				 "스텝은 해당 프로젝트 내에서 폴더 간 위치를 변경할 수 있습니다. "
-		 );
+	  );
 	  
 	  $(".question-folder").attr(
 				 "title",
@@ -39,7 +39,7 @@ $(function() {
 				 "<br><br> " +
 				 "폴더를 삭제할 경우 폴더에 속한 Step도 모두 삭제되어 복구할 수 없으니 주의하시기 바랍니다." 
 				
-		 );
+	  );
 		
 	makeSideProjectDir();
 	
@@ -69,7 +69,11 @@ $(function() {
 	
 	
 	//스텝 추가 클릭시 프로젝트 멤버 리스트 가져오기
-	$(document).on("click","#side-insert-step",function(){ 
+	$(document).on("click","#side-insert-step",function(){
+		$('.add-step-name').val("");
+		$('#insert-step-sday-id').val("");
+		$('#insert-step-eday-id').val("");
+		$('#step-detail').val("");
 		$("#add-step-mgr-assignee-btn").show();
 		$(".step-assigned-member-wrapper").remove();
 		$("#add-step-mgr-assignee").val("");
