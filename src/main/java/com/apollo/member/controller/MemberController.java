@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.View;
+
+import com.apollo.inbox.dao.InboxDAO;
+import com.apollo.inbox.service.InboxService;
 import com.apollo.member.service.MemberService;
 import com.apollo.vo.AuthkeyDTO;
 import com.apollo.vo.MemberDTO;
@@ -48,7 +51,10 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder; 
-	 
+	
+	@Autowired
+	private InboxService inboxservice;
+	
 	@Autowired
 	private MemberService service;
 	
@@ -82,9 +88,12 @@ public class MemberController {
 	 */
 	@RequestMapping("/main.htm")
 	public String main(Model model,  HttpServletRequest request) {
+		
 		String mid = (String) request.getSession().getAttribute("mid");
 		 MemberDTO memberdto = service.getProfileInfoMember(mid);
 		 model.addAttribute("memberdto", memberdto);
+		int newcount = inboxservice.newCount(mid);
+		model.addAttribute("newcount", newcount);
 		return "main";
 	}
 	/**
@@ -226,6 +235,7 @@ public class MemberController {
 		String ischecked = service.ischecked(mid);
 		String result="";
 		String msg = "";
+		int newcount = 0;
 		String securitypwd = service.getlogin(mid);
 		if(securitypwd == null) {
 			System.out.println("아이디 존재 안함");
@@ -246,6 +256,8 @@ public class MemberController {
 						msg = "2주의 무료체험기간이 만료되었습니다.";
 
 					} else {
+						///////////////이거 main.htm에 넣으면 아마 끝?
+						newcount = inboxservice.newCount(mid);
 						session.setAttribute("mid", mid);
 						result = "main";
 
@@ -261,6 +273,7 @@ public class MemberController {
 				result = "login";
 			}
 		}
+		model.addAttribute("newcount", newcount);
 		model.addAttribute("msg", msg);
 		
 		  

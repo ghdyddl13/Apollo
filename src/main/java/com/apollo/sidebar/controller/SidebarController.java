@@ -35,6 +35,13 @@ public class SidebarController {
 	@Autowired 
 	private View jsonview;
 	
+	
+	@RequestMapping(value="/pageReloadEvent.htm", method=RequestMethod.GET)
+	public View getReLoadPage(HttpServletRequest request,  Model model) {
+		System.out.println("test");
+		return jsonview;
+	}
+	
 	@RequestMapping(value="/insertproject.htm", method=RequestMethod.POST)
 	public View insertProject(ProjectDTO projectdto, Model model) {
 		System.out.println("프로젝트 생성");
