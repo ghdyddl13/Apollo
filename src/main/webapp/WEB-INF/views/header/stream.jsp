@@ -64,7 +64,7 @@ $(function() {
 		
 		<c:forEach var="pidlist" items="${pidlist}">
 			<option value="${pidlist.pid}">${pidlist.pname}</option>
-		</c:forEach>	
+		</c:forEach>
 	</select></div>
 		<div class="stream-main-container">
 		
@@ -96,7 +96,6 @@ $(function() {
 				<span style="flex: 1 1 auto;" class = "stream_comments"><c:if test="${streamlists.cmtkind eq 0}">${streamlists.mname} : </c:if>${streamlists.comments}</span>
 				<div style="flex: 0 0 auto; float: right;">${streamlists.cmtmtime}</div> 						
 			</div>		
-		
 		</c:forEach>
 	</div>
 </div>

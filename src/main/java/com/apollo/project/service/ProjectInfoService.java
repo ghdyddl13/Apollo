@@ -28,7 +28,7 @@ public class ProjectInfoService {
 	 기      능 : pid를 이용해서 해당 프로젝트 소속 task를 가져옴
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<TaskDTO> getTasks(String pid){
+	public ArrayList<TaskDTO> getTasks(int pid){
 		ArrayList<TaskDTO> tasklist = new ArrayList<TaskDTO>();
 		TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
 		tasklist = dao.getTasks(pid);

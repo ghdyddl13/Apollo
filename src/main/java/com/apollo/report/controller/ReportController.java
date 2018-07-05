@@ -25,7 +25,10 @@ public class ReportController {
 	
 	
 	@RequestMapping("/report.htm")
-	public String report() {
+	public String report(HttpSession session) {
+		
+		session.setAttribute("location", "/report.htm");
+		
 		return "header/report";
 	}
 	

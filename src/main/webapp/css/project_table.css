@@ -38,7 +38,7 @@
 	font-size: 12px;
 }
 .project-table-content {
-	overflow-y:auto; 
+	overflow-y: hidden; 
 }
 #proejct-page-table-no-data{
 	float: inherit;
@@ -49,4 +49,16 @@
 #proejct-page-table-no-data-content {
 	font-size: 30px;
 	font-weight: bold;
+}
+.project-table-member-image{
+	width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+#project-table-member-td{
+	display: flex;
+    align-items: center;
+    justify-content: center;
 }

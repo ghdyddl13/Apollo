@@ -13,6 +13,14 @@
       <div class="main-body-onepannel-header">
 		<jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
         <div class="main-body-onepannel-header-bottom">
+        	<div class="table-header-filter">
+           		<select class="table-header-filter-status-tag" id="table-status-button">
+            		<option value="all">STATUS:ALL</option>
+            		<c:forEach var="tstatus" items="${tstatuslist}">
+            			<option value="${tstatus.tstatus}" style="color:${tstatus.color}">${tstatus.tstatus}</option>
+            		</c:forEach>
+           		</select>
+        	</div>
         </div>
       </div>
       <div class="main-body-onepannel-body">
@@ -25,13 +33,14 @@
 	               <th>Start</th>
 	               <th>Due</th>
 	               <th>Duration</th>
-	               <th>Status</th>
+	               <th>Assignee / Status</th>
 	            </tr>
 	         </thead>
 	         <tbody id="project-page-tbody">
+	       
 	            <!-- 폴더에 속하지 않은 스텝 뿌려주기 -->
 	            <c:forEach var="step" items="${steplist}">
-	            
+	              
 	            <!-- Duration 구하기 위한 날짜형식 변경 및 비교 -->
 	             <fmt:parseDate var="stepstart"  value="${step.sday}" pattern="yy-MM-dd"/>
 	            <fmt:parseDate  var="stepend" value="${step.eday}" pattern="yy-MM-dd"/>
@@ -40,6 +49,8 @@
 	            <fmt:parseNumber value="${stepend.time/(1000*60*60*24)}" var="step_endeday" integerOnly="true"/>
 	            
 	               <c:if test="${step.fid eq null}">
+	               <!-- step Assignee 뿌려주기 -->
+	               <c:forEach var="member" items="${memberlist}">
 	                  <tr class="project-table-tr-steps">
 	                     <td><i class="side-dir-step-icon far fa-file-alt"></i>&nbsp;${step.sname}</td>
 	                     <td class="project-table-day">${step.sday}</td>
@@ -52,8 +63,15 @@
 	                           <td class="project-table-duration">${step_endeday - step_startsday}일</td>
 	                        </c:otherwise>
 	                     </c:choose>
-	                     <td></td>
-	                     
+	                     <c:choose>
+	                     	<c:when test="${member.image eq null}">
+	                     		<td><img class="project-table-member-image" src="img/user.png">${member.mname}</td>
+	                     	</c:when>
+	                     	<c:otherwise>
+	                     		<td id="project-table-member-td"><div class="project-table-member-image">${member.image}</div>${member.mname}</td>
+	                     	</c:otherwise>
+	                     </c:choose>
+	                     </c:forEach>
 	                  <!-- 스텝에 속한 task 뿌려주기 -->
 	                  <c:forEach var="task" items="${tasklist}">
 	                  
@@ -135,11 +153,11 @@
 	            </c:forEach>
 	         </tbody>
 	      </table>
-	      <div id="proejct-page-table-no-data">
+	      <div id="project-page-table-no-data">
 	      	<div id="proejct-page-table-img-content">
 	      		<img src="img/rocket.png" id="proejct-page-table-img">
 	      	</div>
-	      	<div id="proejct-page-table-no-data-content">
+	      	<div id="project-page-table-no-data-content">
 	      		NO DATA!
 	      	</div>
 	      </div>

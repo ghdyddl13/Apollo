@@ -244,25 +244,25 @@ public class StepListService {
 	public int listCountNoDay(int sid) {
 		StepDAO dao= sqlsession.getMapper(StepDAO.class);
 		int noday =dao.listCountNoDay(sid);
-		System.out.println("noday:"+noday);
+		//System.out.println("noday:"+noday);
 		return noday;
 	}	
 	public int listCountAfterNextWeek(int sid) {
 		StepDAO dao= sqlsession.getMapper(StepDAO.class);
 		int afternextweek =dao.listCountAfterNextWeek(sid);
-		System.out.println("afternextweek"+afternextweek);
+		//System.out.println("afternextweek"+afternextweek);
 		return afternextweek;
 	}
 	public int listCountUntilThisWeek(int sid) {
 		StepDAO dao= sqlsession.getMapper(StepDAO.class);
 		int untilthisweek =dao.listCountUntilThisWeek(sid);
-		System.out.println("untilthisweek:" +untilthisweek);
+		//System.out.println("untilthisweek:" +untilthisweek);
 		return untilthisweek;
 	}
 	public int listCountOverdueTask(int sid) {
 		StepDAO dao= sqlsession.getMapper(StepDAO.class);
 		int overduetask =dao.listCountOverdueTask(sid);
-		System.out.println("overdue:"+overduetask);
+		//System.out.println("overdue:"+overduetask);
 		return overduetask;
 	}
 	/**
