@@ -51,6 +51,18 @@ public class ProjectInfoController {
 		
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
+		
+		for(StepDTO dto : steplist) {
+			
+			if(dto.getSname().length() > 15) {
+					String temp = dto.getSname();
+					temp = temp.substring(0, 10);
+					String newsname = temp + "...";
+					dto.setSname(newsname);
+			}
+			
+		}
+		
 		map.addAttribute("steplist", steplist);
 
 		

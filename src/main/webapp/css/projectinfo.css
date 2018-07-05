@@ -74,9 +74,3 @@
 #project_pmember_table th{
 	text-align: center;
 }
-
-.stepnamelistbypid{
-  text-overflow: ellipsis;
-  display: block;
-  overflow: hidden;
-}

@@ -30,7 +30,7 @@
 					<div align='left'>Step별 Task 완료/미완료 현황</div>
 					<br />
 					<div align='right'>
-							<select class="stepnamelistbypid"  id="projectinfo_task_situation_table_selectbar">
+							<select id="projectinfo_task_situation_table_selectbar">
 								 <c:forEach var="step" items="${steplist}">
 			                        <option value="${step.sid}">${step.sname}</option>
 			                     </c:forEach>
