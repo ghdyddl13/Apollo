@@ -1,6 +1,7 @@
 package com.apollo.inbox.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
@@ -19,4 +20,9 @@ public interface InboxDAO {
 	
 	public ArrayList<CommentAndMemberDTO> getCommentsAndMember(int tid);
 	
+	public int newCheck(Map map);
+	
+	public int newCount(String mid);
+	
+	public int updateNewCount(String mid);
 }

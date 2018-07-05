@@ -1,7 +1,7 @@
 $(function() {
-	
-	
-	 $(document).tooltip({
+	// unload();
+	/////////////  프로젝트, 폴더, 스텝 생성 모달창 도움말 설정////////////////////
+	 $(".modal-question").tooltip({
 		 classes: {
 			    "ui-tooltip": "apollo-tooltip"
 		 },
@@ -31,7 +31,7 @@ $(function() {
 				 "스텝에서 Task(업무)를 생성 및 관리할 수 있습니다. 스텝은 리스트, 칸반보드, 간트차트로 구성되어 있어 " +
 				 "Task들을 효과적으로 관리할 수 있습니다.<br><br> 또한 스텝간 Task를 공유 혹은 이동함으로써 유동적인 업무관리가 가능합니다.<br><br>" +
 				 "스텝은 해당 프로젝트 내에서 폴더 간 위치를 변경할 수 있습니다. "
-		 );
+	  );
 	  
 	  $(".question-folder").attr(
 				 "title",
@@ -39,8 +39,10 @@ $(function() {
 				 "<br><br> " +
 				 "폴더를 삭제할 경우 폴더에 속한 Step도 모두 삭제되어 복구할 수 없으니 주의하시기 바랍니다." 
 				
-		 );
+	  );
+/////////////  프로젝트, 폴더, 스텝 생성 모달창 도움말 설정 끝////////////////////
 		
+	// 사이드바 구조 생성  
 	makeSideProjectDir();
 	
 	// 사이드바 디렉토리 화살표 변경
@@ -69,7 +71,11 @@ $(function() {
 	
 	
 	//스텝 추가 클릭시 프로젝트 멤버 리스트 가져오기
-	$(document).on("click","#side-insert-step",function(){ 
+	$(document).on("click","#side-insert-step",function(){
+		$('.add-step-name').val("");
+		$('#insert-step-sday-id').val("");
+		$('#insert-step-eday-id').val("");
+		$('#step-detail').val("");
 		$("#add-step-mgr-assignee-btn").show();
 		$(".step-assigned-member-wrapper").remove();
 		$("#add-step-mgr-assignee").val("");
@@ -148,6 +154,10 @@ $(function() {
 		 } else if($('#add-step-mgr-assignee').val() == ""){
 			 alert("책임자를 선택하세요.");
 			 return false;
+		 }
+		 if($('#insert-step-sday-id').val() > $('#insert-step-eday-id').val()) {
+			 alert("시작일이 종료일보다 앞설 수 없습니다.");
+			return false;
 		 }
 		 var newstep = $('#step-add-form').serialize();
 		 $.ajax({
@@ -240,7 +250,7 @@ $(function() {
 			$("#move-project-header").text("Project 완료");
 			$("#move-project-pid").val(pid);
 			$("#move-project-pstatuscode").val("2");
-			$("#move-project-message").text("해당 프로젝트를 완료 프로젝트로 이동하시겠습니까?");
+			$("#move-project-message").html("해당 프로젝트를 완료 프로젝트로<br> 이동하시겠습니까?");
 			$("#move-project-submessage").text("");
 		});
 		
@@ -300,8 +310,11 @@ $(function() {
 					alert("프로젝트명을 입력해주세요.");
 					$("#update-project-name").focus();	
 					return false;
-				 }
-			 
+			}
+			 if($("#update-project-sday").val() > $("#update-project-eday").val()) {
+				 alert("시작일이 종료일보다 앞설 수 없습니다.");
+				return false;
+			 }
 			var project = $("#update-project-form").serialize();
 			console.log(project);
 			
@@ -568,6 +581,11 @@ $(function() {
 			$("#add-project-name").focus();	
 			return false;
 		 }
+		 if($('#insert-project-sday-id').val() > $('#insert-proejct-eday-id').val()) {
+			 alert("시작일이 종료일보다 앞설 수 없습니다.");
+			return false;
+		 }
+		 
 		 var newproject = $("#project-add-form").serialize(); //serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
 
 		 $.ajax({
@@ -576,6 +594,7 @@ $(function() {
 			 type:"POST",
 			 dataType:"json",
 			 success: function(data){
+
 				 if(data.result > 0){
 					 alert("프로젝트 생성이 완료되었습니다!");
 					 $(".close").click();
@@ -1024,26 +1043,28 @@ function updateProject(data){
 
 /**
  * 
- 날   짜 : 2018. 6. 22.
- 기   능 : View 로드 시 현재 페이지를 뿌려주는 함수 
+ 날   짜 : 2018. 7. 5.
+ 기   능 : 페이지  reload시 화면 구성함수 
  작성자명 : 박 민 식
  */
-/*
-function loadCurrentPage(){	
-	console.log("loadCurrentPage");
-	var currentpage= $("#currentPage").val();
-	if(currentpage != null){
+function unload() {
+	/*console.log("aa");
+	switch (document.readyState){
+	case "complete":
+	*/	
 		$.ajax({
-			url:currentpage,
+			url:"pageReloadEvent.htm",
 			dataType:"html",
 			success:function(data){
-			   console.log(data);
-		       $("#main-box").empty();
-		       $("#main-box").append(data);           
+				 $("#main-box").empty();
+		         $("#main-box").append(data);
+		         checkCrtPage();
 			}
 		})
-	}
+		
+	
 }
-*/
-   
-   
+
+
+
+

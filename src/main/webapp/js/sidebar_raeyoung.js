@@ -11,14 +11,13 @@ $(function() {
         $("#update-step-mgr-assignee").val("");
         $.when(stepinfo(sid)).done(function(data){
         	var defaultmid = data.selectstep.mid;
-        	console.log(data);
         	$.ajax(
                     {
                     type : "post",
                     url  : "getprojectmembers.htm",
                     data : "pid="+ pid, 
                     success : function(data){
-                    	console.log(data.memberlist);
+                    	
                         //해당 pid 에 참여한 멤버 불러오기
                     	$('#update-step-mgr-assignee-options').empty();
                     	$(".step-update-assigned-member-wrapper").remove();
@@ -40,9 +39,7 @@ $(function() {
 					  	   $(member_info).append(member_name,member_email);
 					  	   $(member_div).append(member_img_wrapper,member_info).appendTo(li);
 					  	   $('#update-step-mgr-assignee-options').append(li);
-					  	   	
-					  	   console.log("this.mid " + this.mid);
-					  	   console.log(defaultmid);
+					  	   
                            if(this.mid == defaultmid){
                         	   console.log("여기");
                         	   var stepassignee_wrapper= jQuery("<div>",{"class":"step-update-assigned-member-wrapper"});
@@ -97,7 +94,7 @@ $(function() {
     // 스텝 modal 에서 수정 버튼 클릭시
     $('#update-step-btn').click(function() {
         var updatestep = $('#update-step-form').serialize();       
-        console.log(updatestep);
+        //console.log(updatestep);
         if($(".update-step-name").val().trim() == ""){
 			alert("스텝명을 입력하세요.");
 			$(".update-step-name").focus();	
@@ -106,20 +103,22 @@ $(function() {
 			alert("책임자를 선택하세요.");
 			return false;
 		}
+        if($("#update-step-sday-id").val() > $("#update-step-eday-id").val()) {
+			 alert("시작일이 종료일보다 앞설 수 없습니다.");
+			return false;
+		 }
         $.ajax({
             type:"post",
             url:"updatestep.htm",
             data:updatestep,
             dataType:"json",
             success:function(data){
-                console.log(data);
-                console.log(data.updatestep);
-                
+
                 if(data.updatestep > 0){
                     alert('스텝 수정이 완료되었습니다!');
                     // 스텝 수정의 경우 이름이 변경되었을 경우만 고려하여 갱신해 주면 된다.
                     $($("#s"+data.stepDTO.sid).find(".side-content-name")).text(data.stepDTO.sname);
-                    console.log($("#s"+data.stepDTO.sid).find(".side-content-name"));
+                    //console.log($("#s"+data.stepDTO.sid).find(".side-content-name"));
                
                 }else {
                     alert('스텝 수정이 실패되었습니다');
@@ -134,7 +133,7 @@ $(function() {
     	var custom_menu =  $(this).parents("ul.custom-menu")[0];
     	var sid = $(custom_menu).find("input[name=sid]").val();
     	
-    	console.log(sid); // 값이 찍힘
+    	//console.log(sid); // 값이 찍힘
     	
     	$('#delete-step-sid').val(sid);
     });
@@ -146,7 +145,7 @@ $(function() {
     	var sid = $('#delete-step-sid').val();
     	
     	$.when(deletetaskinstep(sid)).done(function(data){
-    		console.log(data);
+    		//console.log(data);
     		
     		if(data.deletestep > 0){
                 alert('스텝 삭제가 완료되었습니다!');
@@ -179,8 +178,8 @@ function stepinfo(sid){
          data:{sid:sid},
          dataType:"json",
          success:function(data){
-             console.log(data);
-             console.log(data.selectstep);
+             //console.log(data);
+             //console.log(data.selectstep);
              
              $('.update-step-name').val(data.selectstep.sname);
              $('#update-step-sid').val(data.selectstep.sid);
@@ -205,7 +204,6 @@ function stepinfo(sid){
 function deletetaskinstep(sid) {
 	
 	var sid = $('#delete-step-sid').val();
-	console.log(sid);
 	
 	var ajax = $.ajax({
 		type:"post",

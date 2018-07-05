@@ -1,12 +1,17 @@
-#header-member-table {
+.header-member-table {
+	overflow:auto;
+	background-color:#f0f0f0;
+	width: 100%;
+	height: 750px;
+}
+#header-member-table-id {
 	width:95%;
 }
 
 #header-member-table>thead>tr>th {
 	text-align:center;
 	padding-bottom:10px;
-	background-color: #e6e7e8;
-	color:#978d8b;
+	color:black;
 }
 
 #header-member-table>tbody>tr>td {
@@ -16,9 +21,12 @@
 
 #header-member-table>tbody :hover {
 	cursor: pointer;
-	background-color: #e0e0e0;
+	background-color: #9e9e9e;
 }
 #header-member-table>thead>tbody {
 	border-left-color: white;
 	border-right-color: white;
+}
+#header-member-table-no-data {
+	height: 40px;
 }

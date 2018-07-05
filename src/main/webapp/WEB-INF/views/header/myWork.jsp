@@ -34,7 +34,7 @@
 	                    <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${todaytask.tid}">
 	                      <div class="mywork-main-task-checkbox"></div>
 		                    <div class="mywork-main-task-members">
-		                      <img class="mywork-main-task-member" src="img/frog.png" alt="">
+		                      <img class="mywork-main-task-member" src="img/user.png" alt="">
 		                    </div>
 		                    <c:choose>
 								<c:when test="${todaytask.overdue=='overdue'}">
@@ -89,7 +89,7 @@
                    <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${thisweektask.tid}">
                      <div class="mywork-main-task-checkbox"></div>
                     <div class="mywork-main-task-members">
-                      <img class="mywork-main-task-member" src="img/frog.png" alt="">
+                      <img class="mywork-main-task-member" src="img/user.png" alt="">
                     </div>
                     <c:choose>
 						<c:when test="${thisweektask.overdue=='overdue'}">
@@ -138,7 +138,7 @@
                    <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${nextweektask.tid}">
                      <div class="mywork-main-task-checkbox"></div>
                     <div class="mywork-main-task-members">
-                      <img class="mywork-main-task-member" src="img/frog.png" alt="">
+                      <img class="mywork-main-task-member" src="img/user.png" alt="">
                     </div>
                     <c:choose>
 						<c:when test="${nextweektask.overdue=='overdue'}">
@@ -187,7 +187,7 @@
                    <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${latertask.tid}">
                      <div class="mywork-main-task-checkbox"></div>
                     <div class="mywork-main-task-members">
-                      <img class="mywork-main-task-member" src="img/frog.png" alt="">
+                      <img class="mywork-main-task-member" src="img/user.png" alt="">
                     </div>
                     <c:choose>
 						<c:when test="${latertask.overdue=='overdue'}">

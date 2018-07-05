@@ -5,20 +5,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.session.SqlSession;
+import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.apollo.member.dao.AuthkeyDAO;
 import com.apollo.member.dao.MemberDAO;
 import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.AuthkeyDTO;
-import com.apollo.vo.FileDTO;
 import com.apollo.vo.GoogleDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.filedataDTO;
@@ -29,6 +27,12 @@ public class MemberService {
 	
 	@Autowired
 	private SqlSession sqlsession;
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
+
+	@Autowired
+	private VelocityEngine velocityEngine;
 	
 	
 	/**
@@ -42,8 +46,62 @@ public class MemberService {
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.insertMember(memberdto);
+		
 		return result;
 	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : 가입시 작성한 email을 통해 인증키를 받아오는 서비스 
+	 작성자명 : 이 창 훈
+	 */
+	public String emailcheckbymid(String mid) {
+		String result = "";
+		try {
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			result=dao.emailcheckbymid(mid);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : email 인증키가 인증이 된다면 ischecked부분을 n->y로 바꿔줌
+	 작성자명 : 이 창 훈
+	 */
+    public int emailcheck(String mid){
+		int result = 0;
+        try {
+            MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+            result=dao.emailcheck(mid);
+        }catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+        return result;
+    }
+    
+    /**
+     * 
+     날      짜 : 2018. 7. 3.
+     기      능 : ischecked 의 값이 n 인지 y 인지 확인 하는 서비스
+     작성자명 : 이 창 훈
+     */
+	public String ischecked(String mid) {
+		String result = "";
+		try {
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			result=dao.ischecked(mid);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+     
+	
 	/**
 	 * 
 	 날      짜 : 2018. 6. 12.
@@ -337,4 +395,22 @@ public class MemberService {
 		
 		return files;
 	}
+
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 가장 최근에 만든 프로젝트의 pid를 가져온다
+	 작성자명 : 김 정 권
+	 */
+	public int getMinProjectid(String mid) {
+		
+		System.out.println("getMinProjectid 서비스 실행");
+		
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		int pid = dao.getminprojectid(mid);
+		
+		return pid;
+	}
+	
 }

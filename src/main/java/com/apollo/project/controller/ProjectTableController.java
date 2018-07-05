@@ -39,7 +39,10 @@ public class ProjectTableController {
 	 작성자명 : 김 래 영
 	 */
 	@RequestMapping("/table.htm")
-	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {		
+	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {	
+		
+		session.setAttribute("location", "/table.htm");
+		
 		int pid = (Integer) request.getSession().getAttribute("pid");
 		//String mid = (String) request.getSession().getAttribute("mid");
 		
@@ -57,14 +60,15 @@ public class ProjectTableController {
 			folderlist = tableservice.selectFolderList(pids);
 			model.addAttribute("folderlist", folderlist);
 			
-			ArrayList<TaskDTO> tasklist = null; //sid 에 속한 task 및 tstatus 가져오기
-			tasklist = tableservice.getTasksInStep(steplist);
-			model.addAttribute("tasklist", tasklist);
-			
+			if(steplist.size() != 0) {
+				System.out.println(steplist.size());
+				ArrayList<TaskDTO> tasklist = null; //sid 에 속한 task 및 tstatus 가져오기
+				tasklist = tableservice.getTasksInStep(steplist);
+				model.addAttribute("tasklist", tasklist);	
+			}
 
 			ProjectDTO projectinfo = projectinfoservice.getProjectInfo(pid);
 			model.addAttribute("projectinfo", projectinfo);
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();

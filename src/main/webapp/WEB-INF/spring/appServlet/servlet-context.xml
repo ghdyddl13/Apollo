@@ -58,6 +58,8 @@
 		 	<mvc:exclude-mapping path="/keycheck.htm"/>
 		 	<mvc:exclude-mapping path="/login.htm"/>
 		 	<mvc:exclude-mapping path="/join.htm"/>
+		 	<mvc:exclude-mapping path="/joinform.htm"/>
+		 	<mvc:exclude-mapping path="/emailcheck.htm"/>
 		 	<mvc:exclude-mapping path="/apollokey.htm"/>
 		 	<mvc:exclude-mapping path="/findpwd.htm"/>
 		 	<mvc:exclude-mapping path="/google.htm"/>
@@ -69,13 +71,12 @@
 	<mvc:annotation-driven/>
 	 	<!--Socket -->
  	
-	<bean id="chat" class="com.apollo.socket.ChatWebSocketHandler" />
+	<bean id="socket" class="socket.ChatWebSocketHandler" />
 	<websocket:handlers>
-		<websocket:mapping handler="chat" path="/chat" />
+		<websocket:mapping handler="socket" path="/socket.htm" />
 		<websocket:handshake-interceptors>
-			 <bean class="com.apollo.socket.HandShakeInterceptor"/>
-			<!--  <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean> -->
+			 <bean class="socket.HandShakeInterceptor"/>
+			 <!-- <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean> -->
 		</websocket:handshake-interceptors>
 	</websocket:handlers> 
-
 </beans>

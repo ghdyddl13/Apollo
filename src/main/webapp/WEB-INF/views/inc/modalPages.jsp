@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <!DOCTYPE html>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
-<script>
-	
-</script>
+
 	<!-- 프로젝트 생성 Mo dal 창 -->
 	<div class="modal fade" id="project-insert" role="dialog">
 		<div class="modal-dialog modal-project-dialog">
@@ -80,13 +76,13 @@
 										<div class="modal-flexbox-col">
 											<p>시작일</p>
 											<div class="modal-flexbox-row">
-												<input type="text" id="insert-project-sday-id" name="sday" placeholder="Start Date" class="date  sdate-img">
+												<input type="text" id="insert-project-sday-id" name="sday" placeholder="Start Date" class="date  sdate-img" readonly="readonly">
 											</div>
 										</div>
 										<div class="modal-flexbox-col">
 											<p>종료일</p>
 											<div class= "modal-flexbox-row">
-												<input type="text" id="insert-proejct-eday-id" name="eday" placeholder="End Date" class="date  edate-img">
+												<input type="text" id="insert-proejct-eday-id" name="eday" placeholder="End Date" class="date  edate-img" readonly="readonly">
 											</div>	
 										</div>
 									</div>
@@ -183,14 +179,14 @@
 										<p>시작일</p>
 									<div class="modal-flexbox-row">	
 										<input type="text" id="insert-step-sday-id" name="sday" placeholder="Start Date"
-										class="date sdate-img">
+										class="date sdate-img" readonly="readonly">
 									</div>
 								</div>
 								<div class="modal-flexbox-col">
 										<p>종료일</p>
 									<div class="modal-flexbox-row">	
 									<input type="text" id="insert-step-eday-id" name="eday" placeholder="End Date"
-										class="date edate-img">
+										class="date edate-img" readonly="readonly">
 									</div>
 								</div>
 							</div>
@@ -287,13 +283,13 @@
 										<div class="modal-flexbox-col">
 											<p>시작일</p>
 											<div class="modal-flexbox-row">
-												<input type="text" id="update-project-sday" name="sday" placeholder="Start Date" class="date  sdate-img">
+												<input type="text" id="update-project-sday" name="sday" placeholder="Start Date" class="date  sdate-img" readonly="readonly">
 											</div>
 										</div>
 										<div class="modal-flexbox-col">
 											<p>종료일</p>
 											<div class= "modal-flexbox-row">
-												<input type="text" id="update-project-eday" name="eday" placeholder="End Date" class="date  edate-img">
+												<input type="text" id="update-project-eday" name="eday" placeholder="End Date" class="date  edate-img" readonly="readonly">
 											</div>	
 										</div>
 									</div>
@@ -429,7 +425,7 @@
 				<div class="modal-title">
 					<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
 					<div style="text-align:center">
-					<textarea id="Task_Modal_detail" rows="7%" cols="65%" name="detail" placeholder="내용을 입력하세요"></textarea>
+					<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
 					</div>
 				</div>
                 <hr />
@@ -633,14 +629,14 @@
 									<p>시작일</p>
 								<div class="modal-flexbox-row">	
 									<input type="text" id="update-step-sday-id" name="sday" placeholder="Start Date"
-									class="date sdate-img">
+									class="date sdate-img" readonly="readonly">
 								</div>
 							</div>
 							<div class="modal-flexbox-col">
 									<p>종료일</p>
 								<div class="modal-flexbox-row">	
 								<input type="text" id="update-step-eday-id" name="eday" placeholder="End Date"
-									class="date edate-img">
+									class="date edate-img" readonly="readonly"> 
 								</div>
 							</div>
 						</div>

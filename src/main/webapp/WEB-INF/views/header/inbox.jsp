@@ -9,6 +9,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
 	$(function() {
+		
+		$(".Task_RUD_Modal").click(function(evt) {
+			$(this).children().children(".inbox_newcheck").empty();
+			console.log($(this).children().children().children(".cmtid").val());
+			console.log($(this).children().children(".inbox_mid2").val())
+			$.ajax({
+				url:"newcheck.htm",
+				type: 'POST',
+				data:{cmtid : $(this).children().children().children(".cmtid").val(),
+					  mid2 : $(this).children().children(".inbox_mid2").val()},
+				success:function(data){
+					
+				}
+			})
+		});
+		
+		
 		$("#incomming-page").click(function(evt){
 			
 			
@@ -156,19 +173,30 @@
 			
 			<c:choose>
 				<c:when test="${fn:substring(commentlist.cmtmtime,0,10) eq today}">
-					<div class="inbox-list"><div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
+					<div class="inbox-list">
+					<div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
 						<div class ="yyTask_RUD_Modal"><div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;"><span class="inbox-span1-color">
 						<span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div></div>
 						<span class="inbox-span2"><span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span>${commentlist.pname}</span>
 						<span class="inbox-span3">
 						<c:choose>
 							<c:when test="${inbox eq 'archive'}">
+								<input class="inbox_mid2" type="hidden" value="${commentlist.mid2}"> 
+								<c:if test="${commentlist.newcheck eq 0}">
+									<span class = "inbox_newcheck" style="color: rgba(211, 0, 68, 0.74);">NEW!</span>&nbsp;&nbsp;&nbsp;
+								</c:if>
+							
 								<span class="archiveupdate2" style="cursor: pointer;">
 								<img src="img/archive2.png" width="15px" height="15px">
 								<input type="hidden" class = "cmtid" value="${commentlist.cmtid}">
 								</span>
 							</c:when>
 							<c:otherwise>
+							<input class="inbox_mid2" type="hidden" value="${commentlist.mid2}"> 
+								<c:if test="${commentlist.newcheck eq 0}">
+									<span class = "inbox_newcheck" style="color: rgba(211, 0, 68, 0.74);">NEW!</span>&nbsp;&nbsp;&nbsp;
+								</c:if>
+								
 								<span class="archiveupdate" style="cursor: pointer;">
 								<img src="img/archive.png" width="15px" height="15px">
 								<input type="hidden" class = "cmtid" value="${commentlist.cmtid}">
@@ -195,12 +223,20 @@
 						<span class="inbox-span3">
 						<c:choose>
 							<c:when test="${inbox eq 'archive'}">
+							<input class="inbox_mid2" type="hidden" value="${commentlist.mid2}"> 
+								<c:if test="${commentlist.newcheck eq 0}">
+									<span class = "inbox_newcheck" style="color: rgba(211, 0, 68, 0.74);">NEW!</span>&nbsp;&nbsp;&nbsp;
+								</c:if>
 								<span class="archiveupdate2" style="cursor: pointer;">
 								<img src="img/archive2.png" width="15px" height="15px">
 								<input type="hidden" class = "cmtid" value="${commentlist.cmtid}">
 								</span>
 							</c:when>
 							<c:otherwise>
+							<input class="inbox_mid2" type="hidden" value="${commentlist.mid2}"> 
+								<c:if test="${commentlist.newcheck eq 0}">
+									<span class = "inbox_newcheck" style="color: rgba(211, 0, 68, 0.74);">NEW!</span>&nbsp;&nbsp;&nbsp;
+								</c:if>
 								<span class="archiveupdate" style="cursor: pointer;">
 								<img src="img/archive.png" width="15px" height="15px">
 								<input type="hidden" class = "cmtid" value="${commentlist.cmtid}">

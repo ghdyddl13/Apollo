@@ -43,6 +43,10 @@
 <link rel="stylesheet" href="css/stepBoard.css" />
 <!-- File관련 CSS -->
 <link rel="stylesheet" href="css/projectFile.css" />  
+<!-- PROJECT TABLE -->
+<link rel="stylesheet" href="css/project_table.css" />
+
+
 
 
 <!--   JAVASCRIPT   -->
@@ -54,11 +58,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!-- ECHART.JS CDN-->
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-
-<!-- SIDEBAR JAVASCRIPT -->
-<script type="text/javascript" src="js/sidebar.js"></script>
 <!-- 공통 JavaScript 함수 모음(Utils) -->
 <script type="text/javascript" src="js/utils.js"></script>
+<!-- SIDEBAR JAVASCRIPT -->
+<script type="text/javascript" src="js/sidebar.js"></script>
 <!--TIMELINE JAVASCRIPT  -->
 <script type="text/javascript" src="js/stepTimeline.js"></script>
 <!--GANTT CHART  -->
@@ -69,6 +72,8 @@
 <script type="text/javascript" src="js/stepBoard.js"></script>
 <!-- SIDEBAR JAVASCRIPT-->
 <script type="text/javascript" src="js/sidebar_raeyoung.js"></script>
+<!-- PROJECT INFORMATION JAVASCRIPT-->
+<script type="text/javascript" src="js/main_projectInfo.js"></script>
 <!-- STEP LIST JAVASCRIPT_ JW-->
 <script type="text/javascript" src="js/steplist.js?q=123"></script>
 <!-- MAIN Task js -->
@@ -84,8 +89,57 @@
 
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <title>Project Apollo</title>
+
+
+<script type="text/javascript">
+	var nickname;
+	var wsocket;
+	function connect() {
+		console.log("커넥트 했니?????");
+		wsocket = new WebSocket("ws://192.168.0.45:8090/bit/socket.htm");
+		wsocket.onopen = onOpen;
+		wsocket.onmessage = onMessage;
+		wsocket.onclose = onClose;
+	}
+	function disconnect() {
+		wsocket.close();
+	}
+	function onOpen(evt) {
+	}
+	function onMessage(evt) {
+		var data = evt.data;
+		appendMessage(data);
+	}
+	function onClose(evt) {
+	}
+	function send() {
+		console.log("send")
+		var msg = $("#comment_input_box_in_taskmodal").val();
+		if(msg.trim()!=""){
+			wsocket.send($("#tidhidden").val()+'|'+nickname + " : " + msg);
+		}
+	}
+	
+	
+	function appendMessage(msg) {
+		$("#inbox_count").empty();
+		$("#inbox_count").append(msg);
+	}
+	
+	$(document).ready(function() {
+		
+		nickname=$("#header-user-name").html();
+		
+		connect();
+		
+		$('#exitBtn').click(function(){
+			disconnect();
+			window.close();
+		});
+	});
+</script>
 </head>
-<body>
+<body >
 	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
 	<div class="Apollo-main">
 		<div class="main-header-panel" >

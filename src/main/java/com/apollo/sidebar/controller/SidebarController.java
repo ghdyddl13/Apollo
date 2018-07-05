@@ -35,6 +35,34 @@ public class SidebarController {
 	@Autowired 
 	private View jsonview;
 	
+	
+	@RequestMapping(value="/pageReloadEvent.htm", method=RequestMethod.GET)
+	public String getReLoadPage(HttpServletRequest request,  Model model) {
+		System.out.println("test");
+		String location = null;
+		System.out.println(request.getSession().getAttribute("pid"));
+		System.out.println(request.getSession().getAttribute("sid"));
+		try {
+			location = (String) request.getSession().getAttribute("location");
+			Integer pid =(Integer) request.getSession().getAttribute("pid");
+			Integer sid =(Integer) request.getSession().getAttribute("sid");
+			if(location ==null) {
+				location = "/myWork.htm";
+			}else if(location.equals("/information.htm")) {
+				location += "?pid=" +pid;
+			}else if(location.equals("/list.htm")) {
+				location += "?sid=" +sid;
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println(location);		
+		return "redirect:"+location;
+	}
+	
 	@RequestMapping(value="/insertproject.htm", method=RequestMethod.POST)
 	public View insertProject(ProjectDTO projectdto, Model model) {
 		System.out.println("프로젝트 생성");

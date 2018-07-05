@@ -6,23 +6,19 @@
 	
 	<!-- Root Context는 모든 웹 컴포넌트에서 공유될 수 있는 자원을 정의하는 공간이다 -->	
     <!-- jdbc 자원을 bean으로 선언하고 접속 환경을 구성 -->
- <!--    <bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-        <property name="url" value="jdbc:oracle:thin:@192.168.0.4:1521:XE" />
-        <property name="username" value="Apollo" />
-        <property name="password" value="1004" />
-    </bean> -->
     <!-- AWS RDBS  -->
     <bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-        <!-- 
-        <property name="url" value="jdbc:oracle:thin:@192.168.0.6:1521:XE" />
+       
+        <property name="url" value="jdbc:oracle:thin:@192.168.0.55:1521:XE" />
         <property name="username" value="PROJECT_APOLLO" />
         <property name="password" value="1004" />
-        -->
+       
+     <!--   
         <property name="url" value="jdbc:oracle:thin:@apollodb.c8laekrmeaob.ap-northeast-2.rds.amazonaws.com:1521:APOLLODB" />
         <property name="username" value="PROJECT_APOLLO_AWS" />
-        <property name="password" value="apollo1004" />
+        <property name="password" value="apollo1004" /> 
+     -->
     </bean>
     <!-- Mybatis 사용을 위한 Bean 설정으로 pom.xml에서 dependency 설정을 이미 했기에 가능 -->
     <bean id="sqlSessionFactoryBean"  class="org.mybatis.spring.SqlSessionFactoryBean">

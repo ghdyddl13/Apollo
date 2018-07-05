@@ -49,7 +49,6 @@ public class TaskService {
 	 */
 	public int updateTask(TaskDTO taskdto) {
 		int result = 0;
-		
 		try {
 			TaskDAO dao = session.getMapper(TaskDAO.class);
 			result = dao.updateTask(taskdto);
@@ -99,11 +98,11 @@ public class TaskService {
 	 기      능 : pid로 tstatus 가져오기
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<TstatusDTO> gettstatuslist(int pid) {
+	public ArrayList<TstatusDTO> gettstatuslist(int tid) {
 		
 		ArrayList<TstatusDTO> tstatuslist = new ArrayList();
 		TstatusDAO tstatusdao = session.getMapper(TstatusDAO.class);
-		tstatuslist = tstatusdao.getTstatuslist(pid);
+		tstatuslist = tstatusdao.getTstatuslist(tid);
 		return tstatuslist;
 	}
 	/**
@@ -219,10 +218,19 @@ public class TaskService {
 	 기      능 : 코멘트 입력
 	 작성자명 : 김 정 권
 	 */
-	public int insertComment(CommentDTO commentdto) {
+	public int insertComment(CommentDTO dto) {
 		System.out.println("insertComment 서비스 메소드 실행");
+		
+		System.out.println("서비스에서 검증");
+		System.out.println(dto.getCmtid());
+		System.out.println(dto.getComments());
+		System.out.println(dto.getTid());
+		System.out.println(dto.getMid());
+		System.out.println(dto.getCmtkind());
+		System.out.println("=================");
+		
 		CommentDAO commentdao = session.getMapper(CommentDAO.class);
-		int result = commentdao.insertComment2(commentdto);
+		int result = commentdao.insertComment2(dto);
 		return result;
 	}
 	
@@ -313,8 +321,19 @@ public class TaskService {
 		 System.out.println("!!리시버 테이블에 인서트 성공??!!");
 		 return result;
 	}
-	
-	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 2.
+	 기      능 : 웹소켓에서 사용
+	 작성자명 : 신 호 용
+	 */
+		public ArrayList<String> getMidinAssingnee(int tid) {
+		
+		System.out.println("changeTname 서비스 실행");
+		AssigneeDAO assigneedao = session.getMapper(AssigneeDAO.class);
+		ArrayList<String> result = assigneedao.getMidinAssingnee(tid);
+		return result;
+	}
 
 	/**
 	 * 
@@ -621,6 +640,8 @@ public class TaskService {
 		int result = taskdao.changeTname(dto);
 		return result;
 	}
+	
+	
 	
 }
 

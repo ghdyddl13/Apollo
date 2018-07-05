@@ -51,6 +51,18 @@ public class ProjectInfoController {
 		
 		ArrayList<StepDTO> steplist = new ArrayList<StepDTO>();
 		steplist = projectinfoservice.getSteps(pid);
+		
+		for(StepDTO dto : steplist) {
+			
+			if(dto.getSname().length() > 15) {
+					String temp = dto.getSname();
+					temp = temp.substring(0, 10);
+					String newsname = temp + "...";
+					dto.setSname(newsname);
+			}
+			
+		}
+		
 		map.addAttribute("steplist", steplist);
 
 		
@@ -78,15 +90,12 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/donutChart.htm")
-	public View donutChart(String pid, ModelMap map) {
-		ArrayList<TaskDTO> assignedtasklist = new ArrayList<TaskDTO>();
-		ArrayList<TaskDTO> unassignedtasklist = new ArrayList<TaskDTO>();
+	public View donutChart(int pid, ModelMap map) {
 		
-		assignedtasklist = projectinfoservice.getAssignedTasks(pid);
-		unassignedtasklist = projectinfoservice.getNotAssignedTasks(pid);
+		ArrayList<TaskDTO> tasklist = new ArrayList<TaskDTO>();
+		tasklist = projectinfoservice.getTasks(pid);
 		
-        map.addAttribute("assignedtasklist", assignedtasklist);
-        map.addAttribute("unassignedtasklist", unassignedtasklist);
+        map.addAttribute("tasklist", tasklist);
 		
 		return jsonview;
 	}
@@ -180,21 +189,19 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/insertMidToPmember.htm")
-	public String projectMemberAdd(String[] data, HttpSession session) {
+	public String projectMemberAdd(String mid, HttpSession session) {
 		
+		System.out.println("projectMemberAdd 컨트롤러 실행");
 		String location = (String) session.getAttribute("location");
 		
-		String tempstr = data[0];
-		String[] data_arr = tempstr.split(",");
+		int pid = (Integer) session.getAttribute("pid");
 		
-		String pid = data_arr[0];
-		String mid = data_arr[1];
+		System.out.println("pid : " + pid);
+		System.out.println("mid : " + mid);
 		
-		int int_pid = Integer.parseInt(pid);
-
         MidpidDTO midpiddto = new MidpidDTO();
         midpiddto.setMid(mid);
-        midpiddto.setPid(int_pid);
+        midpiddto.setPid(pid);
 		
 		int result = 0;
 		result = projectinfoservice.insertPmember(midpiddto);

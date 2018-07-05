@@ -124,10 +124,10 @@ $(function() {
 	</div>
 	
 	<!-- 바디 1 아이디 -->
-	<form id = "f" action="join.htm" method="post">
+	<form id = "f" action="joinform.htm" method="post">
 	<div class="input-group div-width">
 		<div class="col-sm-4 div-font">
-			<h5>*아이디</h5>
+			<h5>*E-Mail</h5>
 		</div>
 		<div class="col-sm-8 div-btn-position">
 			<input type="button" id="btnCheckUid" class="btn" value="중복확인">

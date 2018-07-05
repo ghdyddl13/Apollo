@@ -82,7 +82,7 @@ function makeProfileIcon(memberdata, imgsize){
 	var profile_container = jQuery("<div>",{"class":"profile-img-container","id":"profile"+memberdata.mid,"data-toggle":"modal", "data-target":"#profile-modal-dialog"});
 	profile_container.css({"width":imgsize,"height":imgsize});
 	var img = jQuery("<img>",{"class":"profile-img"});
-	var src = (memberdata.image ==null)?"img/user_image.png" :"profileImg/"+memberdata.image;
+	var src = (memberdata.image ==null)?"img/user.png" :"profileImg/"+memberdata.image;
 	img.attr("src",src);
 	$(profile_container).append(img);
 	return profile_container;
@@ -114,7 +114,7 @@ function profileinfo(mid) {
         data:{mid:mid},
         dataType:"json",
         success:function(data) {
-            var image = (data.profileinfo.image)?data.profileinfo.image :"img/profilemiffy1.jpg"
+            var image = (data.profileinfo.image)?data.profileinfo.image :"img/user.png"
             $('#profile-modal-img').attr("src",image);
             $('#profile-modal-mname').text(data.profileinfo.mname)
             $('#profile-modal-mid').text(data.profileinfo.mid);
@@ -137,17 +137,41 @@ function profileinfo(mid) {
 } // end - function
 
 
-//사원목록에서 table 사원정보 클릭시
-$(document).on("click",".header-memberinfo-table",function(){
-	// mid 가져오기
-	var mid = $($(this).children("td")[3]).text();
-	
-	profileinfo(mid);
-	
-});
 
-$(document).on("click","#header-memberlist",function(){
-});
+/**
+ * 
+날   짜 : 2018. 7. 5.
+기   능 : 리다이렉트 이후 실행되어야 할 부분을 처리해주는 함수 
+작성자명 : 박 민 식
+ */
+function checkCrtPage(){
+	console.log( $(document).find(".project-page-table").length);
+	if($(document).find("#timeline").length !=0){
+		$.when(getGanttItems()).done(function(ajax){
+			var tasks = ajax.tasks;
+			makeTimelineGantt(tasks);
+			makeTimelineTable(tasks);
+		});
+	} else if( $(document).find(".project-page-table").length !=0){
+		console.log("dd");
+		$("#project-page-table-no-data").remove();
+	} else if( $(document).find("#board-main-div").length !=0){
+		doDraggable();
+		console.log("here");
+	};
+	
+};
+
+
+
+
+
+
+
+
+
+
+
 
 
 

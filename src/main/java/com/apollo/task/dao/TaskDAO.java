@@ -13,7 +13,7 @@ import com.apollo.vo.TidvalueDTO;
 
 public interface TaskDAO {
 
-	public ArrayList<TaskDTO> getTasks(String pid);
+	public ArrayList<TaskDTO> getTasks(int pid);
 	public ArrayList<TaskDTO> getAssignedTasks(String pid);
 	public ArrayList<TaskDTO> getNotAssignedTasks(String pid);
 	public ArrayList<TaskDTO> getTasksInSteps(String sid);

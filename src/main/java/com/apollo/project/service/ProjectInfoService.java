@@ -28,7 +28,7 @@ public class ProjectInfoService {
 	 기      능 : pid를 이용해서 해당 프로젝트 소속 task를 가져옴
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<TaskDTO> getTasks(String pid){
+	public ArrayList<TaskDTO> getTasks(int pid){
 		ArrayList<TaskDTO> tasklist = new ArrayList<TaskDTO>();
 		TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
 		tasklist = dao.getTasks(pid);
@@ -153,12 +153,11 @@ public class ProjectInfoService {
 	 */
 	public int insertPmember(MidpidDTO midpiddto){
 		
-		System.out.println("서비스 탔음");
+		System.out.println("insertPmember 서비스 실행");
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		int result = dao.insertPmember(midpiddto);
 		
-		System.out.println("테스트 출력");
-		System.out.println("result : " + result);
+		System.out.println("맴버 추가 결과 : " + result);
 		
 		return result;
 	}
