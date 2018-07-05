@@ -13,14 +13,6 @@
       <div class="main-body-onepannel-header">
 		<jsp:include page="/WEB-INF/views/inc/projectInsideHeader.jsp"></jsp:include>
         <div class="main-body-onepannel-header-bottom">
-        	<%-- <div class="table-header-filter">
-           		<select class="table-header-filter-status-tag"id="table-status-button">
-            		<option>STATUS:ALL</option>
-            		<c:forEach var="task" items="${tasklist}">
-            			<option id="${task.tstatusid}">${task.tstatus}</option>
-            		</c:forEach>
-           		</select>
-        	</div> --%>
         </div>
       </div>
       <div class="main-body-onepannel-body">
@@ -97,7 +89,6 @@
 	            <c:forEach var="folder" items="${folderlist}">
 	               <tr class="project-table-tr-folders">
 	                  <td><i class="side-dir-folder-icon fas fa-folder"></i>&nbsp;${folder.fname}</td>
-	                  <td></td>
 	                  <td></td>
 	                  <td></td>
 	                  <td></td>

@@ -1,13 +1,6 @@
 .project-page-table{
 	width:95%;
 }
-.project-page-table>thead>tr>th {
-	text-align: center;
-	padding-bottom: 10px;
-	background-color: #e6e7e8;
-	color:#978d8b;
-	overflow: hidden;
-}
 .project-table-tr-steps {
 	/* background-color: #f4faff */
 	font-weight: bold;
@@ -27,6 +20,11 @@
 
 .project-page-table-title {
 	width: 50%;
+	text-align: center;
+	padding-bottom: 10px;
+	background-color: #e6e7e8;
+	color:black;
+	overflow: hidden;
 }
 
 .project-table-tr-tasks:hover {
