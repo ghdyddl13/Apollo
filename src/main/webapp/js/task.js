@@ -131,7 +131,6 @@ $( ".date_eday" ).datepicker({
 		        	   // comment
 		        	   getCommentAndMemberlist();
 		        	   
-		        	   alert('종료일변경');
 		        	     $('#task_dismiss_btn').click();
 		        	     
 	                	 $("#main-box").empty();

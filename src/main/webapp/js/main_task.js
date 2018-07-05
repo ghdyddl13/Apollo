@@ -1353,4 +1353,41 @@ $(document).on("click",".starred-body-task-container-top-star",function(){
 })
 
 
-
+/**
+ * 
+ 날      짜 : 2018. 7. 5.
+ 기      능 : 테스크 명 변경 포커스아웃
+ 작성자명 : 김 정 권
+ */
+$(document).on("focusout","#Task_Modal_tname_input",function() {
+	
+	var tid = $('#tidhidden').attr('value');
+	var tname = '';
+	
+	tname = $('#Task_Modal_tname_input').val();
+		    
+		    $.ajax(
+				       {
+				           type : "post",
+				           url  : "changetname.htm",
+				           data : {
+				        	   'tid': tid,
+				        	   'tname' : tname
+				           },
+				           success : function(rdata){
+				        	   console.log('success 성공 테스트 출력 : ' + rdata.result);
+				        	   
+				   			$('#Task_Modal_tname_input').css("display","none");
+				   			$('#Task_Modal_tname_input').val('');
+				   			
+				   			$('#Task_Modal_tname').empty();
+				   			$('#Task_Modal_tname').append(tname);
+							$('#Task_Modal_tname').css("display", "block");
+							
+		                	 $("#main-box").empty();
+							 $("#main-box").append(rdata);
+				        	   
+				           } // end-success
+				        }); // end-ajax
+	
+});
