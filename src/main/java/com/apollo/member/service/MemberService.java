@@ -23,6 +23,7 @@ import com.apollo.member.dao.MemberDAO;
 import com.apollo.vo.AuthkeyDTO;
 import com.apollo.vo.GoogleDTO;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.StepDTO;
 
 
 @Service
@@ -360,4 +361,5 @@ public class MemberService {
 		return pid;
 	}
 	
+
 }
