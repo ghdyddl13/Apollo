@@ -110,7 +110,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 				        		   
 				        		   assigneestr += '<span>'
 //				        	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
-				        	       assigneestr += '<img src="img/'+ '프로필사진테스트.jpg' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+				        	       assigneestr += '<img src="img/'+ 'user.png' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
 				        	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
 				        	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
 				        	       assigneestr += '</span>'
@@ -597,7 +597,7 @@ $(document).on("click",".task_page_delete_assignee_btn",function(){
 		        		   
 		        		   assigneestr += '<span>'
 //		        	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
-		        	       assigneestr += '<img src="img/'+ '프로필사진테스트.jpg' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+		        	       assigneestr += '<img src="img/'+ 'user.png' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
 		        	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
 		        	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
 		        	       assigneestr += '</span>'
@@ -648,7 +648,7 @@ $(document).on("click","#task_modal_add_assignee",function(){
 	        					 
 	        			  assignee_popup_div_str += '<div class="wrapper_comment popup_member" id="' + this.mid + '">';	 
 //	                      assignee_popup_div_str += '<img class ="taskmodal_memberprofile2" src="img/' + this.image + '"/>';	
-	        			  assignee_popup_div_str += '<img class ="taskmodal_memberprofile2" src="img/프로필사진테스트.jpg"/>';	
+	        			  assignee_popup_div_str += '<img class ="taskmodal_memberprofile2" src="img/user.png"/>';	
 	        			  assignee_popup_div_str += '<div class="each_comment">';	
 	        			  assignee_popup_div_str += '<div class="first_row">' + this.mname + '</div>';	
 	        			  assignee_popup_div_str += '<div class="second_row">' + this.mid + '</div>';	
@@ -730,7 +730,7 @@ $.ajax(
 	     		        		   
 	     		        		   assigneestr += '<span>'
 //	     		        	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
-	     		        	       assigneestr += '<img src="img/'+ '프로필사진테스트.jpg' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+	     		        	       assigneestr += '<img src="img/'+ 'user.png' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
 	     		        	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
 	     		        	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
 	     		        	       assigneestr += '</span>'
@@ -1035,7 +1035,7 @@ var getCommentAndMemberlist = (function (){
 		        		 
 		        		   comment_str += '<div class="wrapper_comment">' 
 		        		 //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
-		        		   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="img/프로필사진테스트.jpg"/>';
+		        		   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="img/user.png"/>';
 		        		   comment_str += '<div class="each_comment">';
 		        		   comment_str += '<div class="first_row">' + this.mname + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + this.cmtmtime + '</div>'
 		        		   comment_str += '<div class="second_row">' + this.comments + '</div>'
@@ -1089,7 +1089,7 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
                 	 
                   popupdiv_str += '<div class="wrapper_comment popup_mid" id="' + this.mid + '">';	 
 //                popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/' + this.image + '"/>';	
-                  popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/프로필사진테스트.jpg"/>';	
+                  popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/user.png"/>';	
                   popupdiv_str += '<div class="each_comment">';	
                   popupdiv_str += '<div class="first_row">' + this.mname + '</div>';	
                   popupdiv_str += '<div class="second_row">' + this.mid + '</div>';	

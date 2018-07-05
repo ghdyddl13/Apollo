@@ -101,7 +101,7 @@
 	                      <div class= "list-task-checkbox-container">
 	                        <span class="list-task-checkbox"></span>
 	                      </div>
-	                      <div class= "image-container"><img class="profile-image" src="img/frog.png" alt=""></div>
+	                      <div class= "image-container"><img class="profile-image" src="img/user.png" alt=""></div>
 	                      <div class="center-container Task_RUD_Modal"data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}">
 	                        <div class= "task-name-container">${task.tname}</div>
 	                        <div class= "task-step-container">

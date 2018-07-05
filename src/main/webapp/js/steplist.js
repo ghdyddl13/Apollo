@@ -337,7 +337,7 @@ $(function() {
         $(".list-header-filter-people-tagscontainer").empty();
         $.each(list_memberlist,function(index,element) {
               nametag+= '<div class="list-header-filter-people-tagwrap"><div class="list-header-filter-people-tag"><div class="list-header-filter-people-image">';
-              nametag+='<img class="list-people-image"src="img/frog.png" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
+              nametag+='<img class="list-people-image"src="img/user.png" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
               nametag+= element.mname;
               nametag+= '</div><div class="list-people-email">';
               nametag+= element.mid;
@@ -414,7 +414,7 @@ $(function() {
             name = name.replace(piece,"<b>"+piece+"</b>");
             id= id.replace(piece,"<b>"+piece+"</b>");
             nametag+= '<div class="list-header-filter-people-tagwrap"><div class="list-header-filter-people-tag"><div class="list-header-filter-people-image">';
-            nametag+='<img class="list-people-image"src="img/frog.png" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
+            nametag+='<img class="list-people-image"src="img/user.png" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
             nametag+= name;
             nametag+= '</div><div class="list-people-email">';
             nametag+= id;

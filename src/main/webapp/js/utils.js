@@ -82,7 +82,7 @@ function makeProfileIcon(memberdata, imgsize){
 	var profile_container = jQuery("<div>",{"class":"profile-img-container","id":"profile"+memberdata.mid,"data-toggle":"modal", "data-target":"#profile-modal-dialog"});
 	profile_container.css({"width":imgsize,"height":imgsize});
 	var img = jQuery("<img>",{"class":"profile-img"});
-	var src = (memberdata.image ==null)?"img/user_image.png" :"profileImg/"+memberdata.image;
+	var src = (memberdata.image ==null)?"img/user.png" :"profileImg/"+memberdata.image;
 	img.attr("src",src);
 	$(profile_container).append(img);
 	return profile_container;
@@ -114,7 +114,7 @@ function profileinfo(mid) {
         data:{mid:mid},
         dataType:"json",
         success:function(data) {
-            var image = (data.profileinfo.image)?data.profileinfo.image :"img/profilemiffy1.jpg"
+            var image = (data.profileinfo.image)?data.profileinfo.image :"img/user.png"
             $('#profile-modal-img').attr("src",image);
             $('#profile-modal-mname').text(data.profileinfo.mname)
             $('#profile-modal-mid').text(data.profileinfo.mid);

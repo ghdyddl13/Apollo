@@ -34,7 +34,7 @@
 					<c:choose>
 						<c:when test="${m.image eq null}">
 							<div>
-								<img src="img/profilemiffy1.jpg" id="loginimg">
+								<img src="img/user.png" id="loginimg">
 							</div>
 						</c:when>
 						<c:otherwise>
