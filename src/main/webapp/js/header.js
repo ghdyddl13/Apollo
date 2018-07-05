@@ -95,6 +95,10 @@ $(function() {
 
 	//////////////////////////// 래영 /////////////////////////////////
 
+		
+	$('#header-introduce').click(function() {
+		location.href="index.htm";
+	});
 	// 헤더에서 우상단 개인정보수정 클릭시 실행되는 함수
 	// 헤더 개인정보수정 Modal
 	$('#header-profile-edit').click(function(evt) {

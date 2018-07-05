@@ -46,6 +46,7 @@
 					<a id="header-user-name" class="nav-link dropdown-toggle"
 					data-toggle="dropdown" style="color: white"> ${m.mname}님</a>
 					<ul class="dropdown-menu">
+						<li id="header-introduce"><a>Apollo</a></li>
 						<li data-toggle="modal" data-target="#edit-profile"
 							id="header-profile-edit"><a>개인정보수정</a></li>
 						<li id="header-memberlist"><a>사원목록</a></li>
