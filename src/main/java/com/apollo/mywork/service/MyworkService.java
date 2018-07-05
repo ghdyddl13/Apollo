@@ -172,28 +172,6 @@ public class MyworkService {
 	/**
 	 * 
 	 날      짜 : 2018. 6. 18.
-	 기      능 : 어떤 요일인지 확인하는 함수
-	 작성자명 : 이 진 우
-	 */
-	public int checkDay(String date) {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd") ;
-	    Date nDate=null;
-		try {
-			nDate = dateFormat.parse(date);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-		}
-	     
-	    Calendar cal = Calendar.getInstance() ;
-	    cal.setTime(nDate);
-	     
-	    int dayNum = cal.get(Calendar.DAY_OF_WEEK) ;
-
-	    return dayNum;
-	}
-	/**
-	 * 
-	 날      짜 : 2018. 6. 18.
 	 기      능 : Eday를 뿌려주기 좋은 데이터로 만들어주기 위해 쓰는 함수 (IN : Eday (ex:2018-07-01)/ OUT: date(ex: Jun 02)
 	 작성자명 : 이 진 우
 	 */

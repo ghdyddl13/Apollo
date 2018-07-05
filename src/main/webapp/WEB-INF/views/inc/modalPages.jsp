@@ -798,15 +798,43 @@
 				<h4 class="modal-title">개인정보수정</h4>
 			</div>
 			<div class="modal-body">
+				<div id="edit-profile-img-content">
+									<!-- <img name="image" id="edit-profile-modal-img" src=""> -->
+					<form  action="" method="post" >
+						<span class="btn btn-1a btn-addfile fileinput-button">
+		        			<span>Add files...</span>
+							<input type="file" name="member_image" id="edit-profile-image" data-url="updatememberimage.htm">
+		   				</span>
+					</form>
+					<script type="text/javascript">
+						$(function(){
+							$("#edit-profile-image").fileupload({
+								dataType:"json",
+								add:function(e,data){
+					                var uploadFile = data.files[0];
+					                var isValid = true;
+					                if (!(/png|jpe?g|gif|svg/i).test(uploadFile.name)) {
+					                    alert('png, jpg, gif 만 가능합니다');
+					                    isValid = false;
+					                }
+					                if (isValid) {
+					                    data.submit();
+					                }
+								},
+								done:function(e,data){
+									
+								}								
+							})
+						})
+					</script>
+
+				</div>
 				<form id="edit-profile-form">
 					<fieldset>
 						<div class="edit-profile-part1">
 							<br>
 							<div>
-								<div id="edit-profile-img-content">
-									<!-- <img name="image" id="edit-profile-modal-img" src=""> -->
-									<input type="file" name="image" id="edit-profile-image">
-								</div>
+
 								<br>
 								<div class="edit-profile-all-title">
 									<div class="edit-profile-title">이름</div>
@@ -1055,3 +1083,9 @@
 			</div>
 		</div>
 	</div>
+	<!-- jQuery ui widget -->
+	<script src="js/jquery.ui.widget.js"></script>
+	<!-- FILE UPLOAD -iFame -->
+	<script type="text/javascript" src="js/jquery.iframe-transport.js"></script>
+	<!-- FILE UPLOAD -->
+	<script type="text/javascript" src="js/jquery.fileupload.js"></script>

@@ -43,11 +43,13 @@
 <link rel="stylesheet" href="css/stepBoard.css" />
 <!-- File관련 CSS -->
 <link rel="stylesheet" href="css/projectFile.css" />  
+<!-- PROJECT TABLE -->
+<link rel="stylesheet" href="css/project_table.css" />
+
+
 
 
 <!--   JAVASCRIPT   -->
-
-
 <!--JQUERY CDN-->
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!--BOOTSTRAP CDN-->
@@ -72,21 +74,6 @@
 <script type="text/javascript" src="js/sidebar_raeyoung.js"></script>
 <!-- PROJECT INFORMATION JAVASCRIPT-->
 <script type="text/javascript" src="js/main_projectInfo.js"></script>
-
-<link rel="stylesheet" href="css/project_table.css" />
-
-<!-- stream css -->
-<link href="css/stream.css" type="text/css" rel="stylesheet">
-
-<!-- task CSS -->
-<link href="css/task.css" type="text/css" rel="stylesheet">
-
-<!-- STEP LIST CSS_ JW -->
-<link href="css/stepList.css" type="text/css" rel="stylesheet">
-<!-- Header Edit Profile_ RY -->
-<link href="css/profileheader.css" type="text/css" rel="stylesheet">
-<!-- Header Member List_ RY -->
-<link href="css/memberlist.css" type="text/css" rel="stylesheet">
 <!-- STEP LIST JAVASCRIPT_ JW-->
 <script type="text/javascript" src="js/steplist.js?q=123"></script>
 <!-- MAIN Task js -->
@@ -97,6 +84,8 @@
 <script type="text/javascript" src="js/projectInsideHeader.js"></script>
 <!--stepInsideHeader-->
 <script type="text/javascript" src="js/stepInsideHeader.js"></script>
+
+
 
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <title>Project Apollo</title>
