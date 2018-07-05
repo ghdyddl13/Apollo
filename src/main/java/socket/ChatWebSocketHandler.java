@@ -23,7 +23,6 @@ import com.apollo.task.service.TaskService;
 public class ChatWebSocketHandler extends TextWebSocketHandler{
 	@Autowired
 	private TaskService service;
-	
 	@Autowired
 	private InboxService serviceinbox;
 	

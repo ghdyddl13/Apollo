@@ -29,7 +29,8 @@
 					<b>Login to Apollo</b>
 				</h1>
 				<br>
-				<input type="text" class="login-input" placeholder="E-mail" name="mid" id="mid">
+				<span>${msg}</span>
+				<input type="text" class="login-input" placeholder="E-mail" name="mid" id="mid"> 
 				<input type="password" class="login-input" placeholder="Password" name="pwd" id="pwd">
 				<br>
 				<input id="login_btn" type="button" onclick="login()" class="btn btn-block login-btn" value="로그인"> 

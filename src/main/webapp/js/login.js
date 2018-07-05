@@ -1,9 +1,11 @@
 $(function() {
-		var msg = $("#login-msg").val();
-		if (msg != null) {
+	
+	/*	var msg = $("#login-msg").val();
+		console.log(">" +msg+"<");
+		if (msg != "" || msg != null) {
 			alert(msg);
 			
-		}
+		}*/
 		
 		
 		$("#pwdreset").click(function() {
