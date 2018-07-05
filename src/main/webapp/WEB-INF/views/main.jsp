@@ -46,6 +46,8 @@
 
 
 <!--   JAVASCRIPT   -->
+
+
 <!--JQUERY CDN-->
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!--BOOTSTRAP CDN-->
@@ -147,7 +149,7 @@
 	});
 </script>
 </head>
-<body>
+<body >
 	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
 	<div class="Apollo-main">
 		<div class="main-header-panel" >
