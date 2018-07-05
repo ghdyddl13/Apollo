@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 
+import com.apollo.member.service.MemberService;
 import com.apollo.project.service.ProjectInfoService;
-import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.service.TaskService;
 import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
@@ -34,6 +34,9 @@ public class TaskController {
 	
 	@Autowired 
 	private ProjectInfoService projectinfoservice;
+	
+	@Autowired 
+	private MemberService memberservice;
 	
 	@Autowired
 	private View jsonview;
@@ -158,10 +161,21 @@ public class TaskController {
 	public String deleteTask(int tid, Model model, HttpSession session) {
 		
 		String location = (String) session.getAttribute("location");
-		int pid = (Integer) session.getAttribute("pid");
 		
 		int result = service.deleteTask(tid);
 		System.out.println("delete Task 결과 : " + result);
+		
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			System.out.println("null 찾았다");
+			String midforpid =(String)session.getAttribute("mid");
+			pid = memberservice.getMinProjectid(midforpid);
+			System.out.println("null 이어서 넣은 pid :" + pid);
+		}else {
+			System.out.println("null이 아니라서 세션에서 pid 가져온다");
+			pid = (Integer) session.getAttribute("pid");
+			System.out.println("세션에서 가져온 pid : " + pid);
+		}
 		
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
@@ -278,8 +292,20 @@ public class TaskController {
 		model.addAttribute("result", result);
 		
 		String location = (String) session.getAttribute("location");
-		int pid = (Integer) session.getAttribute("pid");
 		
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			System.out.println("null 찾았다");
+			String midforpid =(String)session.getAttribute("mid");
+			pid = memberservice.getMinProjectid(midforpid);
+			System.out.println("null 이어서 넣은 pid :" + pid);
+		}else {
+			System.out.println("null이 아니라서 세션에서 pid 가져온다");
+			pid = (Integer) session.getAttribute("pid");
+			System.out.println("세션에서 가져온 pid : " + pid);
+		}
+		
+		System.out.println("최종적으로 붙여보낼 pid : " + pid);
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    } else if(location.equals("/board.htm")) {
@@ -412,8 +438,15 @@ public class TaskController {
 	public View addTaskAssigneeModalInfo(int tid, HttpSession session, Model model){
 		
 		System.out.println("assignee 추가를 위한 이중 모달 데이터 컨트롤러 실행");
-		int pid = (Integer) session.getAttribute("pid");
-		
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			String midforpid =(String)session.getAttribute("mid");
+			if(pid == 0) {
+				pid = memberservice.getMinProjectid(midforpid);
+			}
+		}else {
+			pid = (Integer) session.getAttribute("pid");
+		}		
 		// 같은 프로젝트이지만 해당 테스크의 담당자가 아닌 사람들
 		ArrayList<MemberDTO> getSameProjectButNotSameTaskMemberList = new ArrayList<MemberDTO>();
 		
@@ -508,7 +541,6 @@ public class TaskController {
 	@RequestMapping("/changesdayoftask.htm")
 	public String changeSdayOfTask(int tid, String sday, HttpSession session, Model model){
 		String location = (String) session.getAttribute("location");
-		int pid = (Integer) session.getAttribute("pid");
 		System.out.println("sday 컨트롤러 실행");
 		
 		System.out.println("tid : " + tid);
@@ -545,6 +577,18 @@ public class TaskController {
 			
 		}
 		
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			System.out.println("null 찾았다");
+			String midforpid =(String)session.getAttribute("mid");
+			pid = memberservice.getMinProjectid(midforpid);
+			System.out.println("null 이어서 넣은 pid :" + pid);
+		}else {
+			System.out.println("null이 아니라서 세션에서 pid 가져온다");
+			pid = (Integer) session.getAttribute("pid");
+			System.out.println("세션에서 가져온 pid : " + pid);
+		}
+		
 		 if(location.equals("/information.htm")) {
 		    	return "redirect:/information.htm?pid=" + pid;
 		    } else if(location.equals("/board.htm")) {
@@ -574,7 +618,6 @@ public class TaskController {
 	@RequestMapping("/changeedayoftask.htm")
 	public String changeEdayOfTask(int tid, String eday, HttpSession session, Model model){
 		String location = (String) session.getAttribute("location");
-		int pid = (Integer) session.getAttribute("pid");
 		System.out.println("eday 컨트롤러 실행");
 		
 		System.out.println("tid : " + tid);
@@ -609,6 +652,18 @@ public class TaskController {
 			
 			System.out.println("eday 변경 코멘트 입력 성공 여부 : " + final_result);
 			
+		}
+		
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			System.out.println("null 찾았다");
+			String midforpid =(String)session.getAttribute("mid");
+			pid = memberservice.getMinProjectid(midforpid);
+			System.out.println("null 이어서 넣은 pid :" + pid);
+		}else {
+			System.out.println("null이 아니라서 세션에서 pid 가져온다");
+			pid = (Integer) session.getAttribute("pid");
+			System.out.println("세션에서 가져온 pid : " + pid);
 		}
 		
 		 if(location.equals("/information.htm")) {
@@ -866,7 +921,18 @@ public class TaskController {
 		map.addAttribute("result", result);
 		
 		String location = (String) session.getAttribute("location");
-		int pid = (Integer) session.getAttribute("pid");
+		
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			System.out.println("null 찾았다");
+			String midforpid =(String)session.getAttribute("mid");
+			pid = memberservice.getMinProjectid(midforpid);
+			System.out.println("null 이어서 넣은 pid :" + pid);
+		}else {
+			System.out.println("null이 아니라서 세션에서 pid 가져온다");
+			pid = (Integer) session.getAttribute("pid");
+			System.out.println("세션에서 가져온 pid : " + pid);
+		}
 		
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;

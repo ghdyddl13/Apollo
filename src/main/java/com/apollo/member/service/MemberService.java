@@ -343,4 +343,21 @@ public class MemberService {
 			}
 		return result;
 	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 가장 최근에 만든 프로젝트의 pid를 가져온다
+	 작성자명 : 김 정 권
+	 */
+	public int getMinProjectid(String mid) {
+		
+		System.out.println("getMinProjectid 서비스 실행");
+		
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		int pid = dao.getminprojectid(mid);
+		
+		return pid;
+	}
+	
 }

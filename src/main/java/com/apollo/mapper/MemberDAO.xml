@@ -133,5 +133,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="ischecked" resultType="String">
 		select ischecked from member where mid=#{mid}
 	</select>
+	
+	<select id="getminprojectid" resultType="Integer">
+		select min(pid) from pmember where mid=#{mid}
+	</select>
 
 </mapper>
