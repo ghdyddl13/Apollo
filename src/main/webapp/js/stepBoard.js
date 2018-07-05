@@ -123,6 +123,7 @@ function addTask_focusout(tstatusid){
     작 성 자 명 : 이 창 훈
     */
    function doDraggable(){
+	   console.log("test")
 	   autoWidth();
 	     sortable();
 	    $('#board-content-md').draggable(
