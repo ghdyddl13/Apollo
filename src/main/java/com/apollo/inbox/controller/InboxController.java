@@ -54,6 +54,8 @@ public class InboxController {
 	 */
 	@RequestMapping("/inbox.htm")
 	public String inbox(HttpSession session,Model model) {
+		session.setAttribute("location", "/inbox.htm");
+		
 		System.out.println("inbox controller");
 		String mid = (String)session.getAttribute("mid");
 		service.updateNewCheck(mid);
