@@ -6,6 +6,7 @@ import com.apollo.vo.GoogleDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidpidDTO;
 import com.apollo.vo.ProjectDTO;
+import com.apollo.vo.StepDTO;
 import com.apollo.vo.TidpidDTO;
 
 public interface MemberDAO {
@@ -166,6 +167,14 @@ public interface MemberDAO {
 	 작성자명 : 김 정 권
 	 */
 	public int getminprojectid(String mid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : step list로 step 담당자 가져오기 
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<MemberDTO> selectStepAssignees (ArrayList<StepDTO> steplist);
 
 
 }

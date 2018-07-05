@@ -137,9 +137,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getminprojectid" resultType="Integer">
 		select min(pid) from pmember where mid=#{mid}
 	</select>
+	
+	<select id="selectStepAssignees" parameterType="java.util.List" resultType="com.apollo.vo.MemberDTO">
+		select * from member
+		where mid in 
+		<foreach collection="list" item="step"  open="(" close=")" separator=",">
+            #{step.mid}
+        </foreach>
+	</select>
+
 	<!-- 맴버 이미지 업데이트 -->
 	<update id="updateImageName" parameterType="com.apollo.vo.MemberDTO"> 
 		update member set image =#{image}
 		where mid = #{mid}
 	</update>
+
 </mapper>

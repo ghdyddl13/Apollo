@@ -19,7 +19,9 @@ import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.AuthkeyDTO;
 import com.apollo.vo.GoogleDTO;
 import com.apollo.vo.MemberDTO;
+import com.apollo.vo.StepDTO;
 import com.apollo.vo.filedataDTO;
+
 
 
 @Service
@@ -413,4 +415,5 @@ public class MemberService {
 		return pid;
 	}
 	
+
 }

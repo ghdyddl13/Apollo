@@ -10,5 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		= (select methodologyid from project where pid=(select pid from task where tid = #{tid}))
 		order by tstatusid asc
 	</select>
-	
+	<select id="getTstatuslistPid" resultType="com.apollo.vo.TstatusDTO">
+		select TSTATUSID, TSTATUS, COLOR, ORDERING from TSTATUS where METHODOLOGYID= (select METHODOLOGYID from project where pid=#{pid})
+	</select>
 </mapper>

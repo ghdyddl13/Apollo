@@ -10,12 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.apollo.member.service.MemberService;
 import com.apollo.project.service.ProjectInfoService;
 import com.apollo.project.service.ProjectTableService;
 import com.apollo.vo.FolderDTO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
+import com.apollo.vo.TstatusDTO;
 /**
  * 
   클래스명 : ProjectTableController
@@ -30,6 +33,9 @@ public class ProjectTableController {
 	
 	@Autowired 
 	private ProjectInfoService projectinfoservice;
+	
+	@Autowired 
+	private MemberService memberservice;
 
 	
 	/**
@@ -64,8 +70,17 @@ public class ProjectTableController {
 				System.out.println(steplist.size());
 				ArrayList<TaskDTO> tasklist = null; //sid 에 속한 task 및 tstatus 가져오기
 				tasklist = tableservice.getTasksInStep(steplist);
-				model.addAttribute("tasklist", tasklist);	
+				model.addAttribute("tasklist", tasklist);
+				
+				ArrayList<MemberDTO> memberlist = null; //step 에 담당자 가져오기
+				memberlist = tableservice.selectStepAssignees(steplist);
+				model.addAttribute("memberlist", memberlist);
+				
+				ArrayList<TstatusDTO> tstatuslist = null; //tstatus 상태 가져오기
+				tstatuslist = tableservice.getTstatuslistPid(pid);
+				model.addAttribute("tstatuslist", tstatuslist);
 			}
+
 
 			ProjectDTO projectinfo = projectinfoservice.getProjectInfo(pid);
 			model.addAttribute("projectinfo", projectinfo);
