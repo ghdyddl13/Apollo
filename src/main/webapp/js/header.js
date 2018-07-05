@@ -387,6 +387,7 @@ function getSearchResult(){
 			 break;
 		 case 3:	 
 			 pstatus= "휴지통";
+			 
 			 pstatuscolor= "rgb(127, 127, 127)";
 			 break;
 	 }
@@ -458,8 +459,7 @@ function resultSearchProject(projectlist){
 	 $(step_info_div).append(step_name_div,step_dir_div)
 	 $(div).append(stepicon,step_info_div);
 	 return div;
- 
- }
+}
  
  /**
   * 
@@ -609,8 +609,6 @@ $(document).on("click",".search-item-task",function(){
 	var pid = $(this).find("[type=hidden]")[0].value.substring(1);
 	var tid = $(this)[0].id.substring(6);
 	console.log(pid, tid);
-	
-	
 	
 })
 
