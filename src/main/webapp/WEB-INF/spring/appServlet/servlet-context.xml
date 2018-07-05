@@ -70,6 +70,10 @@
 		 	<mvc:exclude-mapping path="/googlelogin.htm"/>
 			<bean id ="exInterceptor" class ="inter.ExInterceptor"/>
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/pageReloadEvent.htm" /> 
+			<bean id ="ReloadInterceptor" class ="inter.ReloadInterceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	<mvc:annotation-driven/>

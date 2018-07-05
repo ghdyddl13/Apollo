@@ -149,5 +149,13 @@ public interface MemberDAO {
 	 작성자명 : 이 창 훈
 	 */
 	public String ischecked(String mid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 가장 최근에 만든 프로젝트의 pid를 가져온다
+	 작성자명 : 김 정 권
+	 */
+	public int getminprojectid(String mid);
 
 }

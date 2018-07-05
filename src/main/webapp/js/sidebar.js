@@ -1,5 +1,5 @@
 $(function() {
-	checkIsHereTimeline();
+	 unload();
 	/////////////  프로젝트, 폴더, 스텝 생성 모달창 도움말 설정////////////////////
 	 $(".modal-question").tooltip({
 		 classes: {
@@ -1064,14 +1064,40 @@ function loadCurrentPage(){
 	}
 }
 */
-function checkIsHereTimeline(){
-	  if (window.sessionStorage) {
-
-        sessionStorage.setItem('저장할 이름 - 문자열', '저장할 객체');
-        var position = sessionStorage.getItem('location');
-        console.log(sessionStorage);
+function unload() {
+	
+	switch (document.readyState){
+	
+	case "complete":
+		
+		$.ajax({
+			url:"pageReloadEvent.htm",
+			dataType:"html",
+			success:function(data){
+				console.log(data);
+			}
+		})
+		
+		break;
+	case "loading":
+		// 로딩 중 이벤트
+	case "interactive":
+		//화면 전환 중 이벤트
+	}
+	
+	
+	console.log("unload")
+    if (self.screenTop > 9000) {
+    	alert("브라우저 종료")
+    } else {
+        if (document.readyState == "complete") {
+        	alert("새로고침")
+        } else  if (document.readyState == "loading") {
+        	alert("페이지 전환중")
+        }
     }
-
 }
 
-   
+
+
+
