@@ -14,7 +14,7 @@
 
 		<ul class="nav navbar-nav ">
 			<li class="nav-item"><a class="nav-link header-menu"
-				id="inbox-page" style="color: white">Inbox<span id="inbox_count" style="color: red"></span></a></li>
+				id="inbox-page" style="color: white">Inbox<c:if test="${newcount ne 0}"><span id="inbox_count" style="color: red;margin-left:3px; padding-left:5px; padding-right :5px; background-color:rgb(255, 195, 13);   border-radius: 4px; "><b>${newcount}</b></span></c:if></a></li>
 			<li class="nav-item"><a class="nav-link header-menu"
 				id="myWork-page" style="color: white">My work</a></li>
 			<li class="nav-item"><a class="nav-link main-header-menu"
