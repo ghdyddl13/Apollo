@@ -271,6 +271,7 @@ $(document).on("click","#task_trash_btn",function(){
 		        	     
 	                	 $("#main-box").empty();
 						 $("#main-box").append(rdata);
+						 checkCrtPage();
 	                	 
 		           } // end-success
 		        }); // end-ajax
@@ -376,6 +377,7 @@ $(document).on("click","#step_delete_button",function(){
 		        	     
 	                	 $("#main-box").empty();
 						 $("#main-box").append(rdata);
+						 checkCrtPage();
 	                	 
 		           } // end-success
 		        }); // end-ajax
@@ -787,7 +789,7 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 		        	     
 	                  $("#main-box").empty();
 					  $("#main-box").append(rdata);
-		        	   
+					  checkCrtPage()
 		           } // end-success
 		        }); // end-ajax
 	
@@ -1325,7 +1327,7 @@ $(document).on("keyup","#Task_Modal_tname_input",function(){
 							
 		                	 $("#main-box").empty();
 							 $("#main-box").append(rdata);
-				        	   
+							 checkCrtPage();
 				           } // end-success
 				        }); // end-ajax
 	  		} // end - keyCode==13
@@ -1347,7 +1349,8 @@ $(document).on("click",".starred-body-task-container-top-star",function(){
             data:{tid:tid},
             success:function(data) {
 					 $("#main-box").empty();
-					 $("#main-box").append(data);				
+					 $("#main-box").append(data);
+					 checkCrtPage();
             }
 	});
 })
@@ -1386,7 +1389,7 @@ $(document).on("focusout","#Task_Modal_tname_input",function() {
 							
 		                	 $("#main-box").empty();
 							 $("#main-box").append(rdata);
-				        	   
+							 checkCrtPage();
 				           } // end-success
 				        }); // end-ajax
 	

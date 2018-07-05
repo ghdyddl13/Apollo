@@ -40,7 +40,7 @@
 	font-size: 12px;
 }
 .project-table-content {
-	overflow-y:auto; 
+	overflow-y: hidden; 
 }
 #proejct-page-table-no-data{
 	float: inherit;

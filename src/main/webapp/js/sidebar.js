@@ -1043,59 +1043,26 @@ function updateProject(data){
 
 /**
  * 
- 날   짜 : 2018. 6. 22.
- 기   능 : View 로드 시 현재 페이지를 뿌려주는 함수 
+ 날   짜 : 2018. 7. 5.
+ 기   능 : 페이지  reload시 화면 구성함수 
  작성자명 : 박 민 식
  */
-/*
-function loadCurrentPage(){	
-	console.log("loadCurrentPage");
-	var currentpage= $("#currentPage").val();
-	if(currentpage != null){
-		$.ajax({
-			url:currentpage,
-			dataType:"html",
-			success:function(data){
-			   console.log(data);
-		       $("#main-box").empty();
-		       $("#main-box").append(data);           
-			}
-		})
-	}
-}
-*/
 function unload() {
-	
+	/*console.log("aa");
 	switch (document.readyState){
-	
 	case "complete":
-		
+	*/	
 		$.ajax({
 			url:"pageReloadEvent.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data);
+				 $("#main-box").empty();
+		         $("#main-box").append(data);
+		         checkCrtPage();
 			}
 		})
 		
-		break;
-	case "loading":
-		// 로딩 중 이벤트
-	case "interactive":
-		//화면 전환 중 이벤트
-	}
 	
-	
-	console.log("unload")
-    if (self.screenTop > 9000) {
-    	alert("브라우저 종료")
-    } else {
-        if (document.readyState == "complete") {
-        	alert("새로고침")
-        } else  if (document.readyState == "loading") {
-        	alert("페이지 전환중")
-        }
-    }
 }
 
 
