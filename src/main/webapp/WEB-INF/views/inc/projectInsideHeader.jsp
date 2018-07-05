@@ -3,6 +3,7 @@
 <!DOCTYPE html >
 <div class="main-body-onepannel-header-top">
 	<div class="main-body-onepannel-header-top-title">
+		<input type="hidden" value="${projectinfo.pid}" id="pidhidden" >
 		<div class="main-body-onepannel-header-top-title-text">${projectinfo.pname}</div>
 	</div>
 	<div class="main-body-onepannel-header-top-selectors">

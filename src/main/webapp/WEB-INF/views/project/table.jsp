@@ -144,7 +144,7 @@
 	            </c:forEach>
 	         </tbody>
 	      </table>
-	      <div id="proejct-page-table-no-data">
+	      <div id="project-page-table-no-data">
 	      	<div id="proejct-page-table-img-content">
 	      		<img src="img/rocket.png" id="proejct-page-table-img">
 	      	</div>
