@@ -804,30 +804,34 @@
 			<div class="modal-body">
 				<div id="edit-profile-img-content">
 									<!-- <img name="image" id="edit-profile-modal-img" src=""> -->
-					<form name="form" id="member_image_form" method="post" >
-						<input type="file" name="member_image" id="edit-profile-image">
-						<input type="button" id="member_imageupload" value="가즈앙~">
+					<form  action="" method="post" >
+						<span class="btn btn-1a btn-addfile fileinput-button">
+		        			<span>Add files...</span>
+							<input type="file" name="member_image" id="edit-profile-image" data-url="updatememberimage.htm">
+		   				</span>
 					</form>
 					<script type="text/javascript">
 						$(function(){
-						     $("#member_imageupload").click(function(){
-						    	 
-						    	 console.log('여긴 탔지?')
-						         var form = $('member_image_form');
-						         var formData = new FormData(form);
-						             $.ajax({
-						                url: 'updatememberimage.htm',
-						                processData: false,
-						                   contentType: false,
-						                data: formData,
-						                type: 'POST',
-						                success: function(result){
-						                    alert("업로드 성공!!");
-						                }
-						            });
-						         });
+							$("#edit-profile-image").fileupload({
+								dataType:"json",
+								add:function(e,data){
+					                var uploadFile = data.files[0];
+					                var isValid = true;
+					                if (!(/png|jpe?g|gif|svg/i).test(uploadFile.name)) {
+					                    alert('png, jpg, gif 만 가능합니다');
+					                    isValid = false;
+					                }
+					                if (isValid) {
+					                    data.submit();
+					                }
+								},
+								done:function(e,data){
+									
+								}								
+							})
 						})
 					</script>
+
 				</div>
 				<form id="edit-profile-form">
 					<fieldset>
@@ -1083,3 +1087,9 @@
 			</div>
 		</div>
 	</div>
+	<!-- jQuery ui widget -->
+	<script src="js/jquery.ui.widget.js"></script>
+	<!-- FILE UPLOAD -iFame -->
+	<script type="text/javascript" src="js/jquery.iframe-transport.js"></script>
+	<!-- FILE UPLOAD -->
+	<script type="text/javascript" src="js/jquery.fileupload.js"></script>

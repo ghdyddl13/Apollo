@@ -54,8 +54,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!-- ECHART.JS CDN-->
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-<!--JQUERY FORM CDN  -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
+
 <!-- SIDEBAR JAVASCRIPT -->
 <script type="text/javascript" src="js/sidebar.js"></script>
 <!-- 공통 JavaScript 함수 모음(Utils) -->
@@ -70,21 +69,6 @@
 <script type="text/javascript" src="js/stepBoard.js"></script>
 <!-- SIDEBAR JAVASCRIPT-->
 <script type="text/javascript" src="js/sidebar_raeyoung.js"></script>
-
-<link rel="stylesheet" href="css/project_table.css" />
-
-<!-- stream css -->
-<link href="css/stream.css" type="text/css" rel="stylesheet">
-
-<!-- task CSS -->
-<link href="css/task.css" type="text/css" rel="stylesheet">
-
-<!-- STEP LIST CSS_ JW -->
-<link href="css/stepList.css" type="text/css" rel="stylesheet">
-<!-- Header Edit Profile_ RY -->
-<link href="css/profileheader.css" type="text/css" rel="stylesheet">
-<!-- Header Member List_ RY -->
-<link href="css/memberlist.css" type="text/css" rel="stylesheet">
 <!-- STEP LIST JAVASCRIPT_ JW-->
 <script type="text/javascript" src="js/steplist.js?q=123"></script>
 <!-- MAIN Task js -->
@@ -95,6 +79,8 @@
 <script type="text/javascript" src="js/projectInsideHeader.js"></script>
 <!--stepInsideHeader-->
 <script type="text/javascript" src="js/stepInsideHeader.js"></script>
+
+
 
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <title>Project Apollo</title>

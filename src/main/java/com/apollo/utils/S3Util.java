@@ -11,6 +11,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Properties;
+
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
@@ -23,8 +25,10 @@ import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
 public class S3Util {
-	private String accessKey = "엑세스키"; // 엑세스 키
-	private String secretKey = "보안 엑세스키"; // 보안 엑세스 키
+	private Properties s3key = PropertiesUtil.fetchProperties("Apollo_s3Key");
+	
+	private String accessKey = s3key.getProperty("s3.accessKey"); // 엑세스 키
+	private String secretKey = s3key.getProperty("s3.secretKey"); // 보안 엑세스 키
 
 	private AmazonS3 conn;
 
@@ -35,25 +39,41 @@ public class S3Util {
 		this.conn = new AmazonS3Client(credentials, clientConfig);
 		conn.setEndpoint("s3.ap-northeast-2.amazonaws.com"); // 엔드포인트 설정 [ 아시아 태평양 서울 ]
 	}
-
-	// 버킷 리스트를 가져오는 메서드이다.
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 버킷 리스트 가지고 오는 메서드
+	 작성자명 : 이 진 우
+	 */
 	public List<Bucket> getBucketList() {
 		return conn.listBuckets();
 	}
-
-	// 버킷을 생성하는 메서드이다.
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 버킷 생성 메서드
+	 작성자명 : 이 진 우
+	 */
 	public Bucket createBucket(String bucketName) {
 		return conn.createBucket(bucketName);
 	}
-
-	// 폴더 생성 (폴더는 파일명 뒤에 "/"를 붙여야한다.)
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 폴더 생성 메서드 (폴더는 파일명 뒤에 "/"를 붙여야한다)
+	 작성자명 : 이 진 우
+	 */
 	public void createFolder(String bucketName, String folderName) {
 		conn.putObject(bucketName, folderName + "/", new ByteArrayInputStream(new byte[0]), new ObjectMetadata());
 	}
-
-	// 파일 업로드
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 파일 업로드
+	 작성자명 : 이 진 우
+	 */
 	public void fileUpload(String bucketName, String fileName, byte[] fileData) throws FileNotFoundException {
-
 		String filePath = (fileName).replace(File.separatorChar, '/'); // 파일 구별자를 `/`로 설정(\->/) 이게 기존에 / 였어도 넘어오면서 \로 바뀌는 거같다.
 		ObjectMetadata metaData = new ObjectMetadata();
 
@@ -63,17 +83,23 @@ public class S3Util {
 		conn.putObject(bucketName, filePath, byteArrayInputStream, metaData);
 
 	}
-
-	// 파일 삭제
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 파일 삭제
+	 작성자명 : 이 진 우
+	 */
 	public void fileDelete(String bucketName, String fileName) {
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		conn.deleteObject(bucketName, imgName);
-		System.out.println("삭제성공");
 	}
-
-	// 파일 URL
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 파일 URL 
+	 작성자명 : 이 진 우
+	 */
 	public String getFileURL(String bucketName, String fileName) {
-		System.out.println("넘어오는 파일명 : "+fileName);
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		return conn.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();
 	}

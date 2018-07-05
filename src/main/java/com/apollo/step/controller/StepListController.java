@@ -105,7 +105,7 @@ public class StepListController {
 	@RequestMapping(value="/liststatusfilter.htm",method=RequestMethod.POST)
 	public String statusFilter(int sid,String tstatusid,ModelMap map) {
 		String mid=null;
-		System.out.println("값이 넘어오나요"+tstatusid+"/"+sid);
+		//System.out.println("값이 넘어오나요"+tstatusid+"/"+sid);
         ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid,mid);
         map.addAttribute("tasklist",tasklist);
 		return "step/listtask";
@@ -120,7 +120,7 @@ public class StepListController {
 	public View memberlist(int sid, ModelMap map) {
 		ArrayList<MemberDTO> memberlist = service.listProjectMemberList(sid);
         map.addAttribute("memberlist",memberlist);
-        System.out.println(memberlist.toString());
+        //System.out.println(memberlist.toString());
 		return jsonview;
 	}
 	/**
