@@ -101,12 +101,11 @@
 
 
 <script type="text/javascript">
-	
 	var nickname;
 	var wsocket;
 	function connect() {
 		console.log("커넥트 했니?????");
-		wsocket = new WebSocket("ws://192.168.0.45:8090/bit/main.htm");
+		wsocket = new WebSocket("ws://192.168.0.45:8090/bit/socket.htm");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
@@ -139,7 +138,9 @@
 	$(document).ready(function() {
 		
 		nickname=$("#header-user-name").html();
+		
 		connect();
+		
 		$('#exitBtn').click(function(){
 			disconnect();
 			window.close();

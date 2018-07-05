@@ -506,8 +506,9 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/changesdayoftask.htm")
-	public View changeSdayOfTask(int tid, String sday, HttpSession session, Model model){
-		
+	public String changeSdayOfTask(int tid, String sday, HttpSession session, Model model){
+		String location = (String) session.getAttribute("location");
+		int pid = (Integer) session.getAttribute("pid");
 		System.out.println("sday 컨트롤러 실행");
 		
 		System.out.println("tid : " + tid);
@@ -544,7 +545,21 @@ public class TaskController {
 			
 		}
 		
-		return jsonview;
+		 if(location.equals("/information.htm")) {
+		    	return "redirect:/information.htm?pid=" + pid;
+		    } else if(location.equals("/board.htm")) {
+		    	return "redirect:/board.htm";
+		    }else if(location.equals("/list.htm")) {
+		    	int sid = (Integer) session.getAttribute("sid");
+		    	return "redirect:/list.htm?sid=" + sid;
+		    }else if(location.equals("step/timeline.htm")) {
+		    	return "redirect:step/timeline.htm";
+		    }else if(location.equals("/table.htm")) {
+		    	return "redirect:/table.htm";
+		    }else {
+		    	return null;
+		    }
+		
 		 		
 	}
 	
@@ -557,8 +572,9 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/changeedayoftask.htm")
-	public View changeEdayOfTask(int tid, String eday, HttpSession session, Model model){
-		
+	public String changeEdayOfTask(int tid, String eday, HttpSession session, Model model){
+		String location = (String) session.getAttribute("location");
+		int pid = (Integer) session.getAttribute("pid");
 		System.out.println("eday 컨트롤러 실행");
 		
 		System.out.println("tid : " + tid);
@@ -595,14 +611,28 @@ public class TaskController {
 			
 		}
 		
-		return jsonview;
+		 if(location.equals("/information.htm")) {
+		    	return "redirect:/information.htm?pid=" + pid;
+		    } else if(location.equals("/board.htm")) {
+		    	return "redirect:/board.htm";
+		    }else if(location.equals("/list.htm")) {
+		    	int sid = (Integer) session.getAttribute("sid");
+		    	return "redirect:/list.htm?sid=" + sid;
+		    }else if(location.equals("step/timeline.htm")) {
+		    	return "redirect:step/timeline.htm";
+		    }else if(location.equals("/table.htm")) {
+		    	return "redirect:/table.htm";
+		    }else {
+		    	return null;
+		    }
+		
 	}
 	
 
 	/**
 	 * 
 	 날      짜 : 2018. 6. 26.
-	 기      능 : 테스크 모달에서 eday 를 데이트 피커에서 누르면 eday를 변경
+	 기      능 : subtask 추가
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/addsubtask.htm")

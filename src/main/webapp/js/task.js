@@ -59,6 +59,11 @@ $( ".date_sday" ).datepicker({
 		        	   // comment
 		        	   getCommentAndMemberlist();
 		        	   
+		        	     $('#task_dismiss_btn').click();
+		        	     
+	                	 $("#main-box").empty();
+						 $("#main-box").append(rdata);
+		        	   
  		           } // end-success
  		        }); // end-ajax
         
@@ -125,6 +130,11 @@ $( ".date_eday" ).datepicker({
  		        	  
 		        	   // comment
 		        	   getCommentAndMemberlist();
+		        	   
+		        	     $('#task_dismiss_btn').click();
+		        	     
+	                	 $("#main-box").empty();
+						 $("#main-box").append(rdata);
 		        	   
  		        	  
  		           } // end-success

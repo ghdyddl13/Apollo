@@ -81,7 +81,7 @@ public class InboxController {
 	 작성자명 : 신 호 용
 	 */
 	@RequestMapping("/sent.htm")
-	public String showSent(HttpSession session, Model model) {
+	public String showSent(HttpSession session, Model model){
 		System.out.println("sent controller");
 		String mid = (String)session.getAttribute("mid");
 		System.out.println(mid);
@@ -172,7 +172,6 @@ public class InboxController {
 		comment.setCmtid(cmtid);
 		comment.setMid(mid);//테스트용 아이디
 		service.updateArchive2(comment);
-		
 		return "redirect:/archive.htm";
 	}
 	/**
@@ -181,6 +180,4 @@ public class InboxController {
 	 기      능 : stream 데이터 가져오는 controller
 	 작성자명 : 신 호 용
 	 */
-
-	
 }

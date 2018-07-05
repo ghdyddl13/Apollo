@@ -1,9 +1,9 @@
 $(function() {
-/*		var msg = $("#login-msg").val();
+		var msg = $("#login-msg").val();
 		if (msg != null) {
 			alert(msg);
 			
-		}*/
+		}
 		
 		
 		$("#pwdreset").click(function() {
@@ -39,9 +39,7 @@ $(function() {
 					}
 				}
 			})
-
 		})
-		
 	     var input = document.getElementById("pwd");
 	     input.addEventListener("keyup", function(event) {
 	         event.preventDefault();
