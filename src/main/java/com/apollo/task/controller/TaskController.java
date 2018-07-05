@@ -190,6 +190,10 @@ public class TaskController {
 	    	return "redirect:/table.htm";
 	    }else if(location.equals("/inbox.htm")) {
 	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
 	    }else {
 	    	return null;
 	    }
@@ -322,6 +326,10 @@ public class TaskController {
 	    	return "redirect:/table.htm";
 	    }else if(location.equals("/inbox.htm")) {
 	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
 	    }else {
 	    	System.out.println("null반환");
 	    	return null;
@@ -606,6 +614,10 @@ public class TaskController {
 		    	return "redirect:/table.htm";
 		    }else if(location.equals("/inbox.htm")) {
 		    	return "redirect:/inbox.htm";
+		    }else if(location.equals("/sent.htm")) {
+		    	return "redirect:/sent.htm";
+		    }else if(location.equals("/archive.htm")) {
+		    	return "redirect:/archive.htm";
 		    }else {
 		    	return null;
 		    }
@@ -685,6 +697,10 @@ public class TaskController {
 		    	return "redirect:/table.htm";
 		    }else if(location.equals("/inbox.htm")) {
 		    	return "redirect:/inbox.htm";
+		    }else if(location.equals("/sent.htm")) {
+		    	return "redirect:/sent.htm";
+		    }else if(location.equals("/archive.htm")) {
+		    	return "redirect:/archive.htm";
 		    }else {
 		    	return null;
 		    }

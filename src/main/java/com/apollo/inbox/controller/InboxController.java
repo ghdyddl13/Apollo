@@ -84,6 +84,7 @@ public class InboxController {
 	 */
 	@RequestMapping("/sent.htm")
 	public String showSent(HttpSession session, Model model){
+		session.setAttribute("location", "/sent.htm");
 		System.out.println("sent controller");
 		String mid = (String)session.getAttribute("mid");
 		System.out.println(mid);
@@ -110,6 +111,7 @@ public class InboxController {
 	 */
 	@RequestMapping("/archive.htm")
 	public String showArchive(HttpSession session, Model model){
+		session.setAttribute("location", "/archive.htm");
 		System.out.println("archive controller");
 		String mid = (String)session.getAttribute("mid");
 		System.out.println(mid);

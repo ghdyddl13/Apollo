@@ -130,8 +130,6 @@
 			wsocket.send($("#tidhidden").val()+'|'+nickname + " : " + msg);
 		}
 	}
-	
-	
 	function appendMessage(msg) {
 		$("#inbox_count").empty();
 		$("#inbox_count").append(msg);
@@ -140,13 +138,7 @@
 	$(document).ready(function() {
 		
 		nickname=$("#header-user-name").html();
-		
 		connect();
-		
-		$('#exitBtn').click(function(){
-			disconnect();
-			window.close();
-		});
 	});
 </script>
 </head>
