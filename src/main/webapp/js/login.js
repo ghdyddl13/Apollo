@@ -1,13 +1,5 @@
 $(function() {
-	
-	/*	var msg = $("#login-msg").val();
-		console.log(">" +msg+"<");
-		if (msg != "" || msg != null) {
-			alert(msg);
-			
-		}*/
-		
-		
+
 		$("#pwdreset").click(function() {
 			$("#findpwd")[0].reset();
 		});

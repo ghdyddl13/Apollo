@@ -1,5 +1,6 @@
 
 
+
 /**
  * 
  날   짜 : 2018. 6. 19.
@@ -272,7 +273,6 @@ $(document).on("click","#task_trash_btn",function(){
 	                	 $("#main-box").empty();
 						 $("#main-box").append(rdata);
 						 checkCrtPage();
-	                	 
 		           } // end-success
 		        }); // end-ajax
 });
@@ -790,6 +790,7 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 	                  $("#main-box").empty();
 					  $("#main-box").append(rdata);
 					  checkCrtPage()
+
 		           } // end-success
 		        }); // end-ajax
 	

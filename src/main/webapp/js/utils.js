@@ -153,11 +153,11 @@ function checkCrtPage(){
 			makeTimelineTable(tasks);
 		});
 	} else if( $(document).find(".project-page-table").length !=0){
-		console.log("dd");
 		$("#project-page-table-no-data").remove();
 	} else if( $(document).find("#board-main-div").length !=0){
 		doDraggable();
-		console.log("here");
+	} else if( $(document).find(".file-table-tr-td").length !=0){
+		$("#project-page-table-no-data").remove();
 	};
 	
 };

@@ -96,7 +96,7 @@
 	var wsocket;
 	function connect() {
 		console.log("커넥트 했니?????");
-		wsocket = new WebSocket("ws://192.168.0.45:8090/bit/socket.htm");
+		wsocket = new WebSocket("ws://192.168.0.7:8090/bit/socket.htm");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;

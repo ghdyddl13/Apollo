@@ -33,6 +33,10 @@
             	$('#file_delete_dismiss_btn').click();
                 $("#main-box").empty();
                 $("#main-box").append(data);
+                
+                if( $(document).find(".file-table-tr-td").length !=0){
+            		$("#project-page-table-no-data").remove();
+            	};
              }  
           })
 		

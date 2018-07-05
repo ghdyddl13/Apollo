@@ -11,29 +11,37 @@
         </div>
       </div>
       <div class="main-body-onepannel-body">
-		<div class="files_Table">
-			<table class="file-table">
+		<div class="files-Table-div" align="center">
+			<table class="table file-table">
+				<thead>	
 					<tr class="file-table-tr-th">
 						<th class="col-sm-1 file-table-tr-th-num">번호</th>
 						<th	class="col-sm-8 file-table-tr-th-fname">File명</th>
 						<th	class="col-sm-3 file-table-tr-th-tname">관련 Task</th>
 					</tr>
+				</thead>
+				<tbody>
 					<c:forEach var="f" items="${f}">
 					<c:set var="count" value="${count + 1}" />
 					<tr class="file-table-tr-td">
 				
 					<td class="file-table-tr-td-count">${count}</td>
-					<td class="file-table-tr-td-fname">${f.filename}
+					<td class="file-table-tr-td-fname"><strong>${f.filename}</strong>
 					<div id="${f.fileid}" class="file-table-tr-td-delete" data-toggle="modal" data-target="#file_delete_modal">
 					<span id="${f.fileid}" class="file-deleteicon glyphicon glyphicon-remove"></span>
 					</div></td>
 					<td class="file-table-tr-td-tname">${f.tname}&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp; <h class="file-table-tr-td-sname">${f.sname}</h></td>
 					</tr>
 					</c:forEach>
-				<tbody>
 				</tbody>
 			</table>
-		</div><!--END OF FILE TABLE  -->
+					<div id="proejct-page-table-no-data">
+						<div id="proejct-page-table-img-content">
+							<img src="img/rocket.png" id="proejct-page-table-img">
+						</div>
+						<div id="proejct-page-table-no-data-content">NO DATA!</div>
+					</div>
+				</div><!--END OF FILE TABLE  -->
       </div>
     </div>
   </div>

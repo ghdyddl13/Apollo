@@ -46,6 +46,9 @@ $(function() {
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				$("#files-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected");
+				if($(".file-table-tr-td").children().length !=0){
+					$("#project-page-table-no-data").remove();
+				};
 			}
 		});
 	});
