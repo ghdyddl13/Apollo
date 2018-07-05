@@ -2,28 +2,26 @@ package com.apollo.member.service;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.velocity.VelocityEngineUtils;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.apollo.member.dao.AuthkeyDAO;
 import com.apollo.member.dao.MemberDAO;
+import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.AuthkeyDTO;
 import com.apollo.vo.GoogleDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
+import com.apollo.vo.filedataDTO;
+
 
 
 @Service
@@ -344,6 +342,62 @@ public class MemberService {
 			}
 		return result;
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 프로필 수정하는 함수 
+	 작성자명 : 이 진 우
+	 */
+	public LinkedList<filedataDTO> memberProfileUpdate(String mid, MultipartHttpServletRequest request){
+		System.out.println("프로필 수정하는 함수 도착");
+		String savepath= "resources/member_profile";
+		LinkedList<filedataDTO> files = new LinkedList<filedataDTO>();
+		filedataDTO filedata = null;
+		
+		Iterator<String> itr =request.getFileNames();
+		MultipartFile mpf = null;
+		while(itr.hasNext()) {
+			mpf = request.getFile(itr.next());
+			
+			//파일 정보가 없는 경우
+			if(mpf ==null || mpf.getSize()<=0) {
+				return null;
+			}
+			//fileMetaDTO에 파일정보 입력
+			filedata = new filedataDTO();
+			System.out.println("파일 이름이에요: "+mpf.getOriginalFilename());
+			filedata.setFilename(mpf.getOriginalFilename());
+			filedata.setFileSize(mpf.getSize()/1024+"kb");
+			filedata.setFileType(mpf.getContentType());
+			
+			//경로 설정
+			String filename =null;
+			String originalName = mpf.getOriginalFilename();
+			
+			//SQL 파일 입력
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			MemberDTO member = new MemberDTO();
+			try {
+				//FILE DATADTO에 바이트 정보 입력
+				filedata.setBytes(mpf.getBytes());
+				
+				//AWS S3에 파일 업로드
+				filename = UploadFileUtils.uploadFile(savepath, 0, originalName, mpf.getBytes());
+				
+				//DB에 파일 정보 입력
+				member.setMid(mid);
+				member.setImage(filename);
+				dao.updateImageName(member);
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			files.add(filedata);
+		}
+		
+		return files;
+	}
+
 	
 	/**
 	 * 

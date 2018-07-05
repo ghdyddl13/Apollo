@@ -41,6 +41,9 @@
       <error-code>404</error-code>
       <location>/error/404error.jsp</location>
     </error-page>
+    <session-config>
+    	<session-timeout>-1</session-timeout>
+	</session-config>
     
 	<!-- 에러페이지 처리 -->
     <error-page>

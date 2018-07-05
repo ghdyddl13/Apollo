@@ -1,47 +1,39 @@
 package com.apollo.member.controller;
 
 
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
+
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.View;
 
-import com.apollo.inbox.dao.InboxDAO;
 import com.apollo.inbox.service.InboxService;
 import com.apollo.member.service.MemberService;
 import com.apollo.vo.AuthkeyDTO;
 import com.apollo.vo.MemberDTO;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.sun.mail.iap.Response;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.velocity.app.VelocityEngine;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-
-import org.springframework.ui.velocity.VelocityEngineUtils;
+import com.apollo.vo.filedataDTO;
 
 
 
@@ -480,6 +472,21 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return jsonview;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 프로필 수정하기
+	 작성자명 : 이 진 우
+	 */
+	@RequestMapping(value="/updatememberimage.htm",method=RequestMethod.POST)
+	public View updateMemberImage(HttpSession session, MultipartHttpServletRequest request,ModelMap map) {
+		System.out.println("프로필 수정 컨트롤러 도착");
+		String mid = (String) session.getAttribute("mid");
+		LinkedList<filedataDTO> files = service.memberProfileUpdate(mid, request);
+		map.addAttribute("profile",files);
+				
 		return jsonview;
 	}
 	

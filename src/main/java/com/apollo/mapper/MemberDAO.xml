@@ -121,7 +121,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="gerUserProjects" parameterType="String" resultType="com.apollo.vo.ProjectDTO">
 		select * from project where pid in (select pid from pmember where mid = #{mid}) order by pid asc
 	</select>
-	
+
 	<update id="emailcheck" parameterType="String">
 		update member set ischecked='y' where mid=#{mid}
 	</update>
@@ -145,5 +145,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{step.mid}
         </foreach>
 	</select>
+
+	<!-- 맴버 이미지 업데이트 -->
+	<update id="updateImageName" parameterType="com.apollo.vo.MemberDTO"> 
+		update member set image =#{image}
+		where mid = #{mid}
+	</update>
 
 </mapper>

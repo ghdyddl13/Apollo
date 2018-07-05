@@ -154,8 +154,8 @@
 	         </tbody>
 	      </table>
 	      <div id="project-page-table-no-data">
-	      	<div id="project-page-table-img-content">
-	      		<img src="img/rocket.png" id="project-page-table-img">
+	      	<div id="proejct-page-table-img-content">
+	      		<img src="img/rocket.png" id="proejct-page-table-img">
 	      	</div>
 	      	<div id="project-page-table-no-data-content">
 	      		NO DATA!

@@ -51,7 +51,7 @@ $(function() {
     */
    // 마감기한별로 구분된 라벨을 배열로 선언
    // 후에 반복을 돌면서 맞는 배열에 데이터를 넣는다
-   var unassigned = [];
+   var noeday = [];
    var nextweek = [];
    var thisweek = [];
    var completed = [];
@@ -76,109 +76,128 @@ $(function() {
               url  : "donutChart.htm",
               data : "pid="+pid,
               success : function(rdata){
-                       
-                       // 할당되지 않은 테스크의 tid를 배열에 넣기
-                    $(rdata.unassignedtasklist).each(function(index, el) {
-                             unassigned.push(el.tid);
-                     });
-         
-                    
+                  
+            	  console.log('여기닷');
+            	  console.log(rdata);
+            	  
+            	  
+                  // 할당된 테스크 반복돌며 기한 지난 테스크의 tid를 배열에 넣기
+                   $(rdata.tasklist).each(function(index, el) {
+                  	 
+                  	console.log('회전 몇번하니')
+                  	console.log(el.tstatusid)
+                  	console.log(el.tid)
+                  	console.log(el.eday)
+                   
+                   });
+            	  
+            	  
                     // 할당된 테스크 반복돌며 기한 지난 테스크의 tid를 배열에 넣기
-                     $(rdata.assignedtasklist).each(function(index, el) {
-                        
-                         // 종료일을 year, month, day 기준으로 분할
-                         eday = el.eday.toString();
-                        var eday_year = parseInt(eday.substring(0,4));
-                        var eday_month = parseInt(eday.substring(5,7)); 
-                        var eday_day = parseInt(eday.substring(8,10));
-                        
-                         // 완료 상태인 경우
-                         if((el.tstatusid == 3)||(el.tstatusid == 11)||(el.tstatusid == 15)){
-                            completed.push(el.tid);
+                     $(rdata.tasklist).each(function(index, el) {
+                    	 
+                    	console.log('---------------')
+                    	console.log(el.tstatusid)
+                    	console.log(el.tid)
+                    	console.log(el.eday)
+                    	 
+                    	if((el.tstatusid == 3)||(el.tstatusid == 11)||(el.tstatusid == 15)){
+                             completed.push(el.tid);
 
-                            // 완료가 되었을 경우에는 마감 기한에 따라 배열에 넣지 않고
-                            // continue 기능을 하는 return true
-                            return true;
-                         }
-                         
-                         // 작업 기한이 만료된 경우 
-                        // 년도상 과거가 만료일
-                         else if(eday_year < now_year){
-                            expired.push(el.tid);
-                           return true;
-                         }
-                        
-                        // 년도상 미래가 만료일
-                         else if(eday_year > now_year){
-                            nextweek.push(el.tid);
-                           return true;
-                         }
-                        
-                        // else1
-                        // 년도상 같은 년도
-                         else {
+                             // 완료가 되었을 경우에는 마감 기한에 따라 배열에 넣지 않고
+                             // continue 기능을 하는 return true
+                             return true;
+                        }
+                    	 
+                    	// 종료일 없을때 처리
+                    	else if(el.eday == null){
+                        	noeday.push(el.tid);
+                        	return true;
+                        }
+                    	
+                    	else {
+                    		var eday = el.eday.toString();
+                            var eday_year = parseInt(eday.substring(0,4));
+                            var eday_month = parseInt(eday.substring(5,7)); 
+                            var eday_day = parseInt(eday.substring(8,10));
                             
-                            // 같은 년도, 과거 달
-                            if(eday_month < now_month){
-                               expired.push(el.tid);
+                            // 작업 기한이 만료된 경우 
+                            // 년도상 과거가 만료일
+                             if(eday_year < now_year){
+                                expired.push(el.tid);
                                return true;
-                            }
-                            // 같은 년도, 미래 달
-                            else if(eday_month > now_month){
-                               nextweek.push(el.tid);
+                             }
+                            
+                            // 년도상 미래가 만료일
+                             else if(eday_year > now_year){
+                                nextweek.push(el.tid);
                                return true;
-                            }
+                             }
                             
-                            // else2
-                            // 같은 년도, 같은 달
-                            else {
+                            // else1
+                            // 년도상 같은 년도
+                             else {
+                                
+                                // 같은 년도, 과거 달
+                                if(eday_month < now_month){
+                                   expired.push(el.tid);
+                                   return true;
+                                }
+                                // 같은 년도, 미래 달
+                                else if(eday_month > now_month){
+                                   nextweek.push(el.tid);
+                                   return true;
+                                }
+                                
+                                // else2
+                                // 같은 년도, 같은 달
+                                else {
 
-                               var daygap = eday_day - now_day;
-                               
-
-                               
-                               // 같은 년도, 같은 달, 과거 일
-                               if(daygap < 0) {
-                                  expired.push(el.tid);
-                                  return true;
-                               }
-                               
-                               // else3
-                               // 같은 년도, 같은 달, 같은 일 혹은 미래 일
-                               else {
-                                  
-                                  if((today == 0) && (daygap <= 6)){
-                                     thisweek.push(el.tid);
-                                     return true;
-                                  } else if((today == 1) && (daygap <= 5)){
-                                     thisweek.push(el.tid);
-                                     return true;
-                                  } else if((today == 2) && (daygap <= 4)){
-                                     thisweek.push(el.tid);
-                                     return true;
-                                  } else if((today == 3) && (daygap <= 3)){
-                                     thisweek.push(el.tid);
-                                     return true;
-                                  } else if((today == 4) && (daygap <= 2)){
-                                     thisweek.push(el.tid);
-                                     return true;
-                                  } else if((today == 5) && (daygap <= 1)){
-                                     thisweek.push(el.tid);
-                                     return true;
-                                  } else if((today == 6) && (daygap == 0)){
-                                     thisweek.push(el.tid);
-                                     return true;
-                                  } else {
-                                     nextweek.push(el.tid);
-                                     return true;
-                                  } 
-                               
-                               } // end - else3
-                               
-                            } // end - else2
-                            
-                         } // end - else1
-                     }); // assignedtasklist .each 반복종료
+                                   var daygap = eday_day - now_day;
+                                   
+                                   // 같은 년도, 같은 달, 과거 일
+                                   if(daygap < 0) {
+                                      expired.push(el.tid);
+                                      return true;
+                                   }
+                                   
+                                   // else3
+                                   // 같은 년도, 같은 달, 같은 일 혹은 미래 일
+                                   else {
+                                      
+                                      if((today == 0) && (daygap <= 6)){
+                                         thisweek.push(el.tid);
+                                         return true;
+                                      } else if((today == 1) && (daygap <= 5)){
+                                         thisweek.push(el.tid);
+                                         return true;
+                                      } else if((today == 2) && (daygap <= 4)){
+                                         thisweek.push(el.tid);
+                                         return true;
+                                      } else if((today == 3) && (daygap <= 3)){
+                                         thisweek.push(el.tid);
+                                         return true;
+                                      } else if((today == 4) && (daygap <= 2)){
+                                         thisweek.push(el.tid);
+                                         return true;
+                                      } else if((today == 5) && (daygap <= 1)){
+                                         thisweek.push(el.tid);
+                                         return true;
+                                      } else if((today == 6) && (daygap == 0)){
+                                         thisweek.push(el.tid);
+                                         return true;
+                                      } else {
+                                         nextweek.push(el.tid);
+                                         return true;
+                                      } 
+                                   
+                                   } // end - else3
+                                   
+                                } // end - else2
+                                
+                             } // end - else1
+                    	}
+                        
+                     });
                      
                  
                       var ctx = document.getElementById('projectinfo_DonutChart').getContext('2d');
@@ -187,7 +206,7 @@ $(function() {
                            type: 'doughnut',
                            data: {
                                    datasets: [{
-                                       data: [unassigned.length, nextweek.length, thisweek.length, completed.length, expired.length],
+                                       data: [noeday.length, nextweek.length, thisweek.length, completed.length, expired.length],
                                        backgroundColor: [
 
                                                        'rgba(190, 190, 190, 1)',

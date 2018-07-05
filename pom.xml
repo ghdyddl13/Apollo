@@ -267,21 +267,26 @@
           <version>1.4</version>
       </dependency>
 
-	<!-- 구글아이디연동 -->
-	<dependency>
-		<groupId>org.springframework.social</groupId>
-		<artifactId>spring-social-google</artifactId>
-		<version>1.0.0.RELEASE</version>
-	</dependency>
-
-	<dependency>
-		<groupId>org.apache.httpcomponents</groupId>
-		<artifactId>httpclient</artifactId>
-		<version>4.5.3</version>
-	</dependency>
-
-
+		<!-- 구글아이디연동 -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-google</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.3</version>
+		</dependency>
 		
+		<!--AWS  -->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk</artifactId>
+		    <version>1.11.358</version>
+		</dependency>
+
 		<!-- File Upload 작업 -->
 		<dependency>
     		<groupId>commons-fileupload</groupId>

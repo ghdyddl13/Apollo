@@ -188,8 +188,14 @@ public class TaskController {
 	    	return "redirect:step/timeline.htm";
 	    }else if(location.equals("/table.htm")) {
 	    	return "redirect:/table.htm";
+	    }else if(location.equals("/inbox.htm")) {
+	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/myWork.htm")) {
+	    	return "redirect:/myWork.htm";
+	    }else if(location.equals("/starredTask.htm")) {
+	    	return "redirect:/starredTask.htm";
 	    }else {
-	    	return null;
+	    	return "redirect:/information.htm?pid=" + pid;
 	    }
 	    
 	}
@@ -305,7 +311,6 @@ public class TaskController {
 			System.out.println("세션에서 가져온 pid : " + pid);
 		}
 		
-		System.out.println("최종적으로 붙여보낼 pid : " + pid);
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    } else if(location.equals("/board.htm")) {
@@ -314,13 +319,17 @@ public class TaskController {
 	    	int sid = (Integer) session.getAttribute("sid");
 	    	return "redirect:/list.htm?sid=" + sid;
 	    }else if(location.equals("step/timeline.htm")) {
-	    	System.out.println("timeline반환");
 	    	return "redirect:step/timeline.htm";
 	    }else if(location.equals("/table.htm")) {
 	    	return "redirect:/table.htm";
+	    }else if(location.equals("/inbox.htm")) {
+	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/myWork.htm")) {
+	    	return "redirect:/myWork.htm";
+	    }else if(location.equals("/starredTask.htm")) {
+	    	return "redirect:/starredTask.htm";
 	    }else {
-	    	System.out.println("null반환");
-	    	return null;
+	    	return "redirect:/information.htm?pid=" + pid;
 	    }
 		
 	}
@@ -589,20 +598,26 @@ public class TaskController {
 			System.out.println("세션에서 가져온 pid : " + pid);
 		}
 		
-		 if(location.equals("/information.htm")) {
-		    	return "redirect:/information.htm?pid=" + pid;
-		    } else if(location.equals("/board.htm")) {
-		    	return "redirect:/board.htm";
-		    }else if(location.equals("/list.htm")) {
-		    	int sid = (Integer) session.getAttribute("sid");
-		    	return "redirect:/list.htm?sid=" + sid;
-		    }else if(location.equals("step/timeline.htm")) {
-		    	return "redirect:step/timeline.htm";
-		    }else if(location.equals("/table.htm")) {
-		    	return "redirect:/table.htm";
-		    }else {
-		    	return null;
-		    }
+	    if(location.equals("/information.htm")) {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    } else if(location.equals("/board.htm")) {
+	    	return "redirect:/board.htm";
+	    }else if(location.equals("/list.htm")) {
+	    	int sid = (Integer) session.getAttribute("sid");
+	    	return "redirect:/list.htm?sid=" + sid;
+	    }else if(location.equals("step/timeline.htm")) {
+	    	return "redirect:step/timeline.htm";
+	    }else if(location.equals("/table.htm")) {
+	    	return "redirect:/table.htm";
+	    }else if(location.equals("/inbox.htm")) {
+	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/myWork.htm")) {
+	    	return "redirect:/myWork.htm";
+	    }else if(location.equals("/starredTask.htm")) {
+	    	return "redirect:/starredTask.htm";
+	    }else {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    }
 		
 		 		
 	}
@@ -666,20 +681,26 @@ public class TaskController {
 			System.out.println("세션에서 가져온 pid : " + pid);
 		}
 		
-		 if(location.equals("/information.htm")) {
-		    	return "redirect:/information.htm?pid=" + pid;
-		    } else if(location.equals("/board.htm")) {
-		    	return "redirect:/board.htm";
-		    }else if(location.equals("/list.htm")) {
-		    	int sid = (Integer) session.getAttribute("sid");
-		    	return "redirect:/list.htm?sid=" + sid;
-		    }else if(location.equals("step/timeline.htm")) {
-		    	return "redirect:step/timeline.htm";
-		    }else if(location.equals("/table.htm")) {
-		    	return "redirect:/table.htm";
-		    }else {
-		    	return null;
-		    }
+	    if(location.equals("/information.htm")) {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    } else if(location.equals("/board.htm")) {
+	    	return "redirect:/board.htm";
+	    }else if(location.equals("/list.htm")) {
+	    	int sid = (Integer) session.getAttribute("sid");
+	    	return "redirect:/list.htm?sid=" + sid;
+	    }else if(location.equals("step/timeline.htm")) {
+	    	return "redirect:step/timeline.htm";
+	    }else if(location.equals("/table.htm")) {
+	    	return "redirect:/table.htm";
+	    }else if(location.equals("/inbox.htm")) {
+	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/myWork.htm")) {
+	    	return "redirect:/myWork.htm";
+	    }else if(location.equals("/starredTask.htm")) {
+	    	return "redirect:/starredTask.htm";
+	    }else {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    }
 		
 	}
 	
@@ -945,8 +966,14 @@ public class TaskController {
 	    	return "redirect:step/timeline.htm";
 	    }else if(location.equals("/table.htm")) {
 	    	return "redirect:/table.htm";
+	    }else if(location.equals("/inbox.htm")) {
+	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/myWork.htm")) {
+	    	return "redirect:/myWork.htm";
+	    }else if(location.equals("/starredTask.htm")) {
+	    	return "redirect:/starredTask.htm";
 	    }else {
-	    	return null;
+	    	return "redirect:/information.htm?pid=" + pid;
 	    }
 		
 		

@@ -90,15 +90,12 @@ public class ProjectInfoController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/donutChart.htm")
-	public View donutChart(String pid, ModelMap map) {
-		ArrayList<TaskDTO> assignedtasklist = new ArrayList<TaskDTO>();
-		ArrayList<TaskDTO> unassignedtasklist = new ArrayList<TaskDTO>();
+	public View donutChart(int pid, ModelMap map) {
 		
-		assignedtasklist = projectinfoservice.getAssignedTasks(pid);
-		unassignedtasklist = projectinfoservice.getNotAssignedTasks(pid);
+		ArrayList<TaskDTO> tasklist = new ArrayList<TaskDTO>();
+		tasklist = projectinfoservice.getTasks(pid);
 		
-        map.addAttribute("assignedtasklist", assignedtasklist);
-        map.addAttribute("unassignedtasklist", unassignedtasklist);
+        map.addAttribute("tasklist", tasklist);
 		
 		return jsonview;
 	}
