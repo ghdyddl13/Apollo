@@ -149,41 +149,31 @@ $(function() {
 	  console.log(checkbox);
 	  $(".list-task-checkbox").css("visibility","hidden");
 	})
-	$(document).on("click","#selectpage-complete-button",function() {//완료 버튼 선택시에
-	  alert("완료되었습니다")
-	   /*
-	    $.ajax(
-	            {
-	              type:"POST",
-	              url:"",
-	              data:"",
-	              success:function(data) {
-	
-	              }
-	            }
-	    )
-	    */
-	  checkbox=[];
-	  console.log(checkbox);
+	$(document).on("click",".selectpage-body-statusbutton",function() {//상태 버튼을 눌렀을 시에
+	  let tstatusid = $(this).attr("id");
+	  let checkboxcount= checkbox.length;
+	  $("#list-task-status-ment").html(+checkboxcount+"개 Task의 상태를 변경 하시겠습니까?")
+	  $(document).on("click","#list_Status_Tasks_btn",function(){
+		  if(checkbox.length==0){
+			  alert("왜 테스크가 없지..?")
+			  $('#list_status_tasks_dismiss_btn').click();
+		  }else{
+			    $.ajax(
+			            {
+			              type:"POST",
+			              url:"liststatustasks.htm",
+			              data:{tstatusid:tstatusid,tasks:checkbox},
+			              success:function(data) {
+								$("#main-box").empty();
+								$("#main-box").append(data);
+								$('#list_status_tasks_dismiss_btn').click();
+								checkbox=[];
+			              }
+			    })
+		  }
+	   });
 	})
-	$(document).on("click","#different-status",function() {//다른 선택 영역을 눌렀을 시에
-	  alert("상태를 추가합니다")
-	  /*
-	    $.ajax(
-	            {
-	              type:"POST",
-	              url:"",
-	              date:"",
-	              success:function(data) {
-	
-	              }
-	            }
-	    )
-	    */
-	  checkbox=[];
-	  console.log(checkbox);
-	})
-	
+
 	$(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
 		let checkboxcount= checkbox.length;
 		let mid ="jinwoo@naver.com" ;
@@ -192,6 +182,7 @@ $(function() {
 	$(document).on("click","#list_Assign_Tasks_btn",function(){
 		if(checkbox.length==0){
 			alert("왜 테스크가 없지..?")
+			$('#list_assign_tasks_dismiss_btn').click();
 		}else{
 			$.ajax({
 				type : "POST",
@@ -215,6 +206,7 @@ $(function() {
 		let stepid=8;
 		if(checkbox.length==0){
 			alert("왜 테스크가 없지..?")
+			$('#list_addstep_tasks_dismiss_btn').click();
 		}else{
 			$.ajax({
 				type : "POST",

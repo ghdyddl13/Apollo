@@ -332,8 +332,11 @@
     </div>
     <div class="list-section-third-selectpage-body">
       <div class="list-section-third-selectpage-statuschange">
-        <span class="selectpage-body-button" id="selectpage-complete-button">Completed</span>
-        <span class="list-section-third-selectpage-text" id="different-status">Choose Different status</span>
+      	<span class="list-section-third-selectpage-text">Add Status</span>
+      	<c:forEach var="tstatus" items="${tstatuslist}">
+	        <span class="selectpage-body-statusbutton" id="${tstatus.tstatusid}"style="background-color:${tstatus.color}"data-toggle="modal" data-target="#list_Status_Tasks">${tstatus.tstatus}</span>
+        </c:forEach>
+      <!--   <span class="list-section-third-selectpage-text" id="different-status">Choose Different status</span> -->
       </div>
       <div class="list-section-third-selectpage-addasignee">
         <span class="list-section-third-selectpage-text">Add Asignee</span>
