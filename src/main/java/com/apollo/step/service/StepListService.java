@@ -19,6 +19,7 @@ import com.apollo.vo.StepDTO;
 import com.apollo.vo.StepListMemberDTO;
 import com.apollo.vo.StepListStepDTO;
 import com.apollo.vo.StepListTaskDTO;
+import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TstatusDTO;
 
@@ -275,6 +276,19 @@ public class StepListService {
 		StepDAO dao= sqlsession.getMapper(StepDAO.class);
 		ArrayList<MemberDTO> projectmemberlist = dao.listProjectMemberList(sid);
 		return projectmemberlist;
+	}
+	
+	public int listStatusTasks(String[] tasks, int tstatusid){
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		int result = 0;
+		for(String tid:tasks) {
+			int taskid=Integer.parseInt(tid.substring(1));
+			TaskDTO dto = new TaskDTO();
+			dto.setTid(taskid);
+			dto.setTstatusid(tstatusid);
+			result += dao.listStatusTasks(dto);
+		}
+		return result;
 	}
 	/**
 	 * 

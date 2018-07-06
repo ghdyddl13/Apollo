@@ -63,6 +63,12 @@ public class ProjectInfoController {
 			
 		}
 		
+		if(steplist.size() == 0) {
+			StepDTO dto = new StepDTO();
+			dto.setSname("스텝이 없습니다");
+			steplist.add(dto);
+		}
+		
 		map.addAttribute("steplist", steplist);
 
 		

@@ -10,6 +10,7 @@ import com.apollo.vo.StepDTO;
 import com.apollo.vo.StepListMemberDTO;
 import com.apollo.vo.StepListStepDTO;
 import com.apollo.vo.StepListTaskDTO;
+import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TstatusDTO;
 
@@ -206,6 +207,13 @@ public interface StepDAO {
 	 작성자명 : 이 진 우
 	 */
 	public ArrayList<MemberDTO> listProjectMemberList(int sid);
+	/**
+	 * 
+	 날      짜 : 2018. 7. 6.
+	 기      능 : LIST PAGE 에서 TASK를 단체로 상태 변경
+	 작성자명 : 이 진 우
+	 */
+	public int listStatusTasks(TaskDTO task);
 	/**
 	 * 
 	 날      짜 : 2018. 7. 3.

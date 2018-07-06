@@ -264,9 +264,22 @@ $(function() {
                      console.log(rdata);
                      
                      var labelnames = [];
+                     
+                     var count_labels = 0;
+                     $(rdata.steplist).each(function (index, el){
+                    	 count_labels++;
+                      });
+
                      $(rdata.steplist).each(function (index, el){
                         labelnames.push(el.sname);
                      });
+                     
+                     if(count_labels < 8){
+                    	 for(var i = 0; i < 8-count_labels; i++){
+                    		 var tempstr = '';
+                    		 labelnames.push(tempstr);
+                    	 }
+                     }
                      
                      var completedtasks= [];
                      var uncompletedtasks= [];
@@ -308,6 +321,7 @@ $(function() {
                            }]
                          },              
                          options: {
+                        	 
                             maintainAspectRatio: false,
                              scales: {
                                  xAxes: [{

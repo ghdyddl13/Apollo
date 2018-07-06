@@ -1035,6 +1035,27 @@
 			</div>
 		</div>
 	</div>
+<!-- LIST PAGE TASK 단체 STATUS 변경 창 -->
+	<div class="modal fade list-delete-tasks-modal" id="list_Status_Tasks" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" id="list_status_tasks_dismiss_btn">&times;</button>
+					<h4 class="modal-title">Task 상태 변경</h4>
+				</div>
+				<div class="modal-body" style="text-align:center">
+				<h4 id="list-task-status-ment"></h4>					
+					<div align="center">
+						<input type="button" class="btn add-btn" id="list_Status_Tasks_btn" value="변경">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
 <!-- LIST PAGE TASK 단체 ASSIGN 창 -->
 	<div class="modal fade list-delete-tasks-modal" id="list_Assign_Tasks" role="dialog">
 		<div class="modal-dialog">

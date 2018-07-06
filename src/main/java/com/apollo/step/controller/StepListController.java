@@ -138,6 +138,19 @@ public class StepListController {
 	}
 	/**
 	 * 
+	 날      짜 : 2018. 7. 6.
+	 기      능 : TASK MASS EDIT(여러 테스크를 특정인에게 할당하는 컨트롤러)
+	 작성자명 : 이 진 우
+	 */
+	@RequestMapping(value="/liststatustasks.htm", method=RequestMethod.POST)
+	public String statusListTasks(int tstatusid,String[] tasks, HttpSession session, ModelMap map) {
+		service.listStatusTasks(tasks, tstatusid);
+		int sid = (Integer)session.getAttribute("sid");
+		
+		return "redirect:/list.htm?sid="+sid;
+	}
+	/**
+	 * 
 	 날      짜 : 2018. 7. 3.
 	 기      능 : TASK MASS EDIT(여러 테스크를 특정인에게 할당하는 컨트롤러)
 	 작성자명 : 이 진 우
