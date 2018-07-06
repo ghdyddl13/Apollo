@@ -50,6 +50,15 @@ $(function() {
 			}
 		}		
 	});
+	
+	$(document).on("click",'.project-table-member-image',function(){
+		
+	});
+	
+	
+	/*$(document).on("click","#project-table-tr-steps",function(){
+		
+	});*/
 
 	
 	// 프로젝트 files 페이지

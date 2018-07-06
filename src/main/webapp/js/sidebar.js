@@ -14,7 +14,7 @@ $(function() {
 			 "title",
 			 "프로젝트를 생성하여 여러명의 동료를 초대해 함께 협업할 수 있습니다. 같은 회사의 Apollo Code를 등록한 " +
 			 "멤버들만 초대할 수 있습니다.<br><br> " +
-			 "프로젝트는 진행 상태에 따라 'Working Project', 'Completed Project','Trash Bin'에" +
+			 "프로젝트는 진행 상태에 따라 'Working Projects', 'Completed Projects','Recycle Bin'에" +
 			 "따로 관리할 수 있습니다. 다만, 'Trash Bin'에 보관할 경우 14일 이후 영구 삭제되니 주의하세요."
 	 );
 	 
