@@ -68,6 +68,7 @@
 		 	<mvc:exclude-mapping path="/findpwd.htm"/>
 		 	<mvc:exclude-mapping path="/google.htm"/>
 		 	<mvc:exclude-mapping path="/googlelogin.htm"/>
+		 	<mvc:exclude-mapping path="/midcheck.htm"/>
 			<bean id ="exInterceptor" class ="inter.ExInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

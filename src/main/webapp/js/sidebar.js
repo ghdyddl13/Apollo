@@ -1,5 +1,5 @@
 $(function() {
-	// unload();
+	 unload();
 	/////////////  프로젝트, 폴더, 스텝 생성 모달창 도움말 설정////////////////////
 	 $(".modal-question").tooltip({
 		 classes: {
