@@ -2,6 +2,7 @@ package com.apollo.report.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,14 +61,14 @@ public class ReportController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/downloadreport.htm")
-	public View downloadReport(int pid, String report_kind, String report_title, HttpSession session, Model map) {
+	public View downloadReport(int pid, String report_kind, String report_title, HttpSession session, Model map, HttpServletResponse response) {
 		
 		System.out.println("downloadReport 컨트롤러 실행");
 		
 		String mid = (String) session.getAttribute("mid");
 		
 		try {
-			reportservice.writeData(pid, report_kind, report_title);
+			reportservice.writeData(pid, report_kind, report_title, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

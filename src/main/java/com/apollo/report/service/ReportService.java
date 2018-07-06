@@ -1,13 +1,14 @@
 package com.apollo.report.service;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.io.OutputStream;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -22,6 +23,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 
 import com.apollo.member.dao.MemberDAO;
 import com.apollo.task.dao.TaskDAO;
@@ -48,14 +50,19 @@ public class ReportService {
 		}
 	
 	
-		public void writeData(int pid, String report_kind, String report_title) throws Exception {
+		public void writeData(int pid, String report_kind, String report_title, HttpServletResponse response) throws Exception {
 
 			try {
 
 				String filePath = "C:\\Apollo_Reports\\"; // file 생성 위치 
 				String filename = report_title + ".xls"; // 생성될 파일 이름
 				FileOutputStream fout = setFile(filePath, filename);
+				
 				HSSFWorkbook wb = setExcel(pid, report_kind, filename);
+				//////////////////////////////////
+//				OutputStream out = new BufferedOutputStream(response.getOutputStream());
+//				wb.write(out);
+//				out.flush();
 				
 				// write the workbook to the output stream
 				wb.write(fout);
@@ -66,7 +73,7 @@ public class ReportService {
 			}
 		}
 
-		private FileOutputStream setFile(String filePath, String filename) throws FileNotFoundException {
+		private FileOutputStream setFile(String filePath, String filename) throws IOException {
 
 			// 엑셀 파일 생성
 			// 디렉토리 없으면 생성.
@@ -75,7 +82,7 @@ public class ReportService {
 			if (!fDir.exists()) {
 				fDir.mkdirs();
 			}
-
+			
 			FileOutputStream fout = new FileOutputStream(filePath + filename);
 			return fout;
 		}
