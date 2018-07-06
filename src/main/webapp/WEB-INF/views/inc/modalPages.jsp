@@ -119,7 +119,7 @@
 			<div class="modal-content modal-folder-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Folder 생성&nbsp;&nbsp; <i data-toggle="tooltip" class="question-folder far fa-question-circle modal-question"></i></h4></h4>
+					<h4 class="modal-title">Folder 생성&nbsp;&nbsp; <i data-toggle="tooltip" class="question-folder far fa-question-circle modal-question"></i></h4>
 				</div>
 				<div class="modal-body modal-folder-body">
 					<form id="insert-folder-form" method="post" onsubmit="return false;">
@@ -168,7 +168,7 @@
 								    </a>
 								    <ul id="add-step-mgr-assignee-options" class="dropdown-menu " role="menu" aria-labelledby="add-step-mgr-assignee-btn">
 								    </ul>
-							  </div>
+							   </div>
 							</div>
 							<br>
 							<div class="modal-title">
@@ -227,6 +227,7 @@
 					
 					 <form id="update-project-form" method="post" onsubmit="return false;">
 						<fieldset>
+							<input type="hidden" id="update-project-pid" name="pid">
 							<div class="modal-flexbox-row">
 								<br>
 								<div class="project-setting-left">
@@ -242,7 +243,7 @@
 										<br>
 										<div>
 											<div class="modal-flex-col">
-												<input type="radio" id="update-project-methodologyid-3" name="methodologyid" value="3" disabled="disabled">
+												<input type="radio" id="update-project-methodologyid-3" disabled="disabled">
 												<span class="method"> Customizing</span> <br>
 											</div>
 											<div class="modal-project-method-detail">
@@ -252,7 +253,7 @@
 										</div>
 										<div>
 											<div class="modal-flex-col">
-												<input type="radio" id="update-project-methodologyid-2" name="methodologyid" value="2" disabled="disabled">
+												<input type="radio" id="update-project-methodologyid-2" disabled="disabled">
 												<span class="method"> Agile</span>
 											</div>
 											<div class="modal-project-method-detail">
@@ -262,7 +263,7 @@
 										</div>
 										<div>
 											<div class="modal-flex-col">
-												<input type="radio" id="update-project-methodologyid-1" name="methodologyid" value="1" disabled="disabled">
+												<input type="radio" id="update-project-methodologyid-1"  disabled="disabled">
 												<span class="method"> Waterfall</span><br>
 											</div>
 											<div class="modal-project-method-detail">
@@ -309,7 +310,6 @@
 											data-dismiss="modal" value="취소">
 									</div>
 								</div>
-								<input type="hidden" name="mid" value="${mid}">
 							</div>
 						</fieldset>
 					</form>
@@ -362,8 +362,8 @@
 					</div>
 
 					<div class="col-sm-2" id="star_trash">
-						<span id="span_task_star"></span>&nbsp&nbsp
-						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
+						<span id="span_task_star"></span>&nbsp;&nbsp;
+						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp;&nbsp;&nbsp;
 						<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
 					</div>
 					
@@ -385,12 +385,12 @@
 					</div>
 							
 					<div class="col-sm-5">
-	                    <span>시작일&nbsp:&nbsp</span>
+	                    <span>시작일&nbsp;&nbsp;</span>
                    		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date_sday">
 					</div>
 
 					<div class="col-sm-5">
-						<span>종료일&nbsp:&nbsp</span>
+						<span>종료일&nbsp;&nbsp;</span>
 	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date_eday">
 					</div>
 				</div>
@@ -423,7 +423,7 @@
                 <hr />
                 
 				<div class="modal-title">
-					<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
+					<p>상세설명&nbsp;&nbsp;<img id="task_detail_status" src="img/loader.gif"></p>
 					<div style="text-align:center">
 					<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
 					</div>
@@ -618,7 +618,7 @@
 							    </a>
 							    <ul id="update-step-mgr-assignee-options" class="dropdown-menu " role="menu" aria-labelledby="update-step-mgr-assignee-btn">
 							    </ul>
-						  </div>
+						  	</div>
 						</div>
 						<br>
 						<div class="modal-title">

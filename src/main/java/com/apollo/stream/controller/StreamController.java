@@ -59,10 +59,24 @@ public class StreamController {
 		System.out.println("pid 리스트 있으면 가져왔다.");
 		
 		ArrayList<CommentDTO> streamlist = service.getStreamlist(map);//테스트용 아이디
+		
+		HashMap<Integer, ArrayList<CommentDTO>> commentmap = new HashMap<Integer, ArrayList<CommentDTO>>();
+		
+		for(CommentDTO dto : streamlist) {
+			if(commentmap.containsKey(dto.getTid())) {
+				commentmap.get(dto.getTid()).add(dto);
+			}else {
+				commentmap.put(dto.getTid(), new ArrayList<CommentDTO>());
+				commentmap.get(dto.getTid()).add(dto);
+			}
+		}
+		
+		
 		System.out.println("pid 리스트 있으면 가져왔다.");
 		
 		model.addAttribute("sidlist", sidlist);
-		model.addAttribute("streamlist", streamlist);
+		//model.addAttribute("streamlist", streamlist);
+		model.addAttribute("commentmap", commentmap);
 		model.addAttribute("pidlist", pidlist);
 		
 		return "header/stream";
@@ -90,8 +104,23 @@ public class StreamController {
 		ArrayList<ProjectDTO> pidlist = service.getPidlist(mid);//테스트용 아이디
 		ArrayList<CommentDTO> streamlist = service.getStreamlist(map);//테스트용 아이디
 		
+		
+		HashMap<Integer, ArrayList<CommentDTO>> commentmap = new HashMap<Integer, ArrayList<CommentDTO>>();
+		
+		for(CommentDTO dto : streamlist) {
+			if(commentmap.containsKey(dto.getTid())) {
+				commentmap.get(dto.getTid()).add(dto);
+			}else {
+				commentmap.put(dto.getTid(), new ArrayList<CommentDTO>());
+				commentmap.get(dto.getTid()).add(dto);
+			}
+		}
+		
+		
+		
 		model.addAttribute("sidlist", sidlist);
-		model.addAttribute("streamlist", streamlist);
+	//	model.addAttribute("streamlist", streamlist);
+		model.addAttribute("commentmap", commentmap);
 		model.addAttribute("pidlist", pidlist);
 		
 		return "header/stream";
