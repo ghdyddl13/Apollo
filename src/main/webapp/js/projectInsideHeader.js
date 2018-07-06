@@ -17,8 +17,10 @@ $(function() {
 	})
 	
 	
+	
 	// 프로젝트 table 페이지
 	$(document).on("click","#table-page",function(){
+		
 		$.ajax({
 			url:"table.htm",
 			dataType:"html",
@@ -30,9 +32,21 @@ $(function() {
 				if($('#project-page-tbody').children().length != 0) {
 					$('#project-page-table-no-data').remove();
 				}
+
+
 			}
 		})
-	})
+	});
+	
+	$(document).on("click",".project-table-member-image",function(evt){
+		//console.log($(this).siblings('input').val());
+
+	    var mid = $(this).siblings('input').val(); // mid 만 가져오기
+	    
+	    profileinfo(mid);
+	    
+	}); // end member img
+	
 	
 	// 프로젝트 table 페이지에서 select로 tstatus 변경 시 
 	$(document).on("change","#table-status-button",function(){

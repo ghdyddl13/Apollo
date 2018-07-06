@@ -439,7 +439,7 @@ function resultSearchProject(projectlist){
 }// end	
 	
 /**
- * 
+ * 	
  날   짜 : 2018. 6. 26.
  기   능 : 스텝 검색 결과를 만들어주는 함수 
  작성자명 : 박 민 식

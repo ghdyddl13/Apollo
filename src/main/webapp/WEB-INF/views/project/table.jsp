@@ -26,7 +26,6 @@
       </div>
       <div class="main-body-onepannel-body">
 		<div class="project-table-content" align="center">
-		
 	      <table class="table project-page-table">
 	         <thead>
 	            <tr>
@@ -66,10 +65,14 @@
 	                     </c:choose>
 	                     <c:choose>
 	                     	<c:when test="${member.image eq null}">
-	                     		<td class="project-table-member-td"><img class="project-table-member-image" src="img/user.png">${member.mname}</td>
+	                     		<td class="project-table-member-td">
+	                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
+	                     		<img class="project-table-member-image" src="img/user.png" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
 	                     	</c:when>
 	                     	<c:otherwise>
-	                     		<td class="project-table-member-td"><div class="project-table-member-image">${member.image}</div>${member.mname}</td>
+	                     		<td class="project-table-member-td">
+	                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
+	                     		<div class="project-table-member-image" data-toggle="modal" data-target="#profile-modal-dialog">${member.image}</div>${member.mname}</td>
 	                     	</c:otherwise>
 	                     </c:choose>
 	                     </c:forEach>
@@ -131,10 +134,15 @@
 		                        </c:choose>
 		                        <c:choose>
 			                     	<c:when test="${member.image eq null}">
-			                     		<td class="project-table-member-td"><img class="project-table-member-image" src="img/user.png">${member.mname}</td>
+			                     		<td class="project-table-member-td">
+			                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
+			                     		<img class="project-table-member-image" src="img/user.png" data-toggle="modal" data-target="#profile-modal-dialog" >${member.mname}</td>
 			                     	</c:when>
 			                     	<c:otherwise>
-			                     		<td class="project-table-member-td"><div class="project-table-member-image">${member.image}</div>${member.mname}</td>
+			                     		<td class="project-table-member-td">
+			                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
+			                     		<img class="project-table-member-image" src="img/${member.image}" data-toggle="modal" data-target="#profile-modal-dialog" >${member.mname}</td>
+			     
 			                     	</c:otherwise>
 		                    	</c:choose>
 		                      </tr>	

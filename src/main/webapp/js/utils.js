@@ -114,7 +114,8 @@ function profileinfo(mid) {
         data:{mid:mid},
         dataType:"json",
         success:function(data) {
-            var image = (data.profileinfo.image)?data.profileinfo.image :"img/user.png"
+        	console.log(data.profileinfo);
+            var image = (data.profileinfo.image)?data.profileinfo.image:"img/user.png";
             $('#profile-modal-img').attr("src",image);
             $('#profile-modal-mname').text(data.profileinfo.mname)
             $('#profile-modal-mid').text(data.profileinfo.mid);

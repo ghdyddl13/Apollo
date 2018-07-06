@@ -362,8 +362,8 @@
 					</div>
 
 					<div class="col-sm-2" id="star_trash">
-						<span id="span_task_star"></span>&nbsp&nbsp
-						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
+						<span id="span_task_star"></span>&nbsp;&nbsp;
+						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp;&nbsp;&nbsp;
 						<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
 					</div>
 					
@@ -385,12 +385,12 @@
 					</div>
 							
 					<div class="col-sm-5">
-	                    <span>시작일&nbsp:&nbsp</span>
+	                    <span>시작일&nbsp;&nbsp;</span>
                    		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date_sday">
 					</div>
 
 					<div class="col-sm-5">
-						<span>종료일&nbsp:&nbsp</span>
+						<span>종료일&nbsp;&nbsp;</span>
 	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date_eday">
 					</div>
 				</div>
@@ -423,7 +423,7 @@
                 <hr />
                 
 				<div class="modal-title">
-					<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
+					<p>상세설명&nbsp;&nbsp;<img id="task_detail_status" src="img/loader.gif"></p>
 					<div style="text-align:center">
 					<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
 					</div>
@@ -686,7 +686,7 @@
 								<span class="caret"></span>
 							
 							</div>
-							<ul id="move-step-folder-options" class="dropdown-menu "
+							<ul id="move-step-folder-options" class="dropdown-menu"
 								role="menu" aria-labelledby="move-step-folder-list">
 							</ul>
 						</div>

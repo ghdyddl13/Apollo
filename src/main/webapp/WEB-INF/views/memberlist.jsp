@@ -4,12 +4,19 @@
 <!DOCTYPE html>
 <script>
 $(function() {
+	//사원 테이블에 사원목록이 없을 경우 15 열 생성
 	var rows = $('#header-member-table-tbody').children();
-	console.log(rows);
 	for(var rowcount = rows.length ; rowcount <= 15 ; rowcount++) {
 		var row = "<tr id='header-member-table-no-data'><td></td><td></td><td></td><td></td><td></td></tr>";
 		$('#header-member-table-tbody').append(row);
 	}
+	
+	//tr 클릭시 프로필 modal 창 생성
+	$(document).on("click",".header-memberinfo-table",function(evt){
+	    var mid = $(this).find('.header-member-table-mid').text(); // mid
+	    profileinfo(mid);
+	    
+	}); // end - profile modal
 });
 </script>
 <h4>사원 목록</h4>
@@ -32,7 +39,7 @@ $(function() {
 						<td class="header-member-table-no">${count}</td>
 						<td>${member.mname}</td>
 						<td>${member.position}</td>
-						<td>${member.mid}</td>
+						<td class="header-member-table-mid">${member.mid}</td>
 						<td>${member.pnum}</td>
 					</tr>
 				</c:forEach>

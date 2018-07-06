@@ -218,6 +218,7 @@ public class MemberService {
 		try {
 			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 			profileinfo = dao.getProfileInfoMember(mid);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
