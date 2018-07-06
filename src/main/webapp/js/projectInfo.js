@@ -321,6 +321,7 @@ $(function() {
                            }]
                          },              
                          options: {
+                        	 
                             maintainAspectRatio: false,
                              scales: {
                                  xAxes: [{
