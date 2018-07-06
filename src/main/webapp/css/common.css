@@ -278,6 +278,60 @@ background-color: #f5f5f5
 	margin-top: 7px;
 	margin-bottom:7px
 }
+
+/* 구매하기 Modal*/
+.buy-apollokey-modal-dialog {
+	width: 400px;
+}
+#apollokey-modal-content {
+   	width: 400px;
+    height: 300px;
+}
+.apollokey-modal-body {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.apollokey-modal-title {
+	margin-bottom: 15px;
+}
+.apollokey-modal-title>input[type=text] {
+	border-radius: 3px;
+    border: 1px solid #dddddd;
+}
+.apollokey-modal-description {
+	font-weight: bold;
+}
+.buy-apollokey-btn {
+	background-color: #B9062F;
+	width: 80px;
+}
+.find-pwd-modal-dialog {
+	width:400px;
+}
+.find-pwd-modal-content {
+	width:400px;
+	height: 300px;
+}
+.find-pwd-modal-body {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.find-pwd-modal-title {
+	margin-bottom: 15px;
+}
+.find-pwd-modal-title>input[type=text] {
+	border-radius: 3px;
+    border: 1px solid #dddddd;
+}
+.find-pwd-btn {
+	background-color: #B9062F;
+	width: 80px;
+}
+
  /* /////////////////////////// 로그인 css끝 /////////////////////////////////////////////////////  */
 
 
@@ -1458,3 +1512,5 @@ label {
   background-color: white;
   display: block;
 }
+
+

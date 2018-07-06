@@ -16,6 +16,7 @@
         	<div class="table-header-filter">
            		<select class="table-header-filter-status-tag" id="table-status-button">
             		<option value="all">STATUS:ALL</option>
+            		
             		<c:forEach var="tstatus" items="${tstatuslist}">
             			<option value="${tstatus.tstatus}" style="color:${tstatus.color}">${tstatus.tstatus}</option>
             		</c:forEach>
