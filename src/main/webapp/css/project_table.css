@@ -2,16 +2,15 @@
 	width:95%;
 }
 .project-table-tr-steps {
-	/* background-color: #f4faff */
+	background-color: #8d949a0f;
 	font-weight: bold;
 }
 .project-table-td-tstatus {
-	color:#2d2d2d;
 	text-align:center;
-	font-size: 12px;
+	color:white;
 }
 .project-table-tr-folders {
-	/* background-color: #f4faff */
+	background-color:#66696b1c;
 	font-weight: bold;
 }
 .project-table-day {
@@ -20,6 +19,8 @@
 
 .project-page-table-title {
 	width: 50%;
+}
+.project-page-table>thead>tr>th {
 	text-align: center;
 	padding-bottom: 10px;
 	background-color: #e6e7e8;
@@ -35,7 +36,7 @@
 	text-align:center;
 }
 .project-page-table>tbody {
-	font-size: 12px;
+	font-size: 13px;
 }
 .project-table-content {
 	overflow-y: hidden; 
@@ -57,8 +58,6 @@
     margin-right: 5px;
 }
 
-#project-table-member-td{
-	display: flex;
-    align-items: center;
-    justify-content: center;
+.project-table-member-td {
+	padding-left: 6%;
 }
