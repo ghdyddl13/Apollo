@@ -8,7 +8,7 @@ html, body{
   padding:0;
   height:100%;
 }
-
+	
 /*///////////////////////////////main.jsp 구성 요소 css*/
 .Apollo-main{
 	display:flex;
@@ -95,10 +95,7 @@ html, body{
 
 /* /////////////////////////// 로그인 css /////////////////////////////////////////////////////  */
 /* 로그인 input 간격  */
-.input-group{
-margin-top:1em;
-margin-bottom:1em;
-}
+
 
 .login-box{
    line-height:2.3em;
@@ -216,10 +213,20 @@ color: black;
 width:40px;
 }
 .login-head{
-
+	display:flex;
     margin-bottom: 25px;
     font-size:40px;
-    text-align:center;    
+    align-items:center;   
+    justify-content: center;
+}
+
+.login-page-logo{
+	width:100%;
+	height: auto;
+}	
+
+.login-page-msg{
+	color:#000032
 }
 .div-font-size{
    font-size: 21px; 
@@ -241,7 +248,8 @@ display: flex;
 flex-direction:column;
 justify-content: center;
 align-items: center;
-background-color: #f5f5f59e
+background-color: #f5f5f5
+
 }
 
 .login-container{
@@ -985,16 +993,7 @@ label {
 }
 
 /* /////////////////////////////////회원가입 //////////////////////////////////////////// */
-.div-width{
-   width:40%
-}
 
-.div-font{
-   text-align:left;
-}
-.div-btn-position{
-   text-align:right;
-}
 
 .btn-size{
    width:125px;
@@ -1003,24 +1002,95 @@ label {
    background-color: B9062F;
    color:white;
 }
-.container{
-   margin-top:60px;
+
+.join-page-body{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background-color: #f5f5f5;
 }
+
+.join-form-wrapper{
+	display: flex;
+	align-items: center;
+	width: 500px;
+	height: 90%;
+	flex-direction: column;
+	
+}
+
+.join-form-header{
+	text-align: left	
+}
+
+.join-form-header>h2{
+	font-size: 35px
+}
+
+.join-form-body{
+	width: 60%;
+	padding-top:30px
+}
+
+
+
+.join-input-wrapper{
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 5px
+}
+.join-input-row{
+	display: flex;
+	margin-bottom: 3px;
+	align-items: center
+	
+}
+.join-input-row>input[type=text], input[type=password]{
+	border-radius: 3px;
+	border: 1px solid #dddddd;
+	width:100%;
+	height: 30px;
+	padding:0.5em
+}
+.join-input-title{
+	flex: 1 1 auto;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#idcheck, #keycheck{
+	margin-right:5px
+}
+
+
+.join-form-btn{
+	background-color: #000032;
+	font-size: 13px;
+	height: 30px;
+	padding:3px;
+	width: 60px
+	
+}
+
+.join-from-submit{
+	background-color: rgb(178, 28, 74);
+}
+
 .footer-color{
    color:999999;
 }
-.btn-color{
-background-color: 999999;
-   color: white;
+
+.footer-copyright{
+	text-align: center;
+	color:#9d9d9da3
 }
-.header-fontsize{
-   font-size:45px;   
-}
-.sign-account{
-   text-align:left;
-}
+/* ////////////////////  회원 가입 끝 ////////////// */
+
 .hr-color{
-   border: Inset 1px #999999;   
+   border: 0.5px solid #d9d9d9;   
 }
 .inside-header {
    background-color: #f4faff;
