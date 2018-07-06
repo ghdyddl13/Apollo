@@ -58,7 +58,8 @@ public class InboxController {
 		
 		System.out.println("inbox controller");
 		String mid = (String)session.getAttribute("mid");
-		service.updateNewCheck(mid);
+		service.updateNewCount(mid);
+		
 		ArrayList<CommentDTO> commentlist = service.getCommentlist(mid);//테스트용 아이디
 		
 		model.addAttribute("cmtlist", commentlist);
@@ -88,8 +89,13 @@ public class InboxController {
 		System.out.println("sent controller");
 		String mid = (String)session.getAttribute("mid");
 		System.out.println(mid);
+		service.updateNewCheckSent(mid);
+		
 		ArrayList<CommentDTO> sentlist = service.getSentlist(mid);//테스트용 아이디
+		
+		
 		model.addAttribute("cmtlist", sentlist);
+		
 		
 		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd", Locale.KOREA);
 		java.util.Date currenttime = new java.util.Date();
@@ -101,6 +107,7 @@ public class InboxController {
 	    System.out.println (today);
 		model.addAttribute("today", today);
 		model.addAttribute("inbox", "sent");
+		
 		return "header/inbox";
 	}
 	/**

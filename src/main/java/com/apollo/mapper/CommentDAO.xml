@@ -45,4 +45,10 @@ UPDATE RECEIVER SET newcheck = 1 where mid=#{mid2} and cmtid=#{cmtid}
 <update id="updateNewCount">
  UPDATE receiver SET newcount = 1 where mid = #{mid} and newcount = 0
 </update>
+
+<update id="updateNewCheckSent" parameterType="String">
+UPDATE (select * from RECEIVER r join comments c on c.cmtid = r.cmtid where r.mid=#{mid} and r.mid = c.mid) SET newcheck = 1
+</update>
+
+
 </mapper>

@@ -27,8 +27,7 @@
 		
 		
 		$("#incomming-page").click(function(evt){
-			
-			
+			$("#inbox_count").hide();
 			$.ajax({
 				url:"inbox.htm",
 				dataType:"html",

@@ -54,10 +54,6 @@ $(function() {
 			
 			
 </script>
-
-
-
-
 <div class ="inbox-main-container">
 		<div class ="inbox-section-left" id="left" style="overflow:auto;">
 		<div class="stream_header_container"><span class = "stream_header">STREAM</span><select class="form-control" id="pidselect" name="book_no" style="width:200px; float: right; margin-top: 10px; margin-bottom: 10px;margin-right: 10px;">

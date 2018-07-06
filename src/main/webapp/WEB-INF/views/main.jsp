@@ -101,7 +101,6 @@
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <title>Project Apollo</title>
 
-
 <script type="text/javascript">
 	var nickname;
 	var wsocket;
@@ -118,24 +117,38 @@
 	function onOpen(evt) {
 	}
 	function onMessage(evt) {
+		$("#inbox_count").show();
+		$("#inbox_count_b").hide();
+		
+		$("#inbox_count_c").show();
 		var data = evt.data;
 		appendMessage(data);
 	}
 	function onClose(evt) {
 	}
-	function send() {
+	function send(assign) {
+		console.log(assign);
 		console.log("send")
 		var msg = $("#comment_input_box_in_taskmodal").val();
-		if(msg.trim()!=""){
+		if(msg.trim()!="" || assign == "assign"){
 			wsocket.send($("#tidhidden").val()+'|'+nickname + " : " + msg);
 		}
 	}
 	function appendMessage(msg) {
-		$("#inbox_count").empty();
-		$("#inbox_count").append(msg);
+	
+		$("#inbox_count_c").empty();
+		$("#inbox_count_c").append(msg);
 	}
 	
 	$(document).ready(function() {
+		$("#inbox_count").show();
+		if("${newcount}" == "0"){
+			$("#inbox_count").hide();
+		}else{
+			$("#inbox_count_b").show();
+			$("#inbox_count_c").hide();
+		}
+		
 		
 		nickname=$("#header-user-name").html();
 		connect();
