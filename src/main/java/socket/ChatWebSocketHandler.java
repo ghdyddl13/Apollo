@@ -88,7 +88,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 						System.out.println(wssession.getId() + "에 메시지 발송: " + newcount);
 					}
 				}
-				
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -80,7 +80,6 @@ public class MemberController {
 	 */
 	@RequestMapping("/main.htm")
 	public String main(Model model,  HttpServletRequest request) {
-		
 		String mid = (String) request.getSession().getAttribute("mid");
 		 MemberDTO memberdto = service.getProfileInfoMember(mid);
 		 model.addAttribute("memberdto", memberdto);
