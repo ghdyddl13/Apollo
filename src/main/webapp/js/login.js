@@ -1,11 +1,52 @@
+var Regexemail = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+var Regexpwd =  /^(?=.*[A-Za-z0-9])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z0-9\d$@$!%*#?&]{8,}$/;
+
 $(function() {
 
 		$("#pwdreset").click(function() {
 			$("#findpwd")[0].reset();
 		});
+			
+		
+		// apollo 인증키 구매시 실행되는 함수 
 		$("#keybtn").click(function() {
-			$("#apollokey").submit();
-		});
+			if ($('#company-name-content').val() == "") {
+				alert('회사명을 입력해주세요.');
+				return false;
+			}
+			if ($('#user-email-content').val() == "") {
+				alert('이메일을 입력해주세요.');
+				$("#user-email-content").focus();
+				return false;
+			}
+			if (!Regexemail.test($.trim($("#user-email-content").val()))) {
+				alert("이메일 형식이 아닙니다.");
+				$("#user-email-content").focus();
+				return false;
+			}
+			var data = {
+				cname : $('input[name=cname]').val(),
+				email : $('input[name=email]').val()
+			}
+			$.ajax({
+				type : 'post',
+				url : 'apollokey.htm',
+				data : data,
+				success : function(data) {
+					$('input[name=cname]').val('')
+					$('input[name=email]').val('')
+	
+					if (data.result == '성공') {
+						alert('입력하신 Email로 인증키를 발송했습니다.');
+					} else {
+						alert('입력하신  Email이 존재하지 않습니다.\n다시한번 확인 하시기 바랍니다.');
+					}
+					$(".close").click();
+				}
+			})
+		}) // end - keybtn
+		
+		
 		$("#keyreset").click(function() {
 			$("#apollokey")[0].reset();
 		});
@@ -142,8 +183,7 @@ $(function() {
 	
 	
 	
-		var Regexemail = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
-		var Regexpwd =  /^(?=.*[A-Za-z0-9])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z0-9\d$@$!%*#?&]{8,}$/;
+
 		
 
 		function sendit() {
