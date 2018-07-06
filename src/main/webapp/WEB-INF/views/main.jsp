@@ -45,8 +45,8 @@
 <link rel="stylesheet" href="css/projectFile.css" />  
 <!-- PROJECT TABLE -->
 <link rel="stylesheet" href="css/project_table.css" />
-
-
+<!-- REPORT CSS  -->
+<link href="css/report.css" type="text/css" rel="stylesheet">
 
 
 <!--   JAVASCRIPT   -->

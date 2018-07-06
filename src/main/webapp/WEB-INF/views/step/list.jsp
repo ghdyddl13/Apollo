@@ -36,7 +36,7 @@
             <div class="list-header-sorting">
               <div class="list-header-sorting-cover" >
                 <button id="sorting-button" class="list-header-sorting-button"type="button" name="button">
-                  <span class="list-header-sorting-tag">By Date</span>
+                  <span class="list-header-sorting-tag">By Changed Time</span>
                 </button>
               </div>
             </div>
@@ -74,8 +74,11 @@
         <!-- SORTING FILTER  -->
         <div class="list-header-sorting-selecting">
           <div class="list-header-sorting-container">
+          	<div class="list-header-sorting-item">
+              <div class="list-header-sorting-textcontainer" id="ctime"><span class="list-header-sorting-text">Changed Time</span></div>
+            </div>
             <div class="list-header-sorting-item">
-              <div class="list-header-sorting-textcontainer" id="Date"><span class="list-header-sorting-text">Date</span></div>
+              <div class="list-header-sorting-textcontainer" id="Date"><span class="list-header-sorting-text">Due Date</span></div>
             </div>
             <div class="list-header-sorting-item">
               <div class="list-header-sorting-textcontainer" id="Status"><span class="list-header-sorting-text">Status</span></div>
