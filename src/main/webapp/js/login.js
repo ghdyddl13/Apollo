@@ -35,14 +35,16 @@ $(function() {
 			})
 		})
 	     var input = document.getElementById("pwd");
-	     input.addEventListener("keyup", function(event) {
-	         event.preventDefault();
-	         if (event.keyCode === 13) {
-	             document.getElementById("login_btn").click();
-	         }
-	     });
+		
+		$("#pwd").on("keyup", function(event){
+			event.preventDefault();
+			if (event.keyCode === 13) {
+				document.getElementById("login_btn").click();
+			}
+		
 		
 	});
+});
 
 	function login() {
 		if ($("#mid").val() == "") {
@@ -60,3 +62,175 @@ $(function() {
 		$("#mid").val("");
 		$("#pwd").val("");
 	}
+	
+	
+	///////////////////////////////////////// 회원가입 관련 
+	
+
+	var idcheck = false;
+	$(function() {
+		$('#btnCheckUid').click(function(){
+			if ($("#mid").val()== "") {
+	            alert("아이디를 입력하지 않았습니다.");
+	            $("#mid").focus();
+	            return false;
+	        }
+			if (!Regexemail.test($.trim($("#mid").val())) ){
+				alert("이메일 형식이 아닙니다.");
+				$("#mid").focus();
+				return false;
+
+			}
+			$.ajax(
+				{
+					type:"post",
+					url:"midcheck.htm",
+					data:{"mid" : $('#mid').val()},
+					success:function(data){
+						console.log(data)
+						if(data.result=="fail"){
+							$("#idcheck").text("중복된 아이디 입니다.").css("color","red");
+							$("#mid").focus();
+						}else{
+							$("#idcheck").text("사용 가능한 아이디입니다.").css("color","#1153ed");
+							idcheck = true;
+						}
+					}
+				}	
+			);
+		});
+		
+		$("#mid").keyup(function(){
+			idcheck = false;
+			$("#idcheck").text("");
+		})
+		
+		
+		var keycheck = false;
+		$('#btnCheckkey').click(function(){
+			if ($("#apollokey").val()== "") {
+	            alert("인증키를 입력하지 않았습니다.");
+	            $("#apollokey").focus();
+	            return false;
+	        }
+			$.ajax(
+				{
+					type:"post",
+					url:"keycheck.htm",
+					data:{"apollokey" : $('#apollokey').val()},
+					success:function(data){
+						if(data.result=="fail"){
+							$("#keycheck").text('존재하지 않는 인증키 입니다.').css("color","red");
+							$("#apollokey").focus();
+						}else{
+							$("#keycheck").text('인증 되었습니다.').css("color","#1153ed");
+							
+							keycheck = true;
+						}
+					}
+				}	
+			);
+		});
+		
+		$("#apollokey").keyup(function(){
+			console.log("a")
+			keycheck = false;
+			$("#keycheck").text("");
+		})
+
+	});
+	
+	
+	
+		var Regexemail = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+		var Regexpwd =  /^(?=.*[A-Za-z0-9])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z0-9\d$@$!%*#?&]{8,}$/;
+		
+
+		function sendit() {
+			if ($("#mid").val()== "") {
+	            alert("아이디를 입력해 주세요.");
+	            $("#mid").focus();
+	            return false;
+	        }
+			if (!idcheck) {
+	            alert("아이디 중복확인을 해주세요");
+	            $("#mid").focus();
+	            return false;
+	        }
+			
+			if ($("#join-pwd").val()== "") {
+	            alert("비밀번호를 입력헤 주세요.");
+	            $("#join-pwd").focus();
+	            return false;
+	        }
+
+			if ($("#join-pwd").val()!=$("#join-pwd-check").val()) {
+				console.log($("#join-pwd").val())
+				console.log($("#join-pwd-check").val())
+	            alert("비밀번호 확인이 일치하지 않습니다.");
+				$("#join-pwd").val();
+				$("#join-pwd-check").val();
+	            $("#join-pwd").focus();
+	            return false;
+	        }
+			
+			if ($("#mname").val()== "") {
+	            alert("이름을 입력해 주세요.");
+	            $("#mname").focus();
+	            return false;
+	        }
+			if (!Regexemail.test($.trim($("#mid").val())) ){
+				alert("이메일 형식이 아닙니다.");
+				$("#mid").focus();
+				return false;
+
+			}
+			if (!Regexpwd.test($.trim($("#join-pwd").val())) ){
+				alert("비밀번호 형식이 잘못되었습니다.");
+				$("#pwd").focus();
+				return false;
+
+			}
+			if ($("#apollokey").val()!="" ){
+				
+				if(keycheck ==false){
+					alert("인증키를 확인해 주세요.");
+					return false;
+				}
+			}
+
+			$("#f").submit();
+		}
+		
+		
+$(function(){
+	$(document).on("keyup","#join-pwd",function(){
+		console.log(!Regexpwd.test($.trim($("#join-pwd").val())))
+		console.log($("#join-pwd").val());
+		if (!Regexpwd.test($("#join-pwd").val()) ){
+			$("#regexpwd-check").css("color","red");
+		}else{
+			$("#regexpwd-check").css("color","#1153ed");
+		}
+		
+		if($("#join-pwd-check").val()!=""){
+			if ($("#join-pwd").val()!=$("#join-pwd-check").val()){
+				$("#pwdcheck").text("비밀번호가 일치하지 않습니다.").css("color","red");;
+			}else{
+				$("#pwdcheck").text("비밀번호가 일치합니다.").css("color","#1153ed");
+			}
+		}
+	});
+
+$(document).on("keyup","#join-pwd-check",function(){
+		
+		if ($("#join-pwd").val()!=$("#join-pwd-check").val()){
+			$("#pwdcheck").text("비밀번호가 일치하지 않습니다.").css("color","red");;
+		}else{
+			$("#pwdcheck").text("비밀번호가 일치합니다.").css("color","#1153ed");
+		}
+	});
+	
+})
+		
+		

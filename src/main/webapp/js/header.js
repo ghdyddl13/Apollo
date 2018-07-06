@@ -184,6 +184,8 @@ $(function() {
 	});
 	
 	
+	
+	
 	$('#update-pwd-btn').click(function() {
 		var cpwd = $('#edit-profile-cpwd').val();
 		var upwd = $('#edit-profile-upwd').val();
@@ -220,7 +222,7 @@ $(function() {
 			url:"updatepwd.htm",
 			data:{cpwd:cpwd,upwd:upwd},
 			success:function(data){
-				console.log(data.result); //현재비번과 DB 비번 비교 
+				//console.log(data.result); //현재비번과 DB 비번 비교 
 
 				// 개인정보수정 modal에서 입력한 현재 비밀번호와 DB에 저장된 비밀번호 비교
 				if(data.result > 0) {
@@ -234,9 +236,12 @@ $(function() {
 				// 비밀번호 변경
 				if(data.count > 0){
 					alert('비밀번호 변경이 완료되었습니다');
+					$(".close").click();
 				}else {
 					alert('비밀번호 변경이 실패되었습니다');
+					$(".close").click();
 				}
+				
 			}
 		}); // end - ajax
 	});

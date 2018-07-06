@@ -65,10 +65,10 @@
 	                     </c:choose>
 	                     <c:choose>
 	                     	<c:when test="${member.image eq null}">
-	                     		<td><img class="project-table-member-image" src="img/user.png">${member.mname}</td>
+	                     		<td class="project-table-member-td"><img class="project-table-member-image" src="img/user.png">${member.mname}</td>
 	                     	</c:when>
 	                     	<c:otherwise>
-	                     		<td id="project-table-member-td"><div class="project-table-member-image">${member.image}</div>${member.mname}</td>
+	                     		<td class="project-table-member-td"><div class="project-table-member-image">${member.image}</div>${member.mname}</td>
 	                     	</c:otherwise>
 	                     </c:choose>
 	                     </c:forEach>
@@ -115,20 +115,30 @@
 	               <!-- 폴더에 속한 스텝 뿌려주기 -->
 	               <c:forEach var="step" items="${steplist}">
 	                  <c:if test="${step.fid eq folder.fid}">
-	                     <tr class="project-table-tr-steps" data-toggle="modal" data-target="#update-step" id="${step.sid}">
-	                        <td style="padding-left: 30px"><i class="side-dir-step-icon far fa-file-alt"></i>&nbsp;${step.sname}</td>
-	                        <td class="project-table-day">${step.sday}</td>
-	                        <td class="project-table-day">${step.eday}</td>
-	                        <c:choose>
-	                        <c:when test="${(step_endeday - step_startsday) == 0}">
-	                           <td class="project-table-duration"></td>
-	                        </c:when>
-	                        <c:otherwise>
-	                           <td class="project-table-duration">${step_endeday - step_startsday}일</td>
-	                        </c:otherwise>
-	                        </c:choose>
-	                        <td></td>
-	                     </tr>
+	                 	 <c:forEach var="member" items="${memberlist}">
+		                     <tr class="project-table-tr-steps">
+		                        <td style="padding-left: 30px"><i class="side-dir-step-icon far fa-file-alt"></i>&nbsp;${step.sname}</td>
+		                        <td class="project-table-day">${step.sday}</td>
+		                        <td class="project-table-day">${step.eday}</td>
+		                        <c:choose>
+		                        <c:when test="${(step_endeday - step_startsday) == 0}">
+		                           <td class="project-table-duration"></td>
+		                        </c:when>
+		                        <c:otherwise>
+		                           <td class="project-table-duration">${step_endeday - step_startsday}일</td>
+		                        </c:otherwise>
+		                        </c:choose>
+		                        <c:choose>
+			                     	<c:when test="${member.image eq null}">
+			                     		<td class="project-table-member-td"><img class="project-table-member-image" src="img/user.png">${member.mname}</td>
+			                     	</c:when>
+			                     	<c:otherwise>
+			                     		<td class="project-table-member-td"><div class="project-table-member-image">${member.image}</div>${member.mname}</td>
+			                     	</c:otherwise>
+		                    	</c:choose>
+		                      </tr>	
+	                    	</c:forEach>
+	                   
 	                     <!-- 스텝에 속한 task 뿌려주기 -->
 	                     <c:forEach var="task" items="${tasklist}">
 	                        <c:if test="${task.sid eq step.sid}">

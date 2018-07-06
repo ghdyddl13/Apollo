@@ -25,9 +25,9 @@
 			<input type="hidden" value="${msg}" id="login-msg">
 			<form id="login-form" action="login.htm" method="post">
 				<!-- 제목 -->
-				<h1 class="login-head">
-					<b>Login to Apollo</b>
-				</h1>
+				<div class="login-head">
+					<img class="login-page-logo" src="img/login-header.png">
+				</div>
 				<br>
 				<span>${msg}</span>
 				<input type="text" class="login-input" placeholder="E-mail" name="mid" id="mid"> 

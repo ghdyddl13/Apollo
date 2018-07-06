@@ -807,7 +807,7 @@
 		   				</span>
 					</form>
 					<script type="text/javascript">
-						$(function(){
+						/* $(function(){
 							$("#edit-profile-image").fileupload({
 								dataType:"json",
 								add:function(e,data){
@@ -825,7 +825,7 @@
 									
 								}								
 							})
-						})
+						}) */
 					</script>
 
 				</div>
@@ -837,74 +837,89 @@
 
 								<br>
 								<div class="edit-profile-all-title">
-									<div class="edit-profile-title">이름</div>
-									<input type="text" name="mname" id="edit-profile-mname">
+									<label class="edit-profile-title" for="edit-profile-mname">이름</label>
+									<input type="text" name="mname" class="edit-profile-input-tag" id="edit-profile-mname">
+								</div>
+								
+								<div class="edit-profile-all-title">
+									<label class="edit-profile-title" for="edit-profile-mid">이메일</label>
+									<input type="text" name="mid" class="edit-profile-input-tag" id="edit-profile-mid" readonly="readonly">
 								</div>
 								<br>
 								<div class="edit-profile-all-title">
-									<div class="edit-profile-title">이메일</div>
-									<input type="text" name="mid" id="edit-profile-mid"
-										readonly="readonly">
+									<div id="edit-profile-title-apollokey">
+										<label id="edit-profile-apollokey-label" class="edit-profile-title" for="edit-profile-apollokey">인증키</label>
+										<input class="btn" id="profile-apollokey-check" type="button" value="인증확인">
+									</div>
+									<input type="text" name="apollokey" class="edit-profile-input-tag" id="edit-profile-apollokey">
+									
 								</div>
-								<br>
+								
 								<div class="edit-profile-all-title">
-									<div class="edit-profile-title">인증키</div>
-									<input type="text" name="apollokey" id="edit-profile-apollokey">
-									<input class="btn" id="profile-apollokey-check" type="button" value="인증확인">
+									<label class="edit-profile-title" for="edit-profile-pnum">휴대폰 번호</label>
+									<input type="text" name="pnum" class="edit-profile-input-tag" id="edit-profile-pnum">
 								</div>
-								<br>
+								
 								<div class="edit-profile-all-title">
-									<div class="edit-profile-title">휴대폰 번호</div>
-									<input type="text" name="pnum" id="edit-profile-pnum">
+									<label class="edit-profile-title" for="edit-profile-deptname">부서명</label>
+									<input type="text" name="deptname" class="edit-profile-input-tag" id="edit-profile-deptname">
 								</div>
-								<br>
+								
 								<div class="edit-profile-all-title">
-									<div class="edit-profile-title">부서명</div>
-									<input type="text" name="deptname" id="edit-profile-deptname">
-								</div>
-								<br>
-								<div class="edit-profile-all-title">
-									<div class="edit-profile-title">직위</div>
-									<input type="text" name="position" id="edit-profile-position">
+									<label class="edit-profile-title" for="edit-profile-position">직위</label>
+									<input type="text" name="position" class="edit-profile-input-tag" id="edit-profile-position">
 								</div>
 								<br>
 							</div>
 						</div>
 						<div align="center">
-							<input type="button" class="btn add-btn"
-								id="update-edit-profile-btn" value="수정">&nbsp;&nbsp;&nbsp;
-							<input type="button" class="btn cancel-btn" data-dismiss="modal"
-								value="취소">
+							<input type="button" class="btn" id="update-edit-profile-btn" value="수정완료">
+							<br><br>
+							<input class="btn" type="button" value="비밀번호 변경" id="edit-pwd-btn" data-toggle="modal" data-target="#edit-pwd-modal-dialog">
 						</div>
 					</fieldset>
 				</form>
-				<hr id="edit-memberinfo-hr">
+				</div>
+			</div>
+		</div>
+	</div>	
+	
+	<!-- 비밀번호 변경 Modal -->
+	<div class="modal fade" id="edit-pwd-modal-dialog" role="dialog">
+		<div class="modal-content modal-dialog modal-edit-pwd-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">비밀번호 변경</h4>
+			</div>
+			<div class="modal-body edit-profile-part2-body">
 				<form id="edit-pwd-form" method="post">
 					<fieldset>
 						<div class="edit-profile-part2">
-							<h4>비밀번호 변경</h4>
-							<br>
-							<div class="edit-profile-title">현재 비밀번호</div>
-							<input type="password" name="pwd" id="edit-profile-cpwd">
-							<br>
-							<div class="edit-profile-title">변경 비밀번호</div>
-							<input type="password" name="pwd" id="edit-profile-upwd">
-							<br>
-							<div class="edit-profile-title">변경 비밀번호 확인</div>
-							<input type="password" name="pwd2" id="edit-profile-upwd2">
-							<br>
+							<div class="edit-profile-all-title">
+								<label class="edit-profile-title" for="edit-profile-cpwd">현재 비밀번호</label> 
+								<input type="password" name="pwd" class="edit-pwd-input-tag" id="edit-profile-cpwd">
+							</div>
+							<div class="edit-profile-all-title">
+								<label class="edit-profile-title" for="edit-profile-upwd">변경 비밀번호</label> 
+								<input type="password" name="pwd" class="edit-pwd-input-tag" id="edit-profile-upwd">
+							</div>
+							<div class="edit-profile-all-title">
+								<label class="edit-profile-title" for="edit-profile-upwd2">변경 비밀번호 확인</label> 
+								<input type="password" name="pwd2" class="edit-pwd-input-tag" id="edit-profile-upwd2">
+							</div>
 						</div>
 						<div align="center">
-							<input type="button" class="btn add-btn" id="update-pwd-btn"
-								value="수정">&nbsp;&nbsp;&nbsp; <input type="button"
-								class="btn cancel-btn" data-dismiss="modal" value="취소">
+							<input type="button" class="btn add-btn" id="update-pwd-btn" value="수정">
 						</div>
 					</fieldset>
 				</form>
 			</div>
 		</div>
 	</div>
-</div>
+
+		
+
+
 
 
 	<!-- Assignee 추가 Modal -->
