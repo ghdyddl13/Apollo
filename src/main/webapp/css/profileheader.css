@@ -1,9 +1,7 @@
-/* 개인정보수정 */
+/* 개인정보수정 및 비밀번호 변경 Modal */
 
 .modal-edit-profile-dialog {
 	width: 500px;
-	background-color: rgb();
-	
 }
 #edit-profile-img-content {
 	align-content: center;
@@ -70,8 +68,12 @@
     align-content: center;
     justify-content: center;
 }
-.edit-pwd-input-tag {
+.edit-profile-all-title>input[type=text], input[type=password]{
 	border-radius: 3px;
     border: 1px solid #dddddd;
+}
+#update-pwd-btn {
+	background-color: rgb(178, 28, 74);
+    width: 100%;
 }
     

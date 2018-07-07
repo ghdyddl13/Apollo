@@ -19,8 +19,8 @@ $(function() {
 	}); // end - profile modal
 });
 </script>
-<h4>사원 목록</h4>
-<br><br>
+<h3 id="header-member-list-title">APOLLO MEMBER LIST</h3>
+<br>
 	<div align="center" class="header-member-table">
 		<table class="table" id="header-member-table-id">
 			<thead>
@@ -34,7 +34,7 @@ $(function() {
 			</thead>
 			<tbody id="header-member-table-tbody">
 				<c:forEach var="member" items="${memberlist}">
-				<c:set var="count" value='${count + 1}'></c:set>
+				<c:set var="count" value="${count + 1}"></c:set>
 					<tr class="header-memberinfo-table" data-toggle="modal" data-target="#profile-modal-dialog">
 						<td class="header-member-table-no">${count}</td>
 						<td>${member.mname}</td>

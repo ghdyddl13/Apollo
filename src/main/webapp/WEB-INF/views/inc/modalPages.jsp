@@ -897,19 +897,19 @@
 						<div class="edit-profile-part2">
 							<div class="edit-profile-all-title">
 								<label class="edit-profile-title" for="edit-profile-cpwd">현재 비밀번호</label> 
-								<input type="password" name="pwd" class="edit-pwd-input-tag" id="edit-profile-cpwd">
+								<input type="password" name="pwd" id="edit-profile-cpwd">
 							</div>
 							<div class="edit-profile-all-title">
 								<label class="edit-profile-title" for="edit-profile-upwd">변경 비밀번호</label> 
-								<input type="password" name="pwd" class="edit-pwd-input-tag" id="edit-profile-upwd">
+								<input type="password" name="pwd" id="edit-profile-upwd">
 							</div>
 							<div class="edit-profile-all-title">
 								<label class="edit-profile-title" for="edit-profile-upwd2">변경 비밀번호 확인</label> 
-								<input type="password" name="pwd2" class="edit-pwd-input-tag" id="edit-profile-upwd2">
+								<input type="password" name="pwd2" id="edit-profile-upwd2">
 							</div>
 						</div>
 						<div align="center">
-							<input type="button" class="btn add-btn" id="update-pwd-btn" value="수정">
+							<input type="button" class="btn" id="update-pwd-btn" value="비밀번호 변경">
 						</div>
 					</fieldset>
 				</form>
@@ -981,7 +981,7 @@
 
 	<!-- 로그아웃 -->
 	<div class="modal fade" id="hedaer-logout-dialog" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog logout-modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content modal-header-logout-content">
 				<div class="modal-header">

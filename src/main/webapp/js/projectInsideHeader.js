@@ -20,10 +20,14 @@ $(function() {
 	
 	// 프로젝트 table 페이지
 	$(document).on("click","#table-page",function(){
-		
+		var loading = '<img src="img/loading.gif/>"';
 		$.ajax({
 			url:"table.htm",
 			dataType:"html",
+			beforeSend:function(){
+				console.log($('#main-box').html(loading));
+				$('.main-body-container').html(loading);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);

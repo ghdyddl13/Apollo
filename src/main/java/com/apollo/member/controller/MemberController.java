@@ -498,30 +498,11 @@ public class MemberController {
 	@RequestMapping(value="/updatemember.htm", method=RequestMethod.POST)
 	public View updateMemberInfo(MemberDTO memberdto, Model model, MultipartHttpServletRequest mrequest) {
 		int updatemember = 0;
-		System.out.println(memberdto);
 		
-		//경로 설정
-		String path = "C:\\bitcamp104\\Final\\Apollo\\src\\main\\webapp\\profile";
-		
-		File dir = new File(path);
-		if (!dir.isDirectory()) {
-			dir.mkdirs();
-		} //경로가 지정되어 있지 않은 경우 자동 폴더 생성
 		
 		try {
-			Iterator<String> files = mrequest.getFileNames(); //업로드된 파일들의 이름 목록 가져오기
-			while(files.hasNext()) {
-				String image = files.next();
-				MultipartFile mfile = mrequest.getFile(image); //param 이 image 인 파일 정보 
-				String filename = mfile.getOriginalFilename();
-				System.out.println(filename);
-				
-				mfile.transferTo(new File(path + filename)); //원하는 위치에 해당 파일명으로 저장됨
-				memberdto.setImage(memberdto.getImage());
-				
-				updatemember = service.updateMemberInfo(memberdto);
-				model.addAttribute("updatemember", updatemember);
-			}
+			updatemember = service.updateMemberInfo(memberdto);
+			model.addAttribute("updatemember", updatemember);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -558,7 +539,7 @@ public class MemberController {
 		
 		MemberDTO memberdto = null;
 		int result = 0;
-		int count =0;
+		int count = 0;
 		try {
 			//member 정보 불러오기
 			memberdto = service.updateMemberInfo(mid);

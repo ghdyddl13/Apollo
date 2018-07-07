@@ -1253,14 +1253,12 @@ label {
      text-align: left;
      vertical-align: right;
 }
+.logout-modal-dialog {
+	width: 300px;
+}
 #hedaer-logout-dialog {
-	width:55%;
 	position:absolute;
 	left: 30%;
-}
-
-.modal-header-logout-content {
-	width:55%;
 }
 #side-new-project-btn {
 	color:rgb(178, 28, 74);
