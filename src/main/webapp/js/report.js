@@ -126,13 +126,13 @@ $(document).on("click","#download_report_btn",function(){
 	
 	var pid = $('#user_projectlist_selectbox').val();
 	var report_kind = $('#report_kind').attr('value');
-	var report_title = $('#report_file_name').val().replace(/(\s*)/g,"");
-	
-    var stringRegx = /[~!@\#$%<>^&*\()\-=+_\’]/gi;
-    if(stringRegx.test(report_title)) {
-      alert('특수문자를 사용 하실 수 없습니다');
-      return;
-    }
+	var report_title = 'report';
+//	
+//    var stringRegx = /[~!@\#$%<>^&*\()\-=+_\’]/gi;
+//    if(stringRegx.test(report_title)) {
+//      alert('특수문자를 사용 하실 수 없습니다');
+//      return;
+//    }
     
     location.href = 'downloadreport.htm?pid=' + pid + '&report_kind=' + report_kind + '&report_title=' + report_title;
 	

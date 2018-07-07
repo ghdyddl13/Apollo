@@ -69,7 +69,6 @@ public class ReportService {
 		       response.reset();
 		       response.setHeader("Content-Disposition", "attachment;filename="+filename);
 		       response.setContentType("application/vnd.ms-excel");
-		       response.setHeader("Content-Transfer-Encoding", "binary");
 		     
 		        fos = new FileOutputStream(file);
 		        wb.write(fos);

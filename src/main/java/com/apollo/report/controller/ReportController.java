@@ -63,7 +63,7 @@ public class ReportController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/downloadreport.htm")
-	public View downloadReport(int pid, String report_kind, String report_title, HttpSession session, Model map, HttpServletResponse response) {
+	public void downloadReport(int pid, String report_kind, String report_title, HttpSession session, Model map, HttpServletResponse response) {
 		
 		System.out.println("downloadReport 컨트롤러 실행");
 		
@@ -79,7 +79,6 @@ public class ReportController {
 		}
 		
 		System.out.println("report 추출 성공!");
-		return jsonview;
 	}
 	
 }
