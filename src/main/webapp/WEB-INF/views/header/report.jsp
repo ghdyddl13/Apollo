@@ -68,7 +68,6 @@
 						
 					</div> <!-- end/row -->
 					
-					<a href="downloadreport2.htm?pid=1&report_kind=종류&report_title=제목">이것으로테스트</a>
 				</div> <!-- end/background_div -->
             </div>
           </div>

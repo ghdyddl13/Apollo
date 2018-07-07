@@ -82,34 +82,4 @@ public class ReportController {
 		return jsonview;
 	}
 	
-	/**
-	 * 
-	 날      짜 : 2018. 7. 1.
-	 기      능 : 다운로드 버튼을 누르면 작동하는 함수로 최종적으로 사용자의 선택에 맞는 Report를 만들어서 엑셀로 추출한다
-	 작성자명 : 김 정 권
-	 */
-	@RequestMapping("/downloadreport2.htm")
-	public void downloadReport2(int pid, String report_kind, String report_title, HttpSession session, Model map, HttpServletResponse response) {
-
-		System.out.println("downloadReport2 컨트롤러 실행");
-		String filePath = "";
-		String filename = "";
-
-		filePath = "C:\\Apollo_Reports\\"; // file 생성 위치 
-		filename = report_title + ".xls"; // 생성될 파일 이름
-		
-		System.out.println(pid + "/" + report_kind + "/" + report_title);
-		
-		String mid = (String) session.getAttribute("mid");
-		
-		try {
-			reportservice.writeData(pid, report_kind, report_title, response);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	    System.out.println("report 추출 성공!");
-	
- }
 }

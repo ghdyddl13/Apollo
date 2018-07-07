@@ -56,34 +56,28 @@ public class ReportService {
 			String filename = "";
 			try {
 
-				filePath = "C:\\Apollo_Reports\\"; // file 생성 위치 
-				filename = report_title + ".xls"; // 생성될 파일 이름
-//				FileOutputStream fout = setFile(filePath, filename);
+			   filePath = "C:\\Apollo_Reports\\"; // file 생성 위치 
+			   filename = report_title + ".xls"; // 생성될 파일 이름
 				
-				HSSFWorkbook wb = setExcel(pid, report_kind, filename);
-				
-//				// write the workbook to the output stream
-//				wb.write(fout);
-//				fout.close();
-
-				  response.reset();
-				  response.setHeader("Content-Disposition", "attachment;filename="+filename);
-				  response.setContentType("application/vnd.ms-excel");
-				
-				  OutputStream out = new BufferedOutputStream(response.getOutputStream());
-
-				  ////// 서버측 다운로드 설정
-				  File file = new File(filePath+filename);
-				  FileOutputStream fos = null;
-				
-				   fos = new FileOutputStream(file);
-				   wb.write(fos);
+			   HSSFWorkbook wb = setExcel(pid, report_kind, filename);
+		       OutputStream out = new BufferedOutputStream(response.getOutputStream());
+             
+		       ////// 서버측 다운로드 설정
+		       File file = new File(filePath+filename);
+		       FileOutputStream fos = null;
+		       
+		       response.reset();
+		       response.setHeader("Content-Disposition", "attachment;filename="+filename);
+		       response.setContentType("application/vnd.ms-excel");
+		       response.setHeader("Content-Transfer-Encoding", "binary");
+		     
+		        fos = new FileOutputStream(file);
+		        wb.write(fos);
+		        
+		        wb.write(out);
+		        out.flush();
 				   
-				   System.out.println("여기서 클라이언트로 간다");
-				   wb.write(out);
-				   out.flush();
-				   
-				   if(out != null) out.close();
+				if(out != null) out.close();
 				   
 			} catch (Exception e) {
 				e.printStackTrace();
