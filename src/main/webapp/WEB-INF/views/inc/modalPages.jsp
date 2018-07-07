@@ -807,7 +807,7 @@
 		   				</span>
 					</form>
 					<script type="text/javascript">
-						/* $(function(){
+						 $(function(){
 							$("#edit-profile-image").fileupload({
 								dataType:"json",
 								add:function(e,data){
@@ -825,7 +825,7 @@
 									
 								}								
 							})
-						}) */
+						})
 					</script>
 
 				</div>

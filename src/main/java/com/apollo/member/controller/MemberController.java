@@ -495,13 +495,13 @@ public class MemberController {
 	 작성자명 : 김 래 영
 	 */
 	@RequestMapping(value="/updatemember.htm", method=RequestMethod.POST)
-	public View updateMemberInfo(MemberDTO memberdto, Model model, MultipartHttpServletRequest mrequest) {
+	public View updateMemberInfo(MemberDTO memberdto, Model model) {
 		int updatemember = 0;
-		
 		
 		try {
 			updatemember = service.updateMemberInfo(memberdto);
 			model.addAttribute("updatemember", updatemember);
+			System.out.println("updatemember : " + updatemember);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

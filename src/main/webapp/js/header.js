@@ -104,16 +104,12 @@ $(function() {
 	// 헤더 개인정보수정 Modal
 	$('#header-profile-edit').click(function(evt) {
 		var mid = $('#edit-profile-mid').val(mid);
-		//console.log(mid);
 		
 		
 		$.ajax({
 			url:"updatememberinfo.htm",
 			data:{mid:mid},
 			dataType:"json",
-			contentType:'multipart/form-data',
-			contentType:false,
-			processData:false,
 			success:function(data) {
 				//var image = (data.updatememberinfo.image)?data.updatememberinfo.image :"img/user_image.png"
 				//$('#edit-profile-modal-img').attr("src",image);
@@ -133,21 +129,13 @@ $(function() {
 	
 	// 개인정보수정 Modal 에서 1번째 수정버튼 클릭시 실행되는 함수
 	$('#update-edit-profile-btn').click(function() {
-		//var form = $('#edit-profile-form')[0];
-		//var updateprofile = new FormData(form); 
 		var updateprofile = $('#edit-profile-form').serialize();
-		//console.log(updateprofile);
-		//var formData = new FormData($('#edit-profile-form')[0]);
-		//formData.append('iamge', $('input[type=file]')[0].files[0]);
-		
+		console.log(updateprofile);
 		$('#edit-profile-form').ajaxForm({
 			type:"post",
 			url:"updatemember.htm",
 			data:updateprofile,
 			dataType:"json",
-			enctype:"multipart/form-data",
-			processData: false,
-			contentType: false,
 			success:function(data){
 				console.log(data);
 				
@@ -155,7 +143,6 @@ $(function() {
 					alert('개인정보수정이 완료되었습니다!');
 				}else {
 					alert('개인정보수정에 실패되었습니다');
-					
 				}
 				$(".close").click();
 				
