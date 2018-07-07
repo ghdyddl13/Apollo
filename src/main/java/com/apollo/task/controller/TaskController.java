@@ -194,6 +194,10 @@ public class TaskController {
 	    	return "redirect:/myWork.htm";
 	    }else if(location.equals("/starredTask.htm")) {
 	    	return "redirect:/starredTask.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
 	    }else {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    }
@@ -328,6 +332,10 @@ public class TaskController {
 	    	return "redirect:/myWork.htm";
 	    }else if(location.equals("/starredTask.htm")) {
 	    	return "redirect:/starredTask.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
 	    }else {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    }
@@ -597,7 +605,6 @@ public class TaskController {
 			pid = (Integer) session.getAttribute("pid");
 			System.out.println("세션에서 가져온 pid : " + pid);
 		}
-		
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    } else if(location.equals("/board.htm")) {
@@ -615,6 +622,10 @@ public class TaskController {
 	    	return "redirect:/myWork.htm";
 	    }else if(location.equals("/starredTask.htm")) {
 	    	return "redirect:/starredTask.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
 	    }else {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    }
@@ -680,7 +691,7 @@ public class TaskController {
 			pid = (Integer) session.getAttribute("pid");
 			System.out.println("세션에서 가져온 pid : " + pid);
 		}
-		
+
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    } else if(location.equals("/board.htm")) {
@@ -698,6 +709,10 @@ public class TaskController {
 	    	return "redirect:/myWork.htm";
 	    }else if(location.equals("/starredTask.htm")) {
 	    	return "redirect:/starredTask.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
 	    }else {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    }
@@ -972,6 +987,10 @@ public class TaskController {
 	    	return "redirect:/myWork.htm";
 	    }else if(location.equals("/starredTask.htm")) {
 	    	return "redirect:/starredTask.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
 	    }else {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    }

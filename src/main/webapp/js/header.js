@@ -10,7 +10,7 @@ $(function() {
 	
 	// 헤더 inbox 페이지
 	$("#inbox-page").click(function(evt){
-		$("#inbox_count").empty();
+		$("#inbox_count").hide();
 		$.ajax({
 			type:"GET",
 			url:"inbox.htm",
@@ -20,6 +20,7 @@ $(function() {
 				$("#main-box").append(data);
 				$('#incomming-page').css('border-bottom','2px solid transparent');
 				$('#incomming-page').css('border-color','#286cb0');
+				
 			}
 		})
 	});
