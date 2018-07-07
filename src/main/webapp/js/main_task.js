@@ -8,7 +8,8 @@
  작성자명 : 김 정 권
  */
 $(document).on("click",".Task_RUD_Modal",function(){
-		
+	
+	
 		var temptid = $(this).attr('id'); 
 		var tid =parseInt(temptid.substring(1));
 		$.ajax(
@@ -21,7 +22,6 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			           success : function(rdata){
 			        	   console.log('성공!')
 			        	   console.log(rdata);
-
 			        	   // tid
 			        	   var tid = rdata.task.tid;
 			        	   $('#tidhidden').attr('value', tid);
@@ -190,6 +190,8 @@ $(document).on("click",".Task_RUD_Modal",function(){
 //			        	   $('#').empty();
 //			        	   $('#').append(rdata.task.tname);
 			        	   
+			        	   $(".starred-secondbody-image").hide();
+			        		$(".modal-content").show();	
 			        	   
 			           } // end-success
 			        } 
@@ -212,7 +214,6 @@ $(document).on("click","#task_star",function(){
 	if(star_class == 'far fa-star'){
 		starAddOrDel = 1;
 	}
-	
 	// if 차있는 별(이미 즐겨찾기 한 일)
 	else {
 		starAddOrDel = 0;

@@ -3,12 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
+
 <!-- TASK_JK -->
 <script type="text/javascript" src="js/task.js"></script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
 	$(function() {
+		
+		$(".modal-content").hide();
 		
 		$(".Task_RUD_Modal").click(function(evt) {
 			$(this).children().children(".inbox_newcheck").empty();
@@ -172,7 +176,7 @@
 			<c:choose>
 				<c:when test="${fn:substring(commentlist.cmtmtime,0,10) eq today}">
 					<div class="inbox-list">
-					<div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
+					<div class ="Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
 						<div class ="yyTask_RUD_Modal"><span class="inbox-span1-color">
 						<span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div>
 						<span class="inbox-span2"><span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span>${commentlist.pname}</span>
@@ -215,7 +219,7 @@
 							<hr class="inbox-hr">
 						</center>
 					</c:if>
-					<div class="inbox-list"><div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
+					<div class="inbox-list"><div class ="Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
 						<div class ="yyTask_RUD_Modal"><div><span class="inbox-span1-color"><span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div></div>
 						<span class="inbox-span2" ><span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span> ${commentlist.pname}</span> 
 						<span class="inbox-span3">
@@ -252,10 +256,11 @@
 		</div>
 		<div class ="inbox-section-center" id="center">
 		</div>
-		<div class ="inbox-section-right" id="right" style="overflow:auto; ">
-			
-			
-			
+		
+		
+		
+		<div class ="inbox-section-right" id="right" style="overflow:auto; ">	
+		<div class="starred-secondbody-image"></div>
 		<!-- <div class="modal fade modal-task-dialog" id="Task_RUD_Modal" role="dialog">
 		<div class="modal-dialog"> -->
 			<div class="modal-content">

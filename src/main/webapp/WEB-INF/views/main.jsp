@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <!--   CSS   -->
 <!--BOOTSTRAP  -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -94,7 +93,6 @@
 	var nickname;
 	var wsocket;
 	function connect() {
-		console.log("커넥트 했니?????");
 		wsocket = new WebSocket("ws://192.168.0.45:8090/bit/socket.htm");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
@@ -128,7 +126,6 @@
 		$("#inbox_count_c").empty();
 		$("#inbox_count_c").append(msg);
 	}
-	
 	$(document).ready(function() {
 		$("#inbox_count").show();
 		if("${newcount}" == "0"){
@@ -137,15 +134,13 @@
 			$("#inbox_count_b").show();
 			$("#inbox_count_c").hide();
 		}
-		
-		
 		nickname=$("#header-user-name").html();
 		connect();
 	});
 </script>
 </head>
 <body >
-	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
+	
 	<div class="Apollo-main">
 		<div class="main-header-panel" >
 			<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
@@ -159,5 +154,6 @@
 			</div>	
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp" ></jsp:include>
 </body>
 </html>
