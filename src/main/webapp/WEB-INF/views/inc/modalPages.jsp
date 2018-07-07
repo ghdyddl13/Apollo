@@ -1021,9 +1021,6 @@
 					</select>
 				<br>
 				
-				<br>Report 명을 입력해주세요(공백, 특수문자 사용 불가)<br>
-				<input type="text" id="report_file_name">
-					<br>
 					<br>
 					<div align="center">
 						<input type="button" class="btn add-btn" id="download_report_btn" value="다운로드">&nbsp;&nbsp;&nbsp;
