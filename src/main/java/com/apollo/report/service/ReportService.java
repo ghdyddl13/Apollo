@@ -52,25 +52,43 @@ public class ReportService {
 	
 		public void writeData(int pid, String report_kind, String report_title, HttpServletResponse response) throws Exception {
 
+			String filePath = "";
+			String filename = "";
 			try {
 
-				String filePath = "C:\\Apollo_Reports\\"; // file 생성 위치 
-				String filename = report_title + ".xls"; // 생성될 파일 이름
-				FileOutputStream fout = setFile(filePath, filename);
+				filePath = "C:\\Apollo_Reports\\"; // file 생성 위치 
+				filename = report_title + ".xls"; // 생성될 파일 이름
+//				FileOutputStream fout = setFile(filePath, filename);
 				
 				HSSFWorkbook wb = setExcel(pid, report_kind, filename);
-				//////////////////////////////////
-//				OutputStream out = new BufferedOutputStream(response.getOutputStream());
-//				wb.write(out);
-//				out.flush();
 				
-				// write the workbook to the output stream
-				wb.write(fout);
-				fout.close();
+//				// write the workbook to the output stream
+//				wb.write(fout);
+//				fout.close();
 
+				  response.reset();
+				  response.setHeader("Content-Disposition", "attachment;filename="+filename);
+				  response.setContentType("application/vnd.ms-excel");
+				
+				  OutputStream out = new BufferedOutputStream(response.getOutputStream());
+
+				  ////// 서버측 다운로드 설정
+				  File file = new File(filePath+filename);
+				  FileOutputStream fos = null;
+				
+				   fos = new FileOutputStream(file);
+				   wb.write(fos);
+				   
+				   System.out.println("여기서 클라이언트로 간다");
+				   wb.write(out);
+				   out.flush();
+				   
+				   if(out != null) out.close();
+				   
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+				}
+			
 		}
 
 		private FileOutputStream setFile(String filePath, String filename) throws IOException {
