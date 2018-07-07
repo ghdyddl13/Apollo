@@ -28,7 +28,7 @@ $(function() {
 				$("#table-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected");
 				//step 또는 folder data 가 존재하지 않을 경우 이미지로 대체 
 				if($('#project-page-tbody').children().length != 0) {
-					$('#project-page-table-no-data').remove();
+				$('#project-page-table-no-data').remove();
 				}
 			}
 		})
@@ -61,9 +61,9 @@ $(function() {
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				$("#files-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected");
-				if($(".file-table-tr-td").children().length !=0){
-					$("#project-page-table-no-data").remove();
-				};
+				if($("#file-tbody").children().length !=0){
+					$("#project-page-table-no-data").remove()
+				}
 			}
 		});
 	});
