@@ -8,8 +8,7 @@
  작성자명 : 김 정 권
  */
 $(document).on("click",".Task_RUD_Modal",function(){
-	$(".starred-secondbody-image").hide();
-	$(".modal-content").show();	
+	
 	
 		var temptid = $(this).attr('id'); 
 		var tid =parseInt(temptid.substring(1));
@@ -191,6 +190,8 @@ $(document).on("click",".Task_RUD_Modal",function(){
 //			        	   $('#').empty();
 //			        	   $('#').append(rdata.task.tname);
 			        	   
+			        	   $(".starred-secondbody-image").hide();
+			        		$(".modal-content").show();	
 			        	   
 			           } // end-success
 			        } 
