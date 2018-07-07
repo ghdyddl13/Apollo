@@ -467,7 +467,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">PROFILE</h4>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body profile-modal-body">
 				<div class="col-sm-4 profile-modal-left">
 					<div id="profile-modal-img-content">
 						<img id="profile-modal-img" src="">

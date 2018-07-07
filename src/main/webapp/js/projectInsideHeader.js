@@ -32,19 +32,17 @@ $(function() {
 				if($('#project-page-tbody').children().length != 0) {
 					$('#project-page-table-no-data').remove();
 				}
-
-
 			}
 		})
 	});
 	
-	$(document).on("click",".project-table-member-image",function(evt){
-		//console.log($(this).siblings('input').val());
-
-	    var mid = $(this).siblings('input').val(); // mid 만 가져오기
+	//table 페이지에서 step 담당자 img 클릭 시 
+	$(document).on("click",".project-table-member-td",function(evt){
+		//console.log($(this).siblings()); 
+		//console.log($(this).children('input').val());
+	    var mid = $(this).children('input').val(); // mid 만 가져오기
 	    
-	    profileinfo(mid);
-	    
+	    profileinfo(mid);	    
 	}); // end member img
 	
 	
@@ -64,20 +62,10 @@ $(function() {
 			}
 		}		
 	});
-	
-	$(document).on("click",'.project-table-member-image',function(){
-		
-	});
-	
-	
-	/*$(document).on("click","#project-table-tr-steps",function(){
-		
-	});*/
+
 
 	
-	// 프로젝트 files 페이지\
-	
-	
+	// 프로젝트 files 페이지
 	$(document).on("click","#files-page",function(){	
 		$.ajax({
 			url:"files.htm",

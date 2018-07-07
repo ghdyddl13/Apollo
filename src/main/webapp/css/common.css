@@ -178,17 +178,14 @@ html, body{
 .btn{
 	color:white !important;
 }
-
-
-
 .footer{ /* 꼬리말 부분 */
-text-align: center;
-color: #999999;
+	text-align: center;
+	color: #999999;
 }
 
 .legend{
-text-align: center; 
-font-size: 40px;
+	text-align: center; 
+	font-size: 40px;
 }
 
 .header{
@@ -196,21 +193,18 @@ font-size: 40px;
     margin-left: 500px;
     margin-top: 250px;
 }
-
-
-
 .p-color{
-font-size: 15px;
-text-align: center; 
-color: black;
+	font-size: 15px;
+	text-align: center; 
+	color: black;
 }
 .p-color2{
-font-size: 15px; 
-text-align: center; 
-color: black;
+	font-size: 15px; 
+	text-align: center; 
+	color: black;
 }
 .i-width,.i-width2{
-width:40px;
+	width:40px;
 }
 .login-head{
 	display:flex;
@@ -228,28 +222,18 @@ width:40px;
 .login-page-msg{
 	color:#000032
 }
-.div-font-size{
-   font-size: 21px; 
-   text-align: center;
+.font-header6{
+    margin-left: 35px;
 }
-
-.input-size{
-   width: 326px;
-}
-
- .font-header6{
-     margin-left: 35px;
- }
  
  .login-wrapper{
-height: 100%;
-width:100%;
-display: flex;
-flex-direction:column;
-justify-content: center;
-align-items: center;
-background-color: #f5f5f5
-
+	height: 100%;
+	width:100%;
+	display: flex;
+	flex-direction:column;
+	justify-content: center;
+	align-items: center;
+	background-color: #f5f5f5;
 }
 
 .login-container{
@@ -257,8 +241,6 @@ background-color: #f5f5f5
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-
-	
 }
 
 .login-input{
@@ -1216,6 +1198,8 @@ label {
 	width:20px;
 	height:10px;
 }
+
+/* Profile Modal */
 .profile-modal-left {
 	height: 150px;
 }
@@ -1233,7 +1217,13 @@ label {
 	width: 500px;
     height: 250px;
 }
-
+.profile-modal-body {
+	height: 200px;
+}
+#profile-modal-info {
+    margin-top: 23px;
+}
+/* Profile Modal End */
 
 .update-step-name {
    width: 100%;

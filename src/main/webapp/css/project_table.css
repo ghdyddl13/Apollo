@@ -65,3 +65,7 @@
 .project-table-member-td {
 	padding-left: 6% !important;
 }
+.project-table-member-td:hover {
+	cursor:pointer;
+	background-color: #e0e0e0;
+}

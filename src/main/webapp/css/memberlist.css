@@ -7,21 +7,18 @@
 #header-member-table-id {
 	width:95%;
 }
-
 #header-member-table>thead>tr>th {
 	text-align:center;
 	padding-bottom:10px;
 	color:black;
 }
-
 #header-member-table>tbody>tr>td {
 	text-align:center;
 	color:#000000c7;
 }
-
-#header-member-table>tbody :hover {
+.header-memberinfo-table:hover {
 	cursor: pointer;
-	background-color: #9e9e9e;
+	background-color: #00000014;
 }
 #header-member-table>thead>tbody {
 	border-left-color: white;

@@ -447,7 +447,6 @@ public class MemberController {
 		try {
 			profileinfo = service.getProfileInfoMember(mid);
 			model.addAttribute("profileinfo", profileinfo);
-			System.out.println("profileinfo : " + profileinfo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
