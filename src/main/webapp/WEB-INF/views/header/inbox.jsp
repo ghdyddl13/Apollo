@@ -11,7 +11,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
 	$(function() {
+		
 		$(".modal-content").hide();
+		
 		$(".Task_RUD_Modal").click(function(evt) {
 			$(this).children().children(".inbox_newcheck").empty();
 			console.log($(this).children().children().children(".cmtid").val());

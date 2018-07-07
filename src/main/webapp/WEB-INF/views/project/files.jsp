@@ -13,14 +13,14 @@
       <div class="main-body-onepannel-body">
 		<div class="files-Table-div" align="center">
 			<table class="table file-table">
-				<thead>	
-					<tr class="file-table-tr-th">
+				<thead class="file-thead">	
+					<tr>
 						<th class="col-sm-1 file-table-tr-th-num">번호</th>
 						<th	class="col-sm-8 file-table-tr-th-fname">File명</th>
 						<th	class="col-sm-3 file-table-tr-th-tname">관련 Task</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="file-tbody">
 					<c:forEach var="f" items="${f}">
 					<c:set var="count" value="${count + 1}" />
 					<tr class="file-table-tr-td">
@@ -35,11 +35,11 @@
 					</c:forEach>
 				</tbody>
 			</table>
-					<div id="proejct-page-table-no-data">
+					<div id="project-page-table-no-data">
 						<div id="proejct-page-table-img-content">
 							<img src="img/rocket.png" id="proejct-page-table-img">
 						</div>
-						<div id="proejct-page-table-no-data-content">NO DATA!</div>
+						<div id="project-page-table-no-data-content">NO DATA!</div>
 					</div>
 				</div><!--END OF FILE TABLE  -->
       </div>

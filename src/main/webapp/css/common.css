@@ -7,6 +7,7 @@ html, body{
   margin:0;
   padding:0;
   height:100%;
+ 
 }
 	
 /*///////////////////////////////main.jsp 구성 요소 css*/
@@ -329,17 +330,31 @@ html, body{
    border-radius: 0px
 }
 
-#my-side-nav {
+
+.side-nav {
    height:100%;
    background-color: rgba(180, 197, 209, 0.15);
-   overflow-y: auto;
+   
    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
    display: flex;
    white-space: nowrap;
    flex-direction: column;
    padding-right:5px;
    padding-left:5px;
-   padding-top: 20px
+   padding-top: 20px;
+    width: 250px;
+   position: relative;
+   z-index: 1;
+   top: 0;
+   left: 0;
+   overflow-x: hidden;
+   transition: 0.5s;
+}
+.side-body{
+	flex:1 1 auto;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
 }
 
 
@@ -397,17 +412,7 @@ html, body{
 #header-user-name{
 	padding-left: 5px
 }
-.side-nav {
-   height: 100%;
-   width: 250px;
-   position: relative;
-   z-index: 1;
-   top: 0;
-   left: 0;
-   overflow-x: hidden;
-   transition: 0.5s;
- 
-}
+
 
 
 
@@ -1501,4 +1506,22 @@ label {
   display: block;
 }
 
+.side-freetrial-span{
+	font-size: 15px;
+}
+.side-freetrial{
+	text-align: center;
+	
+}
+
+#freetrial-hr{
+   margin-top : 5px;
+   height: 3px; 
+   width: 175px;
+   background-color: black;
+}
+
+#freetrial-h{
+   font-size: 20px;
+}
 
