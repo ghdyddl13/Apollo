@@ -217,41 +217,37 @@ $(document).on("click","#task_star",function(){
 	else {
 		starAddOrDel = 0;
 	}
-	
-	$.ajax(
-		       {
-		           type : "post",
-		           url  : "addordeletestar.htm",
-		           data : {
-		        	   'tid': tid,
-		        	   'starAddOrDel': starAddOrDel
-		           },
-		           success : function(rdata){
+		$.ajax({
+		type : "post",
+		url : "addordeletestar.htm",
+		data : {
+			'tid' : tid,
+			'starAddOrDel' : starAddOrDel
+		},
+		success : function(rdata) {
 
-		        	   console.log(rdata);
-		        	   
-		        	   if(rdata.result == 'added'){
-		        		  
-		        		   // 클릭시 별을 채워준다
-		        		   $('#task_star').attr('class','fas fa-star');
-		        		   
-		        	   }else {
-		        		 
-		        			// 클릭시 별을 비워준다
-		        			$('#task_star').attr('class','far fa-star');
-		        	   }
-		        	   
-		           } // end-success
-		        }); // end-ajax
+			console.log(rdata);
+
+			if (rdata.result == 'added') {
+
+				// 클릭시 별을 채워준다
+				$('#task_star').attr('class', 'fas fa-star');
+
+			} else {
+
+				// 클릭시 별을 비워준다
+				$('#task_star').attr('class', 'far fa-star');
+			}
+
+		} // end-success
+	}); // end-ajax
 	
 });
 
 
 /**
  * 
- 날      짜 : 2018. 6. 20.
- 기      능 : Task 삭제 버튼
- 작성자명 : 김 정 권
+ * 날 짜 : 2018. 6. 20. 기 능 : Task 삭제 버튼 작성자명 : 김 정 권
  */
 $(document).on("click","#task_trash_btn",function(){
 	
