@@ -248,3 +248,32 @@ assignee_in_taskmodal td{
 	width: 450px;
 	float: left;
 }
+
+.file_del_btn{
+	flex: 0 0 auto;
+	display: block;
+	cursor: pointer;
+	visibility: hidden
+}
+
+.file_name{
+	overflow:hidden;
+	display:block;
+	flex: 1 1 auto;
+}
+
+.filehover_div{
+	cursor: pointer;
+	margin: 10px 10px 10px 25px;
+	font-size: 15px;
+	display: flex;
+	white-space:nowrap;
+	align-items: center
+}
+
+.filehover_div:hover{
+	cursor: pointer;
+	margin: 10px 10px 10px 20px;
+	font-size: 15px;
+	background-color: rgba(163, 172, 182, 0.2);
+}
