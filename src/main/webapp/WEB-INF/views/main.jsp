@@ -126,7 +126,16 @@
 		$("#inbox_count_c").empty();
 		$("#inbox_count_c").append(msg);
 	}
+	
+	$(document).on("click","#logout-btn",function(){
+		disconnect();
+		location.href='logout.htm';
+		
+	});
+	
 	$(document).ready(function() {
+		
+		
 		$("#inbox_count").show();
 		if("${newcount}" == "0"){
 			$("#inbox_count").hide();

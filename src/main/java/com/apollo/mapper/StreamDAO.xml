@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.stream.dao.StreamDAO">
 <select id="getPidlist" resultType="com.apollo.vo.ProjectDTO" parameterType="String">
-	select * from project where pid in (select pid from pmember where mid=#{mid})
+	select * from project where PSTATUSCODE =1 and pid in (select pid from pmember where mid=#{mid}) ORDER BY pid desc
 </select>
 
 <select id="getNewtid" parameterType="Integer" resultType="Integer">
