@@ -905,3 +905,180 @@
 
 	
 }
+
+/* THIRD ADD STEP*/
+.list-section-third-addstep{
+  position: absolute;
+  z-index: 11000;
+  visibility: hidden;
+  width: 300px;
+  left: -10000px;
+  top: -10000px;
+  font-family: "Open sans","lucida grande","Segoe UI",arial,verdana,tahoma,"Hiragino Kaku Gothic ProN","Osaka","Meiryo UI","Yu Gothic UI",sans-serif;
+  font-size: 13px;
+  color: #504f4f;
+  line-height: 18px;
+  font-weight: 400;
+  box-shadow: 0 0 6px #6f6f6f;
+  box-sizing: border-box;
+  display: block;
+}
+.list-section-third-addstep-wrapper{
+  background-color: #fff;
+  height: auto;
+  width: 300px;
+  box-sizing: content-box;
+  display: block;
+}
+.list-section-third-addstep-header{
+  padding: 18px;
+  margin-bottom: 0!important;
+  border-bottom: none;
+  box-sizing: content-box;
+  display: block;
+}
+.list-section-third-addstep-headwrapper{
+  box-sizing: content-box;
+  display: block;
+}
+.list-section-third-addstep-head-text{
+  font-family: "Open sans","lucida grande","Segoe UI",arial,verdana,tahoma,"Hiragino Kaku Gothic ProN","Osaka","Meiryo UI","Yu Gothic UI",sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #504f4f;
+  line-height: 18px;
+  box-sizing: content-box;
+  display: block;
+}
+.list-section-third-addstep-head-cur_step{
+  padding: 9px 0;
+  max-height: 180px;
+  overflow: auto;
+  box-sizing: content-box;
+  display: block;
+}
+.list-section-third-addstep-head-cur_step-cover{
+  margin: 0 12px 6px 0;
+  cursor: default;
+  position: relative;
+  overflow: visible!important;
+  z-index: 0;
+  color: #555;
+  font-family: "Open sans","lucida grande","Segoe UI",arial,verdana,tahoma,"Hiragino Kaku Gothic ProN","Osaka","Meiryo UI","Yu Gothic UI",sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  display: inline-block;
+  vertical-align: baseline;
+  border-radius: 2px;
+  line-height: 16px;
+  padding: 0 6px;
+  border: 1px solid #e0e0e0;
+  white-space: nowrap;
+  max-width: 100%;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-shadow: 0 1px rgba(255,255,255,.2);
+}
+.list-section-third-addstep-head-cur_step-text{
+  display: block;
+  max-width: 235px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+.list-section-third-addstep-text{
+  padding: 0 18px 3px;
+  font-family: "Open sans","lucida grande","Segoe UI",arial,verdana,tahoma,"Hiragino Kaku Gothic ProN","Osaka","Meiryo UI","Yu Gothic UI",sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #504f4f;
+  line-height: 18px;
+  box-sizing: content-box;
+  display: block;
+}
+.ist-section-third-addstep-steplist{
+  width: 300px;
+  box-sizing: content-box;
+  display: block;
+  position: relative;
+  background-color: white;
+}
+.list-section-third-addstep-steplist-inputsection{
+  position: relative;
+  padding: 16px 16px 8px 16px;
+  z-index: 2;
+  box-sizing: content-box;
+  display: block;
+
+}
+.list-section-third-addstep-steplist-input{
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid #d1d1d3;
+  height: 32px;
+  padding: 0 10px;
+  -webkit-font-smoothing: antialiased;
+  font: 13px "Open sans", "lucida grande", "Segoe UI", arial, verdana, tahoma, "Hiragino Kaku Gothic ProN", "Osaka", "Meiryo UI", "Yu Gothic UI", sans-serif;
+  color: #111;
+}
+.list-section-third-addstep-steplist-wrapper{
+  position: relative;
+  width: 100%;
+  max-height: 344px;
+  box-sizing: border-box;
+  display: block;
+}
+.list-section-third-addstep-steplist-wrapper_cover{
+  display: block;
+  overflow: auto;
+  box-sizing: border-box;
+  padding-bottom: 24px;
+  max-height: 280px;
+  position: relative;
+}
+.list-section-third-addstep-step{
+  box-sizing: border-box;
+  display: block;
+}
+.list-section-third-addstep-step:hover{
+  background-color: #f0f0f0;
+}
+.list-section-third-addstep-step-cover{
+  border-left: 4px solid transparent;
+  display: block;
+  padding: 6px 16px;
+  height: 48px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.list-section-third-addstep-step-stepname{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 18px;
+  -webkit-font-smoothing: antialiased;
+  font: 13px "Open sans", "lucida grande", "Segoe UI", arial, verdana, tahoma, "Hiragino Kaku Gothic ProN", "Osaka", "Meiryo UI", "Yu Gothic UI", sans-serif;
+  color: #333;
+  box-sizing: border-box;
+  display: block;
+}
+.list-section-third-addstep-step-projectnamecover{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 18px;
+}
+.list-section-third-addstep-step-projectname{
+  -webkit-font-smoothing: antialiased;
+  font: 11px "Open sans", "lucida grande", "Segoe UI", arial, verdana, tahoma, "Hiragino Kaku Gothic ProN", "Osaka", "Meiryo UI", "Yu Gothic UI", sans-serif;
+  color: #a5a5a5;
+  display: block;
+  float: right;
+  min-width: 100%;
+  box-sizing: border-box;
+}
