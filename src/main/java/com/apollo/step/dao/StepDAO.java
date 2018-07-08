@@ -227,8 +227,14 @@ public interface StepDAO {
 	 기      능 : LIST PAGE 에서 TASK를 단체로 특정인에게 할당
 	 작성자명 : 이 진 우
 	 */
-	
 	public int listAssignTasks(List<AssigneeDTO> list);
+	/**
+	 * 
+	 날      짜 : 2018. 7. 6.
+	 기      능 : LIST PAGE 에서 TASK 단체로 특정 Step에 추가 하기전에 STEP LIST를 들고오는 함수
+	 작성자명 : 이 진 우
+	 */
+	public ArrayList<StepDTO> getStepListBeforeAddStepTasks(int sid);
 	/**
 	 * 
 	 날      짜 : 2018. 7. 3.

@@ -119,7 +119,7 @@
 			<div class="modal-content modal-folder-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Folder 생성&nbsp;&nbsp; <i data-toggle="tooltip" class="question-folder far fa-question-circle modal-question"></i></h4></h4>
+					<h4 class="modal-title">Folder 생성&nbsp;&nbsp; <i data-toggle="tooltip" class="question-folder far fa-question-circle modal-question"></i></h4>
 				</div>
 				<div class="modal-body modal-folder-body">
 					<form id="insert-folder-form" method="post" onsubmit="return false;">
@@ -168,7 +168,7 @@
 								    </a>
 								    <ul id="add-step-mgr-assignee-options" class="dropdown-menu " role="menu" aria-labelledby="add-step-mgr-assignee-btn">
 								    </ul>
-							  </div>
+							   </div>
 							</div>
 							<br>
 							<div class="modal-title">
@@ -227,6 +227,7 @@
 					
 					 <form id="update-project-form" method="post" onsubmit="return false;">
 						<fieldset>
+							<input type="hidden" id="update-project-pid" name="pid">
 							<div class="modal-flexbox-row">
 								<br>
 								<div class="project-setting-left">
@@ -242,7 +243,7 @@
 										<br>
 										<div>
 											<div class="modal-flex-col">
-												<input type="radio" id="update-project-methodologyid-3" name="methodologyid" value="3" disabled="disabled">
+												<input type="radio" id="update-project-methodologyid-3" disabled="disabled">
 												<span class="method"> Customizing</span> <br>
 											</div>
 											<div class="modal-project-method-detail">
@@ -252,7 +253,7 @@
 										</div>
 										<div>
 											<div class="modal-flex-col">
-												<input type="radio" id="update-project-methodologyid-2" name="methodologyid" value="2" disabled="disabled">
+												<input type="radio" id="update-project-methodologyid-2" disabled="disabled">
 												<span class="method"> Agile</span>
 											</div>
 											<div class="modal-project-method-detail">
@@ -262,7 +263,7 @@
 										</div>
 										<div>
 											<div class="modal-flex-col">
-												<input type="radio" id="update-project-methodologyid-1" name="methodologyid" value="1" disabled="disabled">
+												<input type="radio" id="update-project-methodologyid-1"  disabled="disabled">
 												<span class="method"> Waterfall</span><br>
 											</div>
 											<div class="modal-project-method-detail">
@@ -309,7 +310,6 @@
 											data-dismiss="modal" value="취소">
 									</div>
 								</div>
-								<input type="hidden" name="mid" value="${mid}">
 							</div>
 						</fieldset>
 					</form>
@@ -410,7 +410,57 @@
 					<div class="modal-title">파일 업로드</div><br />
 	                <div id="Task_Modal_files">파일들이 여기 잡히게 된다</div>
 	                <br>
-	                <input id="Task_Modal_add_file_btn" type="button" value="파일추가"><br /><br />
+	                <input type="button" name="fileuploadbtn" id="fileuploadbtn" value="파일업로드">
+					<form  action="" method="post" >
+						<input style="display:none" type="file" name="member_image" id="fileuploadintaskmodal" data-url="uploadfileintaskmodal.htm">
+					</form>
+				    <script type="text/javascript">
+						 $(function(){
+							 
+							$("#fileuploadintaskmodal").fileupload({
+								dataType:"json",
+								add:function(e,data){
+					                var uploadFile = data.files[0];
+					                var isValid = true;
+					                if (!(/png|jpe?g|gif|svg/i).test(uploadFile.name)) {
+					                    alert('png, jpg, gif 만 가능합니다');
+					                    isValid = false;
+					                }
+					                if (isValid) {
+					                    data.submit();
+					                }
+								},
+								done:function(e,data){
+									
+									$.ajax(
+										       {
+										           type : "post",
+										           url  : "resetfilelist.htm",
+										           success : function(rdata){
+										        	   
+										        	   // files
+										        	   $('#Task_Modal_files').empty();
+										        	   var filesdivs = '';
+										        	   $(rdata.filelist).each(function(){
+										        		   
+										        	   var shortfilename = this.filename.substring(37);
+										        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
+										        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+										        	   filesdivs += '</div>'
+										        		  
+										        	   });
+										        	   $('#Task_Modal_files').append(filesdivs);
+										        	   
+										           } // end-success
+										        }); // end-ajax
+								
+									
+									
+								}								
+							})
+						});
+					</script>
+					
                 <hr>
 
 				<div class="modal-title">Sub Task</div><br />
@@ -618,7 +668,7 @@
 							    </a>
 							    <ul id="update-step-mgr-assignee-options" class="dropdown-menu " role="menu" aria-labelledby="update-step-mgr-assignee-btn">
 							    </ul>
-						  </div>
+						  	</div>
 						</div>
 						<br>
 						<div class="modal-title">
@@ -825,7 +875,8 @@
 									
 								}								
 							})
-						})
+
+						});
 					</script>
 
 				</div>
@@ -993,7 +1044,7 @@
 					<div>정말 로그아웃하시겠습니까?</div>
 					<br>
 					<div align="center">
-						<input type="button" class="btn add-btn" id="logout-btn" value="확인" onclick="location.href='logout.htm'">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn add-btn" id="logout-btn" value="확인">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
 					</div>
 				</div>
@@ -1040,6 +1091,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" id="list_status_tasks_dismiss_btn">&times;</button>
 					<h4 class="modal-title">Task 상태 변경</h4>
+					<input type="hidden" id="list_status_selectedtstatusid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
 				<h4 id="list-task-status-ment"></h4>					
@@ -1061,9 +1113,10 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" id="list_assign_tasks_dismiss_btn">&times;</button>
 					<h4 class="modal-title">Task 할당</h4>
+					<input type="hidden" id="list_assign_selectedtmid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
-				<h4 id="list-task-assign-ment">선택한 Task들을 해당 Step에 할당하시겠습니까?<br></h4>					
+				<h4 id="list-task-assign-ment"></h4>					
 					<div align="center">
 						<input type="button" class="btn add-btn" id="list_Assign_Tasks_btn" value="할당">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"
@@ -1082,6 +1135,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" id="list_addstep_tasks_dismiss_btn">&times;</button>
 					<h4 class="modal-title">Step 추가</h4>
+					<input type="hidden" id="list_addstep_selectedsid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
 				<h4 id="list-addstep-tasks-ment"></h4>					

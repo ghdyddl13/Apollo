@@ -54,6 +54,7 @@ $(function() {
 	      //문자열이 빈값이면 발생하는 함수가 아무것도 없음
 	    }else{
 	   	  $("#insert-task").val("");
+	   	 $("#insert-task").attr("readonly", true);
 	      $.ajax(
 	              {
 	                url:"listtaskcreate.htm",
@@ -67,7 +68,9 @@ $(function() {
 						$("#main-box").append(data);
 						$("#list-task-adder").remove();
 						$("#body-start").prepend("<div class='list-task-adder-addmode'><input class='form-control' id='insert-task' name='tname' type='text' placeholder='새로운 작업을 입력하세요'></div>");
+						$("#insert-task").attr("readonly", false);
 						$("#insert-task").focus();
+						
 	                }
 	              }
 	      )
@@ -149,31 +152,45 @@ $(function() {
 	  console.log(checkbox);
 	  $(".list-task-checkbox").css("visibility","hidden");
 	})
+	/**
+	 * 
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 상태버튼을 눌렀을때 발동되는 함수
+	 작성자명 : 이 진 우
+	 */
 	$(document).on("click",".selectpage-body-statusbutton",function() {//상태 버튼을 눌렀을 시에
 	  let tstatusid = $(this).attr("id");
 	  let checkboxcount= checkbox.length;
 	  $("#list-task-status-ment").html(+checkboxcount+"개 Task의 상태를 변경 하시겠습니까?")
-	  $(document).on("click","#list_Status_Tasks_btn",function(){
-		  if(checkbox.length==0){
-			  alert("왜 테스크가 없지..?")
-			  $('#list_status_tasks_dismiss_btn').click();
-		  }else{
-			    $.ajax(
-			            {
-			              type:"POST",
-			              url:"liststatustasks.htm",
-			              data:{tstatusid:tstatusid,tasks:checkbox},
-			              success:function(data) {
-								$("#main-box").empty();
-								$("#main-box").append(data);
-								$('#list_status_tasks_dismiss_btn').click();
-								checkbox=[];
-			              }
-			    })
-		  }
-	   });
-	})
-
+	  $("#list_status_selectedtstatusid").val(tstatusid);
+	});
+	$(document).on("click","#list_Status_Tasks_btn",function(){// 확인 버튼을 눌렀을 시에
+		let tstatusid = $("#list_status_selectedtstatusid").val();
+		
+		if(checkbox.length==0){
+			alert("왜 테스크가 없지..?")
+			$('#list_status_tasks_dismiss_btn').click();
+		}else{
+			$.ajax(
+					{
+						type:"POST",
+						url:"liststatustasks.htm",
+						data:{tstatusid:tstatusid,tasks:checkbox},
+						success:function(data) {
+							$("#main-box").empty();
+							$("#main-box").append(data);
+							$('#list_status_tasks_dismiss_btn').click();
+							checkbox=[];
+						}
+					})
+		}
+	});
+	/**
+	 * 
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 할당자를 추가 할 시에 발생하는 함수
+	 작성자명 : 이 진 우
+	 */
 	$(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
 		let checkboxcount= checkbox.length;
 		let mid ="jinwoo@naver.com" ;
@@ -197,13 +214,91 @@ $(function() {
 			})
 		}
 	})
-	
-	$(document).on("click","#selectpage-addsteps-button",function() {// 추가 스텝 버튼을 눌렀을 시에
-		let checkboxcount= checkbox.length;
-		$("#list-addstep-tasks-ment").html("에 "+checkboxcount+"개 Task를 추가하시겠습니까?")
-	});
+	/**
+	 * 
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 스텝을 추가하는 버튼을 눌렀을 시에 발생하는 함수
+	 작성자명 : 이 진 우
+	 */
+	var steplist = [];
+    $(document).on("click","#selectpage-addsteps-button",function() {// 추가 버튼을 눌렀을 시에
+      steplist=[];
+      $.ajax({
+			type : "POST",
+			url : "stepListforAddStep.htm",
+			success : function(data) {
+				  steplist=data.steplist;
+			      $(".list-section-third-addstep-steplist-wrapper_cover").empty();
+			      let steplisttag="";
+			      $.each(steplist,function(index,element) {
+			        let sid = element.sid;
+			        let sname = element.sname;
+			        let pname = element.pname;
+			        steplisttag+='<div class="list-section-third-addstep-step" id="s'+sid+'" data-toggle="modal" data-target="#list_AddStep_Tasks">';
+			        steplisttag+='<div class="list-section-third-addstep-step-cover"><div class="list-section-third-addstep-step-stepname">'
+			        steplisttag+= sname;
+			        steplisttag+= '</div><div class="list-section-third-addstep-step-projectnamecover"><span class="list-section-third-addstep-step-projectname">';
+			        steplisttag+= pname;
+			        steplisttag+= '</span></div></div></div>';
+			        
+			      })
+			      $(".list-section-third-addstep-steplist-wrapper_cover").append(steplisttag);
+			}
+      });
+      //데이터 가지고 오기
+      let p =$("#selectpage-addsteps-button");
+      let position = p.position();
+      let x_position =$(window).width()-800;
+      $(".list-section-third-addstep").css({"visibility":"visible","left":x_position,"top":position.top-150});
+    })
+    $(document).bind("mousedown", function(e) {
+      if (!$(e.target).parents(".list-section-third-addstep").length > 0) {
+        $("#addstep-insert_step").val("");
+        $(".list-section-third-addstep").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+      }
+    });
+    $(document).on("keyup","#addstep-insert_step",function(event) {
+      var piece=$.trim($(this).val());
+      let steplisttag='';
+      $(".list-section-third-addstep-steplist-wrapper_cover").empty();
+      $.each(steplist,function(index,element) {
+        let sid = element.sid;
+        let sname = element.sname;
+        let pname = element.pname;
+        let snamecheck=sname.indexOf(piece);
+        let pnamecheck=pname.indexOf(piece);
+        if(snamecheck==-1&&pnamecheck==-1){
+          //다른 연산 없이 그냥 패스
+        }else{
+          sname = sname.replace(piece,"<b>"+piece+"</b>");
+          pname= pname.replace(piece,"<b>"+piece+"</b>");
+          steplisttag+='<div class="list-section-third-addstep-step" id="s'+sid+'" data-toggle="modal" data-target="#list_AddStep_Tasks">';
+          steplisttag+='<div class="list-section-third-addstep-step-cover"><div class="list-section-third-addstep-step-stepname">'
+          steplisttag+= sname;
+          steplisttag+= '</div><div class="list-section-third-addstep-step-projectnamecover"><span class="list-section-third-addstep-step-projectname">';
+          steplisttag+= pname;
+          steplisttag+= '</span></div></div></div>';
+        }
+      })
+      $(".list-section-third-addstep-steplist-wrapper_cover").append(steplisttag);
+      
+      if(event.which==27){
+        $("#addstep-insert_step").val("");
+        $(".list-section-third-addstep").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+      }
+    });
+    $(document).on("click",".list-section-third-addstep-step",function(){
+      let sid=  parseInt($(this).attr("id").substring(1));
+      let sname=$.trim($(this).children(".list-section-third-addstep-step-cover").children(".list-section-third-addstep-step-stepname").text());
+      console.log(sname);
+      $(".list-section-third-addstep").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+      $("#addstep-insert_step").val("");
+      let checkboxcount= checkbox.length;
+      $("#list-addstep-tasks-ment").html(sname+"에 "+checkboxcount+"개 Task를 추가하시겠습니까?")
+      $("#list_addstep_selectedsid").val(sid);
+    })
 	$(document).on("click","#list_AddStep_Tasks_btn",function(){
-		let stepid=8;
+		let stepid=$("#list_addstep_selectedsid").val();
 		if(checkbox.length==0){
 			alert("왜 테스크가 없지..?")
 			$('#list_addstep_tasks_dismiss_btn').click();
@@ -221,13 +316,18 @@ $(function() {
 			})
 		}
 	})
-	
+	/**
+	 * 
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 삭제 버튼을 눌렀을 시에 발생하는 함수
+	 작성자명 : 이 진 우
+	 */	
 	$(document).on("click", "#selectpage-deletetask-button", function(){// 삭제 버튼을 눌렀을 시에
 		let checkboxcount= checkbox.length;
 		$("#list-delete-tasks-ment").html(checkboxcount+"개 Task를 삭제하시겠습니까?<br><h5 style='color:red'>(삭제 후 복구 불가능합니다)</h5>")
 
 	})
-	$(document).on("click","#list_Delete_Tasks_btn",function(){
+	$(document).on("click","#list_Delete_Tasks_btn",function(){//확인을 눌렀을 시에 발생하는 함수
 		if(checkbox.length==0){
 			alert("왜 테스크가 없지..?")
 		}else{
@@ -244,15 +344,11 @@ $(function() {
 			})
 		}
 	})
-
-	
-	
-	
-	
 	/**
-	 * 
-	 * 날 짜 : 2018. 6. 25. 기 능 : STATUS SELECTING BUTTON을 클릭할시 발생하는 함수들 작성자명 : 이
-	 * 진 우
+	 *  
+	 날 짜 : 2018. 6. 25. 
+	 기 능 : STATUS SELECTING BUTTON을 클릭할시 발생하는 함수들 
+	 작성자명 : 이 진 우
 	 */
 	//상태 버튼을 눌렀을시 발생하는 함수
 	$(document).on("click","#status-button",function() {
@@ -321,6 +417,9 @@ $(function() {
 	 */
 	//people button을 누르면 로드시 가지고 왔던 데이터를 뿌려준다
     $(document).on("click","#people-button-tag",function(){
+		var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
+		var sid= this.id.substr(1);
+
         let p =$("#people-button");
         let position = p.position();
         $(".list-header-filter-people").css("background-color","#dfe6f0")
@@ -459,10 +558,15 @@ $(function() {
 	});
 	$(document).on("click",".list-header-sorting-textcontainer",function() {
 	  let sorting = $(this).attr("id");
-	  console.log(sorting);
-	  $(".list-header-sorting-button").css("background-color","")
-	  $(".list-header-sorting-selecting").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
-	  $("#sorting-button").empty();
-	  $("#sorting-button").append("<span class='list-header-sorting-tag'>By "+ sorting+"</span>");
+	  $.ajax({
+			type : "POST",
+			url : "sortingTasksList.htm",
+			data :{sorting:sorting},
+			success : function(data) {
+				$("#main-box").empty();
+				$("#main-box").append(data);
+				checkbox = [];
+			}
+		})
 	})
 })

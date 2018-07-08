@@ -36,18 +36,25 @@
             <div class="list-header-sorting">
               <div class="list-header-sorting-cover" >
                 <button id="sorting-button" class="list-header-sorting-button"type="button" name="button">
-                  <span class="list-header-sorting-tag">By Changed Time</span>
+                	<c:choose>
+						<c:when test="${sorting=='changedate'}">
+		                  <span class="list-header-sorting-tag">By Changed Time</span>
+						</c:when>
+						<c:when test="${sorting=='duedate'}">
+		                  <span class="list-header-sorting-tag">By Due Date</span>
+						</c:when>
+						<c:when test="${sorting=='status'}">
+		                  <span class="list-header-sorting-tag">By Status</span>
+						</c:when>
+						<c:when test="${sorting=='title'}">
+		                  <span class="list-header-sorting-tag">By Title</span>
+						</c:when>
+					</c:choose>
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <!--
-          사람선택
-          .list-header-filter-status-selecting{}
-          분류
-          .list-header-sorting-selecting{}
-         -->
         <!-- DIV TAG -->
         <div id="status-selecting-tag"class="list-header-filter-status-selecting">
           <ul class="list-header-filter-status-items">
@@ -75,16 +82,16 @@
         <div class="list-header-sorting-selecting">
           <div class="list-header-sorting-container">
           	<div class="list-header-sorting-item">
-              <div class="list-header-sorting-textcontainer" id="ctime"><span class="list-header-sorting-text">Changed Time</span></div>
+              <div class="list-header-sorting-textcontainer" id="changedate"><span class="list-header-sorting-text">Changed Time</span></div>
             </div>
             <div class="list-header-sorting-item">
-              <div class="list-header-sorting-textcontainer" id="Date"><span class="list-header-sorting-text">Due Date</span></div>
+              <div class="list-header-sorting-textcontainer" id="duedate"><span class="list-header-sorting-text">Due Date</span></div>
             </div>
             <div class="list-header-sorting-item">
-              <div class="list-header-sorting-textcontainer" id="Status"><span class="list-header-sorting-text">Status</span></div>
+              <div class="list-header-sorting-textcontainer" id="status"><span class="list-header-sorting-text">Status</span></div>
             </div>
             <div class="list-header-sorting-item">
-              <div class="list-header-sorting-textcontainer" id="Title"><span class="list-header-sorting-text">Title</span></div>
+              <div class="list-header-sorting-textcontainer" id="title"><span class="list-header-sorting-text">Title</span></div>
             </div>
           </div>
         </div>
@@ -115,7 +122,7 @@
 	                        <span class="status-container" style="color: ${task.color}">${task.tstatus}</span>
 			                <c:choose>
 								<c:when test="${task.overdue=='overdue'}">
-									<div class="date-container task-date-overdue">${task.date}</div>
+									<div class="date-overdue date-container">${task.date}</div>
 								</c:when>
 								<c:otherwise>
 									<div class="date-container">${task.date}</div>					
@@ -339,7 +346,6 @@
       	<c:forEach var="tstatus" items="${tstatuslist}">
 	        <span class="selectpage-body-statusbutton" id="${tstatus.tstatusid}"style="background-color:${tstatus.color}"data-toggle="modal" data-target="#list_Status_Tasks">${tstatus.tstatus}</span>
         </c:forEach>
-      <!--   <span class="list-section-third-selectpage-text" id="different-status">Choose Different status</span> -->
       </div>
       <div class="list-section-third-selectpage-addasignee">
         <span class="list-section-third-selectpage-text">Add Asignee</span>
@@ -347,7 +353,7 @@
       </div>
       <div class="list-section-third-selectpage-addstep">
         <span class="list-section-third-selectpage-text">Add Step</span>
-        <span class="selectpage-body-button" id="selectpage-addsteps-button" data-toggle="modal" data-target="#list_AddStep_Tasks">Add Step</span>
+        <span class="selectpage-body-button" id="selectpage-addsteps-button">Add Step</span>
       </div>
       <div class="list-section-third-selectpage-deletetask">
         <span class="list-section-third-selectpage-text">Delete tasks</span>
@@ -355,4 +361,29 @@
       </div>
     </div>
   </div>
+  <!--THIRD PANNEL ADD STEP -->
+ <div class="list-section-third-addstep">
+   <div class="list-section-third-addstep-wrapper">
+     <div class="list-section-third-addstep-header">
+       <div class="list-section-third-addstep-headwrapper">
+         <div class="list-section-third-addstep-head-text">Current Step</div>
+         <div class="list-section-third-addstep-head-cur_step">
+           <div class="list-section-third-addstep-head-cur_step-cover">
+             <span class="list-section-third-addstep-head-cur_step-text">${stepinfo.sname}</span>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="list-section-third-addstep-text">ADD STEPS</div>
+     <div class="list-section-third-addstep-steplist">
+       <div class="list-section-third-addstep-steplist-inputsection">
+         <input class="list-section-third-addstep-steplist-input" id="addstep-insert_step"type="text" autocomplete="off" placeholder="Search step">
+       </div>
+       <div class="list-section-third-addstep-steplist-wrapper">
+         <div class="list-section-third-addstep-steplist-wrapper_cover">
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
 </div><!-- BODY CONTAINER END  -->

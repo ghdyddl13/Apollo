@@ -124,7 +124,7 @@
   line-height: 18px;
 } 
 .date-overdue{
-  color: #a40d0d;
+  color: #a40d0d!important;
 }
 .mywork-main-task-name{
   display: block;

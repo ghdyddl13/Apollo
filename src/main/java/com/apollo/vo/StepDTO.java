@@ -8,10 +8,14 @@ public class StepDTO {
 	private String sday;
 	private String eday;
 	private int pid;
+	private String pname;
 	private String fid;
 	private int methodologyid;
 	private String mid;
 	private String detail;
+	
+	
+	
 	public int getSid() {
 		return sid;
 	}
@@ -42,6 +46,12 @@ public class StepDTO {
 	public void setPid(int pid) {
 		this.pid = pid;
 	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
 	public String getFid() {
 		return fid;
 	}
@@ -67,9 +77,11 @@ public class StepDTO {
 		this.detail = detail;
 	}
 	@Override
-	
 	public String toString() {
 		return "StepDTO [sid=" + sid + ", sname=" + sname + ", sday=" + sday + ", eday=" + eday + ", pid=" + pid
-				+ ", fid=" + fid + ", methodologyid=" + methodologyid + ", mid=" + mid + ", detail=" + detail + "]";
+				+ ", pname=" + pname + ", fid=" + fid + ", methodologyid=" + methodologyid + ", mid=" + mid
+				+ ", detail=" + detail + "]";
 	}
+	
+
 }

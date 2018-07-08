@@ -1,13 +1,17 @@
 package com.apollo.task.controller;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.View;
 
 import com.apollo.member.service.MemberService;
@@ -15,6 +19,7 @@ import com.apollo.project.service.ProjectInfoService;
 import com.apollo.task.service.TaskService;
 import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
+import com.apollo.vo.FileDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StarredTaskDTO;
@@ -25,6 +30,7 @@ import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TidpidDTO;
 import com.apollo.vo.TidvalueDTO;
 import com.apollo.vo.TstatusDTO;
+import com.apollo.vo.filedataDTO;
 
 @Controller
 public class TaskController {
@@ -80,8 +86,9 @@ public class TaskController {
 	public View getTask(int tid, HttpSession session, Model model) {
 
 	System.out.println("getTask 작동");
-
+	
     String mid = (String) session.getAttribute("mid");
+	session.setAttribute("tid", tid);
     
     ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
     starredtasklist = service.getStarredTaskList(mid);
@@ -114,6 +121,11 @@ public class TaskController {
 	commentandmemberlist = service.getCommentsAndMember(tid);
 	model.addAttribute("commentandmemberlist", commentandmemberlist);
 
+	// 해당 테스크의 파일들
+	ArrayList<FileDTO> filelist = new ArrayList();	
+	filelist = service.getFileList(tid);
+	model.addAttribute("filelist", filelist);
+	
 	// 유저의 mid
 	model.addAttribute("userid", mid);
 	
@@ -995,13 +1007,64 @@ public class TaskController {
 	    	return "redirect:/information.htm?pid=" + pid;
 	    }
 		
-		
-		
-		
 	}
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 업로드
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping(value="/uploadfileintaskmodal.htm",method=RequestMethod.POST)
+	public View upLoadFileInTaskModal(HttpSession session, MultipartHttpServletRequest request, ModelMap map) {
+		System.out.println("upLoadFileInTaskModal 컨트롤러 실행");
+		
+		int tid = (Integer) session.getAttribute("tid");
+    	LinkedList<filedataDTO> files = service.upLoadFileInTaskModal(tid, request);
+		map.addAttribute("files",files);
+				
+		return jsonview;
+	}
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 업로드 성공시 모달 내 파일 목록 리셋
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping(value="/resetfilelist.htm",method=RequestMethod.POST)
+	public View resetFileList(HttpSession session, ModelMap map) {
+		System.out.println("resetFileList 컨트롤러 실행");
+		
+		int tid = (Integer) session.getAttribute("tid");
+		
+	 	// 해당 테스크의 파일들
+		ArrayList<FileDTO> filelist = new ArrayList();	
+		filelist = service.getFileList(tid);
+		map.addAttribute("filelist", filelist);
+
+		return jsonview;
+	}
+
+   
+   /**
+    * 
+    날      짜 : 2018. 7. 8.
+    기      능 : Task 모달 내 파일 다운로드
+    작성자명 : 김 정 권
+    */
+   @RequestMapping(value="/downloadfileintaskmodal.htm",method=RequestMethod.POST)
+   public View downLoadFileInTaskModal(String filename, ModelMap map) {
+   	
+	   System.out.println("downLoadFileInTaskModal 컨트롤러 실행");
+   	   
+	   service.downLoadFileInTaskModal(filename);
+   		
+   			
+   	   return jsonview;
+   }
+   
 	
 }

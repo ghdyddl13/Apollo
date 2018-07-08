@@ -76,6 +76,7 @@ public class MyworkService {
 				Date endday=null;
 				Date startday=null;
 				try {
+					System.out.println(task.getSday());
 					endday = dateFormat.parse(task.getEday());
 					startday = dateFormat.parse(task.getSday());
 				} catch (ParseException e) {

@@ -77,11 +77,23 @@ $(function() {
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				
+				if($(".stream-select-list").length!=0){
+					$("#stream-current-project").text($($(".stream-select-list")[0]).find(".stream-project-select-info-pname").text());
+					if($(".stream_main").children().length==0){
+						var msg =  $("<div>", {"class":"no-stream-div-msg",
+							"text":"No Stream!"});
+						$(".stream_main").append(msg);
+					}
+				}else{
+					var msg =  $("<div>", {"class":"no-stream-div-msg",
+						"text":"No Project!"});
+					$(".stream_main").append(msg);
+				}
 			}
 		})
 	});
 	
-	//// 헤더 stream 페이지
+	
 	$("#header-memberlist").click(function(evt){
 		$.ajax({
 			url:"selectmemberlist.htm",
@@ -89,7 +101,7 @@ $(function() {
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
-				
+			
 			}
 		})
 	});

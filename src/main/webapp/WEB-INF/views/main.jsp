@@ -126,7 +126,16 @@
 		$("#inbox_count_c").empty();
 		$("#inbox_count_c").append(msg);
 	}
+	
+	$(document).on("click","#logout-btn",function(){
+		disconnect();
+		location.href='logout.htm';
+		
+	});
+	
 	$(document).ready(function() {
+		
+		
 		$("#inbox_count").show();
 		if("${newcount}" == "0"){
 			$("#inbox_count").hide();
@@ -142,6 +151,7 @@
 <body >
 	
 	<div class="Apollo-main">
+	
 		<div class="main-header-panel" >
 			<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
 		</div>
@@ -153,7 +163,8 @@
 				<div  id="main-box"></div>
 			</div>	
 		</div>
+		<jsp:include page="/WEB-INF/views/inc/modalPages.jsp" ></jsp:include>
 	</div>
-	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp" ></jsp:include>
+	
 </body>
 </html>

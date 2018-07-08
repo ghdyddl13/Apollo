@@ -61,6 +61,8 @@ public class ProjectTableController {
 			ArrayList<StepDTO> steplist = null; // pid 에 속한 step 가져오기
 			steplist = tableservice.getStepInProject(pid);
 			model.addAttribute("steplist", steplist);
+			
+			
 
 			ArrayList<FolderDTO> folderlist = null; // pid 에 속한 folder 가져오기
 			folderlist = tableservice.selectFolderList(pids);

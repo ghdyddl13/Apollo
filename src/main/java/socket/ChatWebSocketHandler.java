@@ -38,6 +38,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 		String userid = (String)session.getAttributes().get("mid");
 		
 		log(userid + " 연결 됨");
+		System.out.println(userid +"의 세션번호"+session.getId() + " 연결 됨");
 		
 		users.put(userid, session);
 		
@@ -79,7 +80,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 				WebSocketSession  wssession = users.get(keyName);				
 				for(int i = 0 ;i<midlist.size();i++) {			
 					if(midlist.get(i).equals(userid)) {
-						
 						System.out.println("나한테는 알람 안보냄~");
 					}else if(midlist.get(i).equals(keyName)){
 						newcount = serviceinbox.newCount(midlist.get(i));
