@@ -1022,8 +1022,7 @@ public class TaskController {
 		
 		int tid = (Integer) session.getAttribute("tid");
     	LinkedList<filedataDTO> files = service.upLoadFileInTaskModal(tid, request);
-		
-		map.addAttribute("profile",files);
+		map.addAttribute("files",files);
 				
 		return jsonview;
 	}
@@ -1048,34 +1047,24 @@ public class TaskController {
 
 		return jsonview;
 	}
-	public View uploadFiles(HttpSession session, MultipartHttpServletRequest request) {
-		
-		
-		
-		return jsonview;
-	}
-	
-	
-	
-	
-//	/**
-//	 * 
-//	 날      짜 : 2018. 7. 8.
-//	 기      능 : Task 모달 내 파일 다운로드
-//	 작성자명 : 김 정 권
-//	 */
-//	@RequestMapping(value="/downloadfileintaskmodal.htm",method=RequestMethod.POST)
-//	public View downLoadFileInTaskModal(int tid, String filename, HttpSession session, MultipartHttpServletRequest request, ModelMap map) {
-//		System.out.println("downLoadFileInTaskModal 컨트롤러 실행");
-//		
-//     	LinkedList<filedataDTO> files = service.downLoadFileInTaskModal(filename, request);
-//		
-//		map.addAttribute("profile",files);
-//				
-//		return jsonview;
-//	}
-	
-	
-	
+
+   
+   /**
+    * 
+    날      짜 : 2018. 7. 8.
+    기      능 : Task 모달 내 파일 다운로드
+    작성자명 : 김 정 권
+    */
+   @RequestMapping(value="/downloadfileintaskmodal.htm",method=RequestMethod.POST)
+   public View downLoadFileInTaskModal(String filename, ModelMap map) {
+   	
+	   System.out.println("downLoadFileInTaskModal 컨트롤러 실행");
+   	   
+	   service.downLoadFileInTaskModal(filename);
+   		
+   			
+   	   return jsonview;
+   }
+   
 	
 }

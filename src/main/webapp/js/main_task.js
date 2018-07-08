@@ -1450,7 +1450,20 @@ $(document).on("click","#fileuploadbtn",function() {
  */
 $(document).on("click",".file_name",function() {
 	
-	alert('다운한다');
+	var filename = $(this).attr('id');
+	console.log('filename: ' + filename);
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "downloadfileintaskmodal.htm",
+		           data : {
+		        	   'filename': filename
+		           },
+		           success : function(rdata){
+		        	
+		           } // end-success
+		        }); // end-ajax
 
 });
 
@@ -1464,5 +1477,17 @@ $(document).on("click",".file_name",function() {
 $(document).on("click",".file_del_btn",function() {
 	
 	alert('삭제한다');
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "changetname.htm",
+		           data : {
+		        	   'tid': tid,
+		        	   'tname' : tname
+		           },
+		           success : function(rdata){
+		        	
+		           } // end-success
+		        }); // end-ajax
 
 });

@@ -8,11 +8,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.View;
 
 import com.apollo.inbox.dao.InboxDAO;
 import com.apollo.member.dao.MemberDAO;
@@ -24,6 +28,7 @@ import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
+import com.apollo.utils.DownloadFileUtils;
 import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
@@ -649,9 +654,6 @@ public class TaskService {
 		return result;
 	}
 	
-	// upLoadFileInTaskModal
-	
-	
 
 	/**
 	 * 
@@ -716,6 +718,12 @@ public class TaskService {
 	}
 	
 
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 업로드 후 파일 목록 리셋
+	 작성자명 : 김 정 권
+	 */
 	public ArrayList<FileDTO> getFileList(int tid){
 		
 		System.out.println("getFileList 서비스 실행");
@@ -724,6 +732,20 @@ public class TaskService {
 		filelist = dao.getFileList(tid);
 		
 		return filelist;
+	}
+	
+	
+	
+	public void downLoadFileInTaskModal(String filename) {
+	
+		String downloadPath = "resources\\upload_files\\" + filename;
+		
+		try {
+			DownloadFileUtils.downFiles(downloadPath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 }
