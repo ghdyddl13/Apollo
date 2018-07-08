@@ -3,24 +3,31 @@ package com.apollo.task.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.apollo.inbox.dao.InboxDAO;
 import com.apollo.member.dao.MemberDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.AssigneeDAO;
 import com.apollo.task.dao.CommentDAO;
+import com.apollo.task.dao.FileDAO;
 import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
+import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
+import com.apollo.vo.FileDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.ReceiverDTO;
@@ -32,6 +39,7 @@ import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TidpidDTO;
 import com.apollo.vo.TidvalueDTO;
 import com.apollo.vo.TstatusDTO;
+import com.apollo.vo.filedataDTO;
 
 @Service
 public class TaskService {
@@ -641,7 +649,82 @@ public class TaskService {
 		return result;
 	}
 	
+	// upLoadFileInTaskModal
 	
+	
+
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 업로드
+	 작성자명 : 김 정 권
+	 */
+	public LinkedList<filedataDTO> upLoadFileInTaskModal(int tid, MultipartHttpServletRequest request){
+		System.out.println("upLoadFileInTaskModal 서비스 실행");
+		
+		String savepath= "resources/upload_files";
+		LinkedList<filedataDTO> files = new LinkedList<filedataDTO>();
+		filedataDTO filedata = null;
+		
+		Iterator<String> itr =request.getFileNames();
+		MultipartFile mpf = null;
+		while(itr.hasNext()) {
+			mpf = request.getFile(itr.next());
+			
+			//파일 정보가 없는 경우
+			if(mpf ==null || mpf.getSize()<=0) {
+				return null;
+			}
+			//fileMetaDTO에 파일정보 입력
+			filedata = new filedataDTO();
+			System.out.println("파일 이름이에요: "+mpf.getOriginalFilename());
+			filedata.setFilename(mpf.getOriginalFilename());
+			filedata.setFileSize(mpf.getSize()/1024+"kb");
+			filedata.setFileType(mpf.getContentType());
+			
+			//경로 설정
+			String filename =null;
+			String originalName = mpf.getOriginalFilename();
+			
+			//SQL 파일 입력
+			FileDAO dao = session.getMapper(FileDAO.class);
+			
+			FileDTO filedto = new FileDTO();
+			try {
+				//FILE DATADTO에 바이트 정보 입력
+				filedata.setBytes(mpf.getBytes());
+				
+				//AWS S3에 파일 업로드
+				filename = UploadFileUtils.uploadFile(savepath, 0, originalName, mpf.getBytes());
+				
+				//DB에 파일 정보 입력
+				filedto.setTid(tid);
+				filedto.setFilename(filename);
+				
+				System.out.println("tid, filename 테스트 출력");
+				System.out.println("tid : " + tid);
+				System.out.println("filename : " + filename);
+				dao.upLoadFileInTaskModal(filedto);
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			files.add(filedata);
+		}
+		
+		return files;
+	}
+	
+
+	public ArrayList<FileDTO> getFileList(int tid){
+		
+		System.out.println("getFileList 서비스 실행");
+		ArrayList<FileDTO> filelist = new ArrayList();
+		FileDAO dao = session.getMapper(FileDAO.class);
+		filelist = dao.getFileList(tid);
+		
+		return filelist;
+	}
 	
 }
 

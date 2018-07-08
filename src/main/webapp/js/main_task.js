@@ -186,9 +186,18 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   var origin_inputboxstr = '<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">'
 			        	   $('#div_for_comment_input_box').append(origin_inputboxstr);
 			        	   
-			        	   
-//			        	   $('#').empty();
-//			        	   $('#').append(rdata.task.tname);
+			        	   // files
+			        	   $('#Task_Modal_files').empty();
+			        	   var filesdivs = '';
+			        	   $(rdata.filelist).each(function(){
+			        		   
+			        	   var shortfilename = this.filename.substring(37);
+			        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
+			        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+			        	   filesdivs += '</div>'
+			        		  
+			        	   });
+			        	   $('#Task_Modal_files').append(filesdivs);
 			        	   
 			        	   $(".starred-secondbody-image").hide();
 			        		$(".modal-content").show();	
@@ -968,6 +977,19 @@ $(document).on("mouseenter",".hover_div",function() {
 
 
 
+/**
+ * 
+ 날      짜 : 2018. 7. 8.
+ 기      능 : 파일에 hover시에만 x 표 보이도록 설정
+ 작성자명 : 김 정 권
+ */
+$(document).on("mouseenter",".filehover_div",function() {
+    $(this).children('i').css("visibility","visible");
+  }).on("mouseleave",".filehover_div",function() {//마우스 호버 아웃 하면 checkbox가 다시 안보이게 함
+	  $(this).children('i').css("visibility","hidden");
+  });
+
+
 
 /**
  * 
@@ -1403,4 +1425,44 @@ $(document).on("focusout","#Task_Modal_tname_input",function() {
 				           } // end-success
 				        }); // end-ajax
 	
+});
+
+
+
+/**
+ * 
+ 날      짜 : 2018. 7. 8.
+ 기      능 : Task 모달 내 파일 업로드
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#fileuploadbtn",function() {
+	
+	$('#fileuploadintaskmodal').trigger('click');
+
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 7. 8.
+ 기      능 : Task 모달 내 파일 다운
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".file_name",function() {
+	
+	alert('다운한다');
+
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 7. 8.
+ 기      능 : Task 모달 내 파일 삭제
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".file_del_btn",function() {
+	
+	alert('삭제한다');
+
 });
