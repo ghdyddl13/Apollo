@@ -38,6 +38,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 		String userid = (String)session.getAttributes().get("mid");
 		
 		log(userid + " 연결 됨");
+		System.out.println(userid +"의 세션번호"+session.getId() + " 연결 됨");
 		
 		users.put(userid, session);
 		
