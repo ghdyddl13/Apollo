@@ -191,7 +191,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 //			        	   $('#').append(rdata.task.tname);
 			        	   
 			        	   $(".starred-secondbody-image").hide();
-			        		$(".modal-content").show();	
+			        		$(".modal-content2").show();	
 			        	   
 			           } // end-success
 			        } 

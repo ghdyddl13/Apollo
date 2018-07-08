@@ -80,7 +80,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 				WebSocketSession  wssession = users.get(keyName);				
 				for(int i = 0 ;i<midlist.size();i++) {			
 					if(midlist.get(i).equals(userid)) {
-						
 						System.out.println("나한테는 알람 안보냄~");
 					}else if(midlist.get(i).equals(keyName)){
 						newcount = serviceinbox.newCount(midlist.get(i));

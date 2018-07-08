@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	$(function() {
 		
-		$(".modal-content").hide();
+		$(".modal-content2").hide();
 		
 		$(".Task_RUD_Modal").click(function(evt) {
 			$(this).children().children(".inbox_newcheck").empty();
@@ -261,9 +261,9 @@
 		
 		<div class ="inbox-section-right" id="right" style="overflow:auto; ">	
 		<div class="starred-secondbody-image"></div>
-		<!-- <div class="modal fade modal-task-dialog" id="Task_RUD_Modal" role="dialog">
-		<div class="modal-dialog"> -->
-			<div class="modal-content">
+			
+			
+			<div class="modal-content2">
 
 				<div class="modal-header">
 				<!-- row 1 -->
@@ -368,11 +368,7 @@
 		</div>
 	</div>
 </div>	
-			
-			
-			
-		</div>
-	</div>
+
 	
 	
 	
