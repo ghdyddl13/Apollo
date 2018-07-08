@@ -4,21 +4,23 @@
     height: 100%;
     text-align: center;
     background-color:#f4f6f8;
+    overflow-y: auto;
+    padding-bottom: 5%
+}
+.stream-main-container::-webkit-scrollbar { 
+    display: none; 
 }
 .stream_main{
 	display : inline-block;
-	width:70%;
-	max-width:700px;
+	width:75%;
+	max-width:750px;
 	text-align: left;
-	height: 95%;
-	padding: 15px 0 15px 0
+	padding: 15px 0 15px 0;
 }
 .stream_task_division{
 	border-radius: 5px;
 }
-.stream_main::-webkit-scrollbar { 
-    display: none; 
-}
+
 
 .stream_hr{
 	margin-top: 10px;
@@ -32,13 +34,7 @@ white-space:nowrap;
 align-items: center;
 
 }
-.stream_comments{
-	width:300px;
-	overflow:hidden;
-	white-space:nowrap;
-	text-overflow:ellipsis; 
-	padding-left: 10px;
-}
+
 .stream_header{
 	margin-left :10px;
 	margin-top: 10px;
@@ -104,7 +100,6 @@ align-items: center;
 }
 .stream-select-list{
 	display: flex;
-	height: 75px;
 	padding: 5px 5px 5px 8px;
 }
 
@@ -161,8 +156,8 @@ align-items: center;
 	margin-top: 15px;
 	margin-left:5px;
 	margin-right:5px;
-	padding:10px;
-	box-shadow: 0.5px 0.5px 1px 1px #cccccc
+	padding:15px;
+	box-shadow: 0.5px 0.5px 1px 1px #cccccc;
 	
 }
 
@@ -175,9 +170,18 @@ align-items: center;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 
 }
+.stream_division-header:hover{
+	cursor: pointer;
+	background-color: #e8e8e8;
+}
 .stream_division-body{
 	display: block;
+	max-height: 350px;
+	overflow-y:auto 
 	
+}
+.stream_division-body::-webkit-scrollbar { 
+    display: none; 
 }
 
 .stream_division-header-tname{
@@ -214,4 +218,58 @@ align-items: center;
 	display: flex;
 	padding: 20px;
 	background-color: #f4f6f8;
+
+}
+
+
+.steam-comment-item{
+	margin: 0 0 15px 0;
+	display: flex
+}
+
+.steam-comment-item-img{
+	
+	
+}
+
+.steam-comment-item-info{
+	display: flex;
+	flex-direction:column;
+	justify-content: center;
+	flex:1 1 auto
+}
+
+.stream_comments{
+	width:100%;
+	display:flex;
+	align-items:center;	
+	min-height:30px;
+	overflow:hidden;
+	white-space:normal;
+	text-overflow:ellipsis; 
+	padding-left: 10px;
+}
+
+.stream_comments_time{
+	text-align: right;
+	font-size: 13px;
+	font-style: italic;
+	color: #cccccc
+}
+
+#stream-current-project{
+	text-align: left;
+	padding:10px;
+	font-size: 25px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	 font-weight: bold;
+}
+.no-stream-div-msg{
+	text-align: center;
+	font-size: 30px;
+	font-weight:bold;
+
+	color: #cccccc
 }

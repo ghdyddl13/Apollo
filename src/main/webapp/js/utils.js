@@ -145,7 +145,6 @@ function profileinfo(mid) {
 작성자명 : 박 민 식
  */
 function checkCrtPage(){
-	console.log( $(document).find(".project-page-table").length);
 	if($(document).find("#timeline").length !=0){
 		$.when(getGanttItems()).done(function(ajax){
 			var tasks = ajax.tasks;
@@ -158,6 +157,20 @@ function checkCrtPage(){
 		doDraggable();
 	} else if( $(document).find(".file-table-tr-td").length !=0){
 		$("#project-page-table-no-data").remove();
+	} else if( $(document).find(".stream-main-container").length !=0){
+		if($(".stream-select-list").length!=0){
+			$("#stream-current-project").text($($(".stream-select-list")[0]).find(".stream-project-select-info-pname").text());
+			if($(".stream_main").children().length==0){
+				var msg =  $("<div>", {"class":"no-stream-div-msg",
+					"text":"No Stream!"});
+				$(".stream_main").append(msg);
+			}
+		}else{
+			var msg =  $("<div>", {"class":"no-stream-div-msg",
+				"text":"No Project!"});
+			$(".stream_main").append(msg);
+		}
+		
 	};
 	
 };
