@@ -217,22 +217,85 @@ $(function() {
 	 기   능 : Mess Edit에서 스텝을 추가하는 버튼을 눌렀을 시에 발생하는 함수
 	 작성자명 : 이 진 우
 	 */
-	$(document).on("click","#selectpage-addsteps-button",function() {// 추가 스텝 버튼을 눌렀을 시에
-		$.ajax({
+	var steplist = [];
+    $(document).on("click","#selectpage-addsteps-button",function() {// 추가 버튼을 눌렀을 시에
+      steplist=[];
+      $.ajax({
 			type : "POST",
 			url : "stepListforAddStep.htm",
 			success : function(data) {
-				$("#main-box").empty();
-				$("#main-box").append(data);
-				$('#list_assign_tasks_dismiss_btn').click();
-				checkbox = [];
+				  steplist=data.steplist;
+			      $(".list-section-third-addstep-steplist-wrapper_cover").empty();
+			      let steplisttag="";
+			      $.each(steplist,function(index,element) {
+			        let sid = element.sid;
+			        let sname = element.sname;
+			        let pname = element.pname;
+			        steplisttag+='<div class="list-section-third-addstep-step" id="s'+sid+'" data-toggle="modal" data-target="#list_AddStep_Tasks">';
+			        steplisttag+='<div class="list-section-third-addstep-step-cover"><div class="list-section-third-addstep-step-stepname">'
+			        steplisttag+= sname;
+			        steplisttag+= '</div><div class="list-section-third-addstep-step-projectnamecover"><span class="list-section-third-addstep-step-projectname">';
+			        steplisttag+= pname;
+			        steplisttag+= '</span></div></div></div>';
+			        
+			      })
+			      $(".list-section-third-addstep-steplist-wrapper_cover").append(steplisttag);
 			}
-		})
-		let checkboxcount= checkbox.length;
-		$("#list-addstep-tasks-ment").html("에 "+checkboxcount+"개 Task를 추가하시겠습니까?")
-	});
+      });
+      //데이터 가지고 오기
+      let p =$("#selectpage-addsteps-button");
+      let position = p.position();
+      let x_position =$(window).width()-800;
+      $(".list-section-third-addstep").css({"visibility":"visible","left":x_position,"top":position.top-150});
+    })
+    $(document).bind("mousedown", function(e) {
+      if (!$(e.target).parents(".list-section-third-addstep").length > 0) {
+        $("#addstep-insert_step").val("");
+        $(".list-section-third-addstep").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+      }
+    });
+    $(document).on("keyup","#addstep-insert_step",function(event) {
+      var piece=$.trim($(this).val());
+      let steplisttag='';
+      $(".list-section-third-addstep-steplist-wrapper_cover").empty();
+      $.each(steplist,function(index,element) {
+        let sid = element.sid;
+        let sname = element.sname;
+        let pname = element.pname;
+        let snamecheck=sname.indexOf(piece);
+        let pnamecheck=pname.indexOf(piece);
+        if(snamecheck==-1&&pnamecheck==-1){
+          //다른 연산 없이 그냥 패스
+        }else{
+          sname = sname.replace(piece,"<b>"+piece+"</b>");
+          pname= pname.replace(piece,"<b>"+piece+"</b>");
+          steplisttag+='<div class="list-section-third-addstep-step" id="s'+sid+'" data-toggle="modal" data-target="#list_AddStep_Tasks">';
+          steplisttag+='<div class="list-section-third-addstep-step-cover"><div class="list-section-third-addstep-step-stepname">'
+          steplisttag+= sname;
+          steplisttag+= '</div><div class="list-section-third-addstep-step-projectnamecover"><span class="list-section-third-addstep-step-projectname">';
+          steplisttag+= pname;
+          steplisttag+= '</span></div></div></div>';
+        }
+      })
+      $(".list-section-third-addstep-steplist-wrapper_cover").append(steplisttag);
+      
+      if(event.which==27){
+        $("#addstep-insert_step").val("");
+        $(".list-section-third-addstep").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+      }
+    });
+    $(document).on("click",".list-section-third-addstep-step",function(){
+      let sid=  parseInt($(this).attr("id").substring(1));
+      let sname=$.trim($(this).children(".list-section-third-addstep-step-cover").children(".list-section-third-addstep-step-stepname").text());
+      console.log(sname);
+      $(".list-section-third-addstep").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+      $("#addstep-insert_step").val("");
+      let checkboxcount= checkbox.length;
+      $("#list-addstep-tasks-ment").html(sname+"에 "+checkboxcount+"개 Task를 추가하시겠습니까?")
+      $("#list_addstep_selectedsid").val(sid);
+    })
 	$(document).on("click","#list_AddStep_Tasks_btn",function(){
-		let stepid=8;
+		let stepid=$("#list_addstep_selectedsid").val();
 		if(checkbox.length==0){
 			alert("왜 테스크가 없지..?")
 			$('#list_addstep_tasks_dismiss_btn').click();

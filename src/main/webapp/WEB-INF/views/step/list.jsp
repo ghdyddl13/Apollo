@@ -353,7 +353,7 @@
       </div>
       <div class="list-section-third-selectpage-addstep">
         <span class="list-section-third-selectpage-text">Add Step</span>
-        <span class="selectpage-body-button" id="selectpage-addsteps-button" data-toggle="modal" data-target="#list_AddStep_Tasks">Add Step</span>
+        <span class="selectpage-body-button" id="selectpage-addsteps-button">Add Step</span>
       </div>
       <div class="list-section-third-selectpage-deletetask">
         <span class="list-section-third-selectpage-text">Delete tasks</span>
@@ -361,4 +361,29 @@
       </div>
     </div>
   </div>
+  <!--THIRD PANNEL ADD STEP -->
+ <div class="list-section-third-addstep">
+   <div class="list-section-third-addstep-wrapper">
+     <div class="list-section-third-addstep-header">
+       <div class="list-section-third-addstep-headwrapper">
+         <div class="list-section-third-addstep-head-text">Current Step</div>
+         <div class="list-section-third-addstep-head-cur_step">
+           <div class="list-section-third-addstep-head-cur_step-cover">
+             <span class="list-section-third-addstep-head-cur_step-text">${stepinfo.sname}</span>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="list-section-third-addstep-text">ADD STEPS</div>
+     <div class="list-section-third-addstep-steplist">
+       <div class="list-section-third-addstep-steplist-inputsection">
+         <input class="list-section-third-addstep-steplist-input" id="addstep-insert_step"type="text" autocomplete="off" placeholder="Search step">
+       </div>
+       <div class="list-section-third-addstep-steplist-wrapper">
+         <div class="list-section-third-addstep-steplist-wrapper_cover">
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
 </div><!-- BODY CONTAINER END  -->

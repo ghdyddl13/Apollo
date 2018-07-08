@@ -201,7 +201,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<!--LIST PAGE 에서 TASK 단체로 특정 Step에 추가 하기전에 STEP LIST를 들고오는 함수 -->
 	<select id="getStepListBeforeAddStepTasks" resultType="com.apollo.vo.StepDTO">
-		select sid, sname, sday,eday from step where pid= (select pid from step where sid = #{sid})
+		select s.sid, s.sname,p.pid,p.PNAME
+		from step s
+		join project p
+		on s.PID = p.PID
+		where p.pid= (select pid from step where sid = #{sid}) and s.sid !=#{sid}
 	</select>	
 	<!--LIST PAGE 에서 TASK 단체로 특정 Step에 추가 하기전에 중복값을 제거하기 위해 가지고 오는 데이터  -->
 	<select id="listBeforeAddStepTasks" resultType="com.apollo.vo.TaskInStepDTO">
