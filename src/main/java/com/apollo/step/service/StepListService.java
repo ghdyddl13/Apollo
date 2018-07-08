@@ -75,7 +75,7 @@ public class StepListService {
 	 기      능 : Step List 첫 페이지 로드
 	 작성자명 : 이 진 우
 	 */
-	public ArrayList<StepListTaskDTO> getListTask(int sid, String tstatusid,String mid){
+	public ArrayList<StepListTaskDTO> getListTask(int sid, String tstatusid,String mid,String sorting){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd") ;
 		StepDAO dao= sqlsession.getMapper(StepDAO.class);
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -83,6 +83,7 @@ public class StepListService {
 		map.put("sid", sids);
 		map.put("tstatusid" , tstatusid);
 		map.put("mid", mid);
+		map.put("sorting",sorting);
 		ArrayList<StepListTaskDTO> tasklist = dao.getStepListTask(map);
 		ArrayList<StepListMemberDTO> memberlist = dao.getStepListMember(map);
 		ArrayList<StepListStepDTO> steplist = dao.getStepListStep(map);
@@ -277,7 +278,12 @@ public class StepListService {
 		ArrayList<MemberDTO> projectmemberlist = dao.listProjectMemberList(sid);
 		return projectmemberlist;
 	}
-	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 6.
+	 기      능 : Task들을 입력하면 Status를 update 해준다
+	 작성자명 : 이 진 우
+	 */
 	public int listStatusTasks(String[] tasks, int tstatusid){
 		StepDAO dao= sqlsession.getMapper(StepDAO.class);
 		int result = 0;
@@ -290,6 +296,18 @@ public class StepListService {
 		}
 		return result;
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 6.
+	 기      능 : LIST PAGE MASS EDIT에서 TASKS를 수정 하기전에 STEP LIST를 들고오는 함수 
+	 작성자명 : 이 진 우
+	 */
+	public ArrayList<StepDTO> getStepListBeforeAddStepTasks(int sid){
+		StepDAO dao= sqlsession.getMapper(StepDAO.class);
+		ArrayList<StepDTO> steps = dao.getStepListBeforeAddStepTasks(sid);
+		return steps;
+	}
+	
 	/**
 	 * 
 	 날      짜 : 2018. 7. 3.

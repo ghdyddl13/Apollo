@@ -149,31 +149,45 @@ $(function() {
 	  console.log(checkbox);
 	  $(".list-task-checkbox").css("visibility","hidden");
 	})
+	/**
+	 * 
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 상태버튼을 눌렀을때 발동되는 함수
+	 작성자명 : 이 진 우
+	 */
 	$(document).on("click",".selectpage-body-statusbutton",function() {//상태 버튼을 눌렀을 시에
 	  let tstatusid = $(this).attr("id");
 	  let checkboxcount= checkbox.length;
 	  $("#list-task-status-ment").html(+checkboxcount+"개 Task의 상태를 변경 하시겠습니까?")
-	  $(document).on("click","#list_Status_Tasks_btn",function(){
-		  if(checkbox.length==0){
-			  alert("왜 테스크가 없지..?")
-			  $('#list_status_tasks_dismiss_btn').click();
-		  }else{
-			    $.ajax(
-			            {
-			              type:"POST",
-			              url:"liststatustasks.htm",
-			              data:{tstatusid:tstatusid,tasks:checkbox},
-			              success:function(data) {
-								$("#main-box").empty();
-								$("#main-box").append(data);
-								$('#list_status_tasks_dismiss_btn').click();
-								checkbox=[];
-			              }
-			    })
-		  }
-	   });
-	})
-
+	  $("#list_status_selectedtstatusid").val(tstatusid);
+	});
+	$(document).on("click","#list_Status_Tasks_btn",function(){// 확인 버튼을 눌렀을 시에
+		let tstatusid = $("#list_status_selectedtstatusid").val();
+		
+		if(checkbox.length==0){
+			alert("왜 테스크가 없지..?")
+			$('#list_status_tasks_dismiss_btn').click();
+		}else{
+			$.ajax(
+					{
+						type:"POST",
+						url:"liststatustasks.htm",
+						data:{tstatusid:tstatusid,tasks:checkbox},
+						success:function(data) {
+							$("#main-box").empty();
+							$("#main-box").append(data);
+							$('#list_status_tasks_dismiss_btn').click();
+							checkbox=[];
+						}
+					})
+		}
+	});
+	/**
+	 * 
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 할당자를 추가 할 시에 발생하는 함수
+	 작성자명 : 이 진 우
+	 */
 	$(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
 		let checkboxcount= checkbox.length;
 		let mid ="jinwoo@naver.com" ;
@@ -197,8 +211,23 @@ $(function() {
 			})
 		}
 	})
-	
+	/**
+	 * 
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 스텝을 추가하는 버튼을 눌렀을 시에 발생하는 함수
+	 작성자명 : 이 진 우
+	 */
 	$(document).on("click","#selectpage-addsteps-button",function() {// 추가 스텝 버튼을 눌렀을 시에
+		$.ajax({
+			type : "POST",
+			url : "stepListforAddStep.htm",
+			success : function(data) {
+				$("#main-box").empty();
+				$("#main-box").append(data);
+				$('#list_assign_tasks_dismiss_btn').click();
+				checkbox = [];
+			}
+		})
 		let checkboxcount= checkbox.length;
 		$("#list-addstep-tasks-ment").html("에 "+checkboxcount+"개 Task를 추가하시겠습니까?")
 	});
@@ -221,13 +250,18 @@ $(function() {
 			})
 		}
 	})
-	
+	/**
+	 * 
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 삭제 버튼을 눌렀을 시에 발생하는 함수
+	 작성자명 : 이 진 우
+	 */	
 	$(document).on("click", "#selectpage-deletetask-button", function(){// 삭제 버튼을 눌렀을 시에
 		let checkboxcount= checkbox.length;
 		$("#list-delete-tasks-ment").html(checkboxcount+"개 Task를 삭제하시겠습니까?<br><h5 style='color:red'>(삭제 후 복구 불가능합니다)</h5>")
 
 	})
-	$(document).on("click","#list_Delete_Tasks_btn",function(){
+	$(document).on("click","#list_Delete_Tasks_btn",function(){//확인을 눌렀을 시에 발생하는 함수
 		if(checkbox.length==0){
 			alert("왜 테스크가 없지..?")
 		}else{
@@ -244,15 +278,11 @@ $(function() {
 			})
 		}
 	})
-
-	
-	
-	
-	
 	/**
-	 * 
-	 * 날 짜 : 2018. 6. 25. 기 능 : STATUS SELECTING BUTTON을 클릭할시 발생하는 함수들 작성자명 : 이
-	 * 진 우
+	 *  
+	 날 짜 : 2018. 6. 25. 
+	 기 능 : STATUS SELECTING BUTTON을 클릭할시 발생하는 함수들 
+	 작성자명 : 이 진 우
 	 */
 	//상태 버튼을 눌렀을시 발생하는 함수
 	$(document).on("click","#status-button",function() {
@@ -321,6 +351,9 @@ $(function() {
 	 */
 	//people button을 누르면 로드시 가지고 왔던 데이터를 뿌려준다
     $(document).on("click","#people-button-tag",function(){
+		var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
+		var sid= this.id.substr(1);
+
         let p =$("#people-button");
         let position = p.position();
         $(".list-header-filter-people").css("background-color","#dfe6f0")
@@ -459,10 +492,15 @@ $(function() {
 	});
 	$(document).on("click",".list-header-sorting-textcontainer",function() {
 	  let sorting = $(this).attr("id");
-	  console.log(sorting);
-	  $(".list-header-sorting-button").css("background-color","")
-	  $(".list-header-sorting-selecting").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
-	  $("#sorting-button").empty();
-	  $("#sorting-button").append("<span class='list-header-sorting-tag'>By "+ sorting+"</span>");
+	  $.ajax({
+			type : "POST",
+			url : "sortingTasksList.htm",
+			data :{sorting:sorting},
+			success : function(data) {
+				$("#main-box").empty();
+				$("#main-box").append(data);
+				checkbox = [];
+			}
+		})
 	})
 })

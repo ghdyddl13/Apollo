@@ -79,8 +79,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where ts.SID =#{sid}
 		<if test="tstatusid != null">and t.TSTATUSID=#{tstatusid}</if> 
 		<if test="mid !=null">and t.TID in (select tid from ASSIGNEE where MID = #{mid})</if>
-
-		order by CTIME
+		<if test="sorting=='changedate'">order by CTIME</if>
+		<if test="sorting=='duedate'">order by t.EDAY</if>
+		<if test="sorting=='status'">order by t.TSTATUSID</if>
+		<if test="sorting=='title'">order by t.TNAME</if>
 	</select>
 	<!-- List 페이지의 Task에 뿌려줄 Step을 위한 Step 리스트  -->
 	<select id="getStepListStep" parameterType="hashmap" resultType="com.apollo.vo.StepListStepDTO">
@@ -197,6 +199,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          	into ASSIGNEE(tid,mid) values (#{assignee.tid},#{assignee.mid})
         </foreach>
 	</insert>
+	<!--LIST PAGE 에서 TASK 단체로 특정 Step에 추가 하기전에 STEP LIST를 들고오는 함수 -->
+	<select id="getStepListBeforeAddStepTasks" resultType="com.apollo.vo.StepDTO">
+		select sid, sname, sday,eday from step where pid= (select pid from step where sid = #{sid})
+	</select>	
 	<!--LIST PAGE 에서 TASK 단체로 특정 Step에 추가 하기전에 중복값을 제거하기 위해 가지고 오는 데이터  -->
 	<select id="listBeforeAddStepTasks" resultType="com.apollo.vo.TaskInStepDTO">
 		select sid, tid from TASKINSTEP where sid=#{sid}
@@ -214,5 +220,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{tid}
         </foreach>
 	</delete>
-
+	
 </mapper>
