@@ -432,8 +432,6 @@
 								},
 								done:function(e,data){
 									
-									alert('업로드 성공했으므로 ajax 시작한다');
-									
 									$.ajax(
 										       {
 										           type : "post",

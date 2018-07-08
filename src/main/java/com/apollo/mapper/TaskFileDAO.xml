@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="getFileList" resultType="com.apollo.vo.FileDTO">
-		select * from files where tid = #{tid}
+		select * from files where tid = #{tid} order by fileid
 	</select>
 	
 </mapper>
