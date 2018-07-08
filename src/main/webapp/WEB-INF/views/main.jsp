@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <!--   CSS   -->
 <!--BOOTSTRAP  -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -90,13 +89,11 @@
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <title>Project Apollo</title>
 
-
 <script type="text/javascript">
 	var nickname;
 	var wsocket;
 	function connect() {
-		console.log("커넥트 했니?????");
-		wsocket = new WebSocket("ws://192.168.0.7:8090/bit/socket.htm");
+		wsocket = new WebSocket("ws://192.168.0.45:8090/bit/socket.htm");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
@@ -107,40 +104,43 @@
 	function onOpen(evt) {
 	}
 	function onMessage(evt) {
+		$("#inbox_count").show();
+		$("#inbox_count_b").hide();
+		
+		$("#inbox_count_c").show();
 		var data = evt.data;
 		appendMessage(data);
 	}
 	function onClose(evt) {
 	}
-	function send() {
+	function send(assign) {
+		console.log(assign);
 		console.log("send")
 		var msg = $("#comment_input_box_in_taskmodal").val();
-		if(msg.trim()!=""){
+		if(msg.trim()!="" || assign == "assign"){
 			wsocket.send($("#tidhidden").val()+'|'+nickname + " : " + msg);
 		}
 	}
-	
-	
 	function appendMessage(msg) {
-		$("#inbox_count").empty();
-		$("#inbox_count").append(msg);
-	}
 	
+		$("#inbox_count_c").empty();
+		$("#inbox_count_c").append(msg);
+	}
 	$(document).ready(function() {
-		
+		$("#inbox_count").show();
+		if("${newcount}" == "0"){
+			$("#inbox_count").hide();
+		}else{
+			$("#inbox_count_b").show();
+			$("#inbox_count_c").hide();
+		}
 		nickname=$("#header-user-name").html();
-		
 		connect();
-		
-		$('#exitBtn').click(function(){
-			disconnect();
-			window.close();
-		});
 	});
 </script>
 </head>
 <body >
-	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp"></jsp:include>
+	
 	<div class="Apollo-main">
 		<div class="main-header-panel" >
 			<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
@@ -154,5 +154,6 @@
 			</div>	
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp" ></jsp:include>
 </body>
 </html>

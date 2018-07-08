@@ -4,9 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<script>	
-
-</script>
 <div class="main-body-container">
   <div class="main-body-onepannel">
     <div class="main-body-onepannel-container">
@@ -26,7 +23,6 @@
       </div>
       <div class="main-body-onepannel-body">
 		<div class="project-table-content" align="center">
-		
 	      <table class="table project-page-table">
 	         <thead>
 	            <tr>
@@ -38,12 +34,11 @@
 	            </tr>
 	         </thead>
 	         <tbody id="project-page-tbody">
-	       
 	            <!-- 폴더에 속하지 않은 스텝 뿌려주기 -->
 	            <c:forEach var="step" items="${steplist}">
 	              
 	            <!-- Duration 구하기 위한 날짜형식 변경 및 비교 -->
-	             <fmt:parseDate var="stepstart"  value="${step.sday}" pattern="yy-MM-dd"/>
+	            <fmt:parseDate var="stepstart"  value="${step.sday}" pattern="yy-MM-dd"/>
 	            <fmt:parseDate  var="stepend" value="${step.eday}" pattern="yy-MM-dd"/>
 	            
 	            <fmt:parseNumber value="${stepstart.time/(1000*60*60*24)}" var="step_startsday" integerOnly="true"/>
@@ -66,10 +61,14 @@
 	                     </c:choose>
 	                     <c:choose>
 	                     	<c:when test="${member.image eq null}">
-	                     		<td class="project-table-member-td"><img class="project-table-member-image" src="img/user.png">${member.mname}</td>
+	                     		<td class="project-table-member-td">
+	                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
+	                     		<img class="project-table-member-image" src="img/user.png" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
 	                     	</c:when>
 	                     	<c:otherwise>
-	                     		<td class="project-table-member-td"><div class="project-table-member-image">${member.image}</div>${member.mname}</td>
+	                     		<td class="project-table-member-td">
+	                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
+	                     		<img class="project-table-member-image" src="img/${member.image}" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
 	                     	</c:otherwise>
 	                     </c:choose>
 	                     </c:forEach>
@@ -102,7 +101,6 @@
 	                     </c:if>
 	                  </c:forEach>
 	               </c:if>
-	                
 	            </c:forEach>
 	            <!-- 폴더 뿌려주기 -->
 	            <c:forEach var="folder" items="${folderlist}">
@@ -131,10 +129,14 @@
 		                        </c:choose>
 		                        <c:choose>
 			                     	<c:when test="${member.image eq null}">
-			                     		<td class="project-table-member-td"><img class="project-table-member-image" src="img/user.png">${member.mname}</td>
+			                     		<td class="project-table-member-td">
+			                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
+			                     		<img class="project-table-member-image" src="img/user.png" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
 			                     	</c:when>
 			                     	<c:otherwise>
-			                     		<td class="project-table-member-td"><div class="project-table-member-image">${member.image}</div>${member.mname}</td>
+			                     		<td class="project-table-member-td">
+			                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
+			                     		<img class="project-table-member-image" src="img/${member.image}" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
 			                     	</c:otherwise>
 		                    	</c:choose>
 		                      </tr>	
@@ -164,6 +166,9 @@
 	            </c:forEach>
 	         </tbody>
 	      </table>
+	      <!--END OF TABLE  -->
+	      
+	      <!-- TABLE 에 DATA 가 존재하지 않을 경우 -->
 	      <div id="project-page-table-no-data">
 	      	<div id="proejct-page-table-img-content">
 	      		<img src="img/rocket.png" id="proejct-page-table-img">
@@ -172,7 +177,7 @@
 	      		NO DATA!
 	      	</div>
 	      </div>
-		 </div><!--END OF TABLE  -->
+		 </div>
       </div>
     </div>
   </div>

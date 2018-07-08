@@ -14,22 +14,17 @@
 <!-- AWESOMEFONT를 위한 cdn -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <script>
-	$(function() {
-		$('#intro-login-btn').click(function() {
-			location.href="login.htm";
-		});
-		
-		/* $('#intro-join-btn').click(function() {
-			location.href="join.htm";
-		}); */
-		$('#intro-main-btn').click(function() {
-			location.href="main.htm";
-		})
-		
+$(function() {
+	$('#intro-login-btn').click(function() {
+		location.href="login.htm";
 	});
+	$('#intro-main-btn').click(function() {
+		location.href="main.htm";
+	})
+	
+});
 
   </script>
-  
 <style>
 .carousel-inner>img {
 	width: 100%; /* Set width to 100% */
@@ -55,7 +50,6 @@
 					<input type="button" class="btn" value="로그아웃" id="intro-login-btn">
 				</c:otherwise>
 			</c:choose>
-			<!-- <input type="button" class="btn" value="메인으로" id="intro-buying-btn" data-toggle="modal" data-target="#apollokey-modal-dialog"> -->
 		</div>
 	</div>
 </nav>
@@ -68,7 +62,7 @@
 					<div class="intro-page-top-img-content">
 						<div id="intro-page-top-img-content-logo">Welcome To Apollo</div>
 						<br>
-						<div id="intro-page-top-img-content-sub">Easy, Too Faster</div>
+						<div id="intro-page-top-img-content-sub">Much Easier, Faster</div>
 					</div>
 					<div class="intro-page-top-img-cover"></div>
 				</div>
@@ -117,13 +111,6 @@
 		<div class="row">
 			<div>
 				<div id="intro-page-slide" class="carousel slide" data-ride="carousel">
-					<!-- <ol class="carousel-indicators">
-						<li data-target="#intro-page-slide" data-slide-to="0" class="active"></li>
-						<li data-target="#intro-page-slide" data-slide-to="1"></li>
-					</ol>
-
-					<br> -->
-					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
 							<div class="intro-page-slide-img1">

@@ -25,4 +25,6 @@ public interface InboxDAO {
 	public int newCount(String mid);
 	
 	public int updateNewCount(String mid);
+	
+	public int updateNewCheckSent(String mid);
 }

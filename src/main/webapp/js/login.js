@@ -12,6 +12,7 @@ $(function() {
 		$("#keybtn").click(function() {
 			if ($('#company-name-content').val() == "") {
 				alert('회사명을 입력해주세요.');
+				$("#company-name-content").focus();
 				return false;
 			}
 			if ($('#user-email-content').val() == "") {
@@ -72,6 +73,7 @@ $(function() {
 					} else {
 						alert('입력하신  Email이 존재하지 않습니다.\n다시한번 확인 하시기 바랍니다.')
 					}
+					$(".close").click();
 				}
 			})
 		})

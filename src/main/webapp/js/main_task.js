@@ -8,7 +8,8 @@
  작성자명 : 김 정 권
  */
 $(document).on("click",".Task_RUD_Modal",function(){
-		
+	
+	
 		var temptid = $(this).attr('id'); 
 		var tid =parseInt(temptid.substring(1));
 		$.ajax(
@@ -21,7 +22,6 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			           success : function(rdata){
 			        	   console.log('성공!')
 			        	   console.log(rdata);
-
 			        	   // tid
 			        	   var tid = rdata.task.tid;
 			        	   $('#tidhidden').attr('value', tid);
@@ -190,6 +190,8 @@ $(document).on("click",".Task_RUD_Modal",function(){
 //			        	   $('#').empty();
 //			        	   $('#').append(rdata.task.tname);
 			        	   
+			        	   $(".starred-secondbody-image").hide();
+			        		$(".modal-content").show();	
 			        	   
 			           } // end-success
 			        } 
@@ -212,46 +214,41 @@ $(document).on("click","#task_star",function(){
 	if(star_class == 'far fa-star'){
 		starAddOrDel = 1;
 	}
-	
 	// if 차있는 별(이미 즐겨찾기 한 일)
 	else {
 		starAddOrDel = 0;
 	}
-	
-	$.ajax(
-		       {
-		           type : "post",
-		           url  : "addordeletestar.htm",
-		           data : {
-		        	   'tid': tid,
-		        	   'starAddOrDel': starAddOrDel
-		           },
-		           success : function(rdata){
+		$.ajax({
+		type : "post",
+		url : "addordeletestar.htm",
+		data : {
+			'tid' : tid,
+			'starAddOrDel' : starAddOrDel
+		},
+		success : function(rdata) {
 
-		        	   console.log(rdata);
-		        	   
-		        	   if(rdata.result == 'added'){
-		        		  
-		        		   // 클릭시 별을 채워준다
-		        		   $('#task_star').attr('class','fas fa-star');
-		        		   
-		        	   }else {
-		        		 
-		        			// 클릭시 별을 비워준다
-		        			$('#task_star').attr('class','far fa-star');
-		        	   }
-		        	   
-		           } // end-success
-		        }); // end-ajax
+			console.log(rdata);
+
+			if (rdata.result == 'added') {
+
+				// 클릭시 별을 채워준다
+				$('#task_star').attr('class', 'fas fa-star');
+
+			} else {
+
+				// 클릭시 별을 비워준다
+				$('#task_star').attr('class', 'far fa-star');
+			}
+
+		} // end-success
+	}); // end-ajax
 	
 });
 
 
 /**
  * 
- 날      짜 : 2018. 6. 20.
- 기      능 : Task 삭제 버튼
- 작성자명 : 김 정 권
+ * 날 짜 : 2018. 6. 20. 기 능 : Task 삭제 버튼 작성자명 : 김 정 권
  */
 $(document).on("click","#task_trash_btn",function(){
 	
@@ -684,10 +681,11 @@ $(document).on("click","#task_modal_add_assignee",function(){
  */
 $(document).on("click",".popup_member",function(){
 
+	
+	
 	var mid = $(this).attr('id'); // 추가할 대상자
 	var tid = $('#tidhidden').attr('value');
 	var tname = $('#tnamehidden').attr('value');
-
 $.ajax(
 	       {
 	           type : "post",
@@ -698,61 +696,71 @@ $.ajax(
 	        	   'tname' : tname
 	           },
 	           success : function(rdata){
-	        	   
+	        	   $.when(reappendassignee(tid)).done(function(data){
+	        		   send("assign");        //웹 소켓 send 함수 추가
+	        		   event.stopPropagation();
+	        	   });
+
 	        	   console.log(rdata.result);
 	        	   $("#assignee_popup_div").css("background-color","#FFFFFF");
 	        	   $("#assignee_popup_div").css({"display":"none","left":"-20000px","top":"-20000px"});
 	        	   
 	        	   // 갱신된 assignee들 append
-	        	   $.ajax(
-	        		       {
-	        		           type : "post",
-	        		           url  : "reappendassignee.htm",
-	        		           data : {
-	        		        	   'tid': tid,
-	        		           },
-	        		           success : function(rdata){
 
-	        		        	console.log(rdata);
-	     		        	   $('#Task_Modal_assignee').empty();
-
-	     		        	   var assigneestr = '';
-	     		        	   var profile_count = 0;
-	     		        	   $(rdata.sametaskmemberlist).each(function(){
-	     		        		   
-	     		        		   if(this == null){
-	     		        			   assigneestr += '<span>해당 Task의 담당자가 존재하지 않습니다</span>&nbsp&nbsp&nbsp';
-	     		        			   assigneestr += '<i id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
-	     		        			   return false;
-	     		        		   }
-	     		        		   
-	     		        		   if((profile_count%4 == 0)&&(profile_count != 0)) {
-	     		        			   assigneestr += '<br><br>'
-	     		        		   }
-	     		        		   
-	     		        		   assigneestr += '<span>'
-//	     		        	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
-	     		        	       assigneestr += '<img src="img/'+ 'user.png' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
-	     		        	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
-	     		        	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
-	     		        	       assigneestr += '</span>'
-	     		        	       assigneestr += '&nbsp&nbsp&nbsp'
-	     		        	       profile_count ++;
-	     		        	   });
-	     		        	   	   assigneestr += '<i id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
-	     		        	   
-	     		        	   $('#Task_Modal_assignee').append(assigneestr);
-	    			        	   
-	    			           // comment
-	    			           getCommentAndMemberlist();
-	    			        	   
-	        		           } // end-success
-	        		        }); // end-ajax
 	        	   
 	           } // end-success
+	           
+	           
 	        }); // end-ajax
 
 });
+
+function reappendassignee(tid){
+	var ajax =$.ajax(
+	       {
+	           type : "post",
+	           url  : "reappendassignee.htm",
+	           data : {
+	        	   'tid': tid,
+	           },
+	           success : function(rdata){
+	        
+	        	console.log(rdata);
+      	   $('#Task_Modal_assignee').empty();
+
+      	   var assigneestr = '';
+      	   var profile_count = 0;
+      	   $(rdata.sametaskmemberlist).each(function(){
+      		   
+      		   if(this == null){
+      			   assigneestr += '<span>해당 Task의 담당자가 존재하지 않습니다</span>&nbsp&nbsp&nbsp';
+      			   assigneestr += '<i id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+      			   return false;
+      		   }
+      		   
+      		   if((profile_count%4 == 0)&&(profile_count != 0)) {
+      			   assigneestr += '<br><br>'
+      		   }
+      		   
+      		   assigneestr += '<span>'
+//      	       assigneestr = '<img src="img/'+ this.image + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+      	       assigneestr += '<img src="img/'+ 'user.png' + '" id="' + this.mid + '" class="taskmodal_memberprofile"/>';
+      	       assigneestr += '&nbsp<span style="background-color:#f0f0f0; margin-right: 5px">' + this.mname + '&nbsp&nbsp';
+      	       assigneestr += '<i class="fas fa-times task_page_delete_assignee_btn" style="color:#808B96; cursor:pointer" id="' + this.mid + '"></i></span>';
+      	       assigneestr += '</span>'
+      	       assigneestr += '&nbsp&nbsp&nbsp'
+      	       profile_count ++;
+      	   });
+      	   	   assigneestr += '<i id="task_modal_add_assignee" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+      	   
+      	   $('#Task_Modal_assignee').append(assigneestr);
+	        	   
+	           // comment
+	           getCommentAndMemberlist();
+	           } // end-success
+	        }); // end-ajax
+	return ajax;
+}
 
 
 /**
@@ -1055,8 +1063,8 @@ var getCommentAndMemberlist = (function (){
 		        
 		        	   
 		           } // end-success
+		           
 		        }); // end-ajax
-	   
 });
 
 
@@ -1131,12 +1139,16 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
   // 엔터키 칠 시
   if (event.keyCode === 13) {
 	   var tid = $('#tidhidden').attr('value');
-	   var comments = $('#comment_input_box_in_taskmodal').val();	   
-	   $.when(insertCommentReceiver(tid,comments)).done(function(data){
-		   send(); //웹 소켓 send 함수 추가
-		   event.stopPropagation();
-		   $('#comment_input_box_in_taskmodal').val('');
-	   });
+	   var comments = $('#comment_input_box_in_taskmodal').val();
+	   console.log(comments);
+	   if(comments != ""){
+		   $.when(insertCommentReceiver(tid,comments)).done(function(data){
+			   send(); //웹 소켓 send 함수 추가
+			   event.stopPropagation();
+			   $('#comment_input_box_in_taskmodal').val('');
+		   });
+	   }
+	   
   } // end - keyCode=13
 });
 
@@ -1157,12 +1169,9 @@ function insertCommentReceiver(tid,comments){
 		   },
 		   success : function(rdata){
 			   console.log('success 성공 테스트 출력 : ' + rdata);
-			   
 			   // comment
 			   getCommentAndMemberlist();
-
-		   } // end-success
-		   
+		   } // end-success	   
 	   }); // end-ajax
 	return ajax;
 }

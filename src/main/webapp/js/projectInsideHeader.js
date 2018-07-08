@@ -17,22 +17,38 @@ $(function() {
 	})
 	
 	
+	
 	// 프로젝트 table 페이지
 	$(document).on("click","#table-page",function(){
+		var loading = '<img src="img/loading.gif/>"';
 		$.ajax({
 			url:"table.htm",
 			dataType:"html",
+			beforeSend:function(){
+				console.log($('#main-box').html(loading));
+				$('.main-body-container').html(loading);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				$("#table-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected");
 				//step 또는 folder data 가 존재하지 않을 경우 이미지로 대체 
 				if($('#project-page-tbody').children().length != 0) {
-					$('#project-page-table-no-data').remove();
+				$('#project-page-table-no-data').remove();
 				}
 			}
 		})
-	})
+	});
+	
+	//table 페이지에서 step 담당자 img 클릭 시 
+	$(document).on("click",".project-table-member-td",function(evt){
+		//console.log($(this).siblings()); 
+		//console.log($(this).children('input').val());
+	    var mid = $(this).children('input').val(); // mid 만 가져오기
+	    
+	    profileinfo(mid);	    
+	}); // end member img
+	
 	
 	// 프로젝트 table 페이지에서 select로 tstatus 변경 시 
 	$(document).on("change","#table-status-button",function(){
@@ -50,20 +66,10 @@ $(function() {
 			}
 		}		
 	});
-	
-	$(document).on("click",'.project-table-member-image',function(){
-		
-	});
-	
-	
-	/*$(document).on("click","#project-table-tr-steps",function(){
-		
-	});*/
+
 
 	
-	// 프로젝트 files 페이지\
-	
-	
+	// 프로젝트 files 페이지
 	$(document).on("click","#files-page",function(){	
 		$.ajax({
 			url:"files.htm",
@@ -72,9 +78,9 @@ $(function() {
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				$("#files-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected");
-				if($(".file-table-tr-td").children().length !=0){
-					$("#project-page-table-no-data").remove();
-				};
+				if($("#file-tbody").children().length !=0){
+					$("#project-page-table-no-data").remove()
+				}
 			}
 		});
 	});

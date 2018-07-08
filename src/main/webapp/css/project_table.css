@@ -1,6 +1,12 @@
 .project-page-table{
 	width:95%;
 }
+.project-page-table>thead>tr>th {
+	text-align: center;
+	background-color: #e6e7e8;
+	color:#978d8b;
+	overflow: hidden;
+}
 .project-table-tr-steps {
 
 	background-color: #8d949a0f;
@@ -63,5 +69,9 @@
 }
 
 .project-table-member-td {
-	padding-left: 6%;
+	padding-left: 6% !important;
+}
+.project-table-member-td:hover {
+	cursor:pointer;
+	background-color: #e0e0e0;
 }

@@ -362,8 +362,8 @@
 					</div>
 
 					<div class="col-sm-2" id="star_trash">
-						<span id="span_task_star"></span>&nbsp&nbsp
-						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
+						<span id="span_task_star"></span>&nbsp;&nbsp;
+						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp;&nbsp;&nbsp;
 						<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
 					</div>
 					
@@ -385,12 +385,12 @@
 					</div>
 							
 					<div class="col-sm-5">
-	                    <span>시작일&nbsp:&nbsp</span>
+	                    <span>시작일&nbsp;&nbsp;</span>
                    		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date_sday">
 					</div>
 
 					<div class="col-sm-5">
-						<span>종료일&nbsp:&nbsp</span>
+						<span>종료일&nbsp;&nbsp;</span>
 	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date_eday">
 					</div>
 				</div>
@@ -423,7 +423,7 @@
                 <hr />
                 
 				<div class="modal-title">
-					<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
+					<p>상세설명&nbsp;&nbsp;<img id="task_detail_status" src="img/loader.gif"></p>
 					<div style="text-align:center">
 					<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
 					</div>
@@ -467,7 +467,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">PROFILE</h4>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body profile-modal-body">
 				<div class="col-sm-4 profile-modal-left">
 					<div id="profile-modal-img-content">
 						<img id="profile-modal-img" src="">
@@ -686,7 +686,7 @@
 								<span class="caret"></span>
 							
 							</div>
-							<ul id="move-step-folder-options" class="dropdown-menu "
+							<ul id="move-step-folder-options" class="dropdown-menu"
 								role="menu" aria-labelledby="move-step-folder-list">
 							</ul>
 						</div>
@@ -897,19 +897,19 @@
 						<div class="edit-profile-part2">
 							<div class="edit-profile-all-title">
 								<label class="edit-profile-title" for="edit-profile-cpwd">현재 비밀번호</label> 
-								<input type="password" name="pwd" class="edit-pwd-input-tag" id="edit-profile-cpwd">
+								<input type="password" name="pwd" id="edit-profile-cpwd">
 							</div>
 							<div class="edit-profile-all-title">
 								<label class="edit-profile-title" for="edit-profile-upwd">변경 비밀번호</label> 
-								<input type="password" name="pwd" class="edit-pwd-input-tag" id="edit-profile-upwd">
+								<input type="password" name="pwd" id="edit-profile-upwd">
 							</div>
 							<div class="edit-profile-all-title">
 								<label class="edit-profile-title" for="edit-profile-upwd2">변경 비밀번호 확인</label> 
-								<input type="password" name="pwd2" class="edit-pwd-input-tag" id="edit-profile-upwd2">
+								<input type="password" name="pwd2" id="edit-profile-upwd2">
 							</div>
 						</div>
 						<div align="center">
-							<input type="button" class="btn add-btn" id="update-pwd-btn" value="수정">
+							<input type="button" class="btn" id="update-pwd-btn" value="비밀번호 변경">
 						</div>
 					</fieldset>
 				</form>
@@ -981,7 +981,7 @@
 
 	<!-- 로그아웃 -->
 	<div class="modal fade" id="hedaer-logout-dialog" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog logout-modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content modal-header-logout-content">
 				<div class="modal-header">
@@ -1021,9 +1021,6 @@
 					</select>
 				<br>
 				
-				<br>Report 명을 입력해주세요(공백, 특수문자 사용 불가)<br>
-				<input type="text" id="report_file_name">
-					<br>
 					<br>
 					<div align="center">
 						<input type="button" class="btn add-btn" id="download_report_btn" value="다운로드">&nbsp;&nbsp;&nbsp;

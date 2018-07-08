@@ -127,6 +127,7 @@ public class SidebarController {
 		try {
 			projectlist = sidebarservice.selectProjectList(mid);
 			model.addAttribute("projectlist",projectlist);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("selectProjectList Controller 에러");

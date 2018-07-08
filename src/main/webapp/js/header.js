@@ -10,7 +10,7 @@ $(function() {
 	
 	// 헤더 inbox 페이지
 	$("#inbox-page").click(function(evt){
-		$("#inbox_count").empty();
+		$("#inbox_count").hide();
 		$.ajax({
 			type:"GET",
 			url:"inbox.htm",
@@ -20,6 +20,7 @@ $(function() {
 				$("#main-box").append(data);
 				$('#incomming-page').css('border-bottom','2px solid transparent');
 				$('#incomming-page').css('border-color','#286cb0');
+				
 			}
 		})
 	});
@@ -152,16 +153,17 @@ $(function() {
 				
 				if(data.updatemember > 0) {
 					alert('개인정보수정이 완료되었습니다!');
-					$(".close").click();
 				}else {
 					alert('개인정보수정에 실패되었습니다');
-					$(".close").click();
+					
 				}
+				$(".close").click();
 				
 			} // end - success
 		}); // end- ajax
 		$("#edit-profile-form").submit();
 	}); // end - click
+
 	
 	//개인정보수정 Modal에서 인증확인 버튼 클릭시 실행되는 함수
 	$('#profile-apollokey-check').click(function() {
@@ -172,9 +174,13 @@ $(function() {
 			url:"updatekeycheck.htm",
 			data:{apollokey:apollokey},
 			success:function(data){
+				if($('#edit-profile-apollokey').val() == ""){
+					alert('인증키를 입력해주세요');
+					$('#edit-profile-apollokey').focus();
+					return false;
+				}
 				if(data.result == "success"){
 					alert('인증키가 확인되었습니다!');
-					
 				}else {
 					alert('등록되지 않은 인증키입니다');
 					$('#edit-profile-apollokey').focus();
@@ -236,14 +242,25 @@ $(function() {
 				// 비밀번호 변경
 				if(data.count > 0){
 					alert('비밀번호 변경이 완료되었습니다');
-					$(".close").click();
 				}else {
 					alert('비밀번호 변경이 실패되었습니다');
-					$(".close").click();
+					
 				}
+				$("#edit-profile-cpwd").val("");
+				$("#edit-profile-upwd").val("");
+				$("#edit-profile-upwd2").val("");
+				$(".close").click();
 				
 			}
 		}); // end - ajax
+		$("#edit-profile-upwd2").on("keyup", function(event){
+			event.preventDefault();
+			if (event.keyCode === 13) {
+				document.getElementById("update-pwd-btn").click();
+			}
+		
+		
+		});
 	});
 	////////////////////////////래영  end/////////////////////////////////
 	
@@ -439,7 +456,7 @@ function resultSearchProject(projectlist){
 }// end	
 	
 /**
- * 
+ * 	
  날   짜 : 2018. 6. 26.
  기   능 : 스텝 검색 결과를 만들어주는 함수 
  작성자명 : 박 민 식
