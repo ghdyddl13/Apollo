@@ -807,7 +807,7 @@
 		   				</span>
 					</form>
 					<script type="text/javascript">
-						/* $(function(){
+						 $(function(){
 							$("#edit-profile-image").fileupload({
 								dataType:"json",
 								add:function(e,data){
@@ -825,7 +825,7 @@
 									
 								}								
 							})
-						}) */
+						}) 
 					</script>
 
 				</div>
@@ -1043,6 +1043,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" id="list_status_tasks_dismiss_btn">&times;</button>
 					<h4 class="modal-title">Task 상태 변경</h4>
+					<input type="hidden" id="list_status_selectedtstatusid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
 				<h4 id="list-task-status-ment"></h4>					
@@ -1064,9 +1065,10 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" id="list_assign_tasks_dismiss_btn">&times;</button>
 					<h4 class="modal-title">Task 할당</h4>
+					<input type="hidden" id="list_assign_selectedtmid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
-				<h4 id="list-task-assign-ment">선택한 Task들을 해당 Step에 할당하시겠습니까?<br></h4>					
+				<h4 id="list-task-assign-ment"></h4>					
 					<div align="center">
 						<input type="button" class="btn add-btn" id="list_Assign_Tasks_btn" value="할당">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"
@@ -1085,6 +1087,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" id="list_addstep_tasks_dismiss_btn">&times;</button>
 					<h4 class="modal-title">Step 추가</h4>
+					<input type="hidden" id="list_addstep_selectedsid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
 				<h4 id="list-addstep-tasks-ment"></h4>					

@@ -19,7 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getStarredTasks" resultType="com.apollo.vo.MyWorkTaskDTO">
 		select t.TID, t.TNAME, t.SDAY, t.EDAY,t.DETAIL,t.PID, t.CTIME,t.TSTATUSID , s.TSTATUS,s.COLOR  
 		from task t 
-		join TASKINSTEP ts on t.TID = ts.TID
 		join TSTATUS s on t.TSTATUSID = s.TSTATUSID
 		where t.TID in (select tid from starredtask where mid=#{mid})
 	</select>

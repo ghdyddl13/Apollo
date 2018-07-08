@@ -346,10 +346,6 @@ public class MemberController {
 		return jsonview;
 	}
 	
-	public String changeProfile(MemberDTO memberdto, Model model) {
-		
-		return null;
-	}
 	
 	public String showMember(String s1, Model model) {
 		return null;
@@ -482,7 +478,6 @@ public class MemberController {
 	 */
 	@RequestMapping(value="/updatememberimage.htm",method=RequestMethod.POST)
 	public View updateMemberImage(HttpSession session, MultipartHttpServletRequest request,ModelMap map) {
-		System.out.println("프로필 수정 컨트롤러 도착");
 		String mid = (String) session.getAttribute("mid");
 		LinkedList<filedataDTO> files = service.memberProfileUpdate(mid, request);
 		map.addAttribute("profile",files);
