@@ -29,12 +29,12 @@ public class MyworkController {
 	public String showMyworkPage(HttpSession session,HttpServletRequest request,ModelMap map) {
     	session.setAttribute("location", "/myWork.htm");
 		String mid = (String)request.getSession().getAttribute("mid");
-		
+		System.out.println(mid);
 		Map<String, List<MyWorkTaskDTO>> taskmap=null;
 		try {
 			taskmap = service.getMyWork(mid);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		map.addAttribute("todaylist", taskmap.get("todaylist"));

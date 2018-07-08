@@ -296,6 +296,9 @@ $(function() {
 					$("#update-project-detail").val(project.detail);
 					$("#update-project-detail-"+project.methodologyid).attr("checked","checked");
 					$("#update-project-pname").val(project.pname);
+					$("#update-project-methodologyid-"+project.methodologyid).attr("checked","true")
+					
+					
 				},
 				error:function(error){
 					console.log(error);
@@ -319,7 +322,9 @@ $(function() {
 			console.log(project);
 			
 			$.when(updateProject(project)).done(function(data){
+				console.log(data.projectDTO);
 				if(data.result=="1"){
+					$($("#p"+data.projectDTO.pid).find(".side-content-name")[0]).text(data.projectDTO.pname);
 					alert("프로젝트 정보가 수정되었습니다");
 				}else{
 					alert("프로젝트 정보 수정에 실패하였습니다.");
