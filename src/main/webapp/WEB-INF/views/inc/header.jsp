@@ -17,7 +17,10 @@
 				<li class="nav-item"><a class="nav-link main-header-menu"
 					id="myWork-page" style="color: white">My work</a></li>
 				<li class="nav-item"><a class="nav-link main-header-menu"
-					id="inbox-page" style="color: white">Inbox<span id="inbox_count" style="color: red"></span></a></li>
+					id="inbox-page" style="color: white">Inbox
+					<span id="inbox_count" style="text-align:center; font-size:12px; color: white;  margin-left:5px; padding-left:5px; padding-right :5px; background-color:#B9062F; border-radius: 10px; ">
+					<b id="inbox_count_b">${newcount}</b>
+					<b id="inbox_count_c"></b></span></a></li>
 				<li class="nav-item"><a class="nav-link main-header-menu"
 					id="starredTask-page" style="color: white">Starred Task</a></li>
 				<li class="nav-item"><a class="nav-link main-header-menu"

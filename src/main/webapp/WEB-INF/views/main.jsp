@@ -151,6 +151,7 @@
 <body >
 	
 	<div class="Apollo-main">
+	
 		<div class="main-header-panel" >
 			<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
 		</div>
@@ -162,7 +163,8 @@
 				<div  id="main-box"></div>
 			</div>	
 		</div>
+		<jsp:include page="/WEB-INF/views/inc/modalPages.jsp" ></jsp:include>
 	</div>
-	<jsp:include page="/WEB-INF/views/inc/modalPages.jsp" ></jsp:include>
+	
 </body>
 </html>

@@ -200,7 +200,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   $('#Task_Modal_files').append(filesdivs);
 			        	   
 			        	   $(".starred-secondbody-image").hide();
-			        		$(".modal-content").show();	
+			        		$(".modal-content2").show();	
 			        	   
 			           } // end-success
 			        } 

@@ -21,6 +21,8 @@ function addTaskView(tstatusid){
 function addTask_keyup(tstatusid){
    let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
       if(event.which==13){
+    	  
+    	  $("#insert-task"+tstatusid).attr("readonly", true);
          let newtask=$.trim($('#insert-task'+tstatusid).val());
       
         if(newtask===""){
@@ -38,6 +40,7 @@ function addTask_keyup(tstatusid){
                    success:function(data){
                       $("#main-box").empty();
                       $("#main-box").append(data);
+                      $("#insert-task"+tstatusid).attr("readonly", false);
                       doDraggable();
                    }  
                 })
