@@ -54,6 +54,7 @@ $(function() {
 	      //문자열이 빈값이면 발생하는 함수가 아무것도 없음
 	    }else{
 	   	  $("#insert-task").val("");
+	   	 $("#insert-task").attr("readonly", true);
 	      $.ajax(
 	              {
 	                url:"listtaskcreate.htm",
@@ -67,7 +68,9 @@ $(function() {
 						$("#main-box").append(data);
 						$("#list-task-adder").remove();
 						$("#body-start").prepend("<div class='list-task-adder-addmode'><input class='form-control' id='insert-task' name='tname' type='text' placeholder='새로운 작업을 입력하세요'></div>");
+						$("#insert-task").attr("readonly", false);
 						$("#insert-task").focus();
+						
 	                }
 	              }
 	      )

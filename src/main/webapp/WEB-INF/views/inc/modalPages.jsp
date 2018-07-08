@@ -993,7 +993,7 @@
 					<div>정말 로그아웃하시겠습니까?</div>
 					<br>
 					<div align="center">
-						<input type="button" class="btn add-btn" id="logout-btn" value="확인" onclick="location.href='logout.htm'">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn add-btn" id="logout-btn" value="확인">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
 					</div>
 				</div>
