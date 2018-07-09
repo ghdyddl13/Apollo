@@ -159,7 +159,7 @@ public class MemberController {
 		int result = 0;
 		String viewpage="";
 		String emailcheckkey = "";
-		String msg="";
+		String emailmsg="";
 		for (int i = 0; i < 8; i++) {
 			char lowerStr = (char) (Math.random() * 26 + 97);
 			if (i % 2 == 0) {
@@ -197,12 +197,12 @@ public class MemberController {
 		}
 		result = service.insertMember(memberdto);
 		if(result > 0) {
-			msg="입력하신 E-Mail로 인증메일을 전송했습니다. 메일 인증을 하지 않으면 로그인을 할 수 없습니다.";
-			viewpage = "redirect:/login.htm";
+			emailmsg="가입하신 E-Mail로 인증메일을 전송했습니다.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;메일 인증을 하지 않으면 로그인을 할 수 없습니다.";
+			viewpage = "login";
 		}else {
 			viewpage = "join.htm";
 		}
-		model.addAttribute("msg", msg);
+		model.addAttribute("emailmsg", emailmsg);
 		return viewpage; //주의 (website/index.htm
 	}	
 	

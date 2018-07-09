@@ -1092,7 +1092,7 @@ label {
 	border-radius: 3px;
 	border: 1px solid #dddddd;
 	width:100%;
-	height: 30px;
+	height: 40px;
 	padding:0.5em
 }
 .join-input-title{
@@ -1522,5 +1522,15 @@ label {
 
 #freetrial-h{
    font-size: 20px;
+}
+
+.login-msg{
+	margin-bottom: 15px;
+	color:#b9062f;
+} 
+
+.email-msg{
+	margin-bottom: 15px;
+	color:#000069;
 }
 
