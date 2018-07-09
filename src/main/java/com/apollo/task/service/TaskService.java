@@ -28,7 +28,7 @@ import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
-import com.apollo.utils.DownloadFileUtils;
+import com.apollo.utils.DeleteFileUtils;
 import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
@@ -734,17 +734,44 @@ public class TaskService {
 		return filelist;
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 삭제
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<FileDTO> deleteFile(int tid, String filename, String filepath) {
+		
+		System.out.println("delete file 서비스 시작");
+		try {
+			DeleteFileUtils.deleteFile(filepath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("파일 삭제 완전히 완료");		
+		
+		FileDAO dao = session.getMapper(FileDAO.class);
+		int result = dao.deleteFile(filename);
+		System.out.println("RDB 에서 파일 삭제 완료");
+		
+		ArrayList<FileDTO> filelist = new ArrayList();
+		filelist = dao.getFileList(tid);
+		System.out.println("새 목록 가져와서 view로 던져줌");
+		
+		return filelist;
+	}
 	
 	
 	public void downLoadFileInTaskModal(String filename) {
 	
-		String downloadPath = "resources\\upload_files\\" + filename;
-		
-		try {
-			DownloadFileUtils.downFiles(downloadPath);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		String downloadPath = "resources/upload_files/" + filename;
+//		
+//		try {
+//			DownloadFileUtils.downFiles(downloadPath);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 	}
 	
