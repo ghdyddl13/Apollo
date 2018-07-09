@@ -1,6 +1,10 @@
 package com.apollo.member.service;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -8,18 +12,22 @@ import java.util.LinkedList;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.amazonaws.util.IOUtils;
 import com.apollo.member.dao.AuthkeyDAO;
 import com.apollo.member.dao.MemberDAO;
+import com.apollo.utils.S3Util;
 import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.AuthkeyDTO;
 import com.apollo.vo.GoogleDTO;
 import com.apollo.vo.MemberDTO;
-import com.apollo.vo.StepDTO;
 import com.apollo.vo.filedataDTO;
 
 
@@ -36,6 +44,8 @@ public class MemberService {
 	@Autowired
 	private VelocityEngine velocityEngine;
 	
+	S3Util s3 = new S3Util();
+	String bucketName = "projectapollo";
 	
 	/**
 	 * 
@@ -414,6 +424,38 @@ public class MemberService {
 		int pid = dao.getminprojectid(mid);
 		
 		return pid;
+	}
+	public ResponseEntity<byte[]> getMemberImage(String fileName) throws Exception{
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		HttpURLConnection uCon = null;
+
+		String inputDirectory = "resources/member_profile/";
+
+
+
+
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			URL url;
+			try {
+				url = new URL(s3.getFileURL(bucketName, inputDirectory+fileName));
+				uCon = (HttpURLConnection) url.openConnection();
+				in = uCon.getInputStream(); // 이미지를 불러옴
+			} catch (Exception e) {
+				url = new URL(s3.getFileURL(bucketName, "default.jpg"));
+				uCon = (HttpURLConnection) url.openConnection();
+				in = uCon.getInputStream();
+			}
+
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		return entity;
 	}
 	
 

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -81,10 +82,19 @@ public class MemberController {
 	@RequestMapping("/main.htm")
 	public String main(Model model,  HttpServletRequest request) {
 		String mid = (String) request.getSession().getAttribute("mid");
-		 MemberDTO memberdto = service.getProfileInfoMember(mid);
-		 model.addAttribute("memberdto", memberdto);
+		
+		MemberDTO memberdto = service.getProfileInfoMember(mid);
+		ResponseEntity<byte[]> imagefile=null;
+		try {
+			imagefile = service.getMemberImage(memberdto.getImage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("memberdto", memberdto);
 		int newcount = inboxservice.newCount(mid);
 		model.addAttribute("newcount", newcount);
+		model.addAttribute("imagefile", imagefile);
 		return "main";
 	}
 	/**

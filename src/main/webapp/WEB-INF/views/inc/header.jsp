@@ -42,7 +42,7 @@
 						</c:when>
 						<c:otherwise>
 							<div>
-								<img src="profileImg/${m.image}" id="loginimg">
+								<img src='displayFile?fileName=${imagefile}' />
 							</div>
 						</c:otherwise>
 					</c:choose> 
