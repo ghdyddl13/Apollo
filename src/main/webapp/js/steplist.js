@@ -191,29 +191,119 @@ $(function() {
 	 기   능 : Mess Edit에서 할당자를 추가 할 시에 발생하는 함수
 	 작성자명 : 이 진 우
 	 */
-	$(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
-		let checkboxcount= checkbox.length;
-		let mid ="jinwoo@naver.com" ;
-		$("#list-task-assign-ment").html("에게 "+checkboxcount+"개 Task를 할당하시겠습니까?")
-	});
-	$(document).on("click","#list_Assign_Tasks_btn",function(){
-		if(checkbox.length==0){
-			alert("왜 테스크가 없지..?")
-			$('#list_assign_tasks_dismiss_btn').click();
-		}else{
-			$.ajax({
-				type : "POST",
-				url : "listassigntasks.htm",
-				data :{mid:mid,tasks:checkbox},
-				success : function(data) {
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					$('#list_assign_tasks_dismiss_btn').click();
-					checkbox = [];
-				}
-			})
-		}
-	})
+    $(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
+        let p =$("#selectpage-addasignee-button");
+        let position = p.position();
+        let x_position =$(window).width()-790;
+        $(".list-section-third-addasignee").css({"visibility":"visible","left":x_position,"top":position.top-100});
+        $(".list-section-third-addasignee-memberlist").empty();
+        let memberlisttag="";
+        $.each(list_memberlist,function(index,element) {
+          let mid = element.mid;
+          let mname = element.mname;
+          //let image = element.image
+          memberlisttag+='<div class="list-section-third-addasignee-member" data-toggle="modal" data-target="#list_Assign_Tasks" id="'+mid+'">';
+          memberlisttag+='<div class="list-section-third-addasignee-member-container"><div class="list-section-third-addasignee-member-tag"><div class="list-section-third-addasignee-member-image-wrapper">';
+          memberlisttag+='<img class="list-section-third-addasignee-member-image"src="img/user.png" alt=""></div>';
+          memberlisttag+='<div class="list-section-third-addasignee-member-textcontainer"><div class="list-section-third-addasignee-member-mname">';
+          memberlisttag+= mname;
+          memberlisttag+= '</div><div class="list-section-third-addasignee-member-mid">';
+          memberlisttag+= mid;
+          memberlisttag+= '</div></div></div></div></div>';
+        })
+        $(".list-section-third-addasignee-memberlist").append(memberlisttag);
+      })
+      $(document).bind("mousedown", function(e) {
+        if (!$(e.target).parents(".list-section-third-addasignee").length > 0) {
+          $("#assign-insert_member").val("");
+          $(".list-section-third-addasignee").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+        }
+      });
+      $(document).on("keyup","#assign-insert_member",function(event) {
+        var piece=$.trim($(this).val());
+        let memberlisttag='';
+        $(".list-section-third-addasignee-memberlist").empty();
+        $.each(list_memberlist,function(index,element) {
+          let mname = element.mname;
+          let mid = element.mid;
+          let namecheck=mname.indexOf(piece);
+          let emailcheck=mid.indexOf(piece);
+          if(namecheck==-1&&emailcheck==-1){
+            //다른 연산 없이 그냥 패스
+          }else{
+            mname = mname.replace(piece,"<b>"+piece+"</b>");
+            mid= mid.replace(piece,"<b>"+piece+"</b>");
+            memberlisttag+='<div class="list-section-third-addasignee-member" id="'+mid+'">';
+            memberlisttag+='<div class="list-section-third-addasignee-member-container"><div class="list-section-third-addasignee-member-tag"><div class="list-section-third-addasignee-member-image-wrapper">';
+            memberlisttag+='<img class="list-section-third-addasignee-member-image"src="img/user.png" alt=""></div>';
+            memberlisttag+='<div class="list-section-third-addasignee-member-textcontainer"><div class="list-section-third-addasignee-member-mname">';
+            memberlisttag+= mname;
+            memberlisttag+= '</div><div class="list-section-third-addasignee-member-mid">';
+            memberlisttag+= mid;
+            memberlisttag+= '</div></div></div></div></div>';
+          }
+        })
+        $(".list-section-third-addasignee-memberlist").append(memberlisttag);
+        
+        if(event.which==27){
+          $("#assign-insert_member").val("");
+          $(".list-section-third-addasignee").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+        }
+      });
+      $(document).on("click",".list-section-third-addasignee-member",function(){
+        let mid=  $(this).attr("id")
+        let mname=$.trim($(this).children().children().children(".list-section-third-addasignee-member-textcontainer").children(".list-section-third-addasignee-member-mname").text());
+        console.log(mname);
+        $(".list-section-third-addasignee").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+        $("#assign-insert_member").val("");
+        let checkboxcount= checkbox.length;
+        $("#list-task-assign-ment").html(mname+"에 "+checkboxcount+"개 Task를 추가하시겠습니까?")
+        $("#list_assign_selectedtmid").val(mid);
+      })
+      
+      $(document).on("click","#list_Assign_Tasks_btn",function(){
+        let mid=$("#list_assign_selectedtmid").val();
+        if(checkbox.length==0){
+          alert("왜 테스크가 없지..?")
+          $('#list_assign_tasks_dismiss_btn').click();
+        }else{
+          $.ajax({
+            type : "POST",
+            url : "listassigntasks.htm",
+            data :{mid:mid,tasks:checkbox},
+            success : function(data) {
+              $("#main-box").empty();
+              $("#main-box").append(data);
+              $('#list_assign_tasks_dismiss_btn').click();
+              checkbox = [];
+            }
+          })
+        }
+      })
+	
+//	$(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
+//		let checkboxcount= checkbox.length;
+//		let mid ="jinwoo@naver.com" ;
+//		$("#list-task-assign-ment").html("에게 "+checkboxcount+"개 Task를 할당하시겠습니까?")
+//	});
+//	$(document).on("click","#list_Assign_Tasks_btn",function(){
+//		if(checkbox.length==0){
+//			alert("왜 테스크가 없지..?")
+//			$('#list_assign_tasks_dismiss_btn').click();
+//		}else{
+//			$.ajax({
+//				type : "POST",
+//				url : "listassigntasks.htm",
+//				data :{mid:mid,tasks:checkbox},
+//				success : function(data) {
+//					$("#main-box").empty();
+//					$("#main-box").append(data);
+//					$('#list_assign_tasks_dismiss_btn').click();
+//					checkbox = [];
+//				}
+//			})
+//		}
+//	})
 	/**
 	 * 
 	 날   짜 : 2018. 7. 06.
