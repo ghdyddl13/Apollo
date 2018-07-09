@@ -36,7 +36,6 @@ public class StepBoardService {
 	}
 	
 	public int insertBoardTaskInStep(int tid, int sid) {
-		System.out.println("tid : " + tid + "/ sid : " + sid);
 		int result = 0;
 		try {
 			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
@@ -46,9 +45,8 @@ public class StepBoardService {
 			dto.setTid(tid);
 			
 			result = dao.insertBoardTaskInStep(dto);
-			System.out.println("result : " + result);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -68,6 +66,7 @@ public class StepBoardService {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
 		return result;
 	}
 	
@@ -105,5 +104,6 @@ public class StepBoardService {
 		}
 		return result;
 	}
+
 	
 }

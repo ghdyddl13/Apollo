@@ -13,6 +13,8 @@ import org.springframework.web.servlet.View;
 
 import com.apollo.step.service.StepBoardService;
 import com.apollo.step.service.StepListService;
+import com.apollo.task.service.TaskService;
+import com.apollo.vo.CommentDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TstatusDTO;
@@ -24,6 +26,8 @@ public class StepBoardController {
 	private StepListService listservice;
 	@Autowired
 	private StepBoardService boardservice;
+	@Autowired
+	private TaskService taskservice;
 	
 	
 	
@@ -38,7 +42,6 @@ public class StepBoardController {
 	 */
 	@RequestMapping("/boardInsertTask.htm")
 	public String createTask(TaskDTO taskdto, HttpServletRequest request) {
-		System.out.println("boardInsertTask : " + taskdto.getTname() + "/" + request.getSession().getAttribute("pid") + "/" + taskdto.getTstatusid()+"/"+request.getSession().getAttribute("sid"));
 		taskdto.setPid((Integer)request.getSession().getAttribute("pid"));
 		int sid = (Integer) request.getSession().getAttribute("sid");
 		try {
@@ -69,12 +72,43 @@ public class StepBoardController {
 	 작성자명 : 이 창 훈
 	 */
 	@RequestMapping("/boardTaskStatusUpdate.htm")
-	public View changeBoardStepStatus(TaskDTO taskdto) {
+	public View changeBoardStepStatus(TaskDTO taskdto, HttpSession session) {
+		
+		int result = 0;
+		
 		try {
-			boardservice.updateBoardTaskByTid(taskdto);
+			result = boardservice.updateBoardTaskByTid(taskdto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		String realtname = taskservice.getTname(taskdto.getTid());
+		
+		// 상태 변경 성공시 코멘트 입력
+		if(result == 1) {
+			String comment = "";
+			String mid = (String) session.getAttribute("mid");
+			ArrayList<TstatusDTO> tstatuslist = new ArrayList();
+			tstatuslist = taskservice.gettstatuslist(taskdto.getTid());
+
+			for(TstatusDTO tstatusdto : tstatuslist) {
+				int tstatusid = tstatusdto.getTstatusid();
+					if(tstatusid == taskdto.getTstatusid()) {
+						
+						String modifier = taskservice.getTaskModifierName(mid);
+						comment = modifier + "님이 " + realtname +"의 상태를 " + tstatusdto.getTstatus() + "로 변경하였습니다";
+					}
+			}
+			
+			CommentDTO commentdto = new CommentDTO();
+			commentdto.setComments(comment);
+			commentdto.setTid(taskdto.getTid());
+			commentdto.setMid(mid);
+			commentdto.setCmtkind(1);
+			int insert_comment_result = taskservice.insertComment(commentdto);
+			
+		} // end - 상태 변경 성공시 발동 조건문 
+		
 		return jsonview;
 	}
 	
@@ -86,8 +120,6 @@ public class StepBoardController {
 	 */
 	@RequestMapping("/board.htm")
     public String selectBoard(Model model,HttpServletRequest request, HttpSession session) {
-
-		
 		session.setAttribute("location", "/board.htm");
 
         int sid = (Integer) request.getSession().getAttribute("sid");

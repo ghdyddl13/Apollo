@@ -49,6 +49,14 @@ $(function() {
 					$("#timeline-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected");
 					makeTimelineTable(ajax.tasks);
 					makeTimelineGantt(ajax.tasks);
+					$(".modal-question").tooltip({
+						 classes: {
+							    "ui-tooltip": "apollo-tooltip"
+						 },
+						 content: function() {
+						       return "<div>test</div>";
+						      }
+					 });   
 				}
 			})
 		})

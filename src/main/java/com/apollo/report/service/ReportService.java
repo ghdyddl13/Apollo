@@ -59,6 +59,11 @@ public class ReportService {
 			   filePath = "C:\\Apollo_Reports\\"; // file 생성 위치 
 			   filename = report_title + ".xls"; // 생성될 파일 이름
 				
+				File fDir = new File(filePath);
+				if (!fDir.exists()) {
+					fDir.mkdirs();
+				}
+
 			   HSSFWorkbook wb = setExcel(pid, report_kind, filename);
 		       OutputStream out = new BufferedOutputStream(response.getOutputStream());
              

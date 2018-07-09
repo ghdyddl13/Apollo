@@ -51,6 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="detail != null">detail=#{detail}</if>
 		where sid=#{sid}
 	</update>
+
 	<update id="moveStep" parameterType="com.apollo.vo.StepDTO" >
 		update step set fid=#{fid} where sid=#{sid}
 	</update>

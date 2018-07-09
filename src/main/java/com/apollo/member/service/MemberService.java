@@ -1,6 +1,9 @@
 package com.apollo.member.service;
 
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -8,18 +11,22 @@ import java.util.LinkedList;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.amazonaws.util.IOUtils;
 import com.apollo.member.dao.AuthkeyDAO;
 import com.apollo.member.dao.MemberDAO;
+import com.apollo.utils.S3Util;
 import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.AuthkeyDTO;
 import com.apollo.vo.GoogleDTO;
 import com.apollo.vo.MemberDTO;
-import com.apollo.vo.StepDTO;
 import com.apollo.vo.filedataDTO;
 
 
@@ -36,6 +43,8 @@ public class MemberService {
 	@Autowired
 	private VelocityEngine velocityEngine;
 	
+	S3Util s3 = new S3Util();
+	String bucketName = "projectapollo";
 	
 	/**
 	 * 
@@ -44,7 +53,6 @@ public class MemberService {
 	 작성자명 : 신 호 용
 	 */
 	public int insertMember(MemberDTO memberdto){
-		System.out.println("service insertmember");
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.insertMember(memberdto);
@@ -111,7 +119,6 @@ public class MemberService {
 	 작성자명 : 신 호 용
 	 */
 	public String getlogin(String mid){
-		System.out.println("service getlogin");
 		String result = "";
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.getLogin(mid);
@@ -125,12 +132,9 @@ public class MemberService {
 	 작성자명 : 신 호 용
 	 */
 	public int midcheck(String mid){
-		System.out.println("service midcheck");
-		System.out.println(mid);
 		int result=0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.midCheck(mid);
-		System.out.println(result);
 		return result;
 	}
 	/**
@@ -140,11 +144,9 @@ public class MemberService {
 	 작성자명 : 신 호 용
 	 */
 	public int keycheck(String apollokey){
-		System.out.println("service midcheck");
 		int result=0;
 		AuthkeyDAO dao = sqlsession.getMapper(AuthkeyDAO.class);
 		result = dao.keyCheck(apollokey);
-		System.out.println(result);
 		return result;
 
 	}
@@ -172,7 +174,6 @@ public class MemberService {
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.findPwd(memberdto);
-		System.out.println("result : " + result);
 		return result;
 	}
 	
@@ -322,7 +323,6 @@ public class MemberService {
 	 작성자명 : 신 호 용
 	 */
 	public int freeTrialCheck(String mid){
-		System.out.println("service freeTrialCheck");
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.freeTrialCheck(mid);
@@ -414,6 +414,41 @@ public class MemberService {
 		int pid = dao.getminprojectid(mid);
 		
 		return pid;
+	}
+	
+	
+	
+	public ResponseEntity<byte[]> getMemberImage(String fileName) throws Exception{
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		HttpURLConnection uCon = null;
+
+		String inputDirectory = "resources/member_profile/";
+
+
+
+
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			URL url;
+			try {
+				url = new URL(s3.getFileURL(bucketName, inputDirectory+fileName));
+				uCon = (HttpURLConnection) url.openConnection();
+				in = uCon.getInputStream(); // 이미지를 불러옴
+			} catch (Exception e) {
+				url = new URL(s3.getFileURL(bucketName, "default.jpg"));
+				uCon = (HttpURLConnection) url.openConnection();
+				in = uCon.getInputStream();
+			}
+
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		return entity;
 	}
 	
 
