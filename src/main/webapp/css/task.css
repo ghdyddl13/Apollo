@@ -153,6 +153,15 @@ assignee_in_taskmodal td{
   outline: none;
 }
 
+#comment_input_box_in_taskmodal_noredirect{
+	border:none;
+	width: 100%;
+}
+
+#comment_input_box_in_taskmodal_noredirect:focus {
+  outline: none;
+}
+
 #project_member_popup_div{
   display: none;
   position: absolute;
@@ -161,12 +170,31 @@ assignee_in_taskmodal td{
   float: left;
 }
 
+#project_member_popup_div2{
+  display: none;
+  position: absolute;
+  left : -20000px;
+  top : -20000px;
+  float: left;
+  z-index: 50000;
+}
+
 .popup_mid{
 	cursor: pointer;
 	padding : 10px;
 }
 
 .popup_mid:hover{
+	cursor: pointer;
+	background-color: rgba(163, 172, 182, 0.2);
+}
+
+.popup_mid2{
+	cursor: pointer;
+	padding : 10px;
+}
+
+.popup_mid2:hover{
 	cursor: pointer;
 	background-color: rgba(163, 172, 182, 0.2);
 }

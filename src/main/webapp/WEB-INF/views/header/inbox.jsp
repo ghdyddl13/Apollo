@@ -345,14 +345,15 @@
 					<div id="Task_Modal_comments">
 					</div>
 					<hr>
-					<div id="project_member_popup_div"></div>
+					<div id="project_member_popup_div2"></div>
 					
-					<div id="div_for_comment_input_box">
-					<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">
+					<div id="div_for_comment_input_box2">
+					<input id="comment_input_box_in_taskmodal_noredirect" type="text" placeholder="코멘트를 입력 후 Enter..">
 					</div>
 							
 					<input type="hidden" id="pidhidden" value="">					
 					<input type="hidden" id="usermidhidden" value="">					
+					<input type="hidden" id="usermidhidden2" value="">					
 					<input type="hidden" id="tidhidden2" value="">
 					<input type="hidden" id="receiverhidden" value="">
 					<input type="hidden" id="receivernamehidden" value="">

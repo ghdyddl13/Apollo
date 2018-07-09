@@ -40,6 +40,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   // user-mid
 			        	   var usermid = rdata.userid;
 			        	   $('#usermidhidden').attr('value', usermid);
+			        	   $('#usermidhidden2').attr('value', usermid);
 			        	   
 			        	   // tname
 			        	   $('#Task_Modal_tname').empty();
@@ -226,6 +227,10 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   $('#div_for_comment_input_box').empty();
 			        	   var origin_inputboxstr = '<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">'
 			        	   $('#div_for_comment_input_box').append(origin_inputboxstr);
+			        	   //////////////////////////////////////no redirect
+			        	   $('#div_for_comment_input_box2').empty();
+			        	   var origin_inputboxstr = '<input id="comment_input_box_in_taskmodal_noredirect" type="text" placeholder="코멘트를 입력 후 Enter..">'
+			        	   $('#div_for_comment_input_box2').append(origin_inputboxstr);
 			        	   
 			        	   // files
 			        	   $('#Task_Modal_files').empty();
@@ -1798,3 +1803,146 @@ $(document).on("click",".popup_sid2",function(){
 		        }); // end-ajax
 });
 
+/**
+ * 
+ 날      짜 : 2018. 7. 9.
+ 기      능 : 테스크 모달 내 코멘트 입력 부분(인풋태그)에서 작동하는 함수 + no redirect
+ 작성자명 : 김 정 권
+ */
+$(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
+	
+	var usermid = $('#usermidhidden2').attr('value');
+	
+  // @ 쳤을 시
+  if (event.keyCode === 50) {
+	  
+	var pid = $('#pidhidden').attr('value');
+    $.ajax(
+           {
+               type : "post",
+               url  : "getsameprojectmembersintaskmodal.htm",
+               data : {
+                 'pid': pid
+               },
+               success : function(rdata){
+                 
+            	 console.log('성공이다');
+            	 console.log(rdata.sameprojectmembers);
+            	   
+            	 var popupdiv_str = '';
+                 $(rdata.sameprojectmembers).each(function(){
+                	 
+              	 if(this.mid == usermid){
+              		 return true;
+               	 }
+                	 
+                  popupdiv_str += '<div class="wrapper_comment popup_mid2" id="' + this.mid + '">';	 
+//                popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/' + this.image + '"/>';	
+                  popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/user.png"/>';	
+                  popupdiv_str += '<div class="each_comment">';	
+                  popupdiv_str += '<div class="first_row">' + this.mname + '</div>';	
+                  popupdiv_str += '<div class="second_row">' + this.mid + '</div>';	
+                  popupdiv_str += '</div></div>';
+                  
+                 });
+
+                 
+                 $('#project_member_popup_div2').empty();
+                 $('#project_member_popup_div2').append(popupdiv_str);
+                 let popupdiv_width = $('#project_member_popup_div2').width();
+                 let popupdiv_height = $('#project_member_popup_div2').height();
+                 
+                 let position = $('#comment_input_box_in_taskmodal_noredirect').position();
+                 $('#project_member_popup_div2').css("left",position.left-popupdiv_width+150);
+                 $('#project_member_popup_div2').css("top",position.top-popupdiv_height-20);
+                 $("#project_member_popup_div2").css("background-color","#FFFFFF")
+                 $('#project_member_popup_div2').css("display","block");
+                 
+               } // end-success
+            }); // end-ajax
+   
+
+  } // end - keyCode=13
+
+  
+  // @ 아닐 시
+  if((event.keyCode != 50) && (event.keyCode != 27) && (event.keyCode != 13)){
+	  
+	    $('#project_member_popup_div').css("display", "none");
+	    $('#project_member_popup_div').css("left", "-20000");
+	    $('#project_member_popup_div').css("top", "-20000");
+  } // end - != 50
+  
+  
+  // 엔터키 칠 시
+  if (event.keyCode === 13) {
+	   var tid = $('#tidhidden').attr('value');
+	   var comments = $('#comment_input_box_in_taskmodal').val();
+	   console.log(comments);
+	   if(comments != ""){
+		   $.when(insertCommentReceiver(tid,comments)).done(function(data){
+			   send(); //웹 소켓 send 함수 추가
+			   event.stopPropagation();
+			   $('#comment_input_box_in_taskmodal').val('');
+		   });
+	   }
+	   
+  } // end - keyCode=13
+});
+
+/**
+ * 
+ 날      짜 : 2018. 7. 9
+ 기      능 : 테스크 모달 내 pop up div 내에 있는 사람을 클릭하면 발생하는 일 + no redirect
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".popup_mid2",function(){
+	
+    $('#project_member_popup_div2').css("display", "none");
+    $('#project_member_popup_div2').css("left", "-20000");
+    $('#project_member_popup_div2').css("top", "-20000");
+
+    $('#div_for_comment_input_box2').empty();
+    var inputboxstr = '<input id="receivermid2" type="button" value="">'
+    	inputboxstr+= '<input id="comment_input_box_in_taskmodal2" type="text" placeholder="코멘트를 입력 후 Enter..">'
+    $('#div_for_comment_input_box2').append(inputboxstr);
+    
+	var mid = $(this).attr('id');
+	$('#receiverhidden').attr('value', mid);
+	var speaker_name = '';
+	var inputstr = '';
+	
+	 $.ajax(
+		       {
+		           type : "post",
+		           url  : "findmname.htm",
+		           data : {
+		        	   'mid': mid
+		           },
+		           success : function(rdata){
+		        	   speaker_name = rdata.speaker;
+		        	   inputstr = 'TO. ' + speaker_name;
+		        	   $('#receivernamehidden').attr('value', inputstr);
+		        	   
+		        	   $('#receivermid2').attr('value', inputstr);
+		        	   $('#comment_input_box_in_taskmodal2').focus();
+		        		
+		           } // end-success
+		        }); // end-ajax
+	
+});
+
+/**
+ * 
+ 날      짜 : 2018. 7. 9
+ 기      능 : @ 를 이용해서 작동한 귓속말 모드를 해지하는 함수 + no redirect
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#receivermid2",function(){
+	
+	 $('#div_for_comment_input_box2').empty();
+	    var origin_inputboxstr = '<input id="comment_input_box_in_taskmodal_noredirect" type="text" placeholder="코멘트를 입력 후 Enter..">'
+	 $('#div_for_comment_input_box2').append(origin_inputboxstr);
+	 $('#comment_input_box_in_taskmodal_noredirect').focus();
+	
+});
