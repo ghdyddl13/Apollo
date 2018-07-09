@@ -279,10 +279,10 @@
 						<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
 					</div>
 					
-					<div class="col-sm-12" id="Task_Modal_snames">
+					<div class="col-sm-12" id="Task_Modal_snames2">
 					</div>
-					<div id="step_names_popup_div"></div>
-					<div id="step_delete_popup_div"></div>
+					<div id="step_names_popup_div2"></div>
+					<div id="step_delete_popup_div2"></div>
 					
 				</div>
 				<!-- end row 1 -->
@@ -353,7 +353,7 @@
 							
 					<input type="hidden" id="pidhidden" value="">					
 					<input type="hidden" id="usermidhidden" value="">					
-					<input type="hidden" id="tidhidden" value="">
+					<input type="hidden" id="tidhidden2" value="">
 					<input type="hidden" id="receiverhidden" value="">
 					<input type="hidden" id="receivernamehidden" value="">
 					<input type="hidden" id="tnamehidden" value="">
