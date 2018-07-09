@@ -349,7 +349,7 @@
       </div>
       <div class="list-section-third-selectpage-addasignee">
         <span class="list-section-third-selectpage-text">Add Asignee</span>
-        <span class="selectpage-body-button" id="selectpage-addasignee-button"data-toggle="modal" data-target="#list_Assign_Tasks">Add Asignee</span>
+        <span class="selectpage-body-button" id="selectpage-addasignee-button">Add Asignee</span>
       </div>
       <div class="list-section-third-selectpage-addstep">
         <span class="list-section-third-selectpage-text">Add Step</span>
@@ -386,4 +386,22 @@
      </div>
    </div>
  </div>
+ <!--THIRD PANNEL ASSIGN-->
+ <div class="list-section-third-addasignee">
+  <div class="list-section-third-addasignee-container">
+    <div class="list-section-third-addasignee-wrapper">
+      <div class="list-section-third-addasignee-input_container">
+        <div class="list-section-third-addasignee-input_wrapper">
+          <div class="list-section-third-addasignee-input-text">
+            <input class="list-section-third-addasignee-input" id="assign-insert_member"type="text" placeholder="Search member">
+          </div>
+        </div>
+      </div>
+      <div class="list-section-third-addasignee-memberlist_wrapper">
+        <div class="list-section-third-addasignee-memberlist">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div><!-- BODY CONTAINER END  -->

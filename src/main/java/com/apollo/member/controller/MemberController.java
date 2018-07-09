@@ -208,7 +208,7 @@ public class MemberController {
 		result = service.insertMember(memberdto);
 		if(result > 0) {
 			msg="입력하신 E-Mail로 인증메일을 전송했습니다. 메일 인증을 하지 않으면 로그인을 할 수 없습니다.";
-			viewpage = "login";
+			viewpage = "redirect:/login.htm";
 		}else {
 			viewpage = "join.htm";
 		}
@@ -222,7 +222,8 @@ public class MemberController {
 	 작성자명 : 신 호 용
 	 */
 	@RequestMapping(value="/login.htm",method=RequestMethod.GET)
-	public String login() {
+	public String login(String msg,Model model) {
+		model.addAttribute("msg", msg);
 		return "login";
 	}
 	
@@ -500,13 +501,13 @@ public class MemberController {
 	 작성자명 : 김 래 영
 	 */
 	@RequestMapping(value="/updatemember.htm", method=RequestMethod.POST)
-	public View updateMemberInfo(MemberDTO memberdto, Model model, MultipartHttpServletRequest mrequest) {
+	public View updateMemberInfo(MemberDTO memberdto, Model model) {
 		int updatemember = 0;
-		
 		
 		try {
 			updatemember = service.updateMemberInfo(memberdto);
 			model.addAttribute("updatemember", updatemember);
+			System.out.println("updatemember : " + updatemember);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
