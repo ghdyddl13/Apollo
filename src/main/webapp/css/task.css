@@ -209,6 +209,17 @@ assignee_in_taskmodal td{
     margin-right: 5px
 }
 
+
+#receivermid2{
+	width: 80px;
+	background-color: white;
+    color: black;
+    border: 1px solid #4CAF50;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-right: 5px
+}
+
 #comment_input_box_in_taskmodal2{
 	border:none;
 	width: 450px;

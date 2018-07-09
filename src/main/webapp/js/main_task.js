@@ -1877,13 +1877,13 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
   // 엔터키 칠 시
   if (event.keyCode === 13) {
 	   var tid = $('#tidhidden').attr('value');
-	   var comments = $('#comment_input_box_in_taskmodal').val();
+	   var comments = $('#comment_input_box_in_taskmodal_noredirect').val();
 	   console.log(comments);
 	   if(comments != ""){
 		   $.when(insertCommentReceiver(tid,comments)).done(function(data){
 			   send(); //웹 소켓 send 함수 추가
 			   event.stopPropagation();
-			   $('#comment_input_box_in_taskmodal').val('');
+			   $('#comment_input_box_in_taskmodal_noredirect').val('');
 		   });
 	   }
 	   
@@ -1931,7 +1931,7 @@ $(document).on("click",".popup_mid2",function(){
 		        }); // end-ajax
 	
 });
-
+//////////////////////////////////////////////// comment_input_box_in_taskmodal_noredirect에서 키코드 이벤트들 안먹힌다
 /**
  * 
  날      짜 : 2018. 7. 9
