@@ -3,6 +3,7 @@ package com.apollo.task.controller;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -1079,10 +1080,10 @@ public class TaskController {
     작성자명 : 김 정 권
     */
    @RequestMapping(value="/downloadfileintaskmodal.htm")
-   public void downLoadFileInTaskModal(String filename, ModelMap map, HttpServletResponse response) {
+   public void downLoadFileInTaskModal(String filename, ModelMap map, HttpServletResponse response, HttpServletRequest request) {
    	
 	   System.out.println("downLoadFileInTaskModal 컨트롤러 실행");
-	   service.downLoadFileInTaskModal(filename, response);
+	   service.downLoadFileInTaskModal(filename, response, request);
    			
    }
   

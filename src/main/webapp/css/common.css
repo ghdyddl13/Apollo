@@ -18,6 +18,23 @@ html, body{
 	white-space: nowrap;
 	flex-direction: column;
 }
+
+.loading{
+	position:absolute;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	background:white;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+#loading_img{
+	height: 20px;
+	width: 20px
+}
+
 .main-header-panel{
 	display:block;
 	flex:0 0 auto;
