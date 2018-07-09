@@ -164,7 +164,9 @@ $(document).on("click",".Task_RUD_Modal",function(){
 		        	   	   
 			        	   $('#Task_Modal_sday').empty();
 			        	   $('#Task_Modal_sday').val(newsday);
-
+			        	   ///////////////////////// no redirect
+			        	   $('#Task_Modal_sday_noredirect').empty();
+			        	   $('#Task_Modal_sday_noredirect').val(newsday);
 			        	   
 			        	   // eday
 			        	   var eday = rdata.task.eday;
@@ -178,7 +180,9 @@ $(document).on("click",".Task_RUD_Modal",function(){
 		        	   	   
 			        	   $('#Task_Modal_eday').empty();
 			        	   $('#Task_Modal_eday').val(neweday);
-			        	   
+			        	   ///////////////////////// no redirect
+			        	   $('#Task_Modal_eday_noredirect').empty();
+			        	   $('#Task_Modal_eday_noredirect').val(neweday);
 
 			        	   // subtask
 			        	   $('#Task_Modal_subtasks').empty();

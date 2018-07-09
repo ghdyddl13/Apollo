@@ -297,12 +297,12 @@
 					</div>	
 					<div class="col-sm-5">
 	                    <span>시작일&nbsp:&nbsp</span>
-                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date_sday">
+                   		<input id="Task_Modal_sday_noredirect" type="text" name="sday" placeholder="Start Date" class="date date_sday_noredirect">
 					</div>
 
 					<div class="col-sm-5">
 						<span>종료일&nbsp:&nbsp</span>
-	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date_eday">
+	                    <input id="Task_Modal_eday_noredirect" type="text" name="eday" placeholder="End Date" class="date date_eday_noredirect">
 					</div>
 				</div>
 				<!-- end row 2 -->

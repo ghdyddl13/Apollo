@@ -1086,7 +1086,7 @@ public class TaskController {
    			
    	   return jsonview;
    }
-   
+   /////////////////////////////////////////////////////////////////////////////// no redirect
    
    /**
 	 * 
@@ -1147,5 +1147,119 @@ public class TaskController {
 		return jsonview;
 		
 	}
+
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 26.
+ 기      능 : 테스크 모달에서 sday 를 데이트 피커에서 누르면 sday를 변경 + no redirect
+ 작성자명 : 김 정 권
+ */
+@RequestMapping("/changesdayoftask_noredirect.htm")
+public View changeSdayOfTaskNoredirect(int tid, String sday, HttpSession session, Model model){
+	String location = (String) session.getAttribute("location");
+	System.out.println("sday 컨트롤러 실행");
 	
+	System.out.println("tid : " + tid);
+	System.out.println("sday : " + sday);
+	
+	TaskDTO dto = new TaskDTO();
+	dto.setSday(sday);
+	dto.setTid(tid);
+	
+	int result = service.changeSdayOfTask(dto);
+	System.out.println("sday 변경 결과 : " + result);
+	
+	
+	// sday 변경 제대로 되었을 시 stream 저장
+	if(result == 1) {
+		
+		System.out.println("sday 변경 성공! 코멘트 입력 시작!");
+		
+		String modifier = (String) session.getAttribute("mid");
+		String modifier_name = service.getTaskModifierName(modifier);
+		String tname = service.getTname(tid);
+		String comment = "";
+		comment = modifier_name + "님이 " + tname +" 업무의 시작일을 " + sday +"로 변경하였습니다";
+		
+		// comments 테이블에 insert
+		CommentDTO commentdto = new CommentDTO();
+		commentdto.setComments(comment);
+		commentdto.setTid(tid);
+		commentdto.setMid(modifier);
+		commentdto.setCmtkind(1);
+		int final_result = service.insertComment(commentdto);
+		
+		System.out.println("sday 변경 코멘트 입력 성공 여부 : " + final_result);
+		
+	}
+	
+	return jsonview;
+	 		
+}
+
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 26.
+ 기      능 : 테스크 모달에서 eday 를 데이트 피커에서 누르면 eday를 변경 + no redirect
+ 작성자명 : 김 정 권
+ */
+@RequestMapping("/changeedayoftask_noredirect.htm")
+public View changeEdayOfTaskNoredirect(int tid, String eday, HttpSession session, Model model){
+	String location = (String) session.getAttribute("location");
+	System.out.println("eday 컨트롤러 실행");
+	
+	System.out.println("tid : " + tid);
+	System.out.println("eday : " + eday);
+	
+	TaskDTO dto = new TaskDTO();
+	dto.setEday(eday);
+	dto.setTid(tid);
+	
+	int result = service.changeEdayOfTask(dto);
+	System.out.println("eday 변경 결과 : " + result);
+	
+	
+	// eday 변경 제대로 되었을 시 stream 저장
+	if(result == 1) {
+		
+		System.out.println("sday 변경 성공! 코멘트 입력 시작!");
+		
+		String modifier = (String) session.getAttribute("mid");
+		String modifier_name = service.getTaskModifierName(modifier);
+		String tname = service.getTname(tid);
+		String comment = "";
+		comment = modifier_name + "님이 " + tname +" 업무의 종료일을 " + eday +"로 변경하였습니다";
+		
+		// comments 테이블에 insert
+		CommentDTO commentdto = new CommentDTO();
+		commentdto.setComments(comment);
+		commentdto.setTid(tid);
+		commentdto.setMid(modifier);
+		commentdto.setCmtkind(1);
+		int final_result = service.insertComment(commentdto);
+		
+		System.out.println("eday 변경 코멘트 입력 성공 여부 : " + final_result);
+		
+	}
+	
+	int pid = 0;
+	if(session.getAttribute("pid") == null) {
+		System.out.println("null 찾았다");
+		String midforpid =(String)session.getAttribute("mid");
+		pid = memberservice.getMinProjectid(midforpid);
+		System.out.println("null 이어서 넣은 pid :" + pid);
+	}else {
+		System.out.println("null이 아니라서 세션에서 pid 가져온다");
+		pid = (Integer) session.getAttribute("pid");
+		System.out.println("세션에서 가져온 pid : " + pid);
+	}
+
+	return jsonview;
+ }
+
+
 }
