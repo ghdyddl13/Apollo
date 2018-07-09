@@ -96,17 +96,19 @@ public class MemberController {
 	 작성자명 : 이 진 우
 	 */
 	@RequestMapping(value="/displayImage.htm",method=RequestMethod.GET)
-	public ResponseEntity<byte[]> displayImage(HttpSession session,HttpServletResponse response){
-		System.out.println("display image 탔어요");
-		String mid = (String) session.getAttribute("mid");
+	public ResponseEntity<byte[]> displayImage(String image,HttpSession session,HttpServletResponse response){
+		if(image==null) {
+			String mid = (String) session.getAttribute("mid");
+			MemberDTO memberdto = service.getProfileInfoMember(mid);
+			image = memberdto.getImage();
+		}
 		
-		MemberDTO memberdto = service.getProfileInfoMember(mid);
 		ResponseEntity<byte[]> imagefile=null;
+		
 		try {
-			imagefile = service.getMemberImage(memberdto.getImage());
+			imagefile = service.getMemberImage(image);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return imagefile;
 	}
