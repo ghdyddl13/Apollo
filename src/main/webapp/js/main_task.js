@@ -1,6 +1,7 @@
 
 
 
+
 /**
  * 
  날   짜 : 2018. 6. 19.
@@ -1397,6 +1398,13 @@ $(document).on("keyup","#Task_Modal_tname_input",function(){
 	  		} // end - keyCode==13
 	
 });
+
+
+$(document).on("click","#task_dismiss_btn_starredtask",function(){
+	$(".modal-content2").hide();
+	$(".starred-secondbody-image").show();
+});
+
 /**
  * 
  날      짜 : 2018. 7. 3.
@@ -1404,7 +1412,8 @@ $(document).on("keyup","#Task_Modal_tname_input",function(){
  작성자명 : 이 진 우
  */
 
-$(document).on("click",".starred-body-task-container-top-star",function(){
+$(document).on("click",".starred-body-task-container-top-star",function(evt){
+	evt.stopPropagation();
 	let tid = parseInt($(this).parents(".starred-body-task-container-top").children(".starred-body-task-container-top-title").attr("id").substring(1));
 	$.ajax({
 

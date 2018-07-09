@@ -7,9 +7,7 @@
     overflow-y: auto;
     padding-bottom: 5%
 }
-.stream-main-container::-webkit-scrollbar { 
-    display: none; 
-}
+
 .stream_main{
 	display : inline-block;
 	width:75%;
@@ -180,9 +178,7 @@ align-items: center;
 	overflow-y:auto 
 	
 }
-.stream_division-body::-webkit-scrollbar { 
-    display: none; 
-}
+
 
 .stream_division-header-tname{
 	padding:8px  15px 8px 15px;
