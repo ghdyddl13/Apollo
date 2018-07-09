@@ -23,18 +23,22 @@
 	<div class="login-wrapper" align="center">
 		<div class="login-container">
 			<input type="hidden" value="${msg}" id="login-msg">
+			<input type="hidden" value="${emailmsg}" id="email-msg">
 			<form id="login-form" action="login.htm" method="post">
 				<!-- 제목 -->
 				<div class="login-head">
 					<img class="login-page-logo" src="img/login-header.png">
 				</div>
 				<br>
-				<span>${msg}</span>
+				<div class="login-msg">${msg}</div>
+				<div class="email-msg">${emailmsg}</div>
+				<div>
 				<input type="text" class="login-input" placeholder="E-mail" name="mid" id="mid"> 
 				<input type="password" class="login-input" placeholder="Password" name="pwd" id="pwd">
 				<br>
 				<input id="login_btn" type="button" onclick="login()" class="btn btn-block login-btn" value="로그인"> 
 				<input type="button" class="btn btn-block buy-license-btn" value="구매하기" data-toggle="modal" data-target="#apollokey-modal-dialog">
+				</div>
 				<div class=" googlelogin-btn btn-block" id="google-login-btn"  onclick="location.href='<%=request.getContextPath()%>/google.htm'">
 					<img class="google_img" alt="구글 로그인" src="<%=request.getContextPath()%>/img/googlelogin.png" >
 					<span class="google_login">GOOGLE 로그인</span>
