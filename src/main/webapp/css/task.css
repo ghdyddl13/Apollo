@@ -160,6 +160,7 @@ assignee_in_taskmodal td{
   left : -20000px;
   top : -20000px;
   float: left;
+  z-index: 10;
 }
 
 .popup_mid{
