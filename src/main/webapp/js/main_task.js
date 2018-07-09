@@ -94,7 +94,28 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        		   }
 				           });
 			        	   $('#Task_Modal_tstatus_selectbox').append(tstatusoptions);
+			        	   ////////////////////////////////////////////////////////// no redirect
+			        	   $('#Task_Modal_tstatus_selectbox_noredirect').empty();
 			        	   
+			        	   var selected_tstatusid = rdata.task.tstatusid;
+			        	   var tstatusoptions = '';
+			        	   
+			        	   $(rdata.tstatuslist).each(function(){
+			        		   
+			        		   if(selected_tstatusid == this.tstatusid){
+				        		   tstatusoptions += '<option value="' + this.tstatusid + '" selected="selected" style='
+				        		   tstatusoptions += '"color: ' + this.color + '">'
+				        		   tstatusoptions += this.tstatus
+				        		   tstatusoptions += '</option>'
+			        		   }else {
+				        		   tstatusoptions += '<option value="' + this.tstatusid + '" style='
+				        		   tstatusoptions += '"color: ' + this.color + '">'
+				        		   tstatusoptions += this.tstatus
+				        		   tstatusoptions += '</option>'
+			        		   }
+				           });
+			        	   $('#Task_Modal_tstatus_selectbox_noredirect').append(tstatusoptions);
+			        	   //////////////////////////////////////////////////////////
 
 			        	   // assignee
 			        	   $('#Task_Modal_assignee').empty();
@@ -143,7 +164,9 @@ $(document).on("click",".Task_RUD_Modal",function(){
 		        	   	   
 			        	   $('#Task_Modal_sday').empty();
 			        	   $('#Task_Modal_sday').val(newsday);
-
+			        	   ///////////////////////// no redirect
+			        	   $('#Task_Modal_sday_noredirect').empty();
+			        	   $('#Task_Modal_sday_noredirect').val(newsday);
 			        	   
 			        	   // eday
 			        	   var eday = rdata.task.eday;
@@ -157,7 +180,9 @@ $(document).on("click",".Task_RUD_Modal",function(){
 		        	   	   
 			        	   $('#Task_Modal_eday').empty();
 			        	   $('#Task_Modal_eday').val(neweday);
-			        	   
+			        	   ///////////////////////// no redirect
+			        	   $('#Task_Modal_eday_noredirect').empty();
+			        	   $('#Task_Modal_eday_noredirect').val(neweday);
 
 			        	   // subtask
 			        	   $('#Task_Modal_subtasks').empty();
@@ -1502,4 +1527,39 @@ $(document).on("click",".file_del_btn",function() {
 		           } // end-success
 		        }); // end-ajax
 
+});
+//////////////////////////////////////////////////////////////////////////////// no redirect
+
+/**
+ * 
+ 날      짜 : 2018. 7. 9
+ 기      능 : Task 모달 창에서 Task 상태 변경 + no redirect
+ 작성자명 : 김 정 권
+ */
+
+$(document).on("change","#Task_Modal_tstatus_selectbox_noredirect",function(){
+	
+	var tid = $('#tidhidden').attr('value');
+	var value = $('#Task_Modal_tstatus_selectbox_noredirect').val();
+	var tname = $('#tnamehidden').attr('value');
+	
+	console.log('/'+ tid +'/' + value +'/' + tname + '/')
+	
+	  $.ajax(
+		       {
+		           type : "post",
+		           url  : "changetstatusno_redirect.htm",
+		           data : {
+		        	   'tid': tid,
+		        	   'value' : value,
+		        	   'tname' : tname
+		           },
+		           success : function(rdata){
+		        	   
+			           // comment
+			           getCommentAndMemberlist();
+
+		           } // end-success
+		        }); // end-ajax
+	
 });

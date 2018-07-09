@@ -408,7 +408,7 @@
 								
                 <hr />
 					<div class="modal-title">파일 업로드</div><br />
-	                <div id="Task_Modal_files">파일들이 여기 잡히게 된다</div>
+	                <div id="Task_Modal_files"></div>
 	                <br>
 	                <input type="button" name="fileuploadbtn" id="fileuploadbtn" value="파일업로드">
 					<form  action="" method="post" >
