@@ -35,6 +35,7 @@
 				<div class="container-fluid search-bar-container">
 					<i class="search-bar-imo fas fa-search"></i> <input
 						id="open-right-nav" type="text">
+								
 				</div>
 				<li class="nav-item dropdown">
 					<c:choose>
@@ -44,13 +45,12 @@
 							</div>
 						</c:when>
 						<c:otherwise>
-							<div>
-								<img src="profileImg/${m.image}" id="loginimg">
+							<div id="profile-modal-image">
+								<img id="loginimg" src='/bit/displayImage.htm'>
 							</div>
 						</c:otherwise>
 					</c:choose> 
-					<a id="header-user-name" class="nav-link dropdown-toggle"
-					data-toggle="dropdown" style="color: white"> ${m.mname}님</a>
+					<a id="header-user-name" class="nav-link dropdown-toggle"data-toggle="dropdown" style="color: white"> ${m.mname}님</a>
 					<ul class="dropdown-menu">
 						<li id="header-introduce"><a>Apollo</a></li>
 						<li data-toggle="modal" data-target="#edit-profile"
