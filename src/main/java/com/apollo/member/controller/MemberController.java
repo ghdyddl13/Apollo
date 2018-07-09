@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.velocity.app.VelocityEngine;
@@ -96,6 +97,20 @@ public class MemberController {
 		model.addAttribute("newcount", newcount);
 		model.addAttribute("imagefile", imagefile);
 		return "main";
+	}
+	@RequestMapping(value="/displayImage.htm",method=RequestMethod.POST)
+	public ResponseEntity<byte[]> displayImage(HttpSession session,HttpServletResponse response){
+		String mid = (String) session.getAttribute("mid");
+		
+		MemberDTO memberdto = service.getProfileInfoMember(mid);
+		ResponseEntity<byte[]> imagefile=null;
+		try {
+			imagefile = service.getMemberImage(memberdto.getImage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return imagefile;
 	}
 	/**
 	 * 

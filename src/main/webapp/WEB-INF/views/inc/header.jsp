@@ -44,8 +44,8 @@
 							</div>
 						</c:when>
 						<c:otherwise>
-							<div>
-								<img src='displayFile?fileName=${imagefile}' />
+							<div id="profile-modal-image">
+								<img  alt="" src="<c:url value='/bit/displayImage.htm'/>">
 							</div>
 						</c:otherwise>
 					</c:choose> 
