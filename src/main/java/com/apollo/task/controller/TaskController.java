@@ -56,14 +56,36 @@ public class TaskController {
 	 작성자명 : 박 민 식
 	 */
 	@RequestMapping("/updateTask.htm")
-	public View updateTask(TaskDTO taskdto, Model model) {
+	public View updateTask(TaskDTO taskdto, Model model, HttpSession session) {
 		int result = 0;
 		try {
 			result=service.updateTask(taskdto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(result == 1) {
+			
+			System.out.println("sday 변경 성공! 코멘트 입력 시작!");
+			
+			String modifier = (String) session.getAttribute("mid");
+			String modifier_name = service.getTaskModifierName(modifier);
+			String tname = service.getTname(taskdto.getTid());
+			String comment = "";
+			comment = modifier_name + "님이 " + tname +"의 업무기간을 <br>" + taskdto.getSday() +"부터 " + taskdto.getEday()+"까지로 변경했습니다.";
+			
+			// comments 테이블에 insert
+			CommentDTO commentdto = new CommentDTO();
+			commentdto.setComments(comment);
+			commentdto.setTid(taskdto.getTid());
+			commentdto.setMid(modifier);
+			commentdto.setCmtkind(1);
+			int final_result = service.insertComment(commentdto);
+			
+			System.out.println("sday 변경 코멘트 입력 성공 여부 : " + final_result);
+			
+		}
 		
+	
 		model.addAttribute("result", result);
 		return jsonview;
 	}

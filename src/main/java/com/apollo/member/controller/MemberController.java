@@ -123,8 +123,6 @@ public class MemberController {
 	 */
 	@RequestMapping(value="/emailcheck.htm",method=RequestMethod.GET)
 	public String emailcheck(String emailcheckkey, String mid) {
-		System.out.println("emailcheckkey : " + emailcheckkey);
-		System.out.println("mid : " + mid);
 		String emailcheckbymid = service.emailcheckbymid(mid);
 		if(emailcheckkey.equals(emailcheckbymid)) {
 			service.emailcheck(mid);
@@ -167,7 +165,7 @@ public class MemberController {
 		MimeMessage message = javaMailSender.createMimeMessage();
 		try {
 			MimeMessageHelper messageHelper1 = new MimeMessageHelper(message, true, "utf-8"); // true로 해야 첨부파일 추가 가능
-			messageHelper1.setSubject("안녕하세요, Apollo 입니다. 인증 메일 보내드립니다.");
+			messageHelper1.setSubject("[Apollo] 인증 메일 보내드립니다.");
 
 			String templateLocation1 = "emailcheck.vm";
 
@@ -191,7 +189,7 @@ public class MemberController {
 		}
 		result = service.insertMember(memberdto);
 		if(result > 0) {
-			emailmsg="가입하신 E-Mail로 인증메일을 전송했습니다.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;메일 인증을 하지 않으면 로그인을 할 수 없습니다.";
+			emailmsg="가입하신 E-Mail로 인증메일을 전송했습니다.<br>메일 인증을 하지 않으면 로그인을 할 수 없습니다.";
 			viewpage = "login";
 		}else {
 			viewpage = "join.htm";
@@ -230,8 +228,6 @@ public class MemberController {
 		}else {
 			if (bCryptPasswordEncoder.matches(pwd, securitypwd)) {
 				if (ischecked.equals("y")) {
-					System.out.println("비밀번호 일치");
-
 					MemberDTO memberdto = service.getProfileInfoMember(mid);
 					session.setAttribute("mid", mid);
 					model.addAttribute("memberdto", memberdto);
@@ -250,11 +246,10 @@ public class MemberController {
 					}
 				}
 				else {
-					 msg = "인증되지 않은 이메일입니다. 가입 당시 입력하신 E-Mail을 통해 인증해주세요";
+					 msg = "인증되지 않은 이메일입니다.<br>가입 당시 입력하신 E-Mail을 통해 인증해주세요";
 			         result = "login";
 				}
 			} else {
-				System.out.println("비밀번호 불일치");
 				msg = "비밀번호가 일치하지 않습니다.";
 				result = "login";
 			}
@@ -291,7 +286,7 @@ public class MemberController {
 
 		try {
 			MimeMessageHelper messageHelper1 = new MimeMessageHelper(message, true, "utf-8"); // true로 해야 첨부파일 추가 가능
-			messageHelper1.setSubject("안녕하세요, Apollo 입니다. 인증키 보내드립니다.");
+			messageHelper1.setSubject("[Apollo] 인증키 보내드립니다.");
 
 			String templateLocation1 = "officeKey.vm";
 
@@ -339,13 +334,7 @@ public class MemberController {
 		}
 		return jsonview;
 	}
-	
-	
-	public String showMember(String s1, Model model) {
-		return null;
-	
-	}
-	
+
 	/**
 	 * 
 	 날      짜 : 2018. 6. 12.
@@ -364,7 +353,7 @@ public class MemberController {
 				MimeMessage message = javaMailSender.createMimeMessage();
 				try {
 					MimeMessageHelper messageHelper1 = new MimeMessageHelper(message, true, "utf-8"); // true로 해야 첨부파일 추가 가능
-					messageHelper1.setSubject("안녕하세요, Apollo 입니다. 임시 비밀번호 보내드립니다.");
+					messageHelper1.setSubject("[Apollo] 임시 비밀번호 보내드립니다.");
 					String templateLocation = "findPwd.vm";
 
 					String pwd = "";
