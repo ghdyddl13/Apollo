@@ -8,15 +8,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.View;
 
 import com.apollo.inbox.dao.InboxDAO;
 import com.apollo.member.dao.MemberDAO;
@@ -29,6 +27,7 @@ import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
 import com.apollo.utils.DeleteFileUtils;
+import com.apollo.utils.DownloadFileUtils;
 import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
@@ -763,15 +762,23 @@ public class TaskService {
 	}
 	
 	
-	public void downLoadFileInTaskModal(String filename) {
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 다운로드
+	 작성자명 : 김 정 권
+	 */
+	public void downLoadFileInTaskModal(String filename, HttpServletResponse response) {
 	
-//		String downloadPath = "resources/upload_files/" + filename;
-//		
-//		try {
-//			DownloadFileUtils.downFiles(downloadPath);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		System.out.println("downLoadFileInTaskModal 서비스 실행");
+	   	   
+		String downloadPath = "resources/upload_files/" + filename;
+		
+		try {
+			DownloadFileUtils.downloadFileUtils(downloadPath, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 	

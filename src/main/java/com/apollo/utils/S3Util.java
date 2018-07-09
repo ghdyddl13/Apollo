@@ -7,32 +7,42 @@
 
 package com.apollo.utils;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Properties;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.util.URLEncoder;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.iot.model.CannedAccessControlList;
-import com.amazonaws.services.mediastoredata.model.GetObjectRequest;
-import com.amazonaws.services.mediastoredata.model.PutObjectRequest;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
 
 public class S3Util {
 	private Properties s3key = PropertiesUtil.fetchProperties("Apollo_s3Key");
@@ -125,8 +135,41 @@ public class S3Util {
 	 기      능 : 파일 다운로드 
 	 작성자명 : 김 정 권
 	 */
-	public void getObject(String bucketName, String downloadPath) {
-	
+	public void getObject(String bucketName, String downloadPath, HttpServletResponse response) throws IOException  {
+		
+		// S3Object s3Object = conn.getObject(new GetObjectRequest(bucketName, downloadPath));
+		
+		 GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, downloadPath);
+	     S3Object s3Object = conn.getObject(getObjectRequest);
+	     String newfilename = downloadPath.substring(60);
+
+	     System.out.println("여기 1");
+	     S3ObjectInputStream objectInputStream = s3Object.getObjectContent();
+	     byte[] bytes = IOUtils.toByteArray(objectInputStream);
+
+	     System.out.println("여기 2");
+	     FileUtils.writeByteArrayToFile(new File("C:\\Apollo_Reports\\" + newfilename), bytes);
+	     
+	     System.out.println("여기 3");
+	     OutputStream out = new BufferedOutputStream(response.getOutputStream());
+	     response.reset();
+	     response.setHeader("Content-Disposition", "attachment;filename=" + newfilename);
+
+	     System.out.println("여기 4");
+	     FileInputStream fis = null;
+	     FileOutputStream fos = null;
+
+	     try {
+	            fis = new FileInputStream("C:\\Apollo_Reports\\" + newfilename);
+	           
+	            int data = 0;
+	            while ((data = fis.read()) != -1) {
+	            	out.write(data);
+	            }
+	        }catch (Exception e) {
+	        	e.printStackTrace();
+	        }
+        
     }
-	
+
 }

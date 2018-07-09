@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Minsik Park
 Build-Jdk: 1.8.0_171
+=======
+Built-By: bit-user
+Build-Jdk: 1.8.0_161
+>>>>>>> feature/jk_last_filedownload
 Created-By: Maven Integration for Eclipse
 
