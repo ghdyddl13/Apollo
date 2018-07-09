@@ -48,9 +48,7 @@
 .project-table-content {
 	overflow-y: hidden; 
 }
-.project-table-content::-webkit-scrollbar{
-	display:none;
-}
+
 #proejct-page-table-no-data{
 	float: inherit;
 }

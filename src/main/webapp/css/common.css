@@ -1437,7 +1437,7 @@ label {
   width: 49%;
   height: 100%;
   border-radius: 3px;
-  overflow: hidden!important;
+  overflow: auto;
 }    
 .main-body-twopannel-left-wrapper{
   display: flex;
