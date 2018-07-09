@@ -95,10 +95,10 @@ $(function() {
 			alert("책임자를 선택하세요.");
 			return false;
 		}
-        if($("#update-step-sday-id").val() > $("#update-step-eday-id").val()) {
+       /* if($("#update-step-sday-id").val() > $("#update-step-eday-id").val()) {
 			 alert("시작일이 종료일보다 앞설 수 없습니다.");
 			return false;
-		 }
+		 }*/
         $.ajax({
             type:"post",
             url:"updatestep.htm",
@@ -120,10 +120,11 @@ $(function() {
    
     // side-bar 스텝 삭제 클릭시 
     $(document).on("click","#side-delete-step",function(){
-    	var custom_menu =  $(this).parents("ul.custom-menu")[0];
+    	var custom_menu = $(this).parents("ul.custom-menu")[0];
     	var sid = $(custom_menu).find("input[name=sid]").val();
     	
     	$('#delete-step-sid').val(sid);
+
     });
     
     
@@ -132,7 +133,6 @@ $(function() {
     	var sid = $('#delete-step-sid').val();
     	
     	$.when(deletetaskinstep(sid)).done(function(data){
-    		
     		if(data.deletestep > 0){
                 alert('스텝 삭제가 완료되었습니다!');
                 $("#s"+sid).remove();
@@ -190,13 +190,7 @@ function deletetaskinstep(sid) {
 		url:"deletestep.htm",
 		data:{sid:sid},
 		success:function(data) {
-			var deletetaskinstep = data.deletetaskinstep;
 			
-			if(deletetaskinstep > 0) {
-				console.log("task 삭제");
-			}else {
-				console.log("task 삭제 실패");
-			}
 		}
 	}); // end - ajax
 	return ajax;

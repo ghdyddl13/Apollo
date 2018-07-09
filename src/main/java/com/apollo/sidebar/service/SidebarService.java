@@ -11,11 +11,13 @@ import com.apollo.member.dao.MemberDAO;
 import com.apollo.project.dao.ProjectDAO;
 import com.apollo.sidebar.dao.FolderDAO;
 import com.apollo.step.dao.StepDAO;
+import com.apollo.task.dao.TaskDAO;
 import com.apollo.vo.FolderDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
+import com.apollo.vo.TaskInStepDTO;
 
 /* 
   클래스명 : SidebarService
@@ -294,25 +296,40 @@ public class SidebarService {
 		return stepresult;
 		
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 9.
+	 기      능 :	sid로 검색하여 삭제할 tid 가져오기 
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<TaskInStepDTO> getTidsTaskInStep(int sid) {
+		ArrayList<TaskInStepDTO> tidlist = null;
+		try {
+			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
+			tidlist = dao.getTidsTaskInStep(sid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tidlist;
+	}
 	
 	/**
 	 * 
-	 날      짜 : 2018. 6. 21.
-	 기      능 : sid 에 속한 task 삭제 (선행)
+	 날      짜 : 2018. 7. 9.
+	 기      능 : step 속한 task 가 1개일 경우 삭제
 	 작성자명 : 김 래 영
 	 */
-	public int deleteTaskInStep(int sid) {
-		System.out.println("delete taskinstep 들어옴");
+	public int deleteTaskCount(int tid) {
 		int result = 0;
 		try {
-			StepDAO dao = sqlsession.getMapper(StepDAO.class);
-			result = dao.deleteTaskInStep(sid);
+			TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
+			result = dao.deleteTaskCount(tid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
-		
 	}
+	
 	/**
 	 * 
 	 날      짜 : 2018. 6. 21.
@@ -320,7 +337,7 @@ public class SidebarService {
 	 작성자명 : 김 래 영
 	 */
 	public int deleteStep(int sid) {
-		System.out.println("delete delete Step 들어옴");
+		//System.out.println("delete delete Step 들어옴");
 		int result = 0;
 		try {
 			StepDAO dao = sqlsession.getMapper(StepDAO.class);

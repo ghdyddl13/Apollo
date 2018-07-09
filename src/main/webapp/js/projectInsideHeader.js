@@ -36,6 +36,9 @@ $(function() {
 				if($('#project-page-tbody').children().length != 0) {
 				$('#project-page-table-no-data').remove();
 				}
+				/*if($('#project-table-sday').val() == "" || $('#project-table-eday').val() == "") {
+					$('#project-table-duration').val("");
+				}*/
 			}
 		})
 	});

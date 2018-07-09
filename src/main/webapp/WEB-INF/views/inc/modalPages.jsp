@@ -827,6 +827,7 @@
 					<p>해당 스텝을 삭제하시겠습니까?</p>
 					<p>(삭제시 해당 스텝은 영구삭제되며, 해당 스텝에 속한 task도 삭제됩니다)</p>
 					<input type="hidden" name="sid" id="delete-step-sid">
+					<input type="hidden" name="tid" id="delete-step-tid">
 				</form>
 				<div align="center">
 					<input type="button" class="btn delete-btn" id="delete-step-btn" value="삭제">&nbsp;&nbsp;&nbsp;

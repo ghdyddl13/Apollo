@@ -54,6 +54,11 @@ public interface TaskDAO {
 	public ArrayList<TaskDTO> getExpiredTasklist(int pid);
 	public ArrayList<TaskDTO> getDrawnearTasklist(int pid);
 	public ArrayList<TaskDTO> getUnassingedTasklist(int pid);
+	
+	
+	
+	public ArrayList<TaskInStepDTO> getTidsTaskInStep(int sid);
 
+	public int deleteTaskCount(int tid);
 	
 }
