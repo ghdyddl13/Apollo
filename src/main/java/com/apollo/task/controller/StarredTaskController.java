@@ -1,5 +1,6 @@
 package com.apollo.task.controller;
 
+import java.awt.Dialog.ModalExclusionType;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,11 +34,12 @@ public class StarredTaskController {
 	 작성자명 : 이 진 우
 	 */
 	@RequestMapping(value="/starredTask.htm",method=RequestMethod.GET)
-	public String showStarredTasks(HttpSession session,HttpServletRequest request,ModelMap map) {
+	public String showStarredTasks(HttpSession session,HttpServletRequest request,ModelMap map,Model model) {
     	session.setAttribute("location", "/starredTask.htm");
 		String mid = (String)request.getSession().getAttribute("mid");
 		List<MyWorkTaskDTO> tasklist = service.getListTask(mid);
 		map.addAttribute("tasklist", tasklist);
+		model.addAttribute("inbox", "starredtask");
 		return "header/starredTask";
 	}
 	/**
