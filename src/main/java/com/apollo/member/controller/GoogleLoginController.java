@@ -97,15 +97,12 @@ public class GoogleLoginController {
      
      int result = memberservice.googleLogin(mid);
      if(result == 1) {
-    	 System.out.println("로그인 성공");
     	 session.setAttribute("mid", mid);
     	 viewpage = "redirect:/main.htm";
     	 
      }else {
     	 memberservice.googleIdInsert(googledto);
     	 memberservice.emailcheck(mid);
-    	 System.out.println("memberservice.ischecked(mid) : " + memberservice.ischecked(mid));
-    	 System.out.println("구글로그인인설트 컨트롤러 종료");
     	 viewpage = "redirect:/google.htm";
      }
      

@@ -12,8 +12,19 @@
 <script type="text/javascript">
 	$(function() {
 		
-		$(".modal-content2").hide();
+		/**
+		 * 
+		 날      짜 : 2018. 7. 9.
+		 기      능 : 인박스에서 X버튼 눌렀을때 서드패널에서 사라짐
+		 작성자명 : 신 호 용
+		 */
+		$(document).on("click","#task_dismiss_btn_inbox",function(){
+			$(".modal-content2").hide();
+			$(".starred-secondbody-image").show();
+		});
 		
+		
+		$(".modal-content2").hide();
 		$(".Task_RUD_Modal").click(function(evt) {
 			$(this).children().children(".inbox_newcheck").empty();
 			console.log($(this).children().children().children(".cmtid").val());
@@ -31,7 +42,7 @@
 		
 		
 		$("#incomming-page").click(function(evt){
-			$("#inbox_count").hide();
+			
 			$.ajax({
 				url:"inbox.htm",
 				dataType:"html",
@@ -163,9 +174,9 @@
 <!-- 		<p class ="inbox-header">&nbsp; Inbox</p> -->
 		<div class = "inbox-nav">
 		<div class="inbox-topnav">
- 			<a id="incomming-page" href="#Inbox" ><b>INCOMMING</b></a>
-  			<a id="sent-page" href="#Sent"><b>SENT</b></a>
- 			<a id = "archive-page" href="#Archive"><b>ARCHIVE</b></a>
+ 			<a id="incomming-page" ><b>INCOMMING</b></a>
+  			<a id="sent-page" ><b>SENT</b></a>
+ 			<a id = "archive-page" ><b>ARCHIVE</b></a>
   			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
     		<i class="fa fa-bars"></i>
   			</a>
@@ -253,6 +264,11 @@
 				</c:otherwise>
 			</c:choose>
 			</c:forEach>
+			
+			
+			
+			
+			
 		</div>
 		<div class ="inbox-section-center" id="center">
 		</div>
@@ -276,7 +292,7 @@
 					<div class="col-sm-2" id="star_trash">
 						<span id="span_task_star"></span>&nbsp&nbsp
 						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
-						<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
+						<button type="button" class="close" id="task_dismiss_btn_inbox">&times;</button>
 					</div>
 					
 					<div class="col-sm-12" id="Task_Modal_snames">
@@ -292,17 +308,16 @@
 				<!-- row 2 -->
 				<div class="row">
 					<div class="col-sm-2">
-							<select id="Task_Modal_tstatus_selectbox">
+							<select id="Task_Modal_tstatus_selectbox_noredirect">
 							</select>
 					</div>	
 					<div class="col-sm-5">
 	                    <span>시작일&nbsp:&nbsp</span>
-                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date_sday">
+                   		<input id="Task_Modal_sday_noredirect" type="text" name="sday" placeholder="Start Date" class="date date_sday_noredirect">
 					</div>
-
 					<div class="col-sm-5">
 						<span>종료일&nbsp:&nbsp</span>
-	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date_eday">
+	                    <input id="Task_Modal_eday_noredirect" type="text" name="eday" placeholder="End Date" class="date date_eday_noredirect">
 					</div>
 				</div>
 				<!-- end row 2 -->
@@ -319,7 +334,7 @@
 								
                 <hr />
 					<div class="modal-title">파일 업로드</div><br />
-	                <div id="Task_Modal_files">파일들이 여기 잡히게 된다</div>
+	                <div id="Task_Modal_files"></div>
 	                <br>
 	                <input id="Task_Modal_add_file_btn" type="button" value="파일추가"><br /><br />
                 <hr>

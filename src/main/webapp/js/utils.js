@@ -20,7 +20,7 @@ $(function(){
 
 
 function getTaskAssignees(tid,imgsize){
-	var div = jQuery("<div>",{"class":""});
+	var div = jQuery("<div>");
 
 	var left_member = [];
 	var left_count = 0;
@@ -40,23 +40,42 @@ function getTaskAssignees(tid,imgsize){
 						left_count++;
 					};
 				});
-
 				if(left_count>0){
-					var a = jQuery("<a>",{"class":"left-assignees",
-										  "text":"외 " +left_count+"명",
-										  "rel":"popover",
-										  "data-popover-content":"#left-assignee-"+tid});
-					var left_div =jQuery("<div>",{"class":"hide assignee-left-div",
-												  "id":"left-assignee-"+tid,
-												  "css":{"position":"absolute",
-													  	 "width":"100px"
-													  	 }});
+		
+					
+					var left_div_wrapper = jQuery("<div>",{"class":"assignee-left-div-wrapper",
+														   "text":"Other Assignees"});
+					var left_div =jQuery("<div>",{"class":"assignee-left-div"});
 					
 					$(left_member).each(function(index,left){
 						var left_assigee_container = makeProfileIcon(left,imgsize);
 						$(left_div).append(left_assigee_container);
 					});
-					$(a).append(left_div).appendTo(div);
+					$(left_div_wrapper).append(left_div);
+				//	let test = 1
+					$(div).on("mouseenter",function(){
+						$(".assignee-left-div-wrapper").remove();
+						console.log($(this).offset())
+						console.log($(this).width())
+						$(left_div_wrapper).css({
+							top: $(this).offset().top+ "px",
+							left : $(this).offset().left+$(this).width()+10 + "px",
+						}).appendTo("body");
+					});
+					
+					$(document).bind("mousedown", function(e) {
+
+						// If the clicked element is not the menu
+						if (!$(e.target).parents(".assignee-left-div-wrapper").length > 0) {
+
+							// Hide it
+							$(".assignee-left-div-wrapper").remove();
+						}
+					})	
+					/*$(div).on("mouseleave",function(){
+						$(left_div).remove();
+					})*/
+						
 				};
 
 				

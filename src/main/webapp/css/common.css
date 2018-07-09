@@ -18,6 +18,23 @@ html, body{
 	white-space: nowrap;
 	flex-direction: column;
 }
+
+.loading{
+	position:absolute;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	background:white;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+#loading_img{
+	height: 20px;
+	width: 20px
+}
+
 .main-header-panel{
 	display:block;
 	flex:0 0 auto;
@@ -1092,7 +1109,7 @@ label {
 	border-radius: 3px;
 	border: 1px solid #dddddd;
 	width:100%;
-	height: 30px;
+	height: 40px;
 	padding:0.5em
 }
 .join-input-title{
@@ -1192,6 +1209,26 @@ label {
 	font-weight: bold;
 	
 }
+.assignee-left-div-wrapper{
+	z-index:12;
+	background: #f5f8fc;
+	text-align:center;
+	border-radius: 10px;
+	padding:10px;
+	position: absolute;
+	box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc
+}
+.assignee-left-div{
+	
+	display: flex;
+	justify-content: center;
+	align-items:center;
+	flex-wrap: wrap;
+	width: 200px;
+	min-height: 50px;
+	
+	
+}
 #main-project-add-btn {
 	background-color:#ffc30d;
 	color:white;
@@ -1270,12 +1307,7 @@ label {
 	font-size: 20px;
 }
 
-.assignee-left-div{
-	padding: 20px;
-	padding-right: 20px;
-	background-color: white;
-	border-radius: 3px
-}
+
 
 
 
@@ -1437,7 +1469,7 @@ label {
   width: 49%;
   height: 100%;
   border-radius: 3px;
-  overflow: hidden!important;
+  overflow: auto;
 }    
 .main-body-twopannel-left-wrapper{
   display: flex;
@@ -1643,3 +1675,14 @@ label {
   padding: 0;
   display: block;
 }
+
+.login-msg{
+	margin-bottom: 15px;
+	color:#b9062f;
+} 
+
+.email-msg{
+	margin-bottom: 15px;
+	color:#000069;
+}
+

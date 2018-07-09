@@ -24,10 +24,6 @@
 }
 
 
-.inbox-section-left::-webkit-scrollbar { 
-    display: none; 
-}
-
 .inbox-section-right {
 	float: left;
 	margin-right: 0.66%;

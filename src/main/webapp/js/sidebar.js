@@ -1,4 +1,21 @@
 $(function() {
+	/*
+	var loading = $('<div id="loading" class="loading"><img id="loading_img" alt="loading" src="img/loader.gif" /></div>')
+					.appendTo(".main-box-panel").hide();
+
+	$(window)	
+	.ajaxStart(function(){
+		console.log("a")
+	loading.show();
+	})
+	.ajaxStop(function(){
+		console.log("b")
+		loading.hide();
+	});*/
+
+
+
+	
 	 unload();
 	/////////////  프로젝트, 폴더, 스텝 생성 모달창 도움말 설정////////////////////
 	 $(".modal-question").tooltip({
@@ -644,6 +661,16 @@ $(function() {
 
 		});	
 		
+		
+	$("#side-bar-add-project").click(function(){
+		 $('#add-project-name').val("");
+		 $('#insert-project-sday-id').val("");
+		 $('#insert-proejct-eday-id').val("");
+		 $('#project-detail').val("");
+		 $("#method1").prop("checked", true);
+
+	})	
+		
 	// 프로젝트 생성 버튼 클릭시 alert 창 화면 		
 	$("#insert-project-btn").click(function(evt){
 		 if($("#add-project-name").val().trim() == ""){
@@ -672,10 +699,7 @@ $(function() {
 				 }else {
 					 alert("프로젝트 생성에 실패했습니다");
 				 }	
-				 $('#add-project-name').val("");
-				 $('#insert-project-sday-id').val("");
-				 $('#insert-proejct-eday-id').val("");
-				 $('#proejct-detail').val("");
+
 				 $('.close').click();
 			 }
 
@@ -684,6 +708,7 @@ $(function() {
 	
 	//사이드바에서 폴더생성 버튼을 클릭할 때
 	$(document).on("click","#side-add-folder",function(){
+		$('#add-folder-name').val("");
 		var custom_menu =  $(this).parents("ul.custom-menu")[0];
 		var pid =  $(custom_menu).find("input[name=pid]").val();
 		$("#add-folder-pid").val(pid);
@@ -715,7 +740,7 @@ $(function() {
                 }else {
                    alert("폴더 생성에 실패했습니다");
                 }   
-                $('#add-folder-name').val("");
+             
                 $('.close').click();
                
                 } // end - success
@@ -796,11 +821,11 @@ $(function() {
 	           data:deletefolder,
 	           dataType:"json",
 	           success:function(data){
-	               
-	               if(data.updatefolder > 0){
+	               console.log(data.deletefolder);
+	               if(data.deletefolder == 0){
 	                   alert('폴더 삭제가 실패되었습니다');
 	               }else {
-	                   alert('폴더 삭제이 완료되었습니다!');
+	                   alert('폴더 삭제가 완료되었습니다!');
 	                   $("#fwrapper"+fid).remove();
 	               }
 	               $('.close').click();

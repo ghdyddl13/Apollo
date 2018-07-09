@@ -1,6 +1,6 @@
 var Regexemail = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
 var Regexpwd =  /^(?=.*[A-Za-z0-9])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z0-9\d$@$!%*#?&]{8,}$/;
-
+var keycheck = false;
 $(function() {
 
 		$("#pwdreset").click(function() {
@@ -147,7 +147,7 @@ $(function() {
 		})
 		
 		
-		var keycheck = false;
+		
 		$('#btnCheckkey').click(function(){
 			if ($("#apollokey").val()== "") {
 	            alert("인증키를 입력하지 않았습니다.");
@@ -163,6 +163,7 @@ $(function() {
 						if(data.result=="fail"){
 							$("#keycheck").text('존재하지 않는 인증키 입니다.').css("color","red");
 							$("#apollokey").focus();
+							keycheck = false;
 						}else{
 							$("#keycheck").text('인증 되었습니다.').css("color","#1153ed");
 							
@@ -229,8 +230,8 @@ $(function() {
 
 			}
 			if ($("#apollokey").val()!="" ){
-				
-				if(keycheck ==false){
+				console.log("keycheck" + keycheck);
+				if(keycheck == false){
 					alert("인증키를 확인해 주세요.");
 					return false;
 				}

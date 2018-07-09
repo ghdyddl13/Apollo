@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
@@ -768,14 +769,14 @@ public class TaskService {
 	 기      능 : Task 모달 내 파일 다운로드
 	 작성자명 : 김 정 권
 	 */
-	public void downLoadFileInTaskModal(String filename, HttpServletResponse response) {
+	public void downLoadFileInTaskModal(String filename, HttpServletResponse response, HttpServletRequest request) {
 	
 		System.out.println("downLoadFileInTaskModal 서비스 실행");
 	   	   
 		String downloadPath = "resources/upload_files/" + filename;
 		
 		try {
-			DownloadFileUtils.downloadFileUtils(downloadPath, response);
+			DownloadFileUtils.downloadFileUtils(downloadPath, response, request);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

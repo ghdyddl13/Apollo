@@ -53,7 +53,6 @@ public class MemberService {
 	 작성자명 : 신 호 용
 	 */
 	public int insertMember(MemberDTO memberdto){
-		System.out.println("service insertmember");
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.insertMember(memberdto);
@@ -120,7 +119,6 @@ public class MemberService {
 	 작성자명 : 신 호 용
 	 */
 	public String getlogin(String mid){
-		System.out.println("service getlogin");
 		String result = "";
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.getLogin(mid);
@@ -134,12 +132,9 @@ public class MemberService {
 	 작성자명 : 신 호 용
 	 */
 	public int midcheck(String mid){
-		System.out.println("service midcheck");
-		System.out.println(mid);
 		int result=0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.midCheck(mid);
-		System.out.println(result);
 		return result;
 	}
 	/**
@@ -149,11 +144,9 @@ public class MemberService {
 	 작성자명 : 신 호 용
 	 */
 	public int keycheck(String apollokey){
-		System.out.println("service midcheck");
 		int result=0;
 		AuthkeyDAO dao = sqlsession.getMapper(AuthkeyDAO.class);
 		result = dao.keyCheck(apollokey);
-		System.out.println(result);
 		return result;
 
 	}
@@ -181,7 +174,6 @@ public class MemberService {
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.findPwd(memberdto);
-		System.out.println("result : " + result);
 		return result;
 	}
 	
@@ -331,7 +323,6 @@ public class MemberService {
 	 작성자명 : 신 호 용
 	 */
 	public int freeTrialCheck(String mid){
-		System.out.println("service freeTrialCheck");
 		int result = 0;
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		result = dao.freeTrialCheck(mid);

@@ -15,6 +15,8 @@ import org.springframework.web.servlet.View;
 
 import com.apollo.step.service.StepBoardService;
 import com.apollo.step.service.StepListService;
+import com.apollo.task.service.TaskService;
+import com.apollo.vo.CommentDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.StepListTaskDTO;
@@ -27,6 +29,8 @@ public class StepListController {
 	private StepListService service;
 	@Autowired
 	private StepBoardService boardservice;
+	@Autowired
+	private TaskService taskservice;
 	@Autowired
 	private View jsonview;
 	
@@ -151,7 +155,32 @@ public class StepListController {
 	 */
 	@RequestMapping(value="/liststatustasks.htm", method=RequestMethod.POST)
 	public String statusListTasks(int tstatusid,String[] tasks, HttpSession session, ModelMap map) {
-		service.listStatusTasks(tasks, tstatusid);
+		int result = service.listStatusTasks(tasks, tstatusid);
+		if(result >= 1) {
+			for(String tid:tasks) {
+			int taskid=Integer.parseInt(tid.substring(1));
+			String realtname = taskservice.getTname(taskid);
+			String comment = "";
+			String mid = (String) session.getAttribute("mid");
+			ArrayList<TstatusDTO> tstatuslist = new ArrayList();
+			tstatuslist = taskservice.gettstatuslist(taskid);
+			for(TstatusDTO tstatusdto : tstatuslist) {
+					if(tstatusid == tstatusdto.getTstatusid()) {
+						
+						String modifier = taskservice.getTaskModifierName(mid);
+						comment += modifier + "님이 " + realtname +"의 상태를 " + tstatusdto.getTstatus() + "로 변경하였습니다";
+					}
+			}
+			
+			CommentDTO commentdto = new CommentDTO();
+			commentdto.setComments(comment);
+			commentdto.setTid(taskid);
+			commentdto.setMid(mid);
+			commentdto.setCmtkind(1);
+			
+			int insert_comment_result = taskservice.insertComment(commentdto);
+			}
+		}
 		int sid = (Integer)session.getAttribute("sid");
 		
 		return "redirect:/list.htm?sid="+sid;
@@ -178,7 +207,32 @@ public class StepListController {
 	 */
 	@RequestMapping(value="/listassigntasks.htm", method=RequestMethod.POST)
 	public String assignListTasks(String mid, String[] tasks,HttpSession session, ModelMap map) {
-		service.listAssignTasks(tasks, mid);
+		int result = service.listAssignTasks(tasks, mid);
+		
+		if(result >= 1) {
+			for(String tid:tasks) {
+			int taskid = Integer.parseInt(tid.substring(1));
+			String realtname = taskservice.getTname(taskid);
+			
+			String modifier = (String) session.getAttribute("mid");
+			modifier = taskservice.getTaskModifierName(modifier);
+			String assignee_name = taskservice.getTaskModifierName(mid);
+
+			String comment = "";
+			comment = modifier + "님이 " + realtname +" 업무를 " + assignee_name +"님에게 할당하였습니다";
+			
+			// comments 테이블에 insert
+			CommentDTO commentdto = new CommentDTO();
+			commentdto.setComments(comment);
+			commentdto.setTid(taskid);
+			
+			String mymid = (String) session.getAttribute("mid");
+			commentdto.setMid(mymid);
+			commentdto.setCmtkind(2);
+			int final_result = taskservice.insertAssignComment(commentdto);
+			}
+		}
+		
 		int sid = (Integer)session.getAttribute("sid");
 		
 		return "redirect:/list.htm?sid="+sid;
