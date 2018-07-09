@@ -320,7 +320,7 @@ $(document).on("focus","#open-right-nav",function(){
 	var doneTypingInterval = 500; // 타이빙 interval이 0.5초 이상일 경우 실행
 	$(document).on("input","#search-bar" ,function () {
 		
-		if(getBytes($("#search-bar").val()) <2 ||$("#search-bar").val() == " ") return false; //타이핑한 문자가 2바이트 이상이고 공백이 아닐 경우에 다음단계로 넘어감
+		if(getBytes($("#search-bar").val()) <2 ||$("#search-bar").val().trim() == "") return false; //타이핑한 문자가 2바이트 이상이고 공백이 아닐 경우에 다음단계로 넘어감
 	    clearTimeout(typingTimer);
 	    typingTimer = setTimeout(function() {
     	$.when(getSearchResult()).done(function(data){
@@ -546,7 +546,10 @@ function resultSearchProject(projectlist){
  작성자명 : 박 민 식
  */
  function makeSearchTaskDiv(task){
-		 var div =jQuery("<div>",{"class":"search-item-box search-item-task row " ,"id":"srch-t"+task.tid});
+		 var div =jQuery("<div>",{"class":"search-item-box Task_RUD_Modal search-item-task row ",
+			 					  "id":"srch-t"+task.tid,
+			 					  "data-toggle":"modal",
+			 					  "data-target":"#Task_RUD_Modal"});
 		 var pid = $("<input>", {"type":"hidden", "value": "p"+task.pid});
 		 var assignee_div= jQuery("<div>",{"class":"search-item-left col-sm-2"});
 		 getTaskAssignees(task.tid,'35').appendTo(assignee_div);
@@ -624,12 +627,4 @@ function resultSearchProject(projectlist){
  }) //end function
  
  
- /// Seacrch 바에서 Task 클릭시 소속  Step의  list에서 모달띄워주기
-$(document).on("click",".search-item-task",function(){
-	
-	var pid = $(this).find("[type=hidden]")[0].value.substring(1);
-	var tid = $(this)[0].id.substring(6);
-	console.log(pid, tid);
-	
-})
 

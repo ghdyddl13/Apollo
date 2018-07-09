@@ -163,8 +163,8 @@
 				<div  id="main-box"></div>
 			</div>	
 		</div>
-		<jsp:include page="/WEB-INF/views/inc/modalPages.jsp" ></jsp:include>
 	</div>
+		<jsp:include page="/WEB-INF/views/inc/modalPages.jsp" ></jsp:include>
 	
 </body>
 </html>
