@@ -1,8 +1,8 @@
 /**
  프로젝트 : Apollo
- 파일이름 : UploadFileUtils.java 
- 날      짜 : 2018. 7. 4.
- 작 성  자 : 이 진 우
+ 파일이름 : DeleteFileUtils.java 
+ 날      짜 : 2018. 7. 9.
+ 작 성  자 : 김 정 권
 */
 
 package com.apollo.utils;

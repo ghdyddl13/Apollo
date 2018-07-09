@@ -126,7 +126,9 @@ public class S3Util {
 	 작성자명 : 김 정 권
 	 */
 	public void getObject(String bucketName, String downloadPath) {
-	
+		
+		conn.getObject(bucketName, downloadPath);
+		System.out.println("conn에서 다운 완료");
     }
 	
 }

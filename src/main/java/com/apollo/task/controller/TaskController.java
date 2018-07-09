@@ -1059,7 +1059,6 @@ public class TaskController {
    public View downLoadFileInTaskModal(String filename, ModelMap map) {
    	
 	   System.out.println("downLoadFileInTaskModal 컨트롤러 실행");
-   	   
 	   service.downLoadFileInTaskModal(filename);
    			
    	   return jsonview;
