@@ -10,14 +10,14 @@
     <bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
        
-        <!-- <property name="url" value="jdbc:oracle:thin:@192.168.0.55:1521:XE" />
+        <property name="url" value="jdbc:oracle:thin:@192.168.0.14:1521:XE" />
         <property name="username" value="PROJECT_APOLLO" />
-        <property name="password" value="1004" /> -->
+        <property name="password" value="1004" /> 
      
        
-        <property name="url" value="jdbc:oracle:thin:@apollodb.c8laekrmeaob.ap-northeast-2.rds.amazonaws.com:1521:APOLLODB" />
+        <!-- <property name="url" value="jdbc:oracle:thin:@apollodb.c8laekrmeaob.ap-northeast-2.rds.amazonaws.com:1521:APOLLODB" />
         <property name="username" value="PROJECT_APOLLO_AWS" />
-        <property name="password" value="apollo1004" /> 
+        <property name="password" value="apollo1004" />  -->
     
     </bean>
     <!-- Mybatis 사용을 위한 Bean 설정으로 pom.xml에서 dependency 설정을 이미 했기에 가능 -->
