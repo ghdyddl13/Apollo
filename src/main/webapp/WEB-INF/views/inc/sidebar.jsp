@@ -54,12 +54,6 @@
 					<hr id="freetrial-hr">	
 				</div>	
 				</c:when>
-				<c:when test="${m.apollokey ne null}">
-					<div class="side-freetrial">
-					<span class = "side-freetrial-span">Hello Apollo!</span>
-					<hr id="freetrial-hr">	
-				</div>
-				</c:when>
 			</c:choose>
 	</div>
 	

@@ -3,6 +3,7 @@ package com.apollo.task.controller;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1055,13 +1056,32 @@ public class TaskController {
     기      능 : Task 모달 내 파일 다운로드
     작성자명 : 김 정 권
     */
-   @RequestMapping(value="/downloadfileintaskmodal.htm",method=RequestMethod.POST)
-   public View downLoadFileInTaskModal(String filename, ModelMap map) {
+   @RequestMapping(value="/downloadfileintaskmodal.htm")
+   public void downLoadFileInTaskModal(String filename, ModelMap map, HttpServletResponse response) {
    	
 	   System.out.println("downLoadFileInTaskModal 컨트롤러 실행");
-   	   
-	   service.downLoadFileInTaskModal(filename);
-   		
+	   service.downLoadFileInTaskModal(filename, response);
+   			
+   }
+  
+   
+   /**
+    * 
+    날      짜 : 2018. 7. 8.
+    기      능 : Task 모달 내 파일 삭제
+    작성자명 : 김 정 권
+    */
+   @RequestMapping(value="/deletefileintaskmodal.htm",method=RequestMethod.POST)
+   public View deleteFile(int tid, String filename, ModelMap map) {
+   	
+	   System.out.println("deleteFile 컨트롤러 실행");
+	   String filepath = "resources/upload_files/" + filename;
+	   System.out.println("테스트 풀 패쓰 출력 : " + filepath);
+	   
+	   // 해당 테스크의 파일들
+	   ArrayList<FileDTO> filelist = new ArrayList();	
+	   filelist = service.deleteFile(tid, filename, filepath);
+	   map.addAttribute("filelist", filelist);
    			
    	   return jsonview;
    }

@@ -8,9 +8,12 @@
 	overflow: hidden;
 }
 .project-table-tr-steps {
-
+	
 	background-color: #8d949a0f;
 	font-weight: bold;
+}
+.project-table-tr-steps>td {
+	vertical-align: middle !important;
 }
 .project-table-td-tstatus {
 	text-align:center;

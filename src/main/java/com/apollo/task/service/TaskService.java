@@ -8,15 +8,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.View;
 
 import com.apollo.inbox.dao.InboxDAO;
 import com.apollo.member.dao.MemberDAO;
@@ -28,6 +26,7 @@ import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
+import com.apollo.utils.DeleteFileUtils;
 import com.apollo.utils.DownloadFileUtils;
 import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.CommentAndMemberDTO;
@@ -734,14 +733,49 @@ public class TaskService {
 		return filelist;
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 삭제
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<FileDTO> deleteFile(int tid, String filename, String filepath) {
+		
+		System.out.println("delete file 서비스 시작");
+		try {
+			DeleteFileUtils.deleteFile(filepath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("파일 삭제 완전히 완료");		
+		
+		FileDAO dao = session.getMapper(FileDAO.class);
+		int result = dao.deleteFile(filename);
+		System.out.println("RDB 에서 파일 삭제 완료");
+		
+		ArrayList<FileDTO> filelist = new ArrayList();
+		filelist = dao.getFileList(tid);
+		System.out.println("새 목록 가져와서 view로 던져줌");
+		
+		return filelist;
+	}
 	
 	
-	public void downLoadFileInTaskModal(String filename) {
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 다운로드
+	 작성자명 : 김 정 권
+	 */
+	public void downLoadFileInTaskModal(String filename, HttpServletResponse response) {
 	
-		String downloadPath = "resources\\upload_files\\" + filename;
+		System.out.println("downLoadFileInTaskModal 서비스 실행");
+	   	   
+		String downloadPath = "resources/upload_files/" + filename;
 		
 		try {
-			DownloadFileUtils.downFiles(downloadPath);
+			DownloadFileUtils.downloadFileUtils(downloadPath, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

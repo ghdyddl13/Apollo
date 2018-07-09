@@ -63,7 +63,7 @@ $( ".date_sday" ).datepicker({
 		        	     
 	                	 $("#main-box").empty();
 						 $("#main-box").append(rdata);
-		        	   
+						 checkCrtPage();
  		           } // end-success
  		        }); // end-ajax
         
@@ -135,7 +135,7 @@ $( ".date_eday" ).datepicker({
 		        	     
 	                	 $("#main-box").empty();
 						 $("#main-box").append(rdata);
-		        	   
+						 checkCrtPage();
  		        	  
  		           } // end-success
  		        }); // end-ajax

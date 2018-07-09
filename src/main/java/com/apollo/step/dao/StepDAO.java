@@ -91,13 +91,6 @@ public interface StepDAO {
 	 */
 	public int updateStep(StepDTO stepdto);
 	
-	/**
-	 * 
-	 날      짜 : 2018. 6. 21.
-	 기      능 : sid 에 속한 task 삭제 (선행)
-	 작성자명 : 김 래 영
-	 */
-	public int deleteTaskInStep(int sid);
 	
 	/**
 	 * 

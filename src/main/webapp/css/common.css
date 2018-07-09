@@ -1450,7 +1450,6 @@ label {
   height: 49px;
   background-color: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  z-index: 10;
   box-sizing: border-box;
   display: block;
 }
@@ -1499,7 +1498,6 @@ label {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 10;
   overflow: auto;
   background-color: white;
   display: block;

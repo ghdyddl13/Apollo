@@ -49,11 +49,14 @@
 	               <c:forEach var="member" items="${memberlist}">
 	                  <tr class="project-table-tr-steps">
 	                     <td><i class="side-dir-step-icon far fa-file-alt"></i>&nbsp;${step.sname}</td>
-	                     <td class="project-table-day">${step.sday}</td>
-	                     <td class="project-table-day">${step.eday}</td>
+	                     <td class="project-table-sday">${step.sday}</td>
+	                     <td class="project-table-eday">${step.eday}</td>
 	                     <c:choose>
 	                        <c:when test="${(step_endeday - step_startsday) == 0}">
 	                           <td class="project-table-duration"></td>
+	                        </c:when>
+	                        <c:when test="${empty step.sday or empty step.eday}">
+	                        	  <td class="project-table-duration"></td>
 	                        </c:when>
 	                        <c:otherwise>
 	                           <td class="project-table-duration">${step_endeday - step_startsday}일</td>
@@ -85,13 +88,16 @@
 	                     <c:if test="${task.sid eq step.sid}">
 	                        <tr class="project-table-tr-tasks Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}">
 	                           <td style="padding-left: 30px">┗ ${task.tname}</td>
-	                           <td class="project-table-day">${task.sday}</td>
-	                           <td class="project-table-day">${task.eday}</td>
+	                           <td class="project-table-sday">${task.sday}</td>
+	                           <td class="project-table-eday">${task.eday}</td>
 	                           <c:choose>
 	                              <c:when test="${(task_endeday - task_startsday) == 0}">
 	                                 <td class="project-table-duration"></td>
 	                              </c:when>
-	                              <c:otherwise>
+								  <c:when test="${empty task.sday or empty task.eday}">
+									 <td class="project-table-duration"></td>
+								  </c:when>	
+								  <c:otherwise>
 	                                 <td class="project-table-duration">${task_endeday - task_startsday}일</td>
 	                              </c:otherwise>
 	                           </c:choose>
@@ -117,12 +123,15 @@
 	                 	 <c:forEach var="member" items="${memberlist}">
 		                     <tr class="project-table-tr-steps">
 		                        <td style="padding-left: 30px"><i class="side-dir-step-icon far fa-file-alt"></i>&nbsp;${step.sname}</td>
-		                        <td class="project-table-day">${step.sday}</td>
-		                        <td class="project-table-day">${step.eday}</td>
+		                        <td class="project-table-sday">${step.sday}</td>
+		                        <td class="project-table-eday">${step.eday}</td>
 		                        <c:choose>
 		                        <c:when test="${(step_endeday - step_startsday) == 0}">
 		                           <td class="project-table-duration"></td>
 		                        </c:when>
+		                        <c:when test="${empty step.sday or empty step.eday}">
+									 <td class="project-table-duration"></td>
+								</c:when>	
 		                        <c:otherwise>
 		                           <td class="project-table-duration">${step_endeday - step_startsday}일</td>
 		                        </c:otherwise>
@@ -147,12 +156,15 @@
 	                        <c:if test="${task.sid eq step.sid}">
 	                           <tr class="project-table-tr-tasks Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}"> 
 	                              <td style="padding-left: 60px">┗ ${task.tname}</td>
-	                              <td class="project-table-day">${task.sday}</td>
-	                              <td class="project-table-day">${task.eday}</td>
+	                              <td class="project-table-sday">${task.sday}</td>
+	                              <td class="project-table-eday">${task.eday}</td>
 	                              <c:choose>
 	                              <c:when test="${(task_endeday - task_startsday) == 0}">
 	                                 <td class="project-table-duration"></td>
 	                              </c:when>
+	                              <c:when test="${empty task.sday or empty task.eday}">
+									 <td class="project-table-duration"></td>
+								  </c:when>	
 	                              <c:otherwise>
 	                                 <td class="project-table-duration">${task_endeday - task_startsday}일</td>
 	                              </c:otherwise>

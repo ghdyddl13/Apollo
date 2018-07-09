@@ -1453,17 +1453,7 @@ $(document).on("click",".file_name",function() {
 	var filename = $(this).attr('id');
 	console.log('filename: ' + filename);
 	
-	$.ajax(
-		       {
-		           type : "post",
-		           url  : "downloadfileintaskmodal.htm",
-		           data : {
-		        	   'filename': filename
-		           },
-		           success : function(rdata){
-		        	
-		           } // end-success
-		        }); // end-ajax
+	location.href = 'downloadfileintaskmodal.htm?filename=' + filename;
 
 });
 
@@ -1476,17 +1466,32 @@ $(document).on("click",".file_name",function() {
  */
 $(document).on("click",".file_del_btn",function() {
 	
-	alert('삭제한다');
+	var tid = $('#tidhidden').attr('value');
+	var filename = $(this).attr('id');
+	console.log(tid + '/' + filename);
 	$.ajax(
 		       {
 		           type : "post",
-		           url  : "changetname.htm",
+		           url  : "deletefileintaskmodal.htm",
 		           data : {
 		        	   'tid': tid,
-		        	   'tname' : tname
+		        	   'filename' : filename
 		           },
 		           success : function(rdata){
 		        	
+		        	   // files
+		        	   $('#Task_Modal_files').empty();
+		        	   var filesdivs = '';
+		        	   $(rdata.filelist).each(function(){
+		        		   
+		        	   var shortfilename = this.filename.substring(37);
+		        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
+		        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+		        	   filesdivs += '</div>'
+		        		  
+		        	   });
+		        	   $('#Task_Modal_files').append(filesdivs);
+		        	   
 		           } // end-success
 		        }); // end-ajax
 

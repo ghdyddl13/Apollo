@@ -22,6 +22,7 @@ import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
+import com.apollo.vo.TaskInStepDTO;
 
 
 @Controller
@@ -362,16 +363,23 @@ public class SidebarController {
 	 */
 	@RequestMapping(value="/deletestep.htm", method=RequestMethod.POST)
 	public View deleteTaskInStep(int sid, Model model) {
-		System.out.println("deleteTaskInStep controller");
 		
-		int deletetaskinstep = 0;
+		ArrayList<TaskInStepDTO> tidlist = null; //tid list로 뽑기
+		int deletetaskcount = 0;
 		int deletestep = 0;
 		
 		try {
-			deletetaskinstep = sidebarservice.deleteTaskInStep(sid);
-			model.addAttribute("deletetaskinstep", deletetaskinstep);
-			System.out.println("task delete : " + deletetaskinstep);
-			
+			tidlist = sidebarservice.getTidsTaskInStep(sid);
+			model.addAttribute("tidlist", tidlist);
+
+			for(TaskInStepDTO taskinstepdto : tidlist) {
+				int tid = taskinstepdto.getTid();
+				
+				deletetaskcount = sidebarservice.deleteTaskCount(tid);
+				
+				System.out.println(deletetaskcount);
+				
+			}	
 			deletestep = sidebarservice.deleteStep(sid);
 			model.addAttribute("deletestep", deletestep);
 			System.out.println("step : " + deletestep);

@@ -48,7 +48,7 @@ public class StepBoardService {
 			result = dao.insertBoardTaskInStep(dto);
 			System.out.println("result : " + result);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		return result;
 	}
