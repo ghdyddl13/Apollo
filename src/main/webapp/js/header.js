@@ -295,6 +295,7 @@ function getRecentTasks(){
  작성자명 : 박 민 식
  */
 $(document).on("focus","#open-right-nav",function(){
+	var inboxkind = $("#inboxkind").val();
    document.getElementById("search-nav").style.width = $("#header-right-wrapper").width()+10+"px";
     $("#search-bar").focus();
    $.when(getRecentTasks()).done(function(data){ //Default로 최근 생성 혹은 변경된 태스크 10건을 가져옴
@@ -302,7 +303,7 @@ $(document).on("focus","#open-right-nav",function(){
 	   var div = jQuery("<div>");
 	   $(div).append(p);
 	   $(data.rcttasks).each(function(index,el){
-		  $(makeSearchTaskDiv(el)).appendTo(div);
+		  $(makeSearchTaskDiv(el,inboxkind)).appendTo(div);
 	   })// each
 	   $(div).appendTo($("#search-content-box"));  
 	   
@@ -545,15 +546,29 @@ function resultSearchProject(projectlist){
  기   능 : 태스크 검색결과를 만들어주는 함수
  작성자명 : 박 민 식
  */
- function makeSearchTaskDiv(task){
+ function makeSearchTaskDiv(task,inboxkind){
 		 var div =jQuery("<div>",{"class":"search-item-box Task_RUD_Modal search-item-task row "});
+
+	 	
+
 		 var pid = $("<input>", {"type":"hidden", "value": "p"+task.pid});
 		 var assignee_div= jQuery("<div>",{"class":"search-item-left col-sm-2"});
 		 getTaskAssignees(task.tid,'35').appendTo(assignee_div);
-		 var task_info_div= jQuery("<div>",{"class":"search-item-right Task_RUD_Modal col-sm-10 container-fluid",
-			 								"id":"srch-t"+task.tid,
-										    "data-toggle":"modal",
-										    "data-target":"#Task_RUD_Modal"});
+		 
+		 
+		 if(inboxkind == 'incomming' || inboxkind == 'sent' || inboxkind == 'archive' || inboxkind == 'starredtask'){
+			 var task_info_div= jQuery("<div>",{"class":"search-item-right Task_RUD_Modal col-sm-10 container-fluid",
+					"id":"srch-t"+task.tid});
+		 	}else{
+		 		 var task_info_div= jQuery("<div>",{"class":"search-item-right Task_RUD_Modal col-sm-10 container-fluid",
+						"id":"srch-t"+task.tid,
+					    "data-toggle":"modal",
+					    "data-target":"#Task_RUD_Modal"});
+		 	}
+		 
+		 
+		
+		 
 		 var task_name_div= jQuery("<div>",{"class":"search-info-div ","text":task.tname});
 		 var task_status_div= jQuery("<div>",{"class":"search-info-div","text":task.tstatus,"css":{"color":task.color}});
 		 var pname= jQuery("<span>",{"class":"search-item-pname","text":$($("#p"+task.pid).find(".side-content-name")[0]).text(),"css":{"margin-left":"5px"}})

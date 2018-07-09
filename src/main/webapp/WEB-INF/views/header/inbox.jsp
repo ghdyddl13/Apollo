@@ -264,6 +264,11 @@
 				</c:otherwise>
 			</c:choose>
 			</c:forEach>
+			
+			
+			
+			
+			
 		</div>
 		<div class ="inbox-section-center" id="center">
 		</div>

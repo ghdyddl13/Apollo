@@ -13,6 +13,7 @@
             <div class="main-body-twopannel-left-header-title-textwrapper">
               <div class="main-body-twopannel-left-header-title">
                 <span class="main-body-twopannel-left-header-title-text">Starred Task</span>
+                 <input id ="inboxkind" type="hidden" value="${inbox}">
               </div>
             </div>
           </div>
@@ -29,6 +30,7 @@
 	                    </div>
 	                    <div class="starred-body-task-container">
 	                      <div class="starred-body-task-container-top">
+	                     
 	                        <div class="starred-body-task-container-top-title" id="t${task.tid}">${task.tname}</div>
 	                        <c:choose>
 								<c:when test="${task.overdue=='overdue'}">
