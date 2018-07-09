@@ -12,6 +12,8 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
 public class DeleteFileUtils {
 	
 	public static void deleteFile(String filepath) throws Exception {

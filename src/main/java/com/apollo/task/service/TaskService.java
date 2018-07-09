@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -766,14 +768,14 @@ public class TaskService {
 	 기      능 : Task 모달 내 파일 다운로드
 	 작성자명 : 김 정 권
 	 */
-	public void downLoadFileInTaskModal(String filename) {
+	public void downLoadFileInTaskModal(String filename, HttpServletResponse response) {
 	
 		System.out.println("downLoadFileInTaskModal 서비스 실행");
 	   	   
 		String downloadPath = "resources/upload_files/" + filename;
 		
 		try {
-			DownloadFileUtils.downloadFileUtils(downloadPath);
+			DownloadFileUtils.downloadFileUtils(downloadPath, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

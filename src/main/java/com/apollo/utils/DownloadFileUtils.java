@@ -7,12 +7,14 @@
 
 package com.apollo.utils;
 
+import javax.servlet.http.HttpServletResponse;
+
 public class DownloadFileUtils {
 	
-	public static void downloadFileUtils(String filepath) throws Exception {
+	public static void downloadFileUtils(String filepath, HttpServletResponse response) throws Exception {
 		S3Util s3 = new S3Util();
 		String bucketName = "projectapollo";
 		
-		s3.getObject(bucketName, filepath);
+		s3.getObject(bucketName, filepath, response);
 	}
 }

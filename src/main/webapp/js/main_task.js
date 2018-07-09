@@ -1453,17 +1453,7 @@ $(document).on("click",".file_name",function() {
 	var filename = $(this).attr('id');
 	console.log('filename: ' + filename);
 	
-	$.ajax(
-		       {
-		           type : "post",
-		           url  : "downloadfileintaskmodal.htm",
-		           data : {
-		        	   'filename': filename
-		           },
-		           success : function(rdata){
-		        	
-		           } // end-success
-		        }); // end-ajax
+	location.href = 'downloadfileintaskmodal.htm?filename=' + filename;
 
 });
 

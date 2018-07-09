@@ -3,6 +3,7 @@ package com.apollo.task.controller;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1055,13 +1056,12 @@ public class TaskController {
     기      능 : Task 모달 내 파일 다운로드
     작성자명 : 김 정 권
     */
-   @RequestMapping(value="/downloadfileintaskmodal.htm",method=RequestMethod.POST)
-   public View downLoadFileInTaskModal(String filename, ModelMap map) {
+   @RequestMapping(value="/downloadfileintaskmodal.htm")
+   public void downLoadFileInTaskModal(String filename, ModelMap map, HttpServletResponse response) {
    	
 	   System.out.println("downLoadFileInTaskModal 컨트롤러 실행");
-	   service.downLoadFileInTaskModal(filename);
+	   service.downLoadFileInTaskModal(filename, response);
    			
-   	   return jsonview;
    }
   
    
