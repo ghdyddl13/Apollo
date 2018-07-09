@@ -85,9 +85,7 @@ public class MemberController {
 		String mid = (String) request.getSession().getAttribute("mid");
 		
 		MemberDTO memberdto = service.getProfileInfoMember(mid);
-		ResponseEntity<byte[]> imagefile=null;
 		try {
-			imagefile = service.getMemberImage(memberdto.getImage());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,11 +93,17 @@ public class MemberController {
 		model.addAttribute("memberdto", memberdto);
 		int newcount = inboxservice.newCount(mid);
 		model.addAttribute("newcount", newcount);
-		model.addAttribute("imagefile", imagefile);
 		return "main";
 	}
-	@RequestMapping(value="/displayImage.htm",method=RequestMethod.POST)
+	/**
+	 * 
+	 날      짜 : 2018. 7. 9.
+	 기      능 : AWS에서 이미지 가지고 오기
+	 작성자명 : 이 진 우
+	 */
+	@RequestMapping(value="/displayImage.htm",method=RequestMethod.GET)
 	public ResponseEntity<byte[]> displayImage(HttpSession session,HttpServletResponse response){
+		System.out.println("display image 탔어요");
 		String mid = (String) session.getAttribute("mid");
 		
 		MemberDTO memberdto = service.getProfileInfoMember(mid);
@@ -112,6 +116,7 @@ public class MemberController {
 		}
 		return imagefile;
 	}
+
 	/**
 	 * 
 	 날      짜 : 2018. 6. 14.

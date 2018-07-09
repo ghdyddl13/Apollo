@@ -850,32 +850,60 @@
 			</div>
 			<div class="modal-body">
 				<div id="edit-profile-img-content">
-									<!-- <img name="image" id="edit-profile-modal-img" src=""> -->
-					<form  action="" method="post" >
-						<span class="btn btn-1a btn-addfile fileinput-button">
-		        			<span>Add files...</span>
-							<input type="file" name="member_image" id="edit-profile-image" data-url="updatememberimage.htm">
-		   				</span>
-					</form>
+					<div class="profile-modal-container">
+						<div class="profile-modal-image-container">
+							<div class="profile-modal-image-wrapper">
+								<img class="profile-modal-image" id="profile-modal-image"src="/bit/displayImage.htm" alt=""> 
+								<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>
+							</div>
+							<form hidden class="profile-modal-image_uploader">
+								<input type="file" id="edit-profile-image" data-url="updatememberimage.htm" class="profile-modal-image-upload_input">
+							</form>
+						</div>
+						<div class="profile-modal-text-container">
+							<div class="profile-modal-text-mname"></div>
+							<div class="profile-modal-text-mid"></div>
+						</div>
+					</div>
 					<script type="text/javascript">
-						 $(function(){
-							$("#edit-profile-image").fileupload({
-								dataType:"json",
-								add:function(e,data){
-					                var uploadFile = data.files[0];
-					                var isValid = true;
-					                if (!(/png|jpe?g|gif|svg/i).test(uploadFile.name)) {
-					                    alert('png, jpg, gif 만 가능합니다');
-					                    isValid = false;
-					                }
-					                if (isValid) {
-					                    data.submit();
-					                }
-								},
-								done:function(e,data){
-									
-								}								
-							})
+						$(function() {
+							let count=0;
+							$("#edit-profile-image").fileupload(
+									{
+										dataType : "json",
+										add : function(e, data) {
+											var uploadFile = data.files[0];
+											var isValid = true;
+											if (!(/png|jpe?g|gif|svg/i)
+													.test(uploadFile.name)) {
+												alert('png, jpg, gif 만 가능합니다');
+												isValid = false;
+											}
+											if (isValid) {
+												data.submit();
+											}
+										},
+										done : function(e, data) {
+											let modalstr="";
+											let profilestr="";
+											console.log(count);
+											if((count%2)==0){
+												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/bit/displayImage.htm?sid=123" alt="">'
+												modalstr+='<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>';
+												profilestr ='<img id="loginimg" src="/bit/displayImage.htm?sid=123">';
+												count++;
+											}else{
+												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/bit/displayImage.htm" alt="">'
+												modalstr+='<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>';
+												profilestr='<img id="loginimg" src="/bit/displayImage.htm">';
+												count++;
+											}
+											$(".profile-modal-image-wrapper").empty();
+											$(".profile-modal-image-wrapper").append(modalstr);
+											$("#profile-modal-image").empty();
+											$("#profile-modal-image").append(profilestr);
+										}
+									})
 
 						});
 					</script>

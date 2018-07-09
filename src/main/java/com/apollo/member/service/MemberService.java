@@ -1,7 +1,6 @@
 package com.apollo.member.service;
 
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -425,6 +424,9 @@ public class MemberService {
 		
 		return pid;
 	}
+	
+	
+	
 	public ResponseEntity<byte[]> getMemberImage(String fileName) throws Exception{
 		InputStream in = null;
 		ResponseEntity<byte[]> entity = null;

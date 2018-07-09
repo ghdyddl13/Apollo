@@ -15,6 +15,6 @@ public class DownloadFileUtils {
 		S3Util s3 = new S3Util();
 		String bucketName = "projectapollo";
 		
-		s3.getObject(bucketName, filepath, response);
+		s3.getObject(bucketName, filepath);
 	}
 }

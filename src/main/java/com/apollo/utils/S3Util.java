@@ -7,30 +7,15 @@
 
 package com.apollo.utils;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.catalina.util.URLEncoder;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
 import com.amazonaws.auth.AWSCredentials;
@@ -39,7 +24,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
-import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
@@ -112,10 +96,7 @@ public class S3Util {
 	public void fileDelete(String bucketName, String fileName) {
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		conn.deleteObject(bucketName, imgName);
-		System.out.println("삭제완료");
 	}
-
-	
 	/**
 	 * 
 	 날      짜 : 2018. 7. 5.
@@ -128,48 +109,40 @@ public class S3Util {
 	}
 	
 	
-	
-	/**
-	 * 
-	 날      짜 : 2018. 7. 9.
-	 기      능 : 파일 다운로드 
-	 작성자명 : 김 정 권
-	 */
-	public void getObject(String bucketName, String downloadPath, HttpServletResponse response) throws IOException  {
-		
-		// S3Object s3Object = conn.getObject(new GetObjectRequest(bucketName, downloadPath));
-		
-		 GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, downloadPath);
-	     S3Object s3Object = conn.getObject(getObjectRequest);
-	     String newfilename = downloadPath.substring(60);
+	public void getObject(String bucketName, String downloadPath) {
+//		final String USAGE = "\n" +
+//	            "To run this example, supply the name of an S3 bucket and object to\n" +
+//	            "download from it.\n" +
+//	            "\n" +
+//	            "Ex: GetObject <bucketname> <filename>\n";
 
-	     System.out.println("여기 1");
-	     S3ObjectInputStream objectInputStream = s3Object.getObjectContent();
-	     byte[] bytes = IOUtils.toByteArray(objectInputStream);
-
-	     System.out.println("여기 2");
-	     FileUtils.writeByteArrayToFile(new File("C:\\Apollo_Reports\\" + newfilename), bytes);
-	     
-	     System.out.println("여기 3");
-	     OutputStream out = new BufferedOutputStream(response.getOutputStream());
-	     response.reset();
-	     response.setHeader("Content-Disposition", "attachment;filename=" + newfilename);
-
-	     System.out.println("여기 4");
-	     FileInputStream fis = null;
-	     FileOutputStream fos = null;
-
-	     try {
-	            fis = new FileInputStream("C:\\Apollo_Reports\\" + newfilename);
-	           
-	            int data = 0;
-	            while ((data = fis.read()) != -1) {
-	            	out.write(data);
+	        String bucket_name = bucketName;
+	        String key_name = downloadPath;
+	        
+	        System.out.format("Downloading %s from S3 bucket %s...\n", key_name, bucket_name);
+	        System.out.println("여기까지 온다");
+	        try {
+	            S3Object o = conn.getObject(bucket_name, key_name);
+	            S3ObjectInputStream s3is = o.getObjectContent();
+	            FileOutputStream fos = new FileOutputStream(new File(key_name));
+	            byte[] read_buf = new byte[1024];
+	            int read_len = 0;
+	            while ((read_len = s3is.read(read_buf)) > 0) {
+	                fos.write(read_buf, 0, read_len);
 	            }
-	        }catch (Exception e) {
-	        	e.printStackTrace();
+	            s3is.close();
+	            fos.close();
+	        } catch (AmazonServiceException e) {
+	            System.err.println(e.getErrorMessage());
+	            System.exit(1);
+	        } catch (FileNotFoundException e) {
+	            System.err.println(e.getMessage());
+	            System.exit(1);
+	        } catch (IOException e) {
+	            System.err.println(e.getMessage());
+	            System.exit(1);
 	        }
-        
-    }
-
+	        System.out.println("Done!");
+	}
+	
 }

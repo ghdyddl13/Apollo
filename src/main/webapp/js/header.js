@@ -125,6 +125,8 @@ $(function() {
 			success:function(data) {
 				//var image = (data.updatememberinfo.image)?data.updatememberinfo.image :"img/user_image.png"
 				//$('#edit-profile-modal-img').attr("src",image);
+				$('.profile-modal-text-mname').text(data.updatememberinfo.mname);
+				$('.profile-modal-text-mid').text(data.updatememberinfo.mid);
 				$('#edit-profile-mname').val(data.updatememberinfo.mname);
 				$('#edit-profile-mid').val(data.updatememberinfo.mid);
 				$('#edit-profile-apollokey').val(data.updatememberinfo.apollokey);
