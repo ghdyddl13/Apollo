@@ -1209,6 +1209,26 @@ label {
 	font-weight: bold;
 	
 }
+.assignee-left-div-wrapper{
+	z-index:12;
+	background: #f5f8fc;
+	text-align:center;
+	border-radius: 10px;
+	padding:10px;
+	position: absolute;
+	box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc
+}
+.assignee-left-div{
+	
+	display: flex;
+	justify-content: center;
+	align-items:center;
+	flex-wrap: wrap;
+	width: 200px;
+	min-height: 50px;
+	
+	
+}
 #main-project-add-btn {
 	background-color:#ffc30d;
 	color:white;
@@ -1287,12 +1307,7 @@ label {
 	font-size: 20px;
 }
 
-.assignee-left-div{
-	padding: 20px;
-	padding-right: 20px;
-	background-color: white;
-	border-radius: 3px
-}
+
 
 
 
