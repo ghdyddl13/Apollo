@@ -26,9 +26,14 @@ $( ".date_sday" ).datepicker({
     	console.log('테스트 eday : ' + eday_year + '/' + eday_month + '/' + eday_day);
    	
     	var yeartest = true;
+    	
     	if(sday_year <= eday_year){
     		yeartest = false;
-    		if(sday_month <= eday_month){
+    		
+    		if(sday_year < eday_year){
+    			yeartest = false;
+    		
+    		}else if((sday_month <= eday_month) && (sday_year == eday_year)){
     			yeartest = false;
     			
     			if((sday_month < eday_month)){
@@ -39,8 +44,8 @@ $( ".date_sday" ).datepicker({
     				yeartest = true;
     			}
     		}else{
-    			yeartest = true;
-    		}
+				yeartest = true;
+			}
     	}
     	
     	if(yeartest){
@@ -104,9 +109,14 @@ $( ".date_eday" ).datepicker({
     	console.log('테스트 eday : ' + eday_year + '/' + eday_month + '/' + eday_day);
    	
     	var yeartest = true;
+    	
     	if(sday_year <= eday_year){
     		yeartest = false;
-    		if(sday_month <= eday_month){
+    		
+    		if(sday_year < eday_year){
+    			yeartest = false;
+    		
+    		}else if((sday_month <= eday_month) && (sday_year == eday_year)){
     			yeartest = false;
     			
     			if((sday_month < eday_month)){
@@ -117,9 +127,9 @@ $( ".date_eday" ).datepicker({
     				yeartest = true;
     			}
     		}else{
-    			yeartest = true;
-    		}
-    	}   	
+				yeartest = true;
+			}
+    	}
     	
     	if(yeartest){
     		alert('종료일을 시작일 이전으로 설정할 수 없습니다');
