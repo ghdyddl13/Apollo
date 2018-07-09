@@ -7,27 +7,32 @@
 
 package com.apollo.utils;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.List;
 import java.util.Properties;
 
-import com.amazonaws.AmazonServiceException;
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.iot.model.CannedAccessControlList;
+import com.amazonaws.services.mediastoredata.model.GetObjectRequest;
+import com.amazonaws.services.mediastoredata.model.PutObjectRequest;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
 
 public class S3Util {
 	private Properties s3key = PropertiesUtil.fetchProperties("Apollo_s3Key");
@@ -97,7 +102,10 @@ public class S3Util {
 	public void fileDelete(String bucketName, String fileName) {
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		conn.deleteObject(bucketName, imgName);
+		System.out.println("삭제완료");
 	}
+
+	
 	/**
 	 * 
 	 날      짜 : 2018. 7. 5.
@@ -110,40 +118,15 @@ public class S3Util {
 	}
 	
 	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 9.
+	 기      능 : 파일 다운로드 
+	 작성자명 : 김 정 권
+	 */
 	public void getObject(String bucketName, String downloadPath) {
-//		final String USAGE = "\n" +
-//	            "To run this example, supply the name of an S3 bucket and object to\n" +
-//	            "download from it.\n" +
-//	            "\n" +
-//	            "Ex: GetObject <bucketname> <filename>\n";
-
-	        String bucket_name = bucketName;
-	        String key_name = downloadPath;
-	        
-	        System.out.format("Downloading %s from S3 bucket %s...\n", key_name, bucket_name);
-	        System.out.println("여기까지 온다");
-	        try {
-	            S3Object o = conn.getObject(bucket_name, key_name);
-	            S3ObjectInputStream s3is = o.getObjectContent();
-	            FileOutputStream fos = new FileOutputStream(new File(key_name));
-	            byte[] read_buf = new byte[1024];
-	            int read_len = 0;
-	            while ((read_len = s3is.read(read_buf)) > 0) {
-	                fos.write(read_buf, 0, read_len);
-	            }
-	            s3is.close();
-	            fos.close();
-	        } catch (AmazonServiceException e) {
-	            System.err.println(e.getErrorMessage());
-	            System.exit(1);
-	        } catch (FileNotFoundException e) {
-	            System.err.println(e.getMessage());
-	            System.exit(1);
-	        } catch (IOException e) {
-	            System.err.println(e.getMessage());
-	            System.exit(1);
-	        }
-	        System.out.println("Done!");
-	}
+	
+    }
 	
 }

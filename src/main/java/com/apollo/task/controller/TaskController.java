@@ -1061,7 +1061,28 @@ public class TaskController {
 	   System.out.println("downLoadFileInTaskModal 컨트롤러 실행");
    	   
 	   service.downLoadFileInTaskModal(filename);
-   		
+   			
+   	   return jsonview;
+   }
+  
+   
+   /**
+    * 
+    날      짜 : 2018. 7. 8.
+    기      능 : Task 모달 내 파일 삭제
+    작성자명 : 김 정 권
+    */
+   @RequestMapping(value="/deletefileintaskmodal.htm",method=RequestMethod.POST)
+   public View deleteFile(int tid, String filename, ModelMap map) {
+   	
+	   System.out.println("deleteFile 컨트롤러 실행");
+	   String filepath = "resources/upload_files/" + filename;
+	   System.out.println("테스트 풀 패쓰 출력 : " + filepath);
+	   
+	   // 해당 테스크의 파일들
+	   ArrayList<FileDTO> filelist = new ArrayList();	
+	   filelist = service.deleteFile(tid, filename, filepath);
+	   map.addAttribute("filelist", filelist);
    			
    	   return jsonview;
    }

@@ -10,4 +10,6 @@ public interface FileDAO {
 	public int upLoadFileInTaskModal(FileDTO dto);
 	
 	public ArrayList<FileDTO> getFileList(int tid);
+	
+	public int deleteFile(String filename);
 }
