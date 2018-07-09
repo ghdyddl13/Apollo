@@ -292,7 +292,7 @@
 				<!-- row 2 -->
 				<div class="row">
 					<div class="col-sm-2">
-							<select id="Task_Modal_tstatus_selectbox">
+							<select id="Task_Modal_tstatus_selectbox_noredirect">
 							</select>
 					</div>	
 					<div class="col-sm-5">
@@ -319,7 +319,7 @@
 								
                 <hr />
 					<div class="modal-title">파일 업로드</div><br />
-	                <div id="Task_Modal_files">파일들이 여기 잡히게 된다</div>
+	                <div id="Task_Modal_files"></div>
 	                <br>
 	                <input id="Task_Modal_add_file_btn" type="button" value="파일추가"><br /><br />
                 <hr>

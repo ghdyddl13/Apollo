@@ -1087,5 +1087,65 @@ public class TaskController {
    	   return jsonview;
    }
    
+   
+   /**
+	 * 
+	 날      짜 : 2018. 7. 9
+	 기      능 : 해당 task 상태 변경하기 + no redirect
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/changetstatusno_redirect.htm")
+	public View changeTstatusNoredirect(int tid, int value, String tname, Model model, HttpSession session) {
+		
+		System.out.println("changetstatus No redirect 컨트롤러 실행됨");
+		
+		TidvalueDTO dto = new TidvalueDTO();
+		dto.setTid(tid);
+		dto.setValue(value);
+		
+		int result = service.changeTstatus(dto);
+		
+		// 상태 변경 성공시 코멘트 입력
+		if(result == 1) {
+			
+			System.out.println("상태변경 성공! 상태변경 코멘트 입력 시작!");
+			String comment = "";
+			String mid = (String) session.getAttribute("mid");
+			ArrayList<TstatusDTO> tstatuslist = new ArrayList();
+			tstatuslist = service.gettstatuslist(tid);
+
+			for(TstatusDTO tstatusdto : tstatuslist) {
+				int tstatusid = tstatusdto.getTstatusid();
+					if(tstatusid == value) {
+						
+						String modifier = service.getTaskModifierName(mid);
+						comment = modifier + "님이 " + tname +"의 상태를 " + tstatusdto.getTstatus() + "로 변경하였습니다";
+					}
+			}
+			
+			CommentDTO commentdto = new CommentDTO();
+			commentdto.setComments(comment);
+			commentdto.setTid(tid);
+			commentdto.setMid(mid);
+			commentdto.setCmtkind(1);
+			
+			System.out.println("컨트롤러에서 검증");
+			System.out.println(commentdto.getCmtid());
+			System.out.println(commentdto.getComments());
+			System.out.println(commentdto.getTid());
+			System.out.println(commentdto.getMid());
+			System.out.println(commentdto.getCmtkind());
+			System.out.println("=================");
+			
+			int insert_comment_result = service.insertComment(commentdto);
+			System.out.println("코멘트 입력 여부 : " + insert_comment_result);
+			
+		} // end - 상태 변경 성공시 발동 조건문 
+		
+		model.addAttribute("result", result);
+		
+		return jsonview;
+		
+	}
 	
 }
