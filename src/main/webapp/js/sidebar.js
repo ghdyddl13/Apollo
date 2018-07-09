@@ -554,6 +554,7 @@ $(function() {
 				success:function(data){
 					$("#main-box").empty();
 					$("#main-box").append(data);	 		
+					console.log("a");
 					$("#information-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected"); 
 				}
 			})
@@ -800,7 +801,7 @@ $(function() {
 	                   alert('폴더 삭제가 실패되었습니다');
 	               }else {
 	                   alert('폴더 삭제이 완료되었습니다!');
-	                   $("#f"+fid).remove();
+	                   $("#fwrapper"+fid).remove();
 	               }
 	               $('.close').click();
 	           }

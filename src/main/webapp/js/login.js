@@ -58,7 +58,6 @@ $(function() {
 				mname : $('input[name=mname2]').val(),
 				mid : $('input[name=mid2]').val()
 			}
-			console.log(data)
 			$.ajax({
 				type : 'post',
 				url : 'findpwd.htm',
@@ -130,7 +129,6 @@ $(function() {
 					url:"midcheck.htm",
 					data:{"mid" : $('#mid').val()},
 					success:function(data){
-						console.log(data)
 						if(data.result=="fail"){
 							$("#idcheck").text("중복된 아이디 입니다.").css("color","red");
 							$("#mid").focus();
@@ -176,7 +174,6 @@ $(function() {
 		});
 		
 		$("#apollokey").keyup(function(){
-			console.log("a")
 			keycheck = false;
 			$("#keycheck").text("");
 		})
@@ -207,8 +204,6 @@ $(function() {
 	        }
 
 			if ($("#join-pwd").val()!=$("#join-pwd-check").val()) {
-				console.log($("#join-pwd").val())
-				console.log($("#join-pwd-check").val())
 	            alert("비밀번호 확인이 일치하지 않습니다.");
 				$("#join-pwd").val();
 				$("#join-pwd-check").val();
@@ -247,8 +242,6 @@ $(function() {
 		
 $(function(){
 	$(document).on("keyup","#join-pwd",function(){
-		console.log(!Regexpwd.test($.trim($("#join-pwd").val())))
-		console.log($("#join-pwd").val());
 		if (!Regexpwd.test($("#join-pwd").val()) ){
 			$("#regexpwd-check").css("color","red");
 		}else{
