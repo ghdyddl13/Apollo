@@ -137,10 +137,15 @@ public class S3Util {
 	 */
 	public void getObject(String bucketName, String downloadPath, HttpServletResponse response) throws IOException  {
 		
-		// S3Object s3Object = conn.getObject(new GetObjectRequest(bucketName, downloadPath));
-		
+		   String filePath = "C:\\Apollo_Files\\"; // file 생성 위치 
+		   File fDir = new File(filePath);
+			if (!fDir.exists()) {
+				fDir.mkdirs();
+			}
+
 		 GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, downloadPath);
 	     S3Object s3Object = conn.getObject(getObjectRequest);
+	     
 	     String newfilename = downloadPath.substring(60);
 
 	     System.out.println("여기 1");
@@ -148,7 +153,7 @@ public class S3Util {
 	     byte[] bytes = IOUtils.toByteArray(objectInputStream);
 
 	     System.out.println("여기 2");
-	     FileUtils.writeByteArrayToFile(new File("C:\\Apollo_Reports\\" + newfilename), bytes);
+	     FileUtils.writeByteArrayToFile(new File("C:\\Apollo_Files\\" + newfilename), bytes);
 	     
 	     System.out.println("여기 3");
 	     OutputStream out = new BufferedOutputStream(response.getOutputStream());
@@ -160,7 +165,7 @@ public class S3Util {
 	     FileOutputStream fos = null;
 
 	     try {
-	            fis = new FileInputStream("C:\\Apollo_Reports\\" + newfilename);
+	            fis = new FileInputStream("C:\\Apollo_Files\\" + newfilename);
 	           
 	            int data = 0;
 	            while ((data = fis.read()) != -1) {

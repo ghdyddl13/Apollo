@@ -94,19 +94,20 @@ function addTask_focusout(tstatusid){
       var i = 1;
       var tstatus;
       var tid;
+      var tname;
       $("ul.tstatuslist").sortable({
          connectWith : "ul",
          update: function(event, ui) {      
            if (i++ == 2){
             tstatusid =  $(this).closest('div')[0].childNodes[1].childNodes[1].value;
             tid =  ui.item[0].value;
-
+ 
          $.ajax({
             url : 'boardTaskStatusUpdate.htm',
             data : { 
                tstatusid : tstatusid,
                tid : tid
-                  } 
+               } 
          }) 
             
             //update event 발생시 이동전 위치와 이동후 위치를 나타내주는 변수를 초기화함
