@@ -336,16 +336,57 @@
 					<div class="modal-title">파일 업로드</div><br />
 	                <div id="Task_Modal_files"></div>
 	                <br>
-	                <input id="Task_Modal_add_file_btn" type="button" value="파일추가"><br /><br />
-                <hr>
-
-				<div class="modal-title">Sub Task</div><br />
-				
-				 <input type="text" name="pname" id="add_sub_task"
-							placeholder="Sub Task의 제목을 입력 후 Enter..."
-							class="text ui-widget-content ui-corner-all"><br><br>
-				 <div id="Task_Modal_subtasks"></div><br>
-
+	                <input type="button" name="fileuploadbtn" id="fileuploadbtn" value="파일업로드">
+					<form  action="" method="post" >
+						<input style="display:none" type="file" name="member_image" id="fileuploadintaskmodal" data-url="uploadfileintaskmodal.htm">
+					</form>
+				    <script type="text/javascript">
+						 $(function(){
+							 
+							$("#fileuploadintaskmodal").fileupload({
+								dataType:"json",
+								add:function(e,data){
+					                var uploadFile = data.files[0];
+					                var isValid = true;
+					                if (!(/png|jpe?g|gif|svg/i).test(uploadFile.name)) {
+					                    alert('png, jpg, gif 만 가능합니다');
+					                    isValid = false;
+					                }
+					                if (isValid) {
+					                    data.submit();
+					                }
+								},
+								done:function(e,data){
+									
+									$.ajax(
+										       {
+										           type : "post",
+										           url  : "resetfilelist.htm",
+										           success : function(rdata){
+										        	   
+										        	   // files
+										        	   $('#Task_Modal_files').empty();
+										        	   var filesdivs = '';
+										        	   $(rdata.filelist).each(function(){
+										        		   
+										        	   var shortfilename = this.filename.substring(37);
+										        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
+										        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+										        	   filesdivs += '</div>'
+										        		  
+										        	   });
+										        	   $('#Task_Modal_files').append(filesdivs);
+										        	   
+										           } // end-success
+										        }); // end-ajax
+								
+									
+									
+								}								
+							})
+						});
+					</script>
+					
                 <hr />
                 
 				<div class="modal-title">
