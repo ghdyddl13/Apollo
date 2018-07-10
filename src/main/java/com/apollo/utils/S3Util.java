@@ -21,7 +21,6 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.util.URLEncoder;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -101,7 +100,6 @@ public class S3Util {
 	public void fileDelete(String bucketName, String fileName) {
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		conn.deleteObject(bucketName, imgName);
-		System.out.println("삭제완료");
 	}
 
 	/**
@@ -112,6 +110,7 @@ public class S3Util {
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		return conn.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();
 	}
+
 
 	/**
 	 * 

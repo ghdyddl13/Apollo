@@ -13,6 +13,7 @@
             <div class="main-body-twopannel-left-header-title-textwrapper">
               <div class="main-body-twopannel-left-header-title">
                 <span class="main-body-twopannel-left-header-title-text">Starred Task</span>
+                 <input id ="inboxkind" type="hidden" value="${inbox}">
               </div>
             </div>
           </div>
@@ -22,14 +23,15 @@
             <div class="starred-body-wrapper">
               <div class="starred-body-tasks">
 				<c:forEach var="task" items="${tasklist}">
-	                <div class="starred-body-task">
+	                <div class="starred-body-task Task_RUD_Modal" id="t${task.tid}">
 	                  <div class="starred-body-task-wrapper" >
 	                    <div class="starred-body-task-image-wrapper">
 	                      <div class="starred-body-task-image"><img class="starred-body-task-imagetag" src="img/frog.png" alt=""></div>
 	                    </div>
 	                    <div class="starred-body-task-container">
 	                      <div class="starred-body-task-container-top">
-	                        <div class="starred-body-task-container-top-title Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}">${task.tname}</div>
+	                     
+	                        <div class="starred-body-task-container-top-title" id="t${task.tid}">${task.tname}</div>
 	                        <c:choose>
 								<c:when test="${task.overdue=='overdue'}">
 			                        <div class="starred-body-task-container-top-date date-overdue">${task.date}</div>
@@ -59,9 +61,156 @@
       </div>
     </div>
     <div class="main-body-twopannel-right">
-      <div class="starred-secondbody-wrapper">
+     
+      
         <div class="starred-secondbody-image"></div>
+        
+<div class="modal-content2">
+
+				<div class="modal-header">
+				<!-- row 1 -->
+				<div class="row">
+					<div class="col-sm-10">
+						<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
+						<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">
+					</div>
+
+					<div class="col-sm-2" id="star_trash">
+						<span id="span_task_star"></span>&nbsp&nbsp
+						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
+						<button type="button" class="close" id="task_dismiss_btn_inbox">&times;</button>
+					</div>
+					
+					<div class="col-sm-12" id="Task_Modal_snames2">
+					</div>
+					<div id="step_names_popup_div2"></div>
+					<div id="step_delete_popup_div2"></div>
+					
+				</div>
+				<!-- end row 1 -->
+				<hr>
+							
+							
+				<!-- row 2 -->
+				<div class="row">
+					<div class="col-sm-2">
+							<select id="Task_Modal_tstatus_selectbox_noredirect">
+							</select>
+					</div>	
+					<div class="col-sm-5">
+	                    <span>시작일&nbsp:&nbsp</span>
+                   		<input id="Task_Modal_sday_noredirect" type="text" name="sday" placeholder="Start Date" class="date date_sday_noredirect">
+					</div>
+					<div class="col-sm-5">
+						<span>종료일&nbsp:&nbsp</span>
+	                    <input id="Task_Modal_eday_noredirect" type="text" name="eday" placeholder="End Date" class="date date_eday_noredirect">
+					</div>
+				</div>
+				<!-- end row 2 -->
+				<hr>
+				
+				<!-- end modal-header -->
+
+				<div class="modal-body">
+
+					<div class="modal-title">업무 담당자</div><br />
+					<div id="Task_Modal_assignee"></div>
+					<div id="assignee_popup_div"></div>
+
+								
+                <hr />
+					<div class="modal-title">파일 업로드</div><br />
+	                <div id="Task_Modal_files"></div>
+	                <br>
+	                <input type="button" name="fileuploadbtn" id="fileuploadbtn" value="파일업로드">
+					<form  action="" method="post" >
+						<input style="display:none" type="file" name="member_image" id="fileuploadintaskmodal" data-url="uploadfileintaskmodal.htm">
+					</form>
+				    <script type="text/javascript">
+						 $(function(){
+							 
+							$("#fileuploadintaskmodal").fileupload({
+								dataType:"json",
+								add:function(e,data){
+					                var uploadFile = data.files[0];
+					                var isValid = true;
+					                if (!(/png|jpe?g|gif|svg/i).test(uploadFile.name)) {
+					                    alert('png, jpg, gif 만 가능합니다');
+					                    isValid = false;
+					                }
+					                if (isValid) {
+					                    data.submit();
+					                }
+								},
+								done:function(e,data){
+									
+									$.ajax(
+										       {
+										           type : "post",
+										           url  : "resetfilelist.htm",
+										           success : function(rdata){
+										        	   
+										        	   // files
+										        	   $('#Task_Modal_files').empty();
+										        	   var filesdivs = '';
+										        	   $(rdata.filelist).each(function(){
+										        		   
+										        	   var shortfilename = this.filename.substring(37);
+										        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
+										        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+										        	   filesdivs += '</div>'
+										        		  
+										        	   });
+										        	   $('#Task_Modal_files').append(filesdivs);
+										        	   
+										           } // end-success
+										        }); // end-ajax
+								
+									
+									
+								}								
+							})
+						});
+					</script>
+					
+                <hr />
+                
+				<div class="modal-title">
+					<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
+					<div style="text-align:center">
+					<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
+					</div>
+				</div>
+                <hr />
+                
+					<div class="modal-title">Comment</div><br />
+					<div id="Task_Modal_comments">
+					</div>
+					<hr>
+					<div id="project_member_popup_div2"></div>
+					
+					<div id="div_for_comment_input_box2">
+					<input id="comment_input_box_in_taskmodal_noredirect" type="text" placeholder="코멘트를 입력 후 Enter..">
+					</div>
+							
+					<input type="hidden" id="pidhidden" value="">					
+					<input type="hidden" id="usermidhidden" value="">					
+					<input type="hidden" id="usermidhidden2" value="">					
+					<input type="hidden" id="tidhidden2" value="">
+					<input type="hidden" id="receiverhidden" value="">
+					<input type="hidden" id="receivernamehidden" value="">
+					<input type="hidden" id="tnamehidden" value="">
+					<input type="hidden" id="origin_sday" value="">
+					<input type="hidden" id="origin_eday" value="">
+					<input type="hidden" id="stepdeletehidden" data-toggle="modal" data-target="#step_delete_Modal">
+					
+			 	</div>
+			 	<!-- end modal-body -->
+				
+			</div>
+		</div>
+        
       </div>
     </div>
-  </div>
+
 </div>

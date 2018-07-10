@@ -2,9 +2,7 @@
 	overflow-y: auto;
 }
 
-.files-Table-div::-webkit-scrollbar {
-	display: none;
-}
+
 
 .file-table {
 	width: 95%;

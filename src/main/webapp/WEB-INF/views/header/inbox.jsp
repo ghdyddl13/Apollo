@@ -10,123 +10,8 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
+
 	$(function() {
-		
-		$(".modal-content2").hide();
-		
-		$(".Task_RUD_Modal").click(function(evt) {
-			$(this).children().children(".inbox_newcheck").empty();
-			console.log($(this).children().children().children(".cmtid").val());
-			console.log($(this).children().children(".inbox_mid2").val())
-			$.ajax({
-				url:"newcheck.htm",
-				type: 'POST',
-				data:{cmtid : $(this).children().children().children(".cmtid").val(),
-					  mid2 : $(this).children().children(".inbox_mid2").val()},
-				success:function(data){
-					
-				}
-			})
-		});
-		
-		
-		$("#incomming-page").click(function(evt){
-			$("#inbox_count").hide();
-			$.ajax({
-				url:"inbox.htm",
-				dataType:"html",
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					$('#incomming-page').css('border-bottom','2px solid transparent');
-					$('#incomming-page').css('border-color','#286cb0');
-				}
-			})
-		});
-		$("#sent-page").click(function(evt){
-			
-			$.ajax({
-				url:"sent.htm",
-				dataType:"html",
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					$('#sent-page').css('border-bottom','2px solid transparent');
-					$('#sent-page').css('border-color','#286cb0');
-				}
-			})
-		});
-		$("#archive-page").click(function(evt){
-			
-			$.ajax({
-				url:"archive.htm",
-				dataType:"html",
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					$('#archive-page').css('border-bottom','2px solid transparent');
-					$('#archive-page').css('border-color','#286cb0');
-				}
-			})
-		});
-		
-		$(".archiveupdate").click(function(evt){
-			evt.stopPropagation();
-			$.ajax({
-				url:"archiveupdate.htm",
-				dataType:"html",
-				type: 'POST',
-				data:{cmtid:$(this).children(".cmtid").val(),
-					  inboxkind:$("#inboxkind").val()},
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					if($('#inboxkind').val()== 'incomming'){
-						$('#incomming-page').css('border-bottom','2px solid transparent');
-						$('#incomming-page').css('border-color','#286cb0');
-					}else if($('#inboxkind').val()== 'sent'){
-						$('#sent-page').css('border-bottom','2px solid transparent');
-						$('#sent-page').css('border-color','#286cb0');
-					}else{
-						$('#archive-page').css('border-bottom','2px solid transparent');
-						$('#archive-page').css('border-color','#286cb0');
-					}
-				
-				}
-			})
-		});
-		$(".archiveupdate2").click(function(evt){
-			evt.stopPropagation();
-			$.ajax({
-				url:"archiveupdate2.htm",
-				dataType:"html",
-				type: 'POST',
-				data:{cmtid:$(this).children(".cmtid").val(),
-					  inboxkind:$("#inboxkind").val()},
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					$('#archive-page').css('border-bottom','2px solid transparent');
-					$('#archive-page').css('border-color','#286cb0');
-				}
-			})
-		});
-		
-		$("#cmt_insert").click(function(evt){
-			$.ajax({
-				url:"insertcomment.htm",
-				dataType:"html",
-				type: 'POST',
-				data:{comments:$("#cmt_cmts").val(),
-					  tid:$("#cmt_tid").val()},
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					
-				}
-			})
-		});
-		
 		var startpos, diffpos = 0, range = 400;
 		var isEnable = false;
 
@@ -148,10 +33,12 @@
 			if (isEnable) {
 				pos = event.clientX;
 				diffpos = startpos - pos;
-				var width = (window.innerWidth-250) / 2;
+				var width = (window.innerWidth - 250) / 2;
 				if (diffpos > -(width - range) && diffpos < (width - range)) {
-					document.getElementById("left").style.width = width -25 - diffpos + "px";
-					document.getElementById("right").style.width = width - 25+ diffpos + "px";
+					document.getElementById("left").style.width = width - 25
+							- diffpos + "px";
+					document.getElementById("right").style.width = width - 25
+							+ diffpos + "px";
 				}
 			}
 		}
@@ -163,9 +50,9 @@
 <!-- 		<p class ="inbox-header">&nbsp; Inbox</p> -->
 		<div class = "inbox-nav">
 		<div class="inbox-topnav">
- 			<a id="incomming-page" href="#Inbox" ><b>INCOMMING</b></a>
-  			<a id="sent-page" href="#Sent"><b>SENT</b></a>
- 			<a id = "archive-page" href="#Archive"><b>ARCHIVE</b></a>
+ 			<a id="incomming-page" ><b>INCOMMING</b></a>
+  			<a id="sent-page" ><b>SENT</b></a>
+ 			<a id = "archive-page" ><b>ARCHIVE</b></a>
   			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
     		<i class="fa fa-bars"></i>
   			</a>
@@ -206,7 +93,7 @@
 							</c:otherwise>
 						</c:choose>
 						&nbsp;&nbsp;&nbsp;${commentlist.cmtmtime}</span>
-						<div class="inbox-div4"><img src="img/user.png" width="30px" height="30px">&nbsp;&nbsp;&nbsp;
+						<div class="inbox-div4"><img style="border-radius: 50%;" src='displayImage.htm?image=${commentlist.image}' width="30px" height="30px">&nbsp;&nbsp;&nbsp;
 						<c:if test="${commentlist.cmtkind eq 0}">${commentlist.mname} : </c:if>${commentlist.comments}</div>
 					</div>
 					</div>
@@ -246,13 +133,18 @@
 							</c:otherwise>
 						</c:choose>
 						&nbsp;&nbsp;&nbsp;${commentlist.cmtmtime}</span>
-						<div class="inbox-div4"><img src="img/user.png" width="30px" height="30px">&nbsp;&nbsp;&nbsp;${commentlist.mname} : ${commentlist.comments}</div>
+						<div class="inbox-div4"><img style="border-radius: 50%;" src='displayImage.htm?image=${commentlist.image}' width="30px" height="30px">&nbsp;&nbsp;&nbsp;${commentlist.mname} : ${commentlist.comments}</div>
 					</div>
 					</div>
 					<hr class="inbox-hr">
 				</c:otherwise>
 			</c:choose>
 			</c:forEach>
+			
+			
+			
+			
+			
 		</div>
 		<div class ="inbox-section-center" id="center">
 		</div>
@@ -276,13 +168,13 @@
 					<div class="col-sm-2" id="star_trash">
 						<span id="span_task_star"></span>&nbsp&nbsp
 						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
-						<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
+						<button type="button" class="close" id="task_dismiss_btn_inbox">&times;</button>
 					</div>
 					
-					<div class="col-sm-12" id="Task_Modal_snames">
+					<div class="col-sm-12" id="Task_Modal_snames2">
 					</div>
-					<div id="step_names_popup_div"></div>
-					<div id="step_delete_popup_div"></div>
+					<div id="step_names_popup_div2"></div>
+					<div id="step_delete_popup_div2"></div>
 					
 				</div>
 				<!-- end row 1 -->
@@ -292,17 +184,16 @@
 				<!-- row 2 -->
 				<div class="row">
 					<div class="col-sm-2">
-							<select id="Task_Modal_tstatus_selectbox">
+							<select id="Task_Modal_tstatus_selectbox_noredirect">
 							</select>
 					</div>	
 					<div class="col-sm-5">
 	                    <span>시작일&nbsp:&nbsp</span>
-                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date_sday">
+                   		<input id="Task_Modal_sday_noredirect" type="text" name="sday" placeholder="Start Date" class="date date_sday_noredirect">
 					</div>
-
 					<div class="col-sm-5">
 						<span>종료일&nbsp:&nbsp</span>
-	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date_eday">
+	                    <input id="Task_Modal_eday_noredirect" type="text" name="eday" placeholder="End Date" class="date date_eday_noredirect">
 					</div>
 				</div>
 				<!-- end row 2 -->
@@ -319,18 +210,59 @@
 								
                 <hr />
 					<div class="modal-title">파일 업로드</div><br />
-	                <div id="Task_Modal_files">파일들이 여기 잡히게 된다</div>
+	                <div id="Task_Modal_files"></div>
 	                <br>
-	                <input id="Task_Modal_add_file_btn" type="button" value="파일추가"><br /><br />
-                <hr>
-
-				<div class="modal-title">Sub Task</div><br />
-				
-				 <input type="text" name="pname" id="add_sub_task"
-							placeholder="Sub Task의 제목을 입력 후 Enter..."
-							class="text ui-widget-content ui-corner-all"><br><br>
-				 <div id="Task_Modal_subtasks"></div><br>
-
+	                <input type="button" name="fileuploadbtn" id="fileuploadbtn" value="파일업로드">
+					<form  action="" method="post" >
+						<input style="display:none" type="file" name="member_image" id="fileuploadintaskmodal" data-url="uploadfileintaskmodal.htm">
+					</form>
+				    <script type="text/javascript">
+						 $(function(){
+							 
+							$("#fileuploadintaskmodal").fileupload({
+								dataType:"json",
+								add:function(e,data){
+					                var uploadFile = data.files[0];
+					                var isValid = true;
+					                if (!(/png|jpe?g|gif|svg/i).test(uploadFile.name)) {
+					                    alert('png, jpg, gif 만 가능합니다');
+					                    isValid = false;
+					                }
+					                if (isValid) {
+					                    data.submit();
+					                }
+								},
+								done:function(e,data){
+									
+									$.ajax(
+										       {
+										           type : "post",
+										           url  : "resetfilelist.htm",
+										           success : function(rdata){
+										        	   
+										        	   // files
+										        	   $('#Task_Modal_files').empty();
+										        	   var filesdivs = '';
+										        	   $(rdata.filelist).each(function(){
+										        		   
+										        	   var shortfilename = this.filename.substring(37);
+										        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
+										        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+										        	   filesdivs += '</div>'
+										        		  
+										        	   });
+										        	   $('#Task_Modal_files').append(filesdivs);
+										        	   
+										           } // end-success
+										        }); // end-ajax
+								
+									
+									
+								}								
+							})
+						});
+					</script>
+					
                 <hr />
                 
 				<div class="modal-title">
@@ -339,21 +271,22 @@
 					<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
 					</div>
 				</div>
-                <hr />
+                <hr/>
                 
 					<div class="modal-title">Comment</div><br />
 					<div id="Task_Modal_comments">
 					</div>
 					<hr>
-					<div id="project_member_popup_div"></div>
+					<div id="project_member_popup_div2"></div>
 					
-					<div id="div_for_comment_input_box">
-					<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">
+					<div id="div_for_comment_input_box2">
+					<input id="comment_input_box_in_taskmodal_noredirect" type="text" placeholder="코멘트를 입력 후 Enter..">
 					</div>
 							
 					<input type="hidden" id="pidhidden" value="">					
 					<input type="hidden" id="usermidhidden" value="">					
-					<input type="hidden" id="tidhidden" value="">
+					<input type="hidden" id="usermidhidden2" value="">					
+					<input type="hidden" id="tidhidden2" value="">
 					<input type="hidden" id="receiverhidden" value="">
 					<input type="hidden" id="receivernamehidden" value="">
 					<input type="hidden" id="tnamehidden" value="">

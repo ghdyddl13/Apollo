@@ -1,5 +1,6 @@
 #projectinfo_outerbox{
-  margin-left: 200px
+  margin-left: 11%;
+  margin-right: 9%;
 }
 
 #projectinfo_first_row{
@@ -9,8 +10,14 @@
 #projectinfo_Task_Status_Donut{
   height:400px;
   margin: 2px;
+  margin-right: 15px;
   padding:10px;
-  background-color:#f0f0f0
+  background-color:#f0f0f0;
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px 0px #cccccc;
+  margin-bottom: 15px;
+  width: 47%;
+  
 }
 
 #prison_Donut{
@@ -21,15 +28,24 @@
    overflow:auto;
    height:400px;
    margin: 2px;
+   
    padding:10px;
-   background-color:#f0f0f0
+   background-color:#f0f0f0;
+   border-radius: 10px;
+   box-shadow: 3px 3px 5px 0px #cccccc;
+   margin-bottom: 15px;
+   width: 47%;
+   
 }
 
 #projectinfo_Step_Progress_Graph{
-   height:500px;
+   height:550px;
    margin: 1px;
    padding:10px;
-   background-color:#f0f0f0
+   background-color:#f0f0f0;
+   border-radius: 10px;
+   box-shadow: 3px 3px 5px 0px #cccccc;
+   width: 96%;
 }
 
 #projectinfo_Project_Member_Table{
@@ -37,7 +53,10 @@
   height:400px;
   margin: 1px;
   padding:10px;
-  background-color:#f0f0f0
+  background-color:#f0f0f0;
+     border-radius: 10px;
+   box-shadow: 3px 3px 5px 0px #cccccc;
+  width: 96%;
 }
 
 #task_progress_table{
@@ -74,3 +93,4 @@
 #project_pmember_table th{
 	text-align: center;
 }
+

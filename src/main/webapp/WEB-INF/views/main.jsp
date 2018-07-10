@@ -83,8 +83,34 @@
 <script type="text/javascript" src="js/projectInsideHeader.js"></script>
 <!--stepInsideHeader-->
 <script type="text/javascript" src="js/stepInsideHeader.js"></script>
+<!-- inbox js -->
+<script type="text/javascript" src="js/inbox.js"></script>
+<style type="text/css">
+	/* Scroll Bar */
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+   /*  background: #f1f1f1; */
+    background-color: none
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 10px
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #cccccc;
+}
+</style>
 
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <title>Project Apollo</title>
@@ -148,7 +174,7 @@
 	});
 </script>
 </head>
-<body >
+<body>
 	
 	<div class="Apollo-main">
 	

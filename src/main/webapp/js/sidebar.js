@@ -14,7 +14,7 @@ $(function() {
 	});*/
 
 
-출처: http://derveljunit.tistory.com/227 [IT를 보고, 듣고, 사색하고]
+
 	
 	 unload();
 	/////////////  프로젝트, 폴더, 스텝 생성 모달창 도움말 설정////////////////////
@@ -543,8 +543,8 @@ $(function() {
 				$(".custom-menu").remove();
 			}
 			
-			if (!$(e.target).parents("#search-nav").length > 0) {
-			    document.getElementById("search-nav").style.width = "0";
+			if (!($(e.target).parents("#search-nav").length > 0) &&!($(e.target).attr("id")=="search-nav")) {
+				document.getElementById("search-nav").style.width = "0";
 			    $("#search-content-box").empty();
 				$("#search-bar").val("")
 			}
@@ -667,7 +667,7 @@ $(function() {
 		 $('#insert-project-sday-id').val("");
 		 $('#insert-proejct-eday-id').val("");
 		 $('#project-detail').val("");
-		 $("#method1").prop("checked", true);s
+		 $("#method1").prop("checked", true);
 
 	})	
 		
