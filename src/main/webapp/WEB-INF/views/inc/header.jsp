@@ -46,7 +46,7 @@
 						</c:when>
 						<c:otherwise>
 							<div id="profile-modal-image">
-								<img id="loginimg" src='/bit/displayImage.htm'>
+								<img id="loginimg" src='displayImage.htm'>
 							</div>
 						</c:otherwise>
 					</c:choose> 
