@@ -550,7 +550,7 @@ function resultSearchProject(projectlist){
  작성자명 : 박 민 식
  */
  function makeSearchTaskDiv(task,inboxkind){
-		 var div =jQuery("<div>",{"class":"search-item-box Task_RUD_Modal search-item-task row "});
+		 var div =jQuery("<div>",{"class":"search-item-box search-item-task row "});
 
 	 	
 

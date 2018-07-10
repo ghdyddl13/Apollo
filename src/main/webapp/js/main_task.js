@@ -9,9 +9,8 @@
  작성자명 : 김 정 권
  */
 $(document).on("click",".Task_RUD_Modal",function(){
-	
+		console.log("a")
 		var temptid = $(this).attr('id'); 
-		console.log(temptid.substring(0,6))
 		var tid =parseInt(temptid.substring(1));
 		
 		if(temptid.substring(0,6) =="srch-t"){
