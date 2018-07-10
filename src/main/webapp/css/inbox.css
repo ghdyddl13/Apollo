@@ -1,4 +1,11 @@
 @charset "UTF-8";
+
+textarea,input[type=text], select{
+	resize: none !important;
+	border-radius: 3px;
+	border: 1px solid #dddddd	
+}
+
 .inbox-header{
 	height: 50px;
 	background-color: #cccccc;
