@@ -1,6 +1,16 @@
 $(function() {
+	
+	/// 헤더 메뉴 클릭 시 상단 border 색 바꿔주기
+	$(".main-header-menu").click(function(){
+		$(".main-header-menu").css("border-top","none");
+		$(".side-project").css("background-color","transparent");
+		$(".side-step").css("background-color","transparent");
+		$(this).css("border-top","3px solid #ffc30d");
+	})
+	
 	// 헤더 inbox 페이지
 	$("#inbox-page").click(function(evt){
+		$("#inbox_count").hide();
 		$.ajax({
 			type:"GET",
 			url:"inbox.htm",
@@ -10,6 +20,7 @@ $(function() {
 				$("#main-box").append(data);
 				$('#incomming-page').css('border-bottom','2px solid transparent');
 				$('#incomming-page').css('border-color','#286cb0');
+				
 			}
 		})
 	});
@@ -35,7 +46,6 @@ $(function() {
 			url:"starredTask.htm",
 			dataType:"html",
 			success:function(data){
-				console.log(data)
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				
@@ -67,11 +77,23 @@ $(function() {
 				$("#main-box").empty();
 				$("#main-box").append(data);
 				
+				if($(".stream-select-list").length!=0){
+					$("#stream-current-project").text($($(".stream-select-list")[0]).find(".stream-project-select-info-pname").text());
+					if($(".stream_main").children().length==0){
+						var msg =  $("<div>", {"class":"no-stream-div-msg",
+							"text":"No Stream!"});
+						$(".stream_main").append(msg);
+					}
+				}else{
+					var msg =  $("<div>", {"class":"no-stream-div-msg",
+						"text":"No Project!"});
+					$(".stream_main").append(msg);
+				}
 			}
 		})
 	});
 	
-	//// 헤더 stream 페이지
+	
 	$("#header-memberlist").click(function(evt){
 		$.ajax({
 			url:"selectmemberlist.htm",
@@ -79,30 +101,32 @@ $(function() {
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
-				
+			
 			}
 		})
 	});
 
 	//////////////////////////// 래영 /////////////////////////////////
-	
+
+		
+	$('#header-introduce').click(function() {
+		location.href="index.htm";
+	});
 	// 헤더에서 우상단 개인정보수정 클릭시 실행되는 함수
 	// 헤더 개인정보수정 Modal
 	$('#header-profile-edit').click(function(evt) {
 		var mid = $('#edit-profile-mid').val(mid);
-		//console.log(mid);
 		
 		
 		$.ajax({
 			url:"updatememberinfo.htm",
 			data:{mid:mid},
 			dataType:"json",
-			contentType:'multipart/form-data',
-			contentType:false,
-			processData:false,
 			success:function(data) {
 				//var image = (data.updatememberinfo.image)?data.updatememberinfo.image :"img/user_image.png"
 				//$('#edit-profile-modal-img').attr("src",image);
+				$('.profile-modal-text-mname').text(data.updatememberinfo.mname);
+				$('.profile-modal-text-mid').text(data.updatememberinfo.mid);
 				$('#edit-profile-mname').val(data.updatememberinfo.mname);
 				$('#edit-profile-mid').val(data.updatememberinfo.mid);
 				$('#edit-profile-apollokey').val(data.updatememberinfo.apollokey);
@@ -119,36 +143,28 @@ $(function() {
 	
 	// 개인정보수정 Modal 에서 1번째 수정버튼 클릭시 실행되는 함수
 	$('#update-edit-profile-btn').click(function() {
-		//var form = $('#edit-profile-form')[0];
-		//var updateprofile = new FormData(form); 
 		var updateprofile = $('#edit-profile-form').serialize();
-		//console.log(updateprofile);
-		//var formData = new FormData($('#edit-profile-form')[0]);
-		//formData.append('iamge', $('input[type=file]')[0].files[0]);
-		
+		console.log(updateprofile);
 		$('#edit-profile-form').ajaxForm({
 			type:"post",
 			url:"updatemember.htm",
 			data:updateprofile,
 			dataType:"json",
-			enctype:"multipart/form-data",
-			processData: false,
-			contentType: false,
 			success:function(data){
 				console.log(data);
 				
 				if(data.updatemember > 0) {
 					alert('개인정보수정이 완료되었습니다!');
-					$(".close").click();
 				}else {
 					alert('개인정보수정에 실패되었습니다');
-					$(".close").click();
 				}
+				$(".close").click();
 				
 			} // end - success
 		}); // end- ajax
 		$("#edit-profile-form").submit();
 	}); // end - click
+
 	
 	//개인정보수정 Modal에서 인증확인 버튼 클릭시 실행되는 함수
 	$('#profile-apollokey-check').click(function() {
@@ -159,9 +175,13 @@ $(function() {
 			url:"updatekeycheck.htm",
 			data:{apollokey:apollokey},
 			success:function(data){
+				if($('#edit-profile-apollokey').val() == ""){
+					alert('인증키를 입력해주세요');
+					$('#edit-profile-apollokey').focus();
+					return false;
+				}
 				if(data.result == "success"){
 					alert('인증키가 확인되었습니다!');
-					
 				}else {
 					alert('등록되지 않은 인증키입니다');
 					$('#edit-profile-apollokey').focus();
@@ -169,6 +189,8 @@ $(function() {
 			} // end - success
 		}); // end - ajax
 	});
+	
+	
 	
 	
 	$('#update-pwd-btn').click(function() {
@@ -207,7 +229,7 @@ $(function() {
 			url:"updatepwd.htm",
 			data:{cpwd:cpwd,upwd:upwd},
 			success:function(data){
-				console.log(data.result); //현재비번과 DB 비번 비교 
+				//console.log(data.result); //현재비번과 DB 비번 비교 
 
 				// 개인정보수정 modal에서 입력한 현재 비밀번호와 DB에 저장된 비밀번호 비교
 				if(data.result > 0) {
@@ -223,12 +245,25 @@ $(function() {
 					alert('비밀번호 변경이 완료되었습니다');
 				}else {
 					alert('비밀번호 변경이 실패되었습니다');
+					
 				}
+				$("#edit-profile-cpwd").val("");
+				$("#edit-profile-upwd").val("");
+				$("#edit-profile-upwd2").val("");
+				$(".close").click();
+				
 			}
 		}); // end - ajax
+		$("#edit-profile-upwd2").on("keyup", function(event){
+			event.preventDefault();
+			if (event.keyCode === 13) {
+				document.getElementById("update-pwd-btn").click();
+			}
+		
+		
+		});
 	});
 	////////////////////////////래영  end/////////////////////////////////
-	
 	
 });
 
@@ -262,15 +297,15 @@ function getRecentTasks(){
  작성자명 : 박 민 식
  */
 $(document).on("focus","#open-right-nav",function(){
-    document.getElementById("search-nav").style.width = $("#header-right-wrapper").width()+10+"px";
+	var inboxkind = $("#inboxkind").val();
+   document.getElementById("search-nav").style.width = $("#header-right-wrapper").width()+10+"px";
     $("#search-bar").focus();
    $.when(getRecentTasks()).done(function(data){ //Default로 최근 생성 혹은 변경된 태스크 10건을 가져옴
-	   console.log(data.rcttasks);
 	   var p = jQuery("<p>",{"class":"search-result-text","text":"Recent Tasks"});
 	   var div = jQuery("<div>");
 	   $(div).append(p);
 	   $(data.rcttasks).each(function(index,el){
-		  $(makeSearchTaskDiv(el)).appendTo(div);
+		  $(makeSearchTaskDiv(el,inboxkind)).appendTo(div);
 	   })// each
 	   $(div).appendTo($("#search-content-box"));  
 	   
@@ -288,7 +323,7 @@ $(document).on("focus","#open-right-nav",function(){
 	var doneTypingInterval = 500; // 타이빙 interval이 0.5초 이상일 경우 실행
 	$(document).on("input","#search-bar" ,function () {
 		
-		if(getBytes($("#search-bar").val()) <2 ||$("#search-bar").val() == " ") return false; //타이핑한 문자가 2바이트 이상이고 공백이 아닐 경우에 다음단계로 넘어감
+		if(getBytes($("#search-bar").val()) <2 ||$("#search-bar").val().trim() == "") return false; //타이핑한 문자가 2바이트 이상이고 공백이 아닐 경우에 다음단계로 넘어감
 	    clearTimeout(typingTimer);
 	    typingTimer = setTimeout(function() {
     	$.when(getSearchResult()).done(function(data){
@@ -376,6 +411,7 @@ function getSearchResult(){
 			 break;
 		 case 3:	 
 			 pstatus= "휴지통";
+			 
 			 pstatuscolor= "rgb(127, 127, 127)";
 			 break;
 	 }
@@ -422,7 +458,7 @@ function resultSearchProject(projectlist){
 }// end	
 	
 /**
- * 
+ * 	
  날   짜 : 2018. 6. 26.
  기   능 : 스텝 검색 결과를 만들어주는 함수 
  작성자명 : 박 민 식
@@ -447,8 +483,7 @@ function resultSearchProject(projectlist){
 	 $(step_info_div).append(step_name_div,step_dir_div)
 	 $(div).append(stepicon,step_info_div);
 	 return div;
- 
- }
+}
  
  /**
   * 
@@ -513,17 +548,35 @@ function resultSearchProject(projectlist){
  기   능 : 태스크 검색결과를 만들어주는 함수
  작성자명 : 박 민 식
  */
- function makeSearchTaskDiv(task){
-		 var div =jQuery("<div>",{"class":"search-item-box search-item-task row" ,"id":"srch-t"+task.tid});  
+ function makeSearchTaskDiv(task,inboxkind){
+		 var div =jQuery("<div>",{"class":"search-item-box Task_RUD_Modal search-item-task row "});
+
+	 	
+
+		 var pid = $("<input>", {"type":"hidden", "value": "p"+task.pid});
 		 var assignee_div= jQuery("<div>",{"class":"search-item-left col-sm-2"});
 		 getTaskAssignees(task.tid,'35').appendTo(assignee_div);
-		 var task_info_div= jQuery("<div>",{"class":"search-item-right col-sm-10 container-fluid"});
+		 
+		 
+		 if(inboxkind == 'incomming' || inboxkind == 'sent' || inboxkind == 'archive' || inboxkind == 'starredtask'){
+			 var task_info_div= jQuery("<div>",{"class":"search-item-right Task_RUD_Modal col-sm-10 container-fluid",
+					"id":"srch-t"+task.tid});
+		 	}else{
+		 		 var task_info_div= jQuery("<div>",{"class":"search-item-right Task_RUD_Modal col-sm-10 container-fluid",
+						"id":"srch-t"+task.tid,
+					    "data-toggle":"modal",
+					    "data-target":"#Task_RUD_Modal"});
+		 	}
+		 
+		 
+		
+		 
 		 var task_name_div= jQuery("<div>",{"class":"search-info-div ","text":task.tname});
 		 var task_status_div= jQuery("<div>",{"class":"search-info-div","text":task.tstatus,"css":{"color":task.color}});
 		 var pname= jQuery("<span>",{"class":"search-item-pname","text":$($("#p"+task.pid).find(".side-content-name")[0]).text(),"css":{"margin-left":"5px"}})
 		 $( task_status_div).append(pname);
 		 $(task_info_div).append( task_name_div,task_status_div);
-		 $(div).append(assignee_div,task_info_div);
+		 $(div).append(assignee_div,task_info_div,pid);
 		return div;
 	} //end
  /**
@@ -548,7 +601,8 @@ function resultSearchProject(projectlist){
  
  ///검색 결과에서 스텝항목 클릭 시 해당 스텝으로 이동
  $(document).on("click",".search-item-step",function(){
-	 
+	checkbox=[];
+	list_memberlist=[]; 
 	var sid = this.id.substr(6);
 	console.log(sid);
 	$.ajax({
@@ -558,52 +612,17 @@ function resultSearchProject(projectlist){
 		success:function(data){
 			 $("#main-box").empty();
 			 $("#main-box").append(data);
-			 	
-				/////////////////////////////////STATUS OF TASK GRAPH/////////////////////////////////////////
-				let ctx = document.getElementById('Step-list-DonutChart').getContext('2d');
-				let myDoughnutChart = new Chart(ctx, {
-				
-				      type: 'doughnut',
-				      data: {
-				              datasets: [{
-				                  data: [3, 4, 5, 6, 7],
-				                  backgroundColor: [
-				                                    'rgba(190, 190, 190, 1)',
-				                                    'rgba(241, 196, 15, 1)',
-				                                    'rgba(244, 7, 7, 1)',
-				                                    'rgba(52, 152, 219, 1)',
-				                                    'rgba(46, 204, 113, 1)'
-				                  ],
-				                  borderColor:[
-				                                'rgba(190, 190, 190, 1)',
-				                                'rgba(241, 196, 15, 1)',
-				                                'rgba(244, 7, 7, 1)',
-				                                'rgba(52, 152, 219, 1)',
-				                                'rgba(46, 204, 113, 1)'
-				                  ],
-				                  borderWidth: 1
-				              }],
-				              labels:
-				        ['미지정','다음주 이후','이번주 까지','완료','기한 만료']
-				      },
-				      options: {
-				                maintainAspectRatio: false,
-				                cutoutPercentage: 50,
-				                legend: {
-				                          display: true,
-				                          position: 'right',
-				                          labels: {
-				                                    fontSize: 12,
-				                                    fontFamily: 'sans-serif',
-				                                    fontColor: '#ffffff',
-				                                    fontStyle: 'bold'
-				                }
-				      }
-				      }
-				});
-
-		} //end success
-	}) //end ajax
+			 $.ajax({
+				 url:"memberlist.htm",
+				 data:{sid:sid},
+				 type:"POST",
+				 dataType:"JSON",
+				 success:function(memberlist){
+					 list_memberlist = memberlist.memberlist;
+				 }
+			 })
+		}
+	})
  }) //end Func
 	
  
@@ -622,9 +641,7 @@ function resultSearchProject(projectlist){
 				 
 			}
 		}) // end ajax
- }) //end func
+ }) //end function
+ 
+ 
 
-/* $('#logout-btn').click(function() {
-	 location.href="logout.htm";
- });
-*/

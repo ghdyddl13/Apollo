@@ -7,20 +7,6 @@ public class FileDTO {
 	private int sid;
 	private String sname;
 	private String tname;
-
-	
-	public String getTname() {
-		return tname;
-	}
-	public void setTname(String tname) {
-		this.tname = tname;
-	}
-	public int getSid() {
-		return sid;
-	}
-	public void setSid(int sid) {
-		this.sid = sid;
-	}
 	public int getFileid() {
 		return fileid;
 	}
@@ -39,13 +25,27 @@ public class FileDTO {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+	public int getSid() {
+		return sid;
+	}
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
 	public String getSname() {
 		return sname;
 	}
 	public void setSname(String sname) {
 		this.sname = sname;
 	}
+	public String getTname() {
+		return tname;
+	}
+	public void setTname(String tname) {
+		this.tname = tname;
+	}
 
+	
+	
 	
 	
 }

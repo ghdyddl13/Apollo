@@ -20,7 +20,7 @@ $(function(){
 
 
 function getTaskAssignees(tid,imgsize){
-	var div = jQuery("<div>",{"class":""});
+	var div = jQuery("<div>");
 
 	var left_member = [];
 	var left_count = 0;
@@ -40,23 +40,42 @@ function getTaskAssignees(tid,imgsize){
 						left_count++;
 					};
 				});
-
 				if(left_count>0){
-					var a = jQuery("<a>",{"class":"left-assignees",
-										  "text":"외 " +left_count+"명",
-										  "rel":"popover",
-										  "data-popover-content":"#left-assignee-"+tid});
-					var left_div =jQuery("<div>",{"class":"hide assignee-left-div",
-												  "id":"left-assignee-"+tid,
-												  "css":{"position":"absolute",
-													  	 "width":"100px"
-													  	 }});
+		
+					
+					var left_div_wrapper = jQuery("<div>",{"class":"assignee-left-div-wrapper",
+														   "text":"Other Assignees"});
+					var left_div =jQuery("<div>",{"class":"assignee-left-div"});
 					
 					$(left_member).each(function(index,left){
 						var left_assigee_container = makeProfileIcon(left,imgsize);
 						$(left_div).append(left_assigee_container);
 					});
-					$(a).append(left_div).appendTo(div);
+					$(left_div_wrapper).append(left_div);
+				//	let test = 1
+					$(div).on("mouseenter",function(){
+						$(".assignee-left-div-wrapper").remove();
+						console.log($(this).offset())
+						console.log($(this).width())
+						$(left_div_wrapper).css({
+							top: $(this).offset().top+ "px",
+							left : $(this).offset().left+$(this).width()+10 + "px",
+						}).appendTo("body");
+					});
+					
+					$(document).bind("mousedown", function(e) {
+
+						// If the clicked element is not the menu
+						if (!$(e.target).parents(".assignee-left-div-wrapper").length > 0) {
+
+							// Hide it
+							$(".assignee-left-div-wrapper").remove();
+						}
+					})	
+					/*$(div).on("mouseleave",function(){
+						$(left_div).remove();
+					})*/
+						
 				};
 
 				
@@ -82,7 +101,7 @@ function makeProfileIcon(memberdata, imgsize){
 	var profile_container = jQuery("<div>",{"class":"profile-img-container","id":"profile"+memberdata.mid,"data-toggle":"modal", "data-target":"#profile-modal-dialog"});
 	profile_container.css({"width":imgsize,"height":imgsize});
 	var img = jQuery("<img>",{"class":"profile-img"});
-	var src = (memberdata.image ==null)?"img/user_image.png" :"profileImg/"+memberdata.image;
+	var src = (memberdata.image ==null)?"img/user.png" :"profileImg/"+memberdata.image;
 	img.attr("src",src);
 	$(profile_container).append(img);
 	return profile_container;
@@ -114,7 +133,8 @@ function profileinfo(mid) {
         data:{mid:mid},
         dataType:"json",
         success:function(data) {
-            var image = (data.profileinfo.image)?data.profileinfo.image :"img/profilemiffy1.jpg"
+        	//console.log(data.profileinfo);
+            var image = (data.profileinfo.image)?data.profileinfo.image:"img/user.png";
             $('#profile-modal-img').attr("src",image);
             $('#profile-modal-mname').text(data.profileinfo.mname)
             $('#profile-modal-mid').text(data.profileinfo.mid);
@@ -137,17 +157,53 @@ function profileinfo(mid) {
 } // end - function
 
 
-//사원목록에서 table 사원정보 클릭시
-$(document).on("click",".header-memberinfo-table",function(){
-	// mid 가져오기
-	var mid = $($(this).children("td")[3]).text();
-	
-	profileinfo(mid);
-	
-});
 
-$(document).on("click","#header-memberlist",function(){
-});
+/**
+ * 
+날   짜 : 2018. 7. 5.
+기   능 : 리다이렉트 이후 실행되어야 할 부분을 처리해주는 함수 
+작성자명 : 박 민 식
+ */
+function checkCrtPage(){
+	if($(document).find("#timeline").length !=0){
+		$.when(getGanttItems()).done(function(ajax){
+			var tasks = ajax.tasks;
+			makeTimelineGantt(tasks);
+			makeTimelineTable(tasks);
+		});
+	} else if( $(document).find(".project-page-table").length !=0){
+		$("#project-page-table-no-data").remove();
+	} else if( $(document).find("#board-main-div").length !=0){
+		doDraggable();
+	} else if( $(document).find(".file-table-tr-td").length !=0){
+		$("#project-page-table-no-data").remove();
+	} else if( $(document).find(".stream-main-container").length !=0){
+		if($(".stream-select-list").length!=0){
+			$("#stream-current-project").text($($(".stream-select-list")[0]).find(".stream-project-select-info-pname").text());
+			if($(".stream_main").children().length==0){
+				var msg =  $("<div>", {"class":"no-stream-div-msg",
+					"text":"No Stream!"});
+				$(".stream_main").append(msg);
+			}
+		}else{
+			var msg =  $("<div>", {"class":"no-stream-div-msg",
+				"text":"No Project!"});
+			$(".stream_main").append(msg);
+		}
+		
+	};
+	
+};
+
+
+
+
+
+
+
+
+
+
 
 
 

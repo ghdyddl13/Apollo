@@ -5,10 +5,8 @@
  작 성 자 명 : 이 창 훈
  */
 	$(document).on("mouseenter",".file-table-tr-td-fname",function() {//마우스 호버 하면 'x'가 보임
-		console.log("mouseenter")
 	  $(this).children(".file-table-tr-td-delete").children(".file-deleteicon").css("visibility","visible");
 	}).on("mouseleave",".file-table-tr-td-fname",function() {//마우스 호버 아웃 하면 'x'가 다시 안보이게 함
-		console.log("mouseleave")
 	  $(this).children(".file-table-tr-td-delete").children(".file-deleteicon").css("visibility","hidden");
 	})
 	
@@ -35,6 +33,9 @@
             	$('#file_delete_dismiss_btn').click();
                 $("#main-box").empty();
                 $("#main-box").append(data);
+                if( $(document).find(".file-table-tr-td").length !=0){
+            		$("#project-page-table-no-data").remove();
+            	};
              }  
           })
 		

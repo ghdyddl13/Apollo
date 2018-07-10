@@ -1,7 +1,10 @@
 
 package com.apollo.member.controller;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,28 +86,26 @@ public class GoogleLoginController {
      Person profile = plusOperations.getGoogleProfile();
      String id = profile.getId();
      String name = profile.getDisplayName();
-     String email = profile.getAccountEmail();
+     String mid = profile.getAccountEmail();
      String viewpage="";
      
-     googledto.setGemail(email);
+     googledto.setGemail(mid);
      googledto.setGid(id);
      googledto.setGname(name);
+    
+ 
      
-     
-     
-     int result = memberservice.googleLogin(email);
+     int result = memberservice.googleLogin(mid);
      if(result == 1) {
-    	 System.out.println("로그인 성공");
-    	 MemberDTO memberdto = memberservice.getProfileInfoMember(email);
-    	 session.setAttribute("mid", email);
-    	 model.addAttribute("memberdto", memberdto);
-    	 viewpage = "main";
+    	 session.setAttribute("mid", mid);
+    	 viewpage = "redirect:/main.htm";
     	 
      }else {
     	 memberservice.googleIdInsert(googledto);
-    	 System.out.println("구글로그인인설트 컨트롤러 종료");
+    	 memberservice.emailcheck(mid);
     	 viewpage = "redirect:/google.htm";
      }
+     
      
      return viewpage;
    }   

@@ -1,127 +1,224 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<script type="text/javascript" src="js/task.js"></script>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
-<div class="main-container container">
-	<div class="main-section-left" id="left">
-		<div class="week-wrapper" id="today">
-			<div class="main-section-header" id="today">
-				<div class="week-section">TODAY</div>
-				<div class="date-section">${today}</div>
-				<div class="week-count-section" id="todaycount" style="float: right">${counttodaylist}</div>
-			</div>
-			<c:forEach var="todaytask" items="${todaylist}">
-				<div class="main-section-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${todaytask.tid}">
-					<div class="task-image-section"></div>
-					<c:choose>
-						<c:when test="${todaytask.overdue=='overdue'}">
-							<div class="task-date-section task-date-overdue"style="float: right">${todaytask.date}</div>	
+<script type="text/javascript" src="js/task.js"></script>
+<div class="main-body-container">
+    <div class="main-body-twopannel">
+      <div class="main-body-twopannel-left">
+        <div class="main-body-twopannel-left-wrapper">
+          <div class="main-body-twopannel-left-header">
+            <div class="main-body-twopannel-left-header-wrapper">
+              <div class="main-body-twopannel-left-header-title-textwrapper">
+                <div class="main-body-twopannel-left-header-title">
+                  <span class="main-body-twopannel-left-header-title-text">My Work</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="main-body-twopannel-left-body">
+            <div class="main-body-twopannel-left-body-wrapper">
+              <div class="mywork-left-today">
+                <div class="mywork-header-wrapper">
+                  <div class="mywork-header">
+                    <div class="mywork-header-textwrapper">
+                      today
+                      <span class="mywork-header-date">${today}</span>
+                      <em class="mywork-header-count">${counttodaylist}</em>
+                    </div>
+                  </div>
+                </div>
+                <div class="mywork-main-tasks">
+                  <c:forEach var="todaytask" items="${todaylist}">
+	                  <div class="mywork-main-task-wrapper">
+	                    <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${todaytask.tid}">
+	                      <div class="mywork-main-task-checkbox"></div>
+		                    <div class="mywork-main-task-members">
+		                      <img class="mywork-main-task-member" src="img/user.png" alt="">
+		                    </div>
+		                    <c:choose>
+								<c:when test="${todaytask.overdue=='overdue'}">
+									<div class="mywork-main-task-date date-overdue">${todaytask.date}</div>	
+								</c:when>
+								<c:otherwise>
+									<div class="mywork-main-task-date">${todaytask.date}</div>						
+								</c:otherwise>
+							</c:choose>
+	                      <div class="mywork-main-task-name">
+	                        <div class="mywork-main-task-name-wrapper">
+	                          <span class="mywork-main-task-name-tag">
+	                            <span class="mywork-main-task-name-status" style="background-color:${todaytask.color}">${todaytask.tstatus}</span>
+	                            ${todaytask.tname}
+	                          </span>
+	                          <span class="mywork-main-task-name-detail">${todaytask.detail}</span>
+	                        </div>
+	                      </div>
+	                      <div class="mywork-main-task-steps">
+	                      	<c:forEach var="step" items="${todaytask.steps}">
+		                       <div class="mywork-main-task-step">
+	                          		<span class="mywork-main-task-step-name" id="s${step.sid}">${step.sname}</span>
+	                     	   </div>
+							</c:forEach>
+	                      </div>
+	                    </div>
+	                  </div>
+                  </c:forEach>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="main-body-twopannel-right">
+        <div class="mywork-right-wrapper">
+          <div class="mywork-right-thisweek">
+        	  <div class="mywork-header-wrapper">
+                <div class="mywork-header">
+                  <div class="mywork-header-textwrapper">
+                    this week
+                    <span class="mywork-header-date">${thisweek}</span>
+                    <em class="mywork-header-count">${countthisweeklist}</em>
+                  </div>
+                </div>
+              </div>
+              <div class="mywork-main-tasks">
+                <c:forEach var="thisweektask" items="${thisweeklist}">
+                 <div class="mywork-main-task-wrapper">
+                   <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${thisweektask.tid}">
+                     <div class="mywork-main-task-checkbox"></div>
+                    <div class="mywork-main-task-members">
+                      <img class="mywork-main-task-member" src="img/user.png" alt="">
+                    </div>
+                    <c:choose>
+						<c:when test="${thisweektask.overdue=='overdue'}">
+							<div class="mywork-main-task-date date-overdue">${thisweektask.date}</div>	
 						</c:when>
 						<c:otherwise>
-							<div class="task-date-section"style="float: right">${todaytask.date}</div>						
+							<div class="mywork-main-task-date">${thisweektask.date}</div>						
 						</c:otherwise>
 					</c:choose>
-					<div class="task-description-section">
-						<div class="task-status" style="background-color:${todaytask.color}">${todaytask.tstatus}</div>
-						<div class="task-name-section">${todaytask.tname}</div>
-						<div class="task-detail-section">${todaytask.detail}</div>
-					</div>
-					<div class="task-step-section">
-						<div class="div-step-section">
-							<c:forEach var="step" items="${todaytask.steps}">
-								<span class="span-step-section" id="s${step.sid}">${step.sname}</span>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
-	<div class="main-section-center" id="center"></div>
-	<div class="main-section-right" id="right">
-		<div class="week-wrapper" id="thisweek">
-			<div class="main-section-header">
-				<div class="week-section">THIS WEEK</div>
-				<div class="date-section">${thisweek}</div>
-				<div class="week-count-section" id="todaycount" style="float: right">${countthisweeklist}</div>
-			</div>
-			<c:forEach var="thisweektask" items="${thisweeklist}">
-				<div class="main-section-task" id="t+${thisweektask.tid}">
-					<div class="task-image-section"></div>
-					<div class="task-date-section"
-						style="float: right">${thisweektask.date}</div>
-					<div class="task-description-section">
-						<div class="task-status" style="background-color:${thisweektask.color}">${thisweektask.tstatus}</div>
-						<div class="task-name-section">${thisweektask.tname}</div>
-						<div class="task-detail-section">${thisweektask.detail}</div>
-					</div>
-					<div class="task-step-section">
-						<div class="div-step-section">
-							<c:forEach var="step" items="${thisweektask.steps}">
-								<span class="span-step-section" id="s+${step.sid}">${step.sname}</span>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-		<div class="week-wrapper" id="nextweek">
-			<div class="main-section-header">
-				<div class="week-section">NEXT WEEK</div>
-				<div class="date-section">${nextweek}</div>
-				<div class="week-count-section" id="todaycount" style="float: right">${countnextweeklist}</div>
-			</div>
-			<c:forEach var="nextweektask" items="${nextweeklist}">
-				<div class="main-section-task" id="t+${nextweektask.tid}">
-					<div class="task-image-section"></div>
-					<div class="task-date-section"
-						style="float: right">${nextweektask.date}</div>
-					<div class="task-description-section">
-						<div class="task-status" style="background-color:${nextweektask.color}">${nextweektask.tstatus}</div>
-						<div class="task-name-section">${nextweektask.tname}</div>
-						<div class="task-detail-section">${nextweektask.detail}</div>
-					</div>
-					<div class="task-step-section">
-						<div class="div-step-section">
-							<c:forEach var="step" items="${nextweektask.steps}">
-								<span class="span-step-section" id="s+${step.sid}">${step.sname}</span>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-		<div class="week-wrapper" id="later">
-			<div class="main-section-header">
-				<div class="week-section">LATER</div>
-				<div class="date-section">${later}</div>
-				<div class="week-count-section" id="todaycount" style="float: right">${countlaterlist}</div>
-			</div>
-			<c:forEach var="latertask" items="${laterlist}">
-				<div class="main-section-task" id="t+${latertask.tid}">
-					<div class="task-image-section"></div>
-					<div class="task-date-section"
-						style="float: right">${latertask.date}</div>
-					<div class="task-description-section">
-						<div class="task-status" style="background-color:${latertask.color}">${latertask.tstatus}</div>
-						<div class="task-name-section">${latertask.tname}</div>
-						<div class="task-detail-section">${latertask.detail}</div>
-					</div>
-					<div class="task-step-section">
-						<div class="div-step-section">
-							<c:forEach var="step" items="${latertask.steps}">
-								<span class="span-step-section" id="s+${step.sid}">${step.sname}</span>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
+                     <div class="mywork-main-task-name">
+                       <div class="mywork-main-task-name-wrapper">
+                         <span class="mywork-main-task-name-tag">
+                           <span class="mywork-main-task-name-status" style="background-color:${thisweektask.color}">${thisweektask.tstatus}</span>
+                           ${thisweektask.tname}
+                         </span>
+                         <span class="mywork-main-task-name-detail">${thisweektask.detail}</span>
+                       </div>
+                     </div>
+                     <div class="mywork-main-task-steps">
+                     	<c:forEach var="step" items="${thisweektask.steps}">
+                       <div class="mywork-main-task-step">
+                         		<span class="mywork-main-task-step-name" id="s${step.sid}">${step.sname}</span>
+                    	   </div>
+					</c:forEach>
+                     </div>
+                   </div>
+                 </div>
+                </c:forEach>
+              </div>
+          </div>
+
+
+          <div class="mywork-right-nextweek">
+              <div class="mywork-header-wrapper">
+                <div class="mywork-header">
+                  <div class="mywork-header-textwrapper">
+                    next week
+                    <span class="mywork-header-date">${nextweek}</span>
+                    <em class="mywork-header-count">${countnextweeklist}</em>
+                  </div>
+                </div>
+              </div>
+              <div class="mywork-main-tasks">
+                <c:forEach var="nextweektask" items="${nextweeklist}">
+                 <div class="mywork-main-task-wrapper">
+                   <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${nextweektask.tid}">
+                     <div class="mywork-main-task-checkbox"></div>
+                    <div class="mywork-main-task-members">
+                      <img class="mywork-main-task-member" src="img/user.png" alt="">
+                    </div>
+                    <c:choose>
+						<c:when test="${nextweektask.overdue=='overdue'}">
+							<div class="mywork-main-task-date date-overdue">${nextweektask.date}</div>	
+						</c:when>
+						<c:otherwise>
+							<div class="mywork-main-task-date">${nextweektask.date}</div>						
+						</c:otherwise>
+					</c:choose>
+                     <div class="mywork-main-task-name">
+                       <div class="mywork-main-task-name-wrapper">
+                         <span class="mywork-main-task-name-tag">
+                           <span class="mywork-main-task-name-status" style="background-color:${nextweektask.color}">${nextweektask.tstatus}</span>
+                           ${nextweektask.tname}
+                         </span>
+                         <span class="mywork-main-task-name-detail">${nextweektask.detail}</span>
+                       </div>
+                     </div>
+                     <div class="mywork-main-task-steps">
+                     	<c:forEach var="step" items="${nextweektask.steps}">
+                       <div class="mywork-main-task-step">
+                         		<span class="mywork-main-task-step-name" id="s${step.sid}">${step.sname}</span>
+                    	   </div>
+					</c:forEach>
+                     </div>
+                   </div>
+                 </div>
+                </c:forEach>
+              </div>
+          </div>
+
+          
+          <div class="mywork-right-later">
+              <div class="mywork-header-wrapper">
+                <div class="mywork-header">
+                  <div class="mywork-header-textwrapper">
+                    later
+                    <span class="mywork-header-date">${later}</span>
+                    <em class="mywork-header-count">${countlaterlist}</em>
+                  </div>
+                </div>
+              </div>
+              <div class="mywork-main-tasks">
+                <c:forEach var="latertask" items="${laterlist}">
+                 <div class="mywork-main-task-wrapper">
+                   <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${latertask.tid}">
+                     <div class="mywork-main-task-checkbox"></div>
+                    <div class="mywork-main-task-members">
+                      <img class="mywork-main-task-member" src="img/user.png" alt="">
+                    </div>
+                    <c:choose>
+						<c:when test="${latertask.overdue=='overdue'}">
+							<div class="mywork-main-task-date date-overdue">${latertask.date}</div>	
+						</c:when>
+						<c:otherwise>
+							<div class="mywork-main-task-date">${latertask.date}</div>						
+						</c:otherwise>
+					</c:choose>
+                     <div class="mywork-main-task-name">
+                       <div class="mywork-main-task-name-wrapper">
+                         <span class="mywork-main-task-name-tag">
+                           <span class="mywork-main-task-name-status" style="background-color:${latertask.color}">${latertask.tstatus}</span>
+                           ${latertask.tname}
+                         </span>
+                         <span class="mywork-main-task-name-detail">${latertask.detail}</span>
+                       </div>
+                     </div>
+                     <div class="mywork-main-task-steps">
+                     	<c:forEach var="step" items="${latertask.steps}">
+                       <div class="mywork-main-task-step">
+                         		<span class="mywork-main-task-step-name" id="s${step.sid}">${step.sname}</span>
+                    	   </div>
+					</c:forEach>
+                     </div>
+                   </div>
+                 </div>
+                </c:forEach>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
-<script type="text/javascript">
-			
-</script>

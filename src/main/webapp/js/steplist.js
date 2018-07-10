@@ -8,8 +8,6 @@ $(function() {
 	var list_memberlist=[];
 	$(document).on("click",".side-step",function(){
 		var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
-		var pid = project_wrapper.id.substr(1);
-		var methodologyid = $(project_wrapper).children("input[name='methodologyid']").val();
 		var sid= this.id.substr(1);
 		checkbox=[];
 		list_memberlist=[];
@@ -45,6 +43,7 @@ $(function() {
 	  let inputtag="<div class='list-task-adder-addmode'><input class='form-control' id='insert-task' name='tname' type='text' placeholder='새로운 작업을 입력하세요'></div>"
 	  $("#body-start").prepend(inputtag);
 	  $("#insert-task").focus();
+
 	})
 	$(document).on("keyup","#insert-task",function(event) {//키업함수를 통해 
 	  let addtag="<div class='list-task-adder' id='list-task-adder'>New task</div>";
@@ -55,6 +54,7 @@ $(function() {
 	      //문자열이 빈값이면 발생하는 함수가 아무것도 없음
 	    }else{
 	   	  $("#insert-task").val("");
+	   	 $("#insert-task").attr("readonly", true);
 	      $.ajax(
 	              {
 	                url:"listtaskcreate.htm",
@@ -66,6 +66,10 @@ $(function() {
 	                success:function(data) {
 						$("#main-box").empty();
 						$("#main-box").append(data);
+						$("#list-task-adder").remove();
+						$("#body-start").prepend("<div class='list-task-adder-addmode'><input class='form-control' id='insert-task' name='tname' type='text' placeholder='새로운 작업을 입력하세요'></div>");
+						$("#insert-task").attr("readonly", false);
+						$("#insert-task").focus();
 						
 	                }
 	              }
@@ -148,105 +152,292 @@ $(function() {
 	  console.log(checkbox);
 	  $(".list-task-checkbox").css("visibility","hidden");
 	})
-	$(document).on("click","#selectpage-complete-button",function() {//완료 버튼 선택시에
-	  alert("완료되었습니다")
-	   /*
-	    $.ajax(
-	            {
-	              type:"POST",
-	              url:"",
-	              data:"",
-	              success:function(data) {
-	
-	              }
-	            }
-	    )
-	    */
-	  checkbox=[];
-	  console.log(checkbox);
-	})
-	$(document).on("click","#different-status",function() {//다른 선택 영역을 눌렀을 시에
-	  alert("상태를 추가합니다")
-	  /*
-	    $.ajax(
-	            {
-	              type:"POST",
-	              url:"",
-	              date:"",
-	              success:function(data) {
-	
-	              }
-	            }
-	    )
-	    */
-	  checkbox=[];
-	  console.log(checkbox);
-	})
-	$(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
-	  alert("할당자들을 추가합니다")
-	
-	  /*
-	    $.ajax(
-	            {
-	              type:"POST",
-	              url:"",
-	              date:"",
-	              success:function(data) {
-	
-	              }
-	            }
-	    )
-	    */
-	    checkbox=[];
-	  console.log(checkbox);
-	})
-	$(document).on("click","#selectpage-addsteps-button",function() {// 추가 버튼을 눌렀을 시에
-	  alert("할당자들을 추가합니다")
-	
-	   /*
-	    $.ajax(
-	            {
-	              type:"POST",
-	              url:"",
-	              date:"",
-	              success:function(data) {
-	
-	              }
-	            }
-	    )
-	    */
-	  checkbox=[];
-	  console.log(checkbox);
-	})
-	$(document).on("click","#selectpage-deletetask-button",function() {//삭제 버튼을 눌렀을 시에
-	  alert("삭제합니다")
-	
-	  /*
-	    $.ajax(
-	            {
-	              type:"POST",
-	              url:"",
-	              date:"",
-	              success:function(data) {
-	
-	              }
-	            }
-	    )
-	    */
-	  checkbox=[];
-	  console.log(checkbox);
-	})
-	
-	
-	
-	
-	
-	
-	
 	/**
 	 * 
-	 날   짜 : 2018. 6. 25.
-	 기   능 : STATUS SELECTING BUTTON을 클릭할시 발생하는 함수들
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 상태버튼을 눌렀을때 발동되는 함수
+	 작성자명 : 이 진 우
+	 */
+	$(document).on("click",".selectpage-body-statusbutton",function() {//상태 버튼을 눌렀을 시에
+	  let tstatusid = $(this).attr("id");
+	  let checkboxcount= checkbox.length;
+	  $("#list-task-status-ment").html(+checkboxcount+"개 Task의 상태를 변경 하시겠습니까?")
+	  $("#list_status_selectedtstatusid").val(tstatusid);
+	});
+	$(document).on("click","#list_Status_Tasks_btn",function(){// 확인 버튼을 눌렀을 시에
+		let tstatusid = $("#list_status_selectedtstatusid").val();
+		
+		if(checkbox.length==0){
+			alert("왜 테스크가 없지..?")
+			$('#list_status_tasks_dismiss_btn').click();
+		}else{
+			$.ajax(
+					{
+						type:"POST",
+						url:"liststatustasks.htm",
+						data:{tstatusid:tstatusid,tasks:checkbox},
+						success:function(data) {
+							$("#main-box").empty();
+							$("#main-box").append(data);
+							$('#list_status_tasks_dismiss_btn').click();
+							checkbox=[];
+						}
+					})
+		}
+	});
+	/**
+	 * 
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 할당자를 추가 할 시에 발생하는 함수
+	 작성자명 : 이 진 우
+	 */
+    $(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
+        let p =$("#selectpage-addasignee-button");
+        let position = p.position();
+        let x_position =$(window).width()-790;
+        $(".list-section-third-addasignee").css({"visibility":"visible","left":x_position,"top":position.top-100});
+        $(".list-section-third-addasignee-memberlist").empty();
+        let memberlisttag="";
+        $.each(list_memberlist,function(index,element) {
+          let mid = element.mid;
+          let mname = element.mname;
+          //let image = element.image
+          memberlisttag+='<div class="list-section-third-addasignee-member" data-toggle="modal" data-target="#list_Assign_Tasks" id="'+mid+'">';
+          memberlisttag+='<div class="list-section-third-addasignee-member-container"><div class="list-section-third-addasignee-member-tag"><div class="list-section-third-addasignee-member-image-wrapper">';
+          memberlisttag+='<img class="list-section-third-addasignee-member-image"src="img/user.png" alt=""></div>';
+          memberlisttag+='<div class="list-section-third-addasignee-member-textcontainer"><div class="list-section-third-addasignee-member-mname">';
+          memberlisttag+= mname;
+          memberlisttag+= '</div><div class="list-section-third-addasignee-member-mid">';
+          memberlisttag+= mid;
+          memberlisttag+= '</div></div></div></div></div>';
+        })
+        $(".list-section-third-addasignee-memberlist").append(memberlisttag);
+      })
+      $(document).bind("mousedown", function(e) {
+        if (!$(e.target).parents(".list-section-third-addasignee").length > 0) {
+          $("#assign-insert_member").val("");
+          $(".list-section-third-addasignee").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+        }
+      });
+      $(document).on("keyup","#assign-insert_member",function(event) {
+        var piece=$.trim($(this).val());
+        let memberlisttag='';
+        $(".list-section-third-addasignee-memberlist").empty();
+        $.each(list_memberlist,function(index,element) {
+          let mname = element.mname;
+          let mid = element.mid;
+          let namecheck=mname.indexOf(piece);
+          let emailcheck=mid.indexOf(piece);
+          if(namecheck==-1&&emailcheck==-1){
+            //다른 연산 없이 그냥 패스
+          }else{
+            mname = mname.replace(piece,"<b>"+piece+"</b>");
+            mid= mid.replace(piece,"<b>"+piece+"</b>");
+            memberlisttag+='<div class="list-section-third-addasignee-member" id="'+mid+'">';
+            memberlisttag+='<div class="list-section-third-addasignee-member-container"><div class="list-section-third-addasignee-member-tag"><div class="list-section-third-addasignee-member-image-wrapper">';
+            memberlisttag+='<img class="list-section-third-addasignee-member-image"src="img/user.png" alt=""></div>';
+            memberlisttag+='<div class="list-section-third-addasignee-member-textcontainer"><div class="list-section-third-addasignee-member-mname">';
+            memberlisttag+= mname;
+            memberlisttag+= '</div><div class="list-section-third-addasignee-member-mid">';
+            memberlisttag+= mid;
+            memberlisttag+= '</div></div></div></div></div>';
+          }
+        })
+        $(".list-section-third-addasignee-memberlist").append(memberlisttag);
+        
+        if(event.which==27){
+          $("#assign-insert_member").val("");
+          $(".list-section-third-addasignee").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+        }
+      });
+      $(document).on("click",".list-section-third-addasignee-member",function(){
+        let mid=  $(this).attr("id")
+        let mname=$.trim($(this).children().children().children(".list-section-third-addasignee-member-textcontainer").children(".list-section-third-addasignee-member-mname").text());
+        console.log(mname);
+        $(".list-section-third-addasignee").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+        $("#assign-insert_member").val("");
+        let checkboxcount= checkbox.length;
+        $("#list-task-assign-ment").html(mname+"에 "+checkboxcount+"개 Task를 추가하시겠습니까?")
+        $("#list_assign_selectedtmid").val(mid);
+      })
+      
+      $(document).on("click","#list_Assign_Tasks_btn",function(){
+        let mid=$("#list_assign_selectedtmid").val();
+        if(checkbox.length==0){
+          alert("왜 테스크가 없지..?")
+          $('#list_assign_tasks_dismiss_btn').click();
+        }else{
+          $.ajax({
+            type : "POST",
+            url : "listassigntasks.htm",
+            data :{mid:mid,tasks:checkbox},
+            success : function(data) {
+              $("#main-box").empty();
+              $("#main-box").append(data);
+              $('#list_assign_tasks_dismiss_btn').click();
+              checkbox = [];
+            }
+          })
+        }
+      })
+	
+//	$(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
+//		let checkboxcount= checkbox.length;
+//		let mid ="jinwoo@naver.com" ;
+//		$("#list-task-assign-ment").html("에게 "+checkboxcount+"개 Task를 할당하시겠습니까?")
+//	});
+//	$(document).on("click","#list_Assign_Tasks_btn",function(){
+//		if(checkbox.length==0){
+//			alert("왜 테스크가 없지..?")
+//			$('#list_assign_tasks_dismiss_btn').click();
+//		}else{
+//			$.ajax({
+//				type : "POST",
+//				url : "listassigntasks.htm",
+//				data :{mid:mid,tasks:checkbox},
+//				success : function(data) {
+//					$("#main-box").empty();
+//					$("#main-box").append(data);
+//					$('#list_assign_tasks_dismiss_btn').click();
+//					checkbox = [];
+//				}
+//			})
+//		}
+//	})
+	/**
+	 * 
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 스텝을 추가하는 버튼을 눌렀을 시에 발생하는 함수
+	 작성자명 : 이 진 우
+	 */
+	var steplist = [];
+    $(document).on("click","#selectpage-addsteps-button",function() {// 추가 버튼을 눌렀을 시에
+      steplist=[];
+      $.ajax({
+			type : "POST",
+			url : "stepListforAddStep.htm",
+			success : function(data) {
+				  steplist=data.steplist;
+			      $(".list-section-third-addstep-steplist-wrapper_cover").empty();
+			      let steplisttag="";
+			      $.each(steplist,function(index,element) {
+			        let sid = element.sid;
+			        let sname = element.sname;
+			        let pname = element.pname;
+			        steplisttag+='<div class="list-section-third-addstep-step" id="s'+sid+'" data-toggle="modal" data-target="#list_AddStep_Tasks">';
+			        steplisttag+='<div class="list-section-third-addstep-step-cover"><div class="list-section-third-addstep-step-stepname">'
+			        steplisttag+= sname;
+			        steplisttag+= '</div><div class="list-section-third-addstep-step-projectnamecover"><span class="list-section-third-addstep-step-projectname">';
+			        steplisttag+= pname;
+			        steplisttag+= '</span></div></div></div>';
+			        
+			      })
+			      $(".list-section-third-addstep-steplist-wrapper_cover").append(steplisttag);
+			}
+      });
+      //데이터 가지고 오기
+      let p =$("#selectpage-addsteps-button");
+      let position = p.position();
+      let x_position =$(window).width()-800;
+      $(".list-section-third-addstep").css({"visibility":"visible","left":x_position,"top":position.top-150});
+    })
+    $(document).bind("mousedown", function(e) {
+      if (!$(e.target).parents(".list-section-third-addstep").length > 0) {
+        $("#addstep-insert_step").val("");
+        $(".list-section-third-addstep").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+      }
+    });
+    $(document).on("keyup","#addstep-insert_step",function(event) {
+      var piece=$.trim($(this).val());
+      let steplisttag='';
+      $(".list-section-third-addstep-steplist-wrapper_cover").empty();
+      $.each(steplist,function(index,element) {
+        let sid = element.sid;
+        let sname = element.sname;
+        let pname = element.pname;
+        let snamecheck=sname.indexOf(piece);
+        let pnamecheck=pname.indexOf(piece);
+        if(snamecheck==-1&&pnamecheck==-1){
+          //다른 연산 없이 그냥 패스
+        }else{
+          sname = sname.replace(piece,"<b>"+piece+"</b>");
+          pname= pname.replace(piece,"<b>"+piece+"</b>");
+          steplisttag+='<div class="list-section-third-addstep-step" id="s'+sid+'" data-toggle="modal" data-target="#list_AddStep_Tasks">';
+          steplisttag+='<div class="list-section-third-addstep-step-cover"><div class="list-section-third-addstep-step-stepname">'
+          steplisttag+= sname;
+          steplisttag+= '</div><div class="list-section-third-addstep-step-projectnamecover"><span class="list-section-third-addstep-step-projectname">';
+          steplisttag+= pname;
+          steplisttag+= '</span></div></div></div>';
+        }
+      })
+      $(".list-section-third-addstep-steplist-wrapper_cover").append(steplisttag);
+      
+      if(event.which==27){
+        $("#addstep-insert_step").val("");
+        $(".list-section-third-addstep").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+      }
+    });
+    $(document).on("click",".list-section-third-addstep-step",function(){
+      let sid=  parseInt($(this).attr("id").substring(1));
+      let sname=$.trim($(this).children(".list-section-third-addstep-step-cover").children(".list-section-third-addstep-step-stepname").text());
+      console.log(sname);
+      $(".list-section-third-addstep").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+      $("#addstep-insert_step").val("");
+      let checkboxcount= checkbox.length;
+      $("#list-addstep-tasks-ment").html(sname+"에 "+checkboxcount+"개 Task를 추가하시겠습니까?")
+      $("#list_addstep_selectedsid").val(sid);
+    })
+	$(document).on("click","#list_AddStep_Tasks_btn",function(){
+		let stepid=$("#list_addstep_selectedsid").val();
+		if(checkbox.length==0){
+			alert("왜 테스크가 없지..?")
+			$('#list_addstep_tasks_dismiss_btn').click();
+		}else{
+			$.ajax({
+				type : "POST",
+				url : "listaddsteptasks.htm",
+				data :{stepid:stepid,tasks:checkbox},
+				success : function(data) {
+					$("#main-box").empty();
+					$("#main-box").append(data);
+					$('#list_addstep_tasks_dismiss_btn').click();
+					checkbox = [];
+				}
+			})
+		}
+	})
+	/**
+	 * 
+	 날   짜 : 2018. 7. 06.
+	 기   능 : Mess Edit에서 삭제 버튼을 눌렀을 시에 발생하는 함수
+	 작성자명 : 이 진 우
+	 */	
+	$(document).on("click", "#selectpage-deletetask-button", function(){// 삭제 버튼을 눌렀을 시에
+		let checkboxcount= checkbox.length;
+		$("#list-delete-tasks-ment").html(checkboxcount+"개 Task를 삭제하시겠습니까?<br><h5 style='color:red'>(삭제 후 복구 불가능합니다)</h5>")
+
+	})
+	$(document).on("click","#list_Delete_Tasks_btn",function(){//확인을 눌렀을 시에 발생하는 함수
+		if(checkbox.length==0){
+			alert("왜 테스크가 없지..?")
+		}else{
+			$.ajax({
+				type : "POST",
+				url : "listdeletetasks.htm",
+				data :{tasks:checkbox},
+				success : function(data) {
+					$("#main-box").empty();
+					$("#main-box").append(data);
+					$('#list_delete_tasks_dismiss_btn').click();
+					checkbox = [];
+				}
+			})
+		}
+	})
+	/**
+	 *  
+	 날 짜 : 2018. 6. 25. 
+	 기 능 : STATUS SELECTING BUTTON을 클릭할시 발생하는 함수들 
 	 작성자명 : 이 진 우
 	 */
 	//상태 버튼을 눌렀을시 발생하는 함수
@@ -316,6 +507,9 @@ $(function() {
 	 */
 	//people button을 누르면 로드시 가지고 왔던 데이터를 뿌려준다
     $(document).on("click","#people-button-tag",function(){
+		var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
+		var sid= this.id.substr(1);
+
         let p =$("#people-button");
         let position = p.position();
         $(".list-header-filter-people").css("background-color","#dfe6f0")
@@ -324,7 +518,7 @@ $(function() {
         $(".list-header-filter-people-tagscontainer").empty();
         $.each(list_memberlist,function(index,element) {
               nametag+= '<div class="list-header-filter-people-tagwrap"><div class="list-header-filter-people-tag"><div class="list-header-filter-people-image">';
-              nametag+='<img class="list-people-image"src="img/frog.png" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
+              nametag+='<img class="list-people-image"src="img/user.png" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
               nametag+= element.mname;
               nametag+= '</div><div class="list-people-email">';
               nametag+= element.mid;
@@ -401,7 +595,7 @@ $(function() {
             name = name.replace(piece,"<b>"+piece+"</b>");
             id= id.replace(piece,"<b>"+piece+"</b>");
             nametag+= '<div class="list-header-filter-people-tagwrap"><div class="list-header-filter-people-tag"><div class="list-header-filter-people-image">';
-            nametag+='<img class="list-people-image"src="img/frog.png" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
+            nametag+='<img class="list-people-image"src="img/user.png" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
             nametag+= name;
             nametag+= '</div><div class="list-people-email">';
             nametag+= id;
@@ -454,10 +648,15 @@ $(function() {
 	});
 	$(document).on("click",".list-header-sorting-textcontainer",function() {
 	  let sorting = $(this).attr("id");
-	  console.log(sorting);
-	  $(".list-header-sorting-button").css("background-color","")
-	  $(".list-header-sorting-selecting").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
-	  $("#sorting-button").empty();
-	  $("#sorting-button").append("<span class='list-header-sorting-tag'>By "+ sorting+"</span>");
+	  $.ajax({
+			type : "POST",
+			url : "sortingTasksList.htm",
+			data :{sorting:sorting},
+			success : function(data) {
+				$("#main-box").empty();
+				$("#main-box").append(data);
+				checkbox = [];
+			}
+		})
 	})
 })

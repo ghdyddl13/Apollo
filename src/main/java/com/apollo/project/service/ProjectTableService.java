@@ -7,12 +7,16 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apollo.member.dao.MemberDAO;
 import com.apollo.sidebar.dao.FolderDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.TaskDAO;
+import com.apollo.task.dao.TstatusDAO;
 import com.apollo.vo.FolderDTO;
+import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
+import com.apollo.vo.TstatusDTO;
 
 /**
  * 
@@ -77,7 +81,40 @@ public class ProjectTableService {
 		return tasklist;
 		
 	}
-	
-	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : pid로 task 상태 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<TstatusDTO> getTstatuslistPid(int pid) {
+		ArrayList<TstatusDTO> tstatuslist = null;
+		try {
+			TstatusDAO tstatusdao = sqlsession.getMapper(TstatusDAO.class);
+			tstatuslist = tstatusdao.getTstatuslistPid(pid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tstatuslist;
+		
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : steplist로 memberlist 가져오기
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<MemberDTO> selectStepAssignees (ArrayList<StepDTO> steplist) {
+		ArrayList<MemberDTO> memberlist = null;
+		try {
+			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+			memberlist = dao.selectStepAssignees(steplist);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return memberlist;
+		
+	}
 }
 

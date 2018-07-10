@@ -3,9 +3,9 @@ package com.apollo.task.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.apollo.vo.FileDTO;
 import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StepDTO;
-import com.apollo.vo.SubtaskDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TidvalueDTO;
@@ -13,7 +13,7 @@ import com.apollo.vo.TidvalueDTO;
 
 public interface TaskDAO {
 
-	public ArrayList<TaskDTO> getTasks(String pid);
+	public ArrayList<TaskDTO> getTasks(int pid);
 	public ArrayList<TaskDTO> getAssignedTasks(String pid);
 	public ArrayList<TaskDTO> getNotAssignedTasks(String pid);
 	public ArrayList<TaskDTO> getTasksInSteps(String sid);
@@ -54,5 +54,11 @@ public interface TaskDAO {
 	public ArrayList<TaskDTO> getExpiredTasklist(int pid);
 	public ArrayList<TaskDTO> getDrawnearTasklist(int pid);
 	public ArrayList<TaskDTO> getUnassingedTasklist(int pid);
+	
+	
+	
+	public ArrayList<TaskInStepDTO> getTidsTaskInStep(int sid);
+
+	public int deleteTaskCount(int tid);
 	
 }

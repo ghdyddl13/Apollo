@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.apollo.vo.AssigneeDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.StepListMemberDTO;
 import com.apollo.vo.StepListStepDTO;
 import com.apollo.vo.StepListTaskDTO;
 import com.apollo.vo.TaskDTO;
+import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TstatusDTO;
 
 public interface StepDAO {
@@ -89,13 +91,6 @@ public interface StepDAO {
 	 */
 	public int updateStep(StepDTO stepdto);
 	
-	/**
-	 * 
-	 날      짜 : 2018. 6. 21.
-	 기      능 : sid 에 속한 task 삭제 (선행)
-	 작성자명 : 김 래 영
-	 */
-	public int deleteTaskInStep(int sid);
 	
 	/**
 	 * 
@@ -205,4 +200,53 @@ public interface StepDAO {
 	 작성자명 : 이 진 우
 	 */
 	public ArrayList<MemberDTO> listProjectMemberList(int sid);
+	/**
+	 * 
+	 날      짜 : 2018. 7. 6.
+	 기      능 : LIST PAGE 에서 TASK를 단체로 상태 변경
+	 작성자명 : 이 진 우
+	 */
+	public int listStatusTasks(TaskDTO task);
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : LIST PAGE 에서 TASK를 단체로 특정인에게 할당전에 중복 값을 제거하기 위해서 가지고 오는 쿼리
+	 작성자명 : 이 진 우
+	 */
+	public ArrayList<AssigneeDTO> listBeforeAssignTasks(String mid);
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : LIST PAGE 에서 TASK를 단체로 특정인에게 할당
+	 작성자명 : 이 진 우
+	 */
+	public int listAssignTasks(List<AssigneeDTO> list);
+	/**
+	 * 
+	 날      짜 : 2018. 7. 6.
+	 기      능 : LIST PAGE 에서 TASK 단체로 특정 Step에 추가 하기전에 STEP LIST를 들고오는 함수
+	 작성자명 : 이 진 우
+	 */
+	public ArrayList<StepDTO> getStepListBeforeAddStepTasks(int sid);
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : LIST PAGE 에서 TASK를 단체로 특정 스텝에 추가하기전 중복 값을 제거하기위해서 가지고 오는 쿼리
+	 작성자명 : 이 진 우
+	 */
+	public ArrayList<TaskInStepDTO> listBeforeAddStepTasks(int sid);
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : LIST PAGE 에서 TASK를 단체로 특정 스텝에 추가
+	 작성자명 : 이 진 우
+	 */
+	public int listAddStepTasks(List<TaskInStepDTO> list);
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : LIST PAGE 에서 TASK 단체로 삭제
+	 작성자명 : 이 진 우
+	 */
+	public int listDeleteTasks(List<Integer> list);
 }

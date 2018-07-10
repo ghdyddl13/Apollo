@@ -1,20 +1,27 @@
 package com.apollo.task.controller;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.View;
 
+import com.apollo.member.service.MemberService;
 import com.apollo.project.service.ProjectInfoService;
-import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.service.TaskService;
 import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
+import com.apollo.vo.FileDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.StarredTaskDTO;
@@ -25,6 +32,7 @@ import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TidpidDTO;
 import com.apollo.vo.TidvalueDTO;
 import com.apollo.vo.TstatusDTO;
+import com.apollo.vo.filedataDTO;
 
 @Controller
 public class TaskController {
@@ -34,6 +42,9 @@ public class TaskController {
 	
 	@Autowired 
 	private ProjectInfoService projectinfoservice;
+	
+	@Autowired 
+	private MemberService memberservice;
 	
 	@Autowired
 	private View jsonview;
@@ -46,14 +57,36 @@ public class TaskController {
 	 작성자명 : 박 민 식
 	 */
 	@RequestMapping("/updateTask.htm")
-	public View updateTask(TaskDTO taskdto, Model model) {
+	public View updateTask(TaskDTO taskdto, Model model, HttpSession session) {
 		int result = 0;
 		try {
 			result=service.updateTask(taskdto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(result == 1) {
+			
+			System.out.println("sday 변경 성공! 코멘트 입력 시작!");
+			
+			String modifier = (String) session.getAttribute("mid");
+			String modifier_name = service.getTaskModifierName(modifier);
+			String tname = service.getTname(taskdto.getTid());
+			String comment = "";
+			comment = modifier_name + "님이 " + tname +"의 업무기간을 <br>" + taskdto.getSday() +"부터 " + taskdto.getEday()+"까지로 변경했습니다.";
+			
+			// comments 테이블에 insert
+			CommentDTO commentdto = new CommentDTO();
+			commentdto.setComments(comment);
+			commentdto.setTid(taskdto.getTid());
+			commentdto.setMid(modifier);
+			commentdto.setCmtkind(1);
+			int final_result = service.insertComment(commentdto);
+			
+			System.out.println("sday 변경 코멘트 입력 성공 여부 : " + final_result);
+			
+		}
 		
+	
 		model.addAttribute("result", result);
 		return jsonview;
 	}
@@ -77,11 +110,9 @@ public class TaskController {
 	public View getTask(int tid, HttpSession session, Model model) {
 
 	System.out.println("getTask 작동");
-		
-	int pid = (Integer) session.getAttribute("pid");
 	
     String mid = (String) session.getAttribute("mid");
-
+	session.setAttribute("tid", tid);
     
     ArrayList<StarredTaskDTO> starredtasklist = new ArrayList();
     starredtasklist = service.getStarredTaskList(mid);
@@ -96,7 +127,7 @@ public class TaskController {
 	model.addAttribute("steps", steplist);
 	
 	ArrayList<TstatusDTO> tstatuslist = new ArrayList();
-	tstatuslist = service.gettstatuslist(pid);
+	tstatuslist = service.gettstatuslist(tid);
 	model.addAttribute("tstatuslist", tstatuslist);
 	
 	// 해당 테스크의 담당자들
@@ -114,6 +145,11 @@ public class TaskController {
 	commentandmemberlist = service.getCommentsAndMember(tid);
 	model.addAttribute("commentandmemberlist", commentandmemberlist);
 
+	// 해당 테스크의 파일들
+	ArrayList<FileDTO> filelist = new ArrayList();	
+	filelist = service.getFileList(tid);
+	model.addAttribute("filelist", filelist);
+	
 	// 유저의 mid
 	model.addAttribute("userid", mid);
 	
@@ -161,10 +197,21 @@ public class TaskController {
 	public String deleteTask(int tid, Model model, HttpSession session) {
 		
 		String location = (String) session.getAttribute("location");
-		int pid = (Integer) session.getAttribute("pid");
 		
 		int result = service.deleteTask(tid);
 		System.out.println("delete Task 결과 : " + result);
+		
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			System.out.println("null 찾았다");
+			String midforpid =(String)session.getAttribute("mid");
+			pid = memberservice.getMinProjectid(midforpid);
+			System.out.println("null 이어서 넣은 pid :" + pid);
+		}else {
+			System.out.println("null이 아니라서 세션에서 pid 가져온다");
+			pid = (Integer) session.getAttribute("pid");
+			System.out.println("세션에서 가져온 pid : " + pid);
+		}
 		
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
@@ -175,8 +222,20 @@ public class TaskController {
 	    	return "redirect:/list.htm?sid=" + sid;
 	    }else if(location.equals("step/timeline.htm")) {
 	    	return "redirect:step/timeline.htm";
+	    }else if(location.equals("/table.htm")) {
+	    	return "redirect:/table.htm";
+	    }else if(location.equals("/inbox.htm")) {
+	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/myWork.htm")) {
+	    	return "redirect:/myWork.htm";
+	    }else if(location.equals("/starredTask.htm")) {
+	    	return "redirect:/starredTask.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
 	    }else {
-	    	return null;
+	    	return "redirect:/information.htm?pid=" + pid;
 	    }
 	    
 	}
@@ -230,7 +289,9 @@ public class TaskController {
 	 */
 	@RequestMapping("/changetstatus.htm")
 	public String changeTstatus(int tid, int value, String tname, Model model, HttpSession session) {
-	
+		
+		System.out.println("changetstatus 컨트롤러 실행됨");
+		
 		TidvalueDTO dto = new TidvalueDTO();
 		dto.setTid(tid);
 		dto.setValue(value);
@@ -243,9 +304,8 @@ public class TaskController {
 			System.out.println("상태변경 성공! 상태변경 코멘트 입력 시작!");
 			String comment = "";
 			String mid = (String) session.getAttribute("mid");
-			int pid = (Integer) session.getAttribute("pid");
 			ArrayList<TstatusDTO> tstatuslist = new ArrayList();
-			tstatuslist = service.gettstatuslist(pid);
+			tstatuslist = service.gettstatuslist(tid);
 
 			for(TstatusDTO tstatusdto : tstatuslist) {
 				int tstatusid = tstatusdto.getTstatusid();
@@ -262,6 +322,14 @@ public class TaskController {
 			commentdto.setMid(mid);
 			commentdto.setCmtkind(1);
 			
+			System.out.println("컨트롤러에서 검증");
+			System.out.println(commentdto.getCmtid());
+			System.out.println(commentdto.getComments());
+			System.out.println(commentdto.getTid());
+			System.out.println(commentdto.getMid());
+			System.out.println(commentdto.getCmtkind());
+			System.out.println("=================");
+			
 			int insert_comment_result = service.insertComment(commentdto);
 			System.out.println("코멘트 입력 여부 : " + insert_comment_result);
 			
@@ -270,7 +338,18 @@ public class TaskController {
 		model.addAttribute("result", result);
 		
 		String location = (String) session.getAttribute("location");
-		int pid = (Integer) session.getAttribute("pid");
+		
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			System.out.println("null 찾았다");
+			String midforpid =(String)session.getAttribute("mid");
+			pid = memberservice.getMinProjectid(midforpid);
+			System.out.println("null 이어서 넣은 pid :" + pid);
+		}else {
+			System.out.println("null이 아니라서 세션에서 pid 가져온다");
+			pid = (Integer) session.getAttribute("pid");
+			System.out.println("세션에서 가져온 pid : " + pid);
+		}
 		
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
@@ -280,11 +359,21 @@ public class TaskController {
 	    	int sid = (Integer) session.getAttribute("sid");
 	    	return "redirect:/list.htm?sid=" + sid;
 	    }else if(location.equals("step/timeline.htm")) {
-	    	System.out.println("timeline반환");
 	    	return "redirect:step/timeline.htm";
+	    }else if(location.equals("/table.htm")) {
+	    	return "redirect:/table.htm";
+	    }else if(location.equals("/inbox.htm")) {
+	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/myWork.htm")) {
+	    	return "redirect:/myWork.htm";
+	    }else if(location.equals("/starredTask.htm")) {
+	    	return "redirect:/starredTask.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
 	    }else {
-	    	System.out.println("null반환");
-	    	return null;
+	    	return "redirect:/information.htm?pid=" + pid;
 	    }
 		
 	}
@@ -402,8 +491,15 @@ public class TaskController {
 	public View addTaskAssigneeModalInfo(int tid, HttpSession session, Model model){
 		
 		System.out.println("assignee 추가를 위한 이중 모달 데이터 컨트롤러 실행");
-		int pid = (Integer) session.getAttribute("pid");
-		
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			String midforpid =(String)session.getAttribute("mid");
+			if(pid == 0) {
+				pid = memberservice.getMinProjectid(midforpid);
+			}
+		}else {
+			pid = (Integer) session.getAttribute("pid");
+		}		
 		// 같은 프로젝트이지만 해당 테스크의 담당자가 아닌 사람들
 		ArrayList<MemberDTO> getSameProjectButNotSameTaskMemberList = new ArrayList<MemberDTO>();
 		
@@ -496,8 +592,8 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/changesdayoftask.htm")
-	public View changeSdayOfTask(int tid, String sday, HttpSession session, Model model){
-		
+	public String changeSdayOfTask(int tid, String sday, HttpSession session, Model model){
+		String location = (String) session.getAttribute("location");
 		System.out.println("sday 컨트롤러 실행");
 		
 		System.out.println("tid : " + tid);
@@ -534,7 +630,42 @@ public class TaskController {
 			
 		}
 		
-		return jsonview;
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			System.out.println("null 찾았다");
+			String midforpid =(String)session.getAttribute("mid");
+			pid = memberservice.getMinProjectid(midforpid);
+			System.out.println("null 이어서 넣은 pid :" + pid);
+		}else {
+			System.out.println("null이 아니라서 세션에서 pid 가져온다");
+			pid = (Integer) session.getAttribute("pid");
+			System.out.println("세션에서 가져온 pid : " + pid);
+		}
+	    if(location.equals("/information.htm")) {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    } else if(location.equals("/board.htm")) {
+	    	return "redirect:/board.htm";
+	    }else if(location.equals("/list.htm")) {
+	    	int sid = (Integer) session.getAttribute("sid");
+	    	return "redirect:/list.htm?sid=" + sid;
+	    }else if(location.equals("step/timeline.htm")) {
+	    	return "redirect:step/timeline.htm";
+	    }else if(location.equals("/table.htm")) {
+	    	return "redirect:/table.htm";
+	    }else if(location.equals("/inbox.htm")) {
+	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/myWork.htm")) {
+	    	return "redirect:/myWork.htm";
+	    }else if(location.equals("/starredTask.htm")) {
+	    	return "redirect:/starredTask.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
+	    }else {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    }
+		
 		 		
 	}
 	
@@ -547,8 +678,8 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/changeedayoftask.htm")
-	public View changeEdayOfTask(int tid, String eday, HttpSession session, Model model){
-		
+	public String changeEdayOfTask(int tid, String eday, HttpSession session, Model model){
+		String location = (String) session.getAttribute("location");
 		System.out.println("eday 컨트롤러 실행");
 		
 		System.out.println("tid : " + tid);
@@ -585,14 +716,50 @@ public class TaskController {
 			
 		}
 		
-		return jsonview;
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			System.out.println("null 찾았다");
+			String midforpid =(String)session.getAttribute("mid");
+			pid = memberservice.getMinProjectid(midforpid);
+			System.out.println("null 이어서 넣은 pid :" + pid);
+		}else {
+			System.out.println("null이 아니라서 세션에서 pid 가져온다");
+			pid = (Integer) session.getAttribute("pid");
+			System.out.println("세션에서 가져온 pid : " + pid);
+		}
+
+	    if(location.equals("/information.htm")) {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    } else if(location.equals("/board.htm")) {
+	    	return "redirect:/board.htm";
+	    }else if(location.equals("/list.htm")) {
+	    	int sid = (Integer) session.getAttribute("sid");
+	    	return "redirect:/list.htm?sid=" + sid;
+	    }else if(location.equals("step/timeline.htm")) {
+	    	return "redirect:step/timeline.htm";
+	    }else if(location.equals("/table.htm")) {
+	    	return "redirect:/table.htm";
+	    }else if(location.equals("/inbox.htm")) {
+	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/myWork.htm")) {
+	    	return "redirect:/myWork.htm";
+	    }else if(location.equals("/starredTask.htm")) {
+	    	return "redirect:/starredTask.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
+	    }else {
+	    	return "redirect:/information.htm?pid=" + pid;
+	    }
+		
 	}
 	
 
 	/**
 	 * 
 	 날      짜 : 2018. 6. 26.
-	 기      능 : 테스크 모달에서 eday 를 데이트 피커에서 누르면 eday를 변경
+	 기      능 : subtask 추가
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/addsubtask.htm")
@@ -826,7 +993,18 @@ public class TaskController {
 		map.addAttribute("result", result);
 		
 		String location = (String) session.getAttribute("location");
-		int pid = (Integer) session.getAttribute("pid");
+		
+		int pid = 0;
+		if(session.getAttribute("pid") == null) {
+			System.out.println("null 찾았다");
+			String midforpid =(String)session.getAttribute("mid");
+			pid = memberservice.getMinProjectid(midforpid);
+			System.out.println("null 이어서 넣은 pid :" + pid);
+		}else {
+			System.out.println("null이 아니라서 세션에서 pid 가져온다");
+			pid = (Integer) session.getAttribute("pid");
+			System.out.println("세션에서 가져온 pid : " + pid);
+		}
 		
 	    if(location.equals("/information.htm")) {
 	    	return "redirect:/information.htm?pid=" + pid;
@@ -837,17 +1015,273 @@ public class TaskController {
 	    	return "redirect:/list.htm?sid=" + sid;
 	    }else if(location.equals("step/timeline.htm")) {
 	    	return "redirect:step/timeline.htm";
+	    }else if(location.equals("/table.htm")) {
+	    	return "redirect:/table.htm";
+	    }else if(location.equals("/inbox.htm")) {
+	    	return "redirect:/inbox.htm";
+	    }else if(location.equals("/myWork.htm")) {
+	    	return "redirect:/myWork.htm";
+	    }else if(location.equals("/starredTask.htm")) {
+	    	return "redirect:/starredTask.htm";
+	    }else if(location.equals("/sent.htm")) {
+	    	return "redirect:/sent.htm";
+	    }else if(location.equals("/archive.htm")) {
+	    	return "redirect:/archive.htm";
 	    }else {
-	    	return null;
+	    	return "redirect:/information.htm?pid=" + pid;
 	    }
-		
-		
-		
 		
 	}
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 업로드
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping(value="/uploadfileintaskmodal.htm",method=RequestMethod.POST)
+	public View upLoadFileInTaskModal(HttpSession session, MultipartHttpServletRequest request, ModelMap map) {
+		System.out.println("upLoadFileInTaskModal 컨트롤러 실행");
+		
+		int tid = (Integer) session.getAttribute("tid");
+    	LinkedList<filedataDTO> files = service.upLoadFileInTaskModal(tid, request);
+		map.addAttribute("files",files);
+				
+		return jsonview;
+	}
 	
 	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 업로드 성공시 모달 내 파일 목록 리셋
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping(value="/resetfilelist.htm",method=RequestMethod.POST)
+	public View resetFileList(HttpSession session, ModelMap map) {
+		System.out.println("resetFileList 컨트롤러 실행");
+		
+		int tid = (Integer) session.getAttribute("tid");
+		
+	 	// 해당 테스크의 파일들
+		ArrayList<FileDTO> filelist = new ArrayList();	
+		filelist = service.getFileList(tid);
+		map.addAttribute("filelist", filelist);
+
+		return jsonview;
+	}
+
+   
+   /**
+    * 
+    날      짜 : 2018. 7. 8.
+    기      능 : Task 모달 내 파일 다운로드
+    작성자명 : 김 정 권
+    */
+   @RequestMapping(value="/downloadfileintaskmodal.htm")
+   public void downLoadFileInTaskModal(String filename, ModelMap map, HttpServletResponse response, HttpServletRequest request) {
+   	
+	   System.out.println("downLoadFileInTaskModal 컨트롤러 실행");
+	   service.downLoadFileInTaskModal(filename, response, request);
+   			
+   }
+  
+   
+   /**
+    * 
+    날      짜 : 2018. 7. 8.
+    기      능 : Task 모달 내 파일 삭제
+    작성자명 : 김 정 권
+    */
+   @RequestMapping(value="/deletefileintaskmodal.htm",method=RequestMethod.POST)
+   public View deleteFile(int tid, String filename, ModelMap map) {
+   	
+	   System.out.println("deleteFile 컨트롤러 실행");
+	   String filepath = "resources/upload_files/" + filename;
+	   System.out.println("테스트 풀 패쓰 출력 : " + filepath);
+	   
+	   // 해당 테스크의 파일들
+	   ArrayList<FileDTO> filelist = new ArrayList();	
+	   filelist = service.deleteFile(tid, filename, filepath);
+	   map.addAttribute("filelist", filelist);
+   			
+   	   return jsonview;
+   }
+   /////////////////////////////////////////////////////////////////////////////// no redirect
+   
+   /**
+	 * 
+	 날      짜 : 2018. 7. 9
+	 기      능 : 해당 task 상태 변경하기 + no redirect
+	 작성자명 : 김 정 권
+	 */
+	@RequestMapping("/changetstatusno_redirect.htm")
+	public View changeTstatusNoredirect(int tid, int value, String tname, Model model, HttpSession session) {
+		
+		System.out.println("changetstatus No redirect 컨트롤러 실행됨");
+		
+		TidvalueDTO dto = new TidvalueDTO();
+		dto.setTid(tid);
+		dto.setValue(value);
+		
+		int result = service.changeTstatus(dto);
+		
+		// 상태 변경 성공시 코멘트 입력
+		if(result == 1) {
+			
+			System.out.println("상태변경 성공! 상태변경 코멘트 입력 시작!");
+			String comment = "";
+			String mid = (String) session.getAttribute("mid");
+			ArrayList<TstatusDTO> tstatuslist = new ArrayList();
+			tstatuslist = service.gettstatuslist(tid);
+
+			for(TstatusDTO tstatusdto : tstatuslist) {
+				int tstatusid = tstatusdto.getTstatusid();
+					if(tstatusid == value) {
+						
+						String modifier = service.getTaskModifierName(mid);
+						comment = modifier + "님이 " + tname +"의 상태를 " + tstatusdto.getTstatus() + "로 변경하였습니다";
+					}
+			}
+			
+			CommentDTO commentdto = new CommentDTO();
+			commentdto.setComments(comment);
+			commentdto.setTid(tid);
+			commentdto.setMid(mid);
+			commentdto.setCmtkind(1);
+			
+			System.out.println("컨트롤러에서 검증");
+			System.out.println(commentdto.getCmtid());
+			System.out.println(commentdto.getComments());
+			System.out.println(commentdto.getTid());
+			System.out.println(commentdto.getMid());
+			System.out.println(commentdto.getCmtkind());
+			System.out.println("=================");
+			
+			int insert_comment_result = service.insertComment(commentdto);
+			System.out.println("코멘트 입력 여부 : " + insert_comment_result);
+			
+		} // end - 상태 변경 성공시 발동 조건문 
+		
+		model.addAttribute("result", result);
+		
+		return jsonview;
+		
+	}
+
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 26.
+ 기      능 : 테스크 모달에서 sday 를 데이트 피커에서 누르면 sday를 변경 + no redirect
+ 작성자명 : 김 정 권
+ */
+@RequestMapping("/changesdayoftask_noredirect.htm")
+public View changeSdayOfTaskNoredirect(int tid, String sday, HttpSession session, Model model){
+	String location = (String) session.getAttribute("location");
+	System.out.println("sday 컨트롤러 실행");
 	
+	System.out.println("tid : " + tid);
+	System.out.println("sday : " + sday);
+	
+	TaskDTO dto = new TaskDTO();
+	dto.setSday(sday);
+	dto.setTid(tid);
+	
+	int result = service.changeSdayOfTask(dto);
+	System.out.println("sday 변경 결과 : " + result);
+	
+	
+	// sday 변경 제대로 되었을 시 stream 저장
+	if(result == 1) {
+		
+		System.out.println("sday 변경 성공! 코멘트 입력 시작!");
+		
+		String modifier = (String) session.getAttribute("mid");
+		String modifier_name = service.getTaskModifierName(modifier);
+		String tname = service.getTname(tid);
+		String comment = "";
+		comment = modifier_name + "님이 " + tname +" 업무의 시작일을 " + sday +"로 변경하였습니다";
+		
+		// comments 테이블에 insert
+		CommentDTO commentdto = new CommentDTO();
+		commentdto.setComments(comment);
+		commentdto.setTid(tid);
+		commentdto.setMid(modifier);
+		commentdto.setCmtkind(1);
+		int final_result = service.insertComment(commentdto);
+		
+		System.out.println("sday 변경 코멘트 입력 성공 여부 : " + final_result);
+		
+	}
+	
+	return jsonview;
+	 		
+}
+
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 26.
+ 기      능 : 테스크 모달에서 eday 를 데이트 피커에서 누르면 eday를 변경 + no redirect
+ 작성자명 : 김 정 권
+ */
+@RequestMapping("/changeedayoftask_noredirect.htm")
+public View changeEdayOfTaskNoredirect(int tid, String eday, HttpSession session, Model model){
+	String location = (String) session.getAttribute("location");
+	System.out.println("eday 컨트롤러 실행");
+	
+	System.out.println("tid : " + tid);
+	System.out.println("eday : " + eday);
+	
+	TaskDTO dto = new TaskDTO();
+	dto.setEday(eday);
+	dto.setTid(tid);
+	
+	int result = service.changeEdayOfTask(dto);
+	System.out.println("eday 변경 결과 : " + result);
+	
+	
+	// eday 변경 제대로 되었을 시 stream 저장
+	if(result == 1) {
+		
+		System.out.println("sday 변경 성공! 코멘트 입력 시작!");
+		
+		String modifier = (String) session.getAttribute("mid");
+		String modifier_name = service.getTaskModifierName(modifier);
+		String tname = service.getTname(tid);
+		String comment = "";
+		comment = modifier_name + "님이 " + tname +" 업무의 종료일을 " + eday +"로 변경하였습니다";
+		
+		// comments 테이블에 insert
+		CommentDTO commentdto = new CommentDTO();
+		commentdto.setComments(comment);
+		commentdto.setTid(tid);
+		commentdto.setMid(modifier);
+		commentdto.setCmtkind(1);
+		int final_result = service.insertComment(commentdto);
+		
+		System.out.println("eday 변경 코멘트 입력 성공 여부 : " + final_result);
+		
+	}
+	
+	int pid = 0;
+	if(session.getAttribute("pid") == null) {
+		System.out.println("null 찾았다");
+		String midforpid =(String)session.getAttribute("mid");
+		pid = memberservice.getMinProjectid(midforpid);
+		System.out.println("null 이어서 넣은 pid :" + pid);
+	}else {
+		System.out.println("null이 아니라서 세션에서 pid 가져온다");
+		pid = (Integer) session.getAttribute("pid");
+		System.out.println("세션에서 가져온 pid : " + pid);
+	}
+
+	return jsonview;
+ }
+
+
 }

@@ -1,6 +1,7 @@
 package com.apollo.inbox.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,60 @@ public class InboxService {
 	 기      능 : imcomming 데이터 가져오는 서비스
 	 작성자명 : 신 호 용
 	 */
+	
 	public ArrayList<CommentDTO> getCommentlist(String mid){
 		System.out.println("service commemtlist");
 		InboxDAO dao = sqlsession.getMapper(InboxDAO.class);
 		ArrayList<CommentDTO> commemtlist = dao.getCommentlist(mid);
 		return commemtlist;
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : sent 의경우 new 표시 안하게 하기위한 업데이트 서비스
+	 작성자명 : 신 호 용
+	 */
+	public int updateNewCheckSent(String mid){
+		InboxDAO dao = sqlsession.getMapper(InboxDAO.class);
+		int result = dao.updateNewCheckSent(mid);
+		return result;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : newcheck하는 서비스
+	 작성자명 : 신 호 용
+	 */
+	public int newCheck(Map map){
+		InboxDAO dao = sqlsession.getMapper(InboxDAO.class);
+		int result = dao.newCheck(map);
+		return result;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 4.
+	 기      능 : newCount 읽음 으로 업데이트하는 서비스
+	 작성자명 : 신 호 용
+	 */
+	public int updateNewCount(String mid){
+		InboxDAO dao = sqlsession.getMapper(InboxDAO.class);
+		int result = dao.updateNewCount(mid);
+		return result;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 4.
+	 기      능 : 인박스 new카운트
+	 작성자명 : 신 호 용
+	 */
+	public int newCount(String mid){
+		System.out.println("newcount 서비스 mid" + mid);
+		InboxDAO dao = sqlsession.getMapper(InboxDAO.class);
+		int result = dao.newCount(mid);
+		return result;
+	}
+	
 	/**
 	 * 
 	 날      짜 : 2018. 6. 18.

@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apollo.member.dao.MemberDAO;
+import com.apollo.project.dao.ProjectDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidpidDTO;
+import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 
@@ -26,7 +28,7 @@ public class ProjectInfoService {
 	 기      능 : pid를 이용해서 해당 프로젝트 소속 task를 가져옴
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<TaskDTO> getTasks(String pid){
+	public ArrayList<TaskDTO> getTasks(int pid){
 		ArrayList<TaskDTO> tasklist = new ArrayList<TaskDTO>();
 		TaskDAO dao = sqlsession.getMapper(TaskDAO.class);
 		tasklist = dao.getTasks(pid);
@@ -151,14 +153,25 @@ public class ProjectInfoService {
 	 */
 	public int insertPmember(MidpidDTO midpiddto){
 		
-		System.out.println("서비스 탔음");
+		System.out.println("insertPmember 서비스 실행");
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		int result = dao.insertPmember(midpiddto);
 		
-		System.out.println("테스트 출력");
-		System.out.println("result : " + result);
+		System.out.println("맴버 추가 결과 : " + result);
 		
 		return result;
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 4.
+	 기      능 : 프로젝트 페이지에서 프로젝트 정보를 가지고 오기 위한 함수
+	 작성자명 : 이 진 우
+	 */
+	public ProjectDTO getProjectInfo(int pid) {
+		ProjectDAO dao = sqlsession.getMapper(ProjectDAO.class);
+		ProjectDTO projectinfo = dao.selectProject(pid);
+		
+		return projectinfo;
 	}
 	
 	

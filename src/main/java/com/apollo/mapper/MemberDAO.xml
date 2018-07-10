@@ -16,13 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertMember"
 		parameterType="com.apollo.vo.MemberDTO">
 		insert into member(mid, mname, pwd, rday, pnum,
-		deptname, apollokey, position)
+		deptname, apollokey, position, emailcheckkey)
 		values(#{mid}, #{mname}, #{pwd},
-		sysdate, #{pnum}, #{deptname}, #{apollokey}, #{position})
+		sysdate, #{pnum}, #{deptname}, #{apollokey}, #{position}, #{emailcheckkey})
 	</insert>
 	<select id="getLogin" resultType="String">
-		select pwd from member where
-		mid=#{mid}
+		select pwd from member where mid=#{mid}
 	</select>
 
 	<select id="getTaskAssignees"
@@ -122,5 +121,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="gerUserProjects" parameterType="String" resultType="com.apollo.vo.ProjectDTO">
 		select * from project where pid in (select pid from pmember where mid = #{mid}) order by pid asc
 	</select>
+
+	<update id="emailcheck" parameterType="String">
+		update member set ischecked='y' where mid=#{mid}
+	</update>
 	
+	<select id="emailcheckbymid" resultType="String">
+		select emailcheckkey from member where mid=#{mid}
+	</select>
+	
+	<select id="ischecked" resultType="String">
+		select ischecked from member where mid=#{mid}
+	</select>
+	
+	<select id="getminprojectid" resultType="Integer">
+		select min(pid) from pmember where mid=#{mid}
+	</select>
+	
+	<select id="selectStepAssignees" parameterType="java.util.List" resultType="com.apollo.vo.MemberDTO">
+		select * from member
+		where mid in 
+		<foreach collection="list" item="step"  open="(" close=")" separator=",">
+            #{step.mid}
+        </foreach>
+	</select>
+
+	<!-- 맴버 이미지 업데이트 -->
+	<update id="updateImageName" parameterType="com.apollo.vo.MemberDTO"> 
+		update member set image =#{image}
+		where mid = #{mid}
+	</update>
+
 </mapper>

@@ -6,6 +6,7 @@ import com.apollo.vo.GoogleDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidpidDTO;
 import com.apollo.vo.ProjectDTO;
+import com.apollo.vo.StepDTO;
 import com.apollo.vo.TidpidDTO;
 
 public interface MemberDAO {
@@ -125,4 +126,55 @@ public interface MemberDAO {
 	 작성자명 : 김 정 권
 	 */
 	public ArrayList<ProjectDTO> gerUserProjects(String mid);
+
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : mid로 해당 맴버에게 이미지 이름을 집어 넣어준다 
+	 작성자명 : 이 진 우
+	 */
+	public int updateImageName(MemberDTO member);
+
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 4.
+	 기      능 : email 인증키가 인증되면 인증확인 컬럼을 n->y로 변경
+	 작성자명 : 이 창 훈
+	 */
+	public int emailcheck(String mid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 4.
+	 기      능 : 입력한 각 이메일에 해당되는 인증키 가져오기
+	 작성자명 : 이 창 훈
+	 */
+	public String emailcheckbymid(String mid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 4.
+	 기      능 : 로그인할때 인증확인 컬럼 값 확인하기 (n이면 인증 안됨, y면 인증됨)
+	 작성자명 : 이 창 훈
+	 */
+	public String ischecked(String mid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : 가장 최근에 만든 프로젝트의 pid를 가져온다
+	 작성자명 : 김 정 권
+	 */
+	public int getminprojectid(String mid);
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 5.
+	 기      능 : step list로 step 담당자 가져오기 
+	 작성자명 : 김 래 영
+	 */
+	public ArrayList<MemberDTO> selectStepAssignees (ArrayList<StepDTO> steplist);
+
+
 }

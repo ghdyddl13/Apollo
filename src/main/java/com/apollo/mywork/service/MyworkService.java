@@ -76,6 +76,7 @@ public class MyworkService {
 				Date endday=null;
 				Date startday=null;
 				try {
+					System.out.println(task.getSday());
 					endday = dateFormat.parse(task.getEday());
 					startday = dateFormat.parse(task.getSday());
 				} catch (ParseException e) {
@@ -168,28 +169,6 @@ public class MyworkService {
 		String stringfydate = stringdate.substring(4, 10);
 		
 		return stringfydate;
-	}
-	/**
-	 * 
-	 날      짜 : 2018. 6. 18.
-	 기      능 : 어떤 요일인지 확인하는 함수
-	 작성자명 : 이 진 우
-	 */
-	public int checkDay(String date) {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd") ;
-	    Date nDate=null;
-		try {
-			nDate = dateFormat.parse(date);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-		}
-	     
-	    Calendar cal = Calendar.getInstance() ;
-	    cal.setTime(nDate);
-	     
-	    int dayNum = cal.get(Calendar.DAY_OF_WEEK) ;
-
-	    return dayNum;
 	}
 	/**
 	 * 

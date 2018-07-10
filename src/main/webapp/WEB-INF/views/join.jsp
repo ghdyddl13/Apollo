@@ -16,223 +16,138 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="css/common.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="js/login.js"></script>
 <title>Insert title here</title>
 
-<script type="text/javascript">
-
-$(function() {
-	$('#btnCheckUid').click(function(){
-		if ($("#mid").val()== "") {
-            alert("아이디를 입력하지 않았습니다.");
-            $("#mid").focus();
-            return false;
-        }
-		$.ajax(
-			{
-				type:"post",
-				url:"midcheck.htm",
-				data:{"mid" : $('#mid').val()},
-				success:function(data){
-					if(data.result=="fail"){
-						alert('중복된 아이디 입니다.');
-						$("#mid").focus();
-					}else{
-						alert('사용가능한 아이디 입니다.');
-					}
-				}
-			}	
-		);
-	});
-	
-	$('#btnCheckkey').click(function(){
-		if ($("#apollokey").val()== "") {
-            alert("인증키를 입력하지 않았습니다.");
-            $("#apollokey").focus();
-            return false;
-        }
-		$.ajax(
-			{
-				type:"post",
-				url:"keycheck.htm",
-				data:{"apollokey" : $('#apollokey').val()},
-				success:function(data){
-					if(data.result=="fail"){
-						alert('존재하지 않는 인증키 입니다.');
-						$("#mid").focus();
-					}else{
-						alert('인증 되었습니다.');
-					}
-				}
-			}	
-		);
-	});
-	
-});
-	var Regexemail = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
-	var Regexpwd = /([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/;
-
-	function sendit() {
-		if ($("#mid").val()== "") {
-            alert("아이디를 입력하지 않았습니다.");
-            $("#mid").focus();
-            return false;
-        }
-		
-		if ($("#pwd").val()== "") {
-            alert("비밀번호 입력하지 않았습니다.");
-            $("#pwd").focus();
-            return false;
-        }
-
-		if ($("#pwd").val()!=$("#pwd2").val()) {
-			console.log($("#pwd").val())
-			console.log($("#pwd2").val())
-            alert("비밀번호 확인이 일치하지 않습니다.");
-            $("#pwd").focus();
-            return false;
-        }
-		
-		if ($("#mname").val()== "") {
-            alert("이름을 입력하지 않았습니다.");
-            $("#mname").focus();
-            return false;
-        }
-		if (!Regexemail.test($.trim($("#mid").val())) ){
-			alert("이메일 형식이 아닙니다.");
-			$("#mid").focus();
-			return false;
-
-		}
-		if (!Regexpwd.test($.trim($("#pwd").val())) ){
-			alert("비밀번호 형식이 잘못되었습니다.");
-			$("#pwd").focus();
-			return false;
-
-		}
-
-		$("#f").submit();
-	}
-</script>
 </head>
 <body>	
-<div class="container" align="center">
-	<h1 class="header-fontsize">Create Apollo Account</h1>
-	<div class="input-group div-width">
-		<h4 class="sign-account">
-			<a>or sign in to your account</a>
-		</h4>
-	</div>
-	
-	<!-- 바디 1 아이디 -->
-	<form id = "f" action="join.htm" method="post">
-	<div class="input-group div-width">
-		<div class="col-sm-4 div-font">
-			<h5>*아이디</h5>
+<div class="join-page-body" >
+	<div class="join-form-wrapper">
+		<div class="join-form-header">
+			<h2 >Create Apollo Account</h2>
+			<a class="sign-account" href="login.htm">or sign in to your account</a>
+		</div> 
+		
+		<div class="join-form-body">
+			<form id = "f" action="joinform.htm" method="post">
+			
+			
+			<!-- 아이디 -->
+			<div class="join-input-wrapper">
+				<div class="join-input-row">
+					<div class="join-input-title">
+						<h5 >* E-Mail</h5>
+					</div>
+					<h6 id="idcheck"></h6>
+					<input type="button" id="btnCheckUid" class="btn join-form-btn" value="중복확인">
+				</div>
+				<div class="join-input-row">
+					<input type="text" id="mid" name="mid">
+				</div>
+			</div>
+		
+			<!--  비밀번호 -->
+			<div class="join-input-wrapper">
+				<div class=" join-input-row">
+					<div class="join-input-title">
+						<h5 >* 비밀번호</h5>
+					</div>
+					<h6 id="regexpwd-check">(영문,숫자,특수문자 포함 8자 이상 16자 이하)</h6>
+				</div>
+				<div class="join-input-row">
+					<input type="password" id ="join-pwd" name ="pwd">
+				</div>
+			</div>
+		
+			<!-- 비밀번호 재입력 -->
+			<div  class="join-input-wrapper">
+				<div class=" join-input-row">
+					<div class="join-input-title">
+						<h5>* 비밀번호 확인</h5>
+					</div>
+						<h6 id="pwdcheck"></h6>
+				</div>
+				<div class="join-input-row ">
+					<input type="password" id ="join-pwd-check" name ="pwd2">
+				</div>
+			</div>
+		
+			<!-- 이름 -->
+			<div  class="join-input-wrapper">
+				<div class="join-input-row ">
+					<div class="join-input-title">
+						<h5>* 이름</h5>
+					</div>
+				</div>
+				<div class=" join-input-row">
+					<input type="text" id = "mname" name="mname"> 			
+				</div>
+			</div>
+		
+			<hr class="hr-color">
+		
+			<!-- 선택사항 -->
+		
+			<h4>선택 사항</h4>
+		
+			<!-- 인증키 -->
+			<div class=" join-input-wrapper">
+				<div class="join-input-row">
+					<div class="join-input-title">
+						<h5 >인증키</h5>
+					</div>
+					<h6 id="keycheck"></h6>
+					<input type="button" id="btnCheckkey" class="btn join-form-btn" value="인증확인">
+				</div>
+				<div class="join-input-row">
+					<input type="text" id="apollokey"  name ="apollokey">
+				</div>
+			</div>
+			
+		
+			<!-- 휴대폰 번호 -->
+			<div class=" join-input-wrapper">
+				<div class="join-input-row">
+					<div class="join-input-title">
+						<h5 >휴대폰 번호</h5>
+					</div>				
+				</div>
+				<div  class=" join-input-row">
+					<input type="text" name="pnum">
+				</div>
+			</div>
+			<!-- 부서명 -->
+			<div class=" join-input-wrapper">
+				<div class="join-input-row">
+					<div class="join-input-title">
+						<h5 >부서명</h5>
+					</div>
+				</div>
+				<div class=" join-input-row">
+					<input type="text" name ="deptname">
+				</div>
+			</div>
+			<!-- 직위 -->
+			<div class="join-input-wrapper ">
+				<div class="join-input-row">
+					<div class="join-input-title">
+						<h5 >직위</h5>
+					</div>
+				</div>
+				<div class=" join-input-row">
+					<input type="text" name="position">
+				</div>
+			</div>
+			<br>
+			<!-- 가입완료 버튼 -->
+			<div class=" " align="right">
+				<input type="button"  onclick="sendit()" class="btn join-from-submit" value="가입완료">
+			</div>
+			</form>
+			
+			<br> 
+			<p class="footer-copyright">@Copyright 2018.All right reserved</p>
 		</div>
-		<div class="col-sm-8 div-btn-position">
-			<input type="button" id="btnCheckUid" class="btn" value="중복확인">
-		</div>
 	</div>
-	<div class="input-group div-width">
-		<input type="text" class="form-control" id="mid" name="mid">
-	</div>
-
-	<!-- 바디 2 비밀번호 -->
-	<div class="input-group div-width">
-		<div class="col-sm-4 div-font">
-			<h5>*비밀번호</h5>
-		</div>
-		<div class="col-sm-8 div-btn-position">
-			<h6>(영문,숫자,특수문자 포함해서 8자 이상 입력하세요)</h6>
-		</div>
-	</div>
-	<div class="input-group div-width">
-		<input type="password" class="form-control" id ="pwd" name ="pwd">
-	</div>
-
-	<!-- 바디 3 비밀번호 재입력 -->
-	<div class="input-group div-width">
-		<div class="col-sm-4 div-font">
-			<h5>*비밀번호 확인</h5>
-		</div>
-	</div>
-	<div class="input-group div-width">
-		<input type="password" class="form-control" id ="pwd2" name ="pwd2">
-	</div>
-
-
-
-	<!-- 바디 4 이름 -->
-	<div class="input-group div-width">
-		<div class="col-sm-4 div-font">
-			<h5>*이름</h5>
-		</div>
-	</div>
-	<div class="input-group div-width">
-		<input type="text" class="form-control" id = "mname" name="mname"> <br> <br>
-		<hr class="hr-color">
-	</div>
-
-
-
-	<!-- 선택사항 글자 -->
-	<div class="input-group div-width">
-		<h4 class="div-font">선택 사항</h4>
-	</div>
-
-	<br>
-
-	<!-- 인증키 -->
-	<!-- 바디 1 아이디 -->
-	<div class="input-group div-width">
-		<div class="col-sm-4 div-font">
-			<h5>인증키</h5>
-		</div>
-		<div class="col-sm-8 div-btn-position">
-			<input type="button" id="btnCheckkey" class="btn" value="인증확인">
-		</div>
-	</div>
-	<div class="input-group div-width">
-		<input type="text" class="form-control" id="apollokey"  name ="apollokey">
-	</div>
-
-	<!-- 휴대폰 번호 -->
-	<div class="input-group div-width">
-		<div class="col-sm-4 div-font">
-			<h5>휴대폰 번호</h5>
-		</div>
-	</div>
-	<div class="input-group div-width">
-		<input type="text" class="form-control" name="pnum">
-	</div>
-	<!-- 부서명 -->
-	<div class="input-group div-width">
-		<div class="col-sm-4 div-font">
-			<h5>부서명</h5>
-		</div>
-	</div>
-	<div class="input-group div-width">
-		<input type="text" class="form-control" name ="deptname">
-	</div>
-
-	<!-- 직위 -->
-	<div class="input-group div-width">
-		<div class="col-sm-4 div-font">
-			<h5>직위</h5>
-		</div>
-	</div>
-	<div class="input-group div-width">
-		<input type="text" class="form-control" name="position">
-	</div>
-	<br> <br>
-	<!-- 가입완료 버튼 -->
-	<div class="input-group div-width" align="right">
-		<input type="button"  onclick="sendit()" class="btn" value="가입완료">
-	</div>
-	</form>
-	
-	<br> <br>
-	<h5 class="footer-color">@Copyright 2018.All right reserved.</h5>
-	<br> <br> <br>
 </div>
 </body>

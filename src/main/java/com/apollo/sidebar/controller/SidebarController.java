@@ -22,6 +22,7 @@ import com.apollo.vo.MemberDTO;
 import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
+import com.apollo.vo.TaskInStepDTO;
 
 
 @Controller
@@ -34,6 +35,34 @@ public class SidebarController {
 	
 	@Autowired 
 	private View jsonview;
+	
+	
+	@RequestMapping(value="/pageReloadEvent.htm", method=RequestMethod.GET)
+	public String getReLoadPage(HttpServletRequest request,  Model model) {
+		System.out.println("test");
+		String location = null;
+		System.out.println(request.getSession().getAttribute("pid"));
+		System.out.println(request.getSession().getAttribute("sid"));
+		try {
+			location = (String) request.getSession().getAttribute("location");
+			Integer pid =(Integer) request.getSession().getAttribute("pid");
+			Integer sid =(Integer) request.getSession().getAttribute("sid");
+			if(location ==null) {
+				location = "/myWork.htm";
+			}else if(location.equals("/information.htm")) {
+				location += "?pid=" +pid;
+			}else if(location.equals("/list.htm")) {
+				location += "?sid=" +sid;
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println(location);		
+		return "redirect:"+location;
+	}
 	
 	@RequestMapping(value="/insertproject.htm", method=RequestMethod.POST)
 	public View insertProject(ProjectDTO projectdto, Model model) {
@@ -99,6 +128,7 @@ public class SidebarController {
 		try {
 			projectlist = sidebarservice.selectProjectList(mid);
 			model.addAttribute("projectlist",projectlist);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("selectProjectList Controller 에러");
@@ -333,16 +363,23 @@ public class SidebarController {
 	 */
 	@RequestMapping(value="/deletestep.htm", method=RequestMethod.POST)
 	public View deleteTaskInStep(int sid, Model model) {
-		System.out.println("deleteTaskInStep controller");
 		
-		int deletetaskinstep = 0;
+		ArrayList<TaskInStepDTO> tidlist = null; //tid list로 뽑기
+		int deletetaskcount = 0;
 		int deletestep = 0;
 		
 		try {
-			deletetaskinstep = sidebarservice.deleteTaskInStep(sid);
-			model.addAttribute("deletetaskinstep", deletetaskinstep);
-			System.out.println("task delete : " + deletetaskinstep);
-			
+			tidlist = sidebarservice.getTidsTaskInStep(sid);
+			model.addAttribute("tidlist", tidlist);
+
+			for(TaskInStepDTO taskinstepdto : tidlist) {
+				int tid = taskinstepdto.getTid();
+				
+				deletetaskcount = sidebarservice.deleteTaskCount(tid);
+				
+				System.out.println(deletetaskcount);
+				
+			}	
 			deletestep = sidebarservice.deleteStep(sid);
 			model.addAttribute("deletestep", deletestep);
 			System.out.println("step : " + deletestep);

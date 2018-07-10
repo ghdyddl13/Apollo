@@ -3,24 +3,36 @@ package com.apollo.task.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.apollo.inbox.dao.InboxDAO;
 import com.apollo.member.dao.MemberDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.AssigneeDAO;
 import com.apollo.task.dao.CommentDAO;
+import com.apollo.task.dao.FileDAO;
 import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
+import com.apollo.utils.DeleteFileUtils;
+import com.apollo.utils.DownloadFileUtils;
+import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
+import com.apollo.vo.FileDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
 import com.apollo.vo.ReceiverDTO;
@@ -32,6 +44,7 @@ import com.apollo.vo.TaskInStepDTO;
 import com.apollo.vo.TidpidDTO;
 import com.apollo.vo.TidvalueDTO;
 import com.apollo.vo.TstatusDTO;
+import com.apollo.vo.filedataDTO;
 
 @Service
 public class TaskService {
@@ -49,7 +62,6 @@ public class TaskService {
 	 */
 	public int updateTask(TaskDTO taskdto) {
 		int result = 0;
-		
 		try {
 			TaskDAO dao = session.getMapper(TaskDAO.class);
 			result = dao.updateTask(taskdto);
@@ -99,11 +111,11 @@ public class TaskService {
 	 기      능 : pid로 tstatus 가져오기
 	 작성자명 : 김 정 권
 	 */
-	public ArrayList<TstatusDTO> gettstatuslist(int pid) {
+	public ArrayList<TstatusDTO> gettstatuslist(int tid) {
 		
 		ArrayList<TstatusDTO> tstatuslist = new ArrayList();
 		TstatusDAO tstatusdao = session.getMapper(TstatusDAO.class);
-		tstatuslist = tstatusdao.getTstatuslist(pid);
+		tstatuslist = tstatusdao.getTstatuslist(tid);
 		return tstatuslist;
 	}
 	/**
@@ -219,10 +231,19 @@ public class TaskService {
 	 기      능 : 코멘트 입력
 	 작성자명 : 김 정 권
 	 */
-	public int insertComment(CommentDTO commentdto) {
+	public int insertComment(CommentDTO dto) {
 		System.out.println("insertComment 서비스 메소드 실행");
+		
+		System.out.println("서비스에서 검증");
+		System.out.println(dto.getCmtid());
+		System.out.println(dto.getComments());
+		System.out.println(dto.getTid());
+		System.out.println(dto.getMid());
+		System.out.println(dto.getCmtkind());
+		System.out.println("=================");
+		
 		CommentDAO commentdao = session.getMapper(CommentDAO.class);
-		int result = commentdao.insertComment2(commentdto);
+		int result = commentdao.insertComment2(dto);
 		return result;
 	}
 	
@@ -313,8 +334,19 @@ public class TaskService {
 		 System.out.println("!!리시버 테이블에 인서트 성공??!!");
 		 return result;
 	}
-	
-	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 2.
+	 기      능 : 웹소켓에서 사용
+	 작성자명 : 신 호 용
+	 */
+		public ArrayList<String> getMidinAssingnee(int tid) {
+		
+		System.out.println("changeTname 서비스 실행");
+		AssigneeDAO assigneedao = session.getMapper(AssigneeDAO.class);
+		ArrayList<String> result = assigneedao.getMidinAssingnee(tid);
+		return result;
+	}
 
 	/**
 	 * 
@@ -620,6 +652,135 @@ public class TaskService {
 		TaskDAO taskdao = session.getMapper(TaskDAO.class);
 		int result = taskdao.changeTname(dto);
 		return result;
+	}
+	
+
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 업로드
+	 작성자명 : 김 정 권
+	 */
+	public LinkedList<filedataDTO> upLoadFileInTaskModal(int tid, MultipartHttpServletRequest request){
+		System.out.println("upLoadFileInTaskModal 서비스 실행");
+		
+		String savepath= "resources/upload_files";
+		LinkedList<filedataDTO> files = new LinkedList<filedataDTO>();
+		filedataDTO filedata = null;
+		
+		Iterator<String> itr =request.getFileNames();
+		MultipartFile mpf = null;
+		while(itr.hasNext()) {
+			mpf = request.getFile(itr.next());
+			
+			//파일 정보가 없는 경우
+			if(mpf ==null || mpf.getSize()<=0) {
+				return null;
+			}
+			//fileMetaDTO에 파일정보 입력
+			filedata = new filedataDTO();
+			System.out.println("파일 이름이에요: "+mpf.getOriginalFilename());
+			filedata.setFilename(mpf.getOriginalFilename());
+			filedata.setFileSize(mpf.getSize()/1024+"kb");
+			filedata.setFileType(mpf.getContentType());
+			
+			//경로 설정
+			String filename =null;
+			String originalName = mpf.getOriginalFilename();
+			
+			//SQL 파일 입력
+			FileDAO dao = session.getMapper(FileDAO.class);
+			
+			FileDTO filedto = new FileDTO();
+			try {
+				//FILE DATADTO에 바이트 정보 입력
+				filedata.setBytes(mpf.getBytes());
+				
+				//AWS S3에 파일 업로드
+				filename = UploadFileUtils.uploadFile(savepath, 0, originalName, mpf.getBytes());
+				
+				//DB에 파일 정보 입력
+				filedto.setTid(tid);
+				filedto.setFilename(filename);
+				
+				System.out.println("tid, filename 테스트 출력");
+				System.out.println("tid : " + tid);
+				System.out.println("filename : " + filename);
+				dao.upLoadFileInTaskModal(filedto);
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			files.add(filedata);
+		}
+		
+		return files;
+	}
+	
+
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 업로드 후 파일 목록 리셋
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<FileDTO> getFileList(int tid){
+		
+		System.out.println("getFileList 서비스 실행");
+		ArrayList<FileDTO> filelist = new ArrayList();
+		FileDAO dao = session.getMapper(FileDAO.class);
+		filelist = dao.getFileList(tid);
+		
+		return filelist;
+	}
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 삭제
+	 작성자명 : 김 정 권
+	 */
+	public ArrayList<FileDTO> deleteFile(int tid, String filename, String filepath) {
+		
+		System.out.println("delete file 서비스 시작");
+		try {
+			DeleteFileUtils.deleteFile(filepath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("파일 삭제 완전히 완료");		
+		
+		FileDAO dao = session.getMapper(FileDAO.class);
+		int result = dao.deleteFile(filename);
+		System.out.println("RDB 에서 파일 삭제 완료");
+		
+		ArrayList<FileDTO> filelist = new ArrayList();
+		filelist = dao.getFileList(tid);
+		System.out.println("새 목록 가져와서 view로 던져줌");
+		
+		return filelist;
+	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 8.
+	 기      능 : Task 모달 내 파일 다운로드
+	 작성자명 : 김 정 권
+	 */
+	public void downLoadFileInTaskModal(String filename, HttpServletResponse response, HttpServletRequest request) {
+	
+		System.out.println("downLoadFileInTaskModal 서비스 실행");
+	   	   
+		String downloadPath = "resources/upload_files/" + filename;
+		
+		try {
+			DownloadFileUtils.downloadFileUtils(downloadPath, response, request);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 }

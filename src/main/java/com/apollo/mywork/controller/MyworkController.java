@@ -4,33 +4,19 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.View;
-/**
- * 
-  클래스명 : MyworkController
-  날      짜 : 2018. 6. 12.
-  작성자명 : 이 진 우
- */
 
 import com.apollo.mywork.service.MyworkService;
 import com.apollo.vo.MyWorkTaskDTO;
 @Controller
 public class MyworkController {
-	/**
-	 * 
-	 날      짜 : 2018. 6. 12.
-	 기      능 : MY WORK 페이지 호출
-	 작성자명 : 이 진 우
-	 */
-	@Autowired
-	private View jsonview;
-	
+
 	@Autowired
 	private MyworkService service;
 	/**
@@ -40,15 +26,15 @@ public class MyworkController {
 	 작성자명 : 이 진 우
 	 */
 	@RequestMapping(value="/myWork.htm",method=RequestMethod.GET)
-	public String showMyworkPage(HttpServletRequest request,ModelMap map) {
+	public String showMyworkPage(HttpSession session,HttpServletRequest request,ModelMap map) {
+    	session.setAttribute("location", "/myWork.htm");
 		String mid = (String)request.getSession().getAttribute("mid");
-		System.out.println("아이디 : " +mid);
-		
+		System.out.println(mid);
 		Map<String, List<MyWorkTaskDTO>> taskmap=null;
 		try {
 			taskmap = service.getMyWork(mid);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		map.addAttribute("todaylist", taskmap.get("todaylist"));
@@ -65,17 +51,5 @@ public class MyworkController {
 		map.addAttribute("later", "After "+service.dateToString(service.getdate("laterfirst")));
 
 		return "header/myWork";
-	}
-	/**
-	 * 
-	 날      짜 : 2018. 6. 15.
-	 기      능 : Mywork 페이지 리스트 뿌려주기
-	 작성자명 : 이 진 우
-	 */
-	@RequestMapping(value="/myWork.htm",method=RequestMethod.POST)
-	public View myWorkList(HttpServletRequest request, ModelMap map) {
-
-		
-		return jsonview;
 	}
 }

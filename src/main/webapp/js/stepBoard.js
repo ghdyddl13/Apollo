@@ -21,6 +21,8 @@ function addTaskView(tstatusid){
 function addTask_keyup(tstatusid){
    let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
       if(event.which==13){
+    	  
+    	  $("#insert-task"+tstatusid).attr("readonly", true);
          let newtask=$.trim($('#insert-task'+tstatusid).val());
       
         if(newtask===""){
@@ -38,6 +40,7 @@ function addTask_keyup(tstatusid){
                    success:function(data){
                       $("#main-box").empty();
                       $("#main-box").append(data);
+                      $("#insert-task"+tstatusid).attr("readonly", false);
                       doDraggable();
                    }  
                 })
@@ -91,19 +94,20 @@ function addTask_focusout(tstatusid){
       var i = 1;
       var tstatus;
       var tid;
+      var tname;
       $("ul.tstatuslist").sortable({
          connectWith : "ul",
          update: function(event, ui) {      
            if (i++ == 2){
             tstatusid =  $(this).closest('div')[0].childNodes[1].childNodes[1].value;
             tid =  ui.item[0].value;
-
+ 
          $.ajax({
             url : 'boardTaskStatusUpdate.htm',
             data : { 
                tstatusid : tstatusid,
                tid : tid
-                  } 
+               } 
          }) 
             
             //update event 발생시 이동전 위치와 이동후 위치를 나타내주는 변수를 초기화함
@@ -123,6 +127,7 @@ function addTask_focusout(tstatusid){
     작 성 자 명 : 이 창 훈
     */
    function doDraggable(){
+	   console.log("test")
 	   autoWidth();
 	     sortable();
 	    $('#board-content-md').draggable(

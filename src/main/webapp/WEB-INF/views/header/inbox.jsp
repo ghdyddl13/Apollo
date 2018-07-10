@@ -3,14 +3,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
+
 <!-- TASK_JK -->
 <script type="text/javascript" src="js/task.js"></script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
 	$(function() {
+		
+		/**
+		 * 
+		 날      짜 : 2018. 7. 9.
+		 기      능 : 인박스에서 X버튼 눌렀을때 서드패널에서 사라짐
+		 작성자명 : 신 호 용
+		 */
+		$(document).on("click","#task_dismiss_btn_inbox",function(){
+			$(".modal-content2").hide();
+			$(".starred-secondbody-image").show();
+		});
+		
+		
+		$(".modal-content2").hide();
+		$(".Task_RUD_Modal").click(function(evt) {
+			$(this).children().children(".inbox_newcheck").empty();
+			console.log($(this).children().children().children(".cmtid").val());
+			console.log($(this).children().children(".inbox_mid2").val())
+			$.ajax({
+				url:"newcheck.htm",
+				type: 'POST',
+				data:{cmtid : $(this).children().children().children(".cmtid").val(),
+					  mid2 : $(this).children().children(".inbox_mid2").val()},
+				success:function(data){
+					
+				}
+			})
+		});
+		
+		
 		$("#incomming-page").click(function(evt){
-			
 			
 			$.ajax({
 				url:"inbox.htm",
@@ -143,9 +174,9 @@
 <!-- 		<p class ="inbox-header">&nbsp; Inbox</p> -->
 		<div class = "inbox-nav">
 		<div class="inbox-topnav">
- 			<a id="incomming-page" href="#Inbox" ><b>INCOMMING</b></a>
-  			<a id="sent-page" href="#Sent"><b>SENT</b></a>
- 			<a id = "archive-page" href="#Archive"><b>ARCHIVE</b></a>
+ 			<a id="incomming-page" ><b>INCOMMING</b></a>
+  			<a id="sent-page" ><b>SENT</b></a>
+ 			<a id = "archive-page" ><b>ARCHIVE</b></a>
   			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
     		<i class="fa fa-bars"></i>
   			</a>
@@ -153,22 +184,32 @@
 		</div>
 			<center><h3 style="color:#717171;">TODAY</h3><hr class="inbox-hr"></center>	
 			<c:forEach var="commentlist" items="${cmtlist}" varStatus="status">
-			
 			<c:choose>
 				<c:when test="${fn:substring(commentlist.cmtmtime,0,10) eq today}">
-					<div class="inbox-list"><div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
-						<div class ="yyTask_RUD_Modal"><div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;"><span class="inbox-span1-color">
-						<span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div></div>
+					<div class="inbox-list">
+					<div class ="Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
+						<div class ="yyTask_RUD_Modal"><span class="inbox-span1-color">
+						<span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div>
 						<span class="inbox-span2"><span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span>${commentlist.pname}</span>
 						<span class="inbox-span3">
 						<c:choose>
 							<c:when test="${inbox eq 'archive'}">
+								<input class="inbox_mid2" type="hidden" value="${commentlist.mid2}"> 
+								<c:if test="${commentlist.newcheck eq 0}">
+									<span class = "inbox_newcheck" style="color: rgba(211, 0, 68, 0.74);">NEW!</span>&nbsp;&nbsp;&nbsp;
+								</c:if>
+							
 								<span class="archiveupdate2" style="cursor: pointer;">
 								<img src="img/archive2.png" width="15px" height="15px">
 								<input type="hidden" class = "cmtid" value="${commentlist.cmtid}">
 								</span>
 							</c:when>
 							<c:otherwise>
+							<input class="inbox_mid2" type="hidden" value="${commentlist.mid2}"> 
+								<c:if test="${commentlist.newcheck eq 0}">
+									<span class = "inbox_newcheck" style="color: rgba(211, 0, 68, 0.74);">NEW!</span>&nbsp;&nbsp;&nbsp;
+								</c:if>
+								
 								<span class="archiveupdate" style="cursor: pointer;">
 								<img src="img/archive.png" width="15px" height="15px">
 								<input type="hidden" class = "cmtid" value="${commentlist.cmtid}">
@@ -189,18 +230,26 @@
 							<hr class="inbox-hr">
 						</center>
 					</c:if>
-					<div class="inbox-list"><div class ="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
+					<div class="inbox-list"><div class ="Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
 						<div class ="yyTask_RUD_Modal"><div><span class="inbox-span1-color"><span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div></div>
 						<span class="inbox-span2" ><span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span> ${commentlist.pname}</span> 
 						<span class="inbox-span3">
 						<c:choose>
 							<c:when test="${inbox eq 'archive'}">
+							<input class="inbox_mid2" type="hidden" value="${commentlist.mid2}"> 
+								<c:if test="${commentlist.newcheck eq 0}">
+									<span class = "inbox_newcheck" style="color: rgba(211, 0, 68, 0.74);">NEW!</span>&nbsp;&nbsp;&nbsp;
+								</c:if>
 								<span class="archiveupdate2" style="cursor: pointer;">
 								<img src="img/archive2.png" width="15px" height="15px">
 								<input type="hidden" class = "cmtid" value="${commentlist.cmtid}">
 								</span>
 							</c:when>
 							<c:otherwise>
+							<input class="inbox_mid2" type="hidden" value="${commentlist.mid2}"> 
+								<c:if test="${commentlist.newcheck eq 0}">
+									<span class = "inbox_newcheck" style="color: rgba(211, 0, 68, 0.74);">NEW!</span>&nbsp;&nbsp;&nbsp;
+								</c:if>
 								<span class="archiveupdate" style="cursor: pointer;">
 								<img src="img/archive.png" width="15px" height="15px">
 								<input type="hidden" class = "cmtid" value="${commentlist.cmtid}">
@@ -215,12 +264,170 @@
 				</c:otherwise>
 			</c:choose>
 			</c:forEach>
+			
+			
+			
+			
+			
 		</div>
 		<div class ="inbox-section-center" id="center">
 		</div>
-		<div class ="inbox-section-right" id="right" style="overflow:auto; ">
-			<input type="text" id = "cmt_cmts" >
-			<input type="text" id = "cmt_tid" value="2">
-			<input type="button" id="cmt_insert" value="입력">
+		
+		
+		
+		<div class ="inbox-section-right" id="right" style="overflow:auto; ">	
+		<div class="starred-secondbody-image"></div>
+			
+			
+			<div class="modal-content2">
+
+				<div class="modal-header">
+				<!-- row 1 -->
+				<div class="row">
+					<div class="col-sm-10">
+						<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
+						<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">
+					</div>
+
+					<div class="col-sm-2" id="star_trash">
+						<span id="span_task_star"></span>&nbsp&nbsp
+						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
+						<button type="button" class="close" id="task_dismiss_btn_inbox">&times;</button>
+					</div>
+					
+					<div class="col-sm-12" id="Task_Modal_snames2">
+					</div>
+					<div id="step_names_popup_div2"></div>
+					<div id="step_delete_popup_div2"></div>
+					
+				</div>
+				<!-- end row 1 -->
+				<hr>
+							
+							
+				<!-- row 2 -->
+				<div class="row">
+					<div class="col-sm-2">
+							<select id="Task_Modal_tstatus_selectbox_noredirect">
+							</select>
+					</div>	
+					<div class="col-sm-5">
+	                    <span>시작일&nbsp:&nbsp</span>
+                   		<input id="Task_Modal_sday_noredirect" type="text" name="sday" placeholder="Start Date" class="date date_sday_noredirect">
+					</div>
+					<div class="col-sm-5">
+						<span>종료일&nbsp:&nbsp</span>
+	                    <input id="Task_Modal_eday_noredirect" type="text" name="eday" placeholder="End Date" class="date date_eday_noredirect">
+					</div>
+				</div>
+				<!-- end row 2 -->
+				<hr>
+				
+				<!-- end modal-header -->
+
+				<div class="modal-body">
+
+					<div class="modal-title">업무 담당자</div><br />
+					<div id="Task_Modal_assignee"></div>
+					<div id="assignee_popup_div"></div>
+
+								
+                <hr />
+					<div class="modal-title">파일 업로드</div><br />
+	                <div id="Task_Modal_files"></div>
+	                <br>
+	                <input type="button" name="fileuploadbtn" id="fileuploadbtn" value="파일업로드">
+					<form  action="" method="post" >
+						<input style="display:none" type="file" name="member_image" id="fileuploadintaskmodal" data-url="uploadfileintaskmodal.htm">
+					</form>
+				    <script type="text/javascript">
+						 $(function(){
+							 
+							$("#fileuploadintaskmodal").fileupload({
+								dataType:"json",
+								add:function(e,data){
+					                var uploadFile = data.files[0];
+					                var isValid = true;
+					                if (!(/png|jpe?g|gif|svg/i).test(uploadFile.name)) {
+					                    alert('png, jpg, gif 만 가능합니다');
+					                    isValid = false;
+					                }
+					                if (isValid) {
+					                    data.submit();
+					                }
+								},
+								done:function(e,data){
+									
+									$.ajax(
+										       {
+										           type : "post",
+										           url  : "resetfilelist.htm",
+										           success : function(rdata){
+										        	   
+										        	   // files
+										        	   $('#Task_Modal_files').empty();
+										        	   var filesdivs = '';
+										        	   $(rdata.filelist).each(function(){
+										        		   
+										        	   var shortfilename = this.filename.substring(37);
+										        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
+										        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+										        	   filesdivs += '</div>'
+										        		  
+										        	   });
+										        	   $('#Task_Modal_files').append(filesdivs);
+										        	   
+										           } // end-success
+										        }); // end-ajax
+								
+									
+									
+								}								
+							})
+						});
+					</script>
+					
+                <hr />
+                
+				<div class="modal-title">
+					<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
+					<div style="text-align:center">
+					<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
+					</div>
+				</div>
+                <hr />
+                
+					<div class="modal-title">Comment</div><br />
+					<div id="Task_Modal_comments">
+					</div>
+					<hr>
+					<div id="project_member_popup_div2"></div>
+					
+					<div id="div_for_comment_input_box2">
+					<input id="comment_input_box_in_taskmodal_noredirect" type="text" placeholder="코멘트를 입력 후 Enter..">
+					</div>
+							
+					<input type="hidden" id="pidhidden" value="">					
+					<input type="hidden" id="usermidhidden" value="">					
+					<input type="hidden" id="usermidhidden2" value="">					
+					<input type="hidden" id="tidhidden2" value="">
+					<input type="hidden" id="receiverhidden" value="">
+					<input type="hidden" id="receivernamehidden" value="">
+					<input type="hidden" id="tnamehidden" value="">
+					<input type="hidden" id="origin_sday" value="">
+					<input type="hidden" id="origin_eday" value="">
+					<input type="hidden" id="stepdeletehidden" data-toggle="modal" data-target="#step_delete_Modal">
+					
+			 	</div>
+			 	<!-- end modal-body -->
+				
+			</div>
 		</div>
 	</div>
+</div>	
+
+	
+	
+	
+	
+	
