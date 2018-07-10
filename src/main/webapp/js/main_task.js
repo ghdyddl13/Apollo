@@ -1874,9 +1874,9 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
   // @ 아닐 시
   if((event.keyCode != 50) && (event.keyCode != 27) && (event.keyCode != 13)){
 	  
-	    $('#project_member_popup_div').css("display", "none");
-	    $('#project_member_popup_div').css("left", "-20000");
-	    $('#project_member_popup_div').css("top", "-20000");
+	    $('#project_member_popup_div2').css("display", "none");
+	    $('#project_member_popup_div2').css("left", "-20000");
+	    $('#project_member_popup_div2').css("top", "-20000");
   } // end - != 50
   
   
