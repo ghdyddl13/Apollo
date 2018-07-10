@@ -350,65 +350,69 @@
 
 <!-- Task 수정/삭제 Modal 창 -->
 	<div class="modal fade modal-task-dialog" id="Task_RUD_Modal" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
+		<div class="modal-dialog task-modal-wrapper">
+			<div class="modal-content ">
 
 				<div class="modal-header">
 				<!-- row 1 -->
-				<div class="row">
-					<div class="col-sm-10">
-						<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
-						<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">
+					<div class="row">
+						<div class="col-sm-10">
+							<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
+							<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">
+						</div>
+	
+						<div class="col-sm-2" id="star_trash">
+							<span id="span_task_star"></span>&nbsp;&nbsp;
+							<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp;&nbsp;&nbsp;
+							<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
+						</div>
+						
+						<div class="col-sm-12" id="Task_Modal_snames">
+						</div>
+						<div id="step_names_popup_div"></div>
+						<div id="step_delete_popup_div"></div>
+						
 					</div>
-
-					<div class="col-sm-2" id="star_trash">
-						<span id="span_task_star"></span>&nbsp;&nbsp;
-						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp;&nbsp;&nbsp;
-						<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
-					</div>
-					
-					<div class="col-sm-12" id="Task_Modal_snames">
-					</div>
-					<div id="step_names_popup_div"></div>
-					<div id="step_delete_popup_div"></div>
-					
-				</div>
 				<!-- end row 1 -->
-				<hr>
-							
-							
+				</div>
+		
+				
+			<!-- task modal body  -->				
+			<div class=" task-modal-body">
 				<!-- row 2 -->
-				<div class="row">
-					<div class="col-sm-2">
+				<div class="task-modal-content-row">
+					<div class="task-modal-content-td">
 							<select id="Task_Modal_tstatus_selectbox">
 							</select>
 					</div>
 							
-					<div class="col-sm-5">
+					<div class="task-modal-content-td">
 	                    <span>시작일&nbsp;&nbsp;</span>
-                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date_sday">
+                   		<input id="Task_Modal_sday" readonly type="text" name="sday" placeholder="Start Date" class="date date_sday">
 					</div>
 
-					<div class="col-sm-5">
+					<div class="task-modal-content-td">
 						<span>종료일&nbsp;&nbsp;</span>
-	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date_eday">
+	                    <input id="Task_Modal_eday" readonly type="text" name="eday" placeholder="End Date" class="date date_eday">
 					</div>
 				</div>
 				<!-- end row 2 -->
-				<hr>
 				
 				<!-- end modal-header -->
 
 				<div class="modal-body">
-
-					<div class="modal-title">업무 담당자</div><br />
-					<div id="Task_Modal_assignee"></div>
-					<div id="assignee_popup_div"></div>
+					
+					<div class="task-modal-content-assignee">
+						<div class="modal-title">업무 담당자</div>
+						<div id="Task_Modal_assignee"></div>
+						<div id="assignee_popup_div"></div>
+					</div>
 
 								
-                <hr />
+          
 					<div class="modal-title">파일 업로드</div><br />
 	                <div id="Task_Modal_files"></div>
+						
 	                <br>
 	                <input type="button" name="fileuploadbtn" id="fileuploadbtn" value="파일업로드">
 					<form  action="" method="post" >
@@ -502,8 +506,8 @@
 					
 			 	</div>
 			 	<!-- end modal-body -->
-				
-			</div>
+			</div>	<!-- task modal body -->
+		
 		</div>
 	</div>
 </div>
@@ -1199,6 +1203,30 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 멤버 삭제 모달창 -->
+	<div class="modal fade information-pmember-delete" id="information-pmember-delete" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" id="list_delete_tasks_dismiss_btn">&times;</button>
+					<h4 class="modal-title">프로젝트 멤버 삭제</h4>
+				</div>
+				<div class="modal-body" style="text-align:center">
+				<h4>해당 멤버를 프로젝트에서 제외 하시겠습니까?</h4>
+					<input type="hidden" id="delete-pmember-mid">					
+					<div align="center">
+						<input type="button" class="btn add-btn" id="information-pmember-delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	
 	<!-- jQuery ui widget -->
 	<script src="js/jquery.ui.widget.js"></script>
 	<!-- FILE UPLOAD -iFame -->

@@ -31,9 +31,10 @@
 
 #Task_Modal_tstatus_selectbox{
 	font-size: 12px;
-	height: 50px;
-	width: 100px;
-	margin: -15px -15px -15px -10px
+	height: 100%;
+	width: 100%;
+	text-align: center
+	/* margin: -15px -15px -15px -10px */
 }
 
 
@@ -46,7 +47,12 @@
 }
 
 #Task_Modal_assignee{
-     text-align: center;
+     justify-content:center;
+     align-items:center;
+     min-height: 50px;
+     display: flex;
+     padding: 10px
+     
 }
 
 
@@ -274,11 +280,15 @@ assignee_in_taskmodal td{
 #assignee_popup_div{
   display: none;
   position: absolute;
-  background-color : #FFFFFF; 
   left : -20000px;
   top : -20000px;
   float: left;
   z-index: 3;
+  border-radius: 3px;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+  background-color: #fcfcff !important;
+  min-height: 40px;
+  
 }
 
 .popup_member{
@@ -350,4 +360,36 @@ assignee_in_taskmodal td{
   z-index: 3;
   width: 300px;
   height: 100px;
+}
+/*////////////// 태스크 모달창 수정 CSS ////////////////*/
+
+.task-modal-wrapper{
+	width:700px
+}
+.task-modal-body{
+	display: flex;
+	flex-direction:column;
+	padding: 0 10px 0 10px 
+}
+
+.task-modal-content-row{
+	display: flex;
+	min-height: 70px;
+	justify-content: center;
+	border-bottom:1px solid #eee
+}
+
+.task-modal-content-td{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 1 1 auto
+}
+
+.task-modal-content-assignee{
+	display: flex;
+	flex-direction: column;
+	border-bottom:1px solid #eee;
+	margin-bottom: 15px;
+	
 }

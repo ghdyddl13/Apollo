@@ -151,5 +151,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set image =#{image}
 		where mid = #{mid}
 	</update>
-
+	
+	<delete id="deletePmember" parameterType="com.apollo.vo.MidpidDTO">
+		delete pmember where mid= #{mid} and pid=#{pid}
+	</delete>
 </mapper>

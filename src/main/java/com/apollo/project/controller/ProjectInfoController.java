@@ -219,5 +219,29 @@ public class ProjectInfoController {
 	    }
 		
 	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 10.
+	 기      능 : 프로젝트 멤버 삭제
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping("/deletePmember.htm")
+	public String deletePmember(String mid,Model model ,HttpSession session ) {
+		System.out.println("들어옴");
+		System.out.println(mid);
+		int pid = (Integer) session.getAttribute("pid");
+		
+		MidpidDTO midpid = new MidpidDTO();
+		midpid.setMid(mid);
+		midpid.setPid(pid);
+		int result= 0;
+		try {
+			result = projectinfoservice.deletePmember(midpid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("result",result);
+		return "redirect:/information.htm?pid=" + pid;
+	}
 	
 }
