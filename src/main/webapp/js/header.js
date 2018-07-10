@@ -313,6 +313,7 @@ $(document).on("focus","#open-right-nav",function(){
 });// end
 
 
+
 /**
  * 
  날   짜 : 2018. 6. 26.

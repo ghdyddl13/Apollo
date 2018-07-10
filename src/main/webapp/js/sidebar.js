@@ -543,8 +543,8 @@ $(function() {
 				$(".custom-menu").remove();
 			}
 			
-			if (!$(e.target).parents("#search-nav").length > 0) {
-			    document.getElementById("search-nav").style.width = "0";
+			if (!($(e.target).parents("#search-nav").length > 0) &&!($(e.target).attr("id")=="search-nav")) {
+				document.getElementById("search-nav").style.width = "0";
 			    $("#search-content-box").empty();
 				$("#search-bar").val("")
 			}
