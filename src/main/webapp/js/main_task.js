@@ -9,7 +9,6 @@
  작성자명 : 김 정 권
  */
 $(document).on("click",".Task_RUD_Modal",function(){
-		
 	
 		var temptid = $(this).attr('id'); 
 		console.log(temptid.substring(0,6))
@@ -33,6 +32,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   // tid
 			        	   var tid = rdata.task.tid;
 			        	   $('#tidhidden').attr('value', tid);
+			        	   $('#tidhidden2').attr('value', tid);
 			        	   
 			        	   // pid
 			        	   var pid = rdata.task.pid;
@@ -41,6 +41,7 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   // user-mid
 			        	   var usermid = rdata.userid;
 			        	   $('#usermidhidden').attr('value', usermid);
+			        	   $('#usermidhidden2').attr('value', usermid);
 			        	   
 			        	   // tname
 			        	   $('#Task_Modal_tname').empty();
@@ -72,6 +73,15 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   });
 			        	   snames += '<i id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 			        	   $('#Task_Modal_snames').append(snames);
+			        	   ///////////////////////////////////// no redirect
+			        	   $('#Task_Modal_snames2').empty();
+			        	   
+			        	   var snames = '<br>'
+			        	   $(rdata.steps).each(function(){
+			        		   snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + this.sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn2" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
+			        	   });
+			        	   snames += '<i id="task_modal_add_step_noredirect" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+			        	   $('#Task_Modal_snames2').append(snames);
 
 			        	   
 			        	   // tstatus
@@ -218,6 +228,10 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   $('#div_for_comment_input_box').empty();
 			        	   var origin_inputboxstr = '<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">'
 			        	   $('#div_for_comment_input_box').append(origin_inputboxstr);
+			        	   //////////////////////////////////////no redirect
+			        	   $('#div_for_comment_input_box2').empty();
+			        	   var origin_inputboxstr = '<input id="comment_input_box_in_taskmodal_noredirect" type="text" placeholder="코멘트를 입력 후 Enter..">'
+			        	   $('#div_for_comment_input_box2').append(origin_inputboxstr);
 			        	   
 			        	   // files
 			        	   $('#Task_Modal_files').empty();
@@ -538,6 +552,18 @@ $(document).bind("mousedown", function(e) {
     	$("#step_delete_popup_div").css({"display":"none","left":"-20000px","top":"-20000px"});
     }
     
+    if (!$(e.target).parents("#step_names_popup_div2").length > 0){
+        // Hide it
+          $("#step_names_popup_div2").css("background-color","#FFFFFF");
+          $("#step_names_popup_div2").css({"display":"none","left":"-20000px","top":"-20000px"});
+        
+      }
+    
+    if (!$(e.target).parents("#step_delete_popup_div2").length > 0){
+    	
+    	$("#step_delete_popup_div2").css("background-color","#FFFFFF");
+    	$("#step_delete_popup_div2").css({"display":"none","left":"-20000px","top":"-20000px"});
+    }
     
 });
 
@@ -1570,5 +1596,362 @@ $(document).on("change","#Task_Modal_tstatus_selectbox_noredirect",function(){
 
 		           } // end-success
 		        }); // end-ajax
+	
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 7. 9.
+ 기      능 : Task 페이지 내 step 추가 버튼 no redirect
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#task_modal_add_step_noredirect",function(){
+	
+	var tid = $('#tidhidden2').attr('value');
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "getStepListByTid.htm",
+		           data : {
+		        	   'tid': tid,
+		           },
+		           success : function(rdata){
+		        	   console.log(rdata.steplist);
+
+		        	   var step_names_popup_div_str = '';
+		        	   
+	        		   var countlength = Object.keys(rdata.steplist).length;
+	        		   if(countlength == 0){
+	        			   step_names_popup_div_str += '<div class="wrapper_comment popup_nothing">';
+	        			   step_names_popup_div_str += '<div class="each_comment">';	
+	        			   step_names_popup_div_str += '<div class="first_row">추가할 스텝이 없습니다</div>';
+	        			   step_names_popup_div_str += '</div></div>';
+	        				   
+	        		   } else {
+		        	   $(rdata.steplist).each(function(){
+		        			   var sday = '';
+				        	   var eday = '';
+				        	   var emptyday = '';
+				        		   
+				        		  if(this.sday == null){
+				        			  sday = emptyday;
+				        		  }
+
+				        		  if(this.eday == null){
+				        			  eday = emptyday;
+				        		  }
+				        		  
+				        		  if(this.sday != null){
+				        			  sday = this.sday.substring(0, 10);
+				        		  }
+				        		  
+				        		  if(this.eday != null){
+				        			  eday = this.eday.substring(0, 10);
+				        		  }
+			        		   
+			        		  step_names_popup_div_str += '<div class="wrapper_comment popup_sid2" id="' + this.sid + '">';	 
+			        		  step_names_popup_div_str += '<div class="each_comment">';	
+			        		  step_names_popup_div_str += '<div class="first_row">' + this.sname + '</div>';
+			        		  
+			        		  if((sday == emptyday) && (eday == emptyday)){
+			        			  step_names_popup_div_str += '<div class="second_row">(시작일과 종료일 모두 미정)</div>'
+			        		  } else if((sday != emptyday) && (eday == emptyday)){
+			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~' + '</div>'
+			        		  }  else if((sday == emptyday) && (eday != emptyday)){
+			        			  step_names_popup_div_str += '<div class="second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
+			        		  } else{
+			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
+			        		  }
+			        		  
+			        		  step_names_popup_div_str += '</div></div>';
+		        		 
+		        	   		});
+	        		   }// end - else
+		        	   
+		        	      $('#step_names_popup_div2').empty();
+		        	      $('#step_names_popup_div2').append(step_names_popup_div_str);
+		        	      let popupdiv_width = $('#step_names_popup_div2').width();
+		                  let popupdiv_height = $('#step_names_popup_div2').height();
+		                  
+		                  let position = $('#task_modal_add_step_noredirect').position();
+		                  $('#step_names_popup_div2').css("left",position.left + 850);
+		                  $('#step_names_popup_div2').css("top",position.top + 50);
+		                  $('#step_names_popup_div2').css("display","block");
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+});
+
+/**
+ * 
+ 날      짜 : 2018. 7. 9.
+ 기      능 : Task 페이지 내 step 삭제 버튼 클릭시 작동 + no redirect
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".task_page_delete_step_btn2",function(){
+
+	var tid = $('#tidhidden').attr('value');
+	var sid = $(this).attr('id');
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "counttaskinstep.htm",
+		           data : {
+		        	   'tid': tid,
+		           },
+		           success : function(rdata){
+		        	   
+		        	   var count = rdata.countresult;
+		        	   if(count == 1) {
+		        		   
+		        		   var step_delete_popup_div_str = '';
+		        		   step_delete_popup_div_str += '<div>';
+		        		   step_delete_popup_div_str +='<div>해당 Task가 속한 마지막 Step 입니다</div>';
+		        		   step_delete_popup_div_str +='<div>Step 삭제시 Task가 삭제됩니다</div>';
+		        		   step_delete_popup_div_str +='<div><input type="button" value="삭제하기" id="step_delete_button"></div>';
+		        		   step_delete_popup_div_str +='</div>';
+		        		   
+		        		   $('#step_delete_popup_div2').empty();
+		        		   $('#step_delete_popup_div2').append(step_delete_popup_div_str);
+		        		   
+			               let position = $('.task_page_delete_step_btn2').position();
+			               $('#step_delete_popup_div2').css("left",position.left + 850);
+			               $('#step_delete_popup_div2').css("top",position.top + 10);
+			               $('#step_delete_popup_div2').css("display","block");
+		        		   
+		        		   return;
+		        	   } 
+		        	   
+		        	   $.ajax(
+		        		       {
+		        		           type : "post",
+		        		           url  : "deletestepintaskmodal.htm",
+		        		           data : {
+		        		        	   'tid': tid,
+		        		        	   'sid': sid
+		        		           },
+		        		           success : function(rdata){
+		        		        	   
+		        		        	   console.log(rdata);
+		        		        	   
+									// step name
+									   $('#Task_Modal_snames2').empty();
+									   
+									   var snames = '<br>'
+									   $(rdata.steplist_after_delete_step).each(function(){
+										   var sname = this.sname;
+										       snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + sname + '&nbsp&nbsp' + '<i class="far fas fa-times task_page_delete_step_btn2" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
+									   });
+									   snames += '<i id="task_modal_add_step_noredirect" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+									   $('#Task_Modal_snames2').append(snames);
+		        		        	   
+		        		           } // end-success
+		        		        }); // end-ajax
+		        	   
+		           } // end-success
+		        }); // end-ajax
+	
+});
+
+
+/**
+ * 
+ 날      짜 : 2018. 6. 23.
+ 기      능 : popup div 에서 스텝 누르면 추가됨 no redirect
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".popup_sid2",function(){
+	
+	var sid = $(this).attr('id');
+	var tid = $('#tidhidden').attr('value');
+	
+	$.ajax(
+		       {
+		           type : "post",
+		           url  : "addTaskInStepInTaskModal.htm",
+		           data : {
+		        	   'sid': sid,
+		        	   'tid': tid
+		           },
+		           success : function(rdata){
+		        	   
+		        	   console.log(rdata.result);
+		        	   $("#step_names_popup_div2").css("background-color","#FFFFFF");
+		        	   $("#step_names_popup_div2").css({"display":"none","left":"-20000px","top":"-20000px"});
+		        	 
+		        	   $.ajax(
+		        		       {
+		        		           type : "post",
+		        		           url  : "addTaskInStepInTaskModal_2.htm",
+		        		           data : {
+		        		        	   'tid': tid
+		        		           },
+		        		           success : function(rdata){
+
+		        		        	console.log('아래에서 확인')
+		        		        	console.log(rdata.steplist);
+		        		        	   
+		        		        	// step name
+		        		        	$('#Task_Modal_snames2').empty();
+
+		        		        	var snames = '<br>'
+		        		        	$(rdata.steplist).each(function(){
+		        		        	snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + this.sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn2" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
+		        		        	});
+		        		        	snames += '<i id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+		        		        	$('#Task_Modal_snames2').append(snames);
+		        		        	
+		        		           } // end-success
+		        		        }); // end-ajax
+		        	   
+		           } // end-success
+		        }); // end-ajax
+});
+
+/**
+ * 
+ 날      짜 : 2018. 7. 9.
+ 기      능 : 테스크 모달 내 코멘트 입력 부분(인풋태그)에서 작동하는 함수 + no redirect
+ 작성자명 : 김 정 권
+ */
+$(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
+	
+	var usermid = $('#usermidhidden2').attr('value');
+	
+  // @ 쳤을 시
+  if (event.keyCode === 50) {
+	  
+	var pid = $('#pidhidden').attr('value');
+    $.ajax(
+           {
+               type : "post",
+               url  : "getsameprojectmembersintaskmodal.htm",
+               data : {
+                 'pid': pid
+               },
+               success : function(rdata){
+                 
+            	 console.log('성공이다');
+            	 console.log(rdata.sameprojectmembers);
+            	   
+            	 var popupdiv_str = '';
+                 $(rdata.sameprojectmembers).each(function(){
+                	 
+              	 if(this.mid == usermid){
+              		 return true;
+               	 }
+                	 
+                  popupdiv_str += '<div class="wrapper_comment popup_mid2" id="' + this.mid + '">';	 
+//                popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/' + this.image + '"/>';	
+                  popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/user.png"/>';	
+                  popupdiv_str += '<div class="each_comment">';	
+                  popupdiv_str += '<div class="first_row">' + this.mname + '</div>';	
+                  popupdiv_str += '<div class="second_row">' + this.mid + '</div>';	
+                  popupdiv_str += '</div></div>';
+                  
+                 });
+
+                 
+                 $('#project_member_popup_div2').empty();
+                 $('#project_member_popup_div2').append(popupdiv_str);
+                 let popupdiv_width = $('#project_member_popup_div2').width();
+                 let popupdiv_height = $('#project_member_popup_div2').height();
+                 
+                 let position = $('#comment_input_box_in_taskmodal_noredirect').position();
+                 $('#project_member_popup_div2').css("left",position.left-popupdiv_width+150);
+                 $('#project_member_popup_div2').css("top",position.top-popupdiv_height-20);
+                 $("#project_member_popup_div2").css("background-color","#FFFFFF")
+                 $('#project_member_popup_div2').css("display","block");
+                 
+               } // end-success
+            }); // end-ajax
+   
+
+  } // end - keyCode=13
+
+  
+  // @ 아닐 시
+  if((event.keyCode != 50) && (event.keyCode != 27) && (event.keyCode != 13)){
+	  
+	    $('#project_member_popup_div').css("display", "none");
+	    $('#project_member_popup_div').css("left", "-20000");
+	    $('#project_member_popup_div').css("top", "-20000");
+  } // end - != 50
+  
+  
+  // 엔터키 칠 시
+  if (event.keyCode === 13) {
+	   var tid = $('#tidhidden').attr('value');
+	   var comments = $('#comment_input_box_in_taskmodal_noredirect').val();
+	   console.log(comments);
+	   if(comments != ""){
+		   $.when(insertCommentReceiver(tid,comments)).done(function(data){
+			   send(); //웹 소켓 send 함수 추가
+			   event.stopPropagation();
+			   $('#comment_input_box_in_taskmodal_noredirect').val('');
+		   });
+	   }
+	   
+  } // end - keyCode=13
+});
+
+/**
+ * 
+ 날      짜 : 2018. 7. 9
+ 기      능 : 테스크 모달 내 pop up div 내에 있는 사람을 클릭하면 발생하는 일 + no redirect
+ 작성자명 : 김 정 권
+ */
+$(document).on("click",".popup_mid2",function(){
+	
+    $('#project_member_popup_div2').css("display", "none");
+    $('#project_member_popup_div2').css("left", "-20000");
+    $('#project_member_popup_div2').css("top", "-20000");
+
+    $('#div_for_comment_input_box2').empty();
+    var inputboxstr = '<input id="receivermid2" type="button" value="">'
+    	inputboxstr+= '<input id="comment_input_box_in_taskmodal2" type="text" placeholder="코멘트를 입력 후 Enter..">'
+    $('#div_for_comment_input_box2').append(inputboxstr);
+    
+	var mid = $(this).attr('id');
+	$('#receiverhidden').attr('value', mid);
+	var speaker_name = '';
+	var inputstr = '';
+	
+	 $.ajax(
+		       {
+		           type : "post",
+		           url  : "findmname.htm",
+		           data : {
+		        	   'mid': mid
+		           },
+		           success : function(rdata){
+		        	   speaker_name = rdata.speaker;
+		        	   inputstr = 'TO. ' + speaker_name;
+		        	   $('#receivernamehidden').attr('value', inputstr);
+		        	   
+		        	   $('#receivermid2').attr('value', inputstr);
+		        	   $('#comment_input_box_in_taskmodal2').focus();
+		        		
+		           } // end-success
+		        }); // end-ajax
+	
+});
+//////////////////////////////////////////////// comment_input_box_in_taskmodal_noredirect에서 키코드 이벤트들 안먹힌다
+/**
+ * 
+ 날      짜 : 2018. 7. 9
+ 기      능 : @ 를 이용해서 작동한 귓속말 모드를 해지하는 함수 + no redirect
+ 작성자명 : 김 정 권
+ */
+$(document).on("click","#receivermid2",function(){
+	
+	 $('#div_for_comment_input_box2').empty();
+	    var origin_inputboxstr = '<input id="comment_input_box_in_taskmodal_noredirect" type="text" placeholder="코멘트를 입력 후 Enter..">'
+	 $('#div_for_comment_input_box2').append(origin_inputboxstr);
+	 $('#comment_input_box_in_taskmodal_noredirect').focus();
 	
 });
