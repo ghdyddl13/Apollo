@@ -46,7 +46,7 @@
 	            
 	               <c:if test="${step.fid eq null}">
 	               <!-- step Assignee 뿌려주기 -->
-	               <c:forEach var="member" items="${memberlist}">
+	               
 	                  <tr class="project-table-tr-steps">
 	                     <td><i class="side-dir-step-icon far fa-file-alt"></i>&nbsp;${step.sname}</td>
 	                     <td class="project-table-sday">${step.sday}</td>
@@ -62,19 +62,23 @@
 	                           <td class="project-table-duration">${step_endeday - step_startsday}일</td>
 	                        </c:otherwise>
 	                     </c:choose>
-	                     <c:choose>
-	                     	<c:when test="${member.image eq null}">
-	                     		<td class="project-table-member-td">
-	                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
-	                     		<img class="project-table-member-image" src="img/user.png" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
-	                     	</c:when>
-	                     	<c:otherwise>
-	                     		<td class="project-table-member-td">
-	                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
-	                     		<img class="project-table-member-image" src="img/${member.image}" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
-	                     	</c:otherwise>
-	                     </c:choose>
+	                     <c:forEach var="member" items="${memberlist}">
+	                     	<c:if test="${member.mid eq step.mid}">
+		                     <c:choose>
+		                     	<c:when test="${member.image eq null}">
+		                     		<td class="project-table-member-td">
+		                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
+		                     		<img class="project-table-member-image" src="img/user.png" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
+		                     	</c:when>
+		                     	<c:otherwise>
+		                     		<td class="project-table-member-td">
+		                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
+		                     		<img class="project-table-member-image" src="displayImage.htm?image=${member.image}" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
+		                     	</c:otherwise>
+		                     </c:choose>
+	                     	</c:if>
 	                     </c:forEach>
+	                     
 	                  <!-- 스텝에 속한 task 뿌려주기 -->
 	                  <c:forEach var="task" items="${tasklist}">
 	                  
@@ -120,7 +124,7 @@
 	               <!-- 폴더에 속한 스텝 뿌려주기 -->
 	               <c:forEach var="step" items="${steplist}">
 	                  <c:if test="${step.fid eq folder.fid}">
-	                 	 <c:forEach var="member" items="${memberlist}">
+	                  
 		                     <tr class="project-table-tr-steps">
 		                        <td style="padding-left: 30px"><i class="side-dir-step-icon far fa-file-alt"></i>&nbsp;${step.sname}</td>
 		                        <td class="project-table-sday">${step.sday}</td>
@@ -136,6 +140,8 @@
 		                           <td class="project-table-duration">${step_endeday - step_startsday}일</td>
 		                        </c:otherwise>
 		                        </c:choose>
+	                 		 <c:forEach var="member" items="${memberlist}">
+	                 		 	<c:if test="${member.mid eq step.mid}">
 		                        <c:choose>
 			                     	<c:when test="${member.image eq null}">
 			                     		<td class="project-table-member-td">
@@ -145,12 +151,14 @@
 			                     	<c:otherwise>
 			                     		<td class="project-table-member-td">
 			                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
-			                     		<img class="project-table-member-image" src="img/${member.image}" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
+			                     		<img class="project-table-member-image" src="displayImage.htm?image=${member.image}" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
 			                     	</c:otherwise>
 		                    	</c:choose>
-		                      </tr>	
-	                    	</c:forEach>
+		                      </c:if>
+		                      
+	                    	</c:forEach> <!-- 스텝 담당자 -->
 	                   
+		                    </tr>	
 	                     <!-- 스텝에 속한 task 뿌려주기 -->
 	                     <c:forEach var="task" items="${tasklist}">
 	                        <c:if test="${task.sid eq step.sid}">
@@ -171,11 +179,11 @@
 	                              </c:choose>
 	                              <td class="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
 	                           </tr>
-	                        </c:if>
-	                     </c:forEach>
-	                  </c:if>
-	               </c:forEach>
-	            </c:forEach>
+	                        </c:if> <!--  태스크와 스텝 일치 여부 -->
+	                     </c:forEach> <!-- task -->
+	                  </c:if> <!-- 스텝이 폴더 안에 있는지 여부 -->
+	           	   </c:forEach><!-- 스텝 -->
+	            </c:forEach> <!--폴더 -->
 	         </tbody>
 	      </table>
 	      <!--END OF TABLE  -->
