@@ -159,10 +159,11 @@ $(function() {
 					alert('개인정보수정에 실패되었습니다');
 				}
 				$(".close").click();
-				
+				window.location.reload();
 			} // end - success
 		}); // end- ajax
 		$("#edit-profile-form").submit();
+		
 	}); // end - click
 
 	
