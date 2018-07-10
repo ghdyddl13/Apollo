@@ -154,6 +154,7 @@ public class TaskController {
 	// 유저의 mid
 	model.addAttribute("userid", mid);
 	
+	
 	return jsonview;
 	}
 	
@@ -489,10 +490,10 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/addtaskassigneemodalinfo.htm")
-	public View addTaskAssigneeModalInfo(int tid, HttpSession session, Model model){
+	public View addTaskAssigneeModalInfo(int tid,int pid, HttpSession session, Model model){
 		
 		System.out.println("assignee 추가를 위한 이중 모달 데이터 컨트롤러 실행");
-		int pid = 0;
+		
 		if(session.getAttribute("pid") == null) {
 			String midforpid =(String)session.getAttribute("mid");
 			if(pid == 0) {

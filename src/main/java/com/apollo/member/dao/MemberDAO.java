@@ -175,6 +175,7 @@ public interface MemberDAO {
 	 작성자명 : 김 래 영
 	 */
 	public ArrayList<MemberDTO> selectStepAssignees (ArrayList<StepDTO> steplist);
+
 	/**
 	 * 
 	 날      짜 : 2018. 7. 10.
@@ -182,4 +183,13 @@ public interface MemberDAO {
 	 작성자명 : 이 진 우
 	 */
 	public String findMemberImage(String mid);
+
+	/**
+	 * 
+	 날      짜 : 2018. 7. 10.
+	 기      능 : 프로젝트 참여멤버 삭제
+	 작성자명 : 박 민 식
+	 */
+	public int deletePmember(MidpidDTO midpid);
+
 }

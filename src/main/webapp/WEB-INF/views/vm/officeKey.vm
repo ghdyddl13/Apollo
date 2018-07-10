@@ -120,7 +120,7 @@ p, ul {
       <tr>
         <td style="padding-right: 0px; padding-left: 0px;" align="left">
           <a href="http://localhost:8090/bit/login.htm">
-          <img align="left" border="0" src="https://cafeptthumb-phinf.pstatic.net/MjAxODA3MDRfMzcg/MDAxNTMwNjgzNjUxMDc2.nDEFIVpXWqjiWEbQwY-8TnQadNqGzxm-2tdg3nFbpYgg.4duQqCDW_FRf2n7FqQs4_k9WcScu3CHwTmmOx3oQGfgg.PNG.pvkpkv0801/apollo_logo.png?type=w740" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;width: 100%;max-width: 120px;">
+          <img align="left" border="0" src="https://s3.ap-northeast-2.amazonaws.com/projectapollo/resources/upload_files/imagelogo/apollo_logo.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;width: 100%;max-width: 120px;">
         </a>
         </td>
       </tr>

@@ -3,6 +3,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<script type="text/javascript">
+ $(".modal-content3").hide();
+</script>
 <script type="text/javascript" src="js/task.js"></script>
 <div class="main-body-container">
   <div class="main-body-twopannel">
@@ -65,7 +68,7 @@
       
         <div class="starred-secondbody-image"></div>
         
-<div class="modal-content2">
+<div class="modal-content3">
 
 				<div class="modal-header">
 				<!-- row 1 -->
@@ -173,6 +176,13 @@
 						});
 					</script>
 					
+                <hr>
+						<div class="modal-title">Sub Task</div><br />
+				
+				 <input type="text" name="pname" id="add_sub_task"
+							placeholder="Sub Task의 제목을 입력 후 Enter..."
+							class="text ui-widget-content ui-corner-all"><br><br>
+				 <div id="Task_Modal_subtasks"></div><br>
                 <hr />
                 
 				<div class="modal-title">
