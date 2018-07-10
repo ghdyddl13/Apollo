@@ -71,7 +71,7 @@
 	                     	<c:otherwise>
 	                     		<td class="project-table-member-td">
 	                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
-	                     		<img class="project-table-member-image" src="img/${member.image}" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
+	                     		<img class="project-table-member-image" src="displayImage.htm?image=${member.image}" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
 	                     	</c:otherwise>
 	                     </c:choose>
 	                     </c:forEach>
@@ -145,7 +145,7 @@
 			                     	<c:otherwise>
 			                     		<td class="project-table-member-td">
 			                     		<input type="hidden" class="project-table-member-mid" value="${member.mid}">
-			                     		<img class="project-table-member-image" src="img/${member.image}" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
+			                     		<img class="project-table-member-image" src="displayImage.htm?image=${member.image}" data-toggle="modal" data-target="#profile-modal-dialog">${member.mname}</td>
 			                     	</c:otherwise>
 		                    	</c:choose>
 		                      </tr>	
