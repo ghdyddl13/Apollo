@@ -94,3 +94,28 @@
 	text-align: center;
 }
 
+
+.information-pmember{
+	cursor: pointer;
+	display: flex;
+	justify-content: center
+}
+.information-pmember-name{
+	flex : 1 1 auto;
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align:left;
+	text-overflow: ellipsis;
+}
+
+.information-pmember:hover{
+	background-color: #cccccc
+}
+
+.delete-pmember{
+	color: #eeeeee
+}
+.delete-pmember:hover{
+	color: #e0e0e0
+}

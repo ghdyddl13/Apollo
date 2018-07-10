@@ -63,14 +63,24 @@
 				<table id="project_member_table" class="table">
 					<tr><th>이름</th><th>직위</th><th>부서명</th><th>이메일</th><th>핸드폰 번호</th></tr>
 						 <c:forEach var="member" items="${memberlist}">
-						 <tr><td>${member.mname}</td><td>${member.position}</td><td>${member.deptname}</td><td>${member.mid}</td><td>${member.pnum}</td></tr>
+						 <tr class="project_member_table_tr">
+						 	<td class="information-pmember">
+						 		<div class="information-pmember-name">
+							 		${member.mname}
+						 		</div>
+						 	</td>
+						 	<td>${member.position}</td>
+						 	<td>${member.deptname}</td>
+						 	<td class="information-pmember-mid">${member.mid}</td>
+						 	<td>${member.pnum}</td>
+						 </tr>
 				         </c:forEach>
 				</table>
 			</div>
 		  </div> <!-- end_row_3 -->
 		
 		<input type="hidden" id="project_infopage_pid" value="${projectinfo.pid}">
-		
+		<input type="hidden" id="project_infopage_manager" value="${projectinfo.mid}">
 		</div> <!-- end_outerbox -->
       </div>
     </div>

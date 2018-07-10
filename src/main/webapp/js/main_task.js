@@ -857,7 +857,7 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 			           getCommentAndMemberlist();
 			           
 		        	   
-		        	  $('#task_dismiss_btn').click();
+		        	  //$('#task_dismiss_btn').click();
 		        	     
 	                  $("#main-box").empty();
 					  $("#main-box").append(rdata);
