@@ -1259,11 +1259,14 @@ label {
 	width: 500px;
     height: 250px;
 }
-.profile-modal-body {
+/* .profile-modal-body {
 	height: 200px;
-}
+} */
 #profile-modal-info {
     margin-top: 23px;
+}
+#profile-modal-info-table>tbody>td {
+	width: 30%;
 }
 /* Profile Modal End */
 
