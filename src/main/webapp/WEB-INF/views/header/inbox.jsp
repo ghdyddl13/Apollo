@@ -12,6 +12,9 @@
 <script type="text/javascript">
 
 	$(function() {
+		
+		$(".modal-content2").hide();
+		
 		var startpos, diffpos = 0, range = 400;
 		var isEnable = false;
 
@@ -263,6 +266,13 @@
 						});
 					</script>
 					
+				 <hr>
+						<div class="modal-title">Sub Task</div><br />
+				
+				 <input type="text" name="pname" id="add_sub_task"
+							placeholder="Sub Task의 제목을 입력 후 Enter..."
+							class="text ui-widget-content ui-corner-all"><br><br>
+				 <div id="Task_Modal_subtasks"></div><br>
                 <hr />
                 
 				<div class="modal-title">

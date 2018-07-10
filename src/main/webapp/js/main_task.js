@@ -9,7 +9,24 @@
  작성자명 : 김 정 권
  */
 $(document).on("click",".Task_RUD_Modal",function(){
-		console.log("a")
+	
+var inboxkind = $("#inboxkind").val();
+if(inboxkind != "starredtask"){
+	
+	$(this).children().children(".inbox_newcheck").empty();
+	console.log($(this).children().children().children(".cmtid").val());
+	console.log($(this).children().children(".inbox_mid2").val())
+	$.ajax({
+		url:"newcheck.htm",
+		type: 'POST',
+		data:{cmtid : $(this).children().children().children(".cmtid").val(),
+			  mid2 : $(this).children().children(".inbox_mid2").val()},
+		success:function(data){
+			
+		}
+	})
+}	
+	
 		var temptid = $(this).attr('id'); 
 		var tid =parseInt(temptid.substring(1));
 		
@@ -244,7 +261,10 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   $('#Task_Modal_files').append(filesdivs);
 			        	   
 			        	   $(".starred-secondbody-image").hide();
-			        		$(".modal-content2").show();	
+			        	   
+			        	   
+			        		$(".modal-content2").show();
+			        		$(".modal-content3").show();
 			        	   
 			           } // end-success
 			        } 
@@ -688,13 +708,15 @@ $(document).on("click",".task_page_delete_assignee_btn",function(){
 $(document).on("click","#task_modal_add_assignee",function(){
 	
 	var tid = $('#tidhidden').attr('value');
+	var pid = $('#pidhidden').attr('value');
 	
 	$.ajax(
 		       {
 		           type : "post",
 		           url  : "addtaskassigneemodalinfo.htm",
 		           data : {
-		        	    'tid': tid
+		        	    'tid': tid,
+		        	    'pid': pid
 		           },
 		           success : function(rdata){
 		        	   
@@ -1197,6 +1219,8 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
                  $("#project_member_popup_div").css("background-color","#FFFFFF")
                  $('#project_member_popup_div').css("display","block");
                  
+                
+                 
                } // end-success
             }); // end-ajax
    
@@ -1332,6 +1356,10 @@ $(document).on("keyup","#comment_input_box_in_taskmodal2",function(){
 			           $('#comment_input_box_in_taskmodal2').val('');
 			           $('#comment_input_box_in_taskmodal2').focus();
 		        	   
+			           send("inbox"); //웹 소켓 send 함수 추가
+					   event.stopPropagation();
+			           
+			           
 		           } // end-success
 		        }); // end-ajax
 
@@ -1798,7 +1826,7 @@ $(document).on("click",".popup_sid2",function(){
 		        		        	$(rdata.steplist).each(function(){
 		        		        	snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + this.sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn2" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
 		        		        	});
-		        		        	snames += '<i id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+		        		        	snames += '<i id="task_modal_add_step_noredirect" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 		        		        	$('#Task_Modal_snames2').append(snames);
 		        		        	
 		        		           } // end-success
@@ -1858,10 +1886,12 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
                  let popupdiv_height = $('#project_member_popup_div2').height();
                  
                  let position = $('#comment_input_box_in_taskmodal_noredirect').position();
-                 $('#project_member_popup_div2').css("left",position.left-popupdiv_width+150);
+                 $('#project_member_popup_div2').css("left",position.left-popupdiv_width+200);
                  $('#project_member_popup_div2').css("top",position.top-popupdiv_height-20);
                  $("#project_member_popup_div2").css("background-color","#FFFFFF")
                  $('#project_member_popup_div2').css("display","block");
+                 
+                 
                  
                } // end-success
             }); // end-ajax
@@ -1886,7 +1916,7 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
 	   console.log(comments);
 	   if(comments != ""){
 		   $.when(insertCommentReceiver(tid,comments)).done(function(data){
-			   send(); //웹 소켓 send 함수 추가
+			   send("inbox"); //웹 소켓 send 함수 추가
 			   event.stopPropagation();
 			   $('#comment_input_box_in_taskmodal_noredirect').val('');
 		   });

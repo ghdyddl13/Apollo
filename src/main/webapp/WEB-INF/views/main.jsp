@@ -143,7 +143,7 @@
 		console.log(assign);
 		console.log("send")
 		var msg = $("#comment_input_box_in_taskmodal").val();
-		if(msg.trim()!="" || assign == "assign"){
+		if(msg.trim()!="" || assign == "assign" ||assign == "inbox"){
 			wsocket.send($("#tidhidden").val()+'|'+nickname + " : " + msg);
 		}
 	}
