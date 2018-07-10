@@ -388,12 +388,14 @@
 							
 					<div class="task-modal-content-td">
 	                    <span>시작일&nbsp;&nbsp;</span>
-                   		<input id="Task_Modal_sday" readonly type="text" name="sday" placeholder="Start Date" class="date date_sday">
+                   		<input id="Task_Modal_sday" readonly type="text" name="sday" 
+                   		placeholder="Start Date" class="date date_sday">
 					</div>
 
 					<div class="task-modal-content-td">
 						<span>종료일&nbsp;&nbsp;</span>
-	                    <input id="Task_Modal_eday" readonly type="text" name="eday" placeholder="End Date" class="date date_eday">
+	                    <input id="Task_Modal_eday" readonly type="text" name="eday"
+	                    placeholder="End Date" class="date date_eday">
 					</div>
 				</div>
 				<!-- end row 2 -->
@@ -409,15 +411,18 @@
 					</div>
 
 								
-          
-					<div class="modal-title">파일 업로드</div><br />
-	                <div id="Task_Modal_files"></div>
-						
-	                <br>
-	                <input type="button" name="fileuploadbtn" id="fileuploadbtn" value="파일업로드">
-					<form  action="" method="post" >
-						<input style="display:none" type="file" name="member_image" id="fileuploadintaskmodal" data-url="uploadfileintaskmodal.htm">
-					</form>
+          			<div class="task-modal-content-file">
+						<div class="modal-title">파일 업로드</div><br />
+						<div class="task-modal-content-filelist-wrapper">
+			                <div id="Task_Modal_files">
+			                </div>
+			                <a type="button"  id="fileuploadbtn" >Click Here To Upload Your File</a>
+							<form  action="" method="post" >
+								<input style="display:none" type="file" name="member_image" id="fileuploadintaskmodal" data-url="uploadfileintaskmodal.htm">
+							</form>
+						</div>
+          			</div>
+			
 				    <script type="text/javascript">
 						 $(function(){
 							 
@@ -475,13 +480,14 @@
 				 <div id="Task_Modal_subtasks"></div><br>
 
                 <hr />
-                
-				<div class="modal-title">
-					<p>상세설명&nbsp;&nbsp;<img id="task_detail_status" src="img/loader.gif"></p>
-					<div style="text-align:center">
-					<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
+                <div class="task-modal-content-detail">
+					<div class="modal-title">
+						<p>상세설명&nbsp;&nbsp;<img id="task_detail_status" src="img/loader.gif"></p>
 					</div>
-				</div>
+					<div style="text-align:center">
+						<textarea id="Task_Modal_detail"  name="detail" placeholder="내용을 입력하세요"></textarea>
+					</div>
+                </div>
                 <hr />
                 
 					<div class="modal-title">Comment</div><br />

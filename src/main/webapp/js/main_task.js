@@ -1121,14 +1121,25 @@ var getCommentAndMemberlist = (function (){
 		        	   
 		        	   $(rdata.commentandmemberlist).each(function(){
 		        		 
-		        		   comment_str += '<div class="wrapper_comment">' 
-		        		 //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
-		        		   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
-		        		   comment_str += '<div class="each_comment">';
-		        		   comment_str += '<div class="first_row">' + this.mname + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + this.cmtmtime + '</div>'
-		        		   comment_str += '<div class="second_row">' + this.comments + '</div>'
-		        		   comment_str += '</div>'
-	        			   comment_str += '</div><br><br>'
+		        		   if(this.mid ==$("#header-mid").val()){
+		        			   comment_str += '<div class="wrapper_comment wrapper_my_comment">' 
+	        				   //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
+	        				   comment_str += '<div class="each_comment my_each_comment">';
+		        			   comment_str += '<div class="first_row" align="right"><span class="comment-time-span">' + this.cmtmtime + '</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + this.mname + '</div>'
+		        			   comment_str += '<div class="second_row my_second_row" align="right">' + this.comments + '</div>'
+		        			   comment_str += '</div>'
+	        				   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
+	        				   comment_str += '</div><br>'
+		        		   }else{
+		        			   comment_str += '<div class="wrapper_comment">' 
+	        				   //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
+	        				   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
+		        			   comment_str += '<div class="each_comment">';
+		        			   comment_str += '<div class="first_row">' + this.mname + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span class="comment-time-span">' + this.cmtmtime + '</span></div>'
+		        			   comment_str += '<div class="second_row">' + this.comments + '</div>'
+		        			   comment_str += '</div>'
+	        				   comment_str += '</div><br>'
+		        		   }
 	        				   
 	        				   
 		        	   });
