@@ -46,7 +46,7 @@ public class ProjectTableController {
 	 */
 	@RequestMapping("/table.htm")
 	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {	
-		
+		System.out.println("aa");
 		session.setAttribute("location", "/table.htm");
 		
 		int pid = (Integer) request.getSession().getAttribute("pid");
@@ -62,7 +62,6 @@ public class ProjectTableController {
 			steplist = tableservice.getStepInProject(pid);
 			model.addAttribute("steplist", steplist);
 			
-			
 
 			ArrayList<FolderDTO> folderlist = null; // pid 에 속한 folder 가져오기
 			folderlist = tableservice.selectFolderList(pids);
@@ -77,6 +76,8 @@ public class ProjectTableController {
 				ArrayList<MemberDTO> memberlist = null; //step 에 담당자 가져오기
 				memberlist = tableservice.selectStepAssignees(steplist);
 				model.addAttribute("memberlist", memberlist);
+				
+			
 				
 				ArrayList<TstatusDTO> tstatuslist = null; //tstatus 상태 가져오기
 				tstatuslist = tableservice.getTstatuslistPid(pid);
