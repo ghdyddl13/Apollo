@@ -175,6 +175,11 @@ public interface MemberDAO {
 	 작성자명 : 김 래 영
 	 */
 	public ArrayList<MemberDTO> selectStepAssignees (ArrayList<StepDTO> steplist);
-
-
+	/**
+	 * 
+	 날      짜 : 2018. 7. 10.
+	 기      능 : MID로 맴버의 이미지 이름을 가지고 온다
+	 작성자명 : 이 진 우
+	 */
+	public String findMemberImage(String mid);
 }

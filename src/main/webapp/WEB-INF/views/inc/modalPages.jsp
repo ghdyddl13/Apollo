@@ -421,14 +421,9 @@
 								dataType:"json",
 								add:function(e,data){
 					                var uploadFile = data.files[0];
-					                var isValid = true;
-					                if (!(/png|jpe?g|gif|svg/i).test(uploadFile.name)) {
-					                    alert('png, jpg, gif 만 가능합니다');
-					                    isValid = false;
-					                }
-					                if (isValid) {
-					                    data.submit();
-					                }
+
+					                data.submit();
+					                
 								},
 								done:function(e,data){
 									
@@ -442,12 +437,11 @@
 										        	   $('#Task_Modal_files').empty();
 										        	   var filesdivs = '';
 										        	   $(rdata.filelist).each(function(){
-										        		   
-										        	   var shortfilename = this.filename.substring(37);
-										        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
-										        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
-										        	   filesdivs += '</div>'
-										        		  
+										        		   let strArray = this.filename.split('/');
+											        	   var shortfilename = strArray[2].substring(37);
+											        	   filesdivs += '<div class="filehover_div">' + '<a class="file_name" href="taskFileDownload.htm?filename='+this.filename+'" download>' + shortfilename + '</a>';
+											        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+											        	   filesdivs += '</div>'
 										        	   });
 										        	   $('#Task_Modal_files').append(filesdivs);
 										        	   

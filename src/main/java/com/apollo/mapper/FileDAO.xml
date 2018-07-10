@@ -15,4 +15,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="filesDeleteByFileId" parameterType="Integer">
     	delete from files where fileid = #{fileid}
     </delete>
+
 </mapper>
