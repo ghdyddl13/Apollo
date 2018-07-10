@@ -12,7 +12,7 @@ $(function() {
 	
 	
 	$(".modal-content2").hide();
-	$(".Task_RUD_Modal").click(function(evt) {
+	$(document).on("click",".Task_RUD_Modal",function(evt){	
 		$(this).children().children(".inbox_newcheck").empty();
 		console.log($(this).children().children().children(".cmtid").val());
 		console.log($(this).children().children(".inbox_mid2").val())
