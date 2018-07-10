@@ -3,6 +3,7 @@
 }
 .project-page-table>thead>tr>th {
 	text-align: center;
+	padding-bottom: 10px;
 	background-color: #e6e7e8;
 	color:#978d8b;
 	overflow: hidden;
@@ -30,14 +31,6 @@
 .project-page-table-title {
 	width: 60%;
 }
-.project-page-table>thead>tr>th {
-	text-align: center;
-	padding-bottom: 10px;
-	background-color: #e6e7e8;
-	color:black;
-	overflow: hidden;
-}
-
 .project-table-tr-tasks:hover {
 	cursor:pointer;
 	background-color: #e0e0e0;
@@ -68,9 +61,8 @@
     border-radius: 50%;
     margin-right: 5px;
 }
-
 .project-table-member-td {
-	padding-left: 6% !important;
+	text-align: center;
 }
 .project-table-member-td:hover {
 	cursor:pointer;

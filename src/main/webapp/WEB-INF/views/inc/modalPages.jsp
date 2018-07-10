@@ -646,7 +646,7 @@
 		<div class="modal-content modal-step-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Step 생성</h4>
+				<h4 class="modal-title">Step 수정</h4>
 			</div>
 			<div class="modal-body modal-step-body modal-flexbox-col">
 				<form id="update-step-form" method="post" onsubmit="return false;">
@@ -703,7 +703,7 @@
 						<input type="hidden" id="update-step-sid" name="sid">
 						<input type="hidden" id= "update-step-fid" name="fid">
 						<div align="center">
-							<input type="button" class="btn add-btn" id="update-step-btn" value="생성">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn add-btn" id="update-step-btn" value="수정">&nbsp;&nbsp;&nbsp;
 							<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
 						</div>
 					</fieldset>

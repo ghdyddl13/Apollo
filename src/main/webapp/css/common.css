@@ -1265,7 +1265,7 @@ label {
 #profile-modal-info {
     margin-top: 23px;
 }
-#profile-modal-info-table>tbody>td {
+.profile-modal-info-table>tbody>td {
 	width: 30%;
 }
 /* Profile Modal End */

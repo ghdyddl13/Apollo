@@ -83,7 +83,7 @@
 	                  <c:forEach var="task" items="${tasklist}">
 	                  
 	                  <!-- Duration 구하기 위한 날짜형식 변경 및 비교 -->
-	                   <fmt:parseDate var="taskstart"  value="${task.sday}" pattern="yy-MM-dd"/>
+	                  <fmt:parseDate var="taskstart"  value="${task.sday}" pattern="yy-MM-dd"/>
 	                  <fmt:parseDate  var="taskend" value="${task.eday}" pattern="yy-MM-dd"/>
 	                  
 	                  <fmt:parseNumber value="${taskstart.time/(1000*60*60*24)}" var="task_startsday" integerOnly="true"/>
@@ -98,9 +98,9 @@
 	                              <c:when test="${(task_endeday - task_startsday) == 0}">
 	                                 <td class="project-table-duration"></td>
 	                              </c:when>
-								  <c:when test="${empty task.sday or empty task.eday}">
+								   <c:when test="${empty task.sday or empty task.eday}">
 									 <td class="project-table-duration"></td>
-								  </c:when>	
+								  </c:when>
 								  <c:otherwise>
 	                                 <td class="project-table-duration">${task_endeday - task_startsday}일</td>
 	                              </c:otherwise>
@@ -155,12 +155,18 @@
 			                     	</c:otherwise>
 		                    	</c:choose>
 		                      </c:if>
-		                      
 	                    	</c:forEach> <!-- 스텝 담당자 -->
-	                   
 		                    </tr>	
 	                     <!-- 스텝에 속한 task 뿌려주기 -->
 	                     <c:forEach var="task" items="${tasklist}">
+	                       
+	                        <!-- Duration 구하기 위한 날짜형식 변경 및 비교 -->
+	                 		<fmt:parseDate var="taskstart"  value="${task.sday}" pattern="yy-MM-dd"/>
+	                  		<fmt:parseDate  var="taskend" value="${task.eday}" pattern="yy-MM-dd"/>
+	                  
+	                  		<fmt:parseNumber value="${taskstart.time/(1000*60*60*24)}" var="task_startsday" integerOnly="true"/>
+	                  		<fmt:parseNumber value="${taskend.time/(1000*60*60*24)}" var="task_endeday" integerOnly="true"/>
+	                  		
 	                        <c:if test="${task.sid eq step.sid}">
 	                           <tr class="project-table-tr-tasks Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${task.tid}"> 
 	                              <td style="padding-left: 60px">┗ ${task.tname}</td>
@@ -170,13 +176,13 @@
 	                              <c:when test="${(task_endeday - task_startsday) == 0}">
 	                                 <td class="project-table-duration"></td>
 	                              </c:when>
-	                              <c:when test="${empty task.sday or empty task.eday}">
+								   <c:when test="${empty task.sday or empty task.eday}">
 									 <td class="project-table-duration"></td>
-								  </c:when>	
-	                              <c:otherwise>
+								  </c:when>
+								  <c:otherwise>
 	                                 <td class="project-table-duration">${task_endeday - task_startsday}일</td>
 	                              </c:otherwise>
-	                              </c:choose>
+	                           	  </c:choose>
 	                              <td class="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
 	                           </tr>
 	                        </c:if> <!--  태스크와 스텝 일치 여부 -->
