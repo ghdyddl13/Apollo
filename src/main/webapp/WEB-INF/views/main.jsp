@@ -83,7 +83,8 @@
 <script type="text/javascript" src="js/projectInsideHeader.js"></script>
 <!--stepInsideHeader-->
 <script type="text/javascript" src="js/stepInsideHeader.js"></script>
-
+<!-- inbox js -->
+<script type="text/javascript" src="js/inbox.js"></script>
 <style type="text/css">
 	/* Scroll Bar */
 

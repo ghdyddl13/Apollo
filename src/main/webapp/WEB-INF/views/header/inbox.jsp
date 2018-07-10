@@ -10,134 +10,8 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script type="text/javascript">
+
 	$(function() {
-		
-		/**
-		 * 
-		 날      짜 : 2018. 7. 9.
-		 기      능 : 인박스에서 X버튼 눌렀을때 서드패널에서 사라짐
-		 작성자명 : 신 호 용
-		 */
-		$(document).on("click","#task_dismiss_btn_inbox",function(){
-			$(".modal-content2").hide();
-			$(".starred-secondbody-image").show();
-		});
-		
-		
-		$(".modal-content2").hide();
-		$(".Task_RUD_Modal").click(function(evt) {
-			$(this).children().children(".inbox_newcheck").empty();
-			console.log($(this).children().children().children(".cmtid").val());
-			console.log($(this).children().children(".inbox_mid2").val())
-			$.ajax({
-				url:"newcheck.htm",
-				type: 'POST',
-				data:{cmtid : $(this).children().children().children(".cmtid").val(),
-					  mid2 : $(this).children().children(".inbox_mid2").val()},
-				success:function(data){
-					
-				}
-			})
-		});
-		
-		
-		$("#incomming-page").click(function(evt){
-			
-			$.ajax({
-				url:"inbox.htm",
-				dataType:"html",
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					$('#incomming-page').css('border-bottom','2px solid transparent');
-					$('#incomming-page').css('border-color','#286cb0');
-				}
-			})
-		});
-		$("#sent-page").click(function(evt){
-			
-			$.ajax({
-				url:"sent.htm",
-				dataType:"html",
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					$('#sent-page').css('border-bottom','2px solid transparent');
-					$('#sent-page').css('border-color','#286cb0');
-				}
-			})
-		});
-		$("#archive-page").click(function(evt){
-			
-			$.ajax({
-				url:"archive.htm",
-				dataType:"html",
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					$('#archive-page').css('border-bottom','2px solid transparent');
-					$('#archive-page').css('border-color','#286cb0');
-				}
-			})
-		});
-		
-		$(".archiveupdate").click(function(evt){
-			evt.stopPropagation();
-			$.ajax({
-				url:"archiveupdate.htm",
-				dataType:"html",
-				type: 'POST',
-				data:{cmtid:$(this).children(".cmtid").val(),
-					  inboxkind:$("#inboxkind").val()},
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					if($('#inboxkind').val()== 'incomming'){
-						$('#incomming-page').css('border-bottom','2px solid transparent');
-						$('#incomming-page').css('border-color','#286cb0');
-					}else if($('#inboxkind').val()== 'sent'){
-						$('#sent-page').css('border-bottom','2px solid transparent');
-						$('#sent-page').css('border-color','#286cb0');
-					}else{
-						$('#archive-page').css('border-bottom','2px solid transparent');
-						$('#archive-page').css('border-color','#286cb0');
-					}
-				
-				}
-			})
-		});
-		$(".archiveupdate2").click(function(evt){
-			evt.stopPropagation();
-			$.ajax({
-				url:"archiveupdate2.htm",
-				dataType:"html",
-				type: 'POST',
-				data:{cmtid:$(this).children(".cmtid").val(),
-					  inboxkind:$("#inboxkind").val()},
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					$('#archive-page').css('border-bottom','2px solid transparent');
-					$('#archive-page').css('border-color','#286cb0');
-				}
-			})
-		});
-		
-		$("#cmt_insert").click(function(evt){
-			$.ajax({
-				url:"insertcomment.htm",
-				dataType:"html",
-				type: 'POST',
-				data:{comments:$("#cmt_cmts").val(),
-					  tid:$("#cmt_tid").val()},
-				success:function(data){
-					$("#main-box").empty();
-					$("#main-box").append(data);
-					
-				}
-			})
-		});
-		
 		var startpos, diffpos = 0, range = 400;
 		var isEnable = false;
 
@@ -159,10 +33,12 @@
 			if (isEnable) {
 				pos = event.clientX;
 				diffpos = startpos - pos;
-				var width = (window.innerWidth-250) / 2;
+				var width = (window.innerWidth - 250) / 2;
 				if (diffpos > -(width - range) && diffpos < (width - range)) {
-					document.getElementById("left").style.width = width -25 - diffpos + "px";
-					document.getElementById("right").style.width = width - 25+ diffpos + "px";
+					document.getElementById("left").style.width = width - 25
+							- diffpos + "px";
+					document.getElementById("right").style.width = width - 25
+							+ diffpos + "px";
 				}
 			}
 		}
@@ -217,7 +93,7 @@
 							</c:otherwise>
 						</c:choose>
 						&nbsp;&nbsp;&nbsp;${commentlist.cmtmtime}</span>
-						<div class="inbox-div4"><img src="img/user.png" width="30px" height="30px">&nbsp;&nbsp;&nbsp;
+						<div class="inbox-div4"><img style="border-radius: 50%;" src='displayImage.htm?image=${commentlist.image}' width="30px" height="30px">&nbsp;&nbsp;&nbsp;
 						<c:if test="${commentlist.cmtkind eq 0}">${commentlist.mname} : </c:if>${commentlist.comments}</div>
 					</div>
 					</div>
@@ -257,7 +133,7 @@
 							</c:otherwise>
 						</c:choose>
 						&nbsp;&nbsp;&nbsp;${commentlist.cmtmtime}</span>
-						<div class="inbox-div4"><img src="img/user.png" width="30px" height="30px">&nbsp;&nbsp;&nbsp;${commentlist.mname} : ${commentlist.comments}</div>
+						<div class="inbox-div4"><img style="border-radius: 50%;" src='displayImage.htm?image=${commentlist.image}' width="30px" height="30px">&nbsp;&nbsp;&nbsp;${commentlist.mname} : ${commentlist.comments}</div>
 					</div>
 					</div>
 					<hr class="inbox-hr">
@@ -395,7 +271,7 @@
 					<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
 					</div>
 				</div>
-                <hr />
+                <hr/>
                 
 					<div class="modal-title">Comment</div><br />
 					<div id="Task_Modal_comments">
