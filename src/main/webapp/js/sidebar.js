@@ -897,23 +897,7 @@ function selectStepList(pids){
 
 
 
-/**
- * 
- 날      짜 : 2018. 6. 19.
- 기      능 : 프로젝트 생성이 없을 때 실행되는 함수
- 작성자명 : 김 래 영
- */
-function noProjectPage() {
-   $.ajax({
-      url:"noproject.htm",
-      dataType:"html",
-      success:function(data){
-          $("#main-box").empty();
-          $("#main-box").append(data);          
-          
-      }
-   })
-}
+
 
 
 
@@ -1012,13 +996,10 @@ function MakeprojectWrapper(project){
 function makeSideProjectDir(){
    
     $.when(selectProjectList()).done(function(data){ //먼저 프로젝트의 리스트를 가져와 뿌려준 후, 
-      if(data.length==0) {
-         //프로젝트가 전혀 없는 경우 실행될 함수 
-         noProjectPage();
-      } else{         
-         var pids = data;
-         makeSideSubDir(pids); // 각 프로젝트의 내부 구조를 채워줄 요소들을 가져오는 함수를 실행한다. 
-      }
+      if(data.length!=0) {
+    	  var pids = data;
+          makeSideSubDir(pids); 
+      } 
    })
 }
 
