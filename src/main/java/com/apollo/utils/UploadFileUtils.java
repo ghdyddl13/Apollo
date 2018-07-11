@@ -48,7 +48,7 @@ public class UploadFileUtils {
 		
 		// 파일 업로드
 		s3.fileUpload(bucketName, fileUploadPath, byteData);
-		return fileUploadPath;
+		return uploadedFileName;
 	}
 	private static String calcPath(String uploadPath, int pid) {
 		Calendar cal = Calendar.getInstance();
@@ -58,7 +58,7 @@ public class UploadFileUtils {
 		String datePath = monthPath + new DecimalFormat("00").format(cal.get(Calendar.DATE));
 		
 		// '/p11/20180628' 식으로 경로 설정 
-		String sortedPath = "/p" + pid + "/" + datePath;
+		String sortedPath = "p" + pid + "/" + datePath;
 		makeDir(uploadPath, pid, sortedPath);
 
 		return sortedPath;

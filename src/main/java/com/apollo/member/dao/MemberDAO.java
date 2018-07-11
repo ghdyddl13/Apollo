@@ -179,6 +179,14 @@ public interface MemberDAO {
 	/**
 	 * 
 	 날      짜 : 2018. 7. 10.
+	 기      능 : MID로 맴버의 이미지 이름을 가지고 온다
+	 작성자명 : 이 진 우
+	 */
+	public String findMemberImage(String mid);
+
+	/**
+	 * 
+	 날      짜 : 2018. 7. 10.
 	 기      능 : 프로젝트 참여멤버 삭제
 	 작성자명 : 박 민 식
 	 */

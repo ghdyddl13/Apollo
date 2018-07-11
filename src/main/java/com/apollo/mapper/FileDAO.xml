@@ -12,7 +12,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where t.pid = #{pid}
 	</select>
 	
-	<delete id="filesDeleteByFileId" parameterType="Integer">
-    	delete from files where fileid = #{fileid}
+	<delete id="filesDeleteByFileId" parameterType="String">
+    	delete from files where filename = #{filename}
     </delete>
+
 </mapper>
