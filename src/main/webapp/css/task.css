@@ -27,9 +27,10 @@
 	  width: 30px;
 	  height:30px;
 	  border-radius: 50%
+	  
 }
 
-#Task_Modal_tstatus_selectbox{
+#Task_Modal_tstatus_selectbox, #Task_Modal_tstatus_selectbox_noredirect{
 	font-size: 12px;
 	height: 100%;
 	width: 100%;
@@ -40,17 +41,18 @@
 }
 
 
-#Task_Modal_sday{
+#Task_Modal_sday,#Task_Modal_eday{
 	  width: 140px;
 	  text-align: center;
 	  padding: 0.3em
 }
 
-#Task_Modal_eday{
-	  width: 140px;
+#Task_Modal_sday_noredirect, #Task_Modal_eday_noredirect{
+	  width: 150px;
 	  text-align: center;
 	  padding: 0.3em
 }
+
 
 #Task_Modal_assignee{
      justify-content:center;

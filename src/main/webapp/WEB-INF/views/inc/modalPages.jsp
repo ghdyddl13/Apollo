@@ -305,7 +305,7 @@
 								
 									<br>
 									<div align="right">	
-										<input type="button" class="btn add-btn" id="update-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
+										<input type="button" class="btn add-btn" id="update-project-btn" value="수정">&nbsp;&nbsp;&nbsp;
 										<input type="button" class="btn cancel-btn"
 											data-dismiss="modal" value="취소">
 									</div>
@@ -382,8 +382,8 @@
 				<!-- row 2 -->
 				<div class="task-modal-content-row">
 					<div class="task-modal-content-td">
-							<select id="Task_Modal_tstatus_selectbox">
-							</select>
+						<select id="Task_Modal_tstatus_selectbox">
+						</select>
 					</div>
 							
 					<div class="task-modal-content-td">
@@ -488,7 +488,7 @@
 					<div id="Task_Modal_comments">
 					</div>
 					<hr>
-					<div id="project_member_popup_div"></div>
+					<div id="project_member_popup_div" class="project_member_popup"></div>
 					
 					<div id="div_for_comment_input_box">
 					<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">
@@ -934,8 +934,10 @@
 									<div id="edit-profile-title-apollokey">
 										<label id="edit-profile-apollokey-label" class="edit-profile-title" for="edit-profile-apollokey">인증키</label>
 										<input class="btn" id="profile-apollokey-check" type="button" value="인증확인">
+
 									</div>
 									<input type="text" name="apollokey" class="edit-profile-input-tag" id="edit-profile-apollokey">
+									
 									
 								</div>
 								

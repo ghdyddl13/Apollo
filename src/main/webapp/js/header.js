@@ -112,21 +112,15 @@ $(function() {
 	$('#header-introduce').click(function() {
 		location.href="index.htm";
 	});
+	
 	// 헤더에서 우상단 개인정보수정 클릭시 실행되는 함수
 	// 헤더 개인정보수정 Modal
 	$('#header-profile-edit').click(function(evt) {
-		var mid = $('#edit-profile-mid').val(mid);
-		
 		
 		$.ajax({
 			url:"updatememberinfo.htm",
-			data:{mid:mid},
 			dataType:"json",
 			success:function(data) {
-				//var image = (data.updatememberinfo.image)?data.updatememberinfo.image :"img/user_image.png"
-				//$('#edit-profile-modal-img').attr("src",image);
-				$('.profile-modal-text-mname').text(data.updatememberinfo.mname);
-				$('.profile-modal-text-mid').text(data.updatememberinfo.mid);
 				$('#edit-profile-mname').val(data.updatememberinfo.mname);
 				$('#edit-profile-mid').val(data.updatememberinfo.mid);
 				$('#edit-profile-apollokey').val(data.updatememberinfo.apollokey);
