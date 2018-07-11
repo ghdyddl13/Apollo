@@ -43,6 +43,10 @@ function addTask_keyup(tstatusid){
                       $("#main-box").append(data);
                       $("#insert-task"+tstatusid).attr("readonly", false);
                       doDraggable();
+                      $("#task-adder"+tstatusid).remove();
+                      let inputtag="<div class='board-task-adder-addmode'><input class=' board-add-task-input' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
+                      $("#body-start"+tstatusid).prepend(inputtag);
+                      $("#insert-task"+tstatusid).focus().css("outline","none");
                    }  
                 })
          } 
@@ -63,6 +67,7 @@ function addTask_focusout(tstatusid){
       $("#body-start"+tstatusid).prepend(addtag);
    }else{
          $.ajax({
+        	 
               url : "boardInsertTask.htm",
               data : {
                     tstatusid : tstatusid, 
