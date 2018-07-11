@@ -928,8 +928,10 @@
 									<div id="edit-profile-title-apollokey">
 										<label id="edit-profile-apollokey-label" class="edit-profile-title" for="edit-profile-apollokey">인증키</label>
 										<input class="btn" id="profile-apollokey-check" type="button" value="인증확인">
+
 									</div>
 									<input type="text" name="apollokey" class="edit-profile-input-tag" id="edit-profile-apollokey">
+									
 									
 								</div>
 								

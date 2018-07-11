@@ -471,13 +471,9 @@ public class MemberController {
 	 작성자명 : 김 래 영
 	 */
 	@RequestMapping("/updatememberinfo.htm")
-	public View updateMemberInfo(HttpServletRequest request, Model model) throws Exception {
+	public View updateMemberInfo(HttpServletRequest request, Model model) {
 		String mid = (String) request.getSession().getAttribute("mid");
-		model.addAttribute("mid", mid);
-		System.out.println("개인정보수정을 위한 mid : " + mid);
-		
 		MemberDTO updatememberinfo = null;
-		
 		try {
 			updatememberinfo = service.updateMemberInfo(mid);
 			model.addAttribute("updatememberinfo", updatememberinfo);

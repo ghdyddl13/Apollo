@@ -112,27 +112,22 @@ $(function() {
 	$('#header-introduce').click(function() {
 		location.href="index.htm";
 	});
+	
 	// 헤더에서 우상단 개인정보수정 클릭시 실행되는 함수
 	// 헤더 개인정보수정 Modal
 	$('#header-profile-edit').click(function(evt) {
-		var mid = $('#edit-profile-mid').val(mid);
-		console.log(mid);
 		
 		$.ajax({
 			url:"updatememberinfo.htm",
-			data:{mid:mid},
 			dataType:"json",
 			success:function(data) {
-				
-				$('.profile-modal-text-mname').text(data.updatememberinfo.mname);
-				$('.profile-modal-text-mid').text(data.updatememberinfo.mid);
 				$('#edit-profile-mname').val(data.updatememberinfo.mname);
 				$('#edit-profile-mid').val(data.updatememberinfo.mid);
 				$('#edit-profile-apollokey').val(data.updatememberinfo.apollokey);
 				$('#edit-profile-pnum').val(data.updatememberinfo.pnum);
 				$('#edit-profile-deptname').val(data.updatememberinfo.deptname);
 				$('#edit-profile-position').val(data.updatememberinfo.position);
-				//$('#edit-profile-image').val(data.updatememberinfo.image);
+				$('#edit-profile-image').val(data.updatememberinfo.image);
 				
 			} // end - success
 		}); // end- ajax
