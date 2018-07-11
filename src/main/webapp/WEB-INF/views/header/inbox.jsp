@@ -15,7 +15,7 @@
 		
 		$(".modal-content2").hide();
 		
-		var startpos, diffpos = 0, range = 400;
+/* 		var startpos, diffpos = 0, range = 400;
 		var isEnable = false;
 
 		document.getElementById("center").onmousedown = on_mouse_down;
@@ -44,7 +44,7 @@
 							+ diffpos + "px";
 				}
 			}
-		}
+		} */
 	});
 </script>
 	<input id ="inboxkind" type="hidden" value="${inbox}">

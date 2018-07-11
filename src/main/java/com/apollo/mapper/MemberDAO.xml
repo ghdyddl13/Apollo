@@ -16,9 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertMember"
 		parameterType="com.apollo.vo.MemberDTO">
 		insert into member(mid, mname, pwd, rday, pnum,
-		deptname, apollokey, position, emailcheckkey)
+		deptname, apollokey, position, emailcheckkey, image)
 		values(#{mid}, #{mname}, #{pwd},
-		sysdate, #{pnum}, #{deptname}, #{apollokey}, #{position}, #{emailcheckkey})
+		sysdate, #{pnum}, #{deptname}, #{apollokey}, #{position}, #{emailcheckkey},'uesr.png')
 	</insert>
 	<select id="getLogin" resultType="String">
 		select pwd from member where mid=#{mid}
