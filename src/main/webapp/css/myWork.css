@@ -215,3 +215,18 @@
 .mywork-main-task-step-name{
   box-sizing: border-box;
 }            
+
+.mywork-main-task-member-hidden{
+	z-index:12;
+	background: #f5f8fc;
+	text-align:center;
+	border-radius: 10px;
+	padding:10px;
+	position: absolute;
+	box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+	display: none
+}
+
+
+
+

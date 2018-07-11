@@ -38,8 +38,23 @@ $(function() {
 			}
 		})
 	});
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	$(document).on("mouseenter",".mywork-main-task-member",function() {
+	   
+        let position = $(this).position();
+        $(this).next().css("left",position.left + 30);
+        $(this).next().css("top",position.top - 40);
+        $(this).next().css("display","block");
+	    
+	  }).on("mouseleave", ".mywork-main-task-member", function() {//마우스 호버 아웃 하면 checkbox가 다시 안보이게 함
+		
+		  $(this).next().css("display","none");
+		  	
+	  });
+
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// 헤더 starred task 페이지
 	$("#starredTask-page").click(function(evt){
 		$.ajax({

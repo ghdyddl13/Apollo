@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <script type="text/javascript" src="js/task.js"></script>
+
+
+<div id="mywork-member-popup-div" class="mywork-member-popup">
+
+</div>
+
 <div class="main-body-container">
     <div class="main-body-twopannel">
       <div class="main-body-twopannel-left">
@@ -34,8 +40,15 @@
 	                    <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${todaytask.tid}">
 	                      <div class="mywork-main-task-checkbox"></div>
 		                    <div class="mywork-main-task-members">
-		                      <img class="mywork-main-task-member" src="img/user.png" alt="">
-		                    </div>
+								<c:forEach var="member" items="${todaytask.members}" end="0">
+									<img class="mywork-main-task-member" src='displayImage.htm?image=${member.image}'>
+									<div class="mywork-main-task-member-hidden">
+										<c:forEach var="member_hidden" items="${todaytask.members}">
+											<img class="mywork-main-task-member" src='displayImage.htm?image=${member_hidden.image}'>
+										</c:forEach>
+									</div>
+								</c:forEach>
+											</div>
 		                    <c:choose>
 								<c:when test="${todaytask.overdue=='overdue'}">
 									<div class="mywork-main-task-date date-overdue">${todaytask.date}</div>	
