@@ -28,7 +28,8 @@
 }
 
 .gif_images{
-	display: none
+	display: none;
+	width: 100%
 }
 
 .report_info_modal{
