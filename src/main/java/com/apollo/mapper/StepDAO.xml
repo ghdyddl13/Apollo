@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apollo.step.dao.StepDAO">
+    <select id="getSteps" parameterType="String" resultType="com.apollo.vo.StepDTO">
+    select * from step where pid = #{pid}
+    </select>
+
+	<insert id="insertStep" parameterType="com.apollo.vo.StepDTO">
+		<selectKey keyProperty="sid" resultType="int" order="BEFORE">
+        	  select seq_sid.nextval FROM DUAL
+   		 </selectKey>
+		insert into step(sid, sname, sday, eday, pid, fid, methodologyid, mid, detail) 
+		values (#{sid}, #{sname}, #{sday}, #{eday}, #{pid}, #{fid}, #{methodologyid}, #{mid}, #{detail})
+	</insert>
+
+	<select id ="getProjectIdByStepId" parameterType="Integer" resultType="Integer"> 
+	 	select pid from step where sid=#{sid}
+	</select>
+	
+    <select id ="selectTstatusBySid" resultType="com.apollo.vo.TstatusDTO" parameterType="Integer"> 
+    	select ts.TSTATUS, ts.TSTATUSID, ts.COLOR from step s join TSTATUS ts on s.METHODOLOGYID = ts.METHODOLOGYID where sid=#{sid}
+	</select>
+
+	<select id="selectStepList" parameterType="java.util.List" resultType="com.apollo.vo.StepDTO">
+		select sid, sname, sday, eday, pid, fid, methodologyid, mid, detail from step
+		where pid in 
+		<foreach collection="list" item="pid"  open="(" close=")" separator=",">
+            #{pid}
+        </foreach>
+	</select>
+
+	<select id="getStepsid" parameterType="String" resultType="com.apollo.vo.StepDTO">
+   	 select * from step where sid in (select sid from taskinstep where tid = #{tid})
+    </select>
+    
+	<select id="selectStep" resultType="com.apollo.vo.StepDTO">
+		select * from step where sid=#{sid}
+	</select>
+	
+	<update id="updateStep" parameterType="com.apollo.vo.StepDTO">
+		update step set
+		<if test="sname != null">sname=#{sname},</if>
+		<if test="mid != null">mid=#{mid},</if>
+		<if test="sday != null">sday=#{sday},</if>
+		<if test="eday != null">eday=#{eday},</if>
+		<if test="methodologyid != 0">methodologyid=#{methodologyid},</if>
+		<if test="pid != 0">pid=#{pid},</if>
+		<if test="fid != null">fid=#{fid},</if>
+		<if test="detail != null">detail=#{detail}</if>
+		where sid=#{sid}
+	</update>
+
+	<update id="moveStep" parameterType="com.apollo.vo.StepDTO" >
+		update step set fid=#{fid} where sid=#{sid}
+	</update>
+	
+	<!--List 페이지에 Tstatus를 뿌려준다  -->
+	<select id="getListTstatus" resultType="com.apollo.vo.TstatusDTO">
+		select TSTATUSID, TSTATUS, COLOR, ORDERING from TSTATUS where METHODOLOGYID= (select METHODOLOGYID from step where sid=#{sid})
+	</select>
+	<!--List 페이지에 Step 이름을 뿌려준다  -->
+	<select id="getListStepName" resultType="com.apollo.vo.StepDTO">
+		select sid, sname from step where sid=#{sid}
+	</select>
+	<!--List페이지에 Task를 뿌려주기위한 Task리스트  -->
+	<select id="getStepListTask" parameterType="hashmap" resultType="com.apollo.vo.StepListTaskDTO">
+		select t.TID, t.TNAME, t.SDAY, t.EDAY,t.DETAIL,t.PID, t.CTIME,t.TSTATUSID, ts.SID , s.TSTATUS,s.COLOR  
+		from task t 
+		join TASKINSTEP ts on t.TID = ts.TID
+		join TSTATUS s on t.TSTATUSID = s.TSTATUSID
+		where ts.SID =#{sid}
+		<if test="tstatusid != null">and t.TSTATUSID=#{tstatusid}</if> 
+		<if test="mid !=null">and t.TID in (select tid from ASSIGNEE where MID = #{mid})</if>
+		<if test="sorting=='changedate'">order by CTIME</if>
+		<if test="sorting=='duedate'">order by t.EDAY</if>
+		<if test="sorting=='status'">order by t.TSTATUSID</if>
+		<if test="sorting=='title'">order by t.TNAME</if>
+	</select>
+	<!-- List 페이지의 Task에 뿌려줄 Step을 위한 Step 리스트  -->
+	<select id="getStepListStep" parameterType="hashmap" resultType="com.apollo.vo.StepListStepDTO">
+		select ts.TID, s.SID,s.SNAME
+		from step s
+		join TASKINSTEP ts on s.SID = ts.SID
+		where ts.TID in 
+		(select tis.tid 
+		from TASKINSTEP tis 
+		join task t on tis.TID = t.TID 
+		where tis.SID=#{sid} 
+		<if test="tstatusid != null">and t.TSTATUSID=#{tstatusid}</if>
+		<if test="mid !=null">and tis.TID in (select tid from ASSIGNEE where MID = #{mid})</if>
+		)and s.SID !=#{sid}
+	</select>
+	<!-- List페이지의 Task에 뿌려줄 Member을 위한 Member리스트 -->
+	<select id="getStepListMember" parameterType="hashmap" resultType="com.apollo.vo.StepListMemberDTO">
+		select a.TID, m.MID, m.MNAME, m.IMAGE
+		from member m 
+		join ASSIGNEE a on m.MID = a.MID 
+		where a.TID in 
+		(select tis.tid 
+		from TASKINSTEP tis join task t on tis.TID = t.TID 
+		where tis.SID=#{sid} 
+		<if test="tstatusid != null">and t.TSTATUSID=#{tstatusid}</if>
+		<if test="mid !=null">and tis.TID in (select tid from ASSIGNEE where MID = #{mid})</if>
+		)
+	</select>
+
+	<select id="getStepInProject" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
+    	select s.sid, s.sname, to_char(s.sday,'YYYY-mm-dd') as sday, to_char(s.eday,'YYYY-mm-dd') as eday, s.detail, s.pid, s.fid, s.methodologyid, s.mid, m.mname
+		from step s join member m
+		on s.mid = m.mid
+		where pid = #{pid}
+    </select>
+	
+	<select id="getStepNamesbytid" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
+		select * from step where sid in (select sid from taskinstep where tid = #{tid})
+	</select>  
+	
+    <select id="getStepListByTid" parameterType="Integer" resultType="com.apollo.vo.StepDTO">
+		select * from step where pid = (select pid from task where tid = #{tid}) and sid not in (select sid from taskinstep where tid = #{tid})
+	</select>   
+	
+	<select id="getSearchSteps" parameterType="hashmap" resultType="com.apollo.vo.StepDTO">
+		select * from step
+		where sname like '%'||#{input}||'%'
+		and pid in (select pid from pmember where mid = #{mid}) order by sid desc
+	</select>
+	<!-- UPPER GRAPH 완료되고 완료되지 않은 일을 가지고오는 함수  -->
+	<select id="listCountCompletedTask" parameterType="Integer" resultType="Integer">
+		select count(*) 
+		from task t join TASKINSTEP ts on t.TID = ts.TID 
+		where t.TSTATUSID in (3,11,15) and ts.SID=#{sid}
+	</select>
+	<select id="listCountUnfinishedTask" parameterType="Integer" resultType="Integer">
+		select count(*) 
+		from task t join TASKINSTEP ts on t.TID = ts.TID 
+		where t.TSTATUSID not in (3,11,15) and ts.SID=#{sid}
+	</select>
+	<!-- MIDDLE GRAPH남은 날과 지나온날을 가지고 오는 함수  -->
+	<select id="listCountThePast" parameterType="Integer" resultType="Integer">
+		select ROUND(sysdate-SDAY) from step where sid=#{sid}
+	</select>
+	<select id="listCountTheRest" parameterType="Integer" resultType="Integer">
+		select  ROUND(EDAY-sysdate) from step where sid=#{sid}
+	</select>
+
+	<!-- LOWER GRAPH 테스크 상태  -->
+	<select id="listCountNoDay" parameterType="Integer" resultType="Integer">
+		select count(*)
+		from (select * from task t join TASKINSTEP ts on t.TID = ts.TID where ts.SID=#{sid} and t.TSTATUSID not in (3,11,15))
+		where SDAY is null or EDAY is null 
+	</select>
+	<select id="listCountAfterNextWeek" parameterType="Integer" resultType="Integer">
+		select count(*) 
+		from task t join TASKINSTEP ts on t.TID = ts.TID 
+		where ts.SID=#{sid} 
+		and t.TSTATUSID not in (3,11,15) 
+		and t.SDAY>=TO_DATE(SUBSTR(sysdate +(8-TO_CHAR(SYSDATE,'D')),1,10),'YYYY/MM/DD')
+	</select>
+	<select id="listCountUntilThisWeek" parameterType="Integer" resultType="Integer">
+		select count(*) 
+		from task t join TASKINSTEP ts on t.TID = ts.TID 
+		where ts.SID=#{sid}
+		and t.TSTATUSID not in (3,11,15) 
+		and TO_DATE(SUBSTR(sysdate +(8-TO_CHAR(SYSDATE,'D')),1,10),'YYYY/MM/DD')>t.EDAY
+	</select>
+	<select id="listCountOverdueTask" parameterType="Integer" resultType="Integer">
+		select count(*)
+		from task t join TASKINSTEP ts on t.TID = ts.TID 
+		where ts.SID=#{sid} 
+		and t.TSTATUSID not in (3,11,15) 
+		and TO_DATE(SUBSTR(sysdate,1,10),'YYYY/MM/DD')>t.EDAY
+	</select>
+
+	<!-- 특정STEP을 포함한 프로젝트에 소속된 인원의 정보 -->
+	<select id="listProjectMemberList" resultType="com.apollo.vo.MemberDTO">
+		select m.MID,m.MNAME,m.IMAGE 
+		from MEMBER m join PMEMBER p on m.MID=p.MID 
+		where p.PID = (select pid from step where sid=#{sid})	
+	</select>
+	<update id="listStatusTasks" parameterType="com.apollo.vo.TaskDTO">
+		update task set tstatusid=#{tstatusid} where tid =#{tid}
+	</update>
+	
+	<!--LIST PAGE 에서 TASK 단체로 특정인에게 할당하기전에 중복값을 제거하기 위해 가지고 오는 데이터  -->
+	<select id="listBeforeAssignTasks" resultType="com.apollo.vo.AssigneeDTO">
+		select tid, mid from assignee where mid =#{mid} 
+	</select>
+	<!--LIST PAGE 에서 TASK 단체로 특정인에게 할당하기  -->
+	<insert id="listAssignTasks" parameterType="List">
+	    <foreach collection="list" item="assignee" open="INSERT ALL " separator=" " close="SELECT * FROM DUAL" > 
+         	into ASSIGNEE(tid,mid) values (#{assignee.tid},#{assignee.mid})
+        </foreach>
+	</insert>
+	<!--LIST PAGE 에서 TASK 단체로 특정 Step에 추가 하기전에 STEP LIST를 들고오는 함수 -->
+	<select id="getStepListBeforeAddStepTasks" resultType="com.apollo.vo.StepDTO">
+		select s.sid, s.sname,p.pid,p.PNAME
+		from step s
+		join project p
+		on s.PID = p.PID
+		where p.pid= (select pid from step where sid = #{sid}) and s.sid !=#{sid}
+	</select>	
+	<!--LIST PAGE 에서 TASK 단체로 특정 Step에 추가 하기전에 중복값을 제거하기 위해 가지고 오는 데이터  -->
+	<select id="listBeforeAddStepTasks" resultType="com.apollo.vo.TaskInStepDTO">
+		select sid, tid from TASKINSTEP where sid=#{sid}
+	</select>
+	<!-- LIST PAGE 에서 TASK 단체로 특정 Step에 추가 -->
+	<insert id="listAddStepTasks" parameterType="List">
+		<foreach collection="list" item="taskinstep" open="INSERT ALL " separator=" " close="SELECT * FROM DUAL" > 
+            into taskinstep(sid,tid) values (#{taskinstep.sid},#{taskinstep.tid})
+        </foreach>
+	</insert>
+	<!-- LIST PAGE 에서 TASK 단체로 삭제  -->
+	<delete id="listDeleteTasks" parameterType="List">
+		delete from task where tid in
+		<foreach collection="list" item="tid"  open="(" close=")" separator=",">
+            #{tid}
+        </foreach>
+	</delete>
+
+	<delete id="deleteStep">
+		delete from step where sid = #{sid}
+	</delete>
+
+	
+</mapper>

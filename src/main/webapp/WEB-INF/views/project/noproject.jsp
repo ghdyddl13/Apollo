@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+	pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-</body>
-</html>
+<div class="main-noproject-content">
+	<p style="font-size:25px ; font-weight:bold ;" align="center">더 쉽고 더 빠르게 협업하세요</p>
+	<br>
+	<div align="center">
+		<button class="btn" id="main-project-add-btn"
+		data-toggle="modal" data-target="#project-insert">프로젝트 생성&nbsp;
+		<i class="fas fa-plus-circle" style="font-size:20px ; color:white ;"></i>
+		</button>
+	</div>
+</div>

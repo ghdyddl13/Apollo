@@ -1,67 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+    /WEB-INF/spring/root-context.xml
+    /WEB-INF/spring/appServlet/security-context.xml
+    </param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>appServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>appServlet</servlet-name>
+    <url-pattern>*.htm</url-pattern>
+  </servlet-mapping>
 
-	<!-- 모든 서블릿과 필터에서 공유하는 Root Spring Container 설정 -->
-    <context-param>
-        <!-- param-name은 재량껏 쓸 수 있다 -->
-		<param-name>contextConfigLocation</param-name>
-
-        <!-- 경로 설정은 정확해야 한다 -->
-        <!-- Root Spring Container 로 사용할 xml의 경로 설정 -->
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
-	</context-param>
-	
-	<!-- 모든 서블릿과 필터에서 공유하는 Spring Container 생성 -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
-	<!-- application requests 실행을 위한 DispatcherServlet 등록-->
-	<servlet>
-		<servlet-name>appServlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-
-        <!-- DispatcherServlet로 사용할 .xml 경로 설정 -->
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-		
-    <!-- 위에서 설정한 DispatcherServlet가 받을 요청 패턴 등록 -->
-    <!-- 위에서 이미 servlet 등록을 해뒀기 때문에 가능 -->
-	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
-
-        <!-- 여기서 .htm이든 .do든 원하는 패턴을 등록 -->
-		<url-pattern>.do</url-pattern>
-	</servlet-mapping>
-
-<!-- 여기까지가 Spring Legacy project 생성시 기본적으로 설정되는 사항들 -->
-
-    <!-- 한글 처리를 위한 필터 -->
-	<filter-mapping>
-		<filter-name>EncodingFilter</filter-name>
-        
-        <!-- 모든 것을 한글화 하기 위해서 /* 으로 패턴 설정 -->
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	
-
+  <filter>
+   <filter-name>EncodingFilter</filter-name>
+   <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+   <init-param>
+     <param-name>encoding</param-name>
+     <param-value>UTF-8</param-value>
+   </init-param>
+ </filter>
+ <filter-mapping>
+   <filter-name>EncodingFilter</filter-name>
+   <url-pattern>/*</url-pattern>
+ </filter-mapping>
 	<!-- 에러페이지 처리 -->
     <error-page>
       <error-code>404</error-code>
       <location>/error/404error.jsp</location>
     </error-page>
+    <session-config>
+    	<session-timeout>-1</session-timeout>
+	</session-config>
     
 	<!-- 에러페이지 처리 -->
     <error-page>
       <error-code>500</error-code>
       <location>/error/500error.jsp</location>
     </error-page>
-
-    <!-- + 에러페이지 sample은 jsp 카테고리에 업로드 되어 있음 -->
 </web-app>

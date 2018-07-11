@@ -1,0 +1,33 @@
+#header-member-list-title {
+	text-align: right;
+    margin-right: 20px;
+}
+.header-member-table {
+	overflow:auto;
+	background-color:#f0f0f0;
+	width: 100%;
+	height: 750px;
+}
+#header-member-table-id {
+	width:95%;
+}
+#header-member-table>thead>tr>th {
+	text-align:center;
+	padding-bottom:10px;
+	color:black;
+}
+#header-member-table>tbody>tr>td {
+	text-align:center;
+	color:#000000c7;
+}
+.header-memberinfo-table:hover {
+	cursor: pointer;
+	background-color: #00000014;
+}
+#header-member-table>thead>tbody {
+	border-left-color: white;
+	border-right-color: white;
+}
+#header-member-table-no-data {
+	height: 40px;
+}

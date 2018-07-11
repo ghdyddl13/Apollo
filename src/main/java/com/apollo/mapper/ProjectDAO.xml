@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apollo.project.dao.ProjectDAO">
+	<insert id="insertProject" parameterType="com.apollo.vo.ProjectDTO">
+		insert into project(pid, pname, sday, eday, methodologyid, mid, pstatuscode, stmtime, detail)
+		values(seq_pid.nextval, #{pname}, #{sday}, #{eday}, #{methodologyid}, #{mid}, 1, sysdate, #{detail})
+	</insert>
+	<select id="selectProject" parameterType="Integer" resultType="com.apollo.vo.ProjectDTO">
+		select pid, pname, sday, eday, methodologyid,mid, pstatuscode,detail
+		from project
+		where pid=#{pid}
+	</select>
+	<update id="updateProject" parameterType="com.apollo.vo.ProjectDTO">
+		update project set
+		<if test="pname != null">pname=#{pname},</if>
+		<if test="sday != null">sday=#{sday},</if>
+		<if test="eday != null">eday=#{eday},</if>
+		<if test="detail != null">detail=#{detail},</if>
+		<if test="pstatuscode != 0">pstatuscode=#{pstatuscode},</if>
+		stmtime=sysdate
+		where pid=#{pid}
+	</update>
+	<!--  프로젝트 삭제시 14일동안 DB 에 데이터가 저장되고 그후 자동삭제된다 -->
+	<delete id="deleteProject">
+		delete project where PID=#{PID}
+	</delete>
+	
+	<select id="selectProjectList" parameterType="String" resultType="com.apollo.vo.ProjectDTO">
+		select * from project where pid in (select pid from pmember where mid=#{mid})
+	</select>
+	
+	<select id="getSearchProjects" parameterType="hashmap" resultType="com.apollo.vo.ProjectDTO">
+		select * from project
+		where pname like '%'||#{input}||'%'
+		and pid in (select pid from pmember where mid = #{mid}) order by pid desc
+	</select>
+</mapper>

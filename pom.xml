@@ -3,20 +3,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <!-- 프로젝트 기본 정보(비 기술적 정보) -->
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>kr.or</groupId> <!-- 구분자로 사용 -->
-	<artifactId>bit</artifactId> <!-- 구분자 & 회사이름 -->
-	<name>PracticeSpring</name><!-- 프로젝트 이름 -->
-	<packaging>war</packaging>
-	<version>1.0.0-BUILD-SNAPSHOT</version>
-
-
-    <!-- 프로젝트 기본 정보(기술적 정보) -->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>kr.or</groupId> <!-- 구분자로 사용 -->
+    <artifactId>bit</artifactId> <!-- 구분자 & 회사이름 -->
+    <name>PracticeSpring</name><!-- 프로젝트 이름 -->
+    <packaging>war</packaging>
+    <version>1.0.0-BUILD-SNAPSHOT</version>
+    
 	<properties>
 		<java-version>1.6</java-version> <!-- 사용 자바 버전 -->
        
         <!-- 사용 스프링 프레임워크 버전 정보 -->
-		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+		<org.springframework-version>4.2.5.RELEASE</org.springframework-version>
 		
         <!-- PARC에서 개발한 자바 프로그래밍 언어용 관점 지향 프로그래밍 (AOP) 확장 기능 -->
         <org.aspectj-version>1.6.10</org.aspectj-version>
@@ -33,7 +31,15 @@
          <id>oracle</id> 
          <name>ORACLE JDBC Repository</name> 
          <url>http://maven.jahia.org/maven2</url> 
-      </repository> 
+      </repository>
+      
+     <repository>
+		<id>mesir-repo</id>
+		<url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
+	</repository>
+	
+	
+       
 	</repositories> 
 
 
@@ -135,14 +141,21 @@
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
 	
         <!-- 위 dependency들은 기본 생성 Spring Legacy project 기본 생성 dependency-->
         <!-- 아래부터는 자주 쓰는 dependency를 추가 한 것 -->
+		
+
+		
+		<!-- websocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>4.3.1.RELEASE</version>
+		</dependency>
+		
+		
+
 		
         <!-- Tiles -->
 		<dependency>
@@ -175,27 +188,143 @@
   			<version>1.2.2</version>
   		</dependency>
   		
+  		
+	
+ 		<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+
+	<!-- Spring Security -->
+
 		<dependency>
-    		<groupId>org.springframework</groupId>
-    		<artifactId>spring-jdbc</artifactId>
-    		<version>4.2.3.RELEASE</version>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.0.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.0.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>4.0.1.RELEASE</version>
 		</dependency>
 
-  		<dependency> 
-	     	<groupId>com.oracle</groupId> 
-	     	<artifactId>ojdbc6</artifactId> 
-	     	<version>12.1.0.1</version> 
-	     	<scope>runtime</scope> 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
 		</dependency>
-
+			
 		<!-- Test -->
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.7</version>
+         <scope>test</scope>
+      </dependency>     
+      
+      <!-- 메일 발송 지원 기능 포함 -->
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context-support</artifactId>
+          <version>${org.springframework-version}</version>
+      </dependency>
+      
+      <!-- Java Mail API -->
+      <dependency>
+          <groupId>javax.mail</groupId>
+          <artifactId>mail</artifactId>
+          <version>1.4.3</version>
+      </dependency>   
+      
+      <!-- Velocity 설정 -->
+      <dependency>
+          <groupId>org.apache.velocity</groupId>
+          <artifactId>velocity</artifactId>
+          <version>1.7</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.velocity</groupId>
+          <artifactId>velocity-tools</artifactId>
+          <version>2.0</version>
+      </dependency>
+      <dependency>
+          <groupId>velocity</groupId>
+          <artifactId>velocity-dep</artifactId>
+          <version>1.4</version>
+      </dependency>
+
+		<!-- 구글아이디연동 -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.7</version>
-			<scope>test</scope>
-		</dependency>        
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-google</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.3</version>
+		</dependency>
+		
+		<!--AWS  -->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk</artifactId>
+		    <version>1.11.358</version>
+		</dependency>
+
+		<!-- File Upload 작업 -->
+		<dependency>
+    		<groupId>commons-fileupload</groupId>
+    		<artifactId>commons-fileupload</artifactId>
+    		<version>1.2.1</version>
+		</dependency>
+		<!-- File 쓰기 작업 -->
+		<dependency>
+    		<groupId>commons-io</groupId>
+    		<artifactId>commons-io</artifactId>
+    		<version>1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>servlets.com</groupId>
+			<artifactId>cos</artifactId>
+			<version>05Nov2002</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<!-- 엑셀 추출 -->
+		<dependency>
+		 <groupId>org.apache.poi</groupId>
+		 <artifactId>poi</artifactId>
+		 <version>3.7</version>
+		</dependency>    
+		
+		<dependency>
+		 <groupId>org.apache.poi</groupId>
+		 <artifactId>poi-ooxml</artifactId>
+		 <version>3.7</version>
+		</dependency>
+		       
 	</dependencies>
+
+
 
     <build>
         <plugins>
@@ -229,6 +358,8 @@
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
+
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>

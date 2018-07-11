@@ -1,0 +1,78 @@
+.project-page-table{
+	width:95%;
+}
+.project-page-table>thead>tr>th {
+	text-align: center;
+	background-color: #e6e7e8;
+	color:#978d8b;
+	overflow: hidden;
+}
+.project-table-tr-steps {
+	
+	background-color: #8d949a0f;
+	font-weight: bold;
+}
+.project-table-tr-steps>td {
+	vertical-align: middle !important;
+}
+.project-table-td-tstatus {
+	text-align:center;
+	color:white;
+}
+.project-table-tr-folders {
+	background-color:#66696b1c;
+	font-weight: bold;
+}
+.project-table-day {
+	text-align:center;
+}
+
+.project-page-table-title {
+	width: 60%;
+}
+.project-page-table>thead>tr>th {
+	text-align: center;
+	padding-bottom: 10px;
+	background-color: #e6e7e8;
+	color:black;
+	overflow: hidden;
+}
+
+.project-table-tr-tasks:hover {
+	cursor:pointer;
+	background-color: #e0e0e0;
+}
+.project-table-duration {
+	text-align:center;
+}
+.project-page-table>tbody {
+	font-size: 13px;
+}
+.project-table-content {
+	overflow-y: hidden; 
+}
+
+#proejct-page-table-no-data{
+	float: inherit;
+}
+#proejct-page-table-img {
+	width: 30%;
+}
+#proejct-page-table-no-data-content {
+	font-size: 30px;
+	font-weight: bold;
+}
+.project-table-member-image{
+	width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.project-table-member-td {
+	padding-left: 6% !important;
+}
+.project-table-member-td:hover {
+	cursor:pointer;
+	background-color: #e0e0e0;
+}

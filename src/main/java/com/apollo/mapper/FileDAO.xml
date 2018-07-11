@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apollo.project.dao.FileDAO">
+	<select id="selectFileListByProjectId" parameterType="Integer" resultType="com.apollo.vo.FileDTO">
+		select f.FILENAME, t.TNAME, s.SNAME, f.FILEID, t.TID, s.sid 
+		from project p join task t on p.pid = t.pid 
+					   join files f on t.tid = f.tid 
+					   join taskinstep ts on t.tid = ts.tid 
+					   join step s on ts.sid = s.sid 
+		where t.pid = #{pid}
+	</select>
+	
+	<delete id="filesDeleteByFileId" parameterType="Integer">
+    	delete from files where fileid = #{fileid}
+    </delete>
+</mapper>

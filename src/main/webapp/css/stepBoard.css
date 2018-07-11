@@ -1,0 +1,108 @@
+#board-sortable{
+   list-style-type: none;
+   margin: 0;
+    float: left; 
+   margin-right: 10px;
+   padding: 5px;
+   width: 270px;
+   height: 650px;
+   overflow: auto;
+}
+
+#board-sortable li{
+   margin: 10px;
+   padding: 5px;
+   font-size: 20px;
+   width: 220px;
+   text-align: center;
+   background: white;
+   border-style: outset;
+   overflow:hidden;
+   white-space:nowrap;
+   text-overflow:ellipsis; 
+   
+   
+}
+
+#board-content-md {
+   height: 100%;
+   
+}
+
+#board-main-div {
+   overflow-x: auto;
+   -ms-overflow-style: none;
+   max-width: calc(100% -250px);
+   height: 100%;
+   
+
+}
+
+#board-main-div::-webkit-scrollbar {
+
+display:none;
+
+}
+
+#board-status-div{
+   display: flex;
+   flex-wrap: nowrap;
+   flex-direction: row;
+   justify-content: flex-start;
+}
+
+#board-hr{
+   margin-right : 46px;
+   margin-top : -5px;
+   border: 0; 
+   height: 10px; 
+   width: 220px;
+}
+
+#board-status-name{
+   font-size: 25px;
+   color: black;
+   margin-right: 50px;
+   
+}
+
+.board-task-adder_containers{
+    box-sizing: border-box;
+    position: relative;
+    background-color: #fff;
+    }
+.board-task-adder{
+    background: url("../img/adder.png") no-repeat 49px center #fff;
+    display: block;
+    box-sizing: border-box;
+    padding: 6px 1px 10px 70px;
+    margin-left:15px;
+    height:50px;
+    width: 220px;
+    font-size: 20px;
+    line-height: 31px;
+    color: #5285b8;
+    cursor: pointer;
+    list-style: none;
+    border-style: outset;
+    }
+.board-task-adder-addmode{
+    border:1px solid black;
+    height:50px;
+    width: 220px;
+    display: block;
+    box-sizing: border-box;
+    padding: 8.5px 0px 0px 0px;
+    margin-left:15px;
+    width: 220px;
+    font-size: 13px;
+    line-height: 31px;
+    color: #5285b8;
+    border-top: 1px solid #e0e0e0;
+    cursor: pointer;
+    list-style: none;
+    }
+    .ui-sortable-handle:hover{
+       cursor:-webkit-grab;
+    }
+  
