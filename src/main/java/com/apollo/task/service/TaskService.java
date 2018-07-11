@@ -832,7 +832,6 @@ public class TaskService {
 				url = new URL(s3.getFileURL(bucketName, inputDirectory+fileName));
 				uCon = (HttpURLConnection) url.openConnection();
 				in = uCon.getInputStream(); // 이미지를 불러옴
-				System.out.println("여기탄다 8");
 			} catch (Exception e) {
 				url = new URL(s3.getFileURL(bucketName, "default.jpg"));
 				uCon = (HttpURLConnection) url.openConnection();

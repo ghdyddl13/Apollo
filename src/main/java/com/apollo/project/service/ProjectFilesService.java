@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apollo.project.dao.FileDAO;
+import com.apollo.utils.S3Util;
 import com.apollo.vo.FileDTO;
 
 @Service
@@ -14,6 +15,11 @@ public class ProjectFilesService {
 	
 	@Autowired
 	private SqlSession sqlsession;
+	
+	//S3 util 이용
+	S3Util s3 = new S3Util();
+	String bucketName = "projectapollo";
+	
 	
 	public ArrayList<FileDTO> selectFileListByProjectId(int pid){
 		ArrayList<FileDTO> result = null;
@@ -28,11 +34,14 @@ public class ProjectFilesService {
 		return result;
 	}
 	
-	public int filesDeleteByFileId(int fileid) {
+	public int filesDeleteByFileId(String filename) {
 		int result = 0;
+		FileDAO dao = sqlsession.getMapper(FileDAO.class);
+		String filepath = "resources/upload_files/" + filename;
+		
+		s3.fileDelete(bucketName, filepath);
 		try {
-			FileDAO dao = sqlsession.getMapper(FileDAO.class);
-			result = dao.filesDeleteByFileId(fileid);
+			result = dao.filesDeleteByFileId(filename);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
