@@ -56,7 +56,6 @@ public class MemberController {
 	private VelocityEngine velocityEngine;
 	
 	HttpSession session;
-
 	/**
 	 * 
 	 날      짜 : 2018. 7. 2.

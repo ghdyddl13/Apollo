@@ -11,7 +11,7 @@
 $(document).on("click",".Task_RUD_Modal",function(){
 	
 var inboxkind = $("#inboxkind").val();
-if(inboxkind != "starredtask"){
+if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 	
 	$(this).children().children(".inbox_newcheck").empty();
 	console.log($(this).children().children().children(".cmtid").val());
