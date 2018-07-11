@@ -47,6 +47,9 @@
 <!-- REPORT CSS  -->
 <link href="css/report.css" type="text/css" rel="stylesheet">
 
+<link rel="shortcut icon" href="img/FAVINEW.ico">
+<link rel="icon" href="img/FAVINEW.ico" sizes="16x16">
+
 
 <!--   JAVASCRIPT   -->
 <!--JQUERY CDN-->
