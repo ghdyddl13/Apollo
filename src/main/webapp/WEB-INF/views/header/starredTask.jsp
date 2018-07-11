@@ -4,7 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <script type="text/javascript">
- $(".modal-content3").hide();
+$(function() {
+	$(".modal-content3").hide();
+});
+
 </script>
 <script type="text/javascript" src="js/task.js"></script>
 <div class="main-body-container">
@@ -68,7 +71,7 @@
       
     <div class="starred-secondbody-image"></div>
         
-		<div class="modal-content2">
+		<div class="modal-content3">
 
 				<div class="modal-header">
 				<!-- row 1 -->

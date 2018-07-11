@@ -261,8 +261,6 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			        	   $('#Task_Modal_files').append(filesdivs);
 			        	   
 			        	   $(".starred-secondbody-image").hide();
-			        	   
-			        	   
 			        		$(".modal-content2").show();
 			        		$(".modal-content3").show();
 			        	   
