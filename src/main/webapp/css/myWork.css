@@ -64,7 +64,7 @@
   width: 100%;
   display: block;
   box-sizing: border-box;
-
+	cursor:pointer;
 }
 .mywork-main-task-wrapper{
   height: 50px;
