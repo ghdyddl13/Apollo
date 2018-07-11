@@ -3,6 +3,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<script type="text/javascript">
+ $(".modal-content3").hide();
+</script>
 <script type="text/javascript" src="js/task.js"></script>
 <div class="main-body-container">
   <div class="main-body-twopannel">
@@ -63,69 +66,73 @@
     <div class="main-body-twopannel-right">
      
       
-        <div class="starred-secondbody-image"></div>
+    <div class="starred-secondbody-image"></div>
         
-<div class="modal-content2">
+		<div class="modal-content2">
 
 				<div class="modal-header">
 				<!-- row 1 -->
-				<div class="row">
-					<div class="col-sm-10">
-						<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
-						<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">
+					<div class="row">
+						<div class="col-sm-10">
+							<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
+							<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">
+						</div>
+	
+						<div class="col-sm-2" id="star_trash">
+							<span id="span_task_star"></span>&nbsp&nbsp
+							<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
+							<button type="button" class="close" id="task_dismiss_btn_inbox">&times;</button>
+						</div>
+						
+						<div class="col-sm-12" id="Task_Modal_snames2">
+						</div>
+						<div id="step_names_popup_div2"></div>
+						<div id="step_delete_popup_div2"></div>
+						
 					</div>
-
-					<div class="col-sm-2" id="star_trash">
-						<span id="span_task_star"></span>&nbsp&nbsp
-						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp&nbsp&nbsp
-						<button type="button" class="close" id="task_dismiss_btn_inbox">&times;</button>
-					</div>
-					
-					<div class="col-sm-12" id="Task_Modal_snames2">
-					</div>
-					<div id="step_names_popup_div2"></div>
-					<div id="step_delete_popup_div2"></div>
-					
 				</div>
 				<!-- end row 1 -->
-				<hr>
 							
 							
 				<!-- row 2 -->
-				<div class="row">
-					<div class="col-sm-2">
+				<div class="task-modal-body">
+					<div class="task-modal-content-row">
+						<div class="task-modal-content-td">
 							<select id="Task_Modal_tstatus_selectbox_noredirect">
 							</select>
+						</div>
+						<div class="task-modal-content-td">
+		                    <span>시작일&nbsp:&nbsp</span>
+	                   		<input id="Task_Modal_sday_noredirect" readonly="readonly" type="text" name="sday" placeholder="Start Date" class="date date_sday_noredirect">
+						</div>
+						<div class="task-modal-content-td">
+							<span>종료일&nbsp:&nbsp</span>
+		                    <input id="Task_Modal_eday_noredirect" readonly="readonly" type="text" name="eday" placeholder="End Date" class="date date_eday_noredirect">
+						</div>
 					</div>	
-					<div class="col-sm-5">
-	                    <span>시작일&nbsp:&nbsp</span>
-                   		<input id="Task_Modal_sday_noredirect" type="text" name="sday" placeholder="Start Date" class="date date_sday_noredirect">
-					</div>
-					<div class="col-sm-5">
-						<span>종료일&nbsp:&nbsp</span>
-	                    <input id="Task_Modal_eday_noredirect" type="text" name="eday" placeholder="End Date" class="date date_eday_noredirect">
-					</div>
 				</div>
 				<!-- end row 2 -->
-				<hr>
 				
 				<!-- end modal-header -->
 
 				<div class="modal-body">
-
-					<div class="modal-title">업무 담당자</div><br />
-					<div id="Task_Modal_assignee"></div>
-					<div id="assignee_popup_div"></div>
-
+					<div class="task-modal-content-assignee">
+						<div class="modal-title">업무 담당자</div><br />
+						<div id="Task_Modal_assignee"></div>
+						<div id="assignee_popup_div"></div>
+					</div>
 								
-                <hr />
+        		<div class="task-modal-content-file">
 					<div class="modal-title">파일 업로드</div><br />
-	                <div id="Task_Modal_files"></div>
-	                <br>
-	                <input type="button" name="fileuploadbtn" id="fileuploadbtn" value="파일업로드">
-					<form  action="" method="post" >
-						<input style="display:none" type="file" name="member_image" id="fileuploadintaskmodal" data-url="uploadfileintaskmodal.htm">
-					</form>
+					<div class="task-modal-content-filelist-wrapper">
+		                <div id="Task_Modal_files"></div>
+		                <br>
+		                <a type="button" name="fileuploadbtn" id="fileuploadbtn">Click Here To Upload Your File</a>
+						<form  action="" method="post" >
+							<input style="display:none" type="file" name="member_image" id="fileuploadintaskmodal" data-url="uploadfileintaskmodal.htm">
+						</form>
+					</div>
+				</div>	
 				    <script type="text/javascript">
 						 $(function(){
 							 
@@ -133,14 +140,9 @@
 								dataType:"json",
 								add:function(e,data){
 					                var uploadFile = data.files[0];
-					                var isValid = true;
-					                if (!(/png|jpe?g|gif|svg/i).test(uploadFile.name)) {
-					                    alert('png, jpg, gif 만 가능합니다');
-					                    isValid = false;
-					                }
-					                if (isValid) {
-					                    data.submit();
-					                }
+
+					                data.submit();
+					                
 								},
 								done:function(e,data){
 									
@@ -154,12 +156,11 @@
 										        	   $('#Task_Modal_files').empty();
 										        	   var filesdivs = '';
 										        	   $(rdata.filelist).each(function(){
-										        		   
-										        	   var shortfilename = this.filename.substring(37);
-										        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
-										        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
-										        	   filesdivs += '</div>'
-										        		  
+										        		   let strArray = this.filename.split('/');
+											        	   var shortfilename = strArray[2].substring(37);
+											        	   filesdivs += '<div class="filehover_div">' + '<a class="file_name" href="taskFileDownload.htm?filename='+this.filename+'" download>' + shortfilename + '</a>';
+											        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+											        	   filesdivs += '</div>'
 										        	   });
 										        	   $('#Task_Modal_files').append(filesdivs);
 										        	   
@@ -173,21 +174,29 @@
 						});
 					</script>
 					
+				 <hr>
+						<div class="modal-title">Sub Task</div><br />
+				
+				 <input type="text" name="pname" id="add_sub_task"
+							placeholder="Sub Task의 제목을 입력 후 Enter..."
+							class="text ui-widget-content ui-corner-all"><br><br>
+				 <div id="Task_Modal_subtasks"></div><br>
                 <hr />
-                
-				<div class="modal-title">
-					<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
-					<div style="text-align:center">
-					<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
+                <div class="task-modal-content-detail">
+					<div class="modal-title">
+						<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
+						<div style="text-align:center">
+						<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
+						</div>
 					</div>
 				</div>
-                <hr />
+                <hr/>
                 
 					<div class="modal-title">Comment</div><br />
 					<div id="Task_Modal_comments">
 					</div>
 					<hr>
-					<div id="project_member_popup_div2"></div>
+					<div id="project_member_popup_div2" class="project_member_popup"></div>
 					
 					<div id="div_for_comment_input_box2">
 					<input id="comment_input_box_in_taskmodal_noredirect" type="text" placeholder="코멘트를 입력 후 Enter..">
@@ -207,8 +216,9 @@
 			 	</div>
 			 	<!-- end modal-body -->
 				
-			</div>
+			
 		</div>
+		
         
       </div>
     </div>

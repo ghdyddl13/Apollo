@@ -1,6 +1,9 @@
 package com.apollo.task.service;
 
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,22 +16,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.amazonaws.util.IOUtils;
 import com.apollo.inbox.dao.InboxDAO;
 import com.apollo.member.dao.MemberDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.AssigneeDAO;
 import com.apollo.task.dao.CommentDAO;
-import com.apollo.task.dao.FileDAO;
+import com.apollo.task.dao.TaskFileDAO;
 import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.task.dao.TstatusDAO;
 import com.apollo.utils.DeleteFileUtils;
 import com.apollo.utils.DownloadFileUtils;
+import com.apollo.utils.MediaUtils;
+import com.apollo.utils.S3Util;
 import com.apollo.utils.UploadFileUtils;
 import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
@@ -53,6 +63,8 @@ public class TaskService {
 	@Autowired	
 	private SqlSession session;
 	
+	S3Util s3 = new S3Util();
+	String bucketName = "projectapollo";
 	
 	/**
 	 * 
@@ -662,11 +674,15 @@ public class TaskService {
 	 작성자명 : 김 정 권
 	 */
 	public LinkedList<filedataDTO> upLoadFileInTaskModal(int tid, MultipartHttpServletRequest request){
-		System.out.println("upLoadFileInTaskModal 서비스 실행");
+		//SQL 파일 입력
+		TaskFileDAO dao = session.getMapper(TaskFileDAO.class);
 		
-		String savepath= "resources/upload_files";
+		String savepath= "resources/upload_files/";
 		LinkedList<filedataDTO> files = new LinkedList<filedataDTO>();
 		filedataDTO filedata = null;
+		int pid = dao.findPidbyTid(tid);
+		
+		System.out.println("dao : " + pid);
 		
 		Iterator<String> itr =request.getFileNames();
 		MultipartFile mpf = null;
@@ -688,8 +704,7 @@ public class TaskService {
 			String filename =null;
 			String originalName = mpf.getOriginalFilename();
 			
-			//SQL 파일 입력
-			FileDAO dao = session.getMapper(FileDAO.class);
+
 			
 			FileDTO filedto = new FileDTO();
 			try {
@@ -697,7 +712,7 @@ public class TaskService {
 				filedata.setBytes(mpf.getBytes());
 				
 				//AWS S3에 파일 업로드
-				filename = UploadFileUtils.uploadFile(savepath, 0, originalName, mpf.getBytes());
+				filename = UploadFileUtils.uploadFile(savepath, pid, originalName, mpf.getBytes());
 				
 				//DB에 파일 정보 입력
 				filedto.setTid(tid);
@@ -728,7 +743,7 @@ public class TaskService {
 		
 		System.out.println("getFileList 서비스 실행");
 		ArrayList<FileDTO> filelist = new ArrayList();
-		FileDAO dao = session.getMapper(FileDAO.class);
+		TaskFileDAO dao = session.getMapper(TaskFileDAO.class);
 		filelist = dao.getFileList(tid);
 		
 		return filelist;
@@ -751,7 +766,7 @@ public class TaskService {
 		
 		System.out.println("파일 삭제 완전히 완료");		
 		
-		FileDAO dao = session.getMapper(FileDAO.class);
+		TaskFileDAO dao = session.getMapper(TaskFileDAO.class);
 		int result = dao.deleteFile(filename);
 		System.out.println("RDB 에서 파일 삭제 완료");
 		
@@ -781,6 +796,56 @@ public class TaskService {
 			e.printStackTrace();
 		}
 
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 10.
+	 기      능 : AWS에 파일 정보 가지고 오기
+	 작성자명 : 이 진 우
+	 */
+	public ResponseEntity<byte[]> getFileData(String fileName) throws Exception{
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		HttpURLConnection uCon = null;
+
+		String inputDirectory = "resources/upload_files/";
+
+
+
+
+		try {
+			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+			MediaType mType = MediaUtils.getMediaType(formatName);
+			HttpHeaders headers = new HttpHeaders();
+			URL url;
+			try {
+				if (mType != null) {
+					headers.setContentType(mType);
+				} else {
+					String realfileName = fileName.substring(fileName.indexOf("_") + 1);
+					headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+					headers.add("Content-Disposition",
+							"attachment; filename=\"" + new String(realfileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+					
+				}
+				
+				url = new URL(s3.getFileURL(bucketName, inputDirectory+fileName));
+				uCon = (HttpURLConnection) url.openConnection();
+				in = uCon.getInputStream(); // 이미지를 불러옴
+			} catch (Exception e) {
+				url = new URL(s3.getFileURL(bucketName, "default.jpg"));
+				uCon = (HttpURLConnection) url.openConnection();
+				in = uCon.getInputStream();
+			}
+
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		return entity;
 	}
 	
 }

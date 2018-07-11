@@ -10,8 +10,24 @@
  */
 $(document).on("click",".Task_RUD_Modal",function(){
 	
+var inboxkind = $("#inboxkind").val();
+if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
+	
+	$(this).children().children(".inbox_newcheck").empty();
+	console.log($(this).children().children().children(".cmtid").val());
+	console.log($(this).children().children(".inbox_mid2").val())
+	$.ajax({
+		url:"newcheck.htm",
+		type: 'POST',
+		data:{cmtid : $(this).children().children().children(".cmtid").val(),
+			  mid2 : $(this).children().children(".inbox_mid2").val()},
+		success:function(data){
+			
+		}
+	})
+}	
+	
 		var temptid = $(this).attr('id'); 
-		console.log(temptid.substring(0,6))
 		var tid =parseInt(temptid.substring(1));
 		
 		if(temptid.substring(0,6) =="srch-t"){
@@ -235,17 +251,20 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   $('#Task_Modal_files').empty();
 			        	   var filesdivs = '';
 			        	   $(rdata.filelist).each(function(){
-			        		   
-			        	   var shortfilename = this.filename.substring(37);
-			        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
-			        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
-			        	   filesdivs += '</div>'
+			        		   let strArray = this.filename.split('/');
+				        	   var shortfilename = strArray[2].substring(37);
+				        	   filesdivs += '<div class="filehover_div">' + '<a class="file_name" href="taskFileDownload.htm?filename='+this.filename+'" download>' + shortfilename + '</a>';
+				        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+				        	   filesdivs += '</div>'
 			        		  
 			        	   });
 			        	   $('#Task_Modal_files').append(filesdivs);
 			        	   
 			        	   $(".starred-secondbody-image").hide();
-			        		$(".modal-content2").show();	
+			        	   
+			        	   
+			        		$(".modal-content2").show();
+			        		$(".modal-content3").show();
 			        	   
 			           } // end-success
 			        } 
@@ -689,13 +708,15 @@ $(document).on("click",".task_page_delete_assignee_btn",function(){
 $(document).on("click","#task_modal_add_assignee",function(){
 	
 	var tid = $('#tidhidden').attr('value');
+	var pid = $('#pidhidden').attr('value');
 	
 	$.ajax(
 		       {
 		           type : "post",
 		           url  : "addtaskassigneemodalinfo.htm",
 		           data : {
-		        	    'tid': tid
+		        	    'tid': tid,
+		        	    'pid': pid
 		           },
 		           success : function(rdata){
 		        	   
@@ -858,7 +879,7 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 			           getCommentAndMemberlist();
 			           
 		        	   
-		        	  $('#task_dismiss_btn').click();
+		        	  //$('#task_dismiss_btn').click();
 		        	     
 	                  $("#main-box").empty();
 					  $("#main-box").append(rdata);
@@ -1122,14 +1143,25 @@ var getCommentAndMemberlist = (function (){
 		        	   
 		        	   $(rdata.commentandmemberlist).each(function(){
 		        		 
-		        		   comment_str += '<div class="wrapper_comment">' 
-		        		 //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
-		        		   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
-		        		   comment_str += '<div class="each_comment">';
-		        		   comment_str += '<div class="first_row">' + this.mname + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + this.cmtmtime + '</div>'
-		        		   comment_str += '<div class="second_row">' + this.comments + '</div>'
-		        		   comment_str += '</div>'
-	        			   comment_str += '</div><br><br>'
+		        		   if(this.mid ==$("#header-mid").val()){
+		        			   comment_str += '<div class="wrapper_comment wrapper_my_comment">' 
+	        				   //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
+	        				   comment_str += '<div class="each_comment my_each_comment">';
+		        			   comment_str += '<div class="first_row" align="right"><span class="comment-time-span">' + this.cmtmtime + '</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + this.mname + '</div>'
+		        			   comment_str += '<div class="second_row my_second_row" align="right">' + this.comments + '</div>'
+		        			   comment_str += '</div>'
+	        				   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
+	        				   comment_str += '</div><br>'
+		        		   }else{
+		        			   comment_str += '<div class="wrapper_comment">' 
+	        				   //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
+	        				   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
+		        			   comment_str += '<div class="each_comment">';
+		        			   comment_str += '<div class="first_row">' + this.mname + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span class="comment-time-span">' + this.cmtmtime + '</span></div>'
+		        			   comment_str += '<div class="second_row">' + this.comments + '</div>'
+		        			   comment_str += '</div>'
+	        				   comment_str += '</div><br>'
+		        		   }
 	        				   
 	        				   
 		        	   });
@@ -1197,6 +1229,8 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
                  $('#project_member_popup_div').css("top",position.top-popupdiv_height+23);
                  $("#project_member_popup_div").css("background-color","#FFFFFF")
                  $('#project_member_popup_div').css("display","block");
+                 
+                
                  
                } // end-success
             }); // end-ajax
@@ -1333,6 +1367,10 @@ $(document).on("keyup","#comment_input_box_in_taskmodal2",function(){
 			           $('#comment_input_box_in_taskmodal2').val('');
 			           $('#comment_input_box_in_taskmodal2').focus();
 		        	   
+			           send("inbox"); //웹 소켓 send 함수 추가
+					   event.stopPropagation();
+			           
+			           
 		           } // end-success
 		        }); // end-ajax
 
@@ -1512,7 +1550,7 @@ $(document).on("click","#fileuploadbtn",function() {
  기      능 : Task 모달 내 파일 다운
  작성자명 : 김 정 권
  */
-$(document).on("click",".file_name",function() {
+/*$(document).on("click",".file_name",function() {
 	
 	var filename = $(this).attr('id');
 	console.log('filename: ' + filename);
@@ -1520,7 +1558,7 @@ $(document).on("click",".file_name",function() {
 	location.href = 'downloadfileintaskmodal.htm?filename=' + filename;
 
 });
-
+*/
 
 /**
  * 
@@ -1548,10 +1586,11 @@ $(document).on("click",".file_del_btn",function() {
 		        	   var filesdivs = '';
 		        	   $(rdata.filelist).each(function(){
 		        		   
-		        	   var shortfilename = this.filename.substring(37);
-		        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
-		        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
-		        	   filesdivs += '</div>'
+		        		   let strArray = this.filename.split('/');
+			        	   var shortfilename = strArray[2].substring(37);
+			        	   filesdivs += '<div class="filehover_div">' + '<a class="file_name" href="taskFileDownload.htm?filename='+this.filename+'" download>' + shortfilename + '</a>';
+			        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+			        	   filesdivs += '</div>'
 		        		  
 		        	   });
 		        	   $('#Task_Modal_files').append(filesdivs);
@@ -1799,7 +1838,7 @@ $(document).on("click",".popup_sid2",function(){
 		        		        	$(rdata.steplist).each(function(){
 		        		        	snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + this.sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn2" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
 		        		        	});
-		        		        	snames += '<i id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+		        		        	snames += '<i id="task_modal_add_step_noredirect" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 		        		        	$('#Task_Modal_snames2').append(snames);
 		        		        	
 		        		           } // end-success
@@ -1815,7 +1854,7 @@ $(document).on("click",".popup_sid2",function(){
  기      능 : 테스크 모달 내 코멘트 입력 부분(인풋태그)에서 작동하는 함수 + no redirect
  작성자명 : 김 정 권
  */
-$(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
+$(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(event){
 	
 	var usermid = $('#usermidhidden2').attr('value');
 	
@@ -1859,10 +1898,12 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
                  let popupdiv_height = $('#project_member_popup_div2').height();
                  
                  let position = $('#comment_input_box_in_taskmodal_noredirect').position();
-                 $('#project_member_popup_div2').css("left",position.left-popupdiv_width+150);
+                 $('#project_member_popup_div2').css("left",0);
                  $('#project_member_popup_div2').css("top",position.top-popupdiv_height-20);
                  $("#project_member_popup_div2").css("background-color","#FFFFFF")
                  $('#project_member_popup_div2').css("display","block");
+                 
+                 
                  
                } // end-success
             }); // end-ajax
@@ -1887,7 +1928,7 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
 	   console.log(comments);
 	   if(comments != ""){
 		   $.when(insertCommentReceiver(tid,comments)).done(function(data){
-			   send(); //웹 소켓 send 함수 추가
+			   send("inbox"); //웹 소켓 send 함수 추가
 			   event.stopPropagation();
 			   $('#comment_input_box_in_taskmodal_noredirect').val('');
 		   });
@@ -1952,3 +1993,23 @@ $(document).on("click","#receivermid2",function(){
 	 $('#comment_input_box_in_taskmodal_noredirect').focus();
 	
 });
+
+
+/**
+ * 
+ 날      짜 : 2018. 7. 9
+ 기      능 : @를 이용한 회원 태그목록 닫아주는 함수
+ 작성자명 : 박 민 식
+ */
+$(document).bind("mousedown", function(e) {
+	console.log("a")
+	// If the clicked element is not the menu
+	if (!$(e.target).parents(".project_member_popup").length > 0) {
+
+		// Hide it
+		$(".project_member_popup").hide();
+	}
+	
+});
+
+

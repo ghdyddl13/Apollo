@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.apollo.task.dao.FileDAO">
+<mapper namespace="com.apollo.task.dao.TaskFileDAO">
 	
 	<insert id="upLoadFileInTaskModal" parameterType="com.apollo.vo.FileDTO">
 		insert into files values (seq_fileid.nextval, #{tid}, #{filename})
@@ -15,5 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteFile">
 		delete from files where filename = #{filename}
 	</delete>
-	
+	   <select id="findPidbyTid" parameterType="Integer" resultType="Integer">
+    	select pid from task where tid = #{tid}
+    </select>
 </mapper>

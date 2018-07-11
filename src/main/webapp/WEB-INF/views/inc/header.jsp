@@ -51,6 +51,7 @@
 						</c:otherwise>
 					</c:choose> 
 					<a id="header-user-name" class="nav-link dropdown-toggle"data-toggle="dropdown" style="color: white"> ${m.mname}님</a>
+					<input type="hidden" value= "${m.mid}" id="header-mid">
 					<ul class="dropdown-menu">
 						<li id="header-introduce"><a>Apollo</a></li>
 						<li data-toggle="modal" data-target="#edit-profile"

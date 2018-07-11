@@ -11,21 +11,7 @@ $(function() {
 	});
 	
 	
-	$(".modal-content2").hide();
-	$(".Task_RUD_Modal").click(function(evt) {
-		$(this).children().children(".inbox_newcheck").empty();
-		console.log($(this).children().children().children(".cmtid").val());
-		console.log($(this).children().children(".inbox_mid2").val())
-		$.ajax({
-			url:"newcheck.htm",
-			type: 'POST',
-			data:{cmtid : $(this).children().children().children(".cmtid").val(),
-				  mid2 : $(this).children().children(".inbox_mid2").val()},
-			success:function(data){
-				
-			}
-		})
-	});
+
 	
 	
 		$(document).on("click","#incomming-page",function(evt){	

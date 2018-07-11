@@ -350,11 +350,17 @@ public class MemberService {
 	 작성자명 : 이 진 우
 	 */
 	public LinkedList<filedataDTO> memberProfileUpdate(String mid, MultipartHttpServletRequest request){
-		System.out.println("프로필 수정하는 함수 도착");
 		String savepath= "resources/member_profile";
 		LinkedList<filedataDTO> files = new LinkedList<filedataDTO>();
 		filedataDTO filedata = null;
+		//SQL 파일 입력
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		
+		String image = dao.findMemberImage(mid);
+		if(!image.equals("user.png")) {
+			System.out.println("데이터를 지웠습니다");
+			s3.fileDelete(bucketName, savepath+"/"+image);
+		}
 		Iterator<String> itr =request.getFileNames();
 		MultipartFile mpf = null;
 		while(itr.hasNext()) {
@@ -375,8 +381,7 @@ public class MemberService {
 			String filename =null;
 			String originalName = mpf.getOriginalFilename();
 			
-			//SQL 파일 입력
-			MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+
 			MemberDTO member = new MemberDTO();
 			try {
 				//FILE DATADTO에 바이트 정보 입력
@@ -417,7 +422,12 @@ public class MemberService {
 	}
 	
 	
-	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 10.
+	 기      능 : AWS에서 이미지 가지고 오는 함수
+	 작성자명 : 이 진 우
+	 */
 	public ResponseEntity<byte[]> getMemberImage(String fileName) throws Exception{
 		InputStream in = null;
 		ResponseEntity<byte[]> entity = null;

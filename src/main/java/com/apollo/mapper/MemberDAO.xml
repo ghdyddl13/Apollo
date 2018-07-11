@@ -16,9 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertMember"
 		parameterType="com.apollo.vo.MemberDTO">
 		insert into member(mid, mname, pwd, rday, pnum,
-		deptname, apollokey, position, emailcheckkey)
+		deptname, apollokey, position, emailcheckkey, image)
 		values(#{mid}, #{mname}, #{pwd},
-		sysdate, #{pnum}, #{deptname}, #{apollokey}, #{position}, #{emailcheckkey})
+		sysdate, #{pnum}, #{deptname}, #{apollokey}, #{position}, #{emailcheckkey},'uesr.png')
 	</insert>
 	<select id="getLogin" resultType="String">
 		select pwd from member where mid=#{mid}
@@ -151,5 +151,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set image =#{image}
 		where mid = #{mid}
 	</update>
+
+	<!-- MID로 맴버의 이미지 이름을 가지고 온다  -->
+	<select id="findMemberImage" parameterType="String" resultType="String">
+		select image from member where mid=#{mid}
+	</select>
+
+	<delete id="deletePmember" parameterType="com.apollo.vo.MidpidDTO">
+		delete pmember where mid= #{mid} and pid=#{pid}
+	</delete>
 
 </mapper>

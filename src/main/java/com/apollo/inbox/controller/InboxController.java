@@ -26,7 +26,6 @@ public class InboxController {
 	
 	@Autowired
 	private InboxService service;
-	
 	/**
 	 * 
 	 날      짜 : 2018. 7. 3.

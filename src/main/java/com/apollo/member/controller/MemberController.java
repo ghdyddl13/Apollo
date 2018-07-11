@@ -56,7 +56,6 @@ public class MemberController {
 	private VelocityEngine velocityEngine;
 	
 	HttpSession session;
-
 	/**
 	 * 
 	 날      짜 : 2018. 7. 2.
@@ -471,11 +470,9 @@ public class MemberController {
 	 작성자명 : 김 래 영
 	 */
 	@RequestMapping("/updatememberinfo.htm")
-	public View updateMemberInfo(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+	public View updateMemberInfo(HttpServletRequest request, Model model) {
 		String mid = (String) request.getSession().getAttribute("mid");
-		model.addAttribute("mid", mid);
 		MemberDTO updatememberinfo = null;
-		
 		try {
 			updatememberinfo = service.updateMemberInfo(mid);
 			model.addAttribute("updatememberinfo", updatememberinfo);

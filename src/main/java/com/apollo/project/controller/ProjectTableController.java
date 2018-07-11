@@ -33,9 +33,7 @@ public class ProjectTableController {
 	
 	@Autowired 
 	private ProjectInfoService projectinfoservice;
-	
-	@Autowired 
-	private MemberService memberservice;
+
 
 	
 	/**
@@ -46,11 +44,9 @@ public class ProjectTableController {
 	 */
 	@RequestMapping("/table.htm")
 	public String projectTable(HttpServletRequest request, Model model, HttpSession session) {	
-		
 		session.setAttribute("location", "/table.htm");
 		
 		int pid = (Integer) request.getSession().getAttribute("pid");
-		//String mid = (String) request.getSession().getAttribute("mid");
 		
 		ArrayList<Integer> pids = new ArrayList<Integer>();
 		pids.add(pid);
@@ -61,7 +57,6 @@ public class ProjectTableController {
 			ArrayList<StepDTO> steplist = null; // pid 에 속한 step 가져오기
 			steplist = tableservice.getStepInProject(pid);
 			model.addAttribute("steplist", steplist);
-			
 			
 
 			ArrayList<FolderDTO> folderlist = null; // pid 에 속한 folder 가져오기
@@ -90,7 +85,6 @@ public class ProjectTableController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return "project/table";
 	}
 	

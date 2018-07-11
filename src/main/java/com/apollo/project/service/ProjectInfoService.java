@@ -174,5 +174,21 @@ public class ProjectInfoService {
 		return projectinfo;
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 10.
+	 기      능 : 프로젝트 참여 멤버 삭제하는 함수 
+	 작성자명 : 박 민 식
+	 */
+	public int deletePmember(MidpidDTO midpid) {
+		int result = 0;
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		try {
+			result = dao.deletePmember(midpid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 }

@@ -112,21 +112,15 @@ $(function() {
 	$('#header-introduce').click(function() {
 		location.href="index.htm";
 	});
+	
 	// 헤더에서 우상단 개인정보수정 클릭시 실행되는 함수
 	// 헤더 개인정보수정 Modal
 	$('#header-profile-edit').click(function(evt) {
-		var mid = $('#edit-profile-mid').val(mid);
-		
 		
 		$.ajax({
 			url:"updatememberinfo.htm",
-			data:{mid:mid},
 			dataType:"json",
 			success:function(data) {
-				//var image = (data.updatememberinfo.image)?data.updatememberinfo.image :"img/user_image.png"
-				//$('#edit-profile-modal-img').attr("src",image);
-				$('.profile-modal-text-mname').text(data.updatememberinfo.mname);
-				$('.profile-modal-text-mid').text(data.updatememberinfo.mid);
 				$('#edit-profile-mname').val(data.updatememberinfo.mname);
 				$('#edit-profile-mid').val(data.updatememberinfo.mid);
 				$('#edit-profile-apollokey').val(data.updatememberinfo.apollokey);
@@ -159,10 +153,11 @@ $(function() {
 					alert('개인정보수정에 실패되었습니다');
 				}
 				$(".close").click();
-				
+				window.location.reload();
 			} // end - success
 		}); // end- ajax
 		$("#edit-profile-form").submit();
+		
 	}); // end - click
 
 	
@@ -550,7 +545,7 @@ function resultSearchProject(projectlist){
  작성자명 : 박 민 식
  */
  function makeSearchTaskDiv(task,inboxkind){
-		 var div =jQuery("<div>",{"class":"search-item-box Task_RUD_Modal search-item-task row "});
+		 var div =jQuery("<div>",{"class":"search-item-box search-item-task row "});
 
 	 	
 
