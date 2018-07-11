@@ -207,16 +207,7 @@ public class SidebarController {
 		return jsonview; 
 		
 	}
-	/*
-	 날      짜 : 2018. 6. 20.
-	 기      능 : 프로젝트가 없을 때 실행되는 함수
-	 작성자명 : 김 래 영
-	 */
-	@RequestMapping("/noproject.htm")
-	public String noproject() {
-		return "project/noproject";
-		
-	}
+
 	/**
 	 * 
 	 날      짜 : 2018. 6. 20.
