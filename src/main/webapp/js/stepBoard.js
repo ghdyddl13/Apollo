@@ -7,9 +7,10 @@
  */
 function addTaskView(tstatusid){
    $("#task-adder"+tstatusid).remove();
-   let inputtag="<div class='board-task-adder-addmode'><input class='form-control' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
-    $("#body-start"+tstatusid).prepend(inputtag);
-    $("#insert-task"+tstatusid).focus();
+   let inputtag="<div class='board-task-adder-addmode'><input class=' board-add-task-input' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
+   $("#body-start"+tstatusid).prepend(inputtag);
+  
+   $("#insert-task"+tstatusid).focus().css("outline","none");
 }
 
 /**
@@ -58,8 +59,8 @@ function addTask_focusout(tstatusid){
    let newtask=$.trim($('#insert-task'+tstatusid).val());
    let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
    if(newtask===""){
-       $(".board-task-adder-addmode").remove();
-       $("#body-start"+tstatusid).prepend(addtag);
+	  $(".board-task-adder-addmode").remove();
+      $("#body-start"+tstatusid).prepend(addtag);
    }else{
          $.ajax({
               url : "boardInsertTask.htm",
@@ -130,33 +131,30 @@ function addTask_focusout(tstatusid){
 	   console.log("test")
 	   autoWidth();
 	     sortable();
-	    $('#board-content-md').draggable(
+	     
+	    
+	     $('#board-content-md').draggable(
 	            {
 	               axis: "x"
 	          },{
 	              stop: function() {
-	                  
-	                  var left = $('#board-content-md')[0].offsetLeft
-	                  console.log("left : " + left);
-	                  var maxwidth = $(window).width() - $('#board-content-md').width()
-	                  if(left > 0){
-	                      $('#board-content-md').css('left','0px')
-	                     
-	                  }else if($(window).width() > $('#board-content-md').width()){
-	                      if(left < 0){ //화면크기가 div길이보다 크고 left가 0보다 작으면!!
-	                          $('#board-content-md').css('left','0px')
-	                      }
-	                     }else if($(window).width() < $('#board-content-md').width()){
-	                      if(left < maxwidth){ //화면크기가 div길이보다 작고 left가 maxwidth보다 작으면!!
-	                          $('#board-content-md').css('left',maxwidth-80)
-	                      }
-	                  }
-	                  $('#board-content-md').off('mousemove')
+	            	  	var board = $('#board-content-md').offset();
+		                var board_container = $($('#board-content-md').parents()[0]).offset();
+		                var board_width=$('#board-content-md').width();
+		                var board_container_width=$($('#board-content-md').parents()[0]).width();
+		                var right_border= board_width - board_container_width;
+		                var diff_left= board_container.left -board.left;
+		                if(board_container.left <=board.left){
+		                	 $('#board-content-md').offset({left:board_container.left});
+		                }else if(diff_left >= right_border){
+		                	$('#board-content-md').offset({left:board_container.left-right_border});
+		                }
+	          
 	              }
 	          }
 	      ) 
    }
    
-
+  
       
      
