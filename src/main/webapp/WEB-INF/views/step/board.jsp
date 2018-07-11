@@ -11,12 +11,12 @@
 				<jsp:include page="/WEB-INF/views/inc/stepInsideHeader.jsp"></jsp:include>
 				<div class="main-body-onepannel-header-bottom"></div>
 			</div>
-			<div class="main-body-onepannel-body">
-				<div class="container-fluid" id="board-main-div">
-					<div class="container-fluid" id="board-content-md">
-						<div class="container-fluid" id="board-status-div">
+			<div class="main-body-onepannel-body board-main-wrapper">
+				<div  id="board-main-div">
+					<div id="board-content-md">
+						<div id="board-status-div">
 							<c:forEach var="b" items="${b}">
-								<div>
+								<div class="board-item-wrapper">
 									<p align="center" id="board-status-name">${b.tstatus}
 										<input type="hidden" value="${b.tstatusid}">
 									</p>
@@ -30,7 +30,7 @@
 												value="${b.tstatusid}"> New Task
 										</div>
 									</div>
-									<ul id="board-sortable" class="tstatuslist">
+									<ul id="board-sortable" class="tstatuslist" >
 										<c:forEach var="t" items="${t}">
 											<c:choose>
 												<c:when test="${b.tstatus eq t.tstatus}">
