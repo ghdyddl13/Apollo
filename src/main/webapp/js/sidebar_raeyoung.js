@@ -113,6 +113,11 @@ $(function() {
                 }else {
                     alert('스텝 수정이 실패되었습니다');
                 }
+                $("#update-step-name").val("");
+                $("#update-step-mgr-assignee").val("");
+                $("#update-step-sday-id").val("");
+                $("#update-step-eday-id").val("");
+                $("#update-step-detail").val("");
                 $('.close').click();
             }
         }); // end - ajax

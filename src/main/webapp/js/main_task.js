@@ -11,7 +11,7 @@
 $(document).on("click",".Task_RUD_Modal",function(){
 	
 var inboxkind = $("#inboxkind").val();
-if(inboxkind != "starredtask"){
+if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 	
 	$(this).children().children(".inbox_newcheck").empty();
 	console.log($(this).children().children().children(".cmtid").val());
@@ -1143,14 +1143,25 @@ var getCommentAndMemberlist = (function (){
 		        	   
 		        	   $(rdata.commentandmemberlist).each(function(){
 		        		 
-		        		   comment_str += '<div class="wrapper_comment">' 
-		        		 //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
-		        		   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
-		        		   comment_str += '<div class="each_comment">';
-		        		   comment_str += '<div class="first_row">' + this.mname + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + this.cmtmtime + '</div>'
-		        		   comment_str += '<div class="second_row">' + this.comments + '</div>'
-		        		   comment_str += '</div>'
-	        			   comment_str += '</div><br><br>'
+		        		   if(this.mid ==$("#header-mid").val()){
+		        			   comment_str += '<div class="wrapper_comment wrapper_my_comment">' 
+	        				   //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
+	        				   comment_str += '<div class="each_comment my_each_comment">';
+		        			   comment_str += '<div class="first_row" align="right"><span class="comment-time-span">' + this.cmtmtime + '</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + this.mname + '</div>'
+		        			   comment_str += '<div class="second_row my_second_row" align="right">' + this.comments + '</div>'
+		        			   comment_str += '</div>'
+	        				   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
+	        				   comment_str += '</div><br>'
+		        		   }else{
+		        			   comment_str += '<div class="wrapper_comment">' 
+	        				   //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
+	        				   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
+		        			   comment_str += '<div class="each_comment">';
+		        			   comment_str += '<div class="first_row">' + this.mname + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span class="comment-time-span">' + this.cmtmtime + '</span></div>'
+		        			   comment_str += '<div class="second_row">' + this.comments + '</div>'
+		        			   comment_str += '</div>'
+	        				   comment_str += '</div><br>'
+		        		   }
 	        				   
 	        				   
 		        	   });
@@ -1843,7 +1854,7 @@ $(document).on("click",".popup_sid2",function(){
  기      능 : 테스크 모달 내 코멘트 입력 부분(인풋태그)에서 작동하는 함수 + no redirect
  작성자명 : 김 정 권
  */
-$(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
+$(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(event){
 	
 	var usermid = $('#usermidhidden2').attr('value');
 	
@@ -1887,7 +1898,7 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
                  let popupdiv_height = $('#project_member_popup_div2').height();
                  
                  let position = $('#comment_input_box_in_taskmodal_noredirect').position();
-                 $('#project_member_popup_div2').css("left",position.left-popupdiv_width+200);
+                 $('#project_member_popup_div2').css("left",0);
                  $('#project_member_popup_div2').css("top",position.top-popupdiv_height-20);
                  $("#project_member_popup_div2").css("background-color","#FFFFFF")
                  $('#project_member_popup_div2').css("display","block");
@@ -1982,3 +1993,23 @@ $(document).on("click","#receivermid2",function(){
 	 $('#comment_input_box_in_taskmodal_noredirect').focus();
 	
 });
+
+
+/**
+ * 
+ 날      짜 : 2018. 7. 9
+ 기      능 : @를 이용한 회원 태그목록 닫아주는 함수
+ 작성자명 : 박 민 식
+ */
+$(document).bind("mousedown", function(e) {
+	console.log("a")
+	// If the clicked element is not the menu
+	if (!$(e.target).parents(".project_member_popup").length > 0) {
+
+		// Hide it
+		$(".project_member_popup").hide();
+	}
+	
+});
+
+
