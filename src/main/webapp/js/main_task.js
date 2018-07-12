@@ -43,7 +43,8 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			        	   'tid': tid
 			           },
 			           beforeSend:function(){
-			   			$('#right').append(loadingpage);
+			        	var loadinggif = '<div id="loading" class="loading_third"><img style="width:auto;height:100px;border-radius:50%"id="loading_img" alt="loading" src="img/rocket_3.gif" /></div>';
+			   			$('#right').append(loadinggif);
 			   			},
 			           success : function(rdata){
 			        	   console.log('성공!')

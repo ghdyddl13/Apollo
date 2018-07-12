@@ -130,7 +130,6 @@ public class StepListController {
 	public View memberlist(int sid, ModelMap map) {
 		ArrayList<MemberDTO> memberlist = service.listProjectMemberList(sid);
         map.addAttribute("memberlist",memberlist);
-        //System.out.println(memberlist.toString());
 		return jsonview;
 	}
 	/**

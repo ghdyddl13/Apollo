@@ -55,6 +55,11 @@
   width: 32px;
   height: 32px;
 }
+.starred-body-task-hidden-imagetag{
+  border-radius:3px;
+  width: 32px;
+  height: 32px;
+}
 .starred-body-task-container{
   display: flex;
   flex-direction: column;
@@ -168,4 +173,33 @@
   background-image: url(../img/rocket.png);
   background-position: 50% 40%;
   background-size: contain;
+}
+.starred-body-task-member-hidden{
+	z-index:12;
+	background: #f5f8fc;
+	text-align:center;
+	border-radius: 10px;
+	position: absolute;
+	box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+	margin-left:10px;
+	width: 32px;
+	height: 32px;
+	border-radius: 2px;
+	display:none;
+}
+.starred-body-task-hidden-wrapper {
+	display: flex;
+	z-index:12;
+	background: #f5f8fc;
+	text-align:center;
+	border-radius: 10px;
+	padding:10px;
+	position: absolute;
+	box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+	
+}
+.starred-noassignee-icon-container {
+	height: 30px;
+    width: 30px;
+}
 }
