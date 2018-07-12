@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!DOCTYPE html>
 <script type="text/javascript" src="js/task.js"></script>
+
+
+<div id="mywork-member-popup-div" class="mywork-member-popup">
+
+</div>
+
 <div class="main-body-container">
     <div class="main-body-twopannel">
       <div class="main-body-twopannel-left">
@@ -34,8 +41,28 @@
 	                    <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${todaytask.tid}">
 	                      <div class="mywork-main-task-checkbox"></div>
 		                    <div class="mywork-main-task-members">
-		                      <img class="mywork-main-task-member" src="img/user.png" alt="">
-		                    </div>
+		                    	<c:choose>
+		                    		<c:when test="${empty todaytask.members}">
+			                    		<div class="mywork-main-task-member">
+			                    			<div class="noassignee-icon-container">
+	                      						<i class="fas fa-user-plus no-assignee-task-icon"></i>
+	                      					</div>
+	                      				</div>
+		                    		</c:when>
+		                    	<c:otherwise>
+									<c:forEach var="today_member" items="${todaytask.members}" end="0">
+										<img class="mywork-main-task-member" src='displayImage.htm?image=${today_member.image}'>
+										<div class="mywork-main-task-member-hidden">
+											<div class="today_member_hidden-wrapper">
+												<c:forEach var="today_member_hidden" items="${todaytask.members}">
+													<img class="mywork-main-task-member-hidden-img" src='displayImage.htm?image=${today_member_hidden.image}'>
+												</c:forEach>
+											</div>
+										</div>
+									</c:forEach>
+								</c:otherwise>
+								</c:choose>
+							</div>
 		                    <c:choose>
 								<c:when test="${todaytask.overdue=='overdue'}">
 									<div class="mywork-main-task-date date-overdue">${todaytask.date}</div>	
@@ -89,8 +116,17 @@
                    <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${thisweektask.tid}">
                      <div class="mywork-main-task-checkbox"></div>
                     <div class="mywork-main-task-members">
-                      <img class="mywork-main-task-member" src="img/user.png" alt="">
-                    </div>
+						<c:forEach var="thisweektask_member" items="${thisweektask.members}" end="0">
+							<img class="mywork-main-task-member" src='displayImage.htm?image=${thisweektask_member.image}'>
+							<div class="mywork-main-task-member-hidden">
+								<div class="today_member_hidden-wrapper">
+									<c:forEach var="thisweektask_member_hidden" items="${thisweektask.members}">
+										<img class="mywork-main-task-member-hidden-img" src='displayImage.htm?image=${thisweek_member_hidden.image}'>
+									</c:forEach>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
                     <c:choose>
 						<c:when test="${thisweektask.overdue=='overdue'}">
 							<div class="mywork-main-task-date date-overdue">${thisweektask.date}</div>	
@@ -138,8 +174,17 @@
                    <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${nextweektask.tid}">
                      <div class="mywork-main-task-checkbox"></div>
                     <div class="mywork-main-task-members">
-                      <img class="mywork-main-task-member" src="img/user.png" alt="">
-                    </div>
+						<c:forEach var="nextweektask_member" items="${nextweektask.members}" end="0">
+							<img class="mywork-main-task-member" src='displayImage.htm?image=${nextweektask_member.image}'>
+							<div class="mywork-main-task-member-hidden">
+								<div class="today_member_hidden-wrapper">
+									<c:forEach var="nextweektask_member_hidden" items="${nextweektask.members}">
+										<img class="mywork-main-task-member-hidden-img" src='displayImage.htm?image=${nextweektask_member_hidden.image}'>
+									</c:forEach>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
                     <c:choose>
 						<c:when test="${nextweektask.overdue=='overdue'}">
 							<div class="mywork-main-task-date date-overdue">${nextweektask.date}</div>	
@@ -187,7 +232,16 @@
                    <div class="mywork-main-task Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t${latertask.tid}">
                      <div class="mywork-main-task-checkbox"></div>
                     <div class="mywork-main-task-members">
-                      <img class="mywork-main-task-member" src="img/user.png" alt="">
+                      <c:forEach var="latertask_member" items="${latertask.members}" end="0">
+							<img class="mywork-main-task-member" src='displayImage.htm?image=${latertask_member.image}'>
+							<div hidden="hidden" class="mywork-main-task-member-hidden">
+								<div class="today_member_hidden-wrapper">
+									<c:forEach var="latertask_member_hidden" items="${nextweeklist.members}">
+										<img class="mywork-main-task-member-hidden-img" src='displayImage.htm?image=${latertask_member_hidden.image}'>
+									</c:forEach>
+								</div>
+							</div>
+						</c:forEach>
                     </div>
                     <c:choose>
 						<c:when test="${latertask.overdue=='overdue'}">
