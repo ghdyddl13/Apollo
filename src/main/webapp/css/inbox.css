@@ -40,7 +40,7 @@ textarea,input[type=text], select{
 .inbox-section-center {
 	float: left;
 	width: 0.66%;
-	height: 100%;rgb
+	height: 100%;
 	background: rgb(0, 0, 50);
 }
 
@@ -57,11 +57,14 @@ textarea,input[type=text], select{
 }
 
 .yyTask_RUD_Modal{
+	display:inline;
 	margin-left: 10px;
 	font-size: 13px;
 	margin-bottom:0px;
 	float: left;
 	border: 1px solid rgb(200, 201, 203);
+	height: 19px;
+	
 }
 
 
@@ -71,7 +74,17 @@ textarea,input[type=text], select{
 	margin-bottom: 2px;
 	color:#717171;
 	
+
 }
+
+.inbox_tname{
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	word-wrap:normal;
+	width:50px;
+	overflow:hidden;
+}
+
 .inbox-span2{
 	margin-left: 10px;
 	margin-right: 10px;
