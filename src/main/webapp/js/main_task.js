@@ -332,6 +332,9 @@ $(document).on("click","#task_trash_btn",function(){
 		           data : {
 		        	   'tid': tid,
 		           },
+		           beforeSend:function(){
+						$("#main-box").html(loadingpage);
+					},
 		           success : function(rdata){
 		        	   
 	        		     $('#taskinstep_delete_dismiss_btn').click();
@@ -437,6 +440,9 @@ $(document).on("click","#step_delete_button",function(){
 		           data : {
 		        	   'tid': tid,
 		           },
+		           beforeSend:function(){
+						$("#main-box").html(loadingpage);
+				   },
 		           success : function(rdata){
 		        	   
 	        		     $('#taskinstep_delete_dismiss_btn').click();
@@ -871,6 +877,9 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 		        	   'value' : value,
 		        	   'tname' : tname
 		           },
+		           beforeSend:function(){
+						$("#main-box").html(loadingpage);
+					},
 		           success : function(rdata){
 		        	   
 			           // comment
@@ -1186,9 +1195,9 @@ var getCommentAndMemberlist = (function (){
 $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
 
 	var usermid = $('#usermidhidden').attr('value');
-	
+	var conmment= $("#comment_input_box_in_taskmodal").val();
   // @ 쳤을 시
-  if (event.keyCode === 50) {
+  if (conmment ==="@") {
 	var pid = $('#pidhidden').attr('value');
     $.ajax(
            {
@@ -1338,7 +1347,7 @@ $(document).on("click",".popup_mid",function(){
  */
 $(document).on("keyup","#comment_input_box_in_taskmodal2",function(){
 
-  // 엔터키 칠 시
+  // 엔터키 칠 시13
   if (event.keyCode === 13) {
 	  
 	   var tid = $('#tidhidden').attr('value');
@@ -1427,35 +1436,10 @@ $(document).on("keyup","#Task_Modal_tname_input",function(){
 	var tid = $('#tidhidden').attr('value');
 	var tname = '';
 	
-	  if (event.keyCode === 13) {
-		  	
-		    tname = $('#Task_Modal_tname_input').val();
-		    
-		    $.ajax(
-				       {
-				           type : "post",
-				           url  : "changetname.htm",
-				           data : {
-				        	   'tid': tid,
-				        	   'tname' : tname
-				           },
-				           success : function(rdata){
-				        	   console.log('success 성공 테스트 출력 : ' + rdata.result);
-				        	   
-				   			$('#Task_Modal_tname_input').css("display","none");
-				   			$('#Task_Modal_tname_input').val('');
-				   			
-				   			$('#Task_Modal_tname').empty();
-				   			$('#Task_Modal_tname').append(tname);
-							$('#Task_Modal_tname').css("display", "block");
-							
-		                	 $("#main-box").empty();
-							 $("#main-box").append(rdata);
-							 checkCrtPage();
-				           } // end-success
-				        }); // end-ajax
-	  		} // end - keyCode==13
-	
+    if (event.keyCode === 13) {
+	  console.log("tets")
+	  	$("#Task_Modal_tname_input").blur();
+	} // end - keyCode==13
 });
 
 
@@ -1479,6 +1463,9 @@ $(document).on("click",".starred-body-task-container-top-star",function(evt){
             type:"POST",
             url:"deleteStarredTask.htm",
             data:{tid:tid},
+            beforeSend:function(){
+				$("#main-box").html(loadingpage);
+			},
             success:function(data) {
 					 $("#main-box").empty();
 					 $("#main-box").append(data);
@@ -1500,7 +1487,7 @@ $(document).on("focusout","#Task_Modal_tname_input",function() {
 	var tname = '';
 	
 	tname = $('#Task_Modal_tname_input').val();
-		    
+		    console.log("tname " + tname);
 		    $.ajax(
 				       {
 				           type : "post",
@@ -1509,6 +1496,9 @@ $(document).on("focusout","#Task_Modal_tname_input",function() {
 				        	   'tid': tid,
 				        	   'tname' : tname
 				           },
+				           beforeSend:function(){
+								$("#main-box").html(loadingpage);
+							},
 				           success : function(rdata){
 				        	   console.log('success 성공 테스트 출력 : ' + rdata.result);
 				        	   
@@ -1855,9 +1845,9 @@ $(document).on("click",".popup_sid2",function(){
 $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(event){
 	
 	var usermid = $('#usermidhidden2').attr('value');
-	
+	var comment=$("#comment_input_box_in_taskmodal_noredirect").val();
   // @ 쳤을 시
-  if (event.keyCode === 50) {
+  if (comment ==="@") {
 	  
 	var pid = $('#pidhidden').attr('value');
     $.ajax(

@@ -549,7 +549,7 @@ html, body{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-
+	font-size: 12px
 	
 }
 .side-content:hover{
@@ -1435,6 +1435,7 @@ label {
   box-sizing: border-box;
   min-height: 45px;
   transition: height, min-height, padding-top 0.15s ease;
+  border-bottom:1px solid #e8e8e8
 }
 .main-body-onepannel-body{
   overflow-y: auto;

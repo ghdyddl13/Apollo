@@ -10,8 +10,12 @@ function getGanttItems() {
 	var ajax =	$.ajax({
 		url : "step/getTimelineTasks.htm",
 		dataType : "json",
+		beforeSend:function(){
+			$('#main-box').append(loadingpage);
+		},
 		success : function(data) {
 			tasks = data;
+			$("#loading").remove();
 		},
 		
 	});
