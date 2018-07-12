@@ -20,36 +20,9 @@ function addTaskView(tstatusid){
  작 성 자 명 : 이 창 훈
  */
 function addTask_keyup(tstatusid){
-   let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
       if(event.which==13){
-    	  
-    	  $("#insert-task"+tstatusid).attr("readonly", true);
-         let newtask=$.trim($('#insert-task'+tstatusid).val());
-      
-        if(newtask===""){
-             $(".board-task-adder-addmode").remove();
-             $("#body-start"+tstatusid).prepend(addtag);
-         }else{
-            console.log(newtask);
-            $('#insert-task'+tstatusid).val('');
-               $.ajax({
-                   url : "boardInsertTask.htm",
-                   data : {
-                         tstatusid : tstatusid, 
-                         tname : newtask
-                         },
-                   success:function(data){
-                      $("#main-box").empty();
-                      $("#main-box").append(data);
-                      $("#insert-task"+tstatusid).attr("readonly", false);
-                      doDraggable();
-                      $("#task-adder"+tstatusid).remove();
-                      let inputtag="<div class='board-task-adder-addmode'><input class=' board-add-task-input' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
-                      $("#body-start"+tstatusid).prepend(inputtag);
-                      $("#insert-task"+tstatusid).focus().css("outline","none");
-                   }  
-                })
-         } 
+    	  console.log("a");
+    	  $('#insert-task'+tstatusid).blur();
       } 
 }
 
@@ -60,10 +33,11 @@ function addTask_keyup(tstatusid){
  작 성 자 명 : 이 창 훈
  */
 function addTask_focusout(tstatusid){
+	  console.log("b");
    let newtask=$.trim($('#insert-task'+tstatusid).val());
    let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
    if(newtask===""){
-	  $(".board-task-adder-addmode").remove();
+	   $(".board-task-adder-addmode").remove();
       $("#body-start"+tstatusid).prepend(addtag);
    }else{
          $.ajax({
@@ -77,6 +51,10 @@ function addTask_focusout(tstatusid){
                  $("#main-box").empty();
                  $("#main-box").append(data);
                  doDraggable();
+                 $("#task-adder"+tstatusid).remove();
+                 let inputtag="<div class='board-task-adder-addmode'><input class=' board-add-task-input' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
+                 $("#body-start"+tstatusid).prepend(inputtag);
+                 $("#insert-task"+tstatusid).focus().css("outline","none");
               }  
            })
               
@@ -105,17 +83,19 @@ function addTask_focusout(tstatusid){
          connectWith : "ul",
          update: function(event, ui) {      
            if (i++ == 2){
-            tstatusid =  $(this).closest('div')[0].childNodes[1].childNodes[1].value;
+           tstatusid = $(event.target).parents(".board-item-wrapper").children("p").find("input").val();
+            console.log($(event.target).parents(".board-item-wrapper").children("p").find("input").val())
             tid =  ui.item[0].value;
- 
-         $.ajax({
+         //   console.log("tsts : " + tstatusid);
+            
+    /*     $.ajax({
             url : 'boardTaskStatusUpdate.htm',
             data : { 
                tstatusid : tstatusid,
                tid : tid
                } 
          }) 
-            
+            */
             //update event 발생시 이동전 위치와 이동후 위치를 나타내주는 변수를 초기화함
             i = 1;
              

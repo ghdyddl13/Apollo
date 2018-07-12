@@ -30,17 +30,19 @@
 												value="${b.tstatusid}"> New Task
 										</div>
 									</div>
-									<ul id="board-sortable" class="tstatuslist" >
-										<c:forEach var="t" items="${t}">
-											<c:choose>
-												<c:when test="${b.tstatus eq t.tstatus}">
-													<li class="ui-state-default Task_RUD_Modal"
-														data-toggle="modal" data-target="#Task_RUD_Modal"
-														id="t${t.tid}" value="${t.tid}">${t.tname}</li>
-												</c:when>
-											</c:choose>
-										</c:forEach>
-									</ul>
+									<div class="tstatuslist-wrapper">
+										<ul id="board-sortable" class="tstatuslist" >
+											<c:forEach var="t" items="${t}">
+												<c:choose>
+													<c:when test="${b.tstatus eq t.tstatus}">
+														<li class="ui-state-default Task_RUD_Modal"
+															data-toggle="modal" data-target="#Task_RUD_Modal"
+															id="t${t.tid}" value="${t.tid}">${t.tname}</li>
+													</c:when>
+												</c:choose>
+											</c:forEach>
+										</ul>
+									</div>
 								</div>
 							</c:forEach>
 						</div>

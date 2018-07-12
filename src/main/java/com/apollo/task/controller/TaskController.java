@@ -986,7 +986,8 @@ public class TaskController {
 	public String changeTname(int tid, String tname, HttpSession session, Model map){
 		
 		System.out.println("changeTname 컨트롤러 실행");
-		
+		System.out.println("id " + tid);
+		System.out.println("name " +tname);
 		TaskDTO dto = new TaskDTO();
 		dto.setTid(tid);
 		dto.setTname(tname);
