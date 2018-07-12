@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import com.apollo.project.service.ProjectInfoService;
@@ -39,7 +40,7 @@ public class ProjectInfoController {
 	 			  4. 프로젝트 이름과 아이디
 	 작성자명 : 김 정 권
 	 */
-	@RequestMapping("/information.htm")
+	@RequestMapping(value="/information.htm", method=RequestMethod.GET)
 	public String projectInfoShow(int pid, HttpSession session, Model map) {
 		session.setAttribute("location", "/information.htm");
 		session.setAttribute("pid", pid);
