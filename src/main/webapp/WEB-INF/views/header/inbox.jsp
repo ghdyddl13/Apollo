@@ -37,8 +37,8 @@
 				<c:when test="${fn:substring(commentlist.cmtmtime,0,10) eq today}">
 					<div class="inbox-list">
 					<div class ="Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
-						<div class ="yyTask_RUD_Modal"><span class="inbox-span1-color">
-						<span class="inbox-span1"><div class = "inbox_tname">${commentlist.tname}</div></span></span>
+						<div class ="yyTask_RUD_Modal">
+						<span class="inbox-span1"><b>${commentlist.tname}</b></span></div>
 						<span class="inbox-span2">
 						
 						<span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span>
@@ -82,7 +82,7 @@
 						&nbsp;&nbsp;&nbsp;${commentlist.cmtmtime}</span>
 						<div class="inbox-div4"><img style="border-radius: 50%;" src='displayImage.htm?image=${commentlist.image}' width="30px" height="30px">&nbsp;&nbsp;&nbsp;
 						<c:if test="${commentlist.cmtkind eq 0}">${commentlist.mname} : </c:if>${commentlist.comments}</div>
-					</div></div>
+					</div>
 					</div>
 					<hr class="inbox-hr">
 				</c:when>
@@ -94,7 +94,7 @@
 						</center>
 					</c:if>
 					<div class="inbox-list"><div class ="Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
-						<div class ="yyTask_RUD_Modal"><div><span class="inbox-span1-color"><span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div></div>
+						<div class ="yyTask_RUD_Modal"><div><span class="inbox-span1"><b>${commentlist.tname}</b></span></div></div>
 						<span class="inbox-span2" >
 						<span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span> 
 						<c:choose>
