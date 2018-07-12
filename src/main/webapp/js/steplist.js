@@ -14,6 +14,9 @@ $(function() {
 		$.ajax({
 			url:"list.htm",
 			data:{sid:sid},
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			dataType:"html",
 			success:function(data){
 				 $("#main-box").empty();
@@ -62,6 +65,9 @@ $(function() {
 	                	tstatusid : tstatus, 
                         tname : newtask
                         },
+            		beforeSend:function(){
+        				$('#main-box').html(loadingpage);
+        			},
 	                dataType:"html",
 	                success:function(data) {
 						$("#main-box").empty();
@@ -104,6 +110,9 @@ $(function() {
                         tname : newtask
                         },
 	                dataType:"html",
+	        		beforeSend:function(){
+	    				$('#main-box').html(loadingpage);
+	    			},
 	                success:function(data) {
 						$("#main-box").empty();
 						$("#main-box").append(data);
@@ -175,6 +184,9 @@ $(function() {
 					{
 						type:"POST",
 						url:"liststatustasks.htm",
+						beforeSend:function(){
+							$('#main-box').html(loadingpage);
+						},
 						data:{tstatusid:tstatusid,tasks:checkbox},
 						success:function(data) {
 							$("#main-box").empty();
@@ -270,6 +282,9 @@ $(function() {
           $.ajax({
             type : "POST",
             url : "listassigntasks.htm",
+    		beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
             data :{mid:mid,tasks:checkbox},
             success : function(data) {
               $("#main-box").empty();
@@ -396,6 +411,9 @@ $(function() {
 			$.ajax({
 				type : "POST",
 				url : "listaddsteptasks.htm",
+				beforeSend:function(){
+					$('#main-box').html(loadingpage);
+				},
 				data :{stepid:stepid,tasks:checkbox},
 				success : function(data) {
 					$("#main-box").empty();
@@ -425,6 +443,9 @@ $(function() {
 				type : "POST",
 				url : "listdeletetasks.htm",
 				data :{tasks:checkbox},
+				beforeSend:function(){
+					$('#main-box').html(loadingpage);
+				},
 				success : function(data) {
 					$("#main-box").empty();
 					$("#main-box").append(data);
@@ -652,6 +673,9 @@ $(function() {
 			type : "POST",
 			url : "sortingTasksList.htm",
 			data :{sorting:sorting},
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			success : function(data) {
 				$("#main-box").empty();
 				$("#main-box").append(data);

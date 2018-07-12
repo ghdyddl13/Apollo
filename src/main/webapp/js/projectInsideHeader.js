@@ -6,6 +6,9 @@ $(function() {
 		$.ajax({
 			url:"information.htm",
 			data: "pid=" + pid,
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			dataType:"html",
 			success:function(data){
 				 $("#main-box").empty();
@@ -20,13 +23,12 @@ $(function() {
 	
 	// 프로젝트 table 페이지
 	$(document).on("click","#table-page",function(){
-		var loading = '<img src="img/loading.gif/>"';
+		
 		$.ajax({
 			url:"table.htm",
 			dataType:"html",
 			beforeSend:function(){
-				console.log($('#main-box').html(loading));
-				$('.main-body-container').html(loading);
+				$('#main-box').html(loadingpage);
 			},
 			success:function(data){
 				$("#main-box").empty();
@@ -77,6 +79,9 @@ $(function() {
 		$.ajax({
 			url:"files.htm",
 			dataType:"html",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);

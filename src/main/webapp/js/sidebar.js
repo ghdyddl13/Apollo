@@ -1,17 +1,5 @@
 $(function() {
-	/*
-	var loading = $('<div id="loading" class="loading"><img id="loading_img" alt="loading" src="img/loader.gif" /></div>')
-					.appendTo(".main-box-panel").hide();
 
-	$(window)	
-	.ajaxStart(function(){
-		console.log("a")
-	loading.show();
-	})
-	.ajaxStop(function(){
-		console.log("b")
-		loading.hide();
-	});*/
 
 
 
@@ -580,6 +568,9 @@ $(function() {
 			$.ajax({
 				url:"information.htm",
 				data: "pid=" + pid,
+				beforeSend:function(){
+					$('#main-box').html(loadingpage);
+				},
 				dataType:"html",
 				success:function(data){
 					$("#main-box").empty();
@@ -932,6 +923,8 @@ function selectProjectList(){
       dataType:"json",
       type:"post",
       success:function(data){
+    	  console.log(data);
+    	  console.log("make side")
          if(data!=null){ /// 참여중인 프로젝트가 있을 경우 
             $(data.projectlist).each(function(index,el){
                pids.push(el.pid);
@@ -1137,13 +1130,13 @@ function updateProject(data){
  작성자명 : 박 민 식
  */
 function unload() {
-	/*console.log("aa");
-	switch (document.readyState){
-	case "complete":
-	*/	
+
 		$.ajax({
 			url:"pageReloadEvent.htm",
 			dataType:"html",
+			beforeSend:function(){
+					$("#main-box").html(loadingpage);
+			},
 			success:function(data){
 				 $("#main-box").empty();
 		         $("#main-box").append(data);

@@ -14,37 +14,7 @@
 	$(function() {
 		
 		$(".modal-content2").hide();
-		
-/* 		var startpos, diffpos = 0, range = 400;
-		var isEnable = false;
 
-		document.getElementById("center").onmousedown = on_mouse_down;
-		document.onmouseup = on_mouse_up;
-		document.onmousemove = on_mouse_move;
-		function on_mouse_down(e) {
-			startpos = event.clientX + diffpos;
-			isEnable = true;
-			return false;
-		}
-
-		function on_mouse_up(e) {
-			isEnable = false;
-			return false;
-		}
-
-		function on_mouse_move(e) {
-			if (isEnable) {
-				pos = event.clientX;
-				diffpos = startpos - pos;
-				var width = (window.innerWidth - 250) / 2;
-				if (diffpos > -(width - range) && diffpos < (width - range)) {
-					document.getElementById("left").style.width = width - 25
-							- diffpos + "px";
-					document.getElementById("right").style.width = width - 25
-							+ diffpos + "px";
-				}
-			}
-		} */
 	});
 </script>
 	<input id ="inboxkind" type="hidden" value="${inbox}">
@@ -69,7 +39,21 @@
 					<div class ="Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
 						<div class ="yyTask_RUD_Modal"><span class="inbox-span1-color">
 						<span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div>
-						<span class="inbox-span2"><span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span>${commentlist.pname}</span>
+						<span class="inbox-span2">
+						
+						<span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span>
+						<c:choose>
+							<c:when test="${commentlist.methodologyid eq 1}">
+								<img style="width: 11px; height: 11px;" src="img/waterfallicon.png">
+							</c:when>
+							<c:when test="${commentlist.methodologyid eq 2}">
+								<img style="width: 11px; height: 11px;" src="img/agileicon.png">
+							</c:when>
+							<c:otherwise>
+								<img style="width: 11px; height: 11px;" src="img/customicon.png">
+							</c:otherwise>
+						</c:choose>
+						&nbsp;${commentlist.pname}</span>
 						<span class="inbox-span3">
 						<c:choose>
 							<c:when test="${inbox eq 'archive'}">
@@ -111,7 +95,20 @@
 					</c:if>
 					<div class="inbox-list"><div class ="Task_RUD_Modal" id="t${commentlist.tid}" style="cursor: pointer;">
 						<div class ="yyTask_RUD_Modal"><div><span class="inbox-span1-color"><span class="inbox-span1"><b>${commentlist.tname}</b></span></span></div></div>
-						<span class="inbox-span2" ><span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span> ${commentlist.pname}</span> 
+						<span class="inbox-span2" >
+						<span style="margin-right: 5px; font-size: 15px;">&#60;&nbsp;</span> 
+						<c:choose>
+							<c:when test="${commentlist.methodologyid eq 1}">
+								<img style="width: 11px; height: 11px;" src="img/waterfallicon.png">
+							</c:when>
+							<c:when test="${commentlist.methodologyid eq 2}">
+								<img style="width: 11px; height: 13px;" src="img/agileicon.png">
+							</c:when>
+							<c:otherwise>
+								<img style="width: 11px; height: 13px;" src="img/customicon.png">
+							</c:otherwise>
+						</c:choose>
+						&nbsp;${commentlist.pname}</span> 
 						<span class="inbox-span3">
 						<c:choose>
 							<c:when test="${inbox eq 'archive'}">
@@ -265,7 +262,7 @@
 					</script>
 					
 				 <hr>
-						<div class="modal-title">Sub Task</div><br />
+						<div class="modal-title">Sub Task</div><br/>
 				
 				 <input type="text" name="pname" id="add_sub_task"
 							placeholder="Sub Task의 제목을 입력 후 Enter..."

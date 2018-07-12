@@ -17,7 +17,7 @@ $(function(){
 
  */
 
-
+const loadingpage = '<div id="loading" class="loading"><img style="width:auto;height:100px;border-radius:50%"id="loading_img" alt="loading" src="img/rocket_3.gif" /></div>';
 
 function getTaskAssignees(tid,imgsize){
 	var div = jQuery("<div>");

@@ -43,9 +43,7 @@ public class StreamController {
 		if(!pidlist.isEmpty()) {
 			pid = pidlist.get(0).getPid();
 			
-			
 			ArrayList<Integer> tidlist = service.getNewtid(pid);
-			
 			
 			if(tidlist.size()>0) {
 				map2.put("tidlist", tidlist);

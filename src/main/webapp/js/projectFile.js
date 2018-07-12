@@ -31,6 +31,9 @@
              data : {
             	 filename : filename
                    },
+             beforeSend:function(){
+   				$("#main-box").html(loadingpage);
+   			 },
              success:function(data){
             	$('#file_delete_dismiss_btn').click();
                 $("#main-box").empty();

@@ -20,6 +20,9 @@
                data : {
 	        	   'mid': mid
 	           },
+	           beforeSend:function(){
+					$("#main-box").html(loadingpage);
+				},
                  success : function(rdata){
                                 
                 	 $("#main-box").empty();
@@ -78,6 +81,9 @@
 	 	$.ajax({
 	 		url:"deletePmember.htm",
 	 		data:{mid:mid},
+	 		beforeSend:function(){
+				$("#main-box").html(loadingpage);
+			},
 	 		dataType:"html",
 	 		success:function(data){
 	 			$("#main-box").empty();
