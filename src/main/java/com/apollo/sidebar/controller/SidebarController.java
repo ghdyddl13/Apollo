@@ -123,12 +123,14 @@ public class SidebarController {
 	@RequestMapping(value="/selectProjectList.htm", method=RequestMethod.POST)
 	public View selectProjectList(Model model,HttpServletRequest request) {
 		String mid =  (String) request.getSession().getAttribute("mid");
-		System.out.println(mid);
+		System.out.println("selectProjectList : "+mid);
 		ArrayList<ProjectDTO> projectlist = null;
 		try {
 			projectlist = sidebarservice.selectProjectList(mid);
+			for(ProjectDTO p : projectlist) {
+				System.out.println(p.toString());
+			}
 			model.addAttribute("projectlist",projectlist);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("selectProjectList Controller 에러");

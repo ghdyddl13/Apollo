@@ -1151,7 +1151,7 @@
 					<input type="hidden" id="list_assign_selectedtmid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
-				<h4 id="list-task-assign-ment"></h4>					
+				<h4 style="font-size:14px" id="list-task-assign-ment"></h4>					
 					<div align="center">
 						<input type="button" class="btn add-btn" id="list_Assign_Tasks_btn" value="할당">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"
@@ -1173,7 +1173,7 @@
 					<input type="hidden" id="list_addstep_selectedsid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
-				<h4 id="list-addstep-tasks-ment"></h4>					
+				<h4 style="font-size:14px" id="list-addstep-tasks-ment"></h4>					
 					<div align="center">
 						<input type="button" class="btn add-btn" id="list_AddStep_Tasks_btn" value="추가">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"
@@ -1194,7 +1194,7 @@
 					<h4 class="modal-title">Task 삭제</h4>
 				</div>
 				<div class="modal-body" style="text-align:center">
-				<h4 id="list-delete-tasks-ment"></h4>					
+				<h4 style="font-size:14px" id="list-delete-tasks-ment"></h4>					
 					<div align="center">
 						<input type="button" class="btn add-btn" id="list_Delete_Tasks_btn" value="삭제">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"

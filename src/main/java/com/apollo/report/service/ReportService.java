@@ -50,14 +50,15 @@ public class ReportService {
 		}
 	
 	
-		public void writeData(int pid, String report_kind, String report_title, HttpServletResponse response) throws Exception {
+		public String writeData(String mid, int pid, String report_kind, String report_title, HttpServletResponse response) throws Exception {
 
 			String filePath = "";
 			String filename = "";
+			File file = null;
 			try {
 
 			   filePath = "C:\\Apollo_Reports\\"; // file 생성 위치 
-			   filename = report_title + ".xls"; // 생성될 파일 이름
+			   filename = mid + "_" + report_title + ".xls"; // 생성될 파일 이름
 				
 				File fDir = new File(filePath);
 				if (!fDir.exists()) {
@@ -68,7 +69,7 @@ public class ReportService {
 		       OutputStream out = new BufferedOutputStream(response.getOutputStream());
              
 		       ////// 서버측 다운로드 설정
-		       File file = new File(filePath+filename);
+		       file = new File(filePath+filename);
 		       FileOutputStream fos = null;
 		       
 		       response.reset();
@@ -86,7 +87,9 @@ public class ReportService {
 			} catch (Exception e) {
 				e.printStackTrace();
 				}
-			
+	         
+	        String fullpath = filePath + filename;
+	        return fullpath;
 		}
 
 		private FileOutputStream setFile(String filePath, String filename) throws IOException {

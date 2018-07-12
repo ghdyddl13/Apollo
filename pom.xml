@@ -381,6 +381,7 @@
 		        <configuration>
 		            <warsourcedirectory>src/main/webapp</warsourcedirectory>
 		            <webxml>src/main/webapp/WEB-INF/web.xml</webxml>
+		            <failOnMissingWebXml>false</failOnMissingWebXml>
 		        </configuration>
 		    </plugin>
 		 
