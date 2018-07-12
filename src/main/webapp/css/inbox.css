@@ -29,6 +29,9 @@ textarea,input[type=text], select{
 .inbox-section-left {
 	float: left;
 	margin-left: 0.66%;
+	overflow: hidden !important;
+	display: flex;
+	flex-direction: column;
 }
 
 
@@ -116,16 +119,18 @@ textarea,input[type=text], select{
   overflow: hidden;
   background-color: #f5f8fc;
   color: #6b99c7;
+  height: 40px;
+  max-height: 40px
 }
 
 .inbox-topnav a {
   float: left;
   display: block;
   color: #6b99c7;
-  text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 13px;
+  height:100%
 }
 
 
@@ -164,4 +169,13 @@ border-bottom: 2px solid transparent;
     display: block;
     text-align: left;
   }
+}
+
+.inbox-content-wrapper{
+	display: flex;
+	flex-direction: column;
+	overflow-y:auto;
+	overflow-x:hidden;
+	height: 100% ;
+	padding-bottom: 30px
 }
