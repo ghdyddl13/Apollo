@@ -40,7 +40,7 @@ public class ProjectInfoController {
 	 			  4. 프로젝트 이름과 아이디
 	 작성자명 : 김 정 권
 	 */
-	@RequestMapping(value="/information.htm", method=RequestMethod.GET)
+	@RequestMapping("/information.htm")
 	public String projectInfoShow(int pid, HttpSession session, Model map) {
 		session.setAttribute("location", "/information.htm");
 		session.setAttribute("pid", pid);

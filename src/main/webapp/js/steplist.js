@@ -65,9 +65,6 @@ $(function() {
 	                	tstatusid : tstatus, 
                         tname : newtask
                         },
-            		beforeSend:function(){
-        				$('#main-box').html(loadingpage);
-        			},
 	                dataType:"html",
 	                success:function(data) {
 						$("#main-box").empty();
@@ -110,9 +107,6 @@ $(function() {
                         tname : newtask
                         },
 	                dataType:"html",
-	        		beforeSend:function(){
-	    				$('#main-box').html(loadingpage);
-	    			},
 	                success:function(data) {
 						$("#main-box").empty();
 						$("#main-box").append(data);
