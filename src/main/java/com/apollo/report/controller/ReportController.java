@@ -1,6 +1,7 @@
 package com.apollo.report.controller;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
@@ -65,20 +66,55 @@ public class ReportController {
 	@RequestMapping("/downloadreport.htm")
 	public void downloadReport(int pid, String report_kind, String report_title, HttpSession session, Model map, HttpServletResponse response) {
 		
+		String mid = (String) session.getAttribute("mid");
 		System.out.println("downloadReport 컨트롤러 실행");
-		
 		System.out.println(pid + "/" + report_kind + "/" + report_title);
 		
-		String mid = (String) session.getAttribute("mid");
-		
+		String fullpath = null;
 		try {
-			reportservice.writeData(pid, report_kind, report_title, response);
+			fullpath = reportservice.writeData(mid, pid, report_kind, report_title, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		System.out.println("report 추출 성공!");
+		boolean deletedcheck = deleteReportFile(fullpath);
+		
+		if(deletedcheck) {
+			System.out.println("삭제 완료");
+		}else {
+			System.out.println("삭제 실패");
+		}
+		
+	}
+	
+	public boolean deleteReportFile(String fullpath) {
+		
+		boolean deletedcheck = false;
+		
+		File file = new File(fullpath);
+		
+		 if(file.exists() ){
+			 
+    	    System.out.println("파일이 존재합니다");
+    	    System.out.println("파일 삭제를 시작합니다");
+    	    System.gc();
+    	    System.runFinalization();
+    	    
+    	    boolean filedeleted = file.delete();
+    	    System.out.println(filedeleted);
+    	    
+    		if(filedeleted) {
+    		System.out.println("파일삭제 성공");
+    		deletedcheck = true;
+    		}
+	    }else{
+	        	System.out.println("파일이 존재하지 않습니다.");
+	        }
+		
+		 return deletedcheck;
+		 
 	}
 	
 }
