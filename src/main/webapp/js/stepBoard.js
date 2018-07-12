@@ -83,14 +83,14 @@ function addTask_focusout(tstatusid){
             tid =  ui.item[0].value;
          //   console.log("tsts : " + tstatusid);
             
-    /*     $.ajax({
+            $.ajax({
             url : 'boardTaskStatusUpdate.htm',
             data : { 
                tstatusid : tstatusid,
                tid : tid
                } 
-         }) 
-            */
+            }) 
+          
             //update event 발생시 이동전 위치와 이동후 위치를 나타내주는 변수를 초기화함
             i = 1;
              
