@@ -1,13 +1,14 @@
 #board-sortable{
    list-style-type: none;
    margin: 0;
-   width: 100%;
+   width: 300px;
    align-items:center;
-   overflow: auto;
-   display: flex;
+   min-height:650px;
+   display:flex;
    flex-direction: column;
-   padding:0;
-   flex: 1 1 auto	   
+   padding-bottom:5px;
+   flex: 1 1 auto;
+   padding-left: 0	  
 }
 .board-main-wrapper{
 	display: flex !important;
@@ -16,7 +17,7 @@
 #board-sortable li{
 color:#909090;
    font-size: 13px;
-   width: 99%;
+   width: 300px;
    padding:0.4em;
    padding-left:8px;
    padding-top:0.8em;
@@ -44,7 +45,7 @@ color:#909090;
    flex:1 1 auto;
    flex-direction:row;
    background-color: #fafbfd;
-   border-top:1px solid #cccccc
+
 }
 
 #board-main-div::-webkit-scrollbar {
@@ -68,25 +69,29 @@ display:none;
 #board-hr{
    border: 0;
    height: 3px; 
-   width:99%;
-   margin: 0 0 5px 0
+   width:300px;
+   margin: 0 0 5px 2px;
 }
 
 #board-status-name{
    font-size: 17px;
    color: #0000006e;
    margin-bottom: 3px;
-   font-weight: 500
+   font-weight: 500;
+   width:300px;
+   margin-left:2px;
 }
 
 .board-task-adder_containers{
     box-sizing: border-box;
     position: relative;
     background-color: #fff;
-    width: 99%;
+    width: 300px;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.16), 0 0 1px 0 rgba(0, 0, 0, 0.16);
     border-radius: 2px;
     height: 40px;
+    min-height:40px;
+    margin-left:2px;
     display: flex;
     align-items: center;
     justify-content: center
@@ -98,7 +103,7 @@ display:none;
 	font-weight:400;
     display: block;
     box-sizing: border-box;
-    width: 220px;
+    width: 90%;
     font-size: 14px;
     line-height: 31px;
     color: #5285b8;
@@ -115,34 +120,27 @@ input.board-add-task-input:focus{
 	border:none
 }    
     
-.board-task-adder-addmode{
-   /*  border:1px solid black;
-    height:50px;
-    width: 220px;
-    display: block;
-    box-sizing: border-box;
-    padding: 8.5px 0px 0px 0px;
-    margin-left:15px;
-    width: 220px;
-    font-size: 13px;
-    line-height: 31px;
-    color: #5285b8;
-    border-top: 1px solid #e0e0e0;
-    cursor: pointer;
-    list-style: none; */
-    }
+
     .ui-sortable-handle:hover{
        cursor:-webkit-grab;
     }
     
 .board-item-wrapper{
 	padding-top:20px;
+	padding-bottom:1%;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	width: 250px;
+	min-width: 320px;
+	align-items:flex-start;
+	max-width: 320px;
 	margin-left: 25px;
-	margin-right:25px;
+	margin-right:20px;
 }    
     
-  
+.tstatuslist-wrapper{
+	overflow-y:auto;
+	flex:1 1 auto;
+	width: 100%;
+	padding-left:2px
+
+}  

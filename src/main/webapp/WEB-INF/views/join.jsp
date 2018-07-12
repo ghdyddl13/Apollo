@@ -17,7 +17,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="css/common.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="js/login.js"></script>
-<title>Insert title here</title>
+<title>Project Apollo</title>
 
 </head>
 <body>	

@@ -35,6 +35,8 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			console.log(tid);
 		}
 		
+		const loadingpage_third = '<div id="loading" class="loading_third"><img style="width:auto;height:100px;border-radius:50%"id="loading_img" alt="loading" src="img/rocket_3.gif" /></div>';
+		
 		$.ajax(
 			       {
 			           type : "post",
@@ -42,6 +44,11 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			           data : {
 			        	   'tid': tid
 			           },
+			           beforeSend:function(){
+			        	$('.modal-content2').css('display','none');
+			        	$('.modal-content3').css('display','none');
+			   			$('#right').append(loadingpage_third);
+			   			},
 			           success : function(rdata){
 			        	   console.log('성공!')
 			        	   console.log(rdata);
@@ -263,7 +270,10 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			        	   $(".starred-secondbody-image").hide();
 			        		$(".modal-content2").show();
 			        		$(".modal-content3").show();
-			        	   
+			        		
+			        		$('.modal-content2').css('display','block');
+			        		$('.modal-content3').css('display','block');
+			        		$("#loading").remove();
 			           } // end-success
 			        } 
 			      ); // end-ajax
@@ -332,6 +342,9 @@ $(document).on("click","#task_trash_btn",function(){
 		           data : {
 		        	   'tid': tid,
 		           },
+		           beforeSend:function(){
+						$("#main-box").html(loadingpage);
+					},
 		           success : function(rdata){
 		        	   
 	        		     $('#taskinstep_delete_dismiss_btn').click();
@@ -437,6 +450,9 @@ $(document).on("click","#step_delete_button",function(){
 		           data : {
 		        	   'tid': tid,
 		           },
+		           beforeSend:function(){
+						$("#main-box").html(loadingpage);
+				   },
 		           success : function(rdata){
 		        	   
 	        		     $('#taskinstep_delete_dismiss_btn').click();
@@ -510,13 +526,13 @@ $(document).on("click","#task_modal_add_step",function(){
 			        		  step_names_popup_div_str += '<div class="first_row">' + this.sname + '</div>';
 			        		  
 			        		  if((sday == emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">(시작일과 종료일 모두 미정)</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">(시작일과 종료일 모두 미정)</div>'
 			        		  } else if((sday != emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~' + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~' + '</div>'
 			        		  }  else if((sday == emptyday) && (eday != emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
 			        		  } else{
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
 			        		  }
 			        		  
 			        		  step_names_popup_div_str += '</div></div>';
@@ -734,7 +750,7 @@ $(document).on("click","#task_modal_add_assignee",function(){
 	        			  assignee_popup_div_str += '<img class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';	
 	        			  assignee_popup_div_str += '<div class="each_comment">';	
 	        			  assignee_popup_div_str += '<div class="first_row">' + this.mname + '</div>';	
-	        			  assignee_popup_div_str += '<div class="second_row">' + this.mid + '</div>';	
+	        			  assignee_popup_div_str += '<div class="popup_second_row">' + this.mid + '</div>';	
 	        			  assignee_popup_div_str += '</div></div>';
 	        				   
 			        	   });
@@ -871,6 +887,9 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 		        	   'value' : value,
 		        	   'tname' : tname
 		           },
+		           beforeSend:function(){
+						$("#main-box").html(loadingpage);
+					},
 		           success : function(rdata){
 		        	   
 			           // comment
@@ -1186,9 +1205,9 @@ var getCommentAndMemberlist = (function (){
 $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
 
 	var usermid = $('#usermidhidden').attr('value');
-	
+	var conmment= $("#comment_input_box_in_taskmodal").val();
   // @ 쳤을 시
-  if (event.keyCode === 50) {
+  if (conmment ==="@") {
 	var pid = $('#pidhidden').attr('value');
     $.ajax(
            {
@@ -1211,7 +1230,7 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
                   popupdiv_str += '<img class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';	
                   popupdiv_str += '<div class="each_comment">';	
                   popupdiv_str += '<div class="first_row">' + this.mname + '</div>';	
-                  popupdiv_str += '<div class="second_row">' + this.mid + '</div>';	
+                  popupdiv_str += '<div class="popup_second_row">' + this.mid + '</div>';	
                   popupdiv_str += '</div></div>';
                   
                  });
@@ -1338,7 +1357,7 @@ $(document).on("click",".popup_mid",function(){
  */
 $(document).on("keyup","#comment_input_box_in_taskmodal2",function(){
 
-  // 엔터키 칠 시
+  // 엔터키 칠 시13
   if (event.keyCode === 13) {
 	  
 	   var tid = $('#tidhidden').attr('value');
@@ -1405,13 +1424,15 @@ $(document).on("click","#receivermid",function(){
  기      능 : tname 변경을 위해 인풋태그 활성화 함수
  작성자명 : 김 정 권
  */
+
 $(document).on("click","#Task_Modal_tname",function(){
 	
 	$('#Task_Modal_tname').css("display", "none");
-	
+
 	var tname = $('#Task_Modal_tname').text();
 	$('#Task_Modal_tname_input').val(tname);
 	$('#Task_Modal_tname_input').css("display","block");
+	$("#Task_Modal_tname_input").focus();
 	
 });
 
@@ -1427,41 +1448,17 @@ $(document).on("keyup","#Task_Modal_tname_input",function(){
 	var tid = $('#tidhidden').attr('value');
 	var tname = '';
 	
-	  if (event.keyCode === 13) {
-		  	
-		    tname = $('#Task_Modal_tname_input').val();
-		    
-		    $.ajax(
-				       {
-				           type : "post",
-				           url  : "changetname.htm",
-				           data : {
-				        	   'tid': tid,
-				        	   'tname' : tname
-				           },
-				           success : function(rdata){
-				        	   console.log('success 성공 테스트 출력 : ' + rdata.result);
-				        	   
-				   			$('#Task_Modal_tname_input').css("display","none");
-				   			$('#Task_Modal_tname_input').val('');
-				   			
-				   			$('#Task_Modal_tname').empty();
-				   			$('#Task_Modal_tname').append(tname);
-							$('#Task_Modal_tname').css("display", "block");
-							
-		                	 $("#main-box").empty();
-							 $("#main-box").append(rdata);
-							 checkCrtPage();
-				           } // end-success
-				        }); // end-ajax
-	  		} // end - keyCode==13
-	
+    if (event.keyCode === 13) {
+	  console.log("tets")
+	  	$("#Task_Modal_tname_input").blur();
+	} // end - keyCode==13
 });
 
 
 $(document).on("click","#task_dismiss_btn_starredtask",function(){
 	$(".modal-content2").hide();
 	$(".starred-secondbody-image").show();
+
 });
 
 /**
@@ -1479,6 +1476,9 @@ $(document).on("click",".starred-body-task-container-top-star",function(evt){
             type:"POST",
             url:"deleteStarredTask.htm",
             data:{tid:tid},
+            beforeSend:function(){
+				$("#main-box").html(loadingpage);
+			},
             success:function(data) {
 					 $("#main-box").empty();
 					 $("#main-box").append(data);
@@ -1500,8 +1500,14 @@ $(document).on("focusout","#Task_Modal_tname_input",function() {
 	var tname = '';
 	
 	tname = $('#Task_Modal_tname_input').val();
-		    
-		    $.ajax(
+    if(tname.trim()==""||tname ==$('#Task_Modal_tname').text()){
+    	$('#Task_Modal_tname_input').val('');
+    	$('#Task_Modal_tname_input').css("display","none");
+    	$('#Task_Modal_tname').css("display", "block");
+    	return false;
+    }
+		 
+    		$.ajax(
 				       {
 				           type : "post",
 				           url  : "changetname.htm",
@@ -1509,6 +1515,9 @@ $(document).on("focusout","#Task_Modal_tname_input",function() {
 				        	   'tid': tid,
 				        	   'tname' : tname
 				           },
+				           beforeSend:function(){
+								$("#main-box").html(loadingpage);
+							},
 				           success : function(rdata){
 				        	   console.log('success 성공 테스트 출력 : ' + rdata.result);
 				        	   
@@ -1690,13 +1699,13 @@ $(document).on("click","#task_modal_add_step_noredirect",function(){
 			        		  step_names_popup_div_str += '<div class="first_row">' + this.sname + '</div>';
 			        		  
 			        		  if((sday == emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">(시작일과 종료일 모두 미정)</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">(시작일과 종료일 모두 미정)</div>'
 			        		  } else if((sday != emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~' + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~' + '</div>'
 			        		  }  else if((sday == emptyday) && (eday != emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
 			        		  } else{
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
 			        		  }
 			        		  
 			        		  step_names_popup_div_str += '</div></div>';
@@ -1855,9 +1864,9 @@ $(document).on("click",".popup_sid2",function(){
 $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(event){
 	
 	var usermid = $('#usermidhidden2').attr('value');
-	
+	var comment=$("#comment_input_box_in_taskmodal_noredirect").val();
   // @ 쳤을 시
-  if (event.keyCode === 50) {
+  if (comment ==="@") {
 	  
 	var pid = $('#pidhidden').attr('value');
     $.ajax(
@@ -1884,7 +1893,7 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(eve
                   popupdiv_str += '<img class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';	
                   popupdiv_str += '<div class="each_comment">';	
                   popupdiv_str += '<div class="first_row">' + this.mname + '</div>';	
-                  popupdiv_str += '<div class="second_row">' + this.mid + '</div>';	
+                  popupdiv_str += '<div class="popup_second_row">' + this.mid + '</div>';	
                   popupdiv_str += '</div></div>';
                   
                  });

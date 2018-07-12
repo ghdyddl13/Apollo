@@ -857,7 +857,7 @@
 					<div class="profile-modal-container">
 						<div class="profile-modal-image-container">
 							<div class="profile-modal-image-wrapper">
-								<img class="profile-modal-image" id="profile-modal-image"src="/bit/displayImage.htm" alt=""> 
+								<img class="profile-modal-image" id="profile-modal-image"src="/Apollo/displayImage.htm" alt=""> 
 								<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>
 							</div>
 							<form hidden class="profile-modal-image_uploader">
@@ -892,14 +892,14 @@
 											let profilestr="";
 											console.log(count);
 											if((count%2)==0){
-												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/bit/displayImage.htm?sid=123" alt="">'
+												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/Apollo/displayImage.htm?sid=123" alt="">'
 												modalstr+='<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>';
-												profilestr ='<img id="loginimg" src="/bit/displayImage.htm?sid=123">';
+												profilestr ='<img id="loginimg" src="/Apollo/displayImage.htm?sid=123">';
 												count++;
 											}else{
-												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/bit/displayImage.htm" alt="">'
+												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/Apollo/displayImage.htm" alt="">'
 												modalstr+='<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>';
-												profilestr='<img id="loginimg" src="/bit/displayImage.htm">';
+												profilestr='<img id="loginimg" src="/Apollo/displayImage.htm">';
 												count++;
 											}
 											$(".profile-modal-image-wrapper").empty();
@@ -1151,7 +1151,7 @@
 					<input type="hidden" id="list_assign_selectedtmid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
-				<h4 id="list-task-assign-ment"></h4>					
+				<h4 style="font-size:14px" id="list-task-assign-ment"></h4>					
 					<div align="center">
 						<input type="button" class="btn add-btn" id="list_Assign_Tasks_btn" value="할당">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"
@@ -1173,7 +1173,7 @@
 					<input type="hidden" id="list_addstep_selectedsid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
-				<h4 id="list-addstep-tasks-ment"></h4>					
+				<h4 style="font-size:14px" id="list-addstep-tasks-ment"></h4>					
 					<div align="center">
 						<input type="button" class="btn add-btn" id="list_AddStep_Tasks_btn" value="추가">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"
@@ -1194,7 +1194,7 @@
 					<h4 class="modal-title">Task 삭제</h4>
 				</div>
 				<div class="modal-body" style="text-align:center">
-				<h4 id="list-delete-tasks-ment"></h4>					
+				<h4 style="font-size:14px" id="list-delete-tasks-ment"></h4>					
 					<div align="center">
 						<input type="button" class="btn add-btn" id="list_Delete_Tasks_btn" value="삭제">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"

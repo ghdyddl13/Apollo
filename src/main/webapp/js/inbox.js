@@ -18,6 +18,9 @@ $(function() {
 		$.ajax({
 			url:"inbox.htm",
 			dataType:"html",
+			beforeSend:function(){
+				$("#main-box").html(loadingpage);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
@@ -31,6 +34,9 @@ $(function() {
 		
 		$.ajax({
 			url:"sent.htm",
+			beforeSend:function(){
+				$("#main-box").html(loadingpage);
+			},
 			dataType:"html",
 			success:function(data){
 				$("#main-box").empty();
@@ -44,6 +50,9 @@ $(function() {
 		
 		$.ajax({
 			url:"archive.htm",
+			beforeSend:function(){
+				$("#main-box").html(loadingpage);
+			},
 			dataType:"html",
 			success:function(data){
 				$("#main-box").empty();
@@ -59,6 +68,7 @@ $(function() {
 			url:"archiveupdate.htm",
 			dataType:"html",
 			type: 'POST',
+		
 			data:{cmtid:$(this).children(".cmtid").val(),
 				  inboxkind:$("#inboxkind").val()},
 			success:function(data){

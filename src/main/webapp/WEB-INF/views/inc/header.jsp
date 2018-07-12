@@ -49,7 +49,7 @@
 								<img id="loginimg" src='displayImage.htm'>
 							</div>
 						</c:otherwise>
-					</c:choose> 
+					</c:choose>  
 					<a id="header-user-name" class="nav-link dropdown-toggle"data-toggle="dropdown" style="color: white"> ${m.mname}님</a>
 					<input type="hidden" value= "${m.mid}" id="header-mid">
 					<ul class="dropdown-menu">

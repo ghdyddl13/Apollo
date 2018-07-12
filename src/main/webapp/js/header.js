@@ -14,6 +14,9 @@ $(function() {
 		$.ajax({
 			type:"GET",
 			url:"inbox.htm",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			dataType:"html",
 			success:function(data){
 				$("#main-box").empty();
@@ -30,6 +33,9 @@ $(function() {
 		$.ajax({
 			type:"GET",
 			url:"myWork.htm",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			dataType:"html",
 			success:function(data){
 				$("#main-box").empty();
@@ -38,13 +44,41 @@ $(function() {
 			}
 		})
 	});
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//mywork task 멤버 hover 시 이외 멤버 모두 불러오기 
+	$(document).on("mouseenter",".mywork-main-task-member",function() {
+	   
+        let position = $(this).position();
+        $('.mywork-main-task-member-hidden').hide();
+        
+        $(this).next().css("left",position.left + 30);
+        $(this).next().css("top",position.top - 40);
+        $(this).next().css("display","block");
+	    
+	  });
 	
+	//starred work task 멤버 hover 시 이외 멤버 모두 불러오기 
+	$(document).on("mouseenter",".starred-body-task-imagetag",function() {
+		   
+        let position = $(this).position();
+        $('.mywork-main-task-member-hidden').hide();
+        
+        $(this).next().css("left",position.left + 16);
+        $(this).next().css("top",position.top + 19);
+        $(this).next().css("display","block");
+	    
+	  });
+
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// 헤더 starred task 페이지
 	$("#starredTask-page").click(function(evt){
 		$.ajax({
 			url:"starredTask.htm",
 			dataType:"html",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
@@ -59,6 +93,9 @@ $(function() {
 		$.ajax({
 			url:"report.htm",
 			dataType:"html",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
@@ -73,6 +110,9 @@ $(function() {
 		$.ajax({
 			url:"stream.htm",
 			dataType:"html",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
@@ -98,6 +138,9 @@ $(function() {
 		$.ajax({
 			url:"selectmemberlist.htm",
 			dataType:"html",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
@@ -316,7 +359,7 @@ $(document).on("focus","#open-right-nav",function(){
  작성자명 : 박 민 식
  */
 	var typingTimer;
-	var doneTypingInterval = 500; // 타이빙 interval이 0.5초 이상일 경우 실행
+	var doneTypingInterval = 1000; // 타이빙 interval이 0.5초 이상일 경우 실행
 	$(document).on("input","#search-bar" ,function () {
 		
 		if(getBytes($("#search-bar").val()) <2 ||$("#search-bar").val().trim() == "") return false; //타이핑한 문자가 2바이트 이상이고 공백이 아닐 경우에 다음단계로 넘어감
@@ -335,7 +378,7 @@ $(document).on("focus","#open-right-nav",function(){
     			if(searchtasks.length != 0) $(resultSearchTask(searchtasks)).appendTo($("#search-content-box"));  
     			if(searchmembers.length != 0) $(resultSearchMember(searchmembers)).appendTo($("#search-content-box"));  
     		})// end when
-   		}, 2000); // end Timeout
+   		}, doneTypingInterval); // end Timeout
     
 	}); // end function
 
@@ -376,6 +419,9 @@ function getSearchResult(){
 	var ajax = $.ajax({
 		url:"getSearchResult.htm",
 		type:"post",
+		beforeSend:function(){
+			$("#search-content-box").html(loadingpage);
+		},
 		data:{input:input},
 		dataType:"json",
 		success:function(data){

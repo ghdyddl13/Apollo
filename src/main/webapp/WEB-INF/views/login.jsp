@@ -10,6 +10,11 @@
 	href="http://jqueryui.com/resources/demos/style.css">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel="shortcut icon" href="img/FAVINEW.ico">
+<link rel="icon" href="img/FAVINEW.ico" sizes="16x16">
+
+	
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -17,7 +22,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="css/common.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="js/login.js"></script>
-<title>Insert title here</title>
+<title>Project Apollo</title>
 </head>
 <body>
 	<div class="login-wrapper" align="center">

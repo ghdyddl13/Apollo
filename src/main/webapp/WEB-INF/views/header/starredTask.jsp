@@ -32,7 +32,35 @@ $(function() {
 	                <div class="starred-body-task Task_RUD_Modal" id="t${task.tid}">
 	                  <div class="starred-body-task-wrapper" >
 	                    <div class="starred-body-task-image-wrapper">
-	                      <div class="starred-body-task-image"><img class="starred-body-task-imagetag" src="img/frog.png" alt=""></div>
+	                      <div class="starred-body-task-image">
+	                      <c:choose>
+	                      	<c:when test="${empty task.members}">
+	                      		<div class="starred-body-task-imagetag">
+                      				<div class="starred-noassignee-icon-container">
+                      					<i class="fas fa-user-plus no-assignee-task-icon"></i>
+                      				</div>
+	                      		</div>
+	                      	</c:when>
+                   			<c:otherwise>
+								<c:forEach var="tasklist_member" items="${task.members}"
+									end="0">
+									<img class="starred-body-task-imagetag"
+										src='displayImage.htm?image=${tasklist_member.image}'>
+									<div class="starred-body-task-member-hidden">
+										<div class="starred-body-task-hidden-wrapper">
+											<c:forEach var="tasklist_member_hidden"
+												items="${task.members}">
+												<img class="starred-body-task-hidden-imagetag"
+													src='displayImage.htm?image=${tasklist_member_hidden.image}'>
+											</c:forEach>
+										</div>
+									</div>
+								</c:forEach>
+							</c:otherwise>
+	                      </c:choose>
+	                     
+	                      	                      
+	                      </div>
 	                    </div>
 	                    <div class="starred-body-task-container">
 	                      <div class="starred-body-task-container-top">
@@ -66,7 +94,7 @@ $(function() {
         </div>
       </div>
     </div>
-    <div class="main-body-twopannel-right">
+    <div class="main-body-twopannel-right" id ="right">
      
       
     <div class="starred-secondbody-image"></div>
@@ -188,10 +216,10 @@ $(function() {
                 <div class="task-modal-content-detail">
 					<div class="modal-title">
 						<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
+					</div>
 						<div style="text-align:center">
 						<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
 						</div>
-					</div>
 				</div>
                 <hr/>
                 

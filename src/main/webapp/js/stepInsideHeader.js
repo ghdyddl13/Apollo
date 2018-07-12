@@ -8,6 +8,9 @@ $(function() {
 		$.ajax({
 			url:"list.htm",
 			data:{sid:sid},
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			dataType:"html",
 			success:function(data){
 
@@ -23,6 +26,9 @@ $(function() {
 		$.ajax({
 			url:"board.htm",
 			dataType:"html",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
@@ -43,20 +49,23 @@ $(function() {
 			$.ajax({
 				url:"step/timeline.htm",
 				dataType:"html",
+				beforeSend:function(){
+					$('#main-box').html(loadingpage);
+				},
 				success:function(data){
 					$("#main-box").empty();
 					$("#main-box").append(data);
 					$("#timeline-page").removeClass("main-body-onepannel-header-top-selector").addClass("main-body-onepannel-header-top-selected");
 					makeTimelineTable(ajax.tasks);
 					makeTimelineGantt(ajax.tasks);
-					$(".modal-question").tooltip({
+					/*$(".modal-question").tooltip({
 						 classes: {
 							    "ui-tooltip": "apollo-tooltip"
 						 },
 						 content: function() {
 						       return "<div>test</div>";
 						      }
-					 });   
+					 });   */
 				}
 			})
 		})

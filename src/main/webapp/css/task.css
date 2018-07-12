@@ -55,12 +55,9 @@
 
 
 #Task_Modal_assignee{
-     justify-content:center;
-     align-items:center;
      min-height: 50px;
-     display: flex;
-     padding: 10px
-     
+     padding: 10px;
+     text-align: center;
 }
 
 
@@ -187,6 +184,12 @@ assignee_in_taskmodal td{
  	background-color: #cccccc4a;
  	box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
 }
+.popup_second_row{
+	color:#b0b4b7;
+	font-size: 12px;
+	padding: 5px;
+	
+}
 
 .my_second_row{
 	background-color: #f6f7124f !important;
@@ -298,21 +301,33 @@ assignee_in_taskmodal td{
 #step_names_popup_div{
   display: none;
   position: absolute;
-  background-color : #FFFFFF; 
   left : -20000px;
   top : -20000px;
   float: left;
   z-index: 3;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+  background-color: #fcfcff !important;
+  min-height: 40px;
+  max-height:350px;
+  overflow-y: auto;
+  overflow-x:hidden;
+  border-radius: 5px
 }
 
 #step_names_popup_div2{
   display: none;
   position: absolute;
-  background-color : #FFFFFF; 
   left : -20000px;
   top : -20000px;
   float: left;
   z-index: 3;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+  background-color: #fcfcff !important;
+  min-height: 40px;
+  max-height:350px;
+  overflow-y: auto;
+  overflow-x:hidden;
+  border-radius: 5px
 }
 
 .popup_sid{

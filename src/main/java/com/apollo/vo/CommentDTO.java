@@ -17,8 +17,16 @@ public class CommentDTO {
 	private String image;
 	private int newcheck;
 	private int newcount;
+	private int methodologyid;
 	
 	
+	
+	public int getMethodologyid() {
+		return methodologyid;
+	}
+	public void setMethodologyid(int methodologyid) {
+		this.methodologyid = methodologyid;
+	}
 	public int getNewcount() {
 		return newcount;
 	}

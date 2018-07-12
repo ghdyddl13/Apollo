@@ -611,7 +611,6 @@
 }
 .image-container{
   box-sizing: content-box;
-  width: 27px;
   height: 100px;
   max-height: 100%;
   max-width: 100%;
@@ -624,8 +623,10 @@
   border: 1px solid #eee;
   width: 27px;
   height: 27px;
-  border-radius: 2px;
+  border-radius: 50%;
   box-shadow: 0 0 8px rgba(33,33,33,.1);
+  height: 32px;
+  width: 32px;
 }
 .center-container{
   flex-grow: 1;
@@ -1237,4 +1238,43 @@
   box-sizing: border-box;
   display: block;
 }
+.list-task-member{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.list-task-member-hidden{
+	z-index:12;
+	background: #f5f8fc;
+	text-align:center;
+	border-radius: 10px;
+	position: absolute;
+	box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+	margin-left:10px;
+	width: 32px;
+	height: 32px;
+	border-radius: 2px;
+	display:none;
+}
+.list-member-hidden-wrapper {
+	display: flex;
+	z-index:12;
+	background: #f5f8fc;
+	text-align:center;
+	border-radius: 10px;
+	padding:10px;
+	position: absolute;
+	box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+}
+.list-task-member-hidden-img{
+	 margin-left:10px;
+	 width: 32px;
+	 height: 32px;
+	 border-radius: 2px;
+}
+.list-noassignee-icon-container {
+	width: 32px;
+	height: 32px;
+}
+
 
