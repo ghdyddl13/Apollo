@@ -143,14 +143,13 @@
 			
 			
 			
-			
+			<div id='testdivgogo'></div>
 			
 		</div>
 		<div class ="inbox-section-center" id="center">
 		</div>
 		
-		
-		
+	
 		<div class ="inbox-section-right" id="right" style="overflow:auto; ">	
 		<div class="starred-secondbody-image"></div>
 			
@@ -306,6 +305,8 @@
 			
 		</div>
 	</div>
+	
+	
 </div>	
 
 	
