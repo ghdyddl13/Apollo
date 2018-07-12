@@ -39,18 +39,28 @@ $(function() {
 		})
 	});
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+	//mywork task 멤버 hover 시 이외 멤버 모두 불러오기 
 	$(document).on("mouseenter",".mywork-main-task-member",function() {
 	   
         let position = $(this).position();
+        $('.mywork-main-task-member-hidden').hide();
+        
         $(this).next().css("left",position.left + 30);
         $(this).next().css("top",position.top - 40);
         $(this).next().css("display","block");
 	    
-	  }).on("mouseleave", ".mywork-main-task-member", function() {//마우스 호버 아웃 하면 checkbox가 다시 안보이게 함
-		
-		  $(this).next().css("display","none");
-		  	
+	  });
+	
+	//starred work task 멤버 hover 시 이외 멤버 모두 불러오기 
+	$(document).on("mouseenter",".starred-body-task-imagetag",function() {
+		   
+        let position = $(this).position();
+        $('.mywork-main-task-member-hidden').hide();
+        
+        $(this).next().css("left",position.left + 16);
+        $(this).next().css("top",position.top + 19);
+        $(this).next().css("display","block");
+	    
 	  });
 
 	

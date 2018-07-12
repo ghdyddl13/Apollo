@@ -111,6 +111,7 @@
   height: 32px;
   border-radius: 2px;
 }
+
 .mywork-main-task-date{
   box-sizing: content-box;
   font-size: 13px;
@@ -221,10 +222,30 @@
 	background: #f5f8fc;
 	text-align:center;
 	border-radius: 10px;
+	position: absolute;
+	box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+	margin-left:10px;
+	width: 32px;
+	height: 32px;
+	border-radius: 2px;
+	display:none;
+}
+.today_member_hidden-wrapper {
+	display: flex;
+	z-index:12;
+	background: #f5f8fc;
+	text-align:center;
+	border-radius: 10px;
 	padding:10px;
 	position: absolute;
 	box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
-	display: none
+	
+}
+.mywork-main-task-member-hidden-img{
+  margin-left:10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
 }
 
 

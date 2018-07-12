@@ -659,4 +659,17 @@ $(function() {
 			}
 		})
 	})
+	
+	//mywork task 멤버 hover 시 이외 멤버 모두 불러오기 
+	$(document).on("mouseenter",".list-task-member",function() {
+		   
+        let position = $(this).position();
+        $('.list-task-member-hidden').hide();
+        
+        $(this).next().css("left",position.left + 16);
+        $(this).next().css("top",position.top + 19);
+        $(this).next().css("display","block");
+	    
+	  });
+
 })
