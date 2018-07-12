@@ -28,8 +28,8 @@
 	padding: 10px;
 	font-size: 13px;
 	display: flex;
-white-space:nowrap;
-align-items: center;
+	white-space:nowrap;
+	align-items: center;
 
 }
 
@@ -124,7 +124,6 @@ align-items: center;
 	height: 100%;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-
 	padding-left: 8px
 }
 .stream-project-select-info-pname{

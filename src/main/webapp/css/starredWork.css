@@ -51,12 +51,12 @@
   border-radius: 50%;
 }
 .starred-body-task-imagetag{
-  border-radius:3px;
+  border-radius:50%;
   width: 32px;
   height: 32px;
 }
 .starred-body-task-hidden-imagetag{
-  border-radius:3px;
+  border-radius:50%;
   width: 32px;
   height: 32px;
 }
