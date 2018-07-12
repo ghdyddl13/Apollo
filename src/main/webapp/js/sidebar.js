@@ -1,17 +1,5 @@
 $(function() {
-	/*
-	var loading = $('<div id="loading" class="loading"><img id="loading_img" alt="loading" src="img/loader.gif" /></div>')
-					.appendTo(".main-box-panel").hide();
 
-	$(window)	
-	.ajaxStart(function(){
-		console.log("a")
-	loading.show();
-	})
-	.ajaxStop(function(){
-		console.log("b")
-		loading.hide();
-	});*/
 
 
 
@@ -1129,10 +1117,7 @@ function updateProject(data){
  작성자명 : 박 민 식
  */
 function unload() {
-	/*console.log("aa");
-	switch (document.readyState){
-	case "complete":
-	*/	
+
 		$.ajax({
 			url:"pageReloadEvent.htm",
 			dataType:"html",

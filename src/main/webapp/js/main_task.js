@@ -516,13 +516,13 @@ $(document).on("click","#task_modal_add_step",function(){
 			        		  step_names_popup_div_str += '<div class="first_row">' + this.sname + '</div>';
 			        		  
 			        		  if((sday == emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">(시작일과 종료일 모두 미정)</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">(시작일과 종료일 모두 미정)</div>'
 			        		  } else if((sday != emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~' + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~' + '</div>'
 			        		  }  else if((sday == emptyday) && (eday != emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
 			        		  } else{
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
 			        		  }
 			        		  
 			        		  step_names_popup_div_str += '</div></div>';
@@ -740,7 +740,7 @@ $(document).on("click","#task_modal_add_assignee",function(){
 	        			  assignee_popup_div_str += '<img class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';	
 	        			  assignee_popup_div_str += '<div class="each_comment">';	
 	        			  assignee_popup_div_str += '<div class="first_row">' + this.mname + '</div>';	
-	        			  assignee_popup_div_str += '<div class="second_row">' + this.mid + '</div>';	
+	        			  assignee_popup_div_str += '<div class="popup_second_row">' + this.mid + '</div>';	
 	        			  assignee_popup_div_str += '</div></div>';
 	        				   
 			        	   });
@@ -1220,7 +1220,7 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
                   popupdiv_str += '<img class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';	
                   popupdiv_str += '<div class="each_comment">';	
                   popupdiv_str += '<div class="first_row">' + this.mname + '</div>';	
-                  popupdiv_str += '<div class="second_row">' + this.mid + '</div>';	
+                  popupdiv_str += '<div class="popup_second_row">' + this.mid + '</div>';	
                   popupdiv_str += '</div></div>';
                   
                  });
@@ -1414,13 +1414,15 @@ $(document).on("click","#receivermid",function(){
  기      능 : tname 변경을 위해 인풋태그 활성화 함수
  작성자명 : 김 정 권
  */
+
 $(document).on("click","#Task_Modal_tname",function(){
 	
 	$('#Task_Modal_tname').css("display", "none");
-	
+
 	var tname = $('#Task_Modal_tname').text();
 	$('#Task_Modal_tname_input').val(tname);
 	$('#Task_Modal_tname_input').css("display","block");
+	$("#Task_Modal_tname_input").focus();
 	
 });
 
@@ -1446,6 +1448,7 @@ $(document).on("keyup","#Task_Modal_tname_input",function(){
 $(document).on("click","#task_dismiss_btn_starredtask",function(){
 	$(".modal-content2").hide();
 	$(".starred-secondbody-image").show();
+
 });
 
 /**
@@ -1487,8 +1490,14 @@ $(document).on("focusout","#Task_Modal_tname_input",function() {
 	var tname = '';
 	
 	tname = $('#Task_Modal_tname_input').val();
-		    console.log("tname " + tname);
-		    $.ajax(
+    if(tname.trim()==""||tname ==$('#Task_Modal_tname').text()){
+    	$('#Task_Modal_tname_input').val('');
+    	$('#Task_Modal_tname_input').css("display","none");
+    	$('#Task_Modal_tname').css("display", "block");
+    	return false;
+    }
+		 
+    		$.ajax(
 				       {
 				           type : "post",
 				           url  : "changetname.htm",
@@ -1680,13 +1689,13 @@ $(document).on("click","#task_modal_add_step_noredirect",function(){
 			        		  step_names_popup_div_str += '<div class="first_row">' + this.sname + '</div>';
 			        		  
 			        		  if((sday == emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">(시작일과 종료일 모두 미정)</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">(시작일과 종료일 모두 미정)</div>'
 			        		  } else if((sday != emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~' + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~' + '</div>'
 			        		  }  else if((sday == emptyday) && (eday != emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
 			        		  } else{
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
 			        		  }
 			        		  
 			        		  step_names_popup_div_str += '</div></div>';
@@ -1874,7 +1883,7 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(eve
                   popupdiv_str += '<img class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';	
                   popupdiv_str += '<div class="each_comment">';	
                   popupdiv_str += '<div class="first_row">' + this.mname + '</div>';	
-                  popupdiv_str += '<div class="second_row">' + this.mid + '</div>';	
+                  popupdiv_str += '<div class="popup_second_row">' + this.mid + '</div>';	
                   popupdiv_str += '</div></div>';
                   
                  });
