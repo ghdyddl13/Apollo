@@ -35,6 +35,8 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			console.log(tid);
 		}
 		
+		const loadingpage_third = '<div id="loading" class="loading_third"><img style="width:auto;height:100px;border-radius:50%"id="loading_img" alt="loading" src="img/rocket_3.gif" /></div>';
+		
 		$.ajax(
 			       {
 			           type : "post",
@@ -43,8 +45,9 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			        	   'tid': tid
 			           },
 			           beforeSend:function(){
-			        	var loadinggif = '<div id="loading" class="loading_third"><img style="width:auto;height:100px;border-radius:50%"id="loading_img" alt="loading" src="img/rocket_3.gif" /></div>';
-			   			$('#right').append(loadinggif);
+			        	$('.modal-content2').css('display','none');
+			        	$('.modal-content3').css('display','none');
+			   			$('#right').append(loadingpage_third);
 			   			},
 			           success : function(rdata){
 			        	   console.log('성공!')
@@ -267,6 +270,9 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			        	   $(".starred-secondbody-image").hide();
 			        		$(".modal-content2").show();
 			        		$(".modal-content3").show();
+			        		
+			        		$('.modal-content2').css('display','block');
+			        		$('.modal-content3').css('display','block');
 			        		$("#loading").remove();
 			           } // end-success
 			        } 
