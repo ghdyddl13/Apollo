@@ -42,6 +42,9 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			           data : {
 			        	   'tid': tid
 			           },
+			           beforeSend:function(){
+			   			$('#right').append(loadingpage);
+			   			},
 			           success : function(rdata){
 			        	   console.log('성공!')
 			        	   console.log(rdata);
@@ -263,7 +266,7 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			        	   $(".starred-secondbody-image").hide();
 			        		$(".modal-content2").show();
 			        		$(".modal-content3").show();
-			        	   
+			        		$("#loading").remove();
 			           } // end-success
 			        } 
 			      ); // end-ajax
