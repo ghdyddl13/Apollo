@@ -188,10 +188,10 @@ $(function() {
                 <div class="task-modal-content-detail">
 					<div class="modal-title">
 						<p>상세설명&nbsp&nbsp<img id="task_detail_status" src="img/loader.gif"></p>
+					</div>
 						<div style="text-align:center">
 						<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
 						</div>
-					</div>
 				</div>
                 <hr/>
                 
