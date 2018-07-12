@@ -1,5 +1,14 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Minsik Park
+=======
+<<<<<<< HEAD
+Built-By: pvkpk
+>>>>>>> 95a9d059f3df3b908f407ff97c5f719f22ca6581
 Build-Jdk: 1.8.0_171
+=======
+Built-By: Bit
+Build-Jdk: 1.8.0_161
+>>>>>>> feature/css2000
 Created-By: Maven Integration for Eclipse
 

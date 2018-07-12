@@ -2,10 +2,26 @@
 	<wb-module deploy-name="Apollo-1.0.0-BUILD-SNAPSHOT">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
 		<wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 95a9d059f3df3b908f407ff97c5f719f22ca6581
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
         <property name="java-output-path" value="/Apollo/target/classes"/>
+<<<<<<< HEAD
+=======
+=======
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+>>>>>>> c6b0f3b753bd6a8c62e2bcd742b50f32e36ec982
+=======
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+>>>>>>> feature/css2000
+>>>>>>> 95a9d059f3df3b908f407ff97c5f719f22ca6581
         <property name="context-root" value="Apollo"/>
 	</wb-module>
 </project-modules>

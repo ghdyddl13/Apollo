@@ -166,4 +166,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteTaskCount">
     	delete from task where tid=#{tid} and (1=(select count(*) from taskinstep where tid=#{tid}))
     </delete>
+    
+    <select id="getProjectNamebyTid" resultType="com.apollo.vo.ProjectDTO"> 
+    	select * from project where pid = (select pid from task where tid = #{tid})
+    </select>
 </mapper>
