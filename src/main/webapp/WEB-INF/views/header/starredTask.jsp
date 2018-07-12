@@ -66,7 +66,7 @@ $(function() {
         </div>
       </div>
     </div>
-    <div class="main-body-twopannel-right">
+    <div class="main-body-twopannel-right" id ="right">
      
       
     <div class="starred-secondbody-image"></div>
