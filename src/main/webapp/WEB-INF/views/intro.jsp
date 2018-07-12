@@ -13,6 +13,10 @@
 <link href="css/common.css" type="text/css" rel="stylesheet">
 <!-- AWESOMEFONT를 위한 cdn -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+<link rel="shortcut icon" href="img/FAVINEW.ico">
+<link rel="icon" href="img/FAVINEW.ico" sizes="16x16">
+
 <script>
 $(function() {
 	$('#intro-login-btn').click(function() {
