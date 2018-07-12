@@ -123,7 +123,7 @@ $(function() {
 									<h3>프로젝트의 업무일정 및 진행상태를 한번에 확인하세요!</h3>
 								</div>
 								<br> 
-								<img src="img/step_timeline_img.png">
+								<img src="img/timeline.png">
 							</div>
 						</div>
 
@@ -134,7 +134,7 @@ $(function() {
 									<h3>급한 업무부터 다음주 업무까지 그래프로 확인할 수 있습니다</h3>
 								</div>
 								<br>
-								<img src="img/step_list_img.png">
+								<img src="img/list.png">
 							</div>
 						</div>
 					</div>

@@ -30,6 +30,17 @@ html, body{
 	justify-content: center;
 	align-items: center
 }
+
+.loading_third{
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	background:white;
+	justify-content: center;
+	align-items: center
+}
+
 #loading_img{
 	height: 20px;
 	width: 20px

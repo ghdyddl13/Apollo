@@ -432,7 +432,7 @@ $(function() {
 	 */	
 	$(document).on("click", "#selectpage-deletetask-button", function(){// 삭제 버튼을 눌렀을 시에
 		let checkboxcount= checkbox.length;
-		$("#list-delete-tasks-ment").html(checkboxcount+"개 Task를 삭제하시겠습니까?<br><h5 style='color:red'>(삭제 후 복구 불가능합니다)</h5>")
+		$("#list-delete-tasks-ment").html(checkboxcount+"개 Task를 삭제하시겠습니까?<br><h5 style='color:red;font-size:14px'>(삭제 후 복구 불가능합니다)</h5>")
 
 	})
 	$(document).on("click","#list_Delete_Tasks_btn",function(){//확인을 눌렀을 시에 발생하는 함수
