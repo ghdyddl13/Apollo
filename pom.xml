@@ -4,9 +4,9 @@
 
     <!-- 프로젝트 기본 정보(비 기술적 정보) -->
     <modelVersion>4.0.0</modelVersion>
-    <groupId>kr.or</groupId> <!-- 구분자로 사용 -->
-    <artifactId>bit</artifactId> <!-- 구분자 & 회사이름 -->
-    <name>PracticeSpring</name><!-- 프로젝트 이름 -->
+    <groupId>com.apollo</groupId> <!-- 구분자로 사용 -->
+    <artifactId>Apollo</artifactId> <!-- 구분자 & 회사이름 -->
+    <name>Apollo</name><!-- 프로젝트 이름 -->
     <packaging>war</packaging>
     <version>1.0.0-BUILD-SNAPSHOT</version>
     
@@ -153,8 +153,13 @@
 			<artifactId>spring-websocket</artifactId>
 			<version>4.3.1.RELEASE</version>
 		</dependency>
-		
-		
+		<!--OJDBC6  -->
+		<dependency> 
+	     	<groupId>com.oracle</groupId> 
+	     	<artifactId>ojdbc6</artifactId> 
+	     	<version>12.1.0.1</version> 
+	     	<scope>runtime</scope> 
+		</dependency>
 
 		
         <!-- Tiles -->
@@ -368,6 +373,30 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            <!-- 메이븐을 통한 서버 배포 -->    
+            <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-war-plugin</artifactId>
+		        <version>2.4</version>
+		        <configuration>
+		            <warsourcedirectory>src/main/webapp</warsourcedirectory>
+		            <webxml>src/main/webapp/WEB-INF/web.xml</webxml>
+		        </configuration>
+		    </plugin>
+		 
+		    <plugin>
+		        <groupId>org.codehaus.mojo</groupId>
+		        <artifactId>tomcat-maven-plugin</artifactId>
+		        <version>1.1</version>
+		        <configuration>
+		            <url>http://52.79.251.197:8080/manager/text</url>
+		            <path>/Apollo</path>
+		            <username>projectapollo</username>
+		            <password>apollo1004</password>
+		        </configuration>
+		    </plugin>
+
+
         </plugins>
 
     </build>
