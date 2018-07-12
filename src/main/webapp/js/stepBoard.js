@@ -61,13 +61,6 @@ function addTask_focusout(tstatusid){
    }
 }
    
-   //board에서 나오는 status 목록 width 크기 지정하는 함수
-   function autoWidth() {
-      var width = (($('.tstatuslist').length * 310)
-            + "px");
-      $('#board-content-md').css("width", width)
-   }
-   
    /**
     * 
     날      짜 : 2018. 6. 18
