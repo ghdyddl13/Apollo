@@ -70,7 +70,7 @@
 		<property name="scope"
 			value="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email" />
 		<property name="redirectUri"
-			value="http://localhost:8090/bit/googlelogin.htm" />
+			value="http://localhost:8090/Apollo/googlelogin.htm" />
 	</bean>
 	
 	 <!-- 파일 업로드 지원 LIB -->

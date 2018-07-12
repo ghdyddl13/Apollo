@@ -61,13 +61,8 @@ function addTask_focusout(tstatusid){
    }
 }
    
-   //board에서 나오는 status 목록 width 크기 지정하는 함수
-   function autoWidth() {
-      var width = (($('.tstatuslist').length * 310)
-            + "px");
-      $('#board-content-md').css("width", width)
-   }
-   
+
+ 
    /**
     * 
     날      짜 : 2018. 6. 18
@@ -88,14 +83,14 @@ function addTask_focusout(tstatusid){
             tid =  ui.item[0].value;
          //   console.log("tsts : " + tstatusid);
             
-    /*     $.ajax({
+            $.ajax({
             url : 'boardTaskStatusUpdate.htm',
             data : { 
                tstatusid : tstatusid,
                tid : tid
                } 
-         }) 
-            */
+            }) 
+          
             //update event 발생시 이동전 위치와 이동후 위치를 나타내주는 변수를 초기화함
             i = 1;
              
@@ -113,8 +108,7 @@ function addTask_focusout(tstatusid){
     작 성 자 명 : 이 창 훈
     */
    function doDraggable(){
-	   console.log("test")
-	   autoWidth();
+
 	     sortable();
 	     
 	    
@@ -127,12 +121,24 @@ function addTask_focusout(tstatusid){
 		                var board_container = $($('#board-content-md').parents()[0]).offset();
 		                var board_width=$('#board-content-md').width();
 		                var board_container_width=$($('#board-content-md').parents()[0]).width();
+		                console.log("board_width  : " + board_width);
+		                console.log("board_container_width : " + board_container_width);
 		                var right_border= board_width - board_container_width;
 		                var diff_left= board_container.left -board.left;
+		                console.log("right_border : " + right_border);
+		                console.log("diff_left : " + diff_left);
+		                console.log("board_container.left : " + board_container.left);
+		                console.log("board.left :" + board.left)
+	                	console.log("be pa right : " +( board_container.left + board_container_width));
+	                	console.log("be board right : " + (board.left + board_width));
 		                if(board_container.left <=board.left){
 		                	 $('#board-content-md').offset({left:board_container.left});
+		                	  console.log("af board_container.left : " + board_container.left);
+		                	  console.log(" af board.left :" + board.left)
 		                }else if(diff_left >= right_border){
-		                	$('#board-content-md').offset({left:board_container.left-right_border});
+		                	$('#board-content-md').offset({left:(board_container.left-right_border)});
+		                	console.log("pa right : " +( board_container.left + board_container_width));
+		                	console.log("board right : " + (board.left + board_width));
 		                }
 	          
 	              }
