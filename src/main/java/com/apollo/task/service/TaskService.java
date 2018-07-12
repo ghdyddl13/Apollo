@@ -30,10 +30,10 @@ import com.apollo.member.dao.MemberDAO;
 import com.apollo.step.dao.StepDAO;
 import com.apollo.task.dao.AssigneeDAO;
 import com.apollo.task.dao.CommentDAO;
-import com.apollo.task.dao.TaskFileDAO;
 import com.apollo.task.dao.StarredTaskDAO;
 import com.apollo.task.dao.SubtaskDAO;
 import com.apollo.task.dao.TaskDAO;
+import com.apollo.task.dao.TaskFileDAO;
 import com.apollo.task.dao.TstatusDAO;
 import com.apollo.utils.DeleteFileUtils;
 import com.apollo.utils.DownloadFileUtils;
@@ -45,6 +45,7 @@ import com.apollo.vo.CommentDTO;
 import com.apollo.vo.FileDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
+import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.ReceiverDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
@@ -847,6 +848,26 @@ public class TaskService {
 		}
 		return entity;
 	}
+	
+	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 12.
+	 기      능 : get 프로젝트 네임 바이 티드
+	 작성자명 : 신 호 용
+	 */
+	public ProjectDTO getProjectNamebyTid(int tid) {
+		
+		System.out.println("getProjectNamebyTid 서비스 실행");
+				
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		
+		
+		ProjectDTO dto = taskdao.getProjectNamebyTid(tid);
+		return dto;
+		
+	}
+	
 	
 }
 

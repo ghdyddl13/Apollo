@@ -160,8 +160,11 @@
 				<!-- row 1 -->
 					<div class="row">
 						<div class="col-sm-10">
+							<div id="projectinTask" style="font-size: 11px; color:#717171; margin-left: 2px; clear: left"></div>
+							<br>
 							<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
-							<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">
+							<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">	
+							
 						</div>
 	
 						<div class="col-sm-2" id="star_trash">

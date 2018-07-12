@@ -267,6 +267,25 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			        	   });
 			        	   $('#Task_Modal_files').append(filesdivs);
 			        	   
+			        	   // 소속 프로젝트 project
+			        	   $('#projectinTask').empty();
+			        	   var methodology;
+			        		 switch (rdata.projectdto.methodologyid){
+			        		 case 1: 
+			        			 methodology="waterfallicon.png";
+			        			 break;
+			        		 case 2:
+			        			 methodology="agileicon.png";
+			        			 break;
+			        		 case 3:	 
+			        			 methodology="customicon.png";
+			        			 break;
+			        		}   
+			        	   var strforprojectnameintaskmodal = '<img style="width: 11px; height: 11px;" src="img/' + methodology + '">'
+			        	   strforprojectnameintaskmodal += '<span class="project_link_in_taskmodal" id="' + rdata.projectdto.pid + '">&nbsp;' + rdata.projectdto.pname + '</span>'
+			        	   $('#projectinTask').append(strforprojectnameintaskmodal);
+			        	   
+			        	   
 			        	   $(".starred-secondbody-image").hide();
 			        		$(".modal-content2").show();
 			        		$(".modal-content3").show();
@@ -956,6 +975,21 @@ $(document).on("keyup","#add_sub_task",function(){
    		        }); // end-ajax
    	
      } // end - keyCode=13
+});
+
+$(document).on("click",".project_link_in_taskmodal",function(){
+	 $("#task_dismiss_btn").click();
+	$.ajax(
+  		       {
+  		           type : "post",
+  		           url  : "information.htm",
+  		           data : {
+  		        	   'pid':$(this).attr('id')},
+  		           success : function(rdata){
+  		        	 $("#main-box").empty();
+					 $("#main-box").append(rdata);
+  		           } // end-success
+  		        }); // end-ajax
 });
 
 
