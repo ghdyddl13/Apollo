@@ -536,7 +536,20 @@ $(function() {
 			    $("#search-content-box").empty();
 				$("#search-bar").val("")
 			}
+			// mywork 페이지에서 member hidden
+			if(!$(e.target).parents('.mywork-main-task-member-hidden').length > 0){
+				$('.mywork-main-task-member-hidden').hide();
+			}
 			
+			// list 페이지 member hidden
+			if(!$(e.target).parents('.list-task-member').length > 0){
+				$('.list-task-member-hidden').hide();
+			}
+			
+		/*	if(!$(e.target).parents('.today_member_hidden-wrapper').length > 0){
+				$('.today_member_hidden-wrapper').hide();
+			}*/
+		
 		});
 	
 
