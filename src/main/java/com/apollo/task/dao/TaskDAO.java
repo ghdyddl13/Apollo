@@ -3,8 +3,8 @@ package com.apollo.task.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.apollo.vo.FileDTO;
 import com.apollo.vo.MidtidDTO;
+import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.TaskDTO;
 import com.apollo.vo.TaskInStepDTO;
@@ -60,5 +60,6 @@ public interface TaskDAO {
 	public ArrayList<TaskInStepDTO> getTidsTaskInStep(int sid);
 
 	public int deleteTaskCount(int tid);
+	public ProjectDTO getProjectNamebyTid(int tid);
 	
 }
