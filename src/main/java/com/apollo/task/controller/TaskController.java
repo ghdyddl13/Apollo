@@ -3,7 +3,6 @@ package com.apollo.task.controller;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +24,7 @@ import com.apollo.vo.CommentDTO;
 import com.apollo.vo.FileDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
+import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.SubtaskDTO;
@@ -154,6 +154,9 @@ public class TaskController {
 	// 유저의 mid
 	model.addAttribute("userid", mid);
 	
+	// 해당 테스크의 프로젝트
+	ProjectDTO projectdto = service.getProjectNamebyTid(tid);
+	model.addAttribute("projectdto", projectdto);
 	
 	return jsonview;
 	}
@@ -1303,6 +1306,5 @@ public View changeEdayOfTaskNoredirect(int tid, String eday, HttpSession session
 
 	return jsonview;
  }
-
 
 }

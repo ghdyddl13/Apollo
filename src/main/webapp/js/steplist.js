@@ -65,9 +65,6 @@ $(function() {
 	                	tstatusid : tstatus, 
                         tname : newtask
                         },
-            		beforeSend:function(){
-        				$('#main-box').html(loadingpage);
-        			},
 	                dataType:"html",
 	                success:function(data) {
 						$("#main-box").empty();
@@ -110,9 +107,6 @@ $(function() {
                         tname : newtask
                         },
 	                dataType:"html",
-	        		beforeSend:function(){
-	    				$('#main-box').html(loadingpage);
-	    			},
 	                success:function(data) {
 						$("#main-box").empty();
 						$("#main-box").append(data);
@@ -213,10 +207,10 @@ $(function() {
         $.each(list_memberlist,function(index,element) {
           let mid = element.mid;
           let mname = element.mname;
-          //let image = element.image
+          let image = element.image
           memberlisttag+='<div class="list-section-third-addasignee-member" data-toggle="modal" data-target="#list_Assign_Tasks" id="'+mid+'">';
           memberlisttag+='<div class="list-section-third-addasignee-member-container"><div class="list-section-third-addasignee-member-tag"><div class="list-section-third-addasignee-member-image-wrapper">';
-          memberlisttag+='<img class="list-section-third-addasignee-member-image"src="img/user.png" alt=""></div>';
+          memberlisttag+='<img class="list-section-third-addasignee-member-image"src="displayImage.htm?image='+image+'" alt=""></div>';
           memberlisttag+='<div class="list-section-third-addasignee-member-textcontainer"><div class="list-section-third-addasignee-member-mname">';
           memberlisttag+= mname;
           memberlisttag+= '</div><div class="list-section-third-addasignee-member-mid">';

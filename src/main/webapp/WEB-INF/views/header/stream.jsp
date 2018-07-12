@@ -38,12 +38,15 @@ $(function() {
 
 <div class = "main-body-container">
 	<div class ="main-body-onepannel">
-
-	
-		<div class="stream_header_container">
-			<span class = "stream_header">STREAM</span>
-			
-		</div>
+	 	<div class="main-body-twopannel-left-header">
+            <div class="main-body-twopannel-left-header-wrapper">
+              <div class="main-body-twopannel-left-header-title-textwrapper">
+                <div class="main-body-twopannel-left-header-title">
+                  <span class="main-body-twopannel-left-header-title-text">Stream</span>
+                </div>
+              </div>
+            </div>
+          </div>
 		<div class="stream-main-container">
 			<div id="stream-current-project">
 				

@@ -15,6 +15,9 @@
      vertical-align: right;
 }
 
+<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
+							<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">	
+
 #steplist_in_taskmodal th{
 	text-align: center;
 }
@@ -55,12 +58,9 @@
 
 
 #Task_Modal_assignee{
-     justify-content:center;
-     align-items:center;
      min-height: 50px;
-     display: flex;
-     padding: 10px
-     
+     padding: 10px;
+     text-align: center;
 }
 
 
@@ -398,6 +398,15 @@ assignee_in_taskmodal td{
 	display: none;
 	width: 450px;
 	float: left;
+	font-size: 19px;
+}
+
+#projectinTask:hover{
+	cursor: pointer;
+}
+
+#Task_Modal_tname{
+	font-size: 19px;
 }
 
 .file_del_btn{

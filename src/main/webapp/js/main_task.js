@@ -34,7 +34,7 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			tid= temptid.substring(6);
 			console.log(tid);
 		}
-		
+        const loadingpage_third = '<div id="loading" class="loading_third"><img style="width:auto;height:100px;border-radius:50%"id="loading_img" alt="loading" src="img/rocket_3.gif" /></div>';
 		$.ajax(
 			       {
 			           type : "post",
@@ -43,8 +43,10 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			        	   'tid': tid
 			           },
 			           beforeSend:function(){
-			        	var loadinggif = '<div id="loading" class="loading_third"><img style="width:auto;height:100px;border-radius:50%"id="loading_img" alt="loading" src="img/rocket_3.gif" /></div>';
-			   			$('#right').append(loadinggif);
+                        $('.modal-content2').css('display','none');
+                        $('.modal-content3').css('display','none');
+                           $('#right').append(loadingpage_third);
+
 			   			},
 			           success : function(rdata){
 			        	   console.log('성공!')
@@ -264,9 +266,31 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			        	   });
 			        	   $('#Task_Modal_files').append(filesdivs);
 			        	   
+			        	   // 소속 프로젝트 project
+			        	   $('#projectinTask').empty();
+			        	   var methodology;
+			        		 switch (rdata.projectdto.methodologyid){
+			        		 case 1: 
+			        			 methodology="waterfallicon.png";
+			        			 break;
+			        		 case 2:
+			        			 methodology="agileicon.png";
+			        			 break;
+			        		 case 3:	 
+			        			 methodology="customicon.png";
+			        			 break;
+			        		}   
+			        	   var strforprojectnameintaskmodal = '<img style="width: 11px; height: 11px;" src="img/' + methodology + '">'
+			        	   strforprojectnameintaskmodal += '<span class="project_link_in_taskmodal" id="' + rdata.projectdto.pid + '">&nbsp;' + rdata.projectdto.pname + '</span>'
+			        	   $('#projectinTask').append(strforprojectnameintaskmodal);
+			        	   
+			        	   
 			        	   $(".starred-secondbody-image").hide();
 			        		$(".modal-content2").show();
 			        		$(".modal-content3").show();
+                            $('.modal-content2').css('display','block');
+                            $('.modal-content3').css('display','block');
+
 			        		$("#loading").remove();
 			           } // end-success
 			        } 
@@ -950,6 +974,21 @@ $(document).on("keyup","#add_sub_task",function(){
    		        }); // end-ajax
    	
      } // end - keyCode=13
+});
+
+$(document).on("click",".project_link_in_taskmodal",function(){
+	 $("#task_dismiss_btn").click();
+	$.ajax(
+  		       {
+  		           type : "post",
+  		           url  : "information.htm",
+  		           data : {
+  		        	   'pid':$(this).attr('id')},
+  		           success : function(rdata){
+  		        	 $("#main-box").empty();
+					 $("#main-box").append(rdata);
+  		           } // end-success
+  		        }); // end-ajax
 });
 
 
