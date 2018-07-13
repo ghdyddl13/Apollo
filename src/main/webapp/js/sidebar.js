@@ -532,7 +532,12 @@ $(function() {
 				$(".custom-menu").remove();
 			}
 			
-			if (!($(e.target).parents("#search-nav").length > 0) &&!($(e.target).attr("id")=="search-nav")&&!($(e.target).parents(".assignee-left-div-wrapper").length > 0)) {
+			if (!($(e.target).parents("#search-nav").length > 0) &&
+				!($(e.target).attr("id")=="search-nav")&&
+				!($(e.target).parents(".assignee-left-div-wrapper").length > 0) &&
+				!($(e.target).parents(".modal").length > 0) &&
+				($(e.target).hasClass("modal")==false)) {
+				console.log()
 				document.getElementById("search-nav").style.width = "0";
 			    $("#search-content-box").empty();
 				$("#search-bar").val("")

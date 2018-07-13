@@ -1265,11 +1265,12 @@ label {
 	width:100%;
 }
 #profile-modal-img-content {
-	border-radius: 50%;
+    border-radius: 50%;
     display: flex;
     overflow: hidden;
     justify-items: center;
     align-items: center;
+    height: 130px;
 }
 #profile-modal-img {
     width: 100%;
