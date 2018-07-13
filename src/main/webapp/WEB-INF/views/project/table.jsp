@@ -59,7 +59,7 @@
 	                           <td class="project-table-duration">1일</td>
 	                        </c:when>
 	                        <c:otherwise>
-	                           <td class="project-table-duration">${step_endeday - step_startsday}일</td>
+	                           <td class="project-table-duration">${step_endeday - step_startsday+1}일</td>
 	                        </c:otherwise>
 	                     </c:choose>
 	                     <c:forEach var="member" items="${memberlist}">
@@ -95,14 +95,14 @@
 	                           <td class="project-table-sday">${task.sday}</td>
 	                           <td class="project-table-eday">${task.eday}</td>
 	                           <c:choose>
-	                              <c:when test="${(task.sday eq null) or (task.eday eq null)}">
+								   <c:when test="${(task.sday eq null) or  (task.eday eq null)}">
 									 <td class="project-table-duration"></td>
 								  </c:when>
 	                              <c:when test="${(task_endeday - task_startsday) == 0}">
 	                                 <td class="project-table-duration">1일</td>
 	                              </c:when>
 								  <c:otherwise>
-	                                 <td class="project-table-duration">${task_endeday - task_startsday}일</td>
+	                                 <td class="project-table-duration">${task_endeday - task_startsday+1}일</td>
 	                              </c:otherwise>
 	                           </c:choose>
 	                           <td class="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
@@ -137,7 +137,7 @@
 		                           <td class="project-table-duration">1일</td>
 		                        </c:when>
 		                        <c:otherwise>
-		                           <td class="project-table-duration">${step_endeday - step_startsday}일</td>
+		                           <td class="project-table-duration">${step_endeday - step_startsday+1}일</td>
 		                        </c:otherwise>
 		                        </c:choose>
 	                 		 <c:forEach var="member" items="${memberlist}">
@@ -173,14 +173,14 @@
 	                              <td class="project-table-sday">${task.sday}</td>
 	                              <td class="project-table-eday">${task.eday}</td>
 	                              <c:choose>
-	                              <c:when test="${(task.sday eq null) or (task.eday eq null)}">
+	                              <c:when test="${ (task.sday eq null) or  (task.eday eq null)}">
 									 <td class="project-table-duration"></td>
 								  </c:when>
 	                              <c:when test="${(task_endeday - task_startsday) == 0}">
 	                                 <td class="project-table-duration">1일</td>
 	                              </c:when>
 								  <c:otherwise>
-	                                 <td class="project-table-duration">${task_endeday - task_startsday}일</td>
+	                                 <td class="project-table-duration">${task_endeday - task_startsday+1}일</td>
 	                              </c:otherwise>
 	                           	  </c:choose>
 	                              <td class="project-table-td-tstatus" style="background-color:${task.color}">${task.tstatus}</td>
