@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.apollo.vo.CommentAndMemberDTO;
 import com.apollo.vo.CommentDTO;
+import com.apollo.vo.MidpidDTO;
 
 public interface InboxDAO {
 	
@@ -27,4 +28,5 @@ public interface InboxDAO {
 	public int updateNewCount(String mid);
 	
 	public int updateNewCheckSent(String mid);
+	public int deleteReceiverAfterDeletePmember(MidpidDTO midpid);
 }

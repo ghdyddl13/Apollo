@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.apollo.vo.CommentDTO;
+import com.apollo.vo.MidpidDTO;
 import com.apollo.vo.ReceiverDTO;
 
 public interface CommentDAO {
@@ -18,4 +19,5 @@ public interface CommentDAO {
 	
 	public int insertReceiver2(ReceiverDTO receiverdto);
 	
+
 }
