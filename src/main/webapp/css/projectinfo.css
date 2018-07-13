@@ -7,7 +7,14 @@
 
 #projectinfo_first_row{
  display: flex;
- margin-top: 30px
+ margin-top: 30px;
+ height: 500px;
+ 
+}
+
+.task_progress_table_wrapper{
+	overflow-y:auto;
+	height: 100%
 }
 
 #projectinfo_Task_Status_Donut{
@@ -30,7 +37,7 @@
 }
 
 #projectinfo_Task_Situation_Table{
-   overflow:auto;
+   overflow:hidden;
 
    margin-left: 5px;
    
