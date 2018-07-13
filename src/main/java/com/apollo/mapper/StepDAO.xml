@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	  select seq_sid.nextval FROM DUAL
    		 </selectKey>
 		insert into step(sid, sname, sday, eday, pid, fid, methodologyid, mid, detail) 
-		values (#{sid}, #{sname}, #{sday}, #{eday}, #{pid}, #{fid}, #{methodologyid}, #{mid}, #{detail})
+		values (#{sid}, #{sname},TO_DATE(#{sday},'YYYY-MM-DD HH24:MI:SS'), TO_DATE(#{eday},'YYYY-MM-DD HH24:MI:SS'), #{pid}, #{fid}, #{methodologyid}, #{mid}, #{detail})
 	</insert>
 
 	<select id ="getProjectIdByStepId" parameterType="Integer" resultType="Integer"> 
@@ -43,8 +43,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update step set
 		<if test="sname != null">sname=#{sname},</if>
 		<if test="mid != null">mid=#{mid},</if>
-		<if test="sday != null">sday=#{sday},</if>
-		<if test="eday != null">eday=#{eday},</if>
+		<if test="sday != null">sday=TO_DATE(#{sday},'YYYY-MM-DD HH24:MI:SS'),</if>
+		<if test="eday != null">eday=TO_DATE(#{eday},'YYYY-MM-DD HH24:MI:SS'),</if>
 		<if test="methodologyid != 0">methodologyid=#{methodologyid},</if>
 		<if test="pid != 0">pid=#{pid},</if>
 		<if test="fid != null">fid=#{fid},</if>
