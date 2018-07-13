@@ -284,13 +284,13 @@
 										<div class="modal-flexbox-col">
 											<p>시작일</p>
 											<div class="modal-flexbox-row">
-												<input type="text" id="update-project-sday" name="sday" placeholder="Start Date" class="date  sdate-img" readonly="readonly">
+												<input type="text" id="update-project-sday" name="sday" placeholder="Start Date" class="date sdate-img" readonly="readonly">
 											</div>
 										</div>
 										<div class="modal-flexbox-col">
 											<p>종료일</p>
 											<div class= "modal-flexbox-row">
-												<input type="text" id="update-project-eday" name="eday" placeholder="End Date" class="date  edate-img" readonly="readonly">
+												<input type="text" id="update-project-eday" name="eday" placeholder="End Date" class="date edate-img" readonly="readonly">
 											</div>	
 										</div>
 									</div>

@@ -152,6 +152,16 @@ $(function() {
 	
 	// 스텝 생성 버튼 클릭시  alert 창 화면
 	$("#insert-step-btn").click(function(){	 
+		var step_sdate = $("#insert-step-sday-id").val();
+		var step_edate = $("#insert-step-eday-id").val();
+		        
+		var sdate = step_sdate.split('-');
+		var edate = step_edate.split('-');
+		        
+		var start_date = new Date(sdate[0], sdate[1], sdate[2]);
+		var end_date = new Date(edate[0], edate[1], edate[2]);
+		
+		
 		 if($(".add-step-name").val().trim() == ""){
 			alert("스텝명을 입력하세요.");
 			$(".add-step-name").focus();	
@@ -160,10 +170,10 @@ $(function() {
 			 alert("책임자를 선택하세요.");
 			 return false;
 		 }
-		 /*if($('#insert-step-sday-id').val() > $('#insert-step-eday-id').val()) {
+		 if(start_date.getTime() > end_date.getTime()) {
 			 alert("시작일이 종료일보다 앞설 수 없습니다.");
 			return false;
-		 }*/
+		 }
 		 var newstep = $('#step-add-form').serialize();
 		 $.ajax({
 			 
@@ -313,16 +323,24 @@ $(function() {
 		
 		/// 프로젝트 수정 모달창에서 수정 버튼 클릭 시 
 		$(document).on("click","#update-project-btn",function(){
+			var step_sdate = $("#update-project-sday").val();
+			var step_edate = $("#update-project-eday").val();
+			        
+			var sdate = step_sdate.split('-');
+			var edate = step_edate.split('-');
+			        
+			var start_date = new Date(sdate[0], sdate[1], sdate[2]);
+			var end_date = new Date(edate[0], edate[1], edate[2]);
 			
 			 if($("#update-project-pname").val().trim() == ""){
 					alert("프로젝트명을 입력해주세요.");
 					$("#update-project-name").focus();	
 					return false;
 			}
-			 if($("#update-project-sday").val() > $("#update-project-eday").val()) {
-				 alert("시작일이 종료일보다 앞설 수 없습니다.");
-				return false;
-			 }
+			if(start_date.getTime() > end_date.getTime()) {
+		    	   alert('시작일이 종료일보다 앞설 수 없습니다.');
+		    	   return false;
+			}
 			var project = $("#update-project-form").serialize();
 			console.log(project);
 			
@@ -677,16 +695,26 @@ $(function() {
 		
 	// 프로젝트 생성 버튼 클릭시 alert 창 화면 		
 	$("#insert-project-btn").click(function(evt){
+		
+		var step_sdate = $("#insert-project-sday-id").val();
+		var step_edate = $("#insert-project-eday-id").val();
+		        
+		var sdate = step_sdate.split('-');
+		var edate = step_edate.split('-');
+		        
+		var start_date = new Date(sdate[0], sdate[1], sdate[2]);
+		var end_date = new Date(edate[0], edate[1], edate[2]);
+		
 		 if($("#add-project-name").val().trim() == ""){
 			alert("프로젝트명을 입력해주세요.");
 			$("#add-project-name").focus();	
 			return false;
 		 }
-		 /*if($('#insert-project-sday-id').val() > $('#insert-proejct-eday-id').val()) {
+		 if($('#insert-project-sday-id').getTime() > $('#insert-proejct-eday-id').getTime()) {
 			 alert("시작일이 종료일보다 앞설 수 없습니다.");
 			return false;
 		 }
-		 */
+		 
 		 var newproject = $("#project-add-form").serialize(); //serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
 
 		 $.ajax({

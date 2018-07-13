@@ -1254,30 +1254,39 @@ label {
 
 /* Profile Modal */
 .profile-modal-left {
-	height: 150px;
+	margin-top: 10px;
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-content: center;
 }
 #profile-modal-content{
 	height:100%;
 	width:100%;
 }
+#profile-modal-img-content {
+	border-radius: 50%;
+    display: flex;
+    overflow: hidden;
+    justify-items: center;
+    align-items: center;
+}
 #profile-modal-img {
-	margin-top: 10px;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
 }
 .profile-modal-dialog {
 	width: 500px;
     height: 250px;
 }
-/* .profile-modal-body {
+.profile-modal-body {
 	height: 200px;
-} */
+} 
 #profile-modal-info {
     margin-top: 23px;
 }
 .profile-modal-info-table>tbody>td {
-	width: 30%;
+	width: 100%;
 }
 /* Profile Modal End */
 
