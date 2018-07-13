@@ -531,7 +531,7 @@ $(function() {
 				$(".custom-menu").remove();
 			}
 			
-			if (!($(e.target).parents("#search-nav").length > 0) &&!($(e.target).attr("id")=="search-nav")) {
+			if (!($(e.target).parents("#search-nav").length > 0) &&!($(e.target).attr("id")=="search-nav")&&!($(e.target).parents(".assignee-left-div-wrapper").length > 0)) {
 				document.getElementById("search-nav").style.width = "0";
 			    $("#search-content-box").empty();
 				$("#search-bar").val("")
