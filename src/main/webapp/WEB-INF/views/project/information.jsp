@@ -35,7 +35,7 @@
 		                     </c:forEach>
 						</select>
 					</div>
-					<div>
+					<div class="task_progress_table_wrapper">
 						<table id="task_progress_table" class="table">
 							<tr><th>완료 task</th><th>미완료 task</th></tr>
 						</table>

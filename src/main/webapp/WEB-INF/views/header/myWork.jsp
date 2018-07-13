@@ -236,7 +236,7 @@
 							<img class="mywork-main-task-member" src='displayImage.htm?image=${latertask_member.image}'>
 							<div hidden="hidden" class="mywork-main-task-member-hidden">
 								<div class="today_member_hidden-wrapper">
-									<c:forEach var="latertask_member_hidden" items="${nextweeklist.members}">
+									<c:forEach var="latertask_member_hidden" items="${latertask.members}">
 										<img class="mywork-main-task-member-hidden-img" src='displayImage.htm?image=${latertask_member_hidden.image}'>
 									</c:forEach>
 								</div>
