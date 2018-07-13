@@ -238,10 +238,18 @@ public class ProjectInfoController {
 		int result= 0;
 		try {
 			result = projectinfoservice.deletePmember(midpid);
+			model.addAttribute("result",result);
+				int receiverresult =0;
+				int assigneeresult =0;
+				if(result > 0 ) {
+					receiverresult = projectinfoservice.deleteReceiverAfterDeletePmember(midpid);
+					assigneeresult = projectinfoservice.deleteAssigneeAfterDeletePmember(midpid);
+					model.addAttribute("receiverresult", receiverresult);
+					model.addAttribute("assigneeresult", assigneeresult);
+				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("result",result);
 		return "redirect:/information.htm?pid=" + pid;
 	}
 	

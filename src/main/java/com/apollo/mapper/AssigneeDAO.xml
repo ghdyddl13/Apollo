@@ -11,4 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getMidinAssingnee" resultType="String">
     select mid from assignee where tid = #{tid}
     </select>
+    
+    <delete id="deleteAssigneeAfterDeletePmember"  parameterType="com.apollo.vo.MidpidDTO">
+    	 delete from assignee where (tid in (select tid from task where pid = #{pid})) and (mid = #{mid})
+    </delete>
 </mapper>

@@ -939,6 +939,12 @@ $(document).on("keyup","#add_sub_task",function(){
 	 
      if (event.keyCode === 13) {
     	 var subtaskstr = $('#add_sub_task').val();
+    	 
+    	 if(subtaskstr.trim()==""){
+    		 $('#add_sub_task').blur();
+    		 return false;
+    	 }
+    	 
     	  $.ajax(
    		       {
    		           type : "post",
@@ -975,6 +981,11 @@ $(document).on("keyup","#add_sub_task",function(){
    	
      } // end - keyCode=13
 });
+
+
+$(document).on("focusout","#add_sub_task",function(){
+	$("#add_sub_task").val("");
+})
 
 $(document).on("click",".project_link_in_taskmodal",function(){
 	 $("#task_dismiss_btn").click();
