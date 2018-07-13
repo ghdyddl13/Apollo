@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId"/>
-=======
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
 	<wb-module deploy-name="Apollo-1.0.0-BUILD-SNAPSHOT">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
@@ -11,4 +8,3 @@
         <property name="context-root" value="Apollo"/>
 	</wb-module>
 </project-modules>
->>>>>>> feature/영상11시27분

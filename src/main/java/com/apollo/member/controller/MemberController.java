@@ -154,8 +154,11 @@ public class MemberController {
 	 */
 	@RequestMapping(value="/emailcheck.htm",method=RequestMethod.GET)
 	public String emailcheck(String emailcheckkey, String mid) {
+		System.out.println("mid : " + mid);
+		System.out.println("emailcheckkey : " + emailcheckkey);
 		String emailcheckbymid = service.emailcheckbymid(mid);
 		if(emailcheckkey.equals(emailcheckbymid)) {
+			System.out.println("if 들어왔니?");
 			service.emailcheck(mid);
 		}
 		return "login";
