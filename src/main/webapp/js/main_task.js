@@ -2053,3 +2053,66 @@ $(document).bind("mousedown", function(e) {
 });
 
 
+/// mywork task에서 스텝항목 클릭 시 해당 스텝으로 이동
+$(document).on("click",".mywork-main-task-step-name",function(evt){
+	evt.stopPropagation();
+	checkbox=[];
+	list_memberlist=[]; 
+	var sid = this.id.substr(1);
+	console.log(sid);
+	$.ajax({
+		url:"list.htm",
+		data:{sid:sid},
+	    beforeSend:function(){
+			$("#main-box").html(loadingpage);
+		},
+		dataType:"html",
+		success:function(data){
+			 $("#main-box").empty();
+			 $("#main-box").append(data);
+			 $.ajax({
+				 url:"memberlist.htm",
+				 data:{sid:sid},
+				 type:"POST",
+				 dataType:"JSON",
+				 success:function(memberlist){
+					 list_memberlist = memberlist.memberlist;
+				 }
+			 })
+		}
+	})
+}) //end Func
+
+/// mywork task에서 스텝항목 클릭 시 해당 스텝으로 이동
+$(document).on("click",".starred-body-task-container-bottom-step",function(evt){
+	evt.stopPropagation();
+	checkbox=[];
+	list_memberlist=[]; 
+	var sid = this.id.substr(1);
+	console.log(sid);
+	$.ajax({
+		url:"list.htm",
+		data:{sid:sid},
+	    beforeSend:function(){
+			$("#main-box").html(loadingpage);
+		},
+		dataType:"html",
+		success:function(data){
+			 $("#main-box").empty();
+			 $("#main-box").append(data);
+			 $.ajax({
+				 url:"memberlist.htm",
+				 data:{sid:sid},
+				 type:"POST",
+				 dataType:"JSON",
+				 success:function(memberlist){
+					 list_memberlist = memberlist.memberlist;
+				 }
+			 })
+		}
+	})
+}) //end Func
+	
+	
+
+

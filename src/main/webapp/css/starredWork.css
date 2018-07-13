@@ -152,6 +152,10 @@
   margin: 0 3px;
   font-size: 12px;
 }
+.starred-body-task-container-bottom-step:hover{
+	 border: 1px solid #a0a0a0;
+}
+
 /*STARRED- RIGHT PANNEL CSS*/
 .starred-secondbody-wrapper{
   padding: 0 32px;
