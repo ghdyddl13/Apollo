@@ -30,8 +30,7 @@ $(function() {
 		})
 	});
 	
-	$(document).on("click","#sent-page",function(evt){	
-		
+	$(document).on("click","#sent-page",function(evt){
 		$.ajax({
 			url:"sent.htm",
 			beforeSend:function(){

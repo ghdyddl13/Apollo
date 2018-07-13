@@ -75,6 +75,32 @@ public class InboxController {
 		model.addAttribute("inbox", "incomming");
 		return "header/inbox";
 	}
+	
+	
+	@RequestMapping("/inbox2.htm")
+	public String inbox2(HttpSession session,Model model) {
+		session.setAttribute("location", "/inbox.htm");
+		
+		System.out.println("inbox controller");
+		String mid = (String)session.getAttribute("mid");
+		service.updateNewCount(mid);
+		
+		ArrayList<CommentDTO> commentlist = service.getCommentlist(mid);//테스트용 아이디
+		
+		model.addAttribute("cmtlist", commentlist);
+		
+		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd", Locale.KOREA);
+		java.util.Date currenttime = new java.util.Date();
+		
+		Calendar cal = Calendar.getInstance();
+	    cal.setTime(currenttime);
+	    String today = formatter.format (cal.getTime());
+	    
+	    System.out.println (today);
+		model.addAttribute("today", today);
+		model.addAttribute("inbox", "incomming");
+		return "header/inbox_left";
+	}
 
 	/**
 	 * 
@@ -108,6 +134,33 @@ public class InboxController {
 		model.addAttribute("inbox", "sent");
 		
 		return "header/inbox";
+	}
+	@RequestMapping("/sent2.htm")
+	public String showSent2(HttpSession session, Model model){
+		session.setAttribute("location", "/sent.htm");
+		System.out.println("sent controller");
+		String mid = (String)session.getAttribute("mid");
+		System.out.println(mid);
+		service.updateNewCheckSent(mid);
+		
+		ArrayList<CommentDTO> sentlist = service.getSentlist(mid);//테스트용 아이디
+		
+		
+		model.addAttribute("cmtlist", sentlist);
+		
+		
+		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd", Locale.KOREA);
+		java.util.Date currenttime = new java.util.Date();
+		 
+		Calendar cal = Calendar.getInstance();
+	    cal.setTime(currenttime);
+	    String today = formatter.format (cal.getTime());
+	    
+	    System.out.println (today);
+		model.addAttribute("today", today);
+		model.addAttribute("inbox", "sent");
+		
+		return "header/inbox_left";
 	}
 	/**
 	 * 

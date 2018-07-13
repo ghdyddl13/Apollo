@@ -817,6 +817,22 @@ $.ajax(
 	        	   $.when(reappendassignee(tid)).done(function(data){
 	        		   send("assign");        //웹 소켓 send 함수 추가
 	        		   event.stopPropagation();
+	        		   if($("#inboxkind").val() == "incomming"){
+	        			   
+	        		   $.ajax({
+	   					url:"inbox2.htm",
+	   					dataType:"html",
+	   					success:function(data){
+	   						console.log("오니?");
+	   						$(".inbox-content-wrapper").empty();
+	   						$(".inbox-content-wrapper").append(data);
+	   						$('#sent-page').css('border-bottom','0px');
+	   						$('#archive-page').css('border-bottom','0px');
+	   						$('#incomming-page').css('border-bottom','2px solid transparent');
+	   						$('#incomming-page').css('border-color','#286cb0');
+	   					}
+	   				})
+	        		   }
 	        	   });
 
 	        	   console.log(rdata.result);
@@ -1305,12 +1321,20 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
 	   console.log(comments);
 	   if(comments != ""){
 		   $.when(insertCommentReceiver(tid,comments)).done(function(data){
+
+			
+			   
 			   send(); //웹 소켓 send 함수 추가
 			   event.stopPropagation();
 			   $('#comment_input_box_in_taskmodal').val('');
+			   
+				
+			   
 		   });
+		   
+
+		   
 	   }
-	   
   } // end - keyCode=13
 });
 
@@ -1420,6 +1444,23 @@ $(document).on("keyup","#comment_input_box_in_taskmodal2",function(){
 			           send("inbox"); //웹 소켓 send 함수 추가
 					   event.stopPropagation();
 			           
+					   if($("#inboxkind").val() == "sent"){
+						   $.ajax({
+								url:"sent2.htm",
+								dataType:"html",
+								success:function(data){
+									console.log("오니?");
+									$(".inbox-content-wrapper").empty();
+									$(".inbox-content-wrapper").append(data);
+									$('#incomming-page').css('border-bottom','0px');
+									$('#archive-page').css('border-bottom','0px');
+									$('#sent-page').css('border-bottom','2px solid transparent');
+									$('#sent-page').css('border-color','#286cb0');
+								}
+							})
+					   }
+					   
+					  
 			           
 		           } // end-success
 		        }); // end-ajax
@@ -1970,6 +2011,21 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(eve
 		   $.when(insertCommentReceiver(tid,comments)).done(function(data){
 			   send("inbox"); //웹 소켓 send 함수 추가
 			   event.stopPropagation();
+			   if($("#inboxkind").val() == "sent"){
+			   $.ajax({
+					url:"sent2.htm",
+					dataType:"html",
+					success:function(data){
+						console.log("오니?");
+						$(".inbox-content-wrapper").empty();
+						$(".inbox-content-wrapper").append(data);
+						$('#incomming-page').css('border-bottom','0px');
+						$('#archive-page').css('border-bottom','0px');
+						$('#sent-page').css('border-bottom','2px solid transparent');
+						$('#sent-page').css('border-color','#286cb0');
+					}
+				})
+			   }
 			   $('#comment_input_box_in_taskmodal_noredirect').val('');
 		   });
 	   }
