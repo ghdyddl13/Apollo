@@ -52,11 +52,11 @@
 	                     <td class="project-table-sday">${step.sday}</td>
 	                     <td class="project-table-eday">${step.eday}</td>
 	                     <c:choose>
-	                        <c:when test="${(step_endeday - step_startsday) == 0}">
-	                           <td class="project-table-duration"></td>
-	                        </c:when>
-	                        <c:when test="${empty step.sday or empty step.eday}">
+	                        <c:when test="${(step.sday eq null) or (step.eday eq null)}">
 	                        	  <td class="project-table-duration"></td>
+	                        </c:when>
+	                        <c:when test="${(step_endeday - step_startsday) == 0}">
+	                           <td class="project-table-duration">1일</td>
 	                        </c:when>
 	                        <c:otherwise>
 	                           <td class="project-table-duration">${step_endeday - step_startsday}일</td>
@@ -95,12 +95,12 @@
 	                           <td class="project-table-sday">${task.sday}</td>
 	                           <td class="project-table-eday">${task.eday}</td>
 	                           <c:choose>
-	                              <c:when test="${(task_endeday - task_startsday) == 0}">
-	                                 <td class="project-table-duration"></td>
-	                              </c:when>
-								   <c:when test="${empty task.sday or empty task.eday}">
+	                              <c:when test="${(task.sday eq null) or (task.eday eq null)}">
 									 <td class="project-table-duration"></td>
 								  </c:when>
+	                              <c:when test="${(task_endeday - task_startsday) == 0}">
+	                                 <td class="project-table-duration">1일</td>
+	                              </c:when>
 								  <c:otherwise>
 	                                 <td class="project-table-duration">${task_endeday - task_startsday}일</td>
 	                              </c:otherwise>
@@ -130,12 +130,12 @@
 		                        <td class="project-table-sday">${step.sday}</td>
 		                        <td class="project-table-eday">${step.eday}</td>
 		                        <c:choose>
-		                        <c:when test="${(step_endeday - step_startsday) == 0}">
-		                           <td class="project-table-duration"></td>
-		                        </c:when>
-		                        <c:when test="${empty step.sday or empty step.eday}">
+		                        <c:when test="${(step.sday eq null) or (step.eday eq null)}">
 									 <td class="project-table-duration"></td>
 								</c:when>	
+		                        <c:when test="${(step_endeday - step_startsday) == 0}">
+		                           <td class="project-table-duration">1일</td>
+		                        </c:when>
 		                        <c:otherwise>
 		                           <td class="project-table-duration">${step_endeday - step_startsday}일</td>
 		                        </c:otherwise>
@@ -173,12 +173,12 @@
 	                              <td class="project-table-sday">${task.sday}</td>
 	                              <td class="project-table-eday">${task.eday}</td>
 	                              <c:choose>
-	                              <c:when test="${(task_endeday - task_startsday) == 0}">
-	                                 <td class="project-table-duration"></td>
-	                              </c:when>
-								   <c:when test="${empty task.sday or empty task.eday}">
+	                              <c:when test="${(task.sday eq null) or (task.eday eq null)}">
 									 <td class="project-table-duration"></td>
 								  </c:when>
+	                              <c:when test="${(task_endeday - task_startsday) == 0}">
+	                                 <td class="project-table-duration">1일</td>
+	                              </c:when>
 								  <c:otherwise>
 	                                 <td class="project-table-duration">${task_endeday - task_startsday}일</td>
 	                              </c:otherwise>
