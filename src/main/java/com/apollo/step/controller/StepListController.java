@@ -122,6 +122,26 @@ public class StepListController {
 	}
 	/**
 	 * 
+	 날      짜 : 2018. 7. 3.
+	 기      능 : 사람 필터를 이용해서 값을 분류한다
+	 작성자명 : 이 진 우
+	 */
+	@RequestMapping(value="/listFilter.htm",method=RequestMethod.POST)
+	public String listFilter(int sid,String tstatusid, String mid,HttpSession session, ModelMap map) {
+		System.out.println("sid/"+sid+"   tstatusid/"+tstatusid+"     mid/"+mid);
+		if(tstatusid.equals("0")) { // 모든 tstatus
+			tstatusid =null;
+		}
+		if(mid.equals("")) {
+			mid =null;
+		}
+		String sorting = (String)session.getAttribute("sorting");
+		ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid,mid,sorting);
+		map.addAttribute("tasklist",tasklist);
+		return "step/listtask";
+	}
+	/**
+	 * 
 	 날      짜 : 2018. 6. 29.
 	 기      능 : 첫 페이지가 로드 되었을때 Memberlist 뜨게 하기
 	 작성자명 : 이 진 우
@@ -131,20 +151,6 @@ public class StepListController {
 		ArrayList<MemberDTO> memberlist = service.listProjectMemberList(sid);
         map.addAttribute("memberlist",memberlist);
 		return jsonview;
-	}
-	/**
-	 * 
-	 날      짜 : 2018. 7. 3.
-	 기      능 : 사람 필터를 이용해서 값을 분류한다
-	 작성자명 : 이 진 우
-	 */
-	@RequestMapping(value="/listpeoplefilter.htm",method=RequestMethod.POST)
-	public String peopleFilter(int sid, String mid,HttpSession session, ModelMap map) {
-		String tstatusid =null;
-		String sorting = (String)session.getAttribute("sorting");
-        ArrayList<StepListTaskDTO> tasklist = service.getListTask(sid,tstatusid,mid,sorting);
-        map.addAttribute("tasklist",tasklist);
-		return "step/listtask";
 	}
 	/**
 	 * 

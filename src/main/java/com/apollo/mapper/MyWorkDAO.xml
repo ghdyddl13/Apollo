@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMyWorkList" parameterType="String" resultType="com.apollo.vo.MyWorkTaskDTO">
 		select t.TID, t.TNAME, t.SDAY, t.EDAY,t.DETAIL, t.PID,t.CTIME, t.TSTATUSID, s.TSTATUS,s.COLOR  
 		from task t join TSTATUS s on t.TSTATUSID = s.TSTATUSID 
-		where t.TID in (select TID from ASSIGNEE where MID = #{mid}) and s.TSTATUS !='Completed'
+		where t.TID in (select TID from ASSIGNEE where MID = #{mid}) and t.TSTATUSID not in (3,11,15)
 		order by t.EDAY
 	</select>
 	<!--  -->
@@ -17,14 +17,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from step s join TASKINSTEP t on s.SID= t.SID
 		where t.TID in (select t.TID
 		from task t join TSTATUS s on t.TSTATUSID = s.TSTATUSID 
-		where t.TID in (select TID from ASSIGNEE where MID = #{mid}) and s.TSTATUS !='Completed')
+		where t.TID in (select TID from ASSIGNEE where MID = #{mid}) and t.TSTATUSID not in (3,11,15))
 	</select>
 	<select id="getMyWorkMember" parameterType="String" resultType="com.apollo.vo.MyWorkMemberDTO">
 		select a.tid, m.MID, m.MNAME, m.IMAGE 
 		from member m join Assignee a on m.MID = a.MID
 		where a.tid in (select t.TID
 		from task t join TSTATUS s on t.TSTATUSID = s.TSTATUSID 
-		where t.TID in (select TID from ASSIGNEE where MID = #{mid}) and s.TSTATUS !='Completed')
+		where t.TID in (select TID from ASSIGNEE where MID = #{mid}) and t.TSTATUSID not in (3,11,15))
 		order by a.tid
 	</select>
 </mapper>
