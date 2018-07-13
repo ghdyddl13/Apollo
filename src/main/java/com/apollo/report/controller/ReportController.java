@@ -70,51 +70,14 @@ public class ReportController {
 		System.out.println("downloadReport 컨트롤러 실행");
 		System.out.println(pid + "/" + report_kind + "/" + report_title);
 		
-		String fullpath = null;
 		try {
-			fullpath = reportservice.writeData(mid, pid, report_kind, report_title, response);
+			reportservice.writeData(mid, pid, report_kind, report_title, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		System.out.println("report 추출 성공!");
-		boolean deletedcheck = deleteReportFile(fullpath);
-		
-		if(deletedcheck) {
-			System.out.println("삭제 완료");
-		}else {
-			System.out.println("삭제 실패");
-		}
-		
 	}
 	
-	public boolean deleteReportFile(String fullpath) {
-		
-		boolean deletedcheck = false;
-		
-		File file = new File(fullpath);
-		
-		 if(file.exists() ){
-			 
-    	    System.out.println("파일이 존재합니다");
-    	    System.out.println("파일 삭제를 시작합니다");
-    	    System.gc();
-    	    System.runFinalization();
-    	    
-    	    boolean filedeleted = file.delete();
-    	    System.out.println(filedeleted);
-    	    
-    		if(filedeleted) {
-    		System.out.println("파일삭제 성공");
-    		deletedcheck = true;
-    		}
-	    }else{
-	        	System.out.println("파일이 존재하지 않습니다.");
-	        }
-		
-		 return deletedcheck;
-		 
-	}
 	
 }

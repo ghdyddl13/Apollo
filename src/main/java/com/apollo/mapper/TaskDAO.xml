@@ -124,11 +124,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <update id="changeSdayOfTask" parameterType="com.apollo.vo.TaskDTO">
-    	update task set sday= #{sday} where tid = #{tid}
+    	update task set sday= TO_DATE(#{sday},'YYYY-MM-DD HH24:MI:SS') where tid = #{tid}
     </update>
     
      <update id="changeEdayOfTask" parameterType="com.apollo.vo.TaskDTO">
-    	update task set eday= #{eday} where tid = #{tid}
+    	update task set eday= TO_DATE(#{eday},'YYYY-MM-DD HH24:MI:SS') where tid = #{tid}
     </update>
     
     <select id="getTname" resultType="String">
