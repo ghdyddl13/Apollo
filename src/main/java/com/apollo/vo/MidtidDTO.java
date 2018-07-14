@@ -16,6 +16,4 @@ public class MidtidDTO {
 		this.tid = tid;
 	}
 	
-	
-	
 }

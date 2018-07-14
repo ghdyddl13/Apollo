@@ -7,8 +7,6 @@
 
 <script type="text/javascript">
 $(function() {
-	
-	
 	$(".stream-select-list").click(function(evt){
 		var curpid = $(this).find("input[type=hidden]").val();
 		var selected_list = $(this);
@@ -40,12 +38,15 @@ $(function() {
 
 <div class = "main-body-container">
 	<div class ="main-body-onepannel">
-
-	
-		<div class="stream_header_container">
-			<span class = "stream_header">STREAM</span>
-			
-		</div>
+	 	<div class="main-body-twopannel-left-header">
+            <div class="main-body-twopannel-left-header-wrapper">
+              <div class="main-body-twopannel-left-header-title-textwrapper">
+                <div class="main-body-twopannel-left-header-title">
+                  <span class="main-body-twopannel-left-header-title-text">Stream</span>
+                </div>
+              </div>
+            </div>
+          </div>
 		<div class="stream-main-container">
 			<div id="stream-current-project">
 				
@@ -72,10 +73,10 @@ $(function() {
 										<div class="steam-comment-item-img">
 											<c:choose >
 												<c:when test="${commentdto.image eq null}">
-													<span><img src="img/user.png" width="30px" height="30px"></span>
+													<span><img style="border-radius: 50%;" src='displayImage.htm?image=${commentdto.image}' width="30px" height="30px"></span>
 												</c:when>
 												<c:otherwise>
-													<span><img src="img/user.png" width="30px" height="30px"></span>
+													<span><img style="border-radius: 50%;" src='displayImage.htm?image=${commentdto.image}' width="30px" height="30px"></span>
 												</c:otherwise> 
 											</c:choose>
 										</div>

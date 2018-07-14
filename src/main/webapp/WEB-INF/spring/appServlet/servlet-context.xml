@@ -9,16 +9,13 @@
                            http://www.springframework.org/schema/context 
                            http://www.springframework.org/schema/context/spring-context.xsd
                            http://www.springframework.org/schema/mvc
-                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
                            http://www.springframework.org/schema/websocket
     					   http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
 <context:annotation-config />
 <!-- base-package 범위 내에서 어노테이션이 적용된 클래스를 bean으로 등록 -->
-<<<<<<< HEAD
 <context:component-scan base-package="kr.or.apollo.controller" />
-=======
->>>>>>> 865e29116250a79a28cc3ecb8e2434e9895e149e
 
 <!-- 비동기 -->
 <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />

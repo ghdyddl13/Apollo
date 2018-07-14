@@ -6,9 +6,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apollo.inbox.dao.InboxDAO;
 import com.apollo.member.dao.MemberDAO;
 import com.apollo.project.dao.ProjectDAO;
 import com.apollo.step.dao.StepDAO;
+import com.apollo.task.dao.AssigneeDAO;
+import com.apollo.task.dao.CommentDAO;
 import com.apollo.task.dao.TaskDAO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidpidDTO;
@@ -174,5 +177,44 @@ public class ProjectInfoService {
 		return projectinfo;
 	}
 	
+	/**
+	 * 
+	 날      짜 : 2018. 7. 10.
+	 기      능 : 프로젝트 참여 멤버 삭제하는 함수 
+	 작성자명 : 박 민 식
+	 */
+	public int deletePmember(MidpidDTO midpid) {
+		int result = 0;
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		try {
+			result = dao.deletePmember(midpid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
+	public int deleteAssigneeAfterDeletePmember(MidpidDTO midpid){
+		int result=0;
+		AssigneeDAO dao = sqlsession.getMapper(AssigneeDAO.class);
+		try {
+			result = dao.deleteAssigneeAfterDeletePmember(midpid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int deleteReceiverAfterDeletePmember(MidpidDTO midpid){
+		int result=0;
+		System.out.println("deleteReceiverAfterDeletePmember service");
+		InboxDAO dao = sqlsession.getMapper(InboxDAO.class);
+		try {
+			System.out.println("try catch");
+			result = dao.deleteReceiverAfterDeletePmember(midpid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

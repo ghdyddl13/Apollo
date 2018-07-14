@@ -10,8 +10,24 @@
  */
 $(document).on("click",".Task_RUD_Modal",function(){
 	
+var inboxkind = $("#inboxkind").val();
+if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
+	
+	$(this).children().children(".inbox_newcheck").empty();
+	console.log($(this).children().children().children(".cmtid").val());
+	console.log($(this).children().children(".inbox_mid2").val())
+	$.ajax({
+		url:"newcheck.htm",
+		type: 'POST',
+		data:{cmtid : $(this).children().children().children(".cmtid").val(),
+			  mid2 : $(this).children().children(".inbox_mid2").val()},
+		success:function(data){
+			
+		}
+	})
+}	
+	
 		var temptid = $(this).attr('id'); 
-		console.log(temptid.substring(0,6))
 		var tid =parseInt(temptid.substring(1));
 		
 		if(temptid.substring(0,6) =="srch-t"){
@@ -19,6 +35,8 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			console.log(tid);
 		}
 		
+		const loadingpage_third = '<div id="loading" class="loading_third"><img style="width:auto;height:100px;border-radius:50%"id="loading_img" alt="loading" src="img/rocket_3.gif" /></div>';
+    	  
 		$.ajax(
 			       {
 			           type : "post",
@@ -26,6 +44,12 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			           data : {
 			        	   'tid': tid
 			           },
+			           beforeSend:function(){
+                        $('.modal-content2').css('display','none');
+                        $('.modal-content3').css('display','none');
+                           $('#right').append(loadingpage_third);
+
+			   			},
 			           success : function(rdata){
 			        	   console.log('성공!')
 			        	   console.log(rdata);
@@ -235,18 +259,41 @@ $(document).on("click",".Task_RUD_Modal",function(){
 			        	   $('#Task_Modal_files').empty();
 			        	   var filesdivs = '';
 			        	   $(rdata.filelist).each(function(){
-			        		   
-			        	   var shortfilename = this.filename.substring(37);
-			        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
-			        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
-			        	   filesdivs += '</div>'
+			        		   let strArray = this.filename.split('/');
+				        	   var shortfilename = strArray[2].substring(37);
+				        	   filesdivs += '<div class="filehover_div">' + '<a class="file_name" href="taskFileDownload.htm?filename='+this.filename+'" download>' + shortfilename + '</a>';
+				        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+				        	   filesdivs += '</div>'
 			        		  
 			        	   });
 			        	   $('#Task_Modal_files').append(filesdivs);
 			        	   
-			        	   $(".starred-secondbody-image").hide();
-			        		$(".modal-content2").show();	
+			        	   // 소속 프로젝트 project
+			        	   $('#projectinTask').empty();
+			        	   var methodology;
+			        		 switch (rdata.projectdto.methodologyid){
+			        		 case 1: 
+			        			 methodology="waterfallicon.png";
+			        			 break;
+			        		 case 2:
+			        			 methodology="agileicon.png";
+			        			 break;
+			        		 case 3:	 
+			        			 methodology="customicon.png";
+			        			 break;
+			        		}   
+			        	   var strforprojectnameintaskmodal = '<img style="width: 11px; height: 11px;" src="img/' + methodology + '">'
+			        	   strforprojectnameintaskmodal += '<span class="project_link_in_taskmodal" id="' + rdata.projectdto.pid + '">&nbsp;' + rdata.projectdto.pname + '</span>'
+			        	   $('#projectinTask').append(strforprojectnameintaskmodal);
 			        	   
+			        	   
+			        	   $(".starred-secondbody-image").hide();
+			        		$(".modal-content2").show();
+			        		$(".modal-content3").show();
+                            $('.modal-content2').css('display','block');
+                            $('.modal-content3').css('display','block');
+
+			        		$("#loading").remove();
 			           } // end-success
 			        } 
 			      ); // end-ajax
@@ -315,6 +362,9 @@ $(document).on("click","#task_trash_btn",function(){
 		           data : {
 		        	   'tid': tid,
 		           },
+		           beforeSend:function(){
+						$("#main-box").html(loadingpage);
+					},
 		           success : function(rdata){
 		        	   
 	        		     $('#taskinstep_delete_dismiss_btn').click();
@@ -420,6 +470,9 @@ $(document).on("click","#step_delete_button",function(){
 		           data : {
 		        	   'tid': tid,
 		           },
+		           beforeSend:function(){
+						$("#main-box").html(loadingpage);
+				   },
 		           success : function(rdata){
 		        	   
 	        		     $('#taskinstep_delete_dismiss_btn').click();
@@ -493,13 +546,13 @@ $(document).on("click","#task_modal_add_step",function(){
 			        		  step_names_popup_div_str += '<div class="first_row">' + this.sname + '</div>';
 			        		  
 			        		  if((sday == emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">(시작일과 종료일 모두 미정)</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">(시작일과 종료일 모두 미정)</div>'
 			        		  } else if((sday != emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~' + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~' + '</div>'
 			        		  }  else if((sday == emptyday) && (eday != emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
 			        		  } else{
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
 			        		  }
 			        		  
 			        		  step_names_popup_div_str += '</div></div>';
@@ -689,13 +742,15 @@ $(document).on("click",".task_page_delete_assignee_btn",function(){
 $(document).on("click","#task_modal_add_assignee",function(){
 	
 	var tid = $('#tidhidden').attr('value');
+	var pid = $('#pidhidden').attr('value');
 	
 	$.ajax(
 		       {
 		           type : "post",
 		           url  : "addtaskassigneemodalinfo.htm",
 		           data : {
-		        	    'tid': tid
+		        	    'tid': tid,
+		        	    'pid': pid
 		           },
 		           success : function(rdata){
 		        	   
@@ -715,7 +770,7 @@ $(document).on("click","#task_modal_add_assignee",function(){
 	        			  assignee_popup_div_str += '<img class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';	
 	        			  assignee_popup_div_str += '<div class="each_comment">';	
 	        			  assignee_popup_div_str += '<div class="first_row">' + this.mname + '</div>';	
-	        			  assignee_popup_div_str += '<div class="second_row">' + this.mid + '</div>';	
+	        			  assignee_popup_div_str += '<div class="popup_second_row">' + this.mid + '</div>';	
 	        			  assignee_popup_div_str += '</div></div>';
 	        				   
 			        	   });
@@ -764,6 +819,22 @@ $.ajax(
 	        	   $.when(reappendassignee(tid)).done(function(data){
 	        		   send("assign");        //웹 소켓 send 함수 추가
 	        		   event.stopPropagation();
+	        		   if($("#inboxkind").val() == "incomming"){
+	        			   
+	        		   $.ajax({
+	   					url:"inbox2.htm",
+	   					dataType:"html",
+	   					success:function(data){
+	   						console.log("오니?");
+	   						$(".inbox-content-wrapper").empty();
+	   						$(".inbox-content-wrapper").append(data);
+	   						$('#sent-page').css('border-bottom','0px');
+	   						$('#archive-page').css('border-bottom','0px');
+	   						$('#incomming-page').css('border-bottom','2px solid transparent');
+	   						$('#incomming-page').css('border-color','#286cb0');
+	   					}
+	   				})
+	        		   }
 	        	   });
 
 	        	   console.log(rdata.result);
@@ -771,13 +842,8 @@ $.ajax(
 	        	   $("#assignee_popup_div").css({"display":"none","left":"-20000px","top":"-20000px"});
 	        	   
 	        	   // 갱신된 assignee들 append
-
-	        	   
-	           } // end-success
-	           
-	           
+	           } // end-success	           
 	        }); // end-ajax
-
 });
 
 function reappendassignee(tid){
@@ -852,13 +918,16 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 		        	   'value' : value,
 		        	   'tname' : tname
 		           },
+		           beforeSend:function(){
+						$("#main-box").html(loadingpage);
+					},
 		           success : function(rdata){
 		        	   
 			           // comment
 			           getCommentAndMemberlist();
 			           
 		        	   
-		        	  $('#task_dismiss_btn').click();
+		        	  //$('#task_dismiss_btn').click();
 		        	     
 	                  $("#main-box").empty();
 					  $("#main-box").append(rdata);
@@ -883,6 +952,12 @@ $(document).on("keyup","#add_sub_task",function(){
 	 
      if (event.keyCode === 13) {
     	 var subtaskstr = $('#add_sub_task').val();
+    	 
+    	 if(subtaskstr.trim()==""){
+    		 $('#add_sub_task').blur();
+    		 return false;
+    	 }
+    	 
     	  $.ajax(
    		       {
    		           type : "post",
@@ -918,6 +993,26 @@ $(document).on("keyup","#add_sub_task",function(){
    		        }); // end-ajax
    	
      } // end - keyCode=13
+});
+
+
+$(document).on("focusout","#add_sub_task",function(){
+	$("#add_sub_task").val("");
+})
+
+$(document).on("click",".project_link_in_taskmodal",function(){
+	 $("#task_dismiss_btn").click();
+	$.ajax(
+  		       {
+  		           type : "post",
+  		           url  : "information.htm",
+  		           data : {
+  		        	   'pid':$(this).attr('id')},
+  		           success : function(rdata){
+  		        	 $("#main-box").empty();
+					 $("#main-box").append(rdata);
+  		           } // end-success
+  		        }); // end-ajax
 });
 
 
@@ -1122,14 +1217,25 @@ var getCommentAndMemberlist = (function (){
 		        	   
 		        	   $(rdata.commentandmemberlist).each(function(){
 		        		 
-		        		   comment_str += '<div class="wrapper_comment">' 
-		        		 //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
-		        		   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
-		        		   comment_str += '<div class="each_comment">';
-		        		   comment_str += '<div class="first_row">' + this.mname + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + this.cmtmtime + '</div>'
-		        		   comment_str += '<div class="second_row">' + this.comments + '</div>'
-		        		   comment_str += '</div>'
-	        			   comment_str += '</div><br><br>'
+		        		   if(this.mid ==$("#header-mid").val()){
+		        			   comment_str += '<div class="wrapper_comment wrapper_my_comment">' 
+	        				   //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
+	        				   comment_str += '<div class="each_comment my_each_comment">';
+		        			   comment_str += '<div class="first_row" align="right"><span class="comment-time-span">' + this.cmtmtime + '</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + this.mname + '</div>'
+		        			   comment_str += '<div class="second_row my_second_row" align="right">' + this.comments + '</div>'
+		        			   comment_str += '</div>'
+	        				   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
+	        				   comment_str += '</div><br>'
+		        		   }else{
+		        			   comment_str += '<div class="wrapper_comment">' 
+	        				   //comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="' + this.image + '">';
+	        				   comment_str += '<img id="' + this.mid + '" class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';
+		        			   comment_str += '<div class="each_comment">';
+		        			   comment_str += '<div class="first_row">' + this.mname + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span class="comment-time-span">' + this.cmtmtime + '</span></div>'
+		        			   comment_str += '<div class="second_row">' + this.comments + '</div>'
+		        			   comment_str += '</div>'
+	        				   comment_str += '</div><br>'
+		        		   }
 	        				   
 	        				   
 		        	   });
@@ -1156,9 +1262,9 @@ var getCommentAndMemberlist = (function (){
 $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
 
 	var usermid = $('#usermidhidden').attr('value');
-	
+	var conmment= $("#comment_input_box_in_taskmodal").val();
   // @ 쳤을 시
-  if (event.keyCode === 50) {
+  if (conmment ==="@") {
 	var pid = $('#pidhidden').attr('value');
     $.ajax(
            {
@@ -1177,11 +1283,10 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
                	 }
                 	 
                   popupdiv_str += '<div class="wrapper_comment popup_mid" id="' + this.mid + '">';	 
-//                popupdiv_str += '<img class ="taskmodal_memberprofile2" src="img/' + this.image + '"/>';	
                   popupdiv_str += '<img class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';	
                   popupdiv_str += '<div class="each_comment">';	
                   popupdiv_str += '<div class="first_row">' + this.mname + '</div>';	
-                  popupdiv_str += '<div class="second_row">' + this.mid + '</div>';	
+                  popupdiv_str += '<div class="popup_second_row">' + this.mid + '</div>';	
                   popupdiv_str += '</div></div>';
                   
                  });
@@ -1197,6 +1302,8 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
                  $('#project_member_popup_div').css("top",position.top-popupdiv_height+23);
                  $("#project_member_popup_div").css("background-color","#FFFFFF")
                  $('#project_member_popup_div').css("display","block");
+                 
+                
                  
                } // end-success
             }); // end-ajax
@@ -1221,12 +1328,20 @@ $(document).on("keyup","#comment_input_box_in_taskmodal",function(){
 	   console.log(comments);
 	   if(comments != ""){
 		   $.when(insertCommentReceiver(tid,comments)).done(function(data){
+
+			
+			   
 			   send(); //웹 소켓 send 함수 추가
 			   event.stopPropagation();
 			   $('#comment_input_box_in_taskmodal').val('');
+			   
+				
+			   
 		   });
+		   
+
+		   
 	   }
-	   
   } // end - keyCode=13
 });
 
@@ -1306,7 +1421,7 @@ $(document).on("click",".popup_mid",function(){
  */
 $(document).on("keyup","#comment_input_box_in_taskmodal2",function(){
 
-  // 엔터키 칠 시
+  // 엔터키 칠 시13
   if (event.keyCode === 13) {
 	  
 	   var tid = $('#tidhidden').attr('value');
@@ -1333,6 +1448,27 @@ $(document).on("keyup","#comment_input_box_in_taskmodal2",function(){
 			           $('#comment_input_box_in_taskmodal2').val('');
 			           $('#comment_input_box_in_taskmodal2').focus();
 		        	   
+			           send("inbox"); //웹 소켓 send 함수 추가
+					   event.stopPropagation();
+			           
+					   if($("#inboxkind").val() == "sent"){
+						   $.ajax({
+								url:"sent2.htm",
+								dataType:"html",
+								success:function(data){
+									console.log("오니?");
+									$(".inbox-content-wrapper").empty();
+									$(".inbox-content-wrapper").append(data);
+									$('#incomming-page').css('border-bottom','0px');
+									$('#archive-page').css('border-bottom','0px');
+									$('#sent-page').css('border-bottom','2px solid transparent');
+									$('#sent-page').css('border-color','#286cb0');
+								}
+							})
+					   }
+					   
+					  
+			           
 		           } // end-success
 		        }); // end-ajax
 
@@ -1369,13 +1505,15 @@ $(document).on("click","#receivermid",function(){
  기      능 : tname 변경을 위해 인풋태그 활성화 함수
  작성자명 : 김 정 권
  */
+
 $(document).on("click","#Task_Modal_tname",function(){
 	
 	$('#Task_Modal_tname').css("display", "none");
-	
+
 	var tname = $('#Task_Modal_tname').text();
 	$('#Task_Modal_tname_input').val(tname);
 	$('#Task_Modal_tname_input').css("display","block");
+	$("#Task_Modal_tname_input").focus();
 	
 });
 
@@ -1391,41 +1529,17 @@ $(document).on("keyup","#Task_Modal_tname_input",function(){
 	var tid = $('#tidhidden').attr('value');
 	var tname = '';
 	
-	  if (event.keyCode === 13) {
-		  	
-		    tname = $('#Task_Modal_tname_input').val();
-		    
-		    $.ajax(
-				       {
-				           type : "post",
-				           url  : "changetname.htm",
-				           data : {
-				        	   'tid': tid,
-				        	   'tname' : tname
-				           },
-				           success : function(rdata){
-				        	   console.log('success 성공 테스트 출력 : ' + rdata.result);
-				        	   
-				   			$('#Task_Modal_tname_input').css("display","none");
-				   			$('#Task_Modal_tname_input').val('');
-				   			
-				   			$('#Task_Modal_tname').empty();
-				   			$('#Task_Modal_tname').append(tname);
-							$('#Task_Modal_tname').css("display", "block");
-							
-		                	 $("#main-box").empty();
-							 $("#main-box").append(rdata);
-							 checkCrtPage();
-				           } // end-success
-				        }); // end-ajax
-	  		} // end - keyCode==13
-	
+    if (event.keyCode === 13) {
+	  console.log("tets")
+	  	$("#Task_Modal_tname_input").blur();
+	} // end - keyCode==13
 });
 
 
 $(document).on("click","#task_dismiss_btn_starredtask",function(){
 	$(".modal-content2").hide();
 	$(".starred-secondbody-image").show();
+
 });
 
 /**
@@ -1443,6 +1557,9 @@ $(document).on("click",".starred-body-task-container-top-star",function(evt){
             type:"POST",
             url:"deleteStarredTask.htm",
             data:{tid:tid},
+            beforeSend:function(){
+				$("#main-box").html(loadingpage);
+			},
             success:function(data) {
 					 $("#main-box").empty();
 					 $("#main-box").append(data);
@@ -1464,8 +1581,14 @@ $(document).on("focusout","#Task_Modal_tname_input",function() {
 	var tname = '';
 	
 	tname = $('#Task_Modal_tname_input').val();
-		    
-		    $.ajax(
+    if(tname.trim()==""||tname ==$('#Task_Modal_tname').text()){
+    	$('#Task_Modal_tname_input').val('');
+    	$('#Task_Modal_tname_input').css("display","none");
+    	$('#Task_Modal_tname').css("display", "block");
+    	return false;
+    }
+		 
+    		$.ajax(
 				       {
 				           type : "post",
 				           url  : "changetname.htm",
@@ -1473,6 +1596,9 @@ $(document).on("focusout","#Task_Modal_tname_input",function() {
 				        	   'tid': tid,
 				        	   'tname' : tname
 				           },
+				           beforeSend:function(){
+								$("#main-box").html(loadingpage);
+							},
 				           success : function(rdata){
 				        	   console.log('success 성공 테스트 출력 : ' + rdata.result);
 				        	   
@@ -1512,7 +1638,7 @@ $(document).on("click","#fileuploadbtn",function() {
  기      능 : Task 모달 내 파일 다운
  작성자명 : 김 정 권
  */
-$(document).on("click",".file_name",function() {
+/*$(document).on("click",".file_name",function() {
 	
 	var filename = $(this).attr('id');
 	console.log('filename: ' + filename);
@@ -1520,7 +1646,7 @@ $(document).on("click",".file_name",function() {
 	location.href = 'downloadfileintaskmodal.htm?filename=' + filename;
 
 });
-
+*/
 
 /**
  * 
@@ -1548,10 +1674,11 @@ $(document).on("click",".file_del_btn",function() {
 		        	   var filesdivs = '';
 		        	   $(rdata.filelist).each(function(){
 		        		   
-		        	   var shortfilename = this.filename.substring(37);
-		        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
-		        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
-		        	   filesdivs += '</div>'
+		        		   let strArray = this.filename.split('/');
+			        	   var shortfilename = strArray[2].substring(37);
+			        	   filesdivs += '<div class="filehover_div">' + '<a class="file_name" href="taskFileDownload.htm?filename='+this.filename+'" download>' + shortfilename + '</a>';
+			        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+			        	   filesdivs += '</div>'
 		        		  
 		        	   });
 		        	   $('#Task_Modal_files').append(filesdivs);
@@ -1653,13 +1780,13 @@ $(document).on("click","#task_modal_add_step_noredirect",function(){
 			        		  step_names_popup_div_str += '<div class="first_row">' + this.sname + '</div>';
 			        		  
 			        		  if((sday == emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">(시작일과 종료일 모두 미정)</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">(시작일과 종료일 모두 미정)</div>'
 			        		  } else if((sday != emptyday) && (eday == emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~' + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~' + '</div>'
 			        		  }  else if((sday == emptyday) && (eday != emptyday)){
-			        			  step_names_popup_div_str += '<div class="second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
+			        			  step_names_popup_div_str += '<div class="popup_second_row">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp~&nbsp' + eday + '</div>'
 			        		  } else{
-			        			  step_names_popup_div_str += '<div class="second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
+			        			  step_names_popup_div_str += '<div class="popup_second_row">' + sday + '&nbsp~&nbsp' + eday + '</div>';	
 			        		  }
 			        		  
 			        		  step_names_popup_div_str += '</div></div>';
@@ -1799,7 +1926,7 @@ $(document).on("click",".popup_sid2",function(){
 		        		        	$(rdata.steplist).each(function(){
 		        		        	snames += '<span style="background-color:#f0f0f0; margin-right: 5px">' + this.sname + '&nbsp&nbsp' + '<i class="fas fa-times task_page_delete_step_btn2" style="color:#808B96; cursor:pointer" id="' + this.sid + '"></i></span>';
 		        		        	});
-		        		        	snames += '<i id="task_modal_add_step" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
+		        		        	snames += '<i id="task_modal_add_step_noredirect" class="fas fa-plus-circle" style="cursor:pointer" ></i>'
 		        		        	$('#Task_Modal_snames2').append(snames);
 		        		        	
 		        		           } // end-success
@@ -1815,12 +1942,12 @@ $(document).on("click",".popup_sid2",function(){
  기      능 : 테스크 모달 내 코멘트 입력 부분(인풋태그)에서 작동하는 함수 + no redirect
  작성자명 : 김 정 권
  */
-$(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
+$(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(event){
 	
 	var usermid = $('#usermidhidden2').attr('value');
-	
+	var comment=$("#comment_input_box_in_taskmodal_noredirect").val();
   // @ 쳤을 시
-  if (event.keyCode === 50) {
+  if (comment ==="@") {
 	  
 	var pid = $('#pidhidden').attr('value');
     $.ajax(
@@ -1847,7 +1974,7 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
                   popupdiv_str += '<img class ="taskmodal_memberprofile2" src="displayImage.htm?image=' + this.image + '"/>';	
                   popupdiv_str += '<div class="each_comment">';	
                   popupdiv_str += '<div class="first_row">' + this.mname + '</div>';	
-                  popupdiv_str += '<div class="second_row">' + this.mid + '</div>';	
+                  popupdiv_str += '<div class="popup_second_row">' + this.mid + '</div>';	
                   popupdiv_str += '</div></div>';
                   
                  });
@@ -1859,10 +1986,12 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
                  let popupdiv_height = $('#project_member_popup_div2').height();
                  
                  let position = $('#comment_input_box_in_taskmodal_noredirect').position();
-                 $('#project_member_popup_div2').css("left",position.left-popupdiv_width+150);
+                 $('#project_member_popup_div2').css("left",0);
                  $('#project_member_popup_div2').css("top",position.top-popupdiv_height-20);
                  $("#project_member_popup_div2").css("background-color","#FFFFFF")
                  $('#project_member_popup_div2').css("display","block");
+                 
+                 
                  
                } // end-success
             }); // end-ajax
@@ -1874,9 +2003,9 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
   // @ 아닐 시
   if((event.keyCode != 50) && (event.keyCode != 27) && (event.keyCode != 13)){
 	  
-	    $('#project_member_popup_div').css("display", "none");
-	    $('#project_member_popup_div').css("left", "-20000");
-	    $('#project_member_popup_div').css("top", "-20000");
+	    $('#project_member_popup_div2').css("display", "none");
+	    $('#project_member_popup_div2').css("left", "-20000");
+	    $('#project_member_popup_div2').css("top", "-20000");
   } // end - != 50
   
   
@@ -1887,8 +2016,23 @@ $(document).on("keyup","#comment_input_box_in_taskmodal_noredirect",function(){
 	   console.log(comments);
 	   if(comments != ""){
 		   $.when(insertCommentReceiver(tid,comments)).done(function(data){
-			   send(); //웹 소켓 send 함수 추가
+			   send("inbox"); //웹 소켓 send 함수 추가
 			   event.stopPropagation();
+			   if($("#inboxkind").val() == "sent"){
+			   $.ajax({
+					url:"sent2.htm",
+					dataType:"html",
+					success:function(data){
+						console.log("오니?");
+						$(".inbox-content-wrapper").empty();
+						$(".inbox-content-wrapper").append(data);
+						$('#incomming-page').css('border-bottom','0px');
+						$('#archive-page').css('border-bottom','0px');
+						$('#sent-page').css('border-bottom','2px solid transparent');
+						$('#sent-page').css('border-color','#286cb0');
+					}
+				})
+			   }
 			   $('#comment_input_box_in_taskmodal_noredirect').val('');
 		   });
 	   }
@@ -1952,3 +2096,86 @@ $(document).on("click","#receivermid2",function(){
 	 $('#comment_input_box_in_taskmodal_noredirect').focus();
 	
 });
+
+
+/**
+ * 
+ 날      짜 : 2018. 7. 9
+ 기      능 : @를 이용한 회원 태그목록 닫아주는 함수
+ 작성자명 : 박 민 식
+ */
+$(document).bind("mousedown", function(e) {
+	console.log("a")
+	// If the clicked element is not the menu
+	if (!$(e.target).parents(".project_member_popup").length > 0) {
+
+		// Hide it
+		$(".project_member_popup").hide();
+	}
+	
+});
+
+
+/// mywork task에서 스텝항목 클릭 시 해당 스텝으로 이동
+$(document).on("click",".mywork-main-task-step-name",function(evt){
+	evt.stopPropagation();
+	checkbox=[];
+	list_memberlist=[]; 
+	var sid = this.id.substr(1);
+	console.log(sid);
+	$.ajax({
+		url:"list.htm",
+		data:{sid:sid},
+	    beforeSend:function(){
+			$("#main-box").html(loadingpage);
+		},
+		dataType:"html",
+		success:function(data){
+			 $("#main-box").empty();
+			 $("#main-box").append(data);
+			 $.ajax({
+				 url:"memberlist.htm",
+				 data:{sid:sid},
+				 type:"POST",
+				 dataType:"JSON",
+				 success:function(memberlist){
+					 list_memberlist = memberlist.memberlist;
+				 }
+			 })
+		}
+	})
+}) //end Func
+
+/// mywork task에서 스텝항목 클릭 시 해당 스텝으로 이동
+$(document).on("click",".starred-body-task-container-bottom-step",function(evt){
+	evt.stopPropagation();
+	checkbox=[];
+	list_memberlist=[]; 
+	var sid = this.id.substr(1);
+	console.log(sid);
+	$.ajax({
+		url:"list.htm",
+		data:{sid:sid},
+	    beforeSend:function(){
+			$("#main-box").html(loadingpage);
+		},
+		dataType:"html",
+		success:function(data){
+			 $("#main-box").empty();
+			 $("#main-box").append(data);
+			 $.ajax({
+				 url:"memberlist.htm",
+				 data:{sid:sid},
+				 type:"POST",
+				 dataType:"JSON",
+				 success:function(memberlist){
+					 list_memberlist = memberlist.memberlist;
+				 }
+			 })
+		}
+	})
+}) //end Func
+	
+	
+
+

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 
 import com.apollo.project.service.ProjectInfoService;
@@ -218,6 +219,38 @@ public class ProjectInfoController {
 	    	return null;
 	    }
 		
+	}
+	/**
+	 * 
+	 날      짜 : 2018. 7. 10.
+	 기      능 : 프로젝트 멤버 삭제
+	 작성자명 : 박 민 식
+	 */
+	@RequestMapping("/deletePmember.htm")
+	public String deletePmember(String mid,Model model ,HttpSession session ) {
+		System.out.println("들어옴");
+		System.out.println(mid);
+		int pid = (Integer) session.getAttribute("pid");
+		
+		MidpidDTO midpid = new MidpidDTO();
+		midpid.setMid(mid);
+		midpid.setPid(pid);
+		int result= 0;
+		try {
+			result = projectinfoservice.deletePmember(midpid);
+			model.addAttribute("result",result);
+				int receiverresult =0;
+				int assigneeresult =0;
+				if(result > 0 ) {
+					receiverresult = projectinfoservice.deleteReceiverAfterDeletePmember(midpid);
+					assigneeresult = projectinfoservice.deleteAssigneeAfterDeletePmember(midpid);
+					model.addAttribute("receiverresult", receiverresult);
+					model.addAttribute("assigneeresult", assigneeresult);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/information.htm?pid=" + pid;
 	}
 	
 }

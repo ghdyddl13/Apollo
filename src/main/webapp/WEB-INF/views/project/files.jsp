@@ -26,9 +26,9 @@
 					<tr class="file-table-tr-td">
 				
 					<td class="file-table-tr-td-count">${count}</td>
-					<td class="file-table-tr-td-fname"><strong>${f.filename}</strong>
+					<td class="file-table-tr-td-fname"><a href="taskFileDownload.htm?filename=${f.filename}"><strong>${f.filename}</strong></a>
 					<div id="${f.fileid}" class="file-table-tr-td-delete" data-toggle="modal" data-target="#file_delete_modal">
-					<span id="${f.fileid}" class="file-deleteicon glyphicon glyphicon-remove"></span>
+					<span id="${f.filename}" class="file-deleteicon glyphicon glyphicon-remove"></span>
 					</div></td>
 					<td class="file-table-tr-td-tname">${f.tname}&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp; <h class="file-table-tr-td-sname">${f.sname}</h></td>
 					</tr>

@@ -14,6 +14,9 @@ $(function() {
 		$.ajax({
 			type:"GET",
 			url:"inbox.htm",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			dataType:"html",
 			success:function(data){
 				$("#main-box").empty();
@@ -30,6 +33,9 @@ $(function() {
 		$.ajax({
 			type:"GET",
 			url:"myWork.htm",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			dataType:"html",
 			success:function(data){
 				$("#main-box").empty();
@@ -38,13 +44,41 @@ $(function() {
 			}
 		})
 	});
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//mywork task 멤버 hover 시 이외 멤버 모두 불러오기 
+	$(document).on("mouseenter",".mywork-main-task-member",function() {
+	   
+        let position = $(this).position();
+        $('.mywork-main-task-member-hidden').hide();
+        
+        $(this).next().css("left",position.left + 30);
+        $(this).next().css("top",position.top - 40);
+        $(this).next().css("display","block");
+	    
+	  });
 	
+	//starred work task 멤버 hover 시 이외 멤버 모두 불러오기 
+	$(document).on("mouseenter",".starred-body-task-imagetag",function() {
+		   
+        let position = $(this).position();
+        $('.mywork-main-task-member-hidden').hide();
+        
+        $(this).next().css("left",position.left + 16);
+        $(this).next().css("top",position.top + 19);
+        $(this).next().css("display","block");
+	    
+	  });
+
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// 헤더 starred task 페이지
 	$("#starredTask-page").click(function(evt){
 		$.ajax({
 			url:"starredTask.htm",
 			dataType:"html",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
@@ -59,6 +93,9 @@ $(function() {
 		$.ajax({
 			url:"report.htm",
 			dataType:"html",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
@@ -73,6 +110,9 @@ $(function() {
 		$.ajax({
 			url:"stream.htm",
 			dataType:"html",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
@@ -98,6 +138,9 @@ $(function() {
 		$.ajax({
 			url:"selectmemberlist.htm",
 			dataType:"html",
+			beforeSend:function(){
+				$('#main-box').html(loadingpage);
+			},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
@@ -112,21 +155,15 @@ $(function() {
 	$('#header-introduce').click(function() {
 		location.href="index.htm";
 	});
+	
 	// 헤더에서 우상단 개인정보수정 클릭시 실행되는 함수
 	// 헤더 개인정보수정 Modal
 	$('#header-profile-edit').click(function(evt) {
-		var mid = $('#edit-profile-mid').val(mid);
-		
 		
 		$.ajax({
 			url:"updatememberinfo.htm",
-			data:{mid:mid},
 			dataType:"json",
 			success:function(data) {
-				//var image = (data.updatememberinfo.image)?data.updatememberinfo.image :"img/user_image.png"
-				//$('#edit-profile-modal-img').attr("src",image);
-				$('.profile-modal-text-mname').text(data.updatememberinfo.mname);
-				$('.profile-modal-text-mid').text(data.updatememberinfo.mid);
 				$('#edit-profile-mname').val(data.updatememberinfo.mname);
 				$('#edit-profile-mid').val(data.updatememberinfo.mid);
 				$('#edit-profile-apollokey').val(data.updatememberinfo.apollokey);
@@ -159,10 +196,11 @@ $(function() {
 					alert('개인정보수정에 실패되었습니다');
 				}
 				$(".close").click();
-				
+				window.location.reload();
 			} // end - success
 		}); // end- ajax
 		$("#edit-profile-form").submit();
+		
 	}); // end - click
 
 	
@@ -313,6 +351,7 @@ $(document).on("focus","#open-right-nav",function(){
 });// end
 
 
+
 /**
  * 
  날   짜 : 2018. 6. 26.
@@ -320,7 +359,7 @@ $(document).on("focus","#open-right-nav",function(){
  작성자명 : 박 민 식
  */
 	var typingTimer;
-	var doneTypingInterval = 500; // 타이빙 interval이 0.5초 이상일 경우 실행
+	var doneTypingInterval = 1000; // 타이빙 interval이 0.5초 이상일 경우 실행
 	$(document).on("input","#search-bar" ,function () {
 		
 		if(getBytes($("#search-bar").val()) <2 ||$("#search-bar").val().trim() == "") return false; //타이핑한 문자가 2바이트 이상이고 공백이 아닐 경우에 다음단계로 넘어감
@@ -339,7 +378,7 @@ $(document).on("focus","#open-right-nav",function(){
     			if(searchtasks.length != 0) $(resultSearchTask(searchtasks)).appendTo($("#search-content-box"));  
     			if(searchmembers.length != 0) $(resultSearchMember(searchmembers)).appendTo($("#search-content-box"));  
     		})// end when
-   		}, 2000); // end Timeout
+   		}, doneTypingInterval); // end Timeout
     
 	}); // end function
 
@@ -380,6 +419,9 @@ function getSearchResult(){
 	var ajax = $.ajax({
 		url:"getSearchResult.htm",
 		type:"post",
+		beforeSend:function(){
+			$("#search-content-box").html(loadingpage);
+		},
 		data:{input:input},
 		dataType:"json",
 		success:function(data){
@@ -549,7 +591,7 @@ function resultSearchProject(projectlist){
  작성자명 : 박 민 식
  */
  function makeSearchTaskDiv(task,inboxkind){
-		 var div =jQuery("<div>",{"class":"search-item-box Task_RUD_Modal search-item-task row "});
+		 var div =jQuery("<div>",{"class":"search-item-box search-item-task row "});
 
 	 	
 

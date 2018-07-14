@@ -123,12 +123,14 @@ public class SidebarController {
 	@RequestMapping(value="/selectProjectList.htm", method=RequestMethod.POST)
 	public View selectProjectList(Model model,HttpServletRequest request) {
 		String mid =  (String) request.getSession().getAttribute("mid");
-		System.out.println(mid);
+		System.out.println("selectProjectList : "+mid);
 		ArrayList<ProjectDTO> projectlist = null;
 		try {
 			projectlist = sidebarservice.selectProjectList(mid);
+			for(ProjectDTO p : projectlist) {
+				System.out.println(p.toString());
+			}
 			model.addAttribute("projectlist",projectlist);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("selectProjectList Controller 에러");
@@ -207,16 +209,7 @@ public class SidebarController {
 		return jsonview; 
 		
 	}
-	/*
-	 날      짜 : 2018. 6. 20.
-	 기      능 : 프로젝트가 없을 때 실행되는 함수
-	 작성자명 : 김 래 영
-	 */
-	@RequestMapping("/noproject.htm")
-	public String noproject() {
-		return "project/noproject";
-		
-	}
+
 	/**
 	 * 
 	 날      짜 : 2018. 6. 20.

@@ -17,7 +17,7 @@ $(function(){
 
  */
 
-
+const loadingpage = '<div id="loading" class="loading"><img style="width:auto;height:100px;border-radius:50%"id="loading_img" alt="loading" src="img/rocket_3.gif" /></div>';
 
 function getTaskAssignees(tid,imgsize){
 	var div = jQuery("<div>");
@@ -72,10 +72,6 @@ function getTaskAssignees(tid,imgsize){
 							$(".assignee-left-div-wrapper").remove();
 						}
 					})	
-					/*$(div).on("mouseleave",function(){
-						$(left_div).remove();
-					})*/
-						
 				};
 
 				
@@ -101,7 +97,7 @@ function makeProfileIcon(memberdata, imgsize){
 	var profile_container = jQuery("<div>",{"class":"profile-img-container","id":"profile"+memberdata.mid,"data-toggle":"modal", "data-target":"#profile-modal-dialog"});
 	profile_container.css({"width":imgsize,"height":imgsize});
 	var img = jQuery("<img>",{"class":"profile-img"});
-	var src = (memberdata.image ==null)?"img/user.png" :"profileImg/"+memberdata.image;
+	var src = (memberdata.image ==null)?"img/user.png" :"displayImage.htm?image="+memberdata.image;
 	img.attr("src",src);
 	$(profile_container).append(img);
 	return profile_container;
@@ -134,7 +130,7 @@ function profileinfo(mid) {
         dataType:"json",
         success:function(data) {
         	//console.log(data.profileinfo);
-            var image = (data.profileinfo.image)?data.profileinfo.image:"img/user.png";
+            var image = (data.profileinfo.image)?"displayImage.htm?image="+data.profileinfo.image:"img/user.png";
             $('#profile-modal-img').attr("src",image);
             $('#profile-modal-mname').text(data.profileinfo.mname)
             $('#profile-modal-mid').text(data.profileinfo.mid);

@@ -353,14 +353,19 @@ $(function() {
                 data : "sid="+this.value,
                 success : function(rdata){
                     
+                	console.log(rdata);
+                	
                    var completedtasks = [];
                    var uncompletedtasks = [];
                    
                    var completedtasks_tid = [];
                    var uncompletedtasks_tid = [];
                    
+                   var kind = true; // true : 완료가 많음 // false : 미완료가 많음
+                   
                     $(rdata.tasklist).each(function(index, el){
                       
+                    	
                        if((el.tstatusid == 3)||(el.tstatusid == 11)||(el.tstatusid == 15)){
                           completedtasks.push(el.tname);
                           completedtasks_tid.push(el.tid);
@@ -371,6 +376,12 @@ $(function() {
                         }
                     });
                     
+                    var origin_completed_length = completedtasks.length;
+                    var origin_uncompleted_length = uncompletedtasks.length;
+                    
+                    console.log('origin_completed_length : ' + origin_completed_length);
+                    console.log('origin_uncompleted_length : ' + origin_uncompleted_length);
+                    
                     if(completedtasks.length > uncompletedtasks.length){
                        var c1 = completedtasks.length - uncompletedtasks.length
                        for(var i = 0; i < c1; i++){
@@ -380,34 +391,84 @@ $(function() {
                     } else if (completedtasks.length < uncompletedtasks.length){
                        var c2 = uncompletedtasks.length - completedtasks.length
                        for(var i = 0; i < c2; i++){
+                    	  kind = false;
                           completedtasks.push(' ');
                        }
                     }
-
+                    
+                    console.log('kind : ' + kind);
+                    console.log('같은지 보자');
+                    console.log(completedtasks.length);
+                    console.log(uncompletedtasks.length);
                     
                     // 위 로직에 의해 두 배열의 길이가 같아졌으므로
                     // 아무 배열이나 잡아서 length 만큼 돌려도 상관없음
                     var tablestr = '<tr><th>완료 task</th><th>미완료 task</th></tr>';
+                    
                     for(var i = 0; i < completedtasks.length; i++){
-                   	 tablestr += '<tr><td class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
-                   		 + completedtasks_tid[i] + '">' + completedtasks[i] 
-                   	 + '</td><td  class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
-                   	 + uncompletedtasks_tid[i] + '">' + uncompletedtasks[i] + '</td></tr>'
+                    	
+                    	if(origin_completed_length == origin_uncompleted_length){ // 완료와 미완료가 같을 경우
+                    		console.log('같은경우')
+                    		tablestr += '<tr><td class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
+                        		 + completedtasks_tid[i] + '">' + completedtasks[i] 
+                        	 + '</td><td  class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
+                        	 + uncompletedtasks_tid[i] + '">' + uncompletedtasks[i] + '</td></tr>'
+                        	 
+                        	 continue;
+                    	}
+                    	
+                    	if(kind){ // 완료가 많을 경우
+                    		console.log('완료가 많은 경우')
+
+                    		if(i >= origin_uncompleted_length){
+                    			
+                    			tablestr += '<tr><td class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
+                             		 + completedtasks_tid[i] + '">' + completedtasks[i] 
+                             	 + '</td><td>' + uncompletedtasks[i] + '</td></tr>'
+                    			
+                             	continue;
+                    		}
+                    		
+                    		tablestr += '<tr><td class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
+                          		 + completedtasks_tid[i] + '">' + completedtasks[i] 
+                          	 + '</td><td  class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
+                          	 + uncompletedtasks_tid[i] + '">' + uncompletedtasks[i] + '</td></tr>'
+                          	 
+                    	}else{ // 미완료가 많을 경우 발동
+                    		console.log('미완료가 많은 경우')
+                    		
+                    		if(i >= origin_completed_length){
+                    			
+                        		tablestr += '<tr><td>' + completedtasks[i] 
+                             	 + '</td><td  class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
+                             	 + uncompletedtasks_tid[i] + '">' + uncompletedtasks[i] + '</td></tr>'
+                    			
+                    			continue;
+                    		}
+                    		
+                    		tablestr += '<tr><td class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
+                         		 + completedtasks_tid[i] + '">' + completedtasks[i] 
+                         	 + '</td><td  class="Task_RUD_Modal" data-toggle="modal" data-target="#Task_RUD_Modal" id="t' 
+                         	 + uncompletedtasks_tid[i] + '">' + uncompletedtasks[i] + '</td></tr>'
+                    	}
+                   	 
                     }
-                    
-//                    for(var i = 0; i < completedtasks.length; i++){
-//                        tablestr += '<tr><td>' + completedtasks[i] + '</td><td>' + uncompletedtasks[i] + '</td></tr>'
-//                     }
-                    
-                    
 
                     $('#task_progress_table').empty();
                     $('#task_progress_table').append(tablestr);
-                    
+                    console.log('append 완료');
                     } // end - success
                 }
                );
            }).trigger("change");
 
    
+  
+   
+   
+   
 }); // end-document.onready
+
+
+
+ 

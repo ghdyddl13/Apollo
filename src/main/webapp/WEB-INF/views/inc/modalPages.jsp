@@ -284,13 +284,13 @@
 										<div class="modal-flexbox-col">
 											<p>시작일</p>
 											<div class="modal-flexbox-row">
-												<input type="text" id="update-project-sday" name="sday" placeholder="Start Date" class="date  sdate-img" readonly="readonly">
+												<input type="text" id="update-project-sday" name="sday" placeholder="Start Date" class="date sdate-img" readonly="readonly">
 											</div>
 										</div>
 										<div class="modal-flexbox-col">
 											<p>종료일</p>
 											<div class= "modal-flexbox-row">
-												<input type="text" id="update-project-eday" name="eday" placeholder="End Date" class="date  edate-img" readonly="readonly">
+												<input type="text" id="update-project-eday" name="eday" placeholder="End Date" class="date edate-img" readonly="readonly">
 											</div>	
 										</div>
 									</div>
@@ -305,7 +305,7 @@
 								
 									<br>
 									<div align="right">	
-										<input type="button" class="btn add-btn" id="update-project-btn" value="생성">&nbsp;&nbsp;&nbsp;
+										<input type="button" class="btn add-btn" id="update-project-btn" value="수정">&nbsp;&nbsp;&nbsp;
 										<input type="button" class="btn cancel-btn"
 											data-dismiss="modal" value="취소">
 									</div>
@@ -350,70 +350,81 @@
 
 <!-- Task 수정/삭제 Modal 창 -->
 	<div class="modal fade modal-task-dialog" id="Task_RUD_Modal" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
+		<div class="modal-dialog task-modal-wrapper">
+			<div class="modal-content ">
 
 				<div class="modal-header">
 				<!-- row 1 -->
-				<div class="row">
-					<div class="col-sm-10">
-						<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
-						<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">
+					<div class="row">
+						<div class="col-sm-10">
+							<div id="projectinTask" style="font-size: 11px; color:#717171; margin-left: 2px; clear: left"></div>
+							<br>
+							<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
+							<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">
+						</div>
+	
+						<div class="col-sm-2" id="star_trash">
+							<span id="span_task_star"></span>&nbsp;&nbsp;
+							<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp;&nbsp;&nbsp;
+							<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
+						</div>
+						
+						<div class="col-sm-12" id="Task_Modal_snames">
+						</div>
+						<div id="step_names_popup_div"></div>
+						<div id="step_delete_popup_div"></div>
+						
 					</div>
-
-					<div class="col-sm-2" id="star_trash">
-						<span id="span_task_star"></span>&nbsp;&nbsp;
-						<i class="fas fa-trash" id="task_trash" data-toggle="modal" data-target="#Trash_Modal"></i>&nbsp;&nbsp;&nbsp;
-						<button type="button" class="close" data-dismiss="modal" id="task_dismiss_btn">&times;</button>
-					</div>
-					
-					<div class="col-sm-12" id="Task_Modal_snames">
-					</div>
-					<div id="step_names_popup_div"></div>
-					<div id="step_delete_popup_div"></div>
-					
-				</div>
 				<!-- end row 1 -->
-				<hr>
-							
-							
+				</div>
+		
+				
+			<!-- task modal body  -->				
+			<div class=" task-modal-body">
 				<!-- row 2 -->
-				<div class="row">
-					<div class="col-sm-2">
-							<select id="Task_Modal_tstatus_selectbox">
-							</select>
+				<div class="task-modal-content-row">
+					<div class="task-modal-content-td">
+						<select id="Task_Modal_tstatus_selectbox">
+						</select>
 					</div>
 							
-					<div class="col-sm-5">
+					<div class="task-modal-content-td">
 	                    <span>시작일&nbsp;&nbsp;</span>
-                   		<input id="Task_Modal_sday" type="text" name="sday" placeholder="Start Date" class="date date_sday">
+                   		<input id="Task_Modal_sday" readonly type="text" name="sday" 
+                   		placeholder="Start Date" class="date date_sday">
 					</div>
 
-					<div class="col-sm-5">
+					<div class="task-modal-content-td">
 						<span>종료일&nbsp;&nbsp;</span>
-	                    <input id="Task_Modal_eday" type="text" name="eday" placeholder="End Date" class="date date_eday">
+	                    <input id="Task_Modal_eday" readonly type="text" name="eday"
+	                    placeholder="End Date" class="date date_eday">
 					</div>
 				</div>
 				<!-- end row 2 -->
-				<hr>
 				
 				<!-- end modal-header -->
 
 				<div class="modal-body">
-
-					<div class="modal-title">업무 담당자</div><br />
-					<div id="Task_Modal_assignee"></div>
-					<div id="assignee_popup_div"></div>
+					
+					<div class="task-modal-content-assignee">
+						<div class="modal-title">업무 담당자</div>
+						<div id="Task_Modal_assignee"></div>
+						<div id="assignee_popup_div"></div>
+					</div>
 
 								
-                <hr />
-					<div class="modal-title">파일 업로드</div><br />
-	                <div id="Task_Modal_files"></div>
-	                <br>
-	                <input type="button" name="fileuploadbtn" id="fileuploadbtn" value="파일업로드">
-					<form  action="" method="post" >
-						<input style="display:none" type="file" name="member_image" id="fileuploadintaskmodal" data-url="uploadfileintaskmodal.htm">
-					</form>
+          			<div class="task-modal-content-file">
+						<div class="modal-title">파일 업로드</div><br />
+						<div class="task-modal-content-filelist-wrapper">
+			                <div id="Task_Modal_files">
+			                </div>
+			                <a type="button"  id="fileuploadbtn" >Click Here To Upload Your File</a>
+							<form  action="" method="post" >
+								<input style="display:none" type="file" name="member_image" id="fileuploadintaskmodal" data-url="uploadfileintaskmodal.htm">
+							</form>
+						</div>
+          			</div>
+			
 				    <script type="text/javascript">
 						 $(function(){
 							 
@@ -421,14 +432,9 @@
 								dataType:"json",
 								add:function(e,data){
 					                var uploadFile = data.files[0];
-					                var isValid = true;
-					                if (!(/png|jpe?g|gif|svg/i).test(uploadFile.name)) {
-					                    alert('png, jpg, gif 만 가능합니다');
-					                    isValid = false;
-					                }
-					                if (isValid) {
-					                    data.submit();
-					                }
+
+					                data.submit();
+					                
 								},
 								done:function(e,data){
 									
@@ -442,12 +448,11 @@
 										        	   $('#Task_Modal_files').empty();
 										        	   var filesdivs = '';
 										        	   $(rdata.filelist).each(function(){
-										        		   
-										        	   var shortfilename = this.filename.substring(37);
-										        	   filesdivs += '<div class="filehover_div">' + '<span class="file_name" id="' + this.filename + '">' + shortfilename + '</span>';
-										        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
-										        	   filesdivs += '</div>'
-										        		  
+										        		   let strArray = this.filename.split('/');
+											        	   var shortfilename = strArray[2].substring(37);
+											        	   filesdivs += '<div class="filehover_div">' + '<a class="file_name" href="taskFileDownload.htm?filename='+this.filename+'" download>' + shortfilename + '</a>';
+											        	   filesdivs += '<i id="' + this.filename + '" class="fas fa-times file_del_btn" style="cursor:pointer"></i>';
+											        	   filesdivs += '</div>'
 										        	   });
 										        	   $('#Task_Modal_files').append(filesdivs);
 										        	   
@@ -471,20 +476,21 @@
 				 <div id="Task_Modal_subtasks"></div><br>
 
                 <hr />
-                
-				<div class="modal-title">
-					<p>상세설명&nbsp;&nbsp;<img id="task_detail_status" src="img/loader.gif"></p>
-					<div style="text-align:center">
-					<textarea id="Task_Modal_detail" rows="7%" cols="60%" name="detail" placeholder="내용을 입력하세요"></textarea>
+                <div class="task-modal-content-detail">
+					<div class="modal-title">
+						<p>상세설명&nbsp;&nbsp;<img id="task_detail_status" src="img/loader.gif"></p>
 					</div>
-				</div>
+					<div style="text-align:center">
+						<textarea id="Task_Modal_detail"  name="detail" placeholder="내용을 입력하세요"></textarea>
+					</div>
+                </div>
                 <hr />
                 
 					<div class="modal-title">Comment</div><br />
 					<div id="Task_Modal_comments">
 					</div>
 					<hr>
-					<div id="project_member_popup_div"></div>
+					<div id="project_member_popup_div" class="project_member_popup"></div>
 					
 					<div id="div_for_comment_input_box">
 					<input id="comment_input_box_in_taskmodal" type="text" placeholder="코멘트를 입력 후 Enter..">
@@ -502,8 +508,8 @@
 					
 			 	</div>
 			 	<!-- end modal-body -->
-				
-			</div>
+			</div>	<!-- task modal body -->
+		
 		</div>
 	</div>
 </div>
@@ -646,7 +652,7 @@
 		<div class="modal-content modal-step-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Step 생성</h4>
+				<h4 class="modal-title">Step 수정</h4>
 			</div>
 			<div class="modal-body modal-step-body modal-flexbox-col">
 				<form id="update-step-form" method="post" onsubmit="return false;">
@@ -703,7 +709,7 @@
 						<input type="hidden" id="update-step-sid" name="sid">
 						<input type="hidden" id= "update-step-fid" name="fid">
 						<div align="center">
-							<input type="button" class="btn add-btn" id="update-step-btn" value="생성">&nbsp;&nbsp;&nbsp;
+							<input type="button" class="btn add-btn" id="update-step-btn" value="수정">&nbsp;&nbsp;&nbsp;
 							<input type="button" class="btn cancel-btn" data-dismiss="modal" value="취소">
 						</div>
 					</fieldset>
@@ -853,7 +859,7 @@
 					<div class="profile-modal-container">
 						<div class="profile-modal-image-container">
 							<div class="profile-modal-image-wrapper">
-								<img class="profile-modal-image" id="profile-modal-image"src="/bit/displayImage.htm" alt=""> 
+								<img class="profile-modal-image" id="profile-modal-image"src="/Apollo/displayImage.htm" alt=""> 
 								<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>
 							</div>
 							<form hidden class="profile-modal-image_uploader">
@@ -888,14 +894,14 @@
 											let profilestr="";
 											console.log(count);
 											if((count%2)==0){
-												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/bit/displayImage.htm?sid=123" alt="">'
+												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/Apollo/displayImage.htm?sid=123" alt="">'
 												modalstr+='<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>';
-												profilestr ='<img id="loginimg" src="/bit/displayImage.htm?sid=123">';
+												profilestr ='<img id="loginimg" src="/Apollo/displayImage.htm?sid=123">';
 												count++;
 											}else{
-												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/bit/displayImage.htm" alt="">'
+												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/Apollo/displayImage.htm" alt="">'
 												modalstr+='<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>';
-												profilestr='<img id="loginimg" src="/bit/displayImage.htm">';
+												profilestr='<img id="loginimg" src="/Apollo/displayImage.htm">';
 												count++;
 											}
 											$(".profile-modal-image-wrapper").empty();
@@ -930,8 +936,10 @@
 									<div id="edit-profile-title-apollokey">
 										<label id="edit-profile-apollokey-label" class="edit-profile-title" for="edit-profile-apollokey">인증키</label>
 										<input class="btn" id="profile-apollokey-check" type="button" value="인증확인">
+
 									</div>
 									<input type="text" name="apollokey" class="edit-profile-input-tag" id="edit-profile-apollokey">
+									
 									
 								</div>
 								
@@ -1145,7 +1153,7 @@
 					<input type="hidden" id="list_assign_selectedtmid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
-				<h4 id="list-task-assign-ment"></h4>					
+				<h4 style="font-size:14px" id="list-task-assign-ment"></h4>					
 					<div align="center">
 						<input type="button" class="btn add-btn" id="list_Assign_Tasks_btn" value="할당">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"
@@ -1167,7 +1175,7 @@
 					<input type="hidden" id="list_addstep_selectedsid" value="">
 				</div>
 				<div class="modal-body" style="text-align:center">
-				<h4 id="list-addstep-tasks-ment"></h4>					
+				<h4 style="font-size:14px" id="list-addstep-tasks-ment"></h4>					
 					<div align="center">
 						<input type="button" class="btn add-btn" id="list_AddStep_Tasks_btn" value="추가">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"
@@ -1188,7 +1196,7 @@
 					<h4 class="modal-title">Task 삭제</h4>
 				</div>
 				<div class="modal-body" style="text-align:center">
-				<h4 id="list-delete-tasks-ment"></h4>					
+				<h4 style="font-size:14px" id="list-delete-tasks-ment"></h4>					
 					<div align="center">
 						<input type="button" class="btn add-btn" id="list_Delete_Tasks_btn" value="삭제">&nbsp;&nbsp;&nbsp;
 						<input type="button" class="btn cancel-btn"
@@ -1199,6 +1207,30 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 멤버 삭제 모달창 -->
+	<div class="modal fade information-pmember-delete" id="information-pmember-delete" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content modal-sm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" id="list_delete_tasks_dismiss_btn">&times;</button>
+					<h4 class="modal-title">프로젝트 멤버 삭제</h4>
+				</div>
+				<div class="modal-body" style="text-align:center">
+				<h4>해당 멤버를 프로젝트에서 제외 하시겠습니까?</h4>
+					<input type="hidden" id="delete-pmember-mid">					
+					<div align="center">
+						<input type="button" class="btn add-btn" id="information-pmember-delete-btn" value="삭제">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="btn cancel-btn"
+							data-dismiss="modal" value="취소">
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+	
 	<!-- jQuery ui widget -->
 	<script src="js/jquery.ui.widget.js"></script>
 	<!-- FILE UPLOAD -iFame -->

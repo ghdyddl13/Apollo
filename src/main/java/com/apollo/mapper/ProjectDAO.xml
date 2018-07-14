@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.apollo.project.dao.ProjectDAO">
 	<insert id="insertProject" parameterType="com.apollo.vo.ProjectDTO">
 		insert into project(pid, pname, sday, eday, methodologyid, mid, pstatuscode, stmtime, detail)
-		values(seq_pid.nextval, #{pname}, #{sday}, #{eday}, #{methodologyid}, #{mid}, 1, sysdate, #{detail})
+		values(seq_pid.nextval, #{pname},TO_DATE(#{sday},'YYYY-MM-DD HH24:MI:SS'),TO_DATE(#{eday},'YYYY-MM-DD HH24:MI:SS'), #{methodologyid}, #{mid}, 1, sysdate, #{detail})
 	</insert>
 	<select id="selectProject" parameterType="Integer" resultType="com.apollo.vo.ProjectDTO">
 		select pid, pname, sday, eday, methodologyid,mid, pstatuscode,detail
@@ -15,8 +15,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateProject" parameterType="com.apollo.vo.ProjectDTO">
 		update project set
 		<if test="pname != null">pname=#{pname},</if>
-		<if test="sday != null">sday=#{sday},</if>
-		<if test="eday != null">eday=#{eday},</if>
+		<if test="sday != null">sday=TO_DATE(#{sday},'YYYY-MM-DD HH24:MI:SS'),</if>
+		<if test="eday != null">eday=TO_DATE(#{eday},'YYYY-MM-DD HH24:MI:SS'),</if>
 		<if test="detail != null">detail=#{detail},</if>
 		<if test="pstatuscode != 0">pstatuscode=#{pstatuscode},</if>
 		stmtime=sysdate

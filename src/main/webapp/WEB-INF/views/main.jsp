@@ -47,6 +47,9 @@
 <!-- REPORT CSS  -->
 <link href="css/report.css" type="text/css" rel="stylesheet">
 
+<link rel="shortcut icon" href="img/FAVINEW.ico">
+<link rel="icon" href="img/FAVINEW.ico" sizes="16x16">
+
 
 <!--   JAVASCRIPT   -->
 <!--JQUERY CDN-->
@@ -83,7 +86,8 @@
 <script type="text/javascript" src="js/projectInsideHeader.js"></script>
 <!--stepInsideHeader-->
 <script type="text/javascript" src="js/stepInsideHeader.js"></script>
-
+<!-- inbox js -->
+<script type="text/javascript" src="js/inbox.js"></script>
 <style type="text/css">
 	/* Scroll Bar */
 
@@ -118,7 +122,7 @@
 	var nickname;
 	var wsocket;
 	function connect() {
-		wsocket = new WebSocket("ws://192.168.0.45:8090/bit/socket.htm");
+		wsocket = new WebSocket("ws://192.168.0.45:8090/Apollo/socket.htm");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
@@ -142,7 +146,7 @@
 		console.log(assign);
 		console.log("send")
 		var msg = $("#comment_input_box_in_taskmodal").val();
-		if(msg.trim()!="" || assign == "assign"){
+		if(msg != "" || assign == "assign" ||assign == "inbox"){
 			wsocket.send($("#tidhidden").val()+'|'+nickname + " : " + msg);
 		}
 	}

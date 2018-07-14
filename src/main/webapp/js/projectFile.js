@@ -11,8 +11,8 @@
 	})
 	
 	$(document).on("click", ".file-deleteicon", function(){
-		var fileid = $(this).attr('id');
-	 	$('#starbucks').attr('value', fileid) 
+		var filename = $(this).attr('id');
+	 	$('#starbucks').attr('value', filename) 
 	})
 	
 /**
@@ -23,12 +23,17 @@
  */	
    $(document).on("click", "#file_delete_btn", function(){
     	 	
-		var fileid = $('#starbucks').attr('value');
+		var filename = $('#starbucks').attr('value');
+		console.log(filename);
 		 $.ajax({
+			 type:"POST",
              url : "filesDeleteByFileId.htm",
              data : {
-                	  fileid : fileid
+            	 filename : filename
                    },
+             beforeSend:function(){
+   				$("#main-box").html(loadingpage);
+   			 },
              success:function(data){
             	$('#file_delete_dismiss_btn').click();
                 $("#main-box").empty();

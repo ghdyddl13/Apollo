@@ -15,6 +15,9 @@
      vertical-align: right;
 }
 
+<h4 class="modal-title" id="Task_Modal_tname">Task_Modal_tname</h4>
+							<input type="text" id="Task_Modal_tname_input" placeholder="클릭하여 Task 이름 변경.." value="">	
+
 #steplist_in_taskmodal th{
 	text-align: center;
 }
@@ -24,28 +27,39 @@
 }
 
 .taskmodal_memberprofile{
-	  width: 40px;
-	  height:40px;
-	  border-radius: 20px
+	  width: 30px;
+	  height:30px;
+	  border-radius: 50%
+	  
 }
 
-#Task_Modal_tstatus_selectbox{
+#Task_Modal_tstatus_selectbox, #Task_Modal_tstatus_selectbox_noredirect{
 	font-size: 12px;
-	height: 50px;
-	width: 100px;
-	margin: -15px -15px -15px -10px
+	height: 100%;
+	width: 100%;
+	border-top:none;
+	border-bottom:none;
+	border-radius: 0
+	/* margin: -15px -15px -15px -10px */
 }
 
 
-#Task_Modal_sday{
+#Task_Modal_sday,#Task_Modal_eday{
 	  width: 140px;
+	  text-align: center;
+	  padding: 0.3em
 }
 
-#Task_Modal_eday{
-	  width: 140px;
+#Task_Modal_sday_noredirect, #Task_Modal_eday_noredirect{
+	  width: 150px;
+	  text-align: center;
+	  padding: 0.3em
 }
+
 
 #Task_Modal_assignee{
+     min-height: 50px;
+     padding: 10px;
      text-align: center;
 }
 
@@ -59,22 +73,31 @@ assignee_in_taskmodal td{
 }
 
 #add_sub_task{
-	width: 500px;
+	width: 100%;
+	height: 35px;
+	padding: 0.5em
 }
 
 
 .hover_div{
 	cursor: pointer;
-	margin: 10px 10px 10px 25px;
+	margin: 10px 10px 10px 10px;
 	font-size: 15px;
 	display: flex;
 	white-space:nowrap;
-	align-items: center
+	align-items: center;
+	BORDER-BOTTOM-LEFT-RADIUS:9px;
+	BORDER-BOTTOM-Right-RADIUS:3px;
+	padding:5px 5PX 5px 15PX;
+	box-shadow:0.3px 1.5px 1px 0px #00003266;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	background-color: #e8e6f733;
 }
 
 .hover_div:hover{
 	cursor: pointer;
-	margin: 10px 10px 10px 20px;
+	margin: 10px 10px 10px 5px;
 	font-size: 15px;
 	background-color: rgba(163, 172, 182, 0.2);
 }
@@ -96,11 +119,13 @@ assignee_in_taskmodal td{
 .subtask_checked {
   text-decoration: line-through;
   font-size: 15px;
-  
+  font-weight: bold;
+  color:#cccccc
 }
 
 .subtask_unchecked {
   font-size: 15px;
+  font-weight: bold;
 }
 
 #task_detail_status{
@@ -114,35 +139,65 @@ assignee_in_taskmodal td{
    overflow:auto;
    height:400px;
    margin: 10px;
-   padding:10px;
-   background-color:#f0f0f0;
+   padding:20px;
+   background-color:f0f0f04a;
    border-radius: 10px;
-
+   border:1px solid #cccccc
 }
 
 .taskmodal_memberprofile2{
-	
+	  min-width: 40px;
+	  min-height:40px;
 	  width: 40px;
 	  height:40px;
-	  border-radius: 20px;
-	  float:left
-	  
+	  border-radius: 50%;
+	  float:left;
+	  margin-top: 5px
 }
 
 .each_comment{
-    margin-left: 10px;
     float:left;
-    font-size: 13px
+    font-size: 13px;
+    padding-left:10px;
+    padding-right:10px
+    
 }
 
 .wrapper_comment{
   display: flex;
   white-space:nowrap;
-  align-items: center
+
+}
+.wrapper_my_comment{
+	justify-content: flex-end;
+}
+.first_row{
+	padding:5px;
+	font-weight:bold
+}
+.second_row{
+	display: -webkit-inline-box;
+ 	min-height: 40px;
+ 	border-radius: 10px;
+ 	padding: 10px 20px 10px 20px;
+ 	white-space: normal;
+ 	overflow: hidden;
+ 	word-break:break-all;
+ 	line-height: 1.5;
+ 	background-color: #cccccc4a;
+ 	box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+}
+.popup_second_row{
+	color:#b0b4b7;
+	font-size: 12px;
+	padding: 5px;
+	
 }
 
-.second_row{
- 	margin-top: 5px;
+.my_second_row{
+	background-color: #f6f7124f !important;
+	
+
 }
 
 #comment_input_box_in_taskmodal{
@@ -170,6 +225,13 @@ assignee_in_taskmodal td{
   top : -20000px;
   float: left;
   z-index: 10;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+  background-color: #fcfcff !important;
+  min-height: 40px;
+  max-height:450px;
+  overflow-y: auto;
+  overflow-x:hidden;
+  border-radius: 5px
 }
 
 #project_member_popup_div2{
@@ -179,6 +241,14 @@ assignee_in_taskmodal td{
   top : -20000px;
   float: left;
   z-index: 50000;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+  background-color: #fcfcff !important;
+  min-height: 40px;
+  width:300px;
+  max-height:450px;
+  overflow-y: auto;
+  overflow-x:hidden;
+  border-radius: 5px
 }
 
 .popup_mid{
@@ -234,21 +304,33 @@ assignee_in_taskmodal td{
 #step_names_popup_div{
   display: none;
   position: absolute;
-  background-color : #FFFFFF; 
   left : -20000px;
   top : -20000px;
   float: left;
   z-index: 3;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+  background-color: #fcfcff !important;
+  min-height: 40px;
+  max-height:350px;
+  overflow-y: auto;
+  overflow-x:hidden;
+  border-radius: 5px
 }
 
 #step_names_popup_div2{
   display: none;
   position: absolute;
-  background-color : #FFFFFF; 
   left : -20000px;
   top : -20000px;
   float: left;
   z-index: 3;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+  background-color: #fcfcff !important;
+  min-height: 40px;
+  max-height:350px;
+  overflow-y: auto;
+  overflow-x:hidden;
+  border-radius: 5px
 }
 
 .popup_sid{
@@ -274,11 +356,19 @@ assignee_in_taskmodal td{
 #assignee_popup_div{
   display: none;
   position: absolute;
-  background-color : #FFFFFF; 
   left : -20000px;
   top : -20000px;
   float: left;
   z-index: 3;
+  border-radius: 3px;
+  width:300px;
+  max-height:450px;
+  overflow-y: auto;
+  overflow-x:hidden;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px #cccccc;
+  background-color: #fcfcff !important;
+  min-height: 40px;
+  
 }
 
 .popup_member{
@@ -308,6 +398,15 @@ assignee_in_taskmodal td{
 	display: none;
 	width: 450px;
 	float: left;
+	font-size: 19px;
+}
+
+#projectinTask:hover{
+	cursor: pointer;
+}
+
+#Task_Modal_tname{
+	font-size: 19px;
 }
 
 .file_del_btn{
@@ -321,6 +420,8 @@ assignee_in_taskmodal td{
 	overflow:hidden;
 	display:block;
 	flex: 1 1 auto;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .filehover_div{
@@ -350,4 +451,82 @@ assignee_in_taskmodal td{
   z-index: 3;
   width: 300px;
   height: 100px;
+}
+/*////////////// 태스크 모달창 수정 CSS ////////////////*/
+
+.task-modal-wrapper{
+	width:700px
+}
+.task-modal-body{
+	display: flex;
+	flex-direction:column;
+	padding: 0 10px 0 10px 
+}
+
+.task-modal-content-row{
+	display: flex;
+	min-height: 70px;
+	justify-content: center;
+	border-bottom:1px solid #eee
+}
+
+.task-modal-content-td{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 1 1 auto
+}
+
+.task-modal-content-assignee{
+	display: flex;
+	flex-direction: column;
+	border-bottom:1px solid #eee;
+	margin-bottom: 15px;
+}
+.task-modal-content-file{
+	display: flex;
+	flex-direction: column;
+}
+
+.task-modal-content-filelist-wrapper{
+	display: flex;
+	flex-direction: column;
+	border-radius: 5px;
+	border: 2px dotted #cccccc;
+	padding:10px;
+	background-color: #ccc3
+}
+
+.task-modal-content-detail{
+	display: flex;
+	flex-direction: column;
+}
+
+#fileuploadbtn{
+	text-align: center;
+	font-weight: bold;
+	color:#b0b4b7
+}
+
+#Task_Modal_subtasks{
+	max-height: 200px;
+	overflow-y:auto 
+}
+
+#Task_Modal_detail{
+	padding:0.5em;
+	width: 100%;
+	height: 250px;
+	max-height: 250px
+}
+
+.comment-time-span{
+	font-weight:normal;
+	font-size: 10px;
+	font-style: italic;
+	color: #cccccc
+}
+
+.my_each_comment{
+	text-align: right;
 }

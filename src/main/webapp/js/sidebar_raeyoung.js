@@ -85,8 +85,8 @@ $(function() {
 	
     // 스텝 modal 에서 수정 버튼 클릭시
     $('#update-step-btn').click(function() {
-        var updatestep = $('#update-step-form').serialize();       
-        
+        var updatestep = $('#update-step-form').serialize();
+
         if($(".update-step-name").val().trim() == ""){
 			alert("스텝명을 입력하세요.");
 			$(".update-step-name").focus();	
@@ -95,10 +95,10 @@ $(function() {
 			alert("책임자를 선택하세요.");
 			return false;
 		}
-       /* if($("#update-step-sday-id").val() > $("#update-step-eday-id").val()) {
-			 alert("시작일이 종료일보다 앞설 수 없습니다.");
-			return false;
-		 }*/
+       if($("#update-step-sday-id").val() > $("#update-step-eday-id").val()) {
+    	   alert('시작일이 종료일보다 앞설 수 없습니다.');
+    	   return false;
+       }
         $.ajax({
             type:"post",
             url:"updatestep.htm",
@@ -113,6 +113,11 @@ $(function() {
                 }else {
                     alert('스텝 수정이 실패되었습니다');
                 }
+                $("#update-step-name").val("");
+                $("#update-step-mgr-assignee").val("");
+                $("#update-step-sday-id").val("");
+                $("#update-step-eday-id").val("");
+                $("#update-step-detail").val("");
                 $('.close').click();
             }
         }); // end - ajax

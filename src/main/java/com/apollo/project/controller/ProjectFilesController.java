@@ -9,7 +9,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.apollo.project.service.ProjectFilesService;
 import com.apollo.project.service.ProjectInfoService;
@@ -42,11 +44,11 @@ public class ProjectFilesController {
 		return "project/files";
 	}
 	
-	@RequestMapping("/filesDeleteByFileId.htm")
-	public String filesDeleteByFileId(int fileid) {
-		System.out.println("파일 컨트롤러 들어왔어요 : " + fileid);
+	@RequestMapping(value="/filesDeleteByFileId.htm",method=RequestMethod.POST)
+	public String filesDeleteByFileId(String filename,ModelMap map) {
+		System.out.println("파일 컨트롤러 들어왔어요 : " + filename);
 		try {
-			fileservice.filesDeleteByFileId(fileid);
+			fileservice.filesDeleteByFileId(filename);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

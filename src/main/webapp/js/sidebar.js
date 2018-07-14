@@ -1,17 +1,5 @@
 $(function() {
-	/*
-	var loading = $('<div id="loading" class="loading"><img id="loading_img" alt="loading" src="img/loader.gif" /></div>')
-					.appendTo(".main-box-panel").hide();
 
-	$(window)	
-	.ajaxStart(function(){
-		console.log("a")
-	loading.show();
-	})
-	.ajaxStop(function(){
-		console.log("b")
-		loading.hide();
-	});*/
 
 
 
@@ -164,6 +152,7 @@ $(function() {
 	
 	// 스텝 생성 버튼 클릭시  alert 창 화면
 	$("#insert-step-btn").click(function(){	 
+		
 		 if($(".add-step-name").val().trim() == ""){
 			alert("스텝명을 입력하세요.");
 			$(".add-step-name").focus();	
@@ -172,10 +161,10 @@ $(function() {
 			 alert("책임자를 선택하세요.");
 			 return false;
 		 }
-		 /*if($('#insert-step-sday-id').val() > $('#insert-step-eday-id').val()) {
+		 if($("#insert-step-sday-id").val() > $("#insert-step-eday-id").val()) {
 			 alert("시작일이 종료일보다 앞설 수 없습니다.");
 			return false;
-		 }*/
+		 }
 		 var newstep = $('#step-add-form').serialize();
 		 $.ajax({
 			 
@@ -331,10 +320,10 @@ $(function() {
 					$("#update-project-name").focus();	
 					return false;
 			}
-			 if($("#update-project-sday").val() > $("#update-project-eday").val()) {
-				 alert("시작일이 종료일보다 앞설 수 없습니다.");
-				return false;
-			 }
+			if($("#update-project-sday").val() > $("#update-project-eday").val()) {
+		    	   alert('시작일이 종료일보다 앞설 수 없습니다.');
+		    	   return false;
+			}
 			var project = $("#update-project-form").serialize();
 			console.log(project);
 			
@@ -543,12 +532,30 @@ $(function() {
 				$(".custom-menu").remove();
 			}
 			
-			if (!$(e.target).parents("#search-nav").length > 0) {
-			    document.getElementById("search-nav").style.width = "0";
+			if (!($(e.target).parents("#search-nav").length > 0) &&
+				!($(e.target).attr("id")=="search-nav")&&
+				!($(e.target).parents(".assignee-left-div-wrapper").length > 0) &&
+				!($(e.target).parents(".modal").length > 0) &&
+				($(e.target).hasClass("modal")==false)) {
+				console.log()
+				document.getElementById("search-nav").style.width = "0";
 			    $("#search-content-box").empty();
 				$("#search-bar").val("")
 			}
+			// mywork 페이지에서 member hidden
+			if(!$(e.target).parents('.mywork-main-task-member-hidden').length > 0){
+				$('.mywork-main-task-member-hidden').hide();
+			}
 			
+			// list 페이지 member hidden
+			if(!$(e.target).parents('.list-task-member').length > 0){
+				$('.list-task-member-hidden').hide();
+			}
+			
+		/*	if(!$(e.target).parents('.today_member_hidden-wrapper').length > 0){
+				$('.today_member_hidden-wrapper').hide();
+			}*/
+		
 		});
 	
 
@@ -567,6 +574,9 @@ $(function() {
 			$.ajax({
 				url:"information.htm",
 				data: "pid=" + pid,
+				beforeSend:function(){
+					$('#main-box').html(loadingpage);
+				},
 				dataType:"html",
 				success:function(data){
 					$("#main-box").empty();
@@ -673,16 +683,17 @@ $(function() {
 		
 	// 프로젝트 생성 버튼 클릭시 alert 창 화면 		
 	$("#insert-project-btn").click(function(evt){
+		
 		 if($("#add-project-name").val().trim() == ""){
 			alert("프로젝트명을 입력해주세요.");
 			$("#add-project-name").focus();	
 			return false;
 		 }
-		 /*if($('#insert-project-sday-id').val() > $('#insert-proejct-eday-id').val()) {
+		 if($('#insert-project-sday-id').val() > $('#insert-proejct-eday-id').val()) {
 			 alert("시작일이 종료일보다 앞설 수 없습니다.");
 			return false;
 		 }
-		 */
+		 
 		 var newproject = $("#project-add-form").serialize(); //serialize() : input 값이 있는 tag 들을 직렬화하여 가져온다 (ex.a=1&b=2&c=3&d=4&e=5)
 
 		 $.ajax({
@@ -897,23 +908,7 @@ function selectStepList(pids){
 
 
 
-/**
- * 
- 날      짜 : 2018. 6. 19.
- 기      능 : 프로젝트 생성이 없을 때 실행되는 함수
- 작성자명 : 김 래 영
- */
-function noProjectPage() {
-   $.ajax({
-      url:"noproject.htm",
-      dataType:"html",
-      success:function(data){
-          $("#main-box").empty();
-          $("#main-box").append(data);          
-          
-      }
-   })
-}
+
 
 
 
@@ -935,6 +930,8 @@ function selectProjectList(){
       dataType:"json",
       type:"post",
       success:function(data){
+    	  console.log(data);
+    	  console.log("make side")
          if(data!=null){ /// 참여중인 프로젝트가 있을 경우 
             $(data.projectlist).each(function(index,el){
                pids.push(el.pid);
@@ -1012,13 +1009,10 @@ function MakeprojectWrapper(project){
 function makeSideProjectDir(){
    
     $.when(selectProjectList()).done(function(data){ //먼저 프로젝트의 리스트를 가져와 뿌려준 후, 
-      if(data.length==0) {
-         //프로젝트가 전혀 없는 경우 실행될 함수 
-         noProjectPage();
-      } else{         
-         var pids = data;
-         makeSideSubDir(pids); // 각 프로젝트의 내부 구조를 채워줄 요소들을 가져오는 함수를 실행한다. 
-      }
+      if(data.length!=0) {
+    	  var pids = data;
+          makeSideSubDir(pids); 
+      } 
    })
 }
 
@@ -1143,13 +1137,13 @@ function updateProject(data){
  작성자명 : 박 민 식
  */
 function unload() {
-	/*console.log("aa");
-	switch (document.readyState){
-	case "complete":
-	*/	
+
 		$.ajax({
 			url:"pageReloadEvent.htm",
 			dataType:"html",
+			beforeSend:function(){
+					$("#main-box").html(loadingpage);
+			},
 			success:function(data){
 				 $("#main-box").empty();
 		         $("#main-box").append(data);

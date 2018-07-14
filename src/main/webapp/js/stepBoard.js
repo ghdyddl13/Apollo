@@ -7,9 +7,10 @@
  */
 function addTaskView(tstatusid){
    $("#task-adder"+tstatusid).remove();
-   let inputtag="<div class='board-task-adder-addmode'><input class='form-control' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
-    $("#body-start"+tstatusid).prepend(inputtag);
-    $("#insert-task"+tstatusid).focus();
+   let inputtag="<div class='board-task-adder-addmode'><input class=' board-add-task-input' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
+   $("#body-start"+tstatusid).prepend(inputtag);
+  
+   $("#insert-task"+tstatusid).focus().css("outline","none");
 }
 
 /**
@@ -19,32 +20,9 @@ function addTaskView(tstatusid){
  작 성 자 명 : 이 창 훈
  */
 function addTask_keyup(tstatusid){
-   let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
       if(event.which==13){
-    	  
-    	  $("#insert-task"+tstatusid).attr("readonly", true);
-         let newtask=$.trim($('#insert-task'+tstatusid).val());
-      
-        if(newtask===""){
-             $(".board-task-adder-addmode").remove();
-             $("#body-start"+tstatusid).prepend(addtag);
-         }else{
-            console.log(newtask);
-            $('#insert-task'+tstatusid).val('');
-               $.ajax({
-                   url : "boardInsertTask.htm",
-                   data : {
-                         tstatusid : tstatusid, 
-                         tname : newtask
-                         },
-                   success:function(data){
-                      $("#main-box").empty();
-                      $("#main-box").append(data);
-                      $("#insert-task"+tstatusid).attr("readonly", false);
-                      doDraggable();
-                   }  
-                })
-         } 
+    	  console.log("a");
+    	  $('#insert-task'+tstatusid).blur();
       } 
 }
 
@@ -55,13 +33,15 @@ function addTask_keyup(tstatusid){
  작 성 자 명 : 이 창 훈
  */
 function addTask_focusout(tstatusid){
+	  console.log("b");
    let newtask=$.trim($('#insert-task'+tstatusid).val());
    let addtag="<div class='board-task-adder' id='task-adder"+tstatusid+"' onclick='addTaskView("+tstatusid+")'>New task</div>";
    if(newtask===""){
-       $(".board-task-adder-addmode").remove();
-       $("#body-start"+tstatusid).prepend(addtag);
+	   $(".board-task-adder-addmode").remove();
+      $("#body-start"+tstatusid).prepend(addtag);
    }else{
          $.ajax({
+        	 
               url : "boardInsertTask.htm",
               data : {
                     tstatusid : tstatusid, 
@@ -71,19 +51,18 @@ function addTask_focusout(tstatusid){
                  $("#main-box").empty();
                  $("#main-box").append(data);
                  doDraggable();
+                 $("#task-adder"+tstatusid).remove();
+                 let inputtag="<div class='board-task-adder-addmode'><input class=' board-add-task-input' id='insert-task"+tstatusid+"' name='tname' type='text' placeholder='새로운 작업을 입력하세요' onkeyup='addTask_keyup("+tstatusid+")' onfocusout='addTask_focusout("+tstatusid+")'></div>"
+                 $("#body-start"+tstatusid).prepend(inputtag);
+                 $("#insert-task"+tstatusid).focus().css("outline","none");
               }  
            })
               
    }
 }
    
-   //board에서 나오는 status 목록 width 크기 지정하는 함수
-   function autoWidth() {
-      var width = (($('.tstatuslist').length * 310)
-            + "px");
-      $('#board-content-md').css("width", width)
-   }
-   
+
+ 
    /**
     * 
     날      짜 : 2018. 6. 18
@@ -99,17 +78,19 @@ function addTask_focusout(tstatusid){
          connectWith : "ul",
          update: function(event, ui) {      
            if (i++ == 2){
-            tstatusid =  $(this).closest('div')[0].childNodes[1].childNodes[1].value;
+           tstatusid = $(event.target).parents(".board-item-wrapper").children("p").find("input").val();
+            console.log($(event.target).parents(".board-item-wrapper").children("p").find("input").val())
             tid =  ui.item[0].value;
- 
-         $.ajax({
+         //   console.log("tsts : " + tstatusid);
+            
+            $.ajax({
             url : 'boardTaskStatusUpdate.htm',
             data : { 
                tstatusid : tstatusid,
                tid : tid
                } 
-         }) 
-            
+            }) 
+          
             //update event 발생시 이동전 위치와 이동후 위치를 나타내주는 변수를 초기화함
             i = 1;
              
@@ -127,36 +108,44 @@ function addTask_focusout(tstatusid){
     작 성 자 명 : 이 창 훈
     */
    function doDraggable(){
-	   console.log("test")
-	   autoWidth();
+
 	     sortable();
-	    $('#board-content-md').draggable(
+	     
+	    
+	     $('#board-content-md').draggable(
 	            {
 	               axis: "x"
 	          },{
 	              stop: function() {
-	                  
-	                  var left = $('#board-content-md')[0].offsetLeft
-	                  console.log("left : " + left);
-	                  var maxwidth = $(window).width() - $('#board-content-md').width()
-	                  if(left > 0){
-	                      $('#board-content-md').css('left','0px')
-	                     
-	                  }else if($(window).width() > $('#board-content-md').width()){
-	                      if(left < 0){ //화면크기가 div길이보다 크고 left가 0보다 작으면!!
-	                          $('#board-content-md').css('left','0px')
-	                      }
-	                     }else if($(window).width() < $('#board-content-md').width()){
-	                      if(left < maxwidth){ //화면크기가 div길이보다 작고 left가 maxwidth보다 작으면!!
-	                          $('#board-content-md').css('left',maxwidth-80)
-	                      }
-	                  }
-	                  $('#board-content-md').off('mousemove')
+	            	  	var board = $('#board-content-md').offset();
+		                var board_container = $($('#board-content-md').parents()[0]).offset();
+		                var board_width=$('#board-content-md').width();
+		                var board_container_width=$($('#board-content-md').parents()[0]).width();
+		                console.log("board_width  : " + board_width);
+		                console.log("board_container_width : " + board_container_width);
+		                var right_border= board_width - board_container_width;
+		                var diff_left= board_container.left -board.left;
+		                console.log("right_border : " + right_border);
+		                console.log("diff_left : " + diff_left);
+		                console.log("board_container.left : " + board_container.left);
+		                console.log("board.left :" + board.left)
+	                	console.log("be pa right : " +( board_container.left + board_container_width));
+	                	console.log("be board right : " + (board.left + board_width));
+		                if(board_container.left <=board.left){
+		                	 $('#board-content-md').offset({left:board_container.left});
+		                	  console.log("af board_container.left : " + board_container.left);
+		                	  console.log(" af board.left :" + board.left)
+		                }else if(diff_left >= right_border){
+		                	$('#board-content-md').offset({left:(board_container.left-right_border)});
+		                	console.log("pa right : " +( board_container.left + board_container_width));
+		                	console.log("board right : " + (board.left + board_width));
+		                }
+	          
 	              }
 	          }
 	      ) 
    }
    
-
+  
       
      

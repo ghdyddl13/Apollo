@@ -4,19 +4,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.apollo.inbox.dao.InboxDAO">
 <select id="getCommentlist" parameterType="String" resultType="com.apollo.vo.CommentDTO">
-SELECT r.cmtid, c.comments, c.tid, c.mid,r.mid as mid2,m.mname, c.cmtkind, c.cmtmtime, r.isarchive, t.tname, p.pname,m.image,r.newcheck
+SELECT r.cmtid, c.comments, c.tid, c.mid,r.mid as mid2,m.mname, c.cmtkind, c.cmtmtime, r.isarchive, t.tname, p.pname,m.image,r.newcheck,p.METHODOLOGYID
  FROM RECEIVER r JOIN COMMENTS c ON r.CMTID = c.CMTID join task t on t.tid=c.tid join project p on p.pid =t.pid 
  join member m on c.mid = m.mid where r.mid=#{mid} and r.ISARCHIVE = 0 and (r.mid != c.mid or cmtkind = 2) ORDER BY c.cmtmtime DESC
 </select>
 
 <select id="getSentlist" parameterType="String" resultType="com.apollo.vo.CommentDTO">
- SELECT r.cmtid, c.comments, c.tid, c.mid,r.mid as mid2,m.mname, c.cmtkind, c.cmtmtime, r.isarchive, t.tname, p.pname,m.image,r.newcheck
+ SELECT r.cmtid, c.comments, c.tid, c.mid,r.mid as mid2,m.mname, c.cmtkind, c.cmtmtime, r.isarchive, t.tname, p.pname,m.image,r.newcheck,p.METHODOLOGYID
  FROM RECEIVER r JOIN COMMENTS c ON r.CMTID = c.CMTID join task t on t.tid=c.tid join project p on p.pid =t.pid 
  join member m on c.mid = m.mid where r.mid=#{mid} and r.ISARCHIVE = 0 and r.mid = c.mid and cmtkind = 0 ORDER BY c.cmtmtime DESC
 </select>
 
 <select id="getArchivelist" parameterType="String" resultType="com.apollo.vo.CommentDTO">
-  SELECT r.cmtid, c.comments, c.tid, c.mid,r.mid as mid2,m.mname, c.cmtkind, c.cmtmtime, r.isarchive, t.tname, p.pname,m.image,r.newcheck
+  SELECT r.cmtid, c.comments, c.tid, c.mid,r.mid as mid2,m.mname, c.cmtkind, c.cmtmtime, r.isarchive, t.tname, p.pname,m.image,r.newcheck,p.METHODOLOGYID
  FROM RECEIVER r JOIN COMMENTS c ON r.CMTID = c.CMTID join task t on t.tid=c.tid join project p on p.pid =t.pid 
  join member m on c.mid = m.mid where r.mid=#{mid} and r.ISARCHIVE = 1 and (cmtkind = 0 or cmtkind = 2) ORDER BY c.cmtmtime DESC
 </select>
@@ -50,5 +50,14 @@ UPDATE RECEIVER SET newcheck = 1 where mid=#{mid2} and cmtid=#{cmtid}
 UPDATE (select * from RECEIVER r join comments c on c.cmtid = r.cmtid where r.mid=#{mid} and r.mid = c.mid) SET newcheck = 1
 </update>
 
-
+<delete id="deleteReceiverAfterDeletePmember"  parameterType="com.apollo.vo.MidpidDTO">
+	    delete from receiver 
+	    where (cmtid in 
+	            (select cmtid from comments 
+	             where tid in 
+	              (select tid from task where pid = #{pid})
+	            )
+	          )
+	    and (mid = #{mid})
+</delete>
 </mapper>

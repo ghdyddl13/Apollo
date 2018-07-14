@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.apollo.mywork.service.MyworkService;
+import com.apollo.vo.MyWorkMemberDTO;
 import com.apollo.vo.MyWorkTaskDTO;
 @Controller
 public class MyworkController {
@@ -30,10 +31,14 @@ public class MyworkController {
     	session.setAttribute("location", "/myWork.htm");
 		String mid = (String)request.getSession().getAttribute("mid");
 		System.out.println(mid);
-		Map<String, List<MyWorkTaskDTO>> taskmap=null;
+		
+		Map<String, List<MyWorkTaskDTO>> taskmap = null;
+		
+		
 		try {
 			taskmap = service.getMyWork(mid);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 		

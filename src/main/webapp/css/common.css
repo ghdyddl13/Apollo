@@ -30,6 +30,17 @@ html, body{
 	justify-content: center;
 	align-items: center
 }
+
+.loading_third{
+	position:absolute;
+	height:100%;
+	width:49%;
+	display: flex;
+	background:white;
+	justify-content: center;
+	align-items: center
+}
+
 #loading_img{
 	height: 20px;
 	width: 20px
@@ -549,7 +560,7 @@ html, body{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-
+	font-size: 12px
 	
 }
 .side-content:hover{
@@ -1243,30 +1254,40 @@ label {
 
 /* Profile Modal */
 .profile-modal-left {
-	height: 150px;
+	margin-top: 10px;
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-content: center;
 }
 #profile-modal-content{
 	height:100%;
 	width:100%;
 }
+#profile-modal-img-content {
+    border-radius: 50%;
+    display: flex;
+    overflow: hidden;
+    justify-items: center;
+    align-items: center;
+    height: 130px;
+}
 #profile-modal-img {
-	margin-top: 10px;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
 }
 .profile-modal-dialog {
 	width: 500px;
     height: 250px;
 }
-/* .profile-modal-body {
+.profile-modal-body {
 	height: 200px;
-} */
+} 
 #profile-modal-info {
     margin-top: 23px;
 }
-#profile-modal-info-table>tbody>td {
-	width: 30%;
+.profile-modal-info-table>tbody>td {
+	width: 100%;
 }
 /* Profile Modal End */
 
@@ -1435,6 +1456,7 @@ label {
   box-sizing: border-box;
   min-height: 45px;
   transition: height, min-height, padding-top 0.15s ease;
+  border-bottom:1px solid #e8e8e8
 }
 .main-body-onepannel-body{
   overflow-y: auto;

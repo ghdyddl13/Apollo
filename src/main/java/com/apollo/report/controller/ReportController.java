@@ -1,6 +1,7 @@
 package com.apollo.report.controller;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
@@ -65,20 +66,18 @@ public class ReportController {
 	@RequestMapping("/downloadreport.htm")
 	public void downloadReport(int pid, String report_kind, String report_title, HttpSession session, Model map, HttpServletResponse response) {
 		
+		String mid = (String) session.getAttribute("mid");
 		System.out.println("downloadReport 컨트롤러 실행");
-		
 		System.out.println(pid + "/" + report_kind + "/" + report_title);
 		
-		String mid = (String) session.getAttribute("mid");
-		
 		try {
-			reportservice.writeData(pid, report_kind, report_title, response);
+			reportservice.writeData(mid, pid, report_kind, report_title, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		System.out.println("report 추출 성공!");
 	}
+	
 	
 }

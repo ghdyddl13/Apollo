@@ -40,6 +40,7 @@ public class StarredTaskController {
 		List<MyWorkTaskDTO> tasklist = service.getListTask(mid);
 		map.addAttribute("tasklist", tasklist);
 		model.addAttribute("inbox", "starredtask");
+		System.out.println("starred task : " + tasklist);
 		return "header/starredTask";
 	}
 	/**

@@ -10,12 +10,12 @@
  <bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 
-       <!-- 
-        <property name="url" value="jdbc:oracle:thin:@192.168.0.14:1521:XE" />
-        <property name="username" value="PROJECT_APOLLO" />
-        <property name="password" value="1004" />  -->
-
-
+     <!--  
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
+        <property name="username" value="Apollo " />
+        <property name="password" value="1004" /> 
+ -->
+ 
         <property name="url" value="jdbc:oracle:thin:@apollodb.c8laekrmeaob.ap-northeast-2.rds.amazonaws.com:1521:APOLLODB" />
         <property name="username" value="PROJECT_APOLLO_AWS" />
         <property name="password" value="apollo1004" />  
@@ -70,7 +70,7 @@
 		<property name="scope"
 			value="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email" />
 		<property name="redirectUri"
-			value="http://localhost:8090/bit/googlelogin.htm" />
+			value="http://localhost:8090/Apollo/googlelogin.htm" />
 	</bean>
 	
 	 <!-- 파일 업로드 지원 LIB -->

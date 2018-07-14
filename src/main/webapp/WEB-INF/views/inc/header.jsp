@@ -49,15 +49,16 @@
 								<img id="loginimg" src='displayImage.htm'>
 							</div>
 						</c:otherwise>
-					</c:choose> 
+					</c:choose>  
 					<a id="header-user-name" class="nav-link dropdown-toggle"data-toggle="dropdown" style="color: white"> ${m.mname}님</a>
+					<input type="hidden" value= "${m.mid}" id="header-mid">
 					<ul class="dropdown-menu">
-						<li id="header-introduce"><a>Apollo</a></li>
+						<li id="header-introduce"><a><i class="fas fa-rocket" style="color: red"></i>&nbspApollo</a></li>
 						<li data-toggle="modal" data-target="#edit-profile"
-							id="header-profile-edit"><a>개인정보수정</a></li>
-						<li id="header-memberlist"><a>사원목록</a></li>
+							id="header-profile-edit"><a><i class="fas fa-user" style="color: green"></i>&nbsp개인정보수정</a></li>
+						<li id="header-memberlist"><a><i class="far fa-list-alt" style="color: blue"></i>&nbsp사원목록</a></li>
 						<li id="header-logout" data-toggle="modal" data-target="#hedaer-logout-dialog">
-						<a>로그아웃</a></li>
+						<a><i class="fas fa-sign-out-alt" style="color: orange"></i>&nbsp로그아웃</a></li>
 					</ul>
 				</li>
 			</ul>

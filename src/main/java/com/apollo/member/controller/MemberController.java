@@ -56,7 +56,6 @@ public class MemberController {
 	private VelocityEngine velocityEngine;
 	
 	HttpSession session;
-
 	/**
 	 * 
 	 날      짜 : 2018. 7. 2.
@@ -155,8 +154,11 @@ public class MemberController {
 	 */
 	@RequestMapping(value="/emailcheck.htm",method=RequestMethod.GET)
 	public String emailcheck(String emailcheckkey, String mid) {
+		System.out.println("mid : " + mid);
+		System.out.println("emailcheckkey : " + emailcheckkey);
 		String emailcheckbymid = service.emailcheckbymid(mid);
 		if(emailcheckkey.equals(emailcheckbymid)) {
+			System.out.println("if 들어왔니?");
 			service.emailcheck(mid);
 		}
 		return "login";
@@ -458,6 +460,7 @@ public class MemberController {
 		try {
 			profileinfo = service.getProfileInfoMember(mid);
 			model.addAttribute("profileinfo", profileinfo);
+			System.out.println("profileinfo : " + profileinfo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -471,11 +474,9 @@ public class MemberController {
 	 작성자명 : 김 래 영
 	 */
 	@RequestMapping("/updatememberinfo.htm")
-	public View updateMemberInfo(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+	public View updateMemberInfo(HttpServletRequest request, Model model) {
 		String mid = (String) request.getSession().getAttribute("mid");
-		model.addAttribute("mid", mid);
 		MemberDTO updatememberinfo = null;
-		
 		try {
 			updatememberinfo = service.updateMemberInfo(mid);
 			model.addAttribute("updatememberinfo", updatememberinfo);

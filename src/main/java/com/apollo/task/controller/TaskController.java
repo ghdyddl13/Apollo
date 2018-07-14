@@ -3,11 +3,11 @@ package com.apollo.task.controller;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -24,6 +24,7 @@ import com.apollo.vo.CommentDTO;
 import com.apollo.vo.FileDTO;
 import com.apollo.vo.MemberDTO;
 import com.apollo.vo.MidtidDTO;
+import com.apollo.vo.ProjectDTO;
 import com.apollo.vo.StarredTaskDTO;
 import com.apollo.vo.StepDTO;
 import com.apollo.vo.SubtaskDTO;
@@ -152,6 +153,10 @@ public class TaskController {
 	
 	// 유저의 mid
 	model.addAttribute("userid", mid);
+	
+	// 해당 테스크의 프로젝트
+	ProjectDTO projectdto = service.getProjectNamebyTid(tid);
+	model.addAttribute("projectdto", projectdto);
 	
 	return jsonview;
 	}
@@ -488,10 +493,10 @@ public class TaskController {
 	 작성자명 : 김 정 권
 	 */
 	@RequestMapping("/addtaskassigneemodalinfo.htm")
-	public View addTaskAssigneeModalInfo(int tid, HttpSession session, Model model){
+	public View addTaskAssigneeModalInfo(int tid,int pid, HttpSession session, Model model){
 		
 		System.out.println("assignee 추가를 위한 이중 모달 데이터 컨트롤러 실행");
-		int pid = 0;
+		
 		if(session.getAttribute("pid") == null) {
 			String midforpid =(String)session.getAttribute("mid");
 			if(pid == 0) {
@@ -984,7 +989,8 @@ public class TaskController {
 	public String changeTname(int tid, String tname, HttpSession session, Model map){
 		
 		System.out.println("changeTname 컨트롤러 실행");
-		
+		System.out.println("id " + tid);
+		System.out.println("name " +tname);
 		TaskDTO dto = new TaskDTO();
 		dto.setTid(tid);
 		dto.setTname(tname);
@@ -1045,6 +1051,7 @@ public class TaskController {
 		System.out.println("upLoadFileInTaskModal 컨트롤러 실행");
 		
 		int tid = (Integer) session.getAttribute("tid");
+		System.out.println("tid : "+tid);
     	LinkedList<filedataDTO> files = service.upLoadFileInTaskModal(tid, request);
 		map.addAttribute("files",files);
 				
@@ -1079,14 +1086,31 @@ public class TaskController {
     기      능 : Task 모달 내 파일 다운로드
     작성자명 : 김 정 권
     */
+	/*
    @RequestMapping(value="/downloadfileintaskmodal.htm")
    public void downLoadFileInTaskModal(String filename, ModelMap map, HttpServletResponse response, HttpServletRequest request) {
    	
 	   System.out.println("downLoadFileInTaskModal 컨트롤러 실행");
 	   service.downLoadFileInTaskModal(filename, response, request);
    			
-   }
-  
+   }*/
+   /**
+    * 
+    날      짜 : 2018. 7. 10.
+    기      능 : 파일 다운로드
+    작성자명 : 이 진 우
+    */
+	@RequestMapping(value="/taskFileDownload.htm",method=RequestMethod.GET)
+	public ResponseEntity<byte[]> taskFileDownload(String filename,HttpSession session,HttpServletResponse response){
+		System.out.println("filename =" +filename);
+		ResponseEntity<byte[]> imagefile=null;
+		try {
+			imagefile = service.getFileData(filename);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return imagefile;
+	}
    
    /**
     * 
@@ -1282,6 +1306,5 @@ public View changeEdayOfTaskNoredirect(int tid, String eday, HttpSession session
 
 	return jsonview;
  }
-
 
 }

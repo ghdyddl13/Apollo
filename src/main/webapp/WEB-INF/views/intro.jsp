@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Apollo Introduce</title>
+<title>Project Apollo</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -13,6 +13,10 @@
 <link href="css/common.css" type="text/css" rel="stylesheet">
 <!-- AWESOMEFONT를 위한 cdn -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+<link rel="shortcut icon" href="img/FAVINEW.ico">
+<link rel="icon" href="img/FAVINEW.ico" sizes="16x16">
+
 <script>
 $(function() {
 	$('#intro-login-btn').click(function() {
@@ -119,7 +123,7 @@ $(function() {
 									<h3>프로젝트의 업무일정 및 진행상태를 한번에 확인하세요!</h3>
 								</div>
 								<br> 
-								<img src="img/step_timeline_img.png">
+								<img src="img/timeline.png">
 							</div>
 						</div>
 
@@ -130,7 +134,7 @@ $(function() {
 									<h3>급한 업무부터 다음주 업무까지 그래프로 확인할 수 있습니다</h3>
 								</div>
 								<br>
-								<img src="img/step_list_img.png">
+								<img src="img/list.png">
 							</div>
 						</div>
 					</div>
