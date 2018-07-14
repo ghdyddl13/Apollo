@@ -35,9 +35,8 @@ if(inboxkind == "sent" || inboxkind == "archive" || inboxkind == "incomming"){
 			console.log(tid);
 		}
 		
-const loadingpage_third = '<div id="loading" class="loading_third">';
-      loadingpage_third += '<img style="width:auto;height:100px;border-radius:50%"id="loading_img"';
-      loadingpage_third += 'alt="loading" src="img/rocket_3.gif" /></div>'
+		const loadingpage_third = '<div id="loading" class="loading_third"><img style="width:auto;height:100px;border-radius:50%"id="loading_img" alt="loading" src="img/rocket_3.gif" /></div>';
+    	  
 		$.ajax(
 			       {
 			           type : "post",
