@@ -52,18 +52,6 @@ public class ReportService {
 	
 		public void writeData(String mid, int pid, String report_kind, String report_title, HttpServletResponse response) throws Exception {
 
-//			String filePath = "";
-//			File file = null;
-//			try {
-//
-//			   filePath = "C:\\Apollo_Reports\\"; // file 생성 위치 
-//				
-//				File fDir = new File(filePath);
-//				if (!fDir.exists()) {
-//					fDir.mkdirs();
-//				}
-
-			
 			   String filename = mid + "_" + report_title + ".xls"; // 생성될 파일 이름
 			   
 			   HSSFWorkbook wb = setExcel(pid, report_kind, filename);
@@ -77,10 +65,6 @@ public class ReportService {
 		       response.setHeader("Content-Disposition", "attachment;filename="+filename);
 		       response.setContentType("application/vnd.ms-excel");
 		     
-		       // 여기서 생성해둔 비어있는 파일에 엑셀 데이터 들어간다
-//		        fos = new FileOutputStream(file);
-//		        wb.write(fos);
-		        
 		        // wb.write(out)에서 클라이언트에게 감
 		        wb.write(out);
 		        out.flush();

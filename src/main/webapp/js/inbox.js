@@ -30,8 +30,7 @@ $(function() {
 		})
 	});
 	
-	$(document).on("click","#sent-page",function(evt){	
-		
+	$(document).on("click","#sent-page",function(evt){
 		$.ajax({
 			url:"sent.htm",
 			beforeSend:function(){
@@ -96,7 +95,7 @@ $(function() {
 			dataType:"html",
 			type: 'POST',
 			data:{cmtid:$(this).children(".cmtid").val(),
-				  inboxkind:$("#inboxkind").val()},
+				  inbox:$("#inboxkind").val()},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);
