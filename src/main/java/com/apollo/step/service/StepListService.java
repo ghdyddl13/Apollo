@@ -226,6 +226,8 @@ public class StepListService {
 		Integer thepast =dao.listCountThePast(sid);
 		if(thepast==null) {
 			thepast=0;
+		}else if(thepast<0) {
+			thepast=0;
 		}
 		return thepast;
 	}
