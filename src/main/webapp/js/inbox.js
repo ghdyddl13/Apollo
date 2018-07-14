@@ -95,7 +95,7 @@ $(function() {
 			dataType:"html",
 			type: 'POST',
 			data:{cmtid:$(this).children(".cmtid").val(),
-				  inboxkind:$("#inboxkind").val()},
+				  inbox:$("#inboxkind").val()},
 			success:function(data){
 				$("#main-box").empty();
 				$("#main-box").append(data);

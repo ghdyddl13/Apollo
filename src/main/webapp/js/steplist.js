@@ -7,7 +7,7 @@ $(function() {
 	 */
 	var list_memberlist=[];
 	$(document).on("click",".side-step",function(){
-		var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
+		//var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
 		var sid= this.id.substr(1);
 		checkbox=[];
 		list_memberlist=[];
@@ -69,6 +69,7 @@ $(function() {
 	                success:function(data) {
 						$("#main-box").empty();
 						$("#main-box").append(data);
+						checkbox = [];
 						$("#list-task-adder").remove();
 						$("#body-start").prepend("<div class='list-task-adder-addmode'><input class='form-control' id='insert-task' name='tname' type='text' placeholder='새로운 작업을 입력하세요'></div>");
 						$("#insert-task").attr("readonly", false);
@@ -110,6 +111,7 @@ $(function() {
 	                success:function(data) {
 						$("#main-box").empty();
 						$("#main-box").append(data);
+						checkbox = [];
 	                }
 	              }
 	      )
@@ -198,26 +200,54 @@ $(function() {
 	 작성자명 : 이 진 우
 	 */
     $(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
-        let p =$("#selectpage-addasignee-button");
-        let position = p.position();
-        let x_position =$(window).width()-790;
-        $(".list-section-third-addasignee").css({"visibility":"visible","left":x_position,"top":position.top-100});
-        $(".list-section-third-addasignee-memberlist").empty();
-        let memberlisttag="";
-        $.each(list_memberlist,function(index,element) {
-          let mid = element.mid;
-          let mname = element.mname;
-          let image = element.image
-          memberlisttag+='<div class="list-section-third-addasignee-member" data-toggle="modal" data-target="#list_Assign_Tasks" id="'+mid+'">';
-          memberlisttag+='<div class="list-section-third-addasignee-member-container"><div class="list-section-third-addasignee-member-tag"><div class="list-section-third-addasignee-member-image-wrapper">';
-          memberlisttag+='<img class="list-section-third-addasignee-member-image"src="displayImage.htm?image='+image+'" alt=""></div>';
-          memberlisttag+='<div class="list-section-third-addasignee-member-textcontainer"><div class="list-section-third-addasignee-member-mname">';
-          memberlisttag+= mname;
-          memberlisttag+= '</div><div class="list-section-third-addasignee-member-mid">';
-          memberlisttag+= mid;
-          memberlisttag+= '</div></div></div></div></div>';
-        })
-        $(".list-section-third-addasignee-memberlist").append(memberlisttag);
+    	let p =$("#selectpage-addasignee-button");
+    	let position = p.position();
+    	let x_position =$(window).width()-790;
+    	$(".list-section-third-addasignee").css({"visibility":"visible","left":x_position,"top":position.top-100});
+    	$(".list-section-third-addasignee-memberlist").empty();
+    	let memberlisttag="";
+    	let sid=parseInt($(".list-header-title").attr("id").substring(1));
+    	if(list_memberlist.length==0){
+    	      $.ajax({
+					 url:"memberlist.htm",
+					 data:{sid:sid},
+					 type:"POST",
+					 dataType:"JSON",
+					 success:function(memberlist){
+						 list_memberlist = memberlist.memberlist;
+				         $.each(list_memberlist,function(index,element) {
+				            let mid = element.mid;
+				            let mname = element.mname;
+				            let image = element.image
+				            memberlisttag+='<div class="list-section-third-addasignee-member" data-toggle="modal" data-target="#list_Assign_Tasks" id="'+mid+'">';
+				            memberlisttag+='<div class="list-section-third-addasignee-member-container"><div class="list-section-third-addasignee-member-tag"><div class="list-section-third-addasignee-member-image-wrapper">';
+				            memberlisttag+='<img class="list-section-third-addasignee-member-image"src="displayImage.htm?image='+image+'" alt=""></div>';
+				            memberlisttag+='<div class="list-section-third-addasignee-member-textcontainer"><div class="list-section-third-addasignee-member-mname">';
+				            memberlisttag+= mname;
+				            memberlisttag+= '</div><div class="list-section-third-addasignee-member-mid">';
+				            memberlisttag+= mid;
+				            memberlisttag+= '</div></div></div></div></div>';
+				          })
+				          $(".list-section-third-addasignee-memberlist").append(memberlisttag);
+					 }
+    	      });
+    	}else{
+            $.each(list_memberlist,function(index,element) {
+                let mid = element.mid;
+                let mname = element.mname;
+                let image = element.image
+                memberlisttag+='<div class="list-section-third-addasignee-member" data-toggle="modal" data-target="#list_Assign_Tasks" id="'+mid+'">';
+                memberlisttag+='<div class="list-section-third-addasignee-member-container"><div class="list-section-third-addasignee-member-tag"><div class="list-section-third-addasignee-member-image-wrapper">';
+                memberlisttag+='<img class="list-section-third-addasignee-member-image"src="displayImage.htm?image='+image+'" alt=""></div>';
+                memberlisttag+='<div class="list-section-third-addasignee-member-textcontainer"><div class="list-section-third-addasignee-member-mname">';
+                memberlisttag+= mname;
+                memberlisttag+= '</div><div class="list-section-third-addasignee-member-mid">';
+                memberlisttag+= mid;
+                memberlisttag+= '</div></div></div></div></div>';
+            })
+            $(".list-section-third-addasignee-memberlist").append(memberlisttag);
+    	}
+
       })
       $(document).bind("mousedown", function(e) {
         if (!$(e.target).parents(".list-section-third-addasignee").length > 0) {
@@ -290,29 +320,6 @@ $(function() {
         }
       })
 	
-//	$(document).on("click","#selectpage-addasignee-button",function() {//추가 할당자들을 눌렀을 시에
-//		let checkboxcount= checkbox.length;
-//		let mid ="jinwoo@naver.com" ;
-//		$("#list-task-assign-ment").html("에게 "+checkboxcount+"개 Task를 할당하시겠습니까?")
-//	});
-//	$(document).on("click","#list_Assign_Tasks_btn",function(){
-//		if(checkbox.length==0){
-//			alert("왜 테스크가 없지..?")
-//			$('#list_assign_tasks_dismiss_btn').click();
-//		}else{
-//			$.ajax({
-//				type : "POST",
-//				url : "listassigntasks.htm",
-//				data :{mid:mid,tasks:checkbox},
-//				success : function(data) {
-//					$("#main-box").empty();
-//					$("#main-box").append(data);
-//					$('#list_assign_tasks_dismiss_btn').click();
-//					checkbox = [];
-//				}
-//			})
-//		}
-//	})
 	/**
 	 * 
 	 날   짜 : 2018. 7. 06.
@@ -475,40 +482,54 @@ $(function() {
 	$(document).on("click",".list-header-menu-list-item",function () {
 	  let tstatusid = $(this).attr("id");
 	  let sid = parseInt($(".list-header-title").attr("id").substring(1));
+	  let mid = $("#list-people-filter-input").val();
 	  let statusname = $.trim($(this).text());
-	  console.log(tstatusid +"/"+sid+"/"+statusname);
+	  let tag ="";
+	  tag +='<input type="hidden" id="list-status-filter-input" value="'+tstatusid+'" >';
+	  tag +="<span class='list-header-filter-status-tag' id='status-button'>"+statusname+"</span><span class='list-header-filter-status-remove' id='task-status-remove'></span>";
 	  $(".list-header-filter-status").css("background-color","")
 	  $(".list-header-filter-status-selecting").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
       $.ajax(
               {
                 type:"POST",
-                url:"liststatusfilter.htm",
+                url:"listFilter.htm",
                 data:{tstatusid:tstatusid,
-                	  sid:sid
+                	  sid:sid,mid:mid
                 },
                 success:function(data) {
                 	$(".list-header-filter-status").empty();
-                	$(".list-header-filter-status").append("<span class='list-header-filter-status-tag' id='status-button'>"+statusname+"</span><span class='list-header-filter-status-remove' id='task-status-remove'></span>");
+                	$(".list-header-filter-status").append(tag);
                 	$(".list-header-filter-status").css("background-color","#dfe6f0")
                 	$(".list-task-containers").empty();
                 	$(".list-task-containers").append(data);
+              	    $(".list-section-third-selectpage").css({"visibility":"hidden","position":"absolute","height":"50%"});
+            	    $(".list-section-third-default").css({"visibility":"visible","position":"relative","height":"100%"})
+                	checkbox = [];
                 }
               }
       )
 	});
 	$(document).on("click",'#task-status-remove',function(){
 		let sid = parseInt($(".list-header-title").attr("id").substring(1));
+		let mid = $("#list-people-filter-input").val();
+		let tag ="";
+		let tstatusid=0;
+		tag +='<input type="hidden" id="list-status-filter-input" value="0" >';
+		tag +="<span class='list-header-filter-status-tag' id='status-button'>STATUS:ALL</span>";
 	    $.ajax(
 	              {
 	                type:"POST",
-	                url:"liststatusfilter.htm",
-	                data:{sid:sid},
+	                url:"listFilter.htm",
+	                data:{tstatusid:tstatusid,mid:mid,sid:sid},
 	                success:function(data) {
 	                	$(".list-header-filter-status").empty();
-	                	$(".list-header-filter-status").append("<span class='list-header-filter-status-tag' id='status-button'>STATUS:ALL</span>");
+	                	$(".list-header-filter-status").append(tag);
 	                	$(".list-header-filter-status").css("background-color","")
 	                	$(".list-task-containers").empty();
 	                	$(".list-task-containers").append(data);
+	               	    $(".list-section-third-selectpage").css({"visibility":"hidden","position":"absolute","height":"50%"});
+	            	    $(".list-section-third-default").css({"visibility":"visible","position":"relative","height":"100%"})
+	                	checkbox = [];
 	                }
 	            }
 	    )
@@ -522,24 +543,52 @@ $(function() {
 	 */
 	//people button을 누르면 로드시 가지고 왔던 데이터를 뿌려준다
     $(document).on("click","#people-button-tag",function(){
-		var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
-		var sid= this.id.substr(1);
-
-        let p =$("#people-button");
-        let position = p.position();
-        $(".list-header-filter-people").css("background-color","#dfe6f0")
-        $(".list-header-filter-people-selecting").css({"visibility":"visible","left":position.left,"top":position.top+24});
-        let nametag="";
-        $(".list-header-filter-people-tagscontainer").empty();
-        $.each(list_memberlist,function(index,element) {
-              nametag+= '<div class="list-header-filter-people-tagwrap"><div class="list-header-filter-people-tag"><div class="list-header-filter-people-image">';
-              nametag+='<img class="list-people-image"src="img/user.png" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
-              nametag+= element.mname;
-              nametag+= '</div><div class="list-people-email">';
-              nametag+= element.mid;
-              nametag+= '</div></div></div></div>';
-         })
-         $(".list-header-filter-people-tagscontainer").append(nametag);
+    	//var project_wrapper =  $(this).parents("div.side-project-wrapper")[0];
+    	//var sid= this.id.substr(1);
+    	let sid= parseInt($(".list-header-title").attr("id").substring(1));
+    	let p =$("#people-button");
+    	let position = p.position();
+    	$(".list-header-filter-people").css("background-color","#dfe6f0")
+    	$(".list-header-filter-people-selecting").css({"visibility":"visible","left":position.left,"top":position.top+24});
+    	let nametag="";
+        nametag+= '<div class="list-header-filter-nopeople-tagwrap"><div class="list-header-filter-people-tag"><div class="list-header-filter-people-image">';
+        nametag+='<div class="list-noassignee-icon-container"><i class="fas fa-user-plus no-assignee-task-icon"></i></div></div><div class="list-header-filter-people-info"><div class="list-people-name list-people-noassign" id="noassign">'
+        nametag+= "No Assignee";
+        nametag+= '</div></div></div></div>';
+    	
+    	
+    	
+    	$(".list-header-filter-people-tagscontainer").empty();
+    	if(list_memberlist.length==0){
+	  	      $.ajax({
+						 url:"memberlist.htm",
+						 data:{sid:sid},
+						 type:"POST",
+						 dataType:"JSON",
+						 success:function(memberlist){
+							list_memberlist = memberlist.memberlist;
+					        $.each(list_memberlist,function(index,element) {
+					              nametag+= '<div class="list-header-filter-people-tagwrap"><div class="list-header-filter-people-tag"><div class="list-header-filter-people-image">';
+					              nametag+='<img class="list-people-image"src="displayImage.htm?image='+element.image+'" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
+					              nametag+= element.mname;
+					              nametag+= '</div><div class="list-people-email">';
+					              nametag+= element.mid;
+					              nametag+= '</div></div></div></div>';
+					         })
+					         $(".list-header-filter-people-tagscontainer").append(nametag);
+						 }
+	  	      });
+	  	}else{
+	        $.each(list_memberlist,function(index,element) {
+	              nametag+= '<div class="list-header-filter-people-tagwrap"><div class="list-header-filter-people-tag"><div class="list-header-filter-people-image">';
+	              nametag+='<img class="list-people-image"src="displayImage.htm?image='+element.image+'" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
+	              nametag+= element.mname;
+	              nametag+= '</div><div class="list-people-email">';
+	              nametag+= element.mid;
+	              nametag+= '</div></div></div></div>';
+	         })
+	         $(".list-header-filter-people-tagscontainer").append(nametag);
+	  	}
      });
 
       // 사이드 우클릭 메뉴 닫는 함수
@@ -555,18 +604,26 @@ $(function() {
 	  //people button이 생성 되고나서 remove 버튼을 눌렀을 시에 
       $(document).on("click",".list-header-filter-people-remove",function(params) {
       	let sid = parseInt($(".list-header-title").attr("id").substring(1));
+      	let tstatusid = $("#list-status-filter-input").val();
+      	let mid ="";
+      	let tag = "";
+      	tag+='<input type="hidden"  id="list-people-filter-input" value="">';
+      	tag+="<span class='list-header-filter-people-tag' id='people-button-tag'>TO:ALL</span>";
         $("#people-button").empty();
         $("#people-button").removeClass("list-header-filter-people-selected").addClass("list-header-filter-people");
         $("#people-button").css("background-color","")
-        $("#people-button").append("<span class='list-header-filter-people-tag' id='people-button-tag'>TO:ALL</span>");
+        $("#people-button").append(tag);
 	    $.ajax(
 	            {
 	              type:"POST",
-	              url:"listpeoplefilter.htm",
-	              data:{sid:sid},
+	              url:"listFilter.htm",
+	              data:{sid:sid,tstatusid:tstatusid,mid:mid},
 	              success:function(data) {
 	                	$(".list-task-containers").empty();
 	                	$(".list-task-containers").append(data);
+	              	    $(".list-section-third-selectpage").css({"visibility":"hidden","position":"absolute","height":"50%"});
+	            	    $(".list-section-third-default").css({"visibility":"visible","position":"relative","height":"100%"})
+	                	checkbox = [];
 	              }
 	            }
 	    )
@@ -576,20 +633,56 @@ $(function() {
     	let sid = parseInt($(".list-header-title").attr("id").substring(1));
         let mid= $.trim($(this).children(".list-header-filter-people-tag").children(".list-header-filter-people-info").children(".list-people-email").text());
         let mname=$.trim($(this).children(".list-header-filter-people-tag").children(".list-header-filter-people-info").children(".list-people-name").text());
-        console.log(mid+"/"+mname);
+        let tstatusid = $("#list-status-filter-input").val();
+        let tag = "";
+        tag +='<input type="hidden"  id="list-people-filter-input" value="'+mid+'">'
+        tag +="<span class='list-header-filter-people-tag-selected list-header-filter-people-tag' id='people-button-tag'>TO: "+mname+"</span><span class='list-header-filter-people-remove'></span>";
         $(".list-header-filter-people-selecting").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
         $("#people-button").css("background-color","#dfe6f0")
         $("#people-button").empty();
-        $("#people-button").append("<span class='list-header-filter-people-tag-selected list-header-filter-people-tag' id='people-button-tag'>TO: "+mname+"</span><span class='list-header-filter-people-remove'></span>");
+        $("#people-button").append(tag);
         $("#people-button").removeClass("list-header-filter-people").addClass("list-header-filter-people-selected")
+       
 	    $.ajax(
 	            {
 	              type:"POST",
-	              url:"listpeoplefilter.htm",
-	              data:{mid:mid,sid:sid},
+	              url:"listFilter.htm",
+	              data:{mid:mid,sid:sid,tstatusid:tstatusid},
 	              success:function(data) {
 	                	$(".list-task-containers").empty();
 	                	$(".list-task-containers").append(data);
+	              	    $(".list-section-third-selectpage").css({"visibility":"hidden","position":"absolute","height":"50%"});
+	            	    $(".list-section-third-default").css({"visibility":"visible","position":"relative","height":"100%"})
+	                	checkbox = [];
+	              }
+	            }
+	    )
+      })
+      //No assginee 태그를 눌렀을시 발생하는 함수
+      $(document).on("click",".list-header-filter-nopeople-tagwrap",function() {
+    	let sid = parseInt($(".list-header-title").attr("id").substring(1));
+        let mid=$.trim($(this).children(".list-header-filter-people-tag").children(".list-header-filter-people-info").children(".list-people-name").attr("id"));
+        let tstatusid = $("#list-status-filter-input").val();
+        let tag = "";
+        tag +='<input type="hidden"  id="list-people-filter-input" value="'+mid+'">'
+        tag +="<span class='list-header-filter-people-tag-selected list-header-filter-people-tag' id='people-button-tag'>No Assignee</span><span class='list-header-filter-people-remove'></span>";
+        $(".list-header-filter-people-selecting").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
+        $("#people-button").css("background-color","#dfe6f0")
+        $("#people-button").empty();
+        $("#people-button").append(tag);
+        $("#people-button").removeClass("list-header-filter-people").addClass("list-header-filter-people-selected")
+       
+	    $.ajax(
+	            {
+	              type:"POST",
+	              url:"listFilter.htm",
+	              data:{mid:mid,sid:sid,tstatusid:tstatusid},
+	              success:function(data) {
+	                	$(".list-task-containers").empty();
+	                	$(".list-task-containers").append(data);
+	              	    $(".list-section-third-selectpage").css({"visibility":"hidden","position":"absolute","height":"50%"});
+	            	    $(".list-section-third-default").css({"visibility":"visible","position":"relative","height":"100%"})
+	                	checkbox = [];
 	              }
 	            }
 	    )
@@ -598,6 +691,12 @@ $(function() {
       $(document).on("keyup","#filter-people-input",function(event) {
         var piece=$.trim($(this).val());
         let nametag='';
+        if(piece==""){
+        	nametag+= '<div class="list-header-filter-nopeople-tagwrap"><div class="list-header-filter-people-tag"><div class="list-header-filter-people-image">';
+        	nametag+='<div class="list-noassignee-icon-container"><i class="fas fa-user-plus no-assignee-task-icon"></i></div></div><div class="list-header-filter-people-info"><div class="list-people-name list-people-noassign" id="noassign">'
+        	nametag+= "No Assignee";
+        	nametag+= '</div></div></div></div>';
+        }
         $(".list-header-filter-people-tagscontainer").empty();
         $.each(list_memberlist,function(index,element) {
           let name = element.mname;
@@ -610,7 +709,7 @@ $(function() {
             name = name.replace(piece,"<b>"+piece+"</b>");
             id= id.replace(piece,"<b>"+piece+"</b>");
             nametag+= '<div class="list-header-filter-people-tagwrap"><div class="list-header-filter-people-tag"><div class="list-header-filter-people-image">';
-            nametag+='<img class="list-people-image"src="img/user.png" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
+            nametag+='<img class="list-people-image"src="displayImage.htm?image='+element.image+'" alt=""></div><div class="list-header-filter-people-info"><div class="list-people-name">'
             nametag+= name;
             nametag+= '</div><div class="list-people-email">';
             nametag+= id;
@@ -619,27 +718,7 @@ $(function() {
 
         })
         $(".list-header-filter-people-tagscontainer").append(nametag);
-        
-        if(event.which==13){
-          if(piece===""){
-            //문자열이 빈값이면 발생하는 함수가 아무것도 없음
-          }else{
-            console.log(piece);
-          $("#filter-people-input").val("");
-            /*
-            $.ajax(
-                    {
-                      type:"POST",
-                      url:"",
-                      date:"",
-                      success:function(data) {
-
-                      }
-                    }
-            )
-            */
-          }
-        }else if(event.which==27){
+        if(event.which==27){
           $("#people-button").css("background-color","");
           $("#filter-people-input").val("");
           $(".list-header-filter-people-selecting").css({"visibility":"hidden","left":"-10000px","top":"-10000px"});
