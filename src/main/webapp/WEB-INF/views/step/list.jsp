@@ -220,17 +220,6 @@
 	          },
 	          series: [
 	              {
-	                  name: '미완료 작업',
-	                  type: 'bar',
-	                  stack: '일',
-	                  label: {
-	                      normal: {
-	                          show: true
-	                      }
-	                  },
-	                  data: [<%=(Integer)request.getAttribute("unfinishedtask")%>]
-	              },
-	              {
 	                  name: '완료된 작업',
 	                  type: 'bar',
 	                  stack: '일',
@@ -240,6 +229,17 @@
 	                      }
 	                  },
 	                  data: [<%=(Integer)request.getAttribute("completedtask")%>]
+	              },
+	              {
+	                  name: '미완료 작업',
+	                  type: 'bar',
+	                  stack: '일',
+	                  label: {
+	                      normal: {
+	                          show: true
+	                      }
+	                  },
+	                  data: [<%=(Integer)request.getAttribute("unfinishedtask")%>]
 	              }
 	          ],
 	          color:['#96add6','#c4d97f'],

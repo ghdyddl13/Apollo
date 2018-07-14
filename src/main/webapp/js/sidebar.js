@@ -590,7 +590,7 @@ $(function() {
 		
 		
 	/* modal 창(project, step) dateficker */
-		$(".sdate-img").datepicker({
+	/*	$(".sdate-img").datepicker({
 		    showOn: "button",
 		    buttonImage: "img/calendar.png",
 		    buttonImageOnly: true,
@@ -669,7 +669,7 @@ $(function() {
 				} 
 		    }
 
-		});	
+		});	*/
 		
 		
 	$("#side-bar-add-project").click(function(){
