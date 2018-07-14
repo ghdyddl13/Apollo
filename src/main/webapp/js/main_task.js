@@ -843,13 +843,8 @@ $.ajax(
 	        	   $("#assignee_popup_div").css({"display":"none","left":"-20000px","top":"-20000px"});
 	        	   
 	        	   // 갱신된 assignee들 append
-
-	        	   
-	           } // end-success
-	           
-	           
+	           } // end-success	           
 	        }); // end-ajax
-
 });
 
 function reappendassignee(tid){

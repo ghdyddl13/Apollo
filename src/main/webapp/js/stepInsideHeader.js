@@ -4,7 +4,9 @@ $(function() {
 	/// step list 페이지
 	$(document).on("click","#list-page",function(){
 		var sid = $("#current-sid").val();
-
+		if(sid==null){
+			sid=parseInt($(".list-header-title").attr("id").substring(1));
+		}
 		$.ajax({
 			url:"list.htm",
 			data:{sid:sid},
