@@ -25,9 +25,6 @@
 <title>Project Apollo</title>
 </head>
 <body>
-<<<<<<< HEAD
-test1
-=======
 	<div class="login-wrapper" align="center">
 		<div class="login-container">
 			<input type="hidden" value="${msg}" id="login-msg">
@@ -134,6 +131,5 @@ test1
 			</div>
 		</div>
 	</form>
->>>>>>> 865e29116250a79a28cc3ecb8e2434e9895e149e
 </body>
 
