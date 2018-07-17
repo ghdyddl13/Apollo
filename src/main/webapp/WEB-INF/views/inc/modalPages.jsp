@@ -859,7 +859,7 @@
 					<div class="profile-modal-container">
 						<div class="profile-modal-image-container">
 							<div class="profile-modal-image-wrapper">
-								<img class="profile-modal-image" id="profile-modal-image"src="/Apollo/displayImage.htm" alt=""> 
+								<img class="profile-modal-image" id="profile-modal-image"src="displayImage.htm" alt=""> 
 								<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>
 							</div>
 							<form hidden class="profile-modal-image_uploader">
@@ -892,18 +892,11 @@
 										done : function(e, data) {
 											let modalstr="";
 											let profilestr="";
-											console.log(count);
-											if((count%2)==0){
-												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/Apollo/displayImage.htm?sid=123" alt="">'
-												modalstr+='<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>';
-												profilestr ='<img id="loginimg" src="/Apollo/displayImage.htm?sid=123">';
-												count++;
-											}else{
-												modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/Apollo/displayImage.htm" alt="">'
-												modalstr+='<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>';
-												profilestr='<img id="loginimg" src="/Apollo/displayImage.htm">';
-												count++;
-											}
+											modalstr+='<img class="profile-modal-image" id="profile-modal-image"src="/Apollo/displayImage.htm?sid=123" alt="">'
+											modalstr+='<label class="profile-modal-image-upload-button" for="edit-profile-image">Upload</label>';
+											profilestr ='<img id="loginimg" src="/Apollo/displayImage.htm?count='+count+'">';
+											count++;
+											
 											$(".profile-modal-image-wrapper").empty();
 											$(".profile-modal-image-wrapper").append(modalstr);
 											$("#profile-modal-image").empty();

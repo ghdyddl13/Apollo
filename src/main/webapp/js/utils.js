@@ -130,8 +130,10 @@ function profileinfo(mid) {
         dataType:"json",
         success:function(data) {
         	//console.log(data.profileinfo);
-            var image = (data.profileinfo.image)?"displayImage.htm?image="+data.profileinfo.image:"img/user.png";
-            $('#profile-modal-img').attr("src",image);
+            $(".profile-modal-text-mname").text(data.profileinfo.mname);
+            $(".profile-modal-text-mid").text(data.profileinfo.mid);
+            
+            $("#profile-modal-img").attr("src","displayImage.htm?image="+data.profileinfo.image);
             $('#profile-modal-mname').text(data.profileinfo.mname)
             $('#profile-modal-mid').text(data.profileinfo.mid);
             $('#profile-modal-pnum').text(data.profileinfo.pnum);

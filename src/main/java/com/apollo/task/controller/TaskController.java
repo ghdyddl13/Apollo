@@ -302,6 +302,8 @@ public class TaskController {
 		dto.setValue(value);
 		
 		int result = service.changeTstatus(dto);
+		String color = service.getTstatusColor(tid);
+		System.out.println(color);
 		
 		// 상태 변경 성공시 코멘트 입력
 		if(result == 1) {
@@ -341,6 +343,7 @@ public class TaskController {
 		} // end - 상태 변경 성공시 발동 조건문 
 		
 		model.addAttribute("result", result);
+		model.addAttribute("color", color);
 		
 		String location = (String) session.getAttribute("location");
 		
