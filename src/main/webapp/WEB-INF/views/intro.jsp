@@ -157,7 +157,13 @@ $(function() {
 		<div class="container text-center">
 			<h1>Tutorial Video</h1>
 			<br>
-				<img src="img/video-img.png" style="width: 800px; height: 500px">
+			<div class="video-container">
+				<div class="jetpack-video-wrapper">
+					<span class="embed-youtube"	style="text-align: center; display: block;">
+						<object type="text/html" width="560" height="315" data="https://youtu.be/GlFOM2zTRcU"allowFullScreen></object>
+					</span>
+				</div>
+			</div>
 			<hr>
 		</div>
 	</div>

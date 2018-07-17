@@ -122,7 +122,8 @@
 	var nickname;
 	var wsocket;
 	function connect() {
-		wsocket = new WebSocket("ws://192.168.0.45:8090/Apollo/socket.htm");
+		wsocket = new WebSocket("ws://52.79.243.89:8080/Apollo/socket.htm");
+//		wsocket = new WebSocket("ws://192.168.0.18:8090/Apollo/socket.htm");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
