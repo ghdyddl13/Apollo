@@ -27,7 +27,7 @@
 	
 	<!-- Velocity 설정 -->
 	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-		<property name="resourceLoaderPath" value="WEB-INF/views/vm/"/>
+		<property name="resourceLoaderPath" value="/resources/vm/"/>
 		<property name="velocityProperties">
 			<value>
 				input.encoding=UTF-8
@@ -37,7 +37,7 @@
 	</bean>
 
 	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
-		<property name="resourceLoaderPath" value="/WEB-INF/views/vm/" />
+		<property name="resourceLoaderPath" value="/resources/vm/" />
 	</bean>
 
 	
@@ -63,7 +63,7 @@
 	 	<!--Socket -->
  	
 	<bean id="socket" class="socket.ChatWebSocketHandler" />
-	<websocket:handlers>
+	<websocket:handlers allowed-origins="*">
 		<websocket:mapping handler="socket" path="/socket.htm" />
 		<websocket:handshake-interceptors>
 			 <bean class="socket.HandShakeInterceptor"/>

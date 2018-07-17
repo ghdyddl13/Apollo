@@ -869,6 +869,15 @@ public class TaskService {
 	}
 	
 	
+	public String getTstatusColor(int tid) {
+		
+		String color = "";
+		TaskDAO taskdao = session.getMapper(TaskDAO.class);
+		color = taskdao.getTstatusColor(tid);
+		
+		return color;
+	}
+	
 }
 
 

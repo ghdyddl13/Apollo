@@ -34,13 +34,13 @@
 }
 
 #Task_Modal_tstatus_selectbox, #Task_Modal_tstatus_selectbox_noredirect{
-	font-size: 12px;
+	font-size: 14px;
 	height: 100%;
 	width: 100%;
 	border-top:none;
 	border-bottom:none;
-	border-radius: 0
-	/* margin: -15px -15px -15px -10px */
+	border-radius: 0;
+    background: #f6f6f6;
 }
 
 

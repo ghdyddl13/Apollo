@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
 <c:forEach var="task" items="${tasklist}">
 	<div class="list-task-container">
 		<div class="list-task-checkbox-container">
@@ -18,13 +17,17 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="member" items="${task.members}" end="0">
-						<img class="list-task-member"
-							src='displayImage.htm?image=${member.image}'>
+						<div class="profile-image">
+							<img class="list-task-member"
+								src='displayImage.htm?image=${member.image}'>
+						</div>
 						<div class="list-task-member-hidden">
 							<div class="list-member-hidden-wrapper">
 								<c:forEach var="list_member_hidden" items="${task.members}">
-									<img class="list-task-member-hidden-img"
-										src='displayImage.htm?image=${list_member_hidden.image}'>
+									<div class="profile-image">
+										<img class="list-task-member-hidden-img"
+											src='displayImage.htm?image=${list_member_hidden.image}'>
+									</div>
 								</c:forEach>
 							</div>
 						</div>
