@@ -923,6 +923,11 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 					},
 		           success : function(rdata){
 		        	   
+		        	   console.log('색깔확인');
+		        	   console.log(rdata.color);
+		        	   // color 변경
+		        	   $('#Task_Modal_tstatus_selectbox').css('background', rdata.color);
+		        	   
 			           // comment
 			           getCommentAndMemberlist();
 			           
@@ -932,7 +937,9 @@ $(document).on("change","#Task_Modal_tstatus_selectbox",function(){
 	                  $("#main-box").empty();
 					  $("#main-box").append(rdata);
 					  checkCrtPage()
-
+					  
+					  
+					  
 		           } // end-success
 		        }); // end-ajax
 	
