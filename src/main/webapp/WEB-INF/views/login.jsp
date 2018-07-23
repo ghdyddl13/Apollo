@@ -25,6 +25,7 @@
 <title>Project Apollo</title>
 </head>
 <body>
+
 	<div class="login-wrapper" align="center">
 		<div class="login-container">
 			<input type="hidden" value="${msg}" id="login-msg">
@@ -131,5 +132,6 @@
 			</div>
 		</div>
 	</form>
+
 </body>
 
