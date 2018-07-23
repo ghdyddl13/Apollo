@@ -5,7 +5,7 @@
  작 성  자 : 이 진 우
 */
 
-package socket;
+package com.apollo.socket;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ public class WebSocketConfig implements WebSocketConfigurer{
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         // 모든사이트는 "*" -> "특정사이트 주소"로 변경
-        registry.addHandler(socket(), "/socket.htm").setAllowedOrigins("/*");
+        registry.addHandler(socket(), "/socket.htm").setAllowedOrigins("http://projectapollo.site/Apollo");
     }
  
     @Bean

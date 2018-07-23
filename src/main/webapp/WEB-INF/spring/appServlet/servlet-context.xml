@@ -37,6 +37,12 @@
 	</bean>
 
 	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="velocityProperties"> 
+			<props> 
+				<prop key="resource.loader">file</prop> 
+				<prop key="class.resource.loader.class"> org.apache.velocity.runtime.resource.loader.FileResourceLoader </prop> 
+			</props> 
+		</property> 
 		<property name="resourceLoaderPath" value="/resources/vm/" />
 	</bean>
 
@@ -62,11 +68,11 @@
 	<mvc:annotation-driven/>
 	 	<!--Socket -->
  	
-	<bean id="socket" class="socket.ChatWebSocketHandler" />
+	<bean id="socket" class="com.apollo.socket.ChatWebSocketHandler" />
 	<websocket:handlers allowed-origins="*">
 		<websocket:mapping handler="socket" path="/socket.htm" />
 		<websocket:handshake-interceptors>
-			 <bean class="socket.HandShakeInterceptor"/>
+			 <bean class="com.apollo.socket.HandShakeInterceptor"/>
 			 <!-- <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean> -->
 		</websocket:handshake-interceptors>
 	</websocket:handlers> 

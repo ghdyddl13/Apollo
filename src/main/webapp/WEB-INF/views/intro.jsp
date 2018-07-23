@@ -155,12 +155,13 @@ $(function() {
 		<hr>
 		<!-- Tutorial Video -->
 		<div class="container text-center">
-			<h1>Tutorial Video</h1>
+			<h1>Intro Video</h1>
 			<br>
 			<div class="video-container">
 				<div class="jetpack-video-wrapper">
 					<span class="embed-youtube"	style="text-align: center; display: block;">
-						<object type="text/html" width="560" height="315" data="https://youtu.be/GlFOM2zTRcU"allowFullScreen></object>
+						<iframe width="850" height="500" src="http://www.youtube.com/embed/GlFOM2zTRcU" frameborder="0" allowfullscreen></iframe>
+	
 					</span>
 				</div>
 			</div>

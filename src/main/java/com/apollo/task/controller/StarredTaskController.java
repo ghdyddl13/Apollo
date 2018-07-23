@@ -1,6 +1,5 @@
 package com.apollo.task.controller;
 
-import java.awt.Dialog.ModalExclusionType;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +39,7 @@ public class StarredTaskController {
 		List<MyWorkTaskDTO> tasklist = service.getListTask(mid);
 		map.addAttribute("tasklist", tasklist);
 		model.addAttribute("inbox", "starredtask");
-		System.out.println("starred task : " + tasklist);
+		
 		return "header/starredTask";
 	}
 	/**
