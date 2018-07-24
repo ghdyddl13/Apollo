@@ -134,6 +134,9 @@ function profileinfo(mid) {
             $(".profile-modal-text-mid").text(data.profileinfo.mid);
             $("#profile-modal-img").attr("src","displayImage.htm?image="+data.profileinfo.image);
             $('#profile-modal-mname').text(data.profileinfo.mname);
+            
+            $("#profile-modal-img").attr("src","displayImage.htm?image="+data.profileinfo.image);
+            $('#profile-modal-mname').text(data.profileinfo.mname)
             $('#profile-modal-mid').text(data.profileinfo.mid);
             $('#profile-modal-pnum').text(data.profileinfo.pnum);
             $('#profile-modal-deptname').text(data.profileinfo.deptname);

@@ -42,12 +42,13 @@
 	<bean id="mailSender"
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="587" />
+		<property name="port" value="465" />
 		<property name="username" value="apolloyy104@gmail.com" />
 		<property name="password" value="apollo104" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.ssl.enable">true</prop>
 				<prop key="mail.smtp.auth">true</prop>
 				<prop key="mail.smtp.starttls.enable">true</prop>
 				<prop key="mail.debug">true</prop>
@@ -70,7 +71,7 @@
 		<property name="scope"
 			value="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email" />
 		<property name="redirectUri"
-			value="http://localhost:8090/Apollo/googlelogin.htm" />
+			value="http://projectapollo.site/Apollo/googlelogin.htm" />
 	</bean>
 	
 	 <!-- 파일 업로드 지원 LIB -->

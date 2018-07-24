@@ -200,10 +200,12 @@ public class MemberController {
 		try {
 			MimeMessageHelper messageHelper1 = new MimeMessageHelper(message, true, "utf-8"); // true로 해야 첨부파일 추가 가능
 			messageHelper1.setSubject("[Apollo] 인증 메일 보내드립니다.");
-
+			messageHelper1.setFrom("apolloyy104@gmail.com", "Apollo");
+			messageHelper1.setTo(new InternetAddress(memberdto.getMid()));
+			velocityEngine.setProperty("resource.loader", "class");
+			velocityEngine.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+			
 			String templateLocation1 = "emailcheck.vm";
-
-
 			Map<String, Object> vmmodel = new HashMap<String, Object>();
 			vmmodel.put("mid", memberdto.getMid());
 			vmmodel.put("emailcheckkey", memberdto.getEmailcheck());
@@ -215,8 +217,6 @@ public class MemberController {
 			messageHelper1.setText(content, true);
 			
 
-			messageHelper1.setFrom("apolloyy104@gmail.com", "Apollo");
-			messageHelper1.setTo(new InternetAddress(memberdto.getMid()));
 			javaMailSender.send(message);
 		} catch (Exception e) {
 			e.printStackTrace();

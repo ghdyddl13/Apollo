@@ -114,15 +114,14 @@
     background: #cccccc;
 }
 </style>
-
 <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <title>Project Apollo</title>
-
 <script type="text/javascript">
 	var nickname;
 	var wsocket;
 	function connect() {
 		wsocket = new WebSocket("ws://192.168.0.52:8090/Apollo/socket.htm");
+		wsocket = new WebSocket("ws://52.79.243.89:8080/Apollo/socket.htm");
 		wsocket.onopen = onOpen;
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;

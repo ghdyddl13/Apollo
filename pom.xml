@@ -153,6 +153,7 @@
 			<artifactId>spring-websocket</artifactId>
 			<version>4.3.1.RELEASE</version>
 		</dependency>
+		
 		<!--OJDBC6  -->
 		<dependency> 
 	     	<groupId>com.oracle</groupId> 
@@ -390,10 +391,10 @@
 		        <artifactId>tomcat-maven-plugin</artifactId>
 		        <version>1.1</version>
 		        <configuration>
-		            <url>http://52.79.251.197:8080/manager/text</url>
+		            <url>http://52.79.243.89:8080/manager/text</url>
 		            <path>/Apollo</path>
-		            <username>projectapollo</username>
-		            <password>apollo1004</password>
+		            <username>project_apollo</username>
+		            <password>apollo104</password>
 		        </configuration>
 		    </plugin>
 

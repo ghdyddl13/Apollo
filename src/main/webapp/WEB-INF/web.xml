@@ -36,9 +36,31 @@
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
 
+<!-- 
+	<filter>
+	    <filter-name>cors</filter-name>
+	    <filter-class>com.apollo.socket.SimpleCORSFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>cors</filter-name>
+	    <url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+-->
+<filter>
+    <filter-name>cors</filter-name>
+    <filter-class>com.apollo.socket.SimpleCORSFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>cors</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+	 
+	
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -48,7 +70,9 @@
 	<filter-mapping>
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> 
+	
+
 	<!-- 에러페이지 처리 -->
 	<error-page>
 		<error-code>404</error-code>

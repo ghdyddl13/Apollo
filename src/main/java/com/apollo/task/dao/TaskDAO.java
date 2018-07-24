@@ -61,5 +61,6 @@ public interface TaskDAO {
 
 	public int deleteTaskCount(int tid);
 	public ProjectDTO getProjectNamebyTid(int tid);
+	public String getTstatusColor(int tid);
 	
 }
