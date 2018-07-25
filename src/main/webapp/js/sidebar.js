@@ -297,8 +297,16 @@ $(function() {
 				success:function(data){
 					var project = data.project;
 					$("#update-project-pid").val(project.pid);
-					if(project.sday !=null) $("#update-project-sday").val(project.sday.split(" ")[0]);
-					if(project.eday !=null) $("#update-project-eday").val(project.eday.split(" ")[0]);
+					if(project.sday !=null) {
+						$("#update-project-sday").val(project.sday.split(" ")[0]);
+					}else{
+						$("#update-project-sday").val("");
+					}
+					if(project.eday !=null) {
+						$("#update-project-eday").val(project.eday.split(" ")[0]);
+					}else{
+						$("#update-project-eday").val("");
+					}
 					$("#update-project-detail").val(project.detail);
 					$("#update-project-detail-"+project.methodologyid).attr("checked","checked");
 					$("#update-project-pname").val(project.pname);
@@ -603,8 +611,8 @@ $(function() {
 		    	var sday_year = parseInt(date.substring(0,4));
 		    	var sday_month = parseInt(date.substring(5,7));
 		    	var sday_day = parseInt(date.substring(8,10));
-		    	
-		    	var eday = $('.edate-img').val();
+		    	console.log($($(this).parents('.modal-flexbox-row')[1]).find(".edate-img").val());
+		    	var eday = $($(this).parents('.modal-flexbox-row')[1]).find(".edate-img").val()
 		    	var eday_year = parseInt(eday.substring(0,4));
 		    	var eday_month = parseInt(eday.substring(5,7));
 		    	var eday_day = parseInt(eday.substring(8,10));
@@ -638,7 +646,7 @@ $(function() {
 		    	
 		    	if(yeartest){
 		    		alert('시작일을 종료일 이후로 설정할 수 없습니다');
-		    		$('.sdate-img').val("");
+		    		$('.sdate-img').val(eday);
 		    		return;
 		    	}
 		    }	
@@ -654,8 +662,8 @@ $(function() {
 		    
 		    	var origin_date = $('.edate-img').val();
 		    	var date = $(this).val();
-		    	
-		    	var sday = $('.sdate-img').val();
+		    	console.log($($(this).parents('.modal-flexbox-row')[1]).find(".sdate-img").val());
+		    	var sday = $($(this).parents('.modal-flexbox-row')[1]).find(".sdate-img").val();
 		    	var sday_year = parseInt(sday.substring(0,4));
 		    	var sday_month = parseInt(sday.substring(5,7));
 		    	var sday_day = parseInt(sday.substring(8,10));
@@ -695,7 +703,7 @@ $(function() {
 		    	
 		    	if(yeartest){
 		    		alert('종료일을 시작일 이전으로 설정할 수 없습니다');
-		    		$('.edate-img').val("");
+		    		$('.edate-img').val(sday);
 		    		return;
 		    	}
 		    }

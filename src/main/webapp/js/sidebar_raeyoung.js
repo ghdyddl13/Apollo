@@ -170,8 +170,16 @@ function stepinfo(sid){
        success:function(data){
              $('.update-step-name').val(data.selectstep.sname);
              $('#update-step-sid').val(data.selectstep.sid);
-             if(data.selectstep.sday != null) $('#update-step-sday-id').val(data.selectstep.sday.split(" ")[0]);
-             if(data.selectstep.eday != null) $('#update-step-eday-id').val(data.selectstep.eday.split(" ")[0]);
+             if(data.selectstep.sday != null){
+            	 $('#update-step-sday-id').val(data.selectstep.sday.split(" ")[0]);
+             }else{
+            	 $('#update-step-sday-id').val("");
+             }
+             if(data.selectstep.eday != null) {
+            	 $('#update-step-eday-id').val(data.selectstep.eday.split(" ")[0]);
+             }else{
+            	 $('#update-step-eday-id').val("");
+             }
              $('#update-step-detail').val(data.selectstep.detail);
              $('#update-step-methodologyid').val(data.selectstep.methodologyid);
              $('#update-step-pid').val(data.selectstep.pid);
