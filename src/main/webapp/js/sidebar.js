@@ -596,8 +596,9 @@ $(function() {
 		    buttonImageOnly: true,
 		    dateFormat: 'yy-mm-dd',
 		    onSelect: function(dateText, inst) {
-		    	/*var origin_date = $('.sdate-img').val();
-		    	var date = $(this).val();
+		    	
+		    	var origin_date = $('.sdate-img').val();
+		        var date = $(this).val();
 		    	
 		    	var sday_year = parseInt(date.substring(0,4));
 		    	var sday_month = parseInt(date.substring(5,7));
@@ -608,23 +609,38 @@ $(function() {
 		    	var eday_month = parseInt(eday.substring(5,7));
 		    	var eday_day = parseInt(eday.substring(8,10));
 		    	
-		    	if(eday_year < sday_year){
-		    		alert('시작일을 종료일 이후로 설정할 수 없습니다');
-		    		$('.sdate-img').val(origin_date);
-		    		return false;
+		    	var yeartest = true;
+		    	
+		    	if(sday_year <= eday_year){
+		    		yeartest = false;
+		    		
+		    		if(sday_year < eday_year){
+		    			yeartest = false;
+		    		
+		    		}else if((sday_month <= eday_month) && (sday_year == eday_year)){
+		    			yeartest = false;
+		    			
+		    			if((sday_month < eday_month)){
+		    				yeartest = false;
+		    			}else if((sday_day <= eday_day) && (sday_month == eday_month)){
+		    				yeartest = false;
+		    			}else{
+		    				yeartest = true;
+		    			}
+		    		}else{
+						yeartest = true;
+					}
 		    	}
 		    	
-		    	if(eday_month < sday_month) {
-		    		alert('시작일을 종료일 이후로 설정할 수 없습니다');
-		    		$('.sdate-img').val(origin_date);
-		    		return false;
-				}
+		    	if((Number.isNaN(sday_year)) || (Number.isNaN(eday_year))){
+		    		yeartest = false;
+		    	}
 		    	
-		    	if(eday_day < sday_day) {
+		    	if(yeartest){
 		    		alert('시작일을 종료일 이후로 설정할 수 없습니다');
-		    		$('.sdate-img').val(origin_date);
-		    		return false;
-				} */
+		    		$('.sdate-img').val("");
+		    		return;
+		    	}
 		    }	
 		}); // end sdate- datepicker
 		
@@ -635,7 +651,8 @@ $(function() {
 		    dateFormat: 'yy-mm-dd',
 		    minDate: 0,
 		    onSelect: function(dateText, inst) {
-		    	/*var origin_date = $('.edate-img').val();
+		    
+		    	var origin_date = $('.edate-img').val();
 		    	var date = $(this).val();
 		    	
 		    	var sday = $('.sdate-img').val();
@@ -648,25 +665,39 @@ $(function() {
 		    	var eday_month = parseInt(date.substring(5,7));
 		    	var eday_day = parseInt(date.substring(8,10));
 		    	console.log('테스트 eday : ' + eday_year + '/' + eday_month + '/' + eday_day);
+		   	
+		    	var yeartest = true;
 		    	
-		    	
-		    	if(eday_year < sday_year){
-		    		alert('종료일을 시작일 이전으로 설정할 수 없습니다');
-		    		$('.edate-img').val(origin_date);
-		    		return false;
+		    	if(sday_year <= eday_year){
+		    		yeartest = false;
+		    		
+		    		if(sday_year < eday_year){
+		    			yeartest = false;
+		    		
+		    		}else if((sday_month <= eday_month) && (sday_year == eday_year)){
+		    			yeartest = false;
+		    			
+		    			if((sday_month < eday_month)){
+		    				yeartest = false;
+		    			}else if((sday_day <= eday_day) && (sday_month == eday_month)){
+		    				yeartest = false;
+		    			}else{
+		    				yeartest = true;
+		    			}
+		    		}else{
+						yeartest = true;
+					}
 		    	}
 		    	
-		    	if(eday_month < sday_month) {
-					alert('종료일을 시작일 이전으로 설정할 수 없습니다');
-					$('.edate-img').val(origin_date);
-					return false;
-				}
+		    	if((Number.isNaN(sday_year)) || (Number.isNaN(eday_year))){
+		    		yeartest = false;
+		    	}
 		    	
-		    	if(eday_day < sday_day) {
-					alert('종료일을 시작일 이전으로 설정할 수 없습니다');
-					$('.edate-img').val(origin_date);
-					return false;
-				} */
+		    	if(yeartest){
+		    		alert('종료일을 시작일 이전으로 설정할 수 없습니다');
+		    		$('.edate-img').val("");
+		    		return;
+		    	}
 		    }
 
 		});	
