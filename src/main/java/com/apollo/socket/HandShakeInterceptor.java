@@ -1,4 +1,4 @@
-package socket;
+package com.apollo.socket;
 
 import java.util.Map;
 

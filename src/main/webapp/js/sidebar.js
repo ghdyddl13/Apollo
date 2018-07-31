@@ -596,7 +596,7 @@ $(function() {
 		    buttonImageOnly: true,
 		    dateFormat: 'yy-mm-dd',
 		    onSelect: function(dateText, inst) {
-		    	var origin_date = $('.sdate-img').val();
+		    	/*var origin_date = $('.sdate-img').val();
 		    	var date = $(this).val();
 		    	
 		    	var sday_year = parseInt(date.substring(0,4));
@@ -624,7 +624,7 @@ $(function() {
 		    		alert('시작일을 종료일 이후로 설정할 수 없습니다');
 		    		$('.sdate-img').val(origin_date);
 		    		return false;
-				} 
+				} */
 		    }	
 		}); // end sdate- datepicker
 		
@@ -635,7 +635,7 @@ $(function() {
 		    dateFormat: 'yy-mm-dd',
 		    minDate: 0,
 		    onSelect: function(dateText, inst) {
-		    	var origin_date = $('.edate-img').val();
+		    	/*var origin_date = $('.edate-img').val();
 		    	var date = $(this).val();
 		    	
 		    	var sday = $('.sdate-img').val();
@@ -666,7 +666,7 @@ $(function() {
 					alert('종료일을 시작일 이전으로 설정할 수 없습니다');
 					$('.edate-img').val(origin_date);
 					return false;
-				} 
+				} */
 		    }
 
 		});	

@@ -1,4 +1,4 @@
-package socket;
+package com.apollo.socket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
