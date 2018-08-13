@@ -9,7 +9,6 @@
     <name>Apollo</name><!-- 프로젝트 이름 -->
     <packaging>war</packaging>
     <version>1.0.0-BUILD-SNAPSHOT</version>
-    
 	<properties>
 		<java-version>1.6</java-version> <!-- 사용 자바 버전 -->
        
@@ -22,7 +21,6 @@
         <!-- 로깅 관련 모듈 -->
         <org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
-
 
     <!-- orcle 저작권 문제해결 위해 oracle repository 설정 -->
     <!-- 아래에서 dependency로 oracle jdbc 부르기 위한 선행 작업-->
@@ -37,12 +35,7 @@
 		<id>mesir-repo</id>
 		<url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
 	</repository>
-	
-	
-       
 	</repositories> 
-
-
     <!-- 의존 주입 -->
 	<dependencies>
 

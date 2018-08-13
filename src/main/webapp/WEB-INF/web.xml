@@ -7,8 +7,6 @@
 		<welcome-file>index.htm</welcome-file>
 	</welcome-file-list>
 
-
-
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -35,7 +33,6 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
-
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
